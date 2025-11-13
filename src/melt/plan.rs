@@ -3,10 +3,9 @@
 //! This module provides pre-computed extraction plans based on inferred schemas,
 //! eliminating runtime decision-making for homogeneous data streams.
 
-use crate::melt::types::{Entity, EntityId, MeltConfig, ParentRef};
-use crate::schema::SchemaBuilder;
+use crate::melt::types::MeltConfig;
 use anyhow::Result;
-use serde_json::{Map, Value};
+use serde_json::Value;
 use std::collections::{HashMap, HashSet};
 
 /// Type of array elements

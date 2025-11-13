@@ -4,7 +4,7 @@
 //! entities without runtime decision-making.
 
 use crate::melt::plan::{ArrayType, FieldRule, MeltPlan};
-use crate::melt::types::{Entity, EntityId, ParentRef};
+use crate::melt::types::{Entity, ParentRef};
 use anyhow::Result;
 use serde_json::{Map, Value};
 
