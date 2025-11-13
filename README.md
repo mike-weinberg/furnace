@@ -257,8 +257,77 @@ This is a learning project demonstrating:
 
 MIT
 
+## Schema Inference Module
+
+This project also includes an optimized JSON schema inference library (ported from Python to Rust).
+
+### Performance Highlights
+
+**6.01x faster than genson-rs!** After optimization:
+
+![Performance Summary](https://raw.githubusercontent.com/mike-weinberg/furnace/main/schema_inference/performance_graphs.png)
+
+![Optimization Timeline](https://raw.githubusercontent.com/mike-weinberg/furnace/main/schema_inference/optimization_timeline.png)
+
+### Key Results
+
+| Metric | Value |
+|--------|-------|
+| **Speedup vs genson-rs** | 6.01x faster |
+| **Python → Rust Optimization** | 59x improvement |
+| **Optimization Cycles** | 2 cycles completed |
+| **Test Coverage** | 100 real-world schemas |
+
+### Optimization Journey
+
+1. **Cycle 1: Pre-compile Regex Patterns**
+   - Identified 99% of overhead in regex compilation
+   - Used `once_cell::Lazy` for lazy static initialization
+   - **Result: 59x improvement** (389.68ms → 6.59ms)
+
+2. **Cycle 2: Early Byte Validation**
+   - Added fast byte position checks before regex matching
+   - Optimized UUID, date, and datetime detection
+   - **Result: 6.01x faster than genson-rs** (6.59ms → 7.22ms)
+
+### Features
+
+- Full JSON Schema Draft 7 support
+- Format detection: date, time, email, UUID, IPv4, IPv6
+- Required field tracking
+- Proper type unification and merging
+- Production-ready Rust implementation
+
+### Documentation
+
+See [`schema_inference/PERFORMANCE_SUMMARY.md`](schema_inference/PERFORMANCE_SUMMARY.md) for comprehensive analysis including:
+- Detailed performance comparisons
+- Optimization methodology
+- Benchmarking results
+- Future optimization opportunities
+
+### Benchmarks
+
+Run the performance benchmarks:
+
+```bash
+# Rust vs genson-rs
+cargo run --release --bin schema_inference_benchmark
+
+# genson-rs baseline
+cargo run --release --bin genson_benchmark
+
+# Python reference
+cd schema_inference
+source venv/bin/activate
+python3 src/benchmarking/benchmark.py
+```
+
+---
+
 ## See Also
 
 - [Tidy Data Principles](tidy-data-principles.md) - Background on data organization
+- [Schema Inference Performance Report](schema_inference/PERFORMANCE_SUMMARY.md) - Detailed optimization analysis
 - Hadley Wickham's "Tidy Data" paper
 - R's `tidyr` package for similar functionality
