@@ -12,3 +12,12 @@ genson-rs = "0.2.0"
 simd-json = "0.13"
 regex = "1.10"
 once_cell = "1.19"
+clap = { version = "4.5", features = ["derive"] }
+
+[[bin]]
+name = "furnace-melt"
+path = "src/bin/furnace_melt.rs"
+
+[[bin]]
+name = "furnace-infer"
+path = "src/bin/furnace_infer.rs"

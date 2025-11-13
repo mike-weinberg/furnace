@@ -5,15 +5,18 @@ Complete guide to using Furnace for JSON melting and schema inference.
 ## Table of Contents
 
 1. [Quick Start](#quick-start)
-2. [JSON Melting](#json-melting)
+2. [CLI Tools](#cli-tools)
+   - [furnace-melt](#furnace-melt-cli)
+   - [furnace-infer](#furnace-infer-cli)
+3. [JSON Melting](#json-melting)
    - [Basic Usage](#basic-melting-usage)
    - [High-Performance (PlannedMelter)](#high-performance-melting)
    - [Streaming Large Files](#streaming-large-files)
-3. [Schema Inference](#schema-inference)
-4. [Understanding Output](#understanding-output)
-5. [Configuration](#configuration)
-6. [Real-World Examples](#real-world-examples)
-7. [Performance](#performance)
+4. [Schema Inference](#schema-inference)
+5. [Understanding Output](#understanding-output)
+6. [Configuration](#configuration)
+7. [Real-World Examples](#real-world-examples)
+8. [Performance](#performance)
 
 ---
 
@@ -40,6 +43,132 @@ cargo run --example schema_builder_usage
 cargo run --release --bin melt_performance_benchmark
 cargo run --release --bin schema_inference_benchmark
 ```
+
+---
+
+## CLI Tools
+
+Furnace provides command-line tools for JSON melting and schema inference, analogous to genson-cli.
+
+### furnace-melt CLI
+
+Extract nested JSON into relational tables from the command line.
+
+**Basic usage:**
+```bash
+# Read from file, output to stdout
+furnace-melt data.json
+
+# Read from stdin, output to stdout
+echo '{"id": 1, "posts": [{"id": 10}]}' | furnace-melt
+
+# Process NDJSON (newline-delimited JSON)
+furnace-melt --ndjson events.jsonl
+
+# Write to separate .jsonl files per entity type
+furnace-melt data.json --output-dir ./entities
+```
+
+**Options:**
+- `--ndjson` - Treat input as newline-delimited JSON (one JSON object per line)
+- `-o, --output-dir <DIR>` - Write multiple .jsonl files to a directory (default: write to stdout)
+- `--planned` - Use PlannedMelter for 40% better performance on homogeneous data
+- `--sample-size <N>` - Number of records to sample for the extraction plan (default: 100)
+- `--max-depth <N>` - Maximum nesting depth to extract (default: 10)
+- `--separator <S>` - Separator for nested entity names (default: "_")
+- `--scalar-fields <F>` - Comma-separated fields to never extract as entities
+
+**Examples:**
+```bash
+# Process API responses with NDJSON, write to directory
+furnace-melt --ndjson api_responses.jsonl --output-dir ./output
+
+# Use PlannedMelter for better performance on large homogeneous datasets
+furnace-melt --ndjson large_file.jsonl --planned --output-dir ./output
+
+# Pipe from curl
+curl https://api.example.com/users | furnace-melt --output-dir ./users
+
+# Custom configuration
+furnace-melt data.json --max-depth 5 --separator "__" --output-dir ./out
+```
+
+**Default output (stdout):**
+Each line is a JSON object with added metadata:
+```json
+{"_entity_type":"root","id":1,"name":"Alice"}
+{"_entity_type":"root_posts","_parent_type":"root","_parent_id":"1","_parent_field":"posts","id":10,"title":"Post"}
+```
+
+**File output (with --output-dir):**
+Creates one `.jsonl` file per entity type:
+- `root.jsonl` - Root entities
+- `root_posts.jsonl` - Nested posts entities
+- `root_posts_tags.jsonl` - Tags within posts
+
+### furnace-infer CLI
+
+Infer JSON Schemas with automatic format detection (email, date, UUID, etc.).
+
+**Basic usage:**
+```bash
+# Read from file, output to stdout
+furnace-infer data.json
+
+# Read from stdin
+echo '{"name": "Alice", "email": "alice@example.com"}' | furnace-infer
+
+# Process NDJSON
+furnace-infer --ndjson events.jsonl
+
+# Compact output (no pretty-printing)
+furnace-infer data.json --compact
+```
+
+**Options:**
+- `--ndjson` - Treat input as newline-delimited JSON
+- `--compact` - Output compact JSON (no pretty-printing)
+
+**Examples:**
+```bash
+# Generate schema from API response
+curl https://api.example.com/users | furnace-infer > users-schema.json
+
+# Infer schema from log file
+furnace-infer --ndjson app.log | jq '.properties | keys'
+
+# Compare with other schemas
+furnace-infer data.json --compact | wc -c
+```
+
+**Output:**
+```json
+{
+  "properties": {
+    "age": {
+      "type": "integer"
+    },
+    "email": {
+      "format": "email",
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "age",
+    "email",
+    "name"
+  ],
+  "type": "object"
+}
+```
+
+**Features unique to furnace-infer:**
+- **Format detection**: Automatically detects date, time, email, UUID, IPv4, IPv6 (not in genson-cli!)
+- **Required field tracking**: Properly tracks which fields appear in all examples
+- **Type unification**: Smart merging of types across examples
 
 ---
 
