@@ -6,11 +6,13 @@ pub mod types;
 pub mod extractor;
 pub mod writer;
 pub mod schema_inference;
+pub mod schema_builder;
 
 pub use types::{Entity, EntityId, MeltConfig};
 pub use extractor::JsonMelter;
 pub use writer::{EntityWriter, SingleWriter};
 pub use schema_inference::infer_schema;
+pub use schema_builder::{SchemaBuilder, infer_schema_streaming};
 
 /// Main entry point: melt a JSON stream into relational entities
 pub fn melt_json<R: BufRead>(

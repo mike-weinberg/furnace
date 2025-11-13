@@ -1,0 +1,128 @@
+╔═══════════════════════════════════════════════════════════════════════════╗
+║        Schema Inference Performance Comparison Benchmark                 ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+Comparing three implementations:
+  1. Old (infer_schema)       - Merge-based approach with intermediate schemas
+  2. Streaming (SchemaBuilder) - Accumulator pattern with single-pass build
+  3. Genson-rs                - Third-party library using simd_json
+
+═══════════════════════════════════════════════════════════════════════════
+                      DETAILED BENCHMARK RESULTS                           
+═══════════════════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ Category: big+complex                                                     │
+└─────────────────────────────────────────────────────────────────────────┘
+
+Schema                                       Old (ms) Stream (ms) Genson (ms)
+---------------------------------------------------------------------------
+Bacon_config                                     5.05       1.39       1.04
+Upsun_config                                     0.79       0.31       1.07
+Platform.sh_application                          8.90       2.44       6.00
+Application_Accelerator                          2.74       0.32       0.29
+gRPC_API_Gateway_&_OpenAPI_Config                0.34       0.08       0.06
+.NET_Aspire_8.0_Manifest                         0.29       0.11       0.22
+.aiproj.json                                     2.71       0.97       0.65
+ABCInventoryModuleData                           1.64       0.43       0.28
+ABCSupplyPlan                                    4.72       1.02       0.59
+Airlock_Microgateway                           161.89      23.12      12.91
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ Category: small+complex                                                   │
+└─────────────────────────────────────────────────────────────────────────┘
+
+Schema                                       Old (ms) Stream (ms) Genson (ms)
+---------------------------------------------------------------------------
+release-hub.json                                 0.41       0.10       0.13
+Platform.sh_routes                               0.08       0.05       0.08
+Platform.sh_services                             0.88       0.40       1.07
+1Password_SSH_Agent_Config                       0.55       0.13       0.08
+AnyWork_Automation_Configuration                 0.24       0.13       0.18
+@factorial_drupal-breakpoints-css                0.14       0.04       0.03
+.adonisrc.json                                   4.97       0.70       0.75
+aerleon.yml                                      0.71       0.17       0.11
+Aerleon_Network_&_Service_Definitions            1.68       1.29       1.24
+Aerleon_Policy                                   0.03       0.01       0.01
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ Category: small+simple                                                    │
+└─────────────────────────────────────────────────────────────────────────┘
+
+Schema                                       Old (ms) Stream (ms) Genson (ms)
+---------------------------------------------------------------------------
+buf.work.yaml                                    0.22       0.06       0.03
+Chromia_Seeder_Root_Config                       0.24       0.05       0.03
+cibuildwheel                                     0.24       0.04       0.04
+CircleCI_config.yml                              0.14       0.04       0.03
+devcontainer.json                                0.02       0.01       0.01
+Dolittle_Resources_Configuration                 0.20       0.12       0.26
+Dolittle_Tenants_Configuration                   0.10       0.05       0.08
+DWP_Exchange_-_gateway                           0.54       0.13       0.08
+
+═══════════════════════════════════════════════════════════════════════════
+                          SUMMARY STATISTICS                               
+═══════════════════════════════════════════════════════════════════════════
+
+Total benchmarks run: 28
+
+┌─────────────────┬──────────────┬──────────────┬──────────────┐
+│ Metric          │ Old (ms)     │ Stream (ms)  │ Genson (ms)  │
+├─────────────────┼──────────────┼──────────────┼──────────────┤
+│ Average         │         7.16 │         1.20 │         0.98 │
+│ Minimum         │         0.02 │         0.01 │         0.01 │
+│ Maximum         │       161.89 │        23.12 │        12.91 │
+└─────────────────┴──────────────┴──────────────┴──────────────┘
+
+═══════════════════════════════════════════════════════════════════════════
+                       PERFORMANCE COMPARISONS                             
+═══════════════════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ Streaming vs Old (Merge-based)                                          │
+└─────────────────────────────────────────────────────────────────────────┘
+  ✓ Streaming is 5.95x FASTER than Old implementation
+  ✓ Improvement: 495.0% speed increase
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ Streaming vs Genson-rs (Third-party)                                    │
+└─────────────────────────────────────────────────────────────────────────┘
+  ✗ Streaming is 1.23x SLOWER than Genson-rs
+  ✗ Gap: 18.8% behind Genson-rs
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ Old vs Genson-rs (Third-party)                                          │
+└─────────────────────────────────────────────────────────────────────────┘
+  ✗ Old is 7.33x SLOWER than Genson-rs
+
+═══════════════════════════════════════════════════════════════════════════
+                    TOP 5 STREAMING IMPROVEMENTS                           
+═══════════════════════════════════════════════════════════════════════════
+
+Schema                                             Speedup        Category
+---------------------------------------------------------------------------
+Application_Accelerator                              8.69x     big+complex
+.adonisrc.json                                       7.15x   small+complex
+Airlock_Microgateway                                 7.00x     big+complex
+cibuildwheel                                         5.40x    small+simple
+Chromia_Seeder_Root_Config                           5.21x    small+simple
+
+═══════════════════════════════════════════════════════════════════════════
+                    PERFORMANCE BY CATEGORY                                
+═══════════════════════════════════════════════════════════════════════════
+
+Category                   Old (avg)     Stream     Genson   Stream/Old
+---------------------------------------------------------------------------
+big+complex                    18.91       3.02       2.31        6.26x
+small+complex                   0.97       0.30       0.37        3.21x
+small+simple                    0.21       0.06       0.07        3.46x
+
+═══════════════════════════════════════════════════════════════════════════
+                           FINAL VERDICT                                   
+═══════════════════════════════════════════════════════════════════════════
+
+  ✓ The Streaming implementation is better than the Old implementation
+    - 5.95x faster than Old
+    - But 1.23x slower than Genson-rs
+
+═══════════════════════════════════════════════════════════════════════════
