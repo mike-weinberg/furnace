@@ -62,34 +62,24 @@ fn main() -> anyhow::Result<()> {
 
             let examples_array = examples.as_array().unwrap();
 
-            // Serialize to JSON bytes for FAIR comparison
-            let examples_json = serde_json::to_string(&examples)?;
-            let examples_json_bytes = examples_json.clone();
-
-            // Benchmark our implementation (fair: parse + infer)
+            // Benchmark our implementation (uses serde_json::Value)
             let start = Instant::now();
-            let mut json_bytes_ours = examples_json_bytes.clone().into_bytes();
-            let parsed = simd_json::to_borrowed_value(&mut json_bytes_ours)?;
-            if let simd_json::BorrowedValue::Array(arr) = parsed {
-                // Convert to serde_json for our implementation
-                let examples_serde: Vec<serde_json::Value> = arr
-                    .iter()
-                    .map(|v| serde_json::to_value(v).unwrap_or(serde_json::Value::Null))
-                    .collect();
-                let _schema = infer_schema(&examples_serde);
-            }
+            let _schema = infer_schema(examples_array);
             let elapsed_ours = start.elapsed();
 
-            // Benchmark genson-rs (fair: parse + infer)
+            // Prepare data for genson-rs (convert to BorrowedValue OUTSIDE timer)
+            // This conversion is necessary because genson-rs uses simd_json types
+            let examples_json = serde_json::to_string(&examples)?;
+            let mut json_bytes = examples_json.into_bytes();
+            let examples_borrowed = simd_json::to_borrowed_value(&mut json_bytes)?;
+
+            // Benchmark genson-rs (uses simd_json::BorrowedValue)
             let start = Instant::now();
             let mut builder = genson_rs::SchemaBuilder::new(Some("AUTO"));
-            let mut json_bytes_genson = examples_json_bytes.into_bytes();
-            let examples_array_genson = simd_json::to_borrowed_value(&mut json_bytes_genson)?;
-
-            match examples_array_genson {
-                simd_json::BorrowedValue::Array(arr) => {
+            match examples_borrowed {
+                simd_json::BorrowedValue::Array(ref arr) => {
                     for example in arr {
-                        builder.add_object(&example);
+                        builder.add_object(example);
                     }
                 }
                 _ => {}
@@ -135,9 +125,11 @@ fn main() -> anyhow::Result<()> {
         println!("Speedup ratio (Genson/Ours): {:.2}x", overall_ratio);
 
         if overall_ratio < 1.0 {
-            println!("\n✓ Our implementation is {:.2}x FASTER than genson-rs", 1.0 / overall_ratio);
+            // Ratio < 1.0 means genson-rs took less time, so we're slower
+            println!("\n✗ Our implementation is {:.2}x SLOWER than genson-rs", 1.0 / overall_ratio);
         } else {
-            println!("\n✗ Our implementation is {:.2}x SLOWER than genson-rs", overall_ratio);
+            // Ratio > 1.0 means genson-rs took more time, so we're faster
+            println!("\n✓ Our implementation is {:.2}x FASTER than genson-rs", overall_ratio);
         }
     }
 

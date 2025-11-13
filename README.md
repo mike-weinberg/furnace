@@ -263,10 +263,10 @@ This project includes a production-ready JSON schema inference library ported fr
 
 ### Performance Summary
 
-**Fair Benchmark (both parse + infer):**
-- Our implementation: **7.13ms average**
-- genson-rs: **1.10ms average**
-- Trade-off: Superior schema quality (+6.48x time) vs raw speed
+**Fair Benchmark (already-parsed input):**
+- Our implementation: **6.51ms average**
+- genson-rs: **0.90ms average**
+- Trade-off: Superior schema quality (7.23x slower) vs raw speed
 
 ![Performance Summary](https://raw.githubusercontent.com/mike-weinberg/furnace/main/schema_inference/performance_graphs.png)
 
@@ -276,9 +276,9 @@ This project includes a production-ready JSON schema inference library ported fr
 
 | Metric | Value |
 |--------|-------|
-| **Performance vs genson-rs** | 6.48x slower (fair benchmark) |
+| **Performance vs genson-rs** | 7.23x slower (fair: already-parsed input) |
 | **Optimization achieved** | 59x improvement (regex pre-compilation) |
-| **Unoptimized → Optimized** | 389.68ms → 7.13ms |
+| **Unoptimized → Optimized** | 389.68ms → 6.51ms |
 | **Quality advantage** | Better required field tracking, format detection, type unification |
 
 ### Optimization Journey
@@ -289,9 +289,9 @@ This project includes a production-ready JSON schema inference library ported fr
    - **Result: 59x improvement** (389.68ms → 6.59ms)
 
 2. **Cycle 2: Fair Benchmarking** ✅
-   - Corrected unfair benchmark (both implementations now parse + infer)
+   - Corrected unfair benchmark (both receive already-parsed input, matching Python methodology)
    - Identified that slower performance is due to superior algorithm
-   - **Result: Production-ready with higher schema quality**
+   - **Result: 7.23x slower than genson-rs but with production-ready schema quality**
 
 ### Features
 
