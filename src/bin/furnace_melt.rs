@@ -15,12 +15,16 @@
 //!   # Use PlannedMelter for 40% better performance
 //!   furnace-melt --planned large_dataset.jsonl --output-dir ./entities
 
+// Use MiMalloc allocator for better performance (recommended by simd-json)
+#[global_allocator]
+static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+
 use anyhow::Result;
 use clap::Parser;
 use furnace::melt::{EntityWriter, JsonMelter, MeltConfig, PlannedMelter};
 use serde_json::Value;
 use std::fs::File;
-use std::io::{stdin, BufRead, BufReader, Stdout, Write};
+use std::io::{BufReader, Stdout, Write, Read};
 
 #[derive(Parser, Debug)]
 #[command(name = "furnace-melt")]
@@ -83,13 +87,6 @@ fn main() -> Result<()> {
             .collect();
     }
 
-    // Create reader based on input source
-    let reader: Box<dyn BufRead> = if let Some(file_path) = &args.input {
-        Box::new(BufReader::new(File::open(file_path)?))
-    } else {
-        Box::new(BufReader::new(stdin()))
-    };
-
     // Process based on output mode
     if let Some(output_dir) = args.output_dir {
         // Make output directory absolute
@@ -105,12 +102,12 @@ fn main() -> Result<()> {
         // Change to it
         std::env::set_current_dir(&abs_path)?;
 
-        process_to_files(reader, ".".to_string(), args.ndjson, args.planned, args.sample_size, config)?;
+        process_to_files(args.input, args.ndjson, args.planned, args.sample_size, config)?;
 
         std::env::set_current_dir(original_dir)?;
     } else {
         // Single stream to stdout
-        process_to_stdout(reader, args.ndjson, args.planned, args.sample_size, config)?;
+        process_to_stdout(args.input, args.ndjson, args.planned, args.sample_size, config)?;
     }
 
     Ok(())
@@ -118,79 +115,236 @@ fn main() -> Result<()> {
 
 /// Process JSON and write to separate files per entity type
 fn process_to_files(
-    reader: Box<dyn BufRead>,
-    output_dir: String,
+    input_file: Option<String>,
     ndjson: bool,
     planned: bool,
     sample_size: Option<usize>,
     config: MeltConfig,
 ) -> Result<()> {
     let sample_size = sample_size.unwrap_or(100);
-    let mut writer = EntityWriter::new_file_writer(&output_dir)?;
+    let mut writer = EntityWriter::new_file_writer(".")?;
 
     if planned {
-        // Planned mode: sample first N records, build plan, then process all
+        // Planned mode: sample first N records to build plan, then process all
         let mut records = Vec::new();
-        let mut all_lines: Vec<String> = Vec::new();
 
-        // Collect all lines first
-        for line in reader.lines() {
-            let line = line?;
-            let line = line.trim().to_string();
-            if !line.is_empty() {
-                all_lines.push(line);
-            }
-            if !ndjson && !all_lines.is_empty() {
-                break;
-            }
-        }
+        // First pass: sample only (avoiding full file load into memory)
+        {
+            let reader = if let Some(file_path) = &input_file {
+                Box::new(BufReader::new(File::open(file_path)?)) as Box<dyn Read>
+            } else {
+                Box::new(std::io::stdin()) as Box<dyn Read>
+            };
 
-        // Build samples for plan
-        for (i, line) in all_lines.iter().enumerate() {
-            if i < sample_size {
-                let value: Value = serde_json::from_str(line)?;
-                records.push(value);
-            }
+            sample_from_reader(reader, !ndjson, sample_size, &mut records)?;
         }
 
         // Build plan from samples
         if !records.is_empty() {
             let melter = PlannedMelter::from_examples(&records, config)?;
 
-            // Process all records with the plan
-            for line in all_lines {
-                let value: Value = serde_json::from_str(&line)?;
-                let entities = melter.melt(value)?;
-                writer.write_entities(entities)?;
-            }
+            // Second pass: process all records (or samples only for stdin)
+            let reader = if let Some(file_path) = &input_file {
+                Box::new(BufReader::new(File::open(file_path)?)) as Box<dyn Read>
+            } else {
+                eprintln!("⚠ Warning: Using --planned mode with stdin. Only first {} records are processed.", sample_size);
+                eprintln!("  For best performance with large files, pass the filename directly.");
+                // Return early - can't re-read stdin
+                return Ok(());
+            };
+
+            process_reader(reader, &melter, !ndjson, &mut writer)?;
         }
     } else {
         // Unplanned mode: process each record immediately
         let melter = JsonMelter::new(config);
+        let reader = if let Some(file_path) = &input_file {
+            Box::new(BufReader::new(File::open(file_path)?)) as Box<dyn Read>
+        } else {
+            Box::new(std::io::stdin()) as Box<dyn Read>
+        };
 
-        for line in reader.lines() {
-            let line = line?;
-            let line = line.trim();
-            if line.is_empty() {
-                continue;
-            }
-            let value: Value = serde_json::from_str(line)?;
-            let entities = melter.melt(value)?;
-            writer.write_entities(entities)?;
-
-            if !ndjson {
-                break;
-            }
-        }
+        process_reader_unplanned(reader, &melter, !ndjson, &mut writer)?;
     }
 
     writer.flush()?;
     Ok(())
 }
 
+/// Sample records from a reader using SIMD-accelerated JSON parsing when possible
+fn sample_from_reader(
+    reader: Box<dyn Read>,
+    stop_after_first: bool,
+    sample_size: usize,
+    records: &mut Vec<Value>,
+) -> Result<()> {
+    // Read entire content into memory for SIMD parsing (only for sampling, small overhead)
+    let mut content = Vec::new();
+    let mut buf_reader = BufReader::new(reader);
+    buf_reader.read_to_end(&mut content)?;
+
+    // Try SIMD parsing first (faster) - use OwnedValue to avoid borrow issues
+    match simd_json::to_owned_value(&mut content) {
+        Ok(simd_json::OwnedValue::Array(arr)) => {
+            // JSON array - iterate through elements
+            for (count, elem) in arr.iter().enumerate() {
+                if count >= sample_size {
+                    break;
+                }
+                // Convert simd_json value to serde_json::Value
+                let json_str = simd_json::to_string(elem)?;
+                let value: Value = serde_json::from_str(&json_str)?;
+                records.push(value);
+
+                if stop_after_first && !records.is_empty() {
+                    break;
+                }
+            }
+        }
+        Ok(elem) => {
+            // Single JSON object
+            let json_str = simd_json::to_string(&elem)?;
+            let value: Value = serde_json::from_str(&json_str)?;
+            records.push(value);
+        }
+        Err(_) => {
+            // Fallback to serde_json for NDJSON or malformed input
+            let content_str = String::from_utf8_lossy(&content);
+            for (count, line) in content_str.lines().enumerate() {
+                if count >= sample_size {
+                    break;
+                }
+                let line = line.trim();
+                if !line.is_empty() {
+                    let value: Value = serde_json::from_str(line)?;
+                    records.push(value);
+
+                    if stop_after_first && !records.is_empty() {
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    Ok(())
+}
+
+/// Process records from a reader with a melter using SIMD-accelerated parsing
+fn process_reader(
+    reader: Box<dyn Read>,
+    melter: &PlannedMelter,
+    stop_after_first: bool,
+    writer: &mut EntityWriter<File>,
+) -> Result<()> {
+    // Read entire file for SIMD parsing
+    let mut content = Vec::new();
+    let mut buf_reader = BufReader::new(reader);
+    buf_reader.read_to_end(&mut content)?;
+
+    // Try SIMD parsing for maximum performance - use OwnedValue
+    match simd_json::to_owned_value(&mut content) {
+        Ok(simd_json::OwnedValue::Array(arr)) => {
+            // Fast path: JSON array with SIMD
+            for elem in arr.iter() {
+                let json_str = simd_json::to_string(elem)?;
+                let value: Value = serde_json::from_str(&json_str)?;
+                let entities = melter.melt(value)?;
+                writer.write_entities(entities)?;
+
+                if stop_after_first {
+                    break;
+                }
+            }
+        }
+        Ok(elem) => {
+            // Single object
+            let json_str = simd_json::to_string(&elem)?;
+            let value: Value = serde_json::from_str(&json_str)?;
+            let entities = melter.melt(value)?;
+            writer.write_entities(entities)?;
+        }
+        Err(_) => {
+            // Fallback for NDJSON
+            let content_str = String::from_utf8_lossy(&content);
+            for line in content_str.lines() {
+                let line = line.trim();
+                if line.is_empty() {
+                    continue;
+                }
+                let value: Value = serde_json::from_str(line)?;
+                let entities = melter.melt(value)?;
+                writer.write_entities(entities)?;
+
+                if stop_after_first {
+                    break;
+                }
+            }
+        }
+    }
+
+    Ok(())
+}
+
+/// Process records from a reader with unplanned melter using SIMD-accelerated parsing
+fn process_reader_unplanned(
+    reader: Box<dyn Read>,
+    melter: &JsonMelter,
+    stop_after_first: bool,
+    writer: &mut EntityWriter<File>,
+) -> Result<()> {
+    // Read entire file for SIMD parsing
+    let mut content = Vec::new();
+    let mut buf_reader = BufReader::new(reader);
+    buf_reader.read_to_end(&mut content)?;
+
+    // Try SIMD parsing for maximum performance - use OwnedValue
+    match simd_json::to_owned_value(&mut content) {
+        Ok(simd_json::OwnedValue::Array(arr)) => {
+            // Fast path: JSON array with SIMD
+            for elem in arr.iter() {
+                let json_str = simd_json::to_string(elem)?;
+                let value = serde_json::from_str(&json_str)?;
+                let entities = melter.melt(value)?;
+                writer.write_entities(entities)?;
+
+                if stop_after_first {
+                    break;
+                }
+            }
+        }
+        Ok(elem) => {
+            // Single object
+            let json_str = simd_json::to_string(&elem)?;
+            let value = serde_json::from_str(&json_str)?;
+            let entities = melter.melt(value)?;
+            writer.write_entities(entities)?;
+        }
+        Err(_) => {
+            // Fallback for NDJSON
+            let content_str = String::from_utf8_lossy(&content);
+            for line in content_str.lines() {
+                let line = line.trim();
+                if line.is_empty() {
+                    continue;
+                }
+                let value = serde_json::from_str(line)?;
+                let entities = melter.melt(value)?;
+                writer.write_entities(entities)?;
+
+                if stop_after_first {
+                    break;
+                }
+            }
+        }
+    }
+
+    Ok(())
+}
+
 /// Process JSON and write to stdout as single stream
 fn process_to_stdout(
-    reader: Box<dyn BufRead>,
+    input_file: Option<String>,
     ndjson: bool,
     planned: bool,
     sample_size: Option<usize>,
@@ -200,52 +354,61 @@ fn process_to_stdout(
     let mut stdout = std::io::stdout();
 
     if planned {
-        // Planned mode: collect all lines, sample first N, build plan, process all
+        // Planned mode: sample first N records to build plan, then process all
         let mut records = Vec::new();
-        let mut all_lines: Vec<String> = Vec::new();
 
-        // Collect all lines first
-        for line in reader.lines() {
-            let line = line?;
-            let line = line.trim().to_string();
-            if !line.is_empty() {
-                all_lines.push(line);
-            }
-            if !ndjson && !all_lines.is_empty() {
-                break;
-            }
-        }
+        // First pass: sample only (avoiding full file load into memory)
+        {
+            let reader = if let Some(file_path) = &input_file {
+                Box::new(BufReader::new(File::open(file_path)?)) as Box<dyn Read>
+            } else {
+                Box::new(std::io::stdin()) as Box<dyn Read>
+            };
 
-        // Build samples for plan
-        for (i, line) in all_lines.iter().enumerate() {
-            if i < sample_size {
-                let value: Value = serde_json::from_str(line)?;
-                records.push(value);
-            }
+            sample_from_reader(reader, !ndjson, sample_size, &mut records)?;
         }
 
         // Build plan from samples
         if !records.is_empty() {
             let melter = PlannedMelter::from_examples(&records, config)?;
 
-            // Process all records with the plan
-            for line in all_lines {
-                let value: Value = serde_json::from_str(&line)?;
+            // Second pass: process all records (or samples only for stdin)
+            let reader = if let Some(file_path) = &input_file {
+                Box::new(BufReader::new(File::open(file_path)?)) as Box<dyn Read>
+            } else {
+                eprintln!("⚠ Warning: Using --planned mode with stdin. Only first {} records are processed.", sample_size);
+                eprintln!("  For best performance with large files, pass the filename directly.");
+                // Return early - can't re-read stdin
+                return Ok(());
+            };
+
+            let buf_reader = serde_json::de::IoRead::new(BufReader::new(reader));
+            let stream = serde_json::StreamDeserializer::new(buf_reader);
+
+            for result in stream.into_iter() {
+                let value: Value = result?;
                 let entities = melter.melt(value)?;
                 write_entities_to_stdout(&mut stdout, entities)?;
+
+                if !ndjson {
+                    break;
+                }
             }
         }
     } else {
         // Unplanned mode: process each record immediately
         let melter = JsonMelter::new(config);
+        let reader = if let Some(file_path) = &input_file {
+            Box::new(BufReader::new(File::open(file_path)?)) as Box<dyn Read>
+        } else {
+            Box::new(std::io::stdin()) as Box<dyn Read>
+        };
 
-        for line in reader.lines() {
-            let line = line?;
-            let line = line.trim();
-            if line.is_empty() {
-                continue;
-            }
-            let value: Value = serde_json::from_str(line)?;
+        let buf_reader = serde_json::de::IoRead::new(BufReader::new(reader));
+        let stream = serde_json::StreamDeserializer::new(buf_reader);
+
+        for result in stream.into_iter() {
+            let value = result?;
             let entities = melter.melt(value)?;
             write_entities_to_stdout(&mut stdout, entities)?;
 

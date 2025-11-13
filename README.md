@@ -352,6 +352,55 @@ Tests cover:
 - **Simple ID detection**: Only looks for `id` field (case-sensitive)
 - **File-based output**: Primary writer outputs to files (use `SingleWriter` for other sinks)
 
+## Memory Safety: Processing Large Files
+
+Furnace is designed for streaming processing of large JSON datasets. However, the `--planned` mode has specific requirements:
+
+### Key Safeguards
+
+**Streaming by Default:**
+```bash
+# Safe for any file size - processes line-by-line with constant memory usage
+furnace-melt large_file.jsonl --output-dir ./output
+```
+
+**Planned Mode (Schema-Guided):**
+```bash
+# Optimal for files > 1GB: samples first N records, builds plan, processes rest
+# File path MUST be provided for full-file processing
+furnace-melt --planned large_file.jsonl --output-dir ./output
+
+# With stdin/pipe, only first N records are processed (memory-safe but limited)
+cat large_file.jsonl | furnace-melt --planned > output.jsonl
+# ⚠ Warning: Using --planned mode with stdin. Only first 100 records are processed.
+```
+
+### Why This Matters
+
+Previous versions had a critical bug where `--planned` mode with file input would load the entire file into memory before processing, causing system lockup on files >1GB. This has been **fixed** - the tool now:
+
+1. **First pass**: Samples only the first N records (default: 100) to build extraction plan
+2. **Second pass**: Re-opens the file and processes all records with constant memory usage
+3. **Stdin limitation**: If piping data via stdin, only the sampled records can be processed (stdin can't be re-read)
+
+### Recommendations
+
+| Use Case | Recommended Command |
+|----------|-------------------|
+| Small file (< 100MB) | `furnace-melt file.json` (default) |
+| Large file (> 1GB) | `furnace-melt --planned file.jsonl` (best performance) |
+| Streaming pipeline | `cmd \| furnace-melt` (no `--planned` for full processing) |
+| Unknown data size | Use `--planned` with file path for safety |
+
+### Technical Details
+
+- **Memory per record**: ~10-50 KB depending on nesting depth (JSON parsing)
+- **Sampling phase**: Only `sample_size` records (default 100) held in memory
+- **Processing phase**: Each record processed and released independently
+- **Output buffering**: Small buffer (4KB) per entity type being written
+
+For very large individual records (>100MB each), you may still need to adjust system limits, but typical JSON records process safely.
+
 ## Contributing
 
 This is a learning project demonstrating:

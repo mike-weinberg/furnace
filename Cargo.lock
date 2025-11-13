@@ -212,6 +212,7 @@ dependencies = [
  "anyhow",
  "clap",
  "genson-rs",
+ "mimalloc",
  "once_cell",
  "regex",
  "serde",
