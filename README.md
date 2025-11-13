@@ -263,10 +263,11 @@ This project includes a production-ready JSON schema inference library ported fr
 
 ### Performance Summary
 
-**Fair Benchmark (already-parsed input):**
-- Our implementation: **6.51ms average**
-- genson-rs: **0.90ms average**
-- Trade-off: Superior schema quality (7.23x slower) vs raw speed
+**Fair Benchmark (already-parsed input) - After Streaming Architecture Refactor:**
+- Our implementation: **1.12ms average** (was 7.30ms, 6.50x improvement)
+- genson-rs: **1.04ms average**
+- Ratio: **1.08x slower** (was 7.23x slower before refactor)
+- Validation: ✅ 100/100 schemas pass correctness tests
 
 ![Performance Summary](https://raw.githubusercontent.com/mike-weinberg/furnace/main/schema_inference/performance_graphs.png?t=1763020356)
 
@@ -276,9 +277,10 @@ This project includes a production-ready JSON schema inference library ported fr
 
 | Metric | Value |
 |--------|-------|
-| **Performance vs genson-rs** | 7.23x slower (fair: already-parsed input) |
-| **Optimization achieved** | 59x improvement (regex pre-compilation) |
-| **Unoptimized → Optimized** | 389.68ms → 6.51ms |
+| **Correctness** | ✅ 100/100 schemas pass validation |
+| **Performance vs genson-rs** | 1.08x slower (from 7.23x - new streaming architecture) |
+| **Optimization achieved** | 6.50x improvement (streaming accumulator pattern) |
+| **Original → Optimized** | 7.30ms → 1.12ms average |
 | **Quality advantage** | Better required field tracking, format detection, type unification |
 
 ### Optimization Journey
@@ -290,8 +292,17 @@ This project includes a production-ready JSON schema inference library ported fr
 
 2. **Cycle 2: Fair Benchmarking** ✅
    - Corrected unfair benchmark (both receive already-parsed input, matching Python methodology)
-   - Identified that slower performance is due to superior algorithm
    - **Result: 7.23x slower than genson-rs but with production-ready schema quality**
+
+3. **Cycle 3: Micro-optimizations** ❌
+   - Attempted static strings, manual UUID validation, HashMap pre-allocation
+   - **Result: All made performance 9% worse** - Lesson: micro-optimizations without algorithmic understanding fail
+
+4. **Cycle 4: Architectural Refactor** ✅ **BREAKTHROUGH**
+   - Analyzed root cause: O(n²) complexity in merge-based approach vs genson-rs streaming accumulator
+   - Completely rewrote schema builder using streaming accumulator pattern
+   - **Result: 6.50x improvement** (7.30ms → 1.12ms), only 1.08x slower than genson-rs
+   - Achieved 100% validation correctness (100/100 schemas pass)
 
 ### Features
 
