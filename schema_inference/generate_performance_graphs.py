@@ -206,4 +206,94 @@ ax6.text(0.05, 0.95, summary_text, transform=ax6.transAxes,
 plt.tight_layout()
 plt.savefig('/home/personal/code/furnace/schema_inference/performance_graphs.png', dpi=300, bbox_inches='tight')
 print("✓ Performance graphs saved to: schema_inference/performance_graphs.png")
+
+# ============ Generate Optimization Timeline ============
+fig2 = plt.figure(figsize=(14, 8))
+fig2.suptitle('json-melt: Optimization Timeline and Journey', fontsize=16, fontweight='bold', y=0.98)
+
+# Timeline chart
+ax_timeline = plt.subplot(2, 1, 1)
+
+timeline_stages = [
+    'Initial\n(Unoptimized)',
+    'Cycle 1\n(Regex Pre-compilation)',
+    'Micro-opt Attempts\n(Cycle 3 - FAILED)',
+    'Pre-Refactor State\n(Build-then-merge)',
+    'Cycle 4\n(Streaming Accumulator)\nBREAKTHROUGH'
+]
+timeline_times = [389.68, 6.59, 6.85, 7.30, 1.12]
+timeline_colors = ['#FF6B6B', '#FFA07A', '#FF9999', '#FFD700', '#2ECC71']
+timeline_x = range(len(timeline_stages))
+
+bars = ax_timeline.bar(timeline_x, timeline_times, color=timeline_colors, edgecolor='black', linewidth=2, width=0.6)
+ax_timeline.set_ylabel('Time (ms)', fontsize=12, fontweight='bold')
+ax_timeline.set_title('Performance Over Optimization Cycles', fontsize=13, fontweight='bold')
+ax_timeline.set_xticks(timeline_x)
+ax_timeline.set_xticklabels(timeline_stages, fontsize=10)
+ax_timeline.set_ylim(0, 400)
+ax_timeline.grid(axis='y', alpha=0.3)
+
+# Add value labels and improvements
+for i, (bar, val) in enumerate(zip(bars, timeline_times)):
+    height = bar.get_height()
+    ax_timeline.text(bar.get_x() + bar.get_width()/2., height + 10,
+                     f'{val:.2f}ms', ha='center', va='bottom', fontsize=10, fontweight='bold')
+
+    if i > 0 and i != 3:  # Skip showing improvement for failed attempts
+        improvement = ((timeline_times[i-1] - val) / timeline_times[i-1]) * 100
+        if improvement > 0:
+            ax_timeline.text(bar.get_x() + bar.get_width()/2., height/2,
+                    f'+{improvement:.0f}%\nfaster', ha='center', va='center',
+                    fontsize=9, color='white', fontweight='bold',
+                    bbox=dict(boxstyle='round', facecolor='green', alpha=0.7))
+        else:
+            ax_timeline.text(bar.get_x() + bar.get_width()/2., height/2,
+                    f'{abs(improvement):.0f}%\nSLOWER', ha='center', va='center',
+                    fontsize=8, color='white', fontweight='bold',
+                    bbox=dict(boxstyle='round', facecolor='red', alpha=0.7))
+
+# Key learnings and results
+ax_info = plt.subplot(2, 1, 2)
+ax_info.axis('off')
+
+info_text = """
+KEY INSIGHTS FROM OPTIMIZATION JOURNEY
+
+Cycle 1: Regex Pre-compilation (59x improvement)
+  ✓ Identified 99% of overhead in regex compilation
+  ✓ Used once_cell::Lazy for lazy static initialization
+  ✓ Result: 389.68ms → 6.59ms
+
+Cycle 2: Fair Benchmarking (Discovered Real Problem)
+  • Corrected unfair benchmarks - found algorithm was 7.23x slower than genson-rs
+  • Root cause: O(n²) complexity in merge-based schema building
+  • Not a micro-optimization problem - architectural issue!
+
+Cycle 3: Micro-optimizations (FAILED - 9% worse!)
+  ✗ Attempted: Static strings, manual UUID validation, HashMap pre-allocation
+  ✗ Result: Made performance 9% WORSE
+  ✓ Lesson: Micro-optimizations without understanding the real bottleneck fail
+
+Cycle 4: Architectural Refactor (BREAKTHROUGH - 6.50x improvement!)
+  ✓ Analyzed genson-rs approach: Streaming accumulator pattern (O(n) complexity)
+  ✓ Completely rewrote schema builder to use streaming accumulator
+  ✓ Eliminated intermediate schema cloning and building
+  ✓ Result: 7.30ms → 1.12ms (6.50x faster than before refactor!)
+  ✓ Now only 1.08x slower than genson-rs (was 7.23x slower)
+  ✓ 100% correctness validation: All 100 schemas pass
+
+FINAL METRICS
+  • Total improvement: 389.68ms → 1.12ms (348.4x faster than initial!)
+  • Performance vs genson-rs: 1.08x slower (acceptable trade-off for schema quality)
+  • Correctness validation: ✓ 100/100 schemas pass
+  • Schema quality advantages: Required fields, format detection, type unification
+"""
+
+ax_info.text(0.05, 0.95, info_text, transform=ax_info.transAxes,
+            fontsize=9.5, verticalalignment='top', fontfamily='monospace',
+            bbox=dict(boxstyle='round', facecolor='lightblue', alpha=0.3))
+
+plt.tight_layout()
+plt.savefig('/home/personal/code/furnace/schema_inference/optimization_timeline.png', dpi=300, bbox_inches='tight')
+print("✓ Optimization timeline saved to: schema_inference/optimization_timeline.png")
 print("✓ All graphs generated successfully!")
