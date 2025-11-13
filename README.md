@@ -269,9 +269,7 @@ This project includes a production-ready JSON schema inference library ported fr
 - Ratio: **1.08x slower** (was 7.23x slower before refactor)
 - Validation: ✅ 100/100 schemas pass correctness tests
 
-![Performance Summary](https://raw.githubusercontent.com/mike-weinberg/furnace/main/schema_inference/performance_graphs.png?t=1763020517)
-
-![Optimization Timeline](https://raw.githubusercontent.com/mike-weinberg/furnace/main/schema_inference/optimization_timeline.png?t=1763020517)
+![Performance Summary](https://raw.githubusercontent.com/mike-weinberg/furnace/main/schema_inference/performance_graphs.png?t=1763020715)
 
 ### Key Results
 
