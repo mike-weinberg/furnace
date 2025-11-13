@@ -206,6 +206,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "furnace"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "genson-rs",
+ "once_cell",
+ "regex",
+ "serde",
+ "serde_json",
+ "simd-json",
+ "thiserror",
+]
+
+[[package]]
 name = "genson-rs"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -278,20 +292,6 @@ checksum = "b011eec8cc36da2aab2d5cff675ec18454fad408585853910a202391cf9f8e65"
 dependencies = [
  "once_cell",
  "wasm-bindgen",
-]
-
-[[package]]
-name = "json-melt"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "genson-rs",
- "once_cell",
- "regex",
- "serde",
- "serde_json",
- "simd-json",
- "thiserror",
 ]
 
 [[package]]

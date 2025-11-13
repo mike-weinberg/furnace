@@ -1,4 +1,4 @@
-use json_melt::{EntityWriter, JsonMelter, MeltConfig};
+use furnace::{EntityWriter, JsonMelter, MeltConfig};
 use serde_json::json;
 
 fn main() -> anyhow::Result<()> {

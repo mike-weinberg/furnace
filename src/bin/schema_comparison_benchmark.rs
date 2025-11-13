@@ -9,7 +9,7 @@
 use std::fs;
 use std::path::Path;
 use std::time::Instant;
-use json_melt::{infer_schema, infer_schema_streaming};
+use furnace::{infer_schema, infer_schema_streaming};
 
 #[derive(Debug, Clone)]
 struct BenchmarkResult {

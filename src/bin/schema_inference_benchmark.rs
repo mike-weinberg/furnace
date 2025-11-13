@@ -2,7 +2,7 @@
 use std::fs;
 use std::path::Path;
 use std::time::Instant;
-use json_melt::infer_schema;
+use furnace::infer_schema;
 
 fn main() -> anyhow::Result<()> {
     println!("=== Benchmarking Rust Schema Inference vs genson-rs ===\n");

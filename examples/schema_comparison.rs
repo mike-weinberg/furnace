@@ -7,8 +7,8 @@ fn main() {
         json!({"name": "Bob", "age": 25}),
     ];
 
-    let schema_old = json_melt::infer_schema(&examples);
-    let schema_new = json_melt::infer_schema_streaming(&examples);
+    let schema_old = furnace::infer_schema(&examples);
+    let schema_new = furnace::infer_schema_streaming(&examples);
 
     println!("=== Test 1: Simple Object ===");
     println!("Old schema: {}", serde_json::to_string_pretty(&schema_old).unwrap());
@@ -20,8 +20,8 @@ fn main() {
         json!({"name": "Bob"}),
     ];
 
-    let schema_old = json_melt::infer_schema(&examples);
-    let schema_new = json_melt::infer_schema_streaming(&examples);
+    let schema_old = furnace::infer_schema(&examples);
+    let schema_new = furnace::infer_schema_streaming(&examples);
 
     println!("\n=== Test 2: Optional Fields ===");
     println!("Old schema: {}", serde_json::to_string_pretty(&schema_old).unwrap());
@@ -35,8 +35,8 @@ fn main() {
         ]),
     ];
 
-    let schema_old = json_melt::infer_schema(&examples);
-    let schema_new = json_melt::infer_schema_streaming(&examples);
+    let schema_old = furnace::infer_schema(&examples);
+    let schema_new = furnace::infer_schema_streaming(&examples);
 
     println!("\n=== Test 3: Array of Objects ===");
     println!("Old schema: {}", serde_json::to_string_pretty(&schema_old).unwrap());
@@ -48,8 +48,8 @@ fn main() {
         json!("another@test.org"),
     ];
 
-    let schema_old = json_melt::infer_schema(&examples);
-    let schema_new = json_melt::infer_schema_streaming(&examples);
+    let schema_old = furnace::infer_schema(&examples);
+    let schema_new = furnace::infer_schema_streaming(&examples);
 
     println!("\n=== Test 4: Format Detection (Email) ===");
     println!("Old schema: {}", serde_json::to_string_pretty(&schema_old).unwrap());

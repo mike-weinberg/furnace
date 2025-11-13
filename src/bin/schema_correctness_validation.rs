@@ -57,7 +57,7 @@ fn main() -> anyhow::Result<()> {
         }
 
         // Infer schema using our streaming implementation
-        let inferred_schema = json_melt::infer_schema_streaming(examples);
+        let inferred_schema = furnace::infer_schema_streaming(examples);
 
         total_tests += 1;
 

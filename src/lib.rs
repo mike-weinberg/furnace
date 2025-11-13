@@ -1,18 +1,66 @@
+//! # Furnace - JSON Processing Toolkit
+//!
+//! A unified library for JSON melting (extracting nested JSON into relational tables)
+//! and JSON Schema inference with format detection.
+//!
+//! ## Modules
+//!
+//! - **melt**: Extract nested JSON into flat, relational entities
+//! - **schema**: Infer JSON Schemas from examples with format detection
+//!
+//! ## Quick Start
+//!
+//! ### JSON Melting
+//!
+//! ```rust
+//! use furnace::melt::{JsonMelter, EntityWriter, MeltConfig};
+//! use serde_json::json;
+//!
+//! # fn main() -> anyhow::Result<()> {
+//! let data = json!({
+//!     "id": 1,
+//!     "name": "Alice",
+//!     "posts": [
+//!         {"id": 10, "title": "First Post"},
+//!         {"id": 11, "title": "Second Post"}
+//!     ]
+//! });
+//!
+//! let config = MeltConfig::default();
+//! let melter = JsonMelter::new(config);
+//! let entities = melter.melt(data)?;
+//!
+//! // entities[0] = root entity (id, name)
+//! // entities[1-2] = posts entities with foreign keys
+//! # Ok(())
+//! # }
+//! ```
+//!
+//! ### Schema Inference
+//!
+//! ```rust
+//! use furnace::schema::infer_schema_streaming;
+//! use serde_json::json;
+//!
+//! let examples = vec![
+//!     json!({"name": "Alice", "age": 30}),
+//!     json!({"name": "Bob", "age": 25}),
+//! ];
+//!
+//! let schema = infer_schema_streaming(&examples);
+//! // schema includes type information, required fields, and format detection
+//! ```
+
 use anyhow::{Context, Result};
 use serde_json::Value;
 use std::io::BufRead;
 
-pub mod types;
-pub mod extractor;
-pub mod writer;
-pub mod schema_inference;
-pub mod schema_builder;
+pub mod melt;
+pub mod schema;
 
-pub use types::{Entity, EntityId, MeltConfig};
-pub use extractor::JsonMelter;
-pub use writer::{EntityWriter, SingleWriter};
-pub use schema_inference::infer_schema;
-pub use schema_builder::{SchemaBuilder, infer_schema_streaming};
+// Re-export commonly used types for convenience
+pub use melt::{Entity, EntityId, EntityWriter, JsonMelter, MeltConfig, MeltPlan, PlannedMelter, SingleWriter};
+pub use schema::{SchemaBuilder, infer_schema, infer_schema_streaming};
 
 /// Main entry point: melt a JSON stream into relational entities
 pub fn melt_json<R: BufRead>(

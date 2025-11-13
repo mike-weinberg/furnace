@@ -2,7 +2,7 @@
 use std::fs;
 use std::path::Path;
 use std::time::Instant;
-use json_melt::infer_schema_streaming;
+use furnace::infer_schema_streaming;
 
 fn main() -> anyhow::Result<()> {
     println!("=== Benchmarking SchemaBuilder (Streaming) vs genson-rs ===\n");

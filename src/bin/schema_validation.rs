@@ -29,7 +29,7 @@
 use std::fs;
 use std::path::Path;
 use serde_json::Value;
-use json_melt::infer_schema_streaming;
+use furnace::infer_schema_streaming;
 
 fn main() -> anyhow::Result<()> {
     println!("=== DEPRECATED TEST - Schema Validation Against Hand-Written Schemas ===\n");

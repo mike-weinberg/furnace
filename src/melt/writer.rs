@@ -1,4 +1,4 @@
-use crate::types::Entity;
+use crate::melt::types::Entity;
 use anyhow::{Context, Result};
 use std::collections::HashMap;
 use std::io::Write;

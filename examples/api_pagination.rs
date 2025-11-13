@@ -1,6 +1,6 @@
 /// Example: Processing paginated API responses
 /// This simulates fetching multiple pages from an API and melting them all into tables
-use json_melt::{JsonMelter, EntityWriter, MeltConfig};
+use furnace::{JsonMelter, EntityWriter, MeltConfig};
 use serde_json::json;
 
 fn main() -> anyhow::Result<()> {

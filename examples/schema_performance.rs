@@ -10,11 +10,11 @@ fn main() {
         .collect();
 
     let start = Instant::now();
-    let _ = json_melt::infer_schema(&small_examples);
+    let _ = furnace::infer_schema(&small_examples);
     let old_small = start.elapsed();
 
     let start = Instant::now();
-    let _ = json_melt::infer_schema_streaming(&small_examples);
+    let _ = furnace::infer_schema_streaming(&small_examples);
     let new_small = start.elapsed();
 
     println!("Small dataset (100 objects):");
@@ -34,11 +34,11 @@ fn main() {
         .collect();
 
     let start = Instant::now();
-    let _ = json_melt::infer_schema(&medium_examples);
+    let _ = furnace::infer_schema(&medium_examples);
     let old_medium = start.elapsed();
 
     let start = Instant::now();
-    let _ = json_melt::infer_schema_streaming(&medium_examples);
+    let _ = furnace::infer_schema_streaming(&medium_examples);
     let new_medium = start.elapsed();
 
     println!("Medium dataset (1,000 objects):");
@@ -62,11 +62,11 @@ fn main() {
         .collect();
 
     let start = Instant::now();
-    let _ = json_melt::infer_schema(&nested_examples);
+    let _ = furnace::infer_schema(&nested_examples);
     let old_nested = start.elapsed();
 
     let start = Instant::now();
-    let _ = json_melt::infer_schema_streaming(&nested_examples);
+    let _ = furnace::infer_schema_streaming(&nested_examples);
     let new_nested = start.elapsed();
 
     println!("Nested dataset (500 objects with nesting):");
@@ -87,11 +87,11 @@ fn main() {
         .collect();
 
     let start = Instant::now();
-    let _ = json_melt::infer_schema(&large_examples);
+    let _ = furnace::infer_schema(&large_examples);
     let old_large = start.elapsed();
 
     let start = Instant::now();
-    let _ = json_melt::infer_schema_streaming(&large_examples);
+    let _ = furnace::infer_schema_streaming(&large_examples);
     let new_large = start.elapsed();
 
     println!("Large dataset (5,000 objects):");

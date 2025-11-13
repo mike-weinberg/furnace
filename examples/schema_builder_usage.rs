@@ -1,5 +1,5 @@
 /// Example demonstrating the SchemaBuilder API
-use json_melt::SchemaBuilder;
+use furnace::SchemaBuilder;
 use serde_json::json;
 
 fn main() {
@@ -141,6 +141,6 @@ fn main() {
         json!({"status": "inactive", "count": 5}),
     ];
 
-    let schema = json_melt::infer_schema_streaming(&examples);
+    let schema = furnace::infer_schema_streaming(&examples);
     println!("Schema: {}\n", serde_json::to_string_pretty(&schema).unwrap());
 }

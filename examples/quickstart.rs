@@ -1,5 +1,5 @@
 /// Quickstart example - the simplest possible usage
-use json_melt::{JsonMelter, EntityWriter, MeltConfig};
+use furnace::{JsonMelter, EntityWriter, MeltConfig};
 use serde_json::json;
 
 fn main() -> anyhow::Result<()> {

@@ -1,4 +1,4 @@
-use crate::types::{Entity, MeltConfig, ParentRef};
+use crate::melt::types::{Entity, MeltConfig, ParentRef};
 use anyhow::Result;
 use serde_json::{Map, Value};
 
