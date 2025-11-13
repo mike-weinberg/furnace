@@ -37,7 +37,7 @@ fn main() -> anyhow::Result<()> {
     println!("  3. Genson-rs                - Third-party library using simd_json");
     println!();
 
-    let examples_dir = Path::new("schema_inference/src/tests/examples");
+    let examples_dir = Path::new("tests/schema_examples");
     let manifest_file = examples_dir.join("manifest.json");
 
     // Load manifest

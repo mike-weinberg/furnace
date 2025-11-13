@@ -16,7 +16,7 @@ fn main() -> anyhow::Result<()> {
     println!("=== Schema Correctness Validation ===\n");
     println!("Testing that inferred schemas correctly describe their source examples\n");
 
-    let examples_dir = Path::new("schema_inference/src/tests/examples");
+    let examples_dir = Path::new("tests/schema_examples");
     let manifest_file = examples_dir.join("manifest.json");
 
     // Load manifest

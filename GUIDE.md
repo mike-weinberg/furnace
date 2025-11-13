@@ -522,5 +522,5 @@ Furnace follows tidy data principles (see `tidy-data-principles.md`):
 
 - **[README.md](README.md)** - Overview and API reference
 - **[tidy-data-principles.md](tidy-data-principles.md)** - Background on data organization
-- **[schema_inference/PERFORMANCE_SUMMARY.md](schema_inference/PERFORMANCE_SUMMARY.md)** - Detailed optimization analysis
+- **[docs/PERFORMANCE_SUMMARY.md](docs/PERFORMANCE_SUMMARY.md)** - Detailed optimization analysis
 - **Examples in `examples/` directory** - Working code samples

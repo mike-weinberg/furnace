@@ -39,7 +39,7 @@ fn main() -> anyhow::Result<()> {
     println!("Inferred schemas describe what data looks like (descriptive).");
     println!("Hand-written schemas define what data should be (prescriptive).\n");
 
-    let examples_dir = Path::new("schema_inference/src/tests/examples");
+    let examples_dir = Path::new("tests/schema_examples");
     let manifest_file = examples_dir.join("manifest.json");
 
     // Load manifest

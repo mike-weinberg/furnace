@@ -6,7 +6,7 @@ use std::time::Instant;
 fn main() -> anyhow::Result<()> {
     println!("=== Benchmarking genson-rs ===\n");
 
-    let examples_dir = Path::new("schema_inference/src/tests/examples");
+    let examples_dir = Path::new("tests/schema_examples");
     let manifest_file = examples_dir.join("manifest.json");
 
     // Load manifest

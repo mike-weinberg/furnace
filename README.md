@@ -377,9 +377,9 @@ This project includes a production-ready JSON schema inference library ported fr
 
 **Trade-off:** We're slower but provide superior schema quality with format detection, better required field tracking, and proper type unification - features not available in genson-rs.
 
-![Performance Summary](https://raw.githubusercontent.com/mike-weinberg/furnace/main/schema_inference/performance_graphs.png?t=1763021108)
+![Performance Summary](https://raw.githubusercontent.com/mike-weinberg/furnace/main/docs/performance_graphs.png?t=1763021108)
 
-![Optimization Timeline](https://raw.githubusercontent.com/mike-weinberg/furnace/main/schema_inference/optimization_timeline.png?t=1763021108)
+![Optimization Timeline](https://raw.githubusercontent.com/mike-weinberg/furnace/main/docs/optimization_timeline.png?t=1763021108)
 
 ### Key Results
 
@@ -426,7 +426,7 @@ Furnace produces richer, more descriptive schemas than genson-rs:
 
 ### Documentation
 
-See [`schema_inference/PERFORMANCE_SUMMARY.md`](schema_inference/PERFORMANCE_SUMMARY.md) for comprehensive analysis including:
+See [`docs/PERFORMANCE_SUMMARY.md`](docs/PERFORMANCE_SUMMARY.md) for comprehensive analysis including:
 - Detailed performance comparisons
 - Optimization methodology
 - Benchmarking results
@@ -486,6 +486,6 @@ Schema inference tools produce *descriptive* schemas, not *prescriptive* validat
 ## See Also
 
 - [Tidy Data Principles](tidy-data-principles.md) - Background on data organization
-- [Schema Inference Performance Report](schema_inference/PERFORMANCE_SUMMARY.md) - Detailed optimization analysis
+- [Schema Inference Performance Report](docs/PERFORMANCE_SUMMARY.md) - Detailed optimization analysis
 - Hadley Wickham's "Tidy Data" paper
 - R's `tidyr` package for similar functionality
