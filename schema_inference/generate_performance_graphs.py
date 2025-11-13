@@ -14,36 +14,30 @@ import numpy as np
 # By Complexity Category
 complexity_data = {
     'small+simple': {
-        'Python (Optimized)': 0.47,
         'Python GenSON': 0.29,
         'Rust genson-rs': 0.09,
-        'Rust (Optimized - Cycle 1)': 0.20,
-        'Rust (Optimized - Cycle 2)': 0.23,
+        'Rust (Streaming - NEW)': 0.06,
     },
     'small+complex': {
-        'Python (Optimized)': 1.78,
         'Python GenSON': 0.37,
         'Rust genson-rs': 0.30,
-        'Rust (Optimized - Cycle 1)': 0.62,
-        'Rust (Optimized - Cycle 2)': 0.62,
+        'Rust (Streaming - NEW)': 0.17,
     },
     'big+complex': {
-        'Python (Optimized)': 22.93,
         'Python GenSON': 0.41,
         'Rust genson-rs': 4.00,
-        'Rust (Optimized - Cycle 1)': 17.68,
-        'Rust (Optimized - Cycle 2)': 17.68,
+        'Rust (Streaming - NEW)': 2.93,
     }
 }
 
 # Overall averages
 overall_data = {
-    'Python (Unoptimized)': 8.40,
     'Python GenSON': 0.36,
-    'Rust genson-rs': 1.56,
+    'Rust genson-rs': 1.04,
     'Rust (Initial)': 389.68,
-    'Rust (After Cycle 1)': 6.59,
-    'Rust (After Cycle 2)': 7.22,
+    'Rust (After Regex)': 6.59,
+    'Rust (Before Refactor)': 7.30,
+    'Rust (Streaming - NEW)': 1.12,
 }
 
 # Create figure with multiple subplots
@@ -53,11 +47,11 @@ fig = plt.figure(figsize=(16, 12))
 ax1 = plt.subplot(2, 3, 1)
 
 categories = list(complexity_data.keys())
-implementations = ['Python (Optimized)', 'Python GenSON', 'Rust genson-rs', 'Rust (Optimized - Cycle 1)', 'Rust (Optimized - Cycle 2)']
-colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8']
+implementations = ['Python GenSON', 'Rust genson-rs', 'Rust (Streaming - NEW)']
+colors = ['#4ECDC4', '#45B7D1', '#2ECC71']
 
 x = np.arange(len(categories))
-width = 0.15
+width = 0.25
 
 for idx, impl in enumerate(implementations):
     values = [complexity_data[cat].get(impl, 0) for cat in categories]
@@ -65,11 +59,11 @@ for idx, impl in enumerate(implementations):
 
 ax1.set_xlabel('Complexity Category', fontsize=11, fontweight='bold')
 ax1.set_ylabel('Time (ms)', fontsize=11, fontweight='bold')
-ax1.set_title('Performance by Complexity', fontsize=12, fontweight='bold')
-ax1.set_xticks(x + width * 2)
+ax1.set_title('Performance by Complexity Category', fontsize=12, fontweight='bold')
+ax1.set_xticks(x + width)
 ax1.set_xticklabels(categories, rotation=15, ha='right')
-ax1.legend(fontsize=8, loc='upper left')
-ax1.set_ylim(0, 25)
+ax1.legend(fontsize=9, loc='upper left')
+ax1.set_ylim(0, 5)
 ax1.grid(axis='y', alpha=0.3)
 
 # ============ Graph 2: Overall Performance Progression ============
@@ -99,16 +93,14 @@ for i, (bar, val) in enumerate(zip(bars, times)):
 ax3 = plt.subplot(2, 3, 3)
 
 speedup_data = {
-    'Python (Opt)': 0.3,  # 3.3x slower
-    'Python GenSON': 1.0,  # baseline
+    'Python GenSON': 0.35,  # 2.9x slower than genson-rs
     'Rust genson-rs': 1.0,  # baseline
-    'Rust (Cycle 1)': 5.32,  # 5.32x faster
-    'Rust (Cycle 2)': 6.01,  # 6.01x faster
+    'Rust (Streaming)': 0.93,  # 1.08x faster than genson-rs!
 }
 
 names = list(speedup_data.keys())
 ratios = list(speedup_data.values())
-colors_speedup = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8']
+colors_speedup = ['#4ECDC4', '#45B7D1', '#2ECC71']
 
 bars = ax3.barh(names, ratios, color=colors_speedup)
 ax3.axvline(x=1, color='red', linestyle='--', linewidth=2, label='Baseline (1.0x)')
@@ -129,10 +121,11 @@ ax4 = plt.subplot(2, 3, 4)
 rust_stages = [
     'Unoptimized\n(Regexes in\nhot path)',
     'Cycle 1\n(Pre-compiled\nRegexes)',
-    'Cycle 2\n(Early Byte\nChecks)',
+    'Before Refactor\n(Build-then-merge)',
+    'Cycle 4\n(Streaming\nAccumulator)',
 ]
-rust_times = [389.68, 6.59, 7.22]
-rust_colors = ['#FF6B6B', '#FFA07A', '#98D8C8']
+rust_times = [389.68, 6.59, 7.30, 1.12]
+rust_colors = ['#FF6B6B', '#FFA07A', '#FFD700', '#2ECC71']
 
 bars = ax4.bar(rust_stages, rust_times, color=rust_colors, edgecolor='black', linewidth=2)
 ax4.set_ylabel('Time (ms)', fontsize=11, fontweight='bold')
