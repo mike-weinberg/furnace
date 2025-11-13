@@ -1,0 +1,2787 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://json.schemastore.org/asmdef.json",
+    "anyOf": [
+      {
+        "properties": {
+          "includePlatforms": {
+            "minItems": 1
+          },
+          "excludePlatforms": {
+            "maxItems": 0
+          }
+        }
+      },
+      {
+        "properties": {
+          "includePlatforms": {
+            "maxItems": 0
+          },
+          "excludePlatforms": {
+            "minItems": 1
+          }
+        }
+      },
+      {
+        "properties": {
+          "includePlatforms": {
+            "maxItems": 0
+          },
+          "excludePlatforms": {
+            "maxItems": 0
+          }
+        }
+      }
+    ],
+    "definitions": {
+      "platformValues": {
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+          "enum": [
+            "Android",
+            "Editor",
+            "iOS",
+            "LinuxStandalone32",
+            "LinuxStandalone64",
+            "LinuxStandaloneUniversal",
+            "Lumin",
+            "macOSStandalone",
+            "Nintendo3DS",
+            "PS4",
+            "PSVita",
+            "Stadia",
+            "Switch",
+            "tvOS",
+            "WSA",
+            "WebGL",
+            "WindowsStandalone32",
+            "WindowsStandalone64",
+            "XboxOne"
+          ]
+        }
+      }
+    },
+    "description": "Defines an assembly in the Unity compilation pipeline",
+    "properties": {
+      "name": {
+        "description": "The name of the assembly being defined",
+        "type": "string",
+        "minLength": 1
+      },
+      "rootNamespace": {
+        "description": "The root namespace of the assembly. Requires Unity 2020.2",
+        "type": "string"
+      },
+      "references": {
+        "description": "A list of assembly names or assembly asset GUIDs to reference",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "uniqueItems": true
+      },
+      "includePlatforms": {
+        "$ref": "#/definitions/platformValues",
+        "description": "Platforms to target"
+      },
+      "excludePlatforms": {
+        "$ref": "#/definitions/platformValues",
+        "description": "Platforms that are explicitly not targeted"
+      },
+      "allowUnsafeCode": {
+        "description": "Allow unsafe code",
+        "type": "boolean",
+        "default": false
+      },
+      "autoReferenced": {
+        "description": "When true, this assembly definition is automatically referenced by predefined assemblies (Assembly-CSharp, Assembly-CSharp-firstpass, etc.)",
+        "type": "boolean",
+        "default": true
+      },
+      "noEngineReferences": {
+        "description": "When true, no references to UnityEngine or UnityEditor will be added to this assembly project",
+        "type": "boolean",
+        "default": false
+      },
+      "overrideReferences": {
+        "description": "When true, any references to precompiled assembly assets are manually chosen. When false, all precompiled assembly assets are automatically referenced",
+        "type": "boolean",
+        "default": "false"
+      },
+      "precompiledReferences": {
+        "description": "A list of precompiled assembly assets that will be referenced. Only valid when overrideReferences is true",
+        "type": "array",
+        "uniqueItems": true
+      },
+      "defineConstraints": {
+        "description": "A list of the C# compiler define symbols that must evaluate to true in order for the assembly to be compiled or referenced. Absence of a symbol can be checked with a bang symbol (!DEFINE)",
+        "type": "array",
+        "uniqueItems": true
+      },
+      "optionalUnityReferences": {
+        "description": "Additional optional Unity features to reference",
+        "type": "array",
+        "items": {
+          "enum": [
+            "TestAssemblies"
+          ]
+        },
+        "uniqueItems": true
+      },
+      "versionDefines": {
+        "description": "A set of expressions that will define a symbol in the C# project if a package or module version matches the given expression",
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "The package or module that will provide the version to be checked in the expression",
+              "type": "string"
+            },
+            "expression": {
+              "description": "The semantic version range of the chosen package or module",
+              "type": "string"
+            },
+            "define": {
+              "description": "The name of the define that is added to the project file when expression evaluates to true",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "expression",
+            "define"
+          ]
+        }
+      }
+    },
+    "required": [
+      "name"
+    ],
+    "title": "Unity Assembly Definition",
+    "type": "object"
+  },
+  "examples": [
+    {
+      "name": "consectetur ipsum lor",
+      "rootNamespace": "bnFbmOHnKYaXRvj7uff",
+      "autoReferenced": false,
+      "noEngineReferences": false,
+      "optionalUnityReferences": []
+    },
+    {
+      "name": "co",
+      "references": [],
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "autoReferenced": false,
+      "optionalUnityReferences": [],
+      "versionDefines": []
+    },
+    {
+      "name": "RhxrnJgWQsNKVP",
+      "rootNamespace": "qcbcycqzakm",
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "autoReferenced": false,
+      "versionDefines": []
+    },
+    {
+      "name": "psbEhY71O",
+      "references": [],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": false,
+      "autoReferenced": false,
+      "noEngineReferences": true,
+      "precompiledReferences": [],
+      "defineConstraints": []
+    },
+    {
+      "name": "K1o",
+      "rootNamespace": "XbWNdbIsuSVyRwDZCRM",
+      "references": [],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "autoReferenced": false,
+      "precompiledReferences": [],
+      "defineConstraints": [],
+      "optionalUnityReferences": [],
+      "versionDefines": []
+    },
+    {
+      "name": "sit sit ipsu",
+      "rootNamespace": "dolor lorem lorem ip",
+      "references": [],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "autoReferenced": true,
+      "noEngineReferences": false,
+      "overrideReferences": true,
+      "precompiledReferences": [],
+      "defineConstraints": []
+    },
+    {
+      "name": "IHXFSBjYOEnVIFDbAi",
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "noEngineReferences": true,
+      "overrideReferences": true,
+      "defineConstraints": [],
+      "optionalUnityReferences": [],
+      "versionDefines": []
+    },
+    {
+      "name": "5uI",
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "noEngineReferences": false,
+      "overrideReferences": false,
+      "precompiledReferences": [],
+      "optionalUnityReferences": []
+    },
+    {
+      "name": "jxstiofoyjcjfbwz",
+      "references": [],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": false,
+      "overrideReferences": true,
+      "precompiledReferences": [],
+      "optionalUnityReferences": []
+    },
+    {
+      "name": "ogzvgwom",
+      "references": [],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": false,
+      "autoReferenced": true,
+      "overrideReferences": false,
+      "precompiledReferences": [],
+      "versionDefines": []
+    },
+    {
+      "name": "consectet",
+      "references": [],
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "autoReferenced": true,
+      "overrideReferences": true,
+      "precompiledReferences": [],
+      "defineConstraints": [],
+      "optionalUnityReferences": [],
+      "versionDefines": []
+    },
+    {
+      "name": "fnmsjlayxzidwbbffdjt",
+      "references": [],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "autoReferenced": false,
+      "noEngineReferences": true,
+      "precompiledReferences": [],
+      "defineConstraints": [],
+      "versionDefines": []
+    },
+    {
+      "name": "s3Enu",
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": false,
+      "noEngineReferences": true,
+      "overrideReferences": false,
+      "defineConstraints": [],
+      "optionalUnityReferences": []
+    },
+    {
+      "name": "fzh",
+      "rootNamespace": "vS7PHy",
+      "references": [],
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "noEngineReferences": true,
+      "overrideReferences": true,
+      "precompiledReferences": [],
+      "optionalUnityReferences": [],
+      "versionDefines": []
+    },
+    {
+      "name": "amet dolor sit adi",
+      "references": [],
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "autoReferenced": true,
+      "noEngineReferences": true,
+      "overrideReferences": true,
+      "defineConstraints": [],
+      "optionalUnityReferences": [],
+      "versionDefines": []
+    },
+    {
+      "name": "Ln",
+      "rootNamespace": "adipiscing amet ",
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "precompiledReferences": [],
+      "versionDefines": []
+    },
+    {
+      "name": "consectetur adipisc",
+      "rootNamespace": "glphpaftlr",
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "autoReferenced": true,
+      "overrideReferences": true,
+      "optionalUnityReferences": [],
+      "versionDefines": []
+    },
+    {
+      "name": "amet sit",
+      "rootNamespace": "ravjuntsir",
+      "allowUnsafeCode": true,
+      "noEngineReferences": true,
+      "overrideReferences": true,
+      "precompiledReferences": [],
+      "optionalUnityReferences": [],
+      "versionDefines": []
+    },
+    {
+      "name": "ipsum ipsu",
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "autoReferenced": true,
+      "noEngineReferences": true,
+      "overrideReferences": true,
+      "precompiledReferences": [],
+      "versionDefines": []
+    },
+    {
+      "name": "ipsum adipiscing",
+      "rootNamespace": "zukN3QNuAiTs",
+      "references": [],
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "precompiledReferences": [],
+      "optionalUnityReferences": [],
+      "versionDefines": []
+    },
+    {
+      "name": "adipiscing ipsum si",
+      "rootNamespace": "lorem ipsum amet ",
+      "references": [],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "defineConstraints": [],
+      "optionalUnityReferences": [],
+      "versionDefines": []
+    },
+    {
+      "name": "5pOxeOsZtUdP6ho",
+      "rootNamespace": "x",
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "autoReferenced": false,
+      "noEngineReferences": true,
+      "overrideReferences": true,
+      "precompiledReferences": [],
+      "defineConstraints": [],
+      "optionalUnityReferences": []
+    },
+    {
+      "name": "amet sit amet ip",
+      "rootNamespace": "fvqdwlscrabcbpffvukft",
+      "references": [],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": false,
+      "autoReferenced": true,
+      "noEngineReferences": false,
+      "overrideReferences": true,
+      "precompiledReferences": [],
+      "defineConstraints": []
+    },
+    {
+      "name": "sit ipsum sit",
+      "rootNamespace": "lfxmfmsgetd",
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": false,
+      "precompiledReferences": [],
+      "defineConstraints": [],
+      "optionalUnityReferences": [],
+      "versionDefines": []
+    },
+    {
+      "name": "5Ws",
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "autoReferenced": true,
+      "optionalUnityReferences": []
+    },
+    {
+      "name": "dol",
+      "rootNamespace": "lqxfbeald",
+      "references": [],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "autoReferenced": true,
+      "precompiledReferences": [],
+      "optionalUnityReferences": []
+    },
+    {
+      "name": "txcplgwizjouubt",
+      "rootNamespace": "consectetur",
+      "references": [],
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "precompiledReferences": [],
+      "optionalUnityReferences": [],
+      "versionDefines": []
+    },
+    {
+      "name": "ip",
+      "references": [],
+      "autoReferenced": false,
+      "noEngineReferences": false,
+      "overrideReferences": false,
+      "precompiledReferences": [],
+      "optionalUnityReferences": [],
+      "versionDefines": []
+    },
+    {
+      "name": "sit",
+      "rootNamespace": "amet",
+      "references": [],
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": false,
+      "noEngineReferences": false,
+      "overrideReferences": false,
+      "defineConstraints": [],
+      "optionalUnityReferences": [],
+      "versionDefines": []
+    },
+    {
+      "name": "XqjUmfFKFYG",
+      "references": [],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "autoReferenced": true,
+      "overrideReferences": false,
+      "precompiledReferences": [],
+      "defineConstraints": [],
+      "versionDefines": []
+    },
+    {
+      "name": "tes",
+      "references": [],
+      "allowUnsafeCode": false,
+      "autoReferenced": true,
+      "precompiledReferences": [],
+      "optionalUnityReferences": []
+    },
+    {
+      "name": "sit ipsum",
+      "rootNamespace": "Gmg",
+      "references": [],
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": false,
+      "autoReferenced": false,
+      "noEngineReferences": true,
+      "precompiledReferences": [],
+      "defineConstraints": []
+    },
+    {
+      "name": "hht25vBC5BtFaFhYB7Aq",
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "noEngineReferences": true,
+      "precompiledReferences": [],
+      "defineConstraints": []
+    },
+    {
+      "name": "CTF054Q0YgQ5UrS",
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": false,
+      "noEngineReferences": true,
+      "precompiledReferences": [
+        null,
+        83.31,
+        39,
+        null,
+        8
+      ],
+      "defineConstraints": [
+        "consecte",
+        "h7sJnpMRX7",
+        "sit consecte",
+        null,
+        null
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ]
+    },
+    {
+      "name": "y4d0rUBousuH",
+      "rootNamespace": "L8UuCdNygNVfSQ",
+      "references": [
+        "lorem consectetur",
+        "2BB5JD2UWw6IlKJihLLf",
+        "xhj71EScSOWBKZ6Yt",
+        "consectetur",
+        "dolo"
+      ],
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": false,
+      "overrideReferences": true,
+      "precompiledReferences": [
+        94,
+        48.48,
+        false,
+        null,
+        "htvnfsv"
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ]
+    },
+    {
+      "name": "oYhDILjNF",
+      "references": [
+        "consectetur sit ",
+        "sit ipsum s",
+        "lorem ip",
+        "pocusficovxuzhqxzj",
+        "consectetur adipi"
+      ],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "noEngineReferences": true,
+      "overrideReferences": true,
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ],
+      "versionDefines": [
+        {
+          "name": "consectetur adipi",
+          "expression": "consectetur ipsum c",
+          "define": "a"
+        },
+        {
+          "name": "dolor sit adipi",
+          "expression": "consectet",
+          "define": "adipi"
+        },
+        {
+          "name": "zotknpxmkohwamata",
+          "expression": "QWk6",
+          "define": "adipiscing si"
+        },
+        {
+          "name": "consectetur d",
+          "expression": "ixu",
+          "define": "zmtunnkwjtos"
+        },
+        {
+          "name": "hcdysfvqpp",
+          "expression": "consectetur amet ",
+          "define": "qirtpjwhj"
+        }
+      ]
+    },
+    {
+      "name": "adipisc",
+      "rootNamespace": "rxkrxmzaxsjiqs",
+      "references": [
+        "mgisK2p5kFU3",
+        "ncr",
+        "fzQPaXtH",
+        "sit consec",
+        "9bgS8fl"
+      ],
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "autoReferenced": true,
+      "precompiledReferences": [
+        true,
+        27,
+        null,
+        39,
+        "xwywfceo"
+      ],
+      "defineConstraints": [
+        true,
+        true,
+        "lorem lorem",
+        null,
+        "mjieykmkowqm"
+      ]
+    },
+    {
+      "name": "KoSEe",
+      "rootNamespace": "mikv",
+      "references": [
+        "q3c",
+        "ztxlqgkizig",
+        "ame",
+        "ct3QvVbXN8F9NLW4bY",
+        "adipiscing lor"
+      ],
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "autoReferenced": true,
+      "overrideReferences": true,
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ],
+      "versionDefines": [
+        {
+          "name": "sddllyergebgadtsrrs",
+          "expression": "YrtUsh9UUj2n",
+          "define": "jptn"
+        },
+        {
+          "name": "ovlovmzdmlzoqdbdfg",
+          "expression": "eD4utHnN4muQC17",
+          "define": "1MLnlwm6phdd51cuDVYl9"
+        },
+        {
+          "name": "OAI682OW",
+          "expression": "sit ipsum c",
+          "define": "bk3oK"
+        },
+        {
+          "name": "sit adipiscin",
+          "expression": "consectetur amet ",
+          "define": "ccpqnjr"
+        },
+        {
+          "name": "q2O8ThLih",
+          "expression": "I1OAuuqM51T4xf8KFC",
+          "define": "qxseq"
+        }
+      ]
+    },
+    {
+      "name": "31AwybV7x",
+      "rootNamespace": "ipsum adipiscing sit",
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "autoReferenced": true,
+      "noEngineReferences": true,
+      "precompiledReferences": [
+        "qamcqonbf",
+        "jrnbfrabgmaz",
+        "xwkelqvtbdkg",
+        "nqzmpzovt",
+        false
+      ],
+      "defineConstraints": [
+        37,
+        "pSYvIqM4218",
+        71.4,
+        94.51,
+        64.7
+      ]
+    },
+    {
+      "name": "inmadrvaisfrpftwo",
+      "rootNamespace": "adipiscing ",
+      "references": [
+        "adipiscing cons",
+        "1KSgdAtqY5",
+        "ohMs0cyk",
+        "jgpw",
+        "j"
+      ],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "autoReferenced": true,
+      "noEngineReferences": false,
+      "precompiledReferences": [
+        "b04Ful1345AVUi",
+        null,
+        66,
+        21,
+        31
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ]
+    },
+    {
+      "name": "zhvee",
+      "rootNamespace": "Kg",
+      "references": [
+        "lorem",
+        "czvgsajuvkhk",
+        "dolor adi",
+        "ipsum lo",
+        "psyz"
+      ],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "autoReferenced": true,
+      "defineConstraints": [
+        12,
+        null,
+        false,
+        null,
+        true
+      ],
+      "versionDefines": [
+        {
+          "name": "kjbqqmyygnblie",
+          "expression": "Nv7QmCU0yjpfYu",
+          "define": "lorem adipiscing"
+        },
+        {
+          "name": "EroYem8wKMQ0Xrv",
+          "expression": "ryYocgm2j",
+          "define": "fZM4d"
+        },
+        {
+          "name": "gob9VSbqG8h3FUEj",
+          "expression": "cons",
+          "define": "nfbzekawvq"
+        },
+        {
+          "name": "LQhdn7nVSw4ZZ8Ec",
+          "expression": "ipsum dol",
+          "define": "amet lorem si"
+        },
+        {
+          "name": "PQCuley",
+          "expression": "Fd4FJVU",
+          "define": "d"
+        }
+      ]
+    },
+    {
+      "name": "ldayfeczkjofusyv",
+      "references": [
+        "c",
+        "SI2DX10BiUzF",
+        "djvrqr",
+        "4jn8gegzLlXCtOEJ",
+        "gphualqtcbl"
+      ],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": false,
+      "autoReferenced": true,
+      "noEngineReferences": true,
+      "overrideReferences": true,
+      "precompiledReferences": [
+        false,
+        37,
+        false,
+        true,
+        83.56
+      ],
+      "defineConstraints": [
+        80,
+        65,
+        null,
+        32,
+        62
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ]
+    },
+    {
+      "name": "aazifmotpo",
+      "references": [
+        "3unODFccGsgo4iR",
+        "consectet",
+        "jWWRbLO2K5jl2Hj",
+        "ION2eDnpfZBOxOq9",
+        "qa5L3Qte844xKUuqqEz1Y"
+      ],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": false,
+      "noEngineReferences": false,
+      "overrideReferences": true,
+      "defineConstraints": [
+        82.67,
+        "amet amet a",
+        null,
+        true,
+        false
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ],
+      "versionDefines": [
+        {
+          "name": "dcaptpjyd",
+          "expression": "waylgzciifemmtojkjmq",
+          "define": "bytcsqzncmnolalgyizjj"
+        },
+        {
+          "name": "a",
+          "expression": "oixtkvaucpsy",
+          "define": "ipsu"
+        },
+        {
+          "name": "i5cNk6jJ",
+          "expression": "rqmatulgjc",
+          "define": "adipiscing ipsum"
+        },
+        {
+          "name": "xrshoscstwpkgqdbnnya",
+          "expression": "vs",
+          "define": "vzvzO"
+        },
+        {
+          "name": "inaoo",
+          "expression": "hVdOD",
+          "define": "4zFJHCmQGaU"
+        }
+      ]
+    },
+    {
+      "name": "viyfuwj",
+      "rootNamespace": "0nQLCAaIAMC5Q",
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "autoReferenced": true,
+      "noEngineReferences": true,
+      "overrideReferences": true,
+      "precompiledReferences": [
+        false,
+        5.76,
+        53,
+        86.4,
+        "kpwSYWjBjTt"
+      ]
+    },
+    {
+      "name": "9",
+      "allowUnsafeCode": false,
+      "autoReferenced": true,
+      "overrideReferences": true,
+      "precompiledReferences": [
+        20.85,
+        100,
+        39.62,
+        60,
+        true
+      ],
+      "defineConstraints": [
+        true,
+        false,
+        false,
+        true,
+        71.35
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ]
+    },
+    {
+      "name": "wvctq",
+      "allowUnsafeCode": false,
+      "overrideReferences": true,
+      "defineConstraints": [
+        69.98,
+        39,
+        89,
+        "OYuO87mvmKD",
+        null
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ]
+    },
+    {
+      "name": "ieataimfyrpli",
+      "rootNamespace": "sit adipis",
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ],
+      "versionDefines": [
+        {
+          "name": "lorem adipisc",
+          "expression": "lorem sit lorem dolor",
+          "define": "bCwuMyvQGJuDN7"
+        },
+        {
+          "name": "vaiglusc",
+          "expression": "dj",
+          "define": "tfazxqb"
+        },
+        {
+          "name": "dzxhphxhwxetbifkp",
+          "expression": "UJZxQO",
+          "define": "jiwjlrkvik"
+        },
+        {
+          "name": "consectetu",
+          "expression": "tuwfvdectlrfzl",
+          "define": "oV7Pk"
+        },
+        {
+          "name": "ncexiosghww",
+          "expression": "yigdbbbtdbnil",
+          "define": "ddistzjthwzcjnp"
+        }
+      ]
+    },
+    {
+      "name": "sgi",
+      "rootNamespace": "nRuJkMnK0duTeD",
+      "references": [
+        "zaxdfciuj",
+        "amet dolor ipsum s",
+        "IGPm02F3OYNJLBkF",
+        "IB4sKsIR",
+        "1BONS79"
+      ],
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "autoReferenced": false,
+      "precompiledReferences": [
+        "lorem adipisci",
+        null,
+        null,
+        true,
+        17
+      ],
+      "defineConstraints": [
+        null,
+        78,
+        false,
+        20.83,
+        null
+      ]
+    },
+    {
+      "name": "moixuoz",
+      "rootNamespace": "lorem consectetu",
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "autoReferenced": true,
+      "noEngineReferences": true,
+      "overrideReferences": false,
+      "defineConstraints": [
+        84,
+        true,
+        0,
+        31,
+        98.47
+      ]
+    },
+    {
+      "name": "7Qy",
+      "rootNamespace": "ZpLwE7nUVf9BHsI",
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "overrideReferences": false,
+      "precompiledReferences": [
+        "fgbybkefylqvn",
+        "oxrixvy",
+        "bktsnhnydcbv",
+        "adipiscing am",
+        null
+      ],
+      "defineConstraints": [
+        "consectetu",
+        null,
+        null,
+        true,
+        false
+      ]
+    },
+    {
+      "name": "IXqX2VfGjZePuc",
+      "rootNamespace": "wepsmredwemlkheepzwdu",
+      "references": [
+        "amet conse",
+        "dxL5ue7S0EstiwI77En7a",
+        "sit",
+        "rvwyxnqtanku",
+        "qjkzefq"
+      ],
+      "autoReferenced": true,
+      "noEngineReferences": true,
+      "defineConstraints": [
+        null,
+        76.85,
+        true,
+        82,
+        "adipiscing "
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ]
+    },
+    {
+      "name": "swcdkupqxrvkdbyf",
+      "rootNamespace": "ehhftxbexccxhaoekivyy",
+      "references": [
+        "oqrxgx",
+        "nhykbzqlakyy",
+        "0Z07q",
+        "lorem am",
+        "imn"
+      ],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": false,
+      "autoReferenced": false,
+      "noEngineReferences": true,
+      "overrideReferences": false,
+      "precompiledReferences": [
+        20,
+        null,
+        "sit amet lor",
+        null,
+        null
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ],
+      "versionDefines": [
+        {
+          "name": "ENl",
+          "expression": "sit consectetur cons",
+          "define": "xhkelubvblpqydcf"
+        },
+        {
+          "name": "sit ipsum a",
+          "expression": "GGAl8vld",
+          "define": "cgupvqh"
+        },
+        {
+          "name": "8Or94Na",
+          "expression": "ndcrrvuouyde",
+          "define": "consecte"
+        },
+        {
+          "name": "bsSk",
+          "expression": "lorem ipsum lorem c",
+          "define": "hzdunxjuaeesd"
+        },
+        {
+          "name": "xvneaiqomyqjnbgklpyjz",
+          "expression": "d",
+          "define": "fvvsjwpmvfmiwyibu"
+        }
+      ]
+    },
+    {
+      "name": "consectetur dolor ",
+      "rootNamespace": "Z7baB7CXPc",
+      "references": [
+        "gczmzwvlqbzarfwigbvrt",
+        "xayoscsszpbrrdvapqy",
+        "efurnk",
+        "zF50MtM2CjW",
+        "lorem dolor"
+      ],
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "autoReferenced": true,
+      "noEngineReferences": false,
+      "overrideReferences": true,
+      "precompiledReferences": [
+        true,
+        17,
+        null,
+        34.98,
+        true
+      ],
+      "defineConstraints": [
+        94,
+        100,
+        57,
+        78,
+        false
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ]
+    },
+    {
+      "name": "9H6hEiafrmJGmOwUxj",
+      "rootNamespace": "ppnetrwmajn",
+      "references": [
+        "fpjxucaxrg",
+        "rersqlpzllxohynh",
+        "epcaulsa",
+        "ezkgajudqh",
+        "Q3FWSCRv7dni"
+      ],
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": false,
+      "autoReferenced": true,
+      "overrideReferences": false,
+      "precompiledReferences": [
+        "thcundyxucjw",
+        null,
+        false,
+        null,
+        "psmcnafvgy"
+      ],
+      "defineConstraints": [
+        false,
+        "sit amet",
+        null,
+        70,
+        true
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ]
+    },
+    {
+      "name": "P5fvc2kNf9wi",
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "noEngineReferences": false,
+      "overrideReferences": true,
+      "precompiledReferences": [
+        null,
+        37.24,
+        58.89,
+        70,
+        "guflubwjqqzktp"
+      ],
+      "defineConstraints": [
+        false,
+        4.07,
+        "ipsum d",
+        true,
+        88.6
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ],
+      "versionDefines": [
+        {
+          "name": "ipsum ipsum ipsum lor",
+          "expression": "t0f",
+          "define": "BtYOZcFX5uimAPsIEHNN"
+        },
+        {
+          "name": "plv",
+          "expression": "dolor",
+          "define": "kldnxzzld"
+        },
+        {
+          "name": "cmgcqxrkfpxneo",
+          "expression": "hxogf",
+          "define": "adipi"
+        },
+        {
+          "name": "dolor sit ipsum dolor",
+          "expression": "adipiscing con",
+          "define": "gv"
+        },
+        {
+          "name": "sit adipi",
+          "expression": "dfv",
+          "define": "iirxnugqhlwsopnh"
+        }
+      ]
+    },
+    {
+      "name": "94YdbVb",
+      "references": [
+        "s",
+        "ghgk",
+        "lorem s",
+        "conse",
+        "rXf"
+      ],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "autoReferenced": true,
+      "noEngineReferences": true,
+      "overrideReferences": true,
+      "precompiledReferences": [
+        19,
+        true,
+        null,
+        null,
+        true
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ]
+    },
+    {
+      "name": "cz8rYIW4yOYV",
+      "rootNamespace": "u",
+      "references": [
+        "wmvokovgndorkcwuvezme",
+        "2lcBEVPIH2",
+        "9QcLc7RW",
+        "xSrqOaJatR2A",
+        "ccucwfl"
+      ],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "autoReferenced": false,
+      "overrideReferences": false,
+      "precompiledReferences": [
+        true,
+        89.75,
+        19,
+        null,
+        "jpozmvnjvdei"
+      ],
+      "defineConstraints": [
+        null,
+        19.33,
+        42,
+        false,
+        91
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ],
+      "versionDefines": [
+        {
+          "name": "lorem amet",
+          "expression": "PRG9bBjZRVGaeA6",
+          "define": "amet"
+        },
+        {
+          "name": "ditNze0bTmCuxWg",
+          "expression": "scbqrvqvc",
+          "define": "agyfp"
+        },
+        {
+          "name": "am",
+          "expression": "sit adipiscin",
+          "define": "ZpHg"
+        },
+        {
+          "name": "amet lorem adipis",
+          "expression": "dolor dol",
+          "define": "dolor s"
+        },
+        {
+          "name": "m0UI5Wu2hkLT",
+          "expression": "rlytrl",
+          "define": "wiwyijku"
+        }
+      ]
+    },
+    {
+      "name": "LoifTGRfMmSKX",
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "noEngineReferences": true,
+      "overrideReferences": false,
+      "precompiledReferences": [
+        null,
+        54,
+        36.25,
+        null,
+        59
+      ],
+      "defineConstraints": [
+        60.55,
+        45,
+        21.58,
+        74.75,
+        true
+      ]
+    },
+    {
+      "name": "7kyvF",
+      "rootNamespace": "sit",
+      "references": [
+        "iitfeejqzfyoxveqdakuo",
+        "lorem a",
+        "xkqtbgqysriroyz",
+        "vxqgwxstnmpdr",
+        "consectetur"
+      ],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": false,
+      "autoReferenced": true,
+      "precompiledReferences": [
+        "lorem ipsum ",
+        null,
+        4.39,
+        51,
+        61.85
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ]
+    },
+    {
+      "name": "xojbnpxmuilgelneugu",
+      "rootNamespace": "sgZ",
+      "allowUnsafeCode": false,
+      "autoReferenced": true,
+      "noEngineReferences": false,
+      "overrideReferences": false,
+      "precompiledReferences": [
+        44,
+        47,
+        "conse",
+        true,
+        "kzvxoe"
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ],
+      "versionDefines": [
+        {
+          "name": "wvdsuvudeutxlxdywi",
+          "expression": "sit",
+          "define": "lQurjCAGX7pr"
+        },
+        {
+          "name": "amet c",
+          "expression": "biumfpiadijkqtn",
+          "define": "lorem d"
+        },
+        {
+          "name": "adipiscing i",
+          "expression": "MmCIssp2m8Up",
+          "define": "tlrgsyumzxbklhqdtwb"
+        },
+        {
+          "name": "dcqlnbmzc",
+          "expression": "i",
+          "define": "ipsum ipsum ipsum "
+        },
+        {
+          "name": "tedzxyurwcnaxndrxcz",
+          "expression": "szpzkdbhnzhgsko",
+          "define": "wssqs"
+        }
+      ]
+    },
+    {
+      "name": "joreh",
+      "rootNamespace": "sit amet sit adipis",
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "overrideReferences": true,
+      "defineConstraints": [
+        false,
+        true,
+        61.13,
+        "ntlkxefpqlo",
+        false
+      ]
+    },
+    {
+      "name": "svrxtrlirmdpzbz",
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "autoReferenced": false,
+      "noEngineReferences": true,
+      "overrideReferences": true,
+      "precompiledReferences": [
+        null,
+        null,
+        false,
+        "nulfnbvd",
+        null
+      ],
+      "defineConstraints": [
+        61,
+        "rvhrdx",
+        90,
+        false,
+        70
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ],
+      "versionDefines": [
+        {
+          "name": "sa",
+          "expression": "MoxJOxDu",
+          "define": "lorem ipsum amet i"
+        },
+        {
+          "name": "ixej",
+          "expression": "amet adipiscing adip",
+          "define": "tvqjtkvuvpx"
+        },
+        {
+          "name": "pGyKuXAiW3QH25aEbu",
+          "expression": "RxhPOKQH",
+          "define": "adipiscing sit adipi"
+        },
+        {
+          "name": "ipsum sit consecte",
+          "expression": "DmPOFT86grMQr",
+          "define": "VdrbXG7LuwxmgOtC"
+        },
+        {
+          "name": "adipiscin",
+          "expression": "dolor lor",
+          "define": "consectetu"
+        }
+      ]
+    },
+    {
+      "name": "t",
+      "rootNamespace": "lorem conse",
+      "references": [
+        "amet ",
+        "ipsum ipsum adipiscin",
+        "CHqlJgLXZp",
+        "eMHYfSCWDinj1l",
+        "ijMfjaYpeMSNHHSt0R"
+      ],
+      "autoReferenced": true,
+      "noEngineReferences": true,
+      "overrideReferences": true,
+      "precompiledReferences": [
+        false,
+        11,
+        57.83,
+        null,
+        78
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ]
+    },
+    {
+      "name": "X6tVukvUjOvkAxC25o9",
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": false,
+      "overrideReferences": true,
+      "versionDefines": [
+        {
+          "name": "oqmqjhwvnxojsoxowk",
+          "expression": "paebwislpwrb",
+          "define": "sit dolor amet amet d"
+        },
+        {
+          "name": "consectetu",
+          "expression": "MfVrnU",
+          "define": "adipiscing s"
+        },
+        {
+          "name": "lorem con",
+          "expression": "DakQVJdU01UPvwlNv",
+          "define": "ipsu"
+        },
+        {
+          "name": "brf",
+          "expression": "ac",
+          "define": "ivl"
+        },
+        {
+          "name": "eaqdysegsjjpakoz",
+          "expression": "Wd9TXMSQWGN4la6",
+          "define": "qrmlzhmcnrrzgfjixf"
+        }
+      ]
+    },
+    {
+      "name": "adipiscing conse",
+      "references": [
+        "BOQUrEirEevYlAcT",
+        "ujri",
+        "Ajimpt3ni",
+        "pyvqjznfk",
+        "yP2OiKTHefHSETIZnZUhn"
+      ],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "autoReferenced": false,
+      "versionDefines": [
+        {
+          "name": "gqc9ErkLajPGR0uVX",
+          "expression": "VclJILzdt",
+          "define": "mpijxak"
+        },
+        {
+          "name": "adipiscing do",
+          "expression": "gruytryfsgbeenll",
+          "define": "lapcpol"
+        },
+        {
+          "name": "dol",
+          "expression": "xxaqgpk",
+          "define": "S4"
+        },
+        {
+          "name": "bw",
+          "expression": "sit sit sit",
+          "define": "adipiscing consectet"
+        },
+        {
+          "name": "devmwqacshkqbcmaikc",
+          "expression": "ptl",
+          "define": "kFEIvF"
+        }
+      ]
+    },
+    {
+      "name": "tsltylod",
+      "rootNamespace": "xh",
+      "references": [
+        "fdngcy",
+        "jqp",
+        "Yet4X5cy896knf",
+        "uzrrumuwnijpomk",
+        "yzak"
+      ],
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "autoReferenced": false,
+      "precompiledReferences": [
+        null,
+        null,
+        91.57,
+        false,
+        true
+      ],
+      "defineConstraints": [
+        false,
+        null,
+        true,
+        "amet ad",
+        true
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ],
+      "versionDefines": [
+        {
+          "name": "ijBJzm4hsP",
+          "expression": "xlxuewwgrhaldvsgkbjpv",
+          "define": "lwpvjxfkfjqybpfvt"
+        },
+        {
+          "name": "gslgcxl",
+          "expression": "dolor",
+          "define": "mh"
+        },
+        {
+          "name": "WxAmCDzXRLn",
+          "expression": "lorem lore",
+          "define": "sm"
+        },
+        {
+          "name": "dolor ipsum dolor lo",
+          "expression": "rEWA0kSZ7QtQNy",
+          "define": "f6TkkruUSHSyVMDwzCPq"
+        },
+        {
+          "name": "adipiscin",
+          "expression": "ha3SG7nv",
+          "define": "hxqateivavjphofplpat"
+        }
+      ]
+    },
+    {
+      "name": "crsjz",
+      "rootNamespace": "consec",
+      "references": [
+        "dolor adipisci",
+        "pxtozauiqgnyfabxtozei",
+        "auufjefpmmcqbye",
+        "ipsum lorem adipisc"
+      ],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": false,
+      "autoReferenced": false,
+      "overrideReferences": false,
+      "precompiledReferences": [],
+      "defineConstraints": [
+        17.23
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ],
+      "versionDefines": [
+        {
+          "name": "lorem ipsum a",
+          "expression": "sit consectetur a",
+          "define": "mlyqxusvolzy"
+        },
+        {
+          "name": "pcmqc",
+          "expression": "ebkqqdpoenqscbsz",
+          "define": "amet consectetur l"
+        },
+        {
+          "name": "t",
+          "expression": "9x",
+          "define": "lorem amet adipisci"
+        },
+        {
+          "name": "consectetur adi",
+          "expression": "uqinseajty",
+          "define": "z"
+        },
+        {
+          "name": "1Ex7t6Wi57hHE",
+          "expression": "Vr7fTnbM5",
+          "define": "joldmtqyudmlayqiqrux"
+        }
+      ]
+    },
+    {
+      "name": "sit lorem",
+      "rootNamespace": "onulhvexwonbeusq",
+      "references": [
+        "wrlldb",
+        "y",
+        "consectetur ipsu",
+        "urbmpryukmutjkpmrwk",
+        "opqccpawidjepgxmnmw"
+      ],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "noEngineReferences": true,
+      "overrideReferences": true,
+      "precompiledReferences": [
+        false
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies"
+      ]
+    },
+    {
+      "name": "pksqrontdncla",
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": false,
+      "autoReferenced": false,
+      "precompiledReferences": [
+        19.43,
+        false,
+        17.7,
+        85.43,
+        false
+      ],
+      "defineConstraints": [
+        "consect"
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ],
+      "versionDefines": [
+        {
+          "name": "tT6wtyGcAffG6lHc",
+          "expression": "l",
+          "define": "drzzv"
+        }
+      ]
+    },
+    {
+      "name": "ifkvqso",
+      "rootNamespace": "xrnS3vXtVoJz1Vg",
+      "references": [
+        "2FXRAFP",
+        "mmwcrseuez",
+        "6bQBj6KHKJa0LQn"
+      ],
+      "autoReferenced": false,
+      "noEngineReferences": false,
+      "overrideReferences": false,
+      "versionDefines": [
+        {
+          "name": "ipsum amet c",
+          "expression": "kfdg",
+          "define": "8lfD"
+        },
+        {
+          "name": "ipsum adi",
+          "expression": "pbnhyxwuhejqen",
+          "define": "ipcvnpocwafmysxiopg"
+        },
+        {
+          "name": "xvh",
+          "expression": "tomxighba",
+          "define": "aNG8MqahF"
+        }
+      ]
+    },
+    {
+      "name": "phmkrjnapglgftrr",
+      "references": [
+        "benyWf7Za6pI63qXZ3rB",
+        "yfgowekpebtqpocmm",
+        "qaRau4rDYmtfXi4zV"
+      ],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "autoReferenced": false,
+      "noEngineReferences": true,
+      "overrideReferences": false,
+      "defineConstraints": [
+        "volwxriwr",
+        81.59,
+        "zC2yoJjrVYRm",
+        48.86
+      ],
+      "optionalUnityReferences": [],
+      "versionDefines": [
+        {
+          "name": "dRaoWpZuMNxSMQ",
+          "expression": "adipiscing ips",
+          "define": "sit lorem lorem dolor"
+        }
+      ]
+    },
+    {
+      "name": "v",
+      "rootNamespace": "o20sLErAyC7Tcv8V",
+      "allowUnsafeCode": false,
+      "overrideReferences": true,
+      "precompiledReferences": [
+        90
+      ],
+      "defineConstraints": [
+        "vdxemccrvcipp",
+        5.09,
+        true,
+        null,
+        92.32
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies"
+      ]
+    },
+    {
+      "name": "u7McGGGK",
+      "rootNamespace": "g83CgU8sw1U4",
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "noEngineReferences": false
+    },
+    {
+      "name": "lorem lore",
+      "autoReferenced": true,
+      "noEngineReferences": false,
+      "versionDefines": [
+        {
+          "name": "nwuuqu",
+          "expression": "ipsum dolor ip",
+          "define": "pgvkjwmsetypvosliyqyi"
+        }
+      ]
+    },
+    {
+      "name": "sUhi77q2A5ed7GE7Ygzk",
+      "rootNamespace": "eCmzq",
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "autoReferenced": true,
+      "noEngineReferences": true,
+      "overrideReferences": false,
+      "precompiledReferences": [
+        "7UscTxcsj9pE"
+      ],
+      "defineConstraints": [
+        null,
+        true
+      ]
+    },
+    {
+      "name": "ipsum co",
+      "rootNamespace": "yilr",
+      "references": [
+        "sit amet dolor",
+        "qpqxmo"
+      ],
+      "allowUnsafeCode": true,
+      "autoReferenced": true,
+      "overrideReferences": true,
+      "defineConstraints": [
+        "I4R6ar3Kuq",
+        82,
+        true,
+        56,
+        null
+      ]
+    },
+    {
+      "name": "lorem dolor consectet",
+      "references": [
+        "GYQFami27xU",
+        "xov",
+        "tlcewraucaxx",
+        "0k0ri7pl5n37"
+      ],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "noEngineReferences": false,
+      "overrideReferences": false,
+      "defineConstraints": [
+        100,
+        null,
+        13.81
+      ],
+      "optionalUnityReferences": []
+    },
+    {
+      "name": "consectetu",
+      "rootNamespace": "adipiscing ame",
+      "references": [
+        "bR2UdOm",
+        "adipiscing sit "
+      ],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "autoReferenced": true,
+      "overrideReferences": true
+    },
+    {
+      "name": "adipiscing adipis",
+      "rootNamespace": "fgitysidhfn",
+      "references": [],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "autoReferenced": false,
+      "overrideReferences": false
+    },
+    {
+      "name": "adi",
+      "references": [
+        "hwkrzu",
+        "iD83vKjlWtoAEOgb2CxL",
+        "lorem consectetur lo",
+        "adipiscing consect"
+      ],
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "noEngineReferences": true,
+      "overrideReferences": true,
+      "precompiledReferences": [
+        1.79,
+        "uwupuiphkjm",
+        46,
+        false,
+        null
+      ],
+      "versionDefines": [
+        {
+          "name": "cwbroyjiehiph",
+          "expression": "qbtksj",
+          "define": "atzunbagseo"
+        },
+        {
+          "name": "ipsum amet lorem ad",
+          "expression": "YqidBkVKxvfi3kHJUk",
+          "define": "S5wp1rpO4eKPp"
+        },
+        {
+          "name": "s",
+          "expression": "znw",
+          "define": "wbxppkpexulmoq"
+        }
+      ]
+    },
+    {
+      "name": "adipiscing adipis",
+      "rootNamespace": "dolor consectetur i",
+      "allowUnsafeCode": false,
+      "autoReferenced": true,
+      "noEngineReferences": false,
+      "precompiledReferences": [
+        "qowkzrjlzp",
+        25,
+        false
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ],
+      "versionDefines": [
+        {
+          "name": "cglzucjuxch",
+          "expression": "wwkppfssjmetixzcoukt",
+          "define": "ll"
+        },
+        {
+          "name": "sit d",
+          "expression": "sit co",
+          "define": "zwbnrxolhfvat"
+        },
+        {
+          "name": "ipsum ipsum ",
+          "expression": "pnmothxezmacrxcaiu",
+          "define": "rsrPxwz"
+        }
+      ]
+    },
+    {
+      "name": "co",
+      "rootNamespace": "Iv",
+      "references": [
+        "Rk4V2xaTgcP"
+      ],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": false,
+      "autoReferenced": false,
+      "noEngineReferences": true,
+      "precompiledReferences": [
+        82.13,
+        null,
+        null
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ],
+      "versionDefines": []
+    },
+    {
+      "name": "k7zWbk8Yb",
+      "rootNamespace": "ipsum dolor ip",
+      "references": [
+        "UkCRL5SxH5g2",
+        "sit",
+        "lnulktwu",
+        "sit",
+        "bn"
+      ],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "noEngineReferences": false,
+      "defineConstraints": [
+        21.89,
+        "memtvjpbvkcfv",
+        42.46
+      ]
+    },
+    {
+      "name": "consecte",
+      "references": [
+        "asenvqthme",
+        "xbsqwapsswblxujq",
+        "M8",
+        "AoaXpuE77zPq"
+      ],
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "noEngineReferences": true,
+      "overrideReferences": false,
+      "precompiledReferences": [
+        null,
+        45.07,
+        true
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ],
+      "versionDefines": [
+        {
+          "name": "consectetur adipis",
+          "expression": "qZHVCzPzJ",
+          "define": "GX9oG8D"
+        }
+      ]
+    },
+    {
+      "name": "amet ipsum ipsum ad",
+      "rootNamespace": "mthdf",
+      "references": [],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "noEngineReferences": true,
+      "overrideReferences": true,
+      "precompiledReferences": [
+        true
+      ],
+      "defineConstraints": [
+        74.1,
+        70,
+        63.95
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ]
+    },
+    {
+      "name": "pv",
+      "rootNamespace": "khryiyiys",
+      "references": [
+        "tjjm",
+        "sjjhng",
+        "sit"
+      ],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": false,
+      "autoReferenced": true,
+      "overrideReferences": true,
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ]
+    },
+    {
+      "name": "wD9tHNJ3",
+      "rootNamespace": "cons",
+      "references": [
+        "ky40utvQ0mJaIeJqVxTJv",
+        "llnzmkuoffeaz",
+        "grxo",
+        "wwntnn",
+        "thj"
+      ],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "autoReferenced": true,
+      "noEngineReferences": true,
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ]
+    },
+    {
+      "name": "nbxskfwgsdrhgymplyg",
+      "autoReferenced": true,
+      "overrideReferences": true,
+      "precompiledReferences": [
+        "FW6SRlU",
+        null
+      ],
+      "defineConstraints": [
+        null,
+        "jxijrnjrt",
+        29,
+        21.12,
+        54.12
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ]
+    },
+    {
+      "name": "WOBCwKnv62SI69Ybb",
+      "references": [
+        "iszkroonvxydwded",
+        "khu",
+        "jwuedlqkszlufd",
+        "HBLoGiKsYFdMtCfPq",
+        "rw"
+      ],
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "autoReferenced": true,
+      "overrideReferences": false,
+      "precompiledReferences": [
+        "ipsum ame"
+      ],
+      "defineConstraints": [
+        83.45
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ]
+    },
+    {
+      "name": "FybWhJ7SnQQ",
+      "allowUnsafeCode": true,
+      "precompiledReferences": [
+        1,
+        false,
+        true
+      ],
+      "versionDefines": [
+        {
+          "name": "sit adipisci",
+          "expression": "zuaslh",
+          "define": "u"
+        },
+        {
+          "name": "JYM",
+          "expression": "bdkkvdzvqguswhufl",
+          "define": "jzFFd"
+        },
+        {
+          "name": "BocP3mxUSRt6XXMk6",
+          "expression": "ocTKS3fRGZx2ZIDpLsf",
+          "define": "sit adipiscing adip"
+        },
+        {
+          "name": "dshfyjcqryukpeimgv",
+          "expression": "consectetur c",
+          "define": "ame"
+        }
+      ]
+    },
+    {
+      "name": "lorem ipsum lo",
+      "rootNamespace": "adipiscing ipsum c",
+      "references": [
+        "tvvwqnuq",
+        "73mXHLXPP2je",
+        "consectetu"
+      ],
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "noEngineReferences": true,
+      "precompiledReferences": [],
+      "defineConstraints": [
+        null,
+        34
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies"
+      ]
+    },
+    {
+      "name": "tMV2RU2cfr58nxAf",
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "autoReferenced": true,
+      "noEngineReferences": true,
+      "defineConstraints": [
+        "zbkmggkmgpoo",
+        74
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ],
+      "versionDefines": [
+        {
+          "name": "dolor adipisci",
+          "expression": "o",
+          "define": "lorem lorem "
+        },
+        {
+          "name": "dolor s",
+          "expression": "ictryl",
+          "define": "bckwrseyxovnvkogrnuyx"
+        },
+        {
+          "name": "sit consectetur dolor",
+          "expression": "pL",
+          "define": "zgkc5umR"
+        }
+      ]
+    },
+    {
+      "name": "SISNhOE7n7L97gT7",
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": false,
+      "defineConstraints": [
+        "994ySMrsu5enRR8",
+        9.68,
+        "iqgsruke",
+        "cyuvescffyunnq",
+        "61te2kEG5v"
+      ],
+      "versionDefines": [
+        {
+          "name": "g",
+          "expression": "gubzzmnc",
+          "define": "cixlzlpww"
+        }
+      ]
+    },
+    {
+      "name": "pmvdhpdqjvhv",
+      "references": [
+        "ipsum ips",
+        "cgtrctzcveuvobxqs"
+      ],
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "autoReferenced": true,
+      "noEngineReferences": true,
+      "precompiledReferences": [],
+      "defineConstraints": [],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ]
+    },
+    {
+      "name": "dEmRkEkdLm3LrwERbZS",
+      "rootNamespace": "b",
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": false,
+      "autoReferenced": true,
+      "defineConstraints": [
+        true,
+        null,
+        null,
+        null,
+        67
+      ],
+      "versionDefines": [
+        {
+          "name": "J9F4DPhwTAz",
+          "expression": "oYsiy6jXD6EwUHe",
+          "define": "wxmfvpcmbpe"
+        },
+        {
+          "name": "dz2r5oZOw63HYH",
+          "expression": "adipiscing lore",
+          "define": "wmjnyntuuztcgnpksr"
+        },
+        {
+          "name": "opmvfxqgizlk",
+          "expression": "consectetur ips",
+          "define": "cAn7Z7BPnMLPkmcTnK"
+        },
+        {
+          "name": "ipsum consectetu",
+          "expression": "zOfg36TSI9h",
+          "define": "lqou"
+        }
+      ]
+    },
+    {
+      "name": "dol",
+      "rootNamespace": "Y3F70GiAGab8i3lX",
+      "allowUnsafeCode": true,
+      "noEngineReferences": false,
+      "precompiledReferences": [],
+      "defineConstraints": [
+        null,
+        null,
+        null,
+        "sit d"
+      ]
+    },
+    {
+      "name": "6sGqlYk",
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "overrideReferences": true,
+      "precompiledReferences": [
+        95,
+        "adipisci"
+      ],
+      "versionDefines": [
+        {
+          "name": "dolor lorem adipi",
+          "expression": "uqnarngcqpanf",
+          "define": "xcvdfcjhuy"
+        },
+        {
+          "name": "ipsum amet ",
+          "expression": "GOTxBAHS",
+          "define": "khtupwfllhvedhnl"
+        },
+        {
+          "name": "sit dolor amet",
+          "expression": "aIz6JhvF0oy",
+          "define": "KgOjR2ZeqPV8evt"
+        },
+        {
+          "name": "dolor adipiscing",
+          "expression": "Qeg40CuO",
+          "define": "1NM5nz"
+        },
+        {
+          "name": "iwxdlnudqffhypcluzbcc",
+          "expression": "0lgYYFplzC488frO",
+          "define": "WfCR"
+        }
+      ]
+    },
+    {
+      "name": "q",
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "autoReferenced": false,
+      "overrideReferences": true
+    },
+    {
+      "name": "lore",
+      "includePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "autoReferenced": false,
+      "noEngineReferences": true,
+      "precompiledReferences": [
+        false
+      ],
+      "optionalUnityReferences": [
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies",
+        "TestAssemblies"
+      ],
+      "versionDefines": [
+        {
+          "name": "adipiscing amet co",
+          "expression": "umfgdncmdvjvwwzmrp",
+          "define": "OVP5vqmxKxZk2YytDj8"
+        },
+        {
+          "name": "yhrtx",
+          "expression": "rgjiojhkttyvl",
+          "define": "enzfh"
+        },
+        {
+          "name": "xrruxckdgj",
+          "expression": "CVjntHQDjQd95kmYX",
+          "define": "Vp2dfhfjx3mZ1PbyXTP"
+        }
+      ]
+    },
+    {
+      "name": "pmomyqazignqmoeio",
+      "references": [
+        "DzGnwcLE6JbbbJIL4z",
+        "QGqZct",
+        "r"
+      ],
+      "excludePlatforms": {
+        "_ref": "#/definitions/platformValues",
+        "_placeholder": true
+      },
+      "allowUnsafeCode": true,
+      "overrideReferences": true,
+      "precompiledReferences": [
+        null,
+        null,
+        null
+      ],
+      "defineConstraints": [
+        29.56,
+        96.39,
+        true,
+        null
+      ]
+    }
+  ]
+}

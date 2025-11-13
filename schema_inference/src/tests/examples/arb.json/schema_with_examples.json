@@ -1,0 +1,898 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/schema",
+    "$id": "arb.json",
+    "title": "Product",
+    "description": "A product in the catalog",
+    "type": "object",
+    "patternProperties": {
+      "^@@x-.+$": {
+        "type": [
+          "string",
+          "number",
+          "integer",
+          "boolean"
+        ],
+        "description": "A custom global attribute."
+      },
+      "^@(?!@).+$": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "image",
+              "css"
+            ],
+            "description": "The type of resource. Possible values are \"text\", \"image\", or \"css\". Program should not rely on this attribute in run time. It is mainly for the localization tools."
+          },
+          "context": {
+            "type": "string",
+            "description": "The context in which this resource applies. Context is organized in hierarchy, and level separated by \":\". Tools can use this information to restore the tree structure from ARB's flat layout. When this piece of information is missing, it defaults to global."
+          },
+          "placeholders": {
+            "type": "object",
+            "patternProperties": {
+              "^.+$": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "String"
+                        ]
+                      },
+                      "example": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    },
+                    "description": "A named placeholder of type String.",
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "type"
+                    ],
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "int",
+                          "double",
+                          "num"
+                        ],
+                        "description": "The type of the parameter, either String, Object, int, double, num, or DateTime."
+                      },
+                      "format": {
+                        "type": "string",
+                        "enum": [
+                          "compact",
+                          "compactCurrency",
+                          "compactSimpleCurrency",
+                          "compactLong",
+                          "currency",
+                          "decimalPattern",
+                          "decimalPatternDigits",
+                          "decimalPercentPattern",
+                          "percentPattern",
+                          "scientificPattern",
+                          "simpleCurrency"
+                        ],
+                        "description": ""
+                      },
+                      "example": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "optionalParameters": {
+                        "type": "object"
+                      }
+                    },
+                    "description": "A number placeholder.",
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "type"
+                    ],
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "DateTime"
+                        ],
+                        "description": "The type of the parameter, either String, Object, int, double, num, or DateTime."
+                      },
+                      "format": {
+                        "type": "string",
+                        "description": "The formatters are the ones provided by the DateFormat class in Dart's package:intl."
+                      },
+                      "isCustomDateFormat": {
+                        "oneOf": [
+                          {
+                            "type": "string",
+                            "enum": [
+                              "true",
+                              "false"
+                            ]
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ]
+                      },
+                      "example": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "optionalParameters": {
+                        "type": "object"
+                      }
+                    },
+                    "description": "A Date placeholder.",
+                    "additionalProperties": false,
+                    "anyOf": [
+                      {
+                        "required": [
+                          "isCustomDateFormat"
+                        ],
+                        "properties": {
+                          "isCustomDateFormat": {
+                            "oneOf": [
+                              {
+                                "type": "string",
+                                "const": "true"
+                              },
+                              {
+                                "type": "boolean",
+                                "const": true
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "required": [
+                          "format"
+                        ],
+                        "properties": {
+                          "format": {
+                            "type": "string",
+                            "oneOf": [
+                              {
+                                "const": "d",
+                                "examples": [],
+                                "description": "DAY"
+                              },
+                              {
+                                "const": "E",
+                                "description": "ABBR_WEEKDAY"
+                              },
+                              {
+                                "const": "EEEE",
+                                "description": "WEEKDAY"
+                              },
+                              {
+                                "const": "LLL",
+                                "description": "ABBR_STANDALONE_MONTH"
+                              },
+                              {
+                                "const": "LLLL",
+                                "description": "STANDALONE_MONTH"
+                              },
+                              {
+                                "const": "M",
+                                "description": "NUM_MONTH"
+                              },
+                              {
+                                "const": "Md",
+                                "description": "NUM_MONTH_DAY"
+                              },
+                              {
+                                "const": "MEd",
+                                "description": "NUM_MONTH_WEEKDAY_DAY"
+                              },
+                              {
+                                "const": "MMM",
+                                "description": "ABBR_MONTH"
+                              },
+                              {
+                                "const": "MMMd",
+                                "description": "ABBR_MONTH_DAY"
+                              },
+                              {
+                                "const": "MMMEd",
+                                "description": "ABBR_MONTH_WEEKDAY_DAY"
+                              },
+                              {
+                                "const": "MMMM",
+                                "description": "MONTH"
+                              },
+                              {
+                                "const": "MMMMd",
+                                "description": "MONTH_DAY"
+                              },
+                              {
+                                "const": "MMMMEEEEd",
+                                "description": "MONTH_WEEKDAY_DAY"
+                              },
+                              {
+                                "const": "QQQ",
+                                "description": "ABBR_QUARTER"
+                              },
+                              {
+                                "const": "QQQQ",
+                                "description": "QUARTER"
+                              },
+                              {
+                                "const": "y",
+                                "description": "YEAR"
+                              },
+                              {
+                                "const": "yM",
+                                "description": "YEAR_NUM_MONTH"
+                              },
+                              {
+                                "const": "yMd",
+                                "description": "YEAR_NUM_MONTH_DAY"
+                              },
+                              {
+                                "const": "yMEd",
+                                "description": "YEAR_NUM_MONTH_WEEKDAY_DAY"
+                              },
+                              {
+                                "const": "yMMM",
+                                "description": "YEAR_ABBR_MONTH"
+                              },
+                              {
+                                "const": "yMMMd",
+                                "description": "YEAR_ABBR_MONTH_DAY"
+                              },
+                              {
+                                "const": "yMMMEd",
+                                "description": "YEAR_ABBR_MONTH_WEEKDAY_DAY"
+                              },
+                              {
+                                "const": "yMMMM",
+                                "description": "YEAR_MONTH"
+                              },
+                              {
+                                "const": "yMMMMd",
+                                "description": "YEAR_MONTH_DAY"
+                              },
+                              {
+                                "const": "yMMMMEEEEd",
+                                "description": "YEAR_MONTH_WEEKDAY_DAY"
+                              },
+                              {
+                                "const": "yQQQ",
+                                "description": "YEAR_ABBR_QUARTER"
+                              },
+                              {
+                                "const": "yQQQQ",
+                                "description": "YEAR_QUARTER"
+                              },
+                              {
+                                "const": "H",
+                                "description": "HOUR24"
+                              },
+                              {
+                                "const": "Hm",
+                                "description": "HOUR24_MINUTE"
+                              },
+                              {
+                                "const": "Hms",
+                                "description": "HOUR24_MINUTE_SECOND"
+                              },
+                              {
+                                "const": "j",
+                                "description": "HOUR"
+                              },
+                              {
+                                "const": "jm",
+                                "description": "HOUR_MINUTE"
+                              },
+                              {
+                                "const": "jms",
+                                "description": "HOUR_MINUTE_SECOND"
+                              },
+                              {
+                                "const": "m",
+                                "description": "MINUTE"
+                              },
+                              {
+                                "const": "ms",
+                                "description": "MINUTE_SECOND"
+                              },
+                              {
+                                "const": "s",
+                                "description": "SECOND"
+                              }
+                            ],
+                            "description": "The formatters are the ones provided by the DateFormat class in Dart's package:intl."
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "description": "A map from placeholder id to placeholder properties, including description and example. Placeholder can be specified using number (as in \"{0}\") or name (as in \"{num}\"). Number starts from 0 and the corresponding argument(s) are passed directly as function arguments. Named arguments are provided through an map object that maps each name to its value.",
+            "additionalProperties": false
+          },
+          "description": {
+            "type": "string",
+            "description": "A short paragraph describing the resource and how it is being used by the app, and message that need to be passed to localization process and translators."
+          },
+          "comment": {
+            "type": "string",
+            "description": "A comment on this resource. This is not intended to be sent to translators."
+          }
+        },
+        "description": "Metadata for a message.",
+        "additionalProperties": false
+      },
+      "^(?!@@).+$": {
+        "type": "string",
+        "description": "The ID of a message"
+      }
+    },
+    "properties": {
+      "@@locale": {
+        "description": "The locale for which messages/resources are stored in this file.",
+        "type": "string"
+      },
+      "@@context": {
+        "description": "It describes (in text) the context in which all these resources apply.",
+        "type": "string"
+      },
+      "@@last_modified": {
+        "description": "The last modified time of this ARB file/data. It is presented in ISO8601 complete form with hour and minutes. Example like: 2011-09-08T09:42-07:00.",
+        "type": "string"
+      },
+      "@@author": {
+        "description": "The author of these messages. In the case of localized ARB files it can contain the names/details of the translator.",
+        "type": "string"
+      },
+      "@@comment": {
+        "description": "A top-level comment for this file. This is not intended to be sent to translators.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "@@locale"
+    ],
+    "additionalProperties": false
+  },
+  "examples": [
+    {
+      "@@locale": "consectetur ipsum lor",
+      "@@context": "bnFbmOHnKYaXRvj7uff"
+    },
+    {
+      "@@locale": "co",
+      "@@last_modified": "EbAx",
+      "@@comment": "dghjjZhx8qldJl"
+    },
+    {
+      "@@locale": "RhxrnJgWQsNKVP",
+      "@@context": "qcbcycqzakm",
+      "@@author": "ubyrstsvv",
+      "@@comment": "poglurivvbefatqo"
+    },
+    {
+      "@@locale": "psbEhY71O",
+      "@@last_modified": "tfwsbksxe",
+      "@@author": "lorem conse",
+      "@@comment": "wtvqpbxxjqamqhkvd"
+    },
+    {
+      "@@locale": "K1o",
+      "@@context": "XbWNdbIsuSVyRwDZCRM",
+      "@@last_modified": "Wrgveu2lsVm",
+      "@@author": "ssitvjen"
+    },
+    {
+      "@@locale": "sit sit ipsu",
+      "@@context": "dolor lorem lorem ip",
+      "@@last_modified": "consectetur dolor ",
+      "@@author": "ajrpotgvxaijjog"
+    },
+    {
+      "@@locale": "IHXFSBjYOEnVIFDbAi",
+      "@@author": "dolor dolor consec"
+    },
+    {
+      "@@locale": "5uI",
+      "@@comment": "qnwpokgdljugkyq"
+    },
+    {
+      "@@locale": "jxstiofoyjcjfbwz",
+      "@@last_modified": "zsv"
+    },
+    {
+      "@@locale": "ogzvgwom",
+      "@@last_modified": "w9z80bqDYlM",
+      "@@author": "consectetur sit conse"
+    },
+    {
+      "@@locale": "consectet",
+      "@@last_modified": "adipi",
+      "@@author": "aHBojDMEEhcM",
+      "@@comment": "P2H"
+    },
+    {
+      "@@locale": "fnmsjlayxzidwbbffdjt",
+      "@@last_modified": "bhcrklgutlvgi",
+      "@@comment": "conse"
+    },
+    {
+      "@@locale": "s3Enu",
+      "@@comment": "adipisc"
+    },
+    {
+      "@@locale": "fzh",
+      "@@context": "vS7PHy",
+      "@@last_modified": "ubgynamfjcqlff",
+      "@@author": "cyijfmvfolh",
+      "@@comment": "ptkrcbsgidpumb"
+    },
+    {
+      "@@locale": "amet dolor sit adi",
+      "@@last_modified": "amet adipiscing ipsu",
+      "@@comment": "ykgcffekxzune"
+    },
+    {
+      "@@locale": "Ln",
+      "@@context": "adipiscing amet ",
+      "@@author": "yg2KEpOiix9Y5FkAJFo3",
+      "@@comment": "aCbyMBV"
+    },
+    {
+      "@@locale": "consectetur adipisc",
+      "@@context": "glphpaftlr",
+      "@@author": "lskLp"
+    },
+    {
+      "@@locale": "amet sit",
+      "@@context": "ravjuntsir"
+    },
+    {
+      "@@locale": "ipsum ipsu",
+      "@@author": "ekg"
+    },
+    {
+      "@@locale": "ipsum adipiscing",
+      "@@context": "zukN3QNuAiTs",
+      "@@last_modified": "txYMWMAolHD",
+      "@@author": "zkc",
+      "@@comment": "hvu"
+    },
+    {
+      "@@locale": "adipiscing ipsum si",
+      "@@context": "lorem ipsum amet ",
+      "@@last_modified": "WvKjneHIM6svC6ts",
+      "@@author": "ipsum consectetur am",
+      "@@comment": "lmhf"
+    },
+    {
+      "@@locale": "5pOxeOsZtUdP6ho",
+      "@@context": "x",
+      "@@comment": "AwRgb9MU5b5ka10dddAp"
+    },
+    {
+      "@@locale": "amet sit amet ip",
+      "@@context": "fvqdwlscrabcbpffvukft",
+      "@@last_modified": "UQGdojnNnpXS"
+    },
+    {
+      "@@locale": "sit ipsum sit",
+      "@@context": "lfxmfmsgetd",
+      "@@author": "OM82oBdjb1pt"
+    },
+    {
+      "@@locale": "5Ws",
+      "@@author": "sit adipiscing c"
+    },
+    {
+      "@@locale": "dol",
+      "@@context": "lqxfbeald",
+      "@@last_modified": "consectetu",
+      "@@author": "znsltg"
+    },
+    {
+      "@@locale": "txcplgwizjouubt",
+      "@@context": "consectetur",
+      "@@last_modified": "xhQIb9jJiYa6xL",
+      "@@author": "xhTzOc6",
+      "@@comment": "ctsuug"
+    },
+    {
+      "@@locale": "ip",
+      "@@last_modified": "ZJZtHBzyzjitROUSYg",
+      "@@author": "gupxbfdxhxqcignkgthx"
+    },
+    {
+      "@@locale": "sit",
+      "@@context": "amet",
+      "@@last_modified": "gqnujxwcmhdgtv",
+      "@@author": "adi",
+      "@@comment": "ntu"
+    },
+    {
+      "@@locale": "XqjUmfFKFYG",
+      "@@last_modified": "kvbOl",
+      "@@author": "g4bLjY2vJpmbgg",
+      "@@comment": "J0sfsnJDtfUMMR1c"
+    },
+    {
+      "@@locale": "tes",
+      "@@last_modified": "adipiscing amet ipsu",
+      "@@comment": "V"
+    },
+    {
+      "@@locale": "sit ipsum",
+      "@@context": "Gmg",
+      "@@last_modified": "I",
+      "@@author": "lorem ipsum am"
+    },
+    {
+      "@@locale": "hht25vBC5BtFaFhYB7Aq",
+      "@@author": "yotsiar"
+    },
+    {
+      "@@locale": "CTF054Q0YgQ5UrS",
+      "@@author": "adipiscing ame"
+    },
+    {
+      "@@locale": "y4d0rUBousuH",
+      "@@context": "L8UuCdNygNVfSQ",
+      "@@last_modified": "lorem consectetur",
+      "@@comment": "B5JD2UWw6IlKJi"
+    },
+    {
+      "@@locale": "oYhDILjNF",
+      "@@last_modified": "consectetur sit ",
+      "@@author": "qDn",
+      "@@comment": "xpocusf"
+    },
+    {
+      "@@locale": "adipisc",
+      "@@context": "rxkrxmzaxsjiqs",
+      "@@last_modified": "mgisK2p5kFU3"
+    },
+    {
+      "@@locale": "KoSEe",
+      "@@context": "mikv",
+      "@@last_modified": "q3c",
+      "@@comment": "xlqgkizigbpsjbi"
+    },
+    {
+      "@@locale": "31AwybV7x",
+      "@@context": "ipsum adipiscing sit",
+      "@@author": "N8q9tOUjs5Mb",
+      "@@comment": "sit"
+    },
+    {
+      "@@locale": "inmadrvaisfrpftwo",
+      "@@context": "adipiscing ",
+      "@@last_modified": "adipiscing cons",
+      "@@author": "SgdAtqY5n",
+      "@@comment": "amet do"
+    },
+    {
+      "@@locale": "zhvee",
+      "@@context": "Kg",
+      "@@last_modified": "lorem",
+      "@@author": "adipiscing conse",
+      "@@comment": "SBxO4Pbs77sn"
+    },
+    {
+      "@@locale": "ldayfeczkjofusyv",
+      "@@last_modified": "c",
+      "@@author": "owmuwwldtkneoalelad",
+      "@@comment": "ipsum adipisci"
+    },
+    {
+      "@@locale": "aazifmotpo",
+      "@@last_modified": "3unODFccGsgo4iR",
+      "@@author": "CbV9"
+    },
+    {
+      "@@locale": "viyfuwj",
+      "@@context": "0nQLCAaIAMC5Q",
+      "@@author": "cyaonxobwsyubc",
+      "@@comment": "IkpwSY"
+    },
+    {
+      "@@locale": "9"
+    },
+    {
+      "@@locale": "wvctq"
+    },
+    {
+      "@@locale": "ieataimfyrpli",
+      "@@context": "sit adipis",
+      "@@author": "adipisc"
+    },
+    {
+      "@@locale": "sgi",
+      "@@context": "nRuJkMnK0duTeD",
+      "@@last_modified": "zaxdfciuj",
+      "@@author": "HyUD85r95I"
+    },
+    {
+      "@@locale": "moixuoz",
+      "@@context": "lorem consectetu",
+      "@@comment": "cons"
+    },
+    {
+      "@@locale": "7Qy",
+      "@@context": "ZpLwE7nUVf9BHsI",
+      "@@author": "rlijjxvfgbybkefylqvnv"
+    },
+    {
+      "@@locale": "IXqX2VfGjZePuc",
+      "@@context": "wepsmredwemlkheepzwdu",
+      "@@last_modified": "amet conse"
+    },
+    {
+      "@@locale": "swcdkupqxrvkdbyf",
+      "@@context": "ehhftxbexccxhaoekivyy",
+      "@@last_modified": "oqrxgx"
+    },
+    {
+      "@@locale": "consectetur dolor ",
+      "@@context": "Z7baB7CXPc",
+      "@@last_modified": "gczmzwvlqbzarfwigbvrt",
+      "@@author": "ayoscss"
+    },
+    {
+      "@@locale": "9H6hEiafrmJGmOwUxj",
+      "@@context": "ppnetrwmajn",
+      "@@last_modified": "fpjxucaxrg",
+      "@@author": "amet amet amet sit",
+      "@@comment": "C4Js"
+    },
+    {
+      "@@locale": "P5fvc2kNf9wi",
+      "@@author": "tQv42XFbdBZx8KhI8s"
+    },
+    {
+      "@@locale": "94YdbVb",
+      "@@last_modified": "s"
+    },
+    {
+      "@@locale": "cz8rYIW4yOYV",
+      "@@context": "u",
+      "@@last_modified": "wmvokovgndorkcwuvezme",
+      "@@author": "ebl",
+      "@@comment": "oowfhfgdvmlm"
+    },
+    {
+      "@@locale": "LoifTGRfMmSKX",
+      "@@comment": "wiynumkhafznmxp"
+    },
+    {
+      "@@locale": "7kyvF",
+      "@@context": "sit",
+      "@@last_modified": "iitfeejqzfyoxveqdakuo",
+      "@@author": "g",
+      "@@comment": "kqtbgqysriroyzkbchlgv"
+    },
+    {
+      "@@locale": "xojbnpxmuilgelneugu",
+      "@@context": "sgZ"
+    },
+    {
+      "@@locale": "joreh",
+      "@@context": "sit amet sit adipis",
+      "@@author": "fdlJ3ZSG",
+      "@@comment": "rgcirntlkxefpq"
+    },
+    {
+      "@@locale": "svrxtrlirmdpzbz",
+      "@@author": "prfruqcffsnvsx"
+    },
+    {
+      "@@locale": "t",
+      "@@context": "lorem conse",
+      "@@last_modified": "amet "
+    },
+    {
+      "@@locale": "X6tVukvUjOvkAxC25o9",
+      "@@comment": "dolor con"
+    },
+    {
+      "@@locale": "adipiscing conse",
+      "@@last_modified": "BOQUrEirEevYlAcT",
+      "@@author": "jriglg"
+    },
+    {
+      "@@locale": "tsltylod",
+      "@@context": "xh",
+      "@@last_modified": "fdngcy",
+      "@@author": "ipsum i",
+      "@@comment": "dolor ad"
+    },
+    {
+      "@@locale": "crsjz",
+      "@@context": "consec",
+      "@@last_modified": "cizkqrqbsvliszyftm"
+    },
+    {
+      "@@locale": "sit lorem",
+      "@@context": "onulhvexwonbeusq",
+      "@@last_modified": "wrlldb",
+      "@@comment": "dvgflovcwgjtm"
+    },
+    {
+      "@@locale": "pksqrontdncla",
+      "@@comment": "F95WC482mz"
+    },
+    {
+      "@@locale": "ifkvqso",
+      "@@context": "xrnS3vXtVoJz1Vg",
+      "@@last_modified": "iwnusknryhmwyos"
+    },
+    {
+      "@@locale": "phmkrjnapglgftrr",
+      "@@last_modified": "gbrhqxpxubgrma"
+    },
+    {
+      "@@locale": "v",
+      "@@context": "o20sLErAyC7Tcv8V"
+    },
+    {
+      "@@locale": "u7McGGGK",
+      "@@context": "g83CgU8sw1U4",
+      "@@author": "wihzyccdrgenzmcdhifci",
+      "@@comment": "jDzwvJV"
+    },
+    {
+      "@@locale": "lorem lore"
+    },
+    {
+      "@@locale": "sUhi77q2A5ed7GE7Ygzk",
+      "@@context": "eCmzq",
+      "@@author": "consectetur l"
+    },
+    {
+      "@@locale": "ipsum co",
+      "@@context": "yilr",
+      "@@last_modified": "kxAaRNKN4DI6",
+      "@@comment": "eMc2"
+    },
+    {
+      "@@locale": "lorem dolor consectet",
+      "@@last_modified": "XjKS04IY21rXM3IYwuJA",
+      "@@author": "raucaxxju",
+      "@@comment": "hdygex"
+    },
+    {
+      "@@locale": "consectetu",
+      "@@context": "adipiscing ame",
+      "@@last_modified": "amet dolo",
+      "@@author": "brfmvnsyxbfmmy"
+    },
+    {
+      "@@locale": "adipiscing adipis",
+      "@@context": "fgitysidhfn",
+      "@@last_modified": "7mba"
+    },
+    {
+      "@@locale": "adi",
+      "@@last_modified": "dolor ipsum amet "
+    },
+    {
+      "@@locale": "adipiscing adipis",
+      "@@context": "dolor consectetur i"
+    },
+    {
+      "@@locale": "co",
+      "@@context": "Iv",
+      "@@last_modified": "upaBf",
+      "@@author": "con",
+      "@@comment": "lo"
+    },
+    {
+      "@@locale": "k7zWbk8Yb",
+      "@@context": "ipsum dolor ip",
+      "@@last_modified": "syg3FP9gJDVLBiHX6CFXB",
+      "@@author": "uyenbygnsmmm",
+      "@@comment": "agrfunjlvtnibvvgcknpz"
+    },
+    {
+      "@@locale": "consecte",
+      "@@last_modified": "NeNDPzgpj3154dRN0bKS"
+    },
+    {
+      "@@locale": "amet ipsum ipsum ad",
+      "@@context": "mthdf",
+      "@@last_modified": "XD",
+      "@@author": "b"
+    },
+    {
+      "@@locale": "pv",
+      "@@context": "khryiyiys",
+      "@@last_modified": "lorem amet ad",
+      "@@author": "sjjhng",
+      "@@comment": "qTAUmOc0j3Y0"
+    },
+    {
+      "@@locale": "wD9tHNJ3",
+      "@@context": "cons",
+      "@@last_modified": "ky40utvQ0mJaIeJqVxTJv",
+      "@@comment": "AG8Ey"
+    },
+    {
+      "@@locale": "nbxskfwgsdrhgymplyg"
+    },
+    {
+      "@@locale": "WOBCwKnv62SI69Ybb",
+      "@@last_modified": "wiszkroonvxydwdedclcl",
+      "@@comment": "1Wj"
+    },
+    {
+      "@@locale": "FybWhJ7SnQQ"
+    },
+    {
+      "@@locale": "lorem ipsum lo",
+      "@@context": "adipiscing ipsum c",
+      "@@last_modified": "amet adipisci"
+    },
+    {
+      "@@locale": "tMV2RU2cfr58nxAf",
+      "@@comment": "le7M9u4uEe1F02lgERy2Z"
+    },
+    {
+      "@@locale": "SISNhOE7n7L97gT7",
+      "@@author": "rgw"
+    },
+    {
+      "@@locale": "pmvdhpdqjvhv",
+      "@@last_modified": "ipsum lor"
+    },
+    {
+      "@@locale": "dEmRkEkdLm3LrwERbZS",
+      "@@context": "b",
+      "@@comment": "ipsum adip"
+    },
+    {
+      "@@locale": "dol",
+      "@@context": "Y3F70GiAGab8i3lX"
+    },
+    {
+      "@@locale": "6sGqlYk",
+      "@@author": "mxo",
+      "@@comment": "dolor co"
+    },
+    {
+      "@@locale": "q",
+      "@@comment": "adipiscing dolor i"
+    },
+    {
+      "@@locale": "lore",
+      "@@author": "amet consectetur "
+    },
+    {
+      "@@locale": "pmomyqazignqmoeio",
+      "@@last_modified": "qqk0XUPIHNBgruM0",
+      "@@author": "lDxmeDveYQObq",
+      "@@comment": "b"
+    }
+  ]
+}

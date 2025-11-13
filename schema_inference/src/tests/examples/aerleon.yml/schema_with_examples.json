@@ -1,0 +1,862 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "aerleon.yml",
+    "description": "Configure Aerleon's aclgen, aclcheck, and pol2yaml command line tools",
+    "type": "object",
+    "properties": {
+      "base_directory": {
+        "type": "string",
+        "description": "aclgen and pol2yaml will search this directory recursively for policy files to process, except if the flag `--policy_file` is used to give a specific input file (aclgen only).\n\nRelative paths that appear in 'include' directives will be resolved against base_directory.\n\nThe default value is './policies'.",
+        "minLength": 1
+      },
+      "definitions_directory": {
+        "type": "string",
+        "description": "All network and service definition files in this directory will be loaded and used to resolve symbolic network and service names. \n\nUnlike base_directory, definitions_directory is not searched recursively for input files.\n\nThe default value is './def'.",
+        "minLength": 1
+      },
+      "output_directory": {
+        "type": "string",
+        "description": "aclgen will place all generated ACLs in this directory. For `aclgen` the default value is the current directory.\n\npol2yaml will place each converted file adjacent to its input file by default. If output_directory is given, pol2yaml will mirror the directory structure of the input files in the output_directory, potentially creating directories in the process.",
+        "minLength": 1
+      },
+      "optimize": {
+        "type": "boolean",
+        "description": "Causes aclgen to produce a more compact address book by collapsing adjacent or overlapping CIDR expressions within the same network.\n\nOn some platforms (Juniper SRX and platforms configured with the 'object-group' option) address book compression is restricted to only collapse addresses that share the same network token (name).\n\nThis flag is not enabled by default, although a secondary address book compression pass is always performed for Juniper SRX and Palo Alto Networks firewalls regardless of this setting."
+      },
+      "recursive": {
+        "type": "boolean",
+        "description": "UNUSED. This field is not used."
+      },
+      "debug": {
+        "type": "boolean",
+        "description": "Causes aclgen to display very detailed log messages if true. The default value is false."
+      },
+      "verbose": {
+        "type": "boolean",
+        "description": "UNUSED. This field is not used. To get detailed log messages, use 'debug'."
+      },
+      "max_renderers": {
+        "type": "integer",
+        "description": "Controls the number of parallel processes used by aclgen to render ACLs. The aclgen program uses Python's OS process-based multiprocessing, so setting max_renderers to '2' would cause aclgen to spawn two OS processes that will generate ACLs.\n\nSetting max_renderers to '1' will disable multiprocessing.\n\nBy default, max_renderers is set to '10'. Users may wish to set this to the number of available CPUs on the current system."
+      },
+      "shade_check": {
+        "type": "boolean",
+        "description": "Causes aclgen to produce a warning if any unreachable term is encountered if true. The default value is false."
+      },
+      "exp_info": {
+        "type": "integer",
+        "description": "aclgen will produce a warning if it encounters a term set to expire in the near future. Expired terms are ignored. Setting exp_info controls the number of weeks ahead that aclgen will check for soon-to-expire terms.\n\nThe default value is '2' (two weeks)."
+      }
+    },
+    "additionalProperties": false
+  },
+  "examples": [
+    {
+      "definitions_directory": "lorem lor",
+      "optimize": false,
+      "recursive": true,
+      "debug": true,
+      "verbose": false,
+      "max_renderers": 206,
+      "shade_check": true
+    },
+    {
+      "base_directory": "jscpp",
+      "definitions_directory": "0HUAk0YxfFEVLFJxdd6",
+      "optimize": true,
+      "recursive": true,
+      "exp_info": 730
+    },
+    {
+      "base_directory": "djhfocurhqptrjihen",
+      "definitions_directory": "cqzakmxeg",
+      "output_directory": "ad",
+      "exp_info": -36
+    },
+    {
+      "base_directory": "dolor lorem sit ",
+      "verbose": false,
+      "exp_info": 736
+    },
+    {
+      "definitions_directory": "3NjHXbWNdbIsuSVyRwD",
+      "optimize": true,
+      "recursive": false,
+      "debug": false,
+      "verbose": false,
+      "exp_info": -169
+    },
+    {
+      "base_directory": "JpxMXO7a6XSaYt",
+      "definitions_directory": "w7cxQLIV",
+      "output_directory": "lo",
+      "optimize": false,
+      "recursive": true,
+      "max_renderers": 524,
+      "shade_check": false
+    },
+    {
+      "base_directory": "HXFSB",
+      "definitions_directory": "nVIF",
+      "output_directory": "l",
+      "optimize": true,
+      "debug": false,
+      "shade_check": true,
+      "exp_info": 327
+    },
+    {
+      "base_directory": "iovrthlbofxhja",
+      "output_directory": "wO7MdzHMO4IHH",
+      "optimize": true,
+      "recursive": false,
+      "verbose": false,
+      "shade_check": true,
+      "exp_info": -696
+    },
+    {
+      "base_directory": "3QVuHnI5v",
+      "definitions_directory": "l8uLLN47QZXN",
+      "output_directory": "XA9mB4Kh",
+      "recursive": true,
+      "debug": true,
+      "exp_info": 817
+    },
+    {
+      "base_directory": "p9Zp1HCRGvOxrRahH",
+      "definitions_directory": "sBX1OV",
+      "output_directory": "49ZZYK",
+      "optimize": false,
+      "exp_info": -8
+    },
+    {
+      "definitions_directory": "6z4j9zlvNcyaekorW",
+      "output_directory": "xy",
+      "optimize": false,
+      "recursive": true,
+      "debug": true,
+      "verbose": false,
+      "max_renderers": 428,
+      "shade_check": false,
+      "exp_info": -587
+    },
+    {
+      "output_directory": "ntswaeztgtejlfdn",
+      "recursive": false,
+      "verbose": false,
+      "max_renderers": 608,
+      "exp_info": -101
+    },
+    {
+      "definitions_directory": "adipiscing sit ips",
+      "debug": true,
+      "verbose": false,
+      "max_renderers": 110,
+      "shade_check": false
+    },
+    {
+      "base_directory": "consect",
+      "output_directory": "xwmkniyzubgy",
+      "optimize": true,
+      "recursive": true,
+      "debug": true,
+      "verbose": false,
+      "max_renderers": 565,
+      "shade_check": true,
+      "exp_info": 698
+    },
+    {
+      "definitions_directory": "hoyscqigoaobpdry",
+      "output_directory": "amet sit",
+      "optimize": false,
+      "recursive": true,
+      "verbose": true,
+      "max_renderers": -724,
+      "shade_check": false,
+      "exp_info": 381
+    },
+    {
+      "base_directory": "fimzlvjwexjkcwpmgqd",
+      "definitions_directory": "jKAVKwGn81ynB",
+      "optimize": false,
+      "recursive": false,
+      "debug": true,
+      "max_renderers": -953,
+      "shade_check": false,
+      "exp_info": -247
+    },
+    {
+      "base_directory": "zffkyug",
+      "definitions_directory": "2gEDeIxwgPic1tLTV4jB",
+      "output_directory": "consecte",
+      "optimize": false,
+      "recursive": false,
+      "debug": true,
+      "verbose": true,
+      "max_renderers": -594,
+      "exp_info": 269
+    },
+    {
+      "base_directory": "awsravjuntsirzxxcqwhb",
+      "output_directory": "lor",
+      "optimize": true,
+      "debug": false,
+      "verbose": true,
+      "max_renderers": 98,
+      "shade_check": false,
+      "exp_info": -182
+    },
+    {
+      "base_directory": "ipsum sit adipiscin",
+      "definitions_directory": "ekg",
+      "optimize": true,
+      "recursive": true,
+      "debug": true,
+      "max_renderers": -382,
+      "shade_check": true,
+      "exp_info": -505
+    },
+    {
+      "base_directory": "adipiscing dolor c",
+      "definitions_directory": "ukN",
+      "debug": false,
+      "max_renderers": -175,
+      "shade_check": false
+    },
+    {
+      "definitions_directory": "ireeagqw",
+      "output_directory": "WvKjneHIM6svC6ts",
+      "optimize": false,
+      "recursive": true,
+      "debug": true,
+      "verbose": true,
+      "max_renderers": 324,
+      "shade_check": false
+    },
+    {
+      "base_directory": "grkcrhvhtb",
+      "optimize": true,
+      "recursive": true,
+      "exp_info": 255
+    },
+    {
+      "base_directory": "nrfgxqtsuzckfakxyepyg",
+      "definitions_directory": "ukf",
+      "optimize": false,
+      "recursive": false,
+      "verbose": true,
+      "max_renderers": -47,
+      "shade_check": true,
+      "exp_info": -426
+    },
+    {
+      "base_directory": "nCB5ZBn2Cm",
+      "definitions_directory": "ip",
+      "optimize": true,
+      "recursive": false,
+      "debug": false,
+      "exp_info": -80
+    },
+    {
+      "base_directory": "uhzucwvenxsssk",
+      "optimize": true,
+      "verbose": true
+    },
+    {
+      "base_directory": "kylqxfbealdcik",
+      "output_directory": "2R88GRBToPPY2jI4KBoia",
+      "optimize": true,
+      "debug": false,
+      "max_renderers": 635,
+      "shade_check": true
+    },
+    {
+      "recursive": true,
+      "debug": false,
+      "shade_check": false,
+      "exp_info": 328
+    },
+    {
+      "definitions_directory": "dolor ",
+      "recursive": false,
+      "verbose": false,
+      "max_renderers": 656,
+      "shade_check": false
+    },
+    {
+      "definitions_directory": "tgYPnPXoOFVx31f",
+      "output_directory": "altduwvdyf",
+      "debug": true,
+      "shade_check": false
+    },
+    {
+      "base_directory": "getfcnpnvnyldqapkpzi",
+      "output_directory": "rgdg",
+      "recursive": false,
+      "debug": false,
+      "verbose": false,
+      "max_renderers": -801,
+      "shade_check": false,
+      "exp_info": -22
+    },
+    {
+      "base_directory": "esqhszdzsgdaulabhnsw",
+      "output_directory": "consectetur ",
+      "optimize": true,
+      "recursive": false,
+      "verbose": true,
+      "max_renderers": 791,
+      "shade_check": true,
+      "exp_info": -875
+    },
+    {
+      "base_directory": "lsezFBbz0zIE9ldqK",
+      "optimize": false,
+      "verbose": true
+    },
+    {
+      "definitions_directory": "Xl1n",
+      "output_directory": "rkrMQc6ojLopPBI",
+      "optimize": true,
+      "recursive": true,
+      "verbose": true,
+      "max_renderers": 730,
+      "exp_info": 419
+    },
+    {
+      "base_directory": "TF054Q0YgQ5UrS",
+      "optimize": false,
+      "recursive": false,
+      "verbose": true,
+      "shade_check": true
+    },
+    {
+      "base_directory": "dolor dolor i",
+      "definitions_directory": "f0oWdOKL8UuCdNy",
+      "output_directory": "qthpwnafvmepykoeaqjfl",
+      "optimize": false,
+      "debug": true,
+      "shade_check": true,
+      "exp_info": -961
+    },
+    {
+      "definitions_directory": "adipisci",
+      "recursive": true,
+      "verbose": false,
+      "max_renderers": 665,
+      "shade_check": false,
+      "exp_info": -342
+    },
+    {
+      "definitions_directory": "xrxkrxmza",
+      "recursive": false,
+      "verbose": true,
+      "max_renderers": 544,
+      "exp_info": -890
+    },
+    {
+      "base_directory": "oSEebgSSkDQM",
+      "definitions_directory": "adip",
+      "output_directory": "ztxlqgkizig",
+      "optimize": false,
+      "debug": true,
+      "shade_check": true,
+      "exp_info": 473
+    },
+    {
+      "base_directory": "wkjkatyjfqkenaldej",
+      "definitions_directory": "fgccaanhjpitgmjtlhyuj",
+      "optimize": true,
+      "recursive": true,
+      "verbose": true,
+      "shade_check": true,
+      "exp_info": -835
+    },
+    {
+      "base_directory": "GDbjP0atSnQLnU2",
+      "definitions_directory": "uijxgv",
+      "output_directory": "adipiscing cons",
+      "optimize": false,
+      "recursive": true,
+      "debug": false,
+      "exp_info": 760
+    },
+    {
+      "base_directory": "hveegtamvfodmqvu",
+      "definitions_directory": "gsajuv",
+      "output_directory": "xrahzzhfad",
+      "optimize": false,
+      "debug": false,
+      "max_renderers": 762,
+      "shade_check": true
+    },
+    {
+      "base_directory": "dolor lorem ame",
+      "definitions_directory": "vI",
+      "output_directory": "yvzbazmksowmuwwldtkne",
+      "optimize": true,
+      "recursive": true,
+      "shade_check": false,
+      "exp_info": -568
+    },
+    {
+      "output_directory": "P",
+      "recursive": false,
+      "verbose": false,
+      "max_renderers": -184
+    },
+    {
+      "base_directory": "iyfuwjfjwnupopdrbmru",
+      "definitions_directory": "fkyjejdv",
+      "optimize": false,
+      "max_renderers": -788,
+      "shade_check": true,
+      "exp_info": 139
+    },
+    {
+      "definitions_directory": "tsthsjwnzka",
+      "optimize": false,
+      "recursive": true,
+      "debug": true,
+      "verbose": true,
+      "max_renderers": -18,
+      "shade_check": false,
+      "exp_info": -125
+    },
+    {
+      "base_directory": "vctqswx",
+      "output_directory": "vnxbrgeocahpq",
+      "recursive": false,
+      "debug": false
+    },
+    {
+      "base_directory": "laVavCn",
+      "recursive": false,
+      "verbose": true,
+      "max_renderers": 689,
+      "exp_info": 848
+    },
+    {
+      "base_directory": "gibwifsioeqfpwbisbmk",
+      "definitions_directory": "axdfciujosv",
+      "output_directory": "9PvIGPm02F3OYNJLBk",
+      "optimize": true,
+      "recursive": true,
+      "debug": false,
+      "verbose": false,
+      "max_renderers": 840
+    },
+    {
+      "base_directory": "Jt2",
+      "output_directory": "ipsum lore",
+      "optimize": false,
+      "recursive": true,
+      "debug": true,
+      "verbose": true,
+      "max_renderers": 33,
+      "shade_check": true,
+      "exp_info": 354
+    },
+    {
+      "base_directory": "rklull",
+      "definitions_directory": "jmzfttc",
+      "optimize": false,
+      "recursive": false,
+      "debug": false,
+      "verbose": true,
+      "max_renderers": -235,
+      "exp_info": 669
+    },
+    {
+      "base_directory": "XqX2VfGjZePucb2X1jM",
+      "output_directory": "ryubja",
+      "debug": true,
+      "shade_check": true,
+      "exp_info": 776
+    },
+    {
+      "definitions_directory": "wcdkupqxrvkdbyffrmp",
+      "output_directory": "consectetur",
+      "optimize": true,
+      "debug": false,
+      "max_renderers": 590,
+      "shade_check": false,
+      "exp_info": -97
+    },
+    {
+      "base_directory": "hwrj",
+      "definitions_directory": "yaalylurbmqedrhrhbju",
+      "output_directory": "arfwigbvrtofmsfxnq",
+      "verbose": true,
+      "exp_info": 656
+    },
+    {
+      "definitions_directory": "wyaupqubspqchujeki",
+      "output_directory": "FjTQ2DawGKsxA",
+      "recursive": true,
+      "verbose": true,
+      "max_renderers": -562,
+      "exp_info": -38
+    },
+    {
+      "base_directory": "cibxeqczjdvvm",
+      "definitions_directory": "Qv42XFbdBZx8KhI",
+      "optimize": false,
+      "recursive": true,
+      "verbose": true,
+      "max_renderers": 39,
+      "shade_check": false
+    },
+    {
+      "base_directory": "vbauathaqmci",
+      "output_directory": "kgJhWi5HrXfdeX",
+      "optimize": true,
+      "recursive": true,
+      "debug": true,
+      "verbose": true,
+      "shade_check": true,
+      "exp_info": 52
+    },
+    {
+      "base_directory": "dD",
+      "optimize": false,
+      "debug": false,
+      "verbose": true,
+      "exp_info": 314
+    },
+    {
+      "base_directory": "oifTGRf",
+      "output_directory": "XWY1nClJfSPftcIAw5fG",
+      "optimize": false,
+      "debug": true,
+      "exp_info": 894
+    },
+    {
+      "base_directory": "ekjncdtgrqffvzy",
+      "definitions_directory": "zZyCrXx1NlLj",
+      "optimize": true,
+      "verbose": false,
+      "exp_info": 277
+    },
+    {
+      "base_directory": "ojbnpxm",
+      "output_directory": "ipsum lorem con",
+      "optimize": false,
+      "recursive": false,
+      "debug": true,
+      "verbose": false,
+      "max_renderers": 335
+    },
+    {
+      "base_directory": "IOlsAKSHU2lXBFfdlJ3Z",
+      "output_directory": "qrgcirntlkxefpql",
+      "optimize": false,
+      "verbose": false,
+      "shade_check": false
+    },
+    {
+      "definitions_directory": "xtrlirm",
+      "output_directory": "afcdnektskuovgjpyqm",
+      "optimize": false,
+      "verbose": false,
+      "max_renderers": 450,
+      "shade_check": true,
+      "exp_info": -702
+    },
+    {
+      "optimize": false,
+      "recursive": true,
+      "verbose": true,
+      "max_renderers": -699,
+      "shade_check": false,
+      "exp_info": -876
+    },
+    {
+      "definitions_directory": "itie",
+      "output_directory": "dolor",
+      "verbose": true,
+      "shade_check": false
+    },
+    {
+      "output_directory": "buuezjlqrthmdhmbj",
+      "recursive": false,
+      "debug": true,
+      "max_renderers": -628,
+      "exp_info": 408
+    },
+    {
+      "base_directory": "sltylodharyvexfdngc",
+      "output_directory": "ipsum i",
+      "optimize": true,
+      "recursive": false,
+      "debug": false,
+      "shade_check": false
+    },
+    {
+      "base_directory": "khf",
+      "definitions_directory": "amet do",
+      "output_directory": "xci",
+      "recursive": true,
+      "verbose": false,
+      "max_renderers": 653
+    },
+    {
+      "base_directory": "doEs4eoFAP4tT2t",
+      "definitions_directory": "sqdszwrlldbzkkmzxrunq",
+      "recursive": false,
+      "debug": false,
+      "shade_check": false,
+      "exp_info": 549
+    },
+    {
+      "definitions_directory": "sit ipsum sit lorem ",
+      "output_directory": "si",
+      "optimize": false,
+      "debug": false,
+      "shade_check": false,
+      "exp_info": 38
+    },
+    {
+      "definitions_directory": "yMkmAoPzxrn",
+      "recursive": true,
+      "debug": true,
+      "max_renderers": -869
+    },
+    {
+      "base_directory": "sxteflkzsmjfpyelipg",
+      "definitions_directory": "O4K4XdpP",
+      "output_directory": "g",
+      "verbose": false,
+      "max_renderers": 359,
+      "exp_info": 277
+    },
+    {
+      "base_directory": "sit ipsum",
+      "optimize": false,
+      "recursive": false,
+      "debug": false,
+      "verbose": false,
+      "max_renderers": -361,
+      "exp_info": -279
+    },
+    {
+      "base_directory": "7McG",
+      "definitions_directory": "lorem consectetur",
+      "output_directory": "mct",
+      "recursive": false,
+      "debug": false,
+      "max_renderers": 947,
+      "exp_info": 686
+    },
+    {
+      "definitions_directory": "u2Is",
+      "optimize": false,
+      "recursive": true,
+      "debug": false
+    },
+    {
+      "definitions_directory": "amet conse",
+      "output_directory": "adipisci",
+      "recursive": true,
+      "debug": false,
+      "verbose": true,
+      "shade_check": false,
+      "exp_info": 136
+    },
+    {
+      "base_directory": "consec",
+      "recursive": false,
+      "verbose": false,
+      "max_renderers": -665,
+      "shade_check": false,
+      "exp_info": -673
+    },
+    {
+      "definitions_directory": "haia",
+      "output_directory": "XjKS04IY21rXM3IYwuJA",
+      "optimize": false,
+      "verbose": false,
+      "max_renderers": -986,
+      "shade_check": true
+    },
+    {
+      "definitions_directory": "ttcxqgeyhmaswtbrfm",
+      "optimize": false,
+      "verbose": true,
+      "shade_check": true
+    },
+    {
+      "base_directory": "xtrmifw",
+      "output_directory": "sidhfn",
+      "optimize": true,
+      "recursive": true,
+      "verbose": false,
+      "shade_check": false
+    },
+    {
+      "base_directory": "qeueieqbswwldmzxipd",
+      "definitions_directory": "oAEO",
+      "output_directory": "d",
+      "optimize": true,
+      "recursive": true,
+      "verbose": true,
+      "max_renderers": -556
+    },
+    {
+      "base_directory": "xbjfzrzehsgksyuhubud",
+      "optimize": false,
+      "debug": true,
+      "verbose": false,
+      "max_renderers": -698,
+      "exp_info": -67
+    },
+    {
+      "base_directory": "gvw",
+      "definitions_directory": "0juupaBfLetB4fiWb4",
+      "output_directory": "csGDYNJ7a",
+      "debug": false,
+      "verbose": false,
+      "max_renderers": -935
+    },
+    {
+      "definitions_directory": "bhjiki",
+      "output_directory": "Aogtil1wsyg3FP9gJD",
+      "debug": true,
+      "max_renderers": -491,
+      "exp_info": 49
+    },
+    {
+      "definitions_directory": "TvLMaRjFZNUsElEi5rLH",
+      "output_directory": "ueebupcmnmqzjqtvlot",
+      "debug": true,
+      "verbose": false,
+      "shade_check": false,
+      "exp_info": -853
+    },
+    {
+      "base_directory": "pk2oP4EUsimEczrE7Xe",
+      "output_directory": "pApzTb2",
+      "debug": true
+    },
+    {
+      "base_directory": "YbqmoP15xdsHZ6xXTwvD",
+      "definitions_directory": "jjhngcjbsfhlsvvgvyoy",
+      "optimize": true,
+      "debug": false,
+      "exp_info": -835
+    },
+    {
+      "definitions_directory": "D9tHNJ3sWbVhZN48G",
+      "output_directory": "tvQ0mJaIeJqVxTJv",
+      "recursive": true,
+      "debug": false,
+      "verbose": false,
+      "shade_check": false
+    },
+    {
+      "base_directory": "adipiscing adipis",
+      "definitions_directory": "sit lore",
+      "optimize": true,
+      "recursive": false,
+      "debug": true,
+      "verbose": false
+    },
+    {
+      "base_directory": "rlljpfiyw",
+      "output_directory": "vaatdrmlmjucbunqdnsqh",
+      "max_renderers": -424,
+      "shade_check": false
+    },
+    {
+      "base_directory": "dolor dolor adipi",
+      "definitions_directory": "frrz",
+      "debug": true,
+      "exp_info": -112
+    },
+    {
+      "base_directory": "ipsum lorem lo",
+      "optimize": true,
+      "debug": false,
+      "verbose": false,
+      "max_renderers": 354
+    },
+    {
+      "base_directory": "MV2RU2cfr58nxAf1",
+      "optimize": true,
+      "recursive": true,
+      "max_renderers": 874,
+      "exp_info": 798
+    },
+    {
+      "base_directory": "osqdrmz",
+      "definitions_directory": "97gT7VXs",
+      "output_directory": "gwxjsxxrrdvsnwvysno",
+      "optimize": false,
+      "recursive": true,
+      "max_renderers": 849,
+      "shade_check": false,
+      "exp_info": 290
+    },
+    {
+      "output_directory": "amet sit lorem c",
+      "optimize": false,
+      "recursive": false,
+      "debug": false,
+      "max_renderers": -606,
+      "shade_check": false
+    },
+    {
+      "base_directory": "sit ipsum amet ip",
+      "definitions_directory": "sbfzuq",
+      "output_directory": "c",
+      "optimize": true,
+      "debug": false,
+      "verbose": true,
+      "max_renderers": -132
+    },
+    {
+      "base_directory": "lEaz1tyZD9GuLP",
+      "output_directory": "consectetur ",
+      "recursive": true,
+      "verbose": false,
+      "shade_check": true,
+      "exp_info": 938
+    },
+    {
+      "base_directory": "hnhevetufcvwwcr",
+      "definitions_directory": "amet dolor ",
+      "output_directory": "rrhrbkaxv",
+      "optimize": true,
+      "verbose": true,
+      "max_renderers": 975,
+      "shade_check": true,
+      "exp_info": 682
+    },
+    {
+      "base_directory": "36OUHG3Vv5jZ0qosEtal",
+      "output_directory": "ozn",
+      "optimize": false,
+      "recursive": true,
+      "debug": true,
+      "max_renderers": -131,
+      "exp_info": -210
+    },
+    {
+      "definitions_directory": "consectet",
+      "output_directory": "amet consectetur ",
+      "recursive": true,
+      "verbose": false,
+      "shade_check": false,
+      "exp_info": 6
+    },
+    {
+      "base_directory": "D",
+      "definitions_directory": "ipsum sit amet ",
+      "output_directory": "MDHjvJLHD",
+      "optimize": false,
+      "recursive": true,
+      "debug": true,
+      "exp_info": 97
+    }
+  ]
+}

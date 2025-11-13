@@ -1,0 +1,3828 @@
+{
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "ast-grep rule",
+    "description": "Used for global rules, rewriters, and pyo3/napi",
+    "type": "object",
+    "properties": {
+      "rule": {
+        "description": "A rule object to find matching AST nodes",
+        "$ref": "#/$defs/SerializableRule"
+      },
+      "constraints": {
+        "description": "Additional meta variables pattern to filter matching",
+        "type": [
+          "object",
+          "null"
+        ],
+        "additionalProperties": {
+          "$ref": "#/$defs/SerializableRule"
+        }
+      },
+      "utils": {
+        "description": "Utility rules that can be used in `matches`",
+        "type": [
+          "object",
+          "null"
+        ],
+        "additionalProperties": {
+          "$ref": "#/$defs/SerializableRule"
+        }
+      },
+      "transform": {
+        "description": "A dictionary for metavariable manipulation. Dict key is the new variable name.\nDict value is a [transformation] that specifies how meta var is processed.\nSee [transformation doc](https://ast-grep.github.io/reference/yaml/transformation.html).",
+        "type": [
+          "object",
+          "null"
+        ],
+        "additionalProperties": {
+          "$ref": "#/$defs/Transformation"
+        }
+      },
+      "fix": {
+        "description": "A pattern string or a FixConfig object to auto fix the issue.\nIt can reference metavariables appeared in rule.\nSee details in fix [object reference](https://ast-grep.github.io/reference/yaml/fix.html#fixconfig).",
+        "anyOf": [
+          {
+            "$ref": "#/$defs/SerializableFixer"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "id": {
+        "description": "Unique, descriptive identifier, e.g., no-unused-variable",
+        "type": "string"
+      },
+      "language": {
+        "description": "Specify the language to parse and the file extension to include in matching.",
+        "$ref": "#/$defs/Language"
+      },
+      "rewriters": {
+        "description": "Rewrite rules for `rewrite` transformation",
+        "type": [
+          "array",
+          "null"
+        ],
+        "items": {
+          "$ref": "#/$defs/SerializableRewriter"
+        }
+      },
+      "message": {
+        "description": "Main message highlighting why this rule fired. It should be single line and concise,\nbut specific enough to be understood without additional context.",
+        "type": "string",
+        "default": ""
+      },
+      "note": {
+        "description": "Additional notes to elaborate the message and provide potential fix to the issue.\n`notes` can contain markdown syntax, but it cannot reference meta-variables.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "severity": {
+        "description": "One of: hint, info, warning, or error",
+        "$ref": "#/$defs/Severity",
+        "default": "hint"
+      },
+      "labels": {
+        "description": "Custom label dictionary to configure reporting. Key is the meta-variable name and\nvalue is the label message and label style.",
+        "type": [
+          "object",
+          "null"
+        ],
+        "additionalProperties": {
+          "$ref": "#/$defs/LabelConfig"
+        }
+      },
+      "files": {
+        "description": "Glob patterns to specify that the rule only applies to matching files",
+        "type": [
+          "array",
+          "null"
+        ],
+        "items": {
+          "type": "string"
+        }
+      },
+      "ignores": {
+        "description": "Glob patterns that exclude rules from applying to files",
+        "type": [
+          "array",
+          "null"
+        ],
+        "items": {
+          "type": "string"
+        }
+      },
+      "url": {
+        "description": "Documentation link to this rule",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "metadata": {
+        "description": "Extra information for the rule",
+        "anyOf": [
+          {
+            "$ref": "#/$defs/Metadata"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+    },
+    "required": [
+      "rule",
+      "id",
+      "language"
+    ],
+    "$defs": {
+      "SerializableRule": {
+        "description": "A rule object to find matching AST nodes. We have three categories of rules in ast-grep.\n\n* Atomic: the most basic rule to match AST. We have two variants: Pattern and Kind.\n\n* Relational: filter matched target according to their position relative to other nodes.\n\n* Composite: use logic operation all/any/not to compose the above rules to larger rules.\n\nEvery rule has it's unique name so we can combine several rules in one object.",
+        "type": "object",
+        "properties": {
+          "pattern": {
+            "description": "A pattern string or a pattern object.",
+            "$ref": "#/$defs/PatternStyle"
+          },
+          "kind": {
+            "description": "The kind name of the node to match. You can look up code's kind names in playground.",
+            "type": "string"
+          },
+          "regex": {
+            "description": "A Rust regular expression to match the node's text. https://docs.rs/regex/latest/regex/#syntax",
+            "type": "string"
+          },
+          "nthChild": {
+            "description": "`nth_child` accepts number, string or object.\nIt specifies the position in nodes' sibling list.",
+            "$ref": "#/$defs/SerializableNthChild"
+          },
+          "range": {
+            "description": "`range` accepts a range object.\nthe target node must exactly appear in the range.",
+            "$ref": "#/$defs/SerializableRange"
+          },
+          "inside": {
+            "description": "`inside` accepts a relational rule object.\nthe target node must appear inside of another node matching the `inside` sub-rule.",
+            "$ref": "#/$defs/Relation"
+          },
+          "has": {
+            "description": "`has` accepts a relational rule object.\nthe target node must has a descendant node matching the `has` sub-rule.",
+            "$ref": "#/$defs/Relation"
+          },
+          "precedes": {
+            "description": "`precedes` accepts a relational rule object.\nthe target node must appear before another node matching the `precedes` sub-rule.",
+            "$ref": "#/$defs/Relation"
+          },
+          "follows": {
+            "description": "`follows` accepts a relational rule object.\nthe target node must appear after another node matching the `follows` sub-rule.",
+            "$ref": "#/$defs/Relation"
+          },
+          "all": {
+            "description": "A list of sub rules and matches a node if all of sub rules match.\nThe meta variables of the matched node contain all variables from the sub-rules.",
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/SerializableRule"
+            }
+          },
+          "any": {
+            "description": "A list of sub rules and matches a node if any of sub rules match.\nThe meta variables of the matched node only contain those of the matched sub-rule.",
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/SerializableRule"
+            }
+          },
+          "not": {
+            "description": "A single sub-rule and matches a node if the sub rule does not match.",
+            "$ref": "#/$defs/SerializableRule"
+          },
+          "matches": {
+            "description": "A utility rule id and matches a node if the utility rule matches.",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatternStyle": {
+        "description": "A String pattern will match one single AST node according to pattern syntax.\nOr an object with field `context`, `selector` and optionally `strictness`.",
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "context": {
+                "description": "The surrounding code that helps to resolve any ambiguity in the syntax.",
+                "type": "string"
+              },
+              "selector": {
+                "description": "The sub-syntax node kind that is the actual matcher of the pattern.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "strictness": {
+                "description": "Strictness of the pattern. More strict pattern matches fewer nodes.",
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/Strictness"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "context"
+            ]
+          }
+        ]
+      },
+      "Strictness": {
+        "oneOf": [
+          {
+            "description": "all nodes are matched",
+            "type": "string",
+            "const": "cst"
+          },
+          {
+            "description": "all nodes except source trivial nodes are matched.",
+            "type": "string",
+            "const": "smart"
+          },
+          {
+            "description": "only ast nodes are matched",
+            "type": "string",
+            "const": "ast"
+          },
+          {
+            "description": "ast-nodes excluding comments are matched",
+            "type": "string",
+            "const": "relaxed"
+          },
+          {
+            "description": "ast-nodes excluding comments, without text",
+            "type": "string",
+            "const": "signature"
+          },
+          {
+            "description": "similar to smart, but node kinds are ignored, only text is matched.",
+            "type": "string",
+            "const": "template"
+          }
+        ]
+      },
+      "SerializableNthChild": {
+        "description": "`nthChild` accepts either a number, a string or an object.",
+        "anyOf": [
+          {
+            "description": "Simple syntax",
+            "$ref": "#/$defs/NthChildSimple"
+          },
+          {
+            "description": "Object style syntax",
+            "type": "object",
+            "properties": {
+              "position": {
+                "description": "nth-child syntax",
+                "$ref": "#/$defs/NthChildSimple"
+              },
+              "ofRule": {
+                "description": "select the nth node that matches the rule, like CSS's of syntax",
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/SerializableRule"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "reverse": {
+                "description": "matches from the end instead like CSS's nth-last-child",
+                "type": "boolean",
+                "default": false
+              }
+            },
+            "required": [
+              "position"
+            ]
+          }
+        ]
+      },
+      "NthChildSimple": {
+        "description": "A string or number describing the indices of matching nodes in a list of siblings.",
+        "anyOf": [
+          {
+            "description": "A number indicating the precise element index",
+            "type": "integer",
+            "format": "uint",
+            "minimum": 0
+          },
+          {
+            "description": "Functional notation like CSS's An + B",
+            "type": "string"
+          }
+        ]
+      },
+      "SerializableRange": {
+        "description": "Represents a position in source code using 0-based line and column numbers",
+        "type": "object",
+        "properties": {
+          "start": {
+            "description": "start position in the source code",
+            "$ref": "#/$defs/SerializablePosition"
+          },
+          "end": {
+            "description": "end position in the source code",
+            "$ref": "#/$defs/SerializablePosition"
+          }
+        },
+        "required": [
+          "start",
+          "end"
+        ]
+      },
+      "SerializablePosition": {
+        "description": "Represents a zero-based character-wise position in a document",
+        "type": "object",
+        "properties": {
+          "line": {
+            "description": "0-based line number in the source code",
+            "type": "integer",
+            "format": "uint",
+            "minimum": 0
+          },
+          "column": {
+            "description": "0-based column number in the source code",
+            "type": "integer",
+            "format": "uint",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "line",
+          "column"
+        ]
+      },
+      "Relation": {
+        "description": "A relational rule object, which is a Rule object with two additional fields stopBy and field.",
+        "type": "object",
+        "properties": {
+          "pattern": {
+            "description": "A pattern string or a pattern object.",
+            "$ref": "#/$defs/PatternStyle"
+          },
+          "kind": {
+            "description": "The kind name of the node to match. You can look up code's kind names in playground.",
+            "type": "string"
+          },
+          "regex": {
+            "description": "A Rust regular expression to match the node's text. https://docs.rs/regex/latest/regex/#syntax",
+            "type": "string"
+          },
+          "nthChild": {
+            "description": "`nth_child` accepts number, string or object.\nIt specifies the position in nodes' sibling list.",
+            "$ref": "#/$defs/SerializableNthChild"
+          },
+          "range": {
+            "description": "`range` accepts a range object.\nthe target node must exactly appear in the range.",
+            "$ref": "#/$defs/SerializableRange"
+          },
+          "inside": {
+            "description": "`inside` accepts a relational rule object.\nthe target node must appear inside of another node matching the `inside` sub-rule.",
+            "$ref": "#/$defs/Relation"
+          },
+          "has": {
+            "description": "`has` accepts a relational rule object.\nthe target node must has a descendant node matching the `has` sub-rule.",
+            "$ref": "#/$defs/Relation"
+          },
+          "precedes": {
+            "description": "`precedes` accepts a relational rule object.\nthe target node must appear before another node matching the `precedes` sub-rule.",
+            "$ref": "#/$defs/Relation"
+          },
+          "follows": {
+            "description": "`follows` accepts a relational rule object.\nthe target node must appear after another node matching the `follows` sub-rule.",
+            "$ref": "#/$defs/Relation"
+          },
+          "all": {
+            "description": "A list of sub rules and matches a node if all of sub rules match.\nThe meta variables of the matched node contain all variables from the sub-rules.",
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/SerializableRule"
+            }
+          },
+          "any": {
+            "description": "A list of sub rules and matches a node if any of sub rules match.\nThe meta variables of the matched node only contain those of the matched sub-rule.",
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/SerializableRule"
+            }
+          },
+          "not": {
+            "description": "A single sub-rule and matches a node if the sub rule does not match.",
+            "$ref": "#/$defs/SerializableRule"
+          },
+          "matches": {
+            "description": "A utility rule id and matches a node if the utility rule matches.",
+            "type": "string"
+          },
+          "stopBy": {
+            "$ref": "#/$defs/SerializableStopBy",
+            "default": "neighbor"
+          },
+          "field": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "SerializableStopBy": {
+        "description": "Control how the relational rule search should stop",
+        "oneOf": [
+          {
+            "type": "string",
+            "enum": [
+              "neighbor",
+              "end"
+            ]
+          },
+          {
+            "$ref": "#/$defs/SerializableRule"
+          }
+        ]
+      },
+      "Transformation": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "$ref": "#/$defs/Trans"
+          }
+        ]
+      },
+      "Trans": {
+        "description": "Represents a transformation that can be applied to a matched AST node.\nAvailable transformations are `substring`, `replace` and `convert`.",
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "substring": {
+                "$ref": "#/$defs/Substring"
+              }
+            },
+            "required": [
+              "substring"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "replace": {
+                "$ref": "#/$defs/Replace"
+              }
+            },
+            "required": [
+              "replace"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "convert": {
+                "$ref": "#/$defs/Convert"
+              }
+            },
+            "required": [
+              "convert"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "rewrite": {
+                "$ref": "#/$defs/Rewrite"
+              }
+            },
+            "required": [
+              "rewrite"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "Substring": {
+        "description": "Extracts a substring from the meta variable's text content.\n\nBoth `start_char` and `end_char` support negative indexing,\nwhich counts character from the end of an array, moving backwards.",
+        "type": "object",
+        "properties": {
+          "source": {
+            "description": "source meta variable to be transformed",
+            "type": "string"
+          },
+          "startChar": {
+            "description": "optional starting character index of the substring, defaults to 0.",
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32"
+          },
+          "endChar": {
+            "description": "optional ending character index of the substring, defaults to the end of the string.",
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32"
+          }
+        },
+        "required": [
+          "source"
+        ]
+      },
+      "Replace": {
+        "description": "Replaces a substring in the meta variable's text content with another string.",
+        "type": "object",
+        "properties": {
+          "source": {
+            "description": "source meta variable to be transformed",
+            "type": "string"
+          },
+          "replace": {
+            "description": "a regex to find substring to be replaced",
+            "type": "string"
+          },
+          "by": {
+            "description": "the replacement string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "source",
+          "replace",
+          "by"
+        ]
+      },
+      "Convert": {
+        "description": "Converts the source meta variable's text content to a specified case format.",
+        "type": "object",
+        "properties": {
+          "source": {
+            "description": "source meta variable to be transformed",
+            "type": "string"
+          },
+          "toCase": {
+            "description": "the target case format to convert the text content to",
+            "$ref": "#/$defs/StringCase"
+          },
+          "separatedBy": {
+            "description": "optional separators to specify how to separate word",
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "$ref": "#/$defs/Separator"
+            }
+          }
+        },
+        "required": [
+          "source",
+          "toCase"
+        ]
+      },
+      "StringCase": {
+        "description": "An enumeration representing different cases for strings.",
+        "type": "string",
+        "enum": [
+          "lowerCase",
+          "upperCase",
+          "capitalize",
+          "camelCase",
+          "snakeCase",
+          "kebabCase",
+          "pascalCase"
+        ]
+      },
+      "Separator": {
+        "description": "Separator to split string. e.g. `user_accountName` -> `user`, `accountName`\nIt will be rejoin according to `StringCase`.",
+        "type": "string",
+        "enum": [
+          "caseChange",
+          "dash",
+          "dot",
+          "slash",
+          "space",
+          "underscore"
+        ]
+      },
+      "Rewrite": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string"
+          },
+          "rewriters": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "joinBy": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "source",
+          "rewriters"
+        ]
+      },
+      "SerializableFixer": {
+        "description": "A pattern string or fix object to auto fix the issue.\nIt can reference metavariables appeared in rule.",
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "$ref": "#/$defs/SerializableFixConfig"
+          },
+          {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/SerializableFixConfig"
+            }
+          }
+        ]
+      },
+      "SerializableFixConfig": {
+        "type": "object",
+        "properties": {
+          "template": {
+            "type": "string"
+          },
+          "expandEnd": {
+            "$ref": "#/$defs/Relation"
+          },
+          "expandStart": {
+            "$ref": "#/$defs/Relation"
+          },
+          "title": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "template"
+        ]
+      },
+      "Language": {
+        "description": "Placeholder for language, used in JSON schema only.",
+        "type": "string",
+        "example": "typescript"
+      },
+      "SerializableRewriter": {
+        "description": "Used for global rules, rewriters, and pyo3/napi",
+        "type": "object",
+        "properties": {
+          "rule": {
+            "description": "A rule object to find matching AST nodes",
+            "$ref": "#/$defs/SerializableRule"
+          },
+          "constraints": {
+            "description": "Additional meta variables pattern to filter matching",
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": {
+              "$ref": "#/$defs/SerializableRule"
+            }
+          },
+          "utils": {
+            "description": "Utility rules that can be used in `matches`",
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": {
+              "$ref": "#/$defs/SerializableRule"
+            }
+          },
+          "transform": {
+            "description": "A dictionary for metavariable manipulation. Dict key is the new variable name.\nDict value is a [transformation] that specifies how meta var is processed.\nSee [transformation doc](https://ast-grep.github.io/reference/yaml/transformation.html).",
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": {
+              "$ref": "#/$defs/Transformation"
+            }
+          },
+          "fix": {
+            "description": "A pattern string or a FixConfig object to auto fix the issue.\nIt can reference metavariables appeared in rule.\nSee details in fix [object reference](https://ast-grep.github.io/reference/yaml/fix.html#fixconfig).",
+            "anyOf": [
+              {
+                "$ref": "#/$defs/SerializableFixer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "id": {
+            "description": "Unique, descriptive identifier, e.g., no-unused-variable",
+            "type": "string"
+          }
+        },
+        "required": [
+          "rule",
+          "id"
+        ]
+      },
+      "Severity": {
+        "oneOf": [
+          {
+            "description": "A kind reminder for code with potential improvement.",
+            "type": "string",
+            "const": "hint"
+          },
+          {
+            "description": "A suggestion that code can be improved or optimized.",
+            "type": "string",
+            "const": "info"
+          },
+          {
+            "description": "A warning that code might produce bugs or does not follow best practice.",
+            "type": "string",
+            "const": "warning"
+          },
+          {
+            "description": "An error that code produces bugs or has logic errors.",
+            "type": "string",
+            "const": "error"
+          },
+          {
+            "description": "Turns off the rule.",
+            "type": "string",
+            "const": "off"
+          }
+        ]
+      },
+      "LabelConfig": {
+        "type": "object",
+        "properties": {
+          "style": {
+            "$ref": "#/$defs/LabelStyle"
+          },
+          "message": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "style"
+        ]
+      },
+      "LabelStyle": {
+        "oneOf": [
+          {
+            "description": "Labels that describe the primary cause of a diagnostic.",
+            "type": "string",
+            "const": "primary"
+          },
+          {
+            "description": "Labels that provide additional context for a diagnostic.",
+            "type": "string",
+            "const": "secondary"
+          }
+        ]
+      },
+      "Metadata": {
+        "description": "Additional metadata for the rule, can be used to store extra information.",
+        "type": "object",
+        "additionalProperties": true
+      }
+    }
+  },
+  "examples": [
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "consectetur ipsum lor",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "utils": {},
+      "transform": {
+        "sklhwt": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        },
+        "ieyicc": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        }
+      },
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "files": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "co",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "utils": {
+        "bAx0HUAk0": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "fix": 20,
+      "rewriters": null,
+      "message": "FJxdd60s3Gg1K",
+      "labels": null,
+      "url": null,
+      "metadata": 99
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "RhxrnJgWQsNKVP",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "fix": 75,
+      "rewriters": null,
+      "message": "hicmedtubyrstsvvjmlud",
+      "note": null,
+      "ignores": [],
+      "url": "qozjfcivpblbqdeqvqh"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "psbEhY71O",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "utils": null,
+      "rewriters": null,
+      "message": "lorem lorem do",
+      "note": null,
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "files": null,
+      "metadata": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "K1o",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {},
+      "utils": null,
+      "fix": 17,
+      "rewriters": null,
+      "message": "RwD",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "ignores": null,
+      "url": null,
+      "metadata": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "sit sit ipsu",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {
+        "lorem ipsu": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "utils": {
+        "oFBpISvvJ": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "transform": {},
+      "fix": "HpO250nUVLPrVo",
+      "rewriters": null,
+      "message": "dolor consectetur i",
+      "files": null,
+      "ignores": [],
+      "url": "tbnqmujtpxpyxxqyvo",
+      "metadata": true
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "IHXFSBjYOEnVIFDbAi",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "transform": null,
+      "message": "amet adi",
+      "note": null,
+      "labels": null,
+      "files": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "5uI",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "fix": true,
+      "message": "dolor lorem consecte",
+      "note": null,
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": {
+        "xfubgpim": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        },
+        "K7ERVq": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        }
+      },
+      "url": "l"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "jxstiofoyjcjfbwz",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "utils": {},
+      "note": "adipiscing ",
+      "labels": null,
+      "files": [],
+      "ignores": [],
+      "url": "olnnrmvhwtdjxrmurozeo"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "ogzvgwom",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "utils": null,
+      "transform": null,
+      "fix": "acoaryjhluw",
+      "note": "lorem lorem cons",
+      "labels": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "consectet",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "utils": {},
+      "note": "Bo",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "files": null,
+      "ignores": []
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "fnmsjlayxzidwbbffdjt",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "utils": null,
+      "fix": "amet do",
+      "rewriters": [],
+      "note": "mxpvxctcyuxogbk",
+      "labels": null,
+      "url": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "s3Enu",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "fix": 5.6,
+      "message": "dolor dolor dolor si",
+      "files": [],
+      "ignores": [],
+      "url": "exwjyafj",
+      "metadata": true
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "fzh",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {
+        "S7PHy": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "utils": null,
+      "rewriters": null,
+      "message": "aCnxfNAo",
+      "note": "aZzuMokktk",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "metadata": 51
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "amet dolor sit adi",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "utils": {
+        "amet lorem": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "transform": {
+        "ipsum adip": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        }
+      },
+      "rewriters": null,
+      "message": "amet lorem ip",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "ignores": [],
+      "url": "ncmrmjnorrfisdedgad"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "Ln",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "utils": null,
+      "rewriters": [],
+      "message": "yg2KEpOiix9Y5FkAJFo3",
+      "note": "NB6dvGcCJs9vwK",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": {},
+      "files": null,
+      "ignores": [],
+      "url": null,
+      "metadata": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "consectetur adipisc",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "transform": null,
+      "rewriters": [],
+      "message": "eIxwgPi",
+      "note": null,
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "metadata": true
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "amet sit",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "fix": false,
+      "rewriters": null,
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "metadata": 40
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "ipsum ipsu",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "transform": {
+        "lorem ": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        },
+        "TiMXj": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        }
+      },
+      "fix": null,
+      "rewriters": [],
+      "note": "obfsgvtwpz",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "files": [],
+      "metadata": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "ipsum adipiscing",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "utils": null,
+      "transform": {
+        "sit lorem ": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        }
+      },
+      "fix": 12.79,
+      "rewriters": null,
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "url": null,
+      "metadata": 13.05
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "adipiscing ipsum si",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {},
+      "utils": null,
+      "fix": 3,
+      "rewriters": [],
+      "note": "ilakyxj",
+      "labels": null,
+      "ignores": null,
+      "url": "mjiOBEsm71jiHyyaH3e"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "5pOxeOsZtUdP6ho",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {},
+      "rewriters": null,
+      "message": "m3cvu7hJ6L5y",
+      "note": null,
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "files": [],
+      "ignores": [],
+      "url": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "amet sit amet ip",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {
+        "ckfakxyepy": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        },
+        "ipsum c": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "transform": {
+        "dolor sit ": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        }
+      },
+      "rewriters": [],
+      "message": "ipsum amet ipsu",
+      "ignores": [],
+      "url": "adipiscing amet dolor",
+      "metadata": 82.68
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "sit ipsum sit",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "transform": {},
+      "rewriters": [],
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": {
+        "dolor": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        },
+        "zwflbda": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        }
+      },
+      "ignores": null,
+      "metadata": 73.66
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "5Ws",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "transform": null,
+      "fix": null,
+      "rewriters": [],
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "ignores": []
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "dol",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "transform": null,
+      "rewriters": [],
+      "note": "amet sit ipsum ",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": {},
+      "ignores": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "txcplgwizjouubt",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "utils": {},
+      "fix": false,
+      "rewriters": [],
+      "labels": {
+        "Wh6DUQeAx": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        },
+        "geuaz": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        }
+      },
+      "files": [],
+      "url": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "ip",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "utils": null,
+      "transform": null,
+      "fix": null,
+      "rewriters": null,
+      "message": "dolor ipsum a",
+      "note": "adip",
+      "labels": null,
+      "ignores": [],
+      "url": "adipisci",
+      "metadata": "sit dolor ipsum"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "sit",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {},
+      "fix": false,
+      "rewriters": [],
+      "message": "31fEriqUZ",
+      "note": "HLedy",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "ignores": null,
+      "metadata": 98.5
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "XqjUmfFKFYG",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "utils": {
+        "dolor lore": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "transform": {
+        "g4bLjY2v": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        }
+      },
+      "fix": "lorem lore",
+      "rewriters": null,
+      "message": "w7mMjBHqPUVpUb0nu0Y",
+      "labels": {},
+      "files": null,
+      "ignores": [],
+      "url": null,
+      "metadata": false
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "tes",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "utils": {
+        "xNQnYBVftb": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        },
+        "hjjmgpsh": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "transform": null,
+      "fix": 4.2,
+      "rewriters": [],
+      "message": "adipi",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "files": null,
+      "ignores": [],
+      "url": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "sit ipsum",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {
+        "mgpWbvAI": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "utils": {
+        "WSfSvsib1": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "files": [],
+      "url": "BV3YI",
+      "metadata": "lorem do"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "hht25vBC5BtFaFhYB7Aq",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "transform": {
+        "TSubQ7": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        },
+        "JSjkk": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        }
+      },
+      "rewriters": null,
+      "note": "dezrhshsijcoenk",
+      "labels": null,
+      "files": [],
+      "ignores": [],
+      "url": null,
+      "metadata": 5.61
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "CTF054Q0YgQ5UrS",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "transform": null,
+      "fix": null,
+      "rewriters": null,
+      "note": "7kCtM",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "files": [
+        "dolor sit lore",
+        "sit ipsum ipsum",
+        "y",
+        "bj28HaqTlqA",
+        "kjnmzckinwuqjpvo"
+      ],
+      "url": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "y4d0rUBousuH",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "utils": null,
+      "fix": true,
+      "rewriters": null,
+      "message": "tcsrcsca",
+      "labels": null,
+      "files": null,
+      "ignores": [
+        "jflpleppzaopadnkjdd",
+        "msbsrulpvyvircuxyd",
+        "8zBM5ZrMHoho",
+        "Gs5sU0F",
+        "RLUAEQn"
+      ],
+      "url": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "oYhDILjNF",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "utils": null,
+      "transform": {
+        "dolor lo": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        },
+        "mlfmIBR": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        }
+      },
+      "fix": 74.31,
+      "message": "xuzhqxzjnvukppg",
+      "note": null,
+      "files": [
+        "cw",
+        "adipiscing adi",
+        "vr",
+        "lorem",
+        "tobmttaacyck"
+      ],
+      "ignores": [
+        "consecte",
+        "lorem ",
+        "zotknpxmkohwamata",
+        "QWk6",
+        "adipiscing si"
+      ],
+      "url": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "adipisc",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "rewriters": [
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        }
+      ],
+      "note": "jiqseuyj",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "files": null,
+      "ignores": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "KoSEe",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {
+        "emrqccum": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        },
+        "itlcbccehf": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "transform": {},
+      "fix": null,
+      "rewriters": [
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        }
+      ],
+      "message": "siuauqz",
+      "note": "ojxztdzassklfjgtotsm",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "ignores": [
+        "rsddll",
+        "amet ips",
+        "amet s",
+        "aksi",
+        "YrtUsh9UUj2n"
+      ],
+      "url": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "31AwybV7x",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {
+        "sit lo": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "utils": {},
+      "transform": null,
+      "fix": 27.06,
+      "message": "d",
+      "note": null,
+      "labels": null,
+      "ignores": null,
+      "url": "dolor sit amet ",
+      "metadata": 49
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "inmadrvaisfrpftwo",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "utils": {
+        "sit sit": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        },
+        "vjjwpscblh": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "transform": {},
+      "fix": 18.89,
+      "rewriters": null,
+      "message": "si",
+      "note": null,
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "ignores": [
+        "kcyylfatutrj",
+        "oawxniewxx",
+        "VUi2KccSp",
+        "consectet",
+        "ebzkju"
+      ],
+      "url": "vFtUtfhO",
+      "metadata": 98.92
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "zhvee",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {
+        "gt0hfuvE": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "utils": {},
+      "transform": null,
+      "fix": "vkhkzgjcrgbuj",
+      "files": null,
+      "url": "lyc",
+      "metadata": "0ezBxLRMFw9YP"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "ldayfeczkjofusyv",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "utils": {},
+      "fix": true,
+      "rewriters": null,
+      "message": "ldtkneoaleladpxdfzcb",
+      "note": null,
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "ignores": null,
+      "metadata": 56.89
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "aazifmotpo",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "utils": null,
+      "transform": null,
+      "rewriters": null,
+      "message": "si",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": {
+        "lorem ": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        }
+      },
+      "ignores": null,
+      "url": "amet amet adipis"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "viyfuwj",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "utils": {
+        "mlaolqlyr": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        },
+        "drcyaonxob": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "note": "ipsum dolor co",
+      "labels": {
+        "gdqmlO": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        }
+      },
+      "files": null,
+      "metadata": 12.89
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "9",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "rewriters": null,
+      "message": "consectetur sit a",
+      "note": "3Df9iY",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "ignores": [
+        "sit amet dolo",
+        "luesurxulbcae",
+        "vxovqzbuigunu",
+        "mxfpqkneiss",
+        "itgjfhhlilxebzahbuk"
+      ],
+      "metadata": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "wvctq",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "rewriters": null,
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "files": [
+        "syhsksxlz",
+        "dolor ipsum ame",
+        "csr7vaKqKYd41WXtEMr",
+        "13xsZJ1pu9hpOwn2Wj",
+        "amet dolor lorem "
+      ],
+      "ignores": null,
+      "url": "3cmWn"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "ieataimfyrpli",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "utils": null,
+      "fix": 90.25,
+      "rewriters": [
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        }
+      ],
+      "message": "z",
+      "files": null,
+      "url": null,
+      "metadata": true
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "sgi",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "utils": {
+        "bwmadluozc": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "transform": {
+        "zaxdfci": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        }
+      },
+      "rewriters": [
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        }
+      ],
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "url": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "moixuoz",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "utils": {
+        "adipiscing": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        },
+        "YiVlQbF5": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "transform": {
+        "lorem ip": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        },
+        "zvlutt": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        }
+      },
+      "fix": "ipsum dolor si",
+      "rewriters": null,
+      "message": "birlysyrfbkeotosdz",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "url": null,
+      "metadata": 38
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "7Qy",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "utils": null,
+      "transform": null,
+      "rewriters": [
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        }
+      ],
+      "message": "czl",
+      "note": null,
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "ignores": null,
+      "url": "tovxunxxlnbok"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "IXqX2VfGjZePuc",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {
+        "ektusr": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        },
+        "bjaxrf": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "utils": {
+        "aOrr94": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        },
+        "dxL5ue7S0E": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "transform": null,
+      "message": "zmfzabrpzrvwyxnqta",
+      "note": null,
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": {
+        "7kmN69Ry": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        }
+      },
+      "files": null,
+      "ignores": null,
+      "url": "achawvuoimbvftiej",
+      "metadata": 4
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "swcdkupqxrvkdbyf",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "utils": null,
+      "transform": null,
+      "fix": true,
+      "rewriters": [
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        }
+      ],
+      "message": "ctvf",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "metadata": 68.76
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "consectetur dolor ",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "utils": null,
+      "fix": 95,
+      "rewriters": null,
+      "message": "bmqedrh",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "files": null,
+      "ignores": [
+        "fwigbvrto",
+        "ayoscss",
+        "lorem sit amet ipsum",
+        "M6knPD4jOn5wzF",
+        "qiqwmduzhbieqnvfqpdm"
+      ],
+      "url": "xaY0jpf2TWBXLqs",
+      "metadata": false
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "9H6hEiafrmJGmOwUxj",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "fix": null,
+      "message": "wmaj",
+      "note": null,
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "ignores": [
+        "any",
+        "TJQyN0iLgU2lux3mi",
+        "amet",
+        "ftq",
+        "s"
+      ]
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "P5fvc2kNf9wi",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "transform": null,
+      "fix": 68.87,
+      "rewriters": null,
+      "message": "si",
+      "note": "hI8sZ",
+      "labels": {
+        "bwjqqzkt": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        }
+      },
+      "files": [
+        "uibzdphadxbvhae",
+        "Te",
+        "dafhxxoiv",
+        "ame",
+        "eidtcvumkbalctz"
+      ],
+      "url": "rplvdbeogjjdvhyiobmxc",
+      "metadata": 17.18
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "94YdbVb",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "utils": {},
+      "fix": 40,
+      "rewriters": null,
+      "message": "kgJhWi5HrXfdeX",
+      "note": "jsyarawmpnasollcs",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "files": [
+        "wkhTw9vcmZufHJOg7V",
+        "oah",
+        "do",
+        "awhxjtnenwlnlyemu",
+        "sexaswysxcpgc"
+      ],
+      "url": "amet",
+      "metadata": "xerdud"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "cz8rYIW4yOYV",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {
+        "NR8lZkl": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "utils": {
+        "hHQzg2VZj": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "fix": 69.99,
+      "rewriters": [
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        }
+      ],
+      "labels": null,
+      "ignores": [
+        "dolor ipsum ipsum ",
+        "AD",
+        "xSrqOaJatR2A",
+        "ccucwfl",
+        "mlktkvuj"
+      ],
+      "url": "vdomoy",
+      "metadata": 97.72
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "LoifTGRfMmSKX",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "fix": true,
+      "message": "ciboljycnfmbdystl",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": {},
+      "files": [
+        "kyqdqjdkxzqlovdy",
+        "dwptpkcdeedfouuv",
+        "jrna",
+        "xu",
+        "YHlcx1Vo0oSgQ"
+      ],
+      "ignores": [
+        "consectetur l",
+        "dolor ame",
+        "nygwkrphrpz",
+        "dolor ipsum lor",
+        "freqrtwgwi"
+      ],
+      "url": "atPUkWBmUTDGMNVVm",
+      "metadata": 39
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "7kyvF",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {},
+      "transform": {
+        "VmllvM": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        }
+      },
+      "rewriters": null,
+      "message": "amet lorem lo",
+      "note": "lorem a",
+      "ignores": [
+        "amet adipiscing amet",
+        "69ydgsAoZRB",
+        "xgbpibhssuxxnfusj",
+        "lorem ipsum sit",
+        "consect"
+      ],
+      "metadata": true
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "xojbnpxmuilgelneugu",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {
+        "gZQP2yxA": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "utils": null,
+      "transform": null,
+      "fix": 44,
+      "message": "sit ipsum lo",
+      "note": "9Z3Jk",
+      "labels": {
+        "acaiywvds": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        },
+        "udeutxlxd": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        }
+      },
+      "url": "Qv",
+      "metadata": "cygfczxicqxaqwl"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "joreh",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {
+        "U2lXBFfdl": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        },
+        "FnGjMNPpf": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "utils": {
+        "lkxefpql": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        },
+        "ztgitqnwz": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "transform": {
+        "pxqnzn": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        }
+      },
+      "fix": true,
+      "rewriters": null,
+      "note": "ljFiLGa",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": {},
+      "ignores": null,
+      "url": null,
+      "metadata": 43.0
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "svrxtrlirmdpzbz",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "transform": null,
+      "rewriters": null,
+      "message": "qcffsnvsxtnulfnbvdn",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": {
+        "dxtcjamq": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        }
+      },
+      "files": null,
+      "ignores": [
+        "cO2HJM",
+        "ecralcda",
+        "wnzixejva",
+        "rrmdqtvqjtkvuvpxokga",
+        "XXiCB8JOVKh5ZjLRxhPO"
+      ],
+      "url": "adipiscing sit adipi"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "t",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "utils": {},
+      "fix": 11.81,
+      "message": "ipsum ipsum adipiscin",
+      "note": "p71ccWhkIveMHYf",
+      "labels": null,
+      "metadata": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "X6tVukvUjOvkAxC25o9",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "fix": "zqdvt",
+      "labels": null,
+      "ignores": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "adipiscing conse",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "utils": null,
+      "transform": null,
+      "rewriters": [
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        }
+      ],
+      "note": null,
+      "labels": null,
+      "files": [
+        "YlAcTglUBI",
+        "sit ipsum adipiscing",
+        "3niqiZ7",
+        "olkqgnkrwrdptnbcosmso",
+        "c"
+      ],
+      "url": "lorem lore"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "tsltylod",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {
+        "hiepxtdjbe": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        },
+        "sit lore": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "utils": null,
+      "fix": null,
+      "rewriters": null,
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "files": [
+        "adipiscing sit ipsu",
+        "umuwnij",
+        "axvcniggysxhjqyjrong",
+        "kkltzrlcdbdak",
+        "5EbQ4J4o3u"
+      ],
+      "ignores": [
+        "dqbsbpezxlxueww",
+        "1a55kjlFN",
+        "LZ8MB2KYw3myoxM5cKnYU",
+        "gslgcxl",
+        "dolor"
+      ],
+      "url": null,
+      "metadata": "qFJez2SFyu"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "crsjz",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {},
+      "transform": {},
+      "fix": null,
+      "message": "wfwpxtozaui",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "files": [],
+      "ignores": [
+        "glqjue",
+        "loKDEgNd5lJvbXVtycSt",
+        "mhkkeeozp"
+      ],
+      "url": "adipiscing ",
+      "metadata": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "sit lorem",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "transform": {},
+      "fix": "exwonbeusqd",
+      "labels": null,
+      "files": [],
+      "url": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "pksqrontdncla",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "fix": "gzI2r3QhqD",
+      "rewriters": [],
+      "message": "dolor ipsum",
+      "note": "U",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": {
+        "NFFc6A1uf": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        }
+      },
+      "ignores": [
+        "adipiscing lorem l"
+      ]
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "ifkvqso",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "utils": null,
+      "fix": "itgokwtcclfg",
+      "note": "yxstmmwcrseuez",
+      "labels": {
+        "amet adipi": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        }
+      },
+      "ignores": null,
+      "url": "tvnrj",
+      "metadata": "amet adipiscing"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "phmkrjnapglgftrr",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "utils": null,
+      "fix": 8,
+      "message": "czvaygoyxguvxhlnqcqgs",
+      "note": null,
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "files": [
+        "lorem dolor consecte",
+        "lorem sit amet am"
+      ],
+      "url": null,
+      "metadata": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "v",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "utils": {
+        "hpmhl": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "transform": null,
+      "fix": "kMnqE",
+      "rewriters": null,
+      "message": "falaotnqd",
+      "note": "nnpufowibmrypgqm",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "ignores": null,
+      "metadata": 81
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "u7McGGGK",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "utils": {},
+      "fix": 76,
+      "note": null,
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "ignores": null,
+      "url": "5Q381JOvVWl",
+      "metadata": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "lorem lore",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "message": "jrYkE4pljn8i6ZQamu",
+      "note": null,
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "ignores": [
+        "consectetur",
+        "tyendqnoqerkgazbynk",
+        "adipiscing do"
+      ],
+      "metadata": 77
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "sUhi77q2A5ed7GE7Ygzk",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {
+        "sit ipsum": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "utils": null,
+      "message": "amet amet ipsum conse",
+      "note": null,
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "files": null,
+      "metadata": 4
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "ipsum co",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {
+        "ilrdjblqk": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        },
+        "qpqxmo": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "fix": 75,
+      "note": "OuxupjwqHcC",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": {
+        "tlvqxxhn": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        },
+        "adipisci": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        }
+      },
+      "files": null,
+      "ignores": null,
+      "metadata": "gzlux"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "lorem dolor consectet",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "utils": null,
+      "transform": {
+        "vxovwwhuqx": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        },
+        "qwtlcewra": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        }
+      },
+      "rewriters": [],
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "files": [
+        "adipiscin",
+        "wqdewn"
+      ],
+      "ignores": null,
+      "url": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "consectetu",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "utils": null,
+      "fix": 25.31,
+      "message": "amet adipiscing con",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "url": "H6LldkgljuDxwGo7",
+      "metadata": 39.03
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "adipiscing adipis",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "transform": null,
+      "rewriters": [],
+      "note": "ipsum sit ",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": {
+        "adipi": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        },
+        "3L307Yxa": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        }
+      },
+      "files": null,
+      "metadata": false
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "adi",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "utils": {
+        "amet lo": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "message": "sit a",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "files": [
+        "neikdijt",
+        "lorem consectetur lo"
+      ],
+      "ignores": [
+        "amet d",
+        "pdagpqawtjkcislk",
+        "qzxEaBE4R",
+        "kdqxb",
+        "7wtlrtJrl1e7qVT7V"
+      ],
+      "url": "lorem adipiscing "
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "adipiscing adipis",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {},
+      "utils": {
+        "MiuWDy8G": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        },
+        "nxxjybwi": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "transform": {
+        "C8La0zs": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        },
+        "afjcxpcg": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        }
+      },
+      "fix": 99,
+      "rewriters": [
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        }
+      ],
+      "message": "wwkppfssjmetixzcoukt",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": {
+        "sit do": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        },
+        "sit co": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        }
+      },
+      "files": null,
+      "url": "BroZbT8dlrYY4LGEITs4l"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "co",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {
+        "vdiIRk4V2": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "utils": {
+        "4fiWb4JqZV": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "transform": null,
+      "fix": null,
+      "message": "adipiscing ",
+      "note": null,
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": {
+        "cmgiow": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        },
+        "JulfMavoGS": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "k7zWbk8Yb",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "utils": {},
+      "transform": {},
+      "fix": "dolor lorem a",
+      "rewriters": [
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        }
+      ],
+      "message": "cwctkgesaqqqjpmc",
+      "note": "si",
+      "labels": null,
+      "ignores": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "consecte",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "utils": null,
+      "fix": 46.95,
+      "message": "hmem",
+      "note": "qwapsswbl",
+      "files": [
+        "zjqtvlo",
+        "togpnslothj",
+        "ipsu"
+      ],
+      "ignores": [
+        "escgjixjdoev",
+        "JqQ",
+        "nulkrkofm"
+      ],
+      "url": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "amet ipsum ipsum ad",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {
+        "amet sit": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        },
+        "sit lor": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "utils": null,
+      "transform": {
+        "kNypA": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        },
+        "fzosdf": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        }
+      },
+      "fix": 72,
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "ignores": null,
+      "url": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "pv",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "transform": null,
+      "note": "sit consect",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "ignores": null,
+      "url": "jjhngcjbsfhlsvvgvyoy"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "wD9tHNJ3",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {},
+      "utils": null,
+      "transform": null,
+      "message": "iijrvfoaobog",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "files": null,
+      "ignores": null,
+      "metadata": false
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "nbxskfwgsdrhgymplyg",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "message": "lorem sit lorem ame",
+      "note": "M0gFj4jBNUv",
+      "labels": null,
+      "files": null,
+      "ignores": [
+        "ipsum i",
+        "fMjm5wkj",
+        "dolor amet dolor "
+      ],
+      "url": "lorem dolor amet ",
+      "metadata": false
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "WOBCwKnv62SI69Ybb",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "utils": null,
+      "fix": false,
+      "rewriters": [
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        }
+      ],
+      "note": "dwdedclclxkctneig",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "files": null,
+      "url": "sit con"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "FybWhJ7SnQQ",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "rewriters": [
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        }
+      ],
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": {},
+      "url": "expdo"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "lorem ipsum lo",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {},
+      "transform": null,
+      "fix": null,
+      "message": "wqnuqujyxfuopurr",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "files": [
+        "xg",
+        "2KJd",
+        "eSPQ8DiNOZi",
+        "cqutt",
+        "LqHU0TQg4x1eKE7VFT"
+      ],
+      "ignores": null,
+      "url": "gyxebyibsb",
+      "metadata": 31.77
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "tMV2RU2cfr58nxAf",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "fix": null,
+      "message": "qziximbwnvwecmskwvs",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": {
+        "dolor i": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        }
+      },
+      "files": null,
+      "ignores": [
+        "dolor lorem ipsum l"
+      ],
+      "url": "gwehhmu",
+      "metadata": true
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "SISNhOE7n7L97gT7",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "transform": {
+        "gwxjsxxrr": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        },
+        "zxksqh": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        }
+      },
+      "fix": "bfsszexggkfset",
+      "rewriters": [
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        }
+      ],
+      "message": "adipiscing consectet",
+      "note": "adipis",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": {
+        "61te2kE": {
+          "_ref": "#/$defs/LabelConfig",
+          "_placeholder": true
+        }
+      },
+      "files": [
+        "j",
+        "amet s"
+      ],
+      "ignores": null,
+      "url": "z",
+      "metadata": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "pmvdhpdqjvhv",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "utils": null,
+      "transform": {
+        "sit a": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        }
+      },
+      "fix": "o07nSSRyhSDAXjo",
+      "rewriters": [
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        }
+      ],
+      "note": null,
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": {},
+      "url": "lorem ipsum sit ",
+      "metadata": "ipsum amet amet"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "dEmRkEkdLm3LrwERbZS",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": {
+        "adipi": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        },
+        "pAgUNXJyS": {
+          "_ref": "#/$defs/SerializableRule",
+          "_placeholder": true
+        }
+      },
+      "transform": {},
+      "fix": null,
+      "note": "f7nNm7CoYsiy6jXD",
+      "labels": null,
+      "files": [
+        "wxmfvpcmbpe",
+        "dz2r5oZOw63HYH",
+        "adipiscing lore",
+        "wmjnyntuuztcgnpksr",
+        "opmvfxqgizlk"
+      ],
+      "ignores": [
+        "fob"
+      ]
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "dol",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "constraints": null,
+      "utils": null,
+      "fix": false,
+      "rewriters": null,
+      "message": "lorem adipi",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "metadata": 89
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "6sGqlYk",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "transform": {
+        "wcrdityw": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        },
+        "ipsum": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        }
+      },
+      "fix": "bkaxvjavyta",
+      "message": "am",
+      "note": "mt0cUwjf3vM",
+      "files": null,
+      "ignores": null,
+      "url": null
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "q",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "fix": null,
+      "rewriters": null,
+      "note": "whfhmiaewnbcgyzalubp",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "files": null,
+      "ignores": null,
+      "metadata": "nygcyhmszjckt"
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "lore",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "transform": {
+        "kzxfevsx": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        },
+        "AmdBI": {
+          "_ref": "#/$defs/Transformation",
+          "_placeholder": true
+        }
+      },
+      "fix": 65.97,
+      "message": "umfgdncmdvjvwwzmrp",
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "metadata": "dolor amet "
+    },
+    {
+      "rule": {
+        "_ref": "#/$defs/SerializableRule",
+        "_placeholder": true
+      },
+      "id": "pmomyqazignqmoeio",
+      "language": {
+        "_ref": "#/$defs/Language",
+        "_placeholder": true
+      },
+      "utils": null,
+      "transform": null,
+      "fix": true,
+      "rewriters": [
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/$defs/SerializableRewriter",
+          "_placeholder": true
+        }
+      ],
+      "severity": {
+        "_ref": "#/$defs/Severity",
+        "_placeholder": true
+      },
+      "labels": null,
+      "files": [
+        "M",
+        "ywJQGqZctaqMOtuLQcRD"
+      ],
+      "ignores": [
+        "hezxftpwesxseewtep",
+        "pco"
+      ],
+      "metadata": 40.5
+    }
+  ]
+}

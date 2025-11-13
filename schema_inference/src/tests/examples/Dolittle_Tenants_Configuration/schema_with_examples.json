@@ -1,0 +1,262 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "dolittle.io/schemas/Runtime/Tenancy/tenants.json",
+    "title": "Tenants Configuration",
+    "description": "The tenants configuration",
+    "type": "object",
+    "additionalProperties": {
+      "description": "The configuration of a tenant",
+      "type": "object"
+    }
+  },
+  "examples": [
+    {
+      "ipsum": {},
+      "consectetu": {}
+    },
+    {},
+    {
+      "1knbhajF9": {}
+    },
+    {
+      "fvearhtU": {}
+    },
+    {},
+    {
+      "CvFyc": {}
+    },
+    {
+      "amet do": {},
+      "consectet": {}
+    },
+    {},
+    {
+      "3QVuHnI": {}
+    },
+    {},
+    {
+      "nwjad": {}
+    },
+    {
+      "S6GTT1": {},
+      "zidwb": {}
+    },
+    {},
+    {},
+    {
+      "GV9Ao": {},
+      "igoaobp": {}
+    },
+    {},
+    {
+      "amet a": {},
+      "dolor": {}
+    },
+    {},
+    {
+      "qYCu3X1": {}
+    },
+    {
+      "YttQEw": {}
+    },
+    {
+      "consec": {},
+      "jneyzed": {}
+    },
+    {
+      "adipisci": {}
+    },
+    {
+      "kxazs": {}
+    },
+    {
+      "consect": {}
+    },
+    {},
+    {},
+    {
+      "txcplgwi": {},
+      "IWWcTgvfL": {}
+    },
+    {
+      "ipsum": {},
+      "wuomlln": {}
+    },
+    {},
+    {
+      "azvzgfbfa": {}
+    },
+    {},
+    {
+      "ICKEG": {}
+    },
+    {
+      "iuewfdunh": {},
+      "FaFhYB": {}
+    },
+    {
+      "cVPPDP2Qv": {}
+    },
+    {
+      "fhkghvmc": {}
+    },
+    {
+      "ipsum a": {}
+    },
+    {},
+    {},
+    {
+      "R7wHxI09": {}
+    },
+    {
+      "GDbjP0at": {},
+      "sieFsJ79Wu": {}
+    },
+    {},
+    {
+      "dolor lo": {}
+    },
+    {
+      "aazifmo": {},
+      "j6SGy3unOD": {}
+    },
+    {},
+    {},
+    {},
+    {
+      "laVavC": {}
+    },
+    {},
+    {},
+    {},
+    {
+      "IKX7PYJDZ": {}
+    },
+    {
+      "wcdkupqxr": {}
+    },
+    {
+      "ipsum ": {},
+      "jhphn": {}
+    },
+    {
+      "tuwyaupqu": {},
+      "GmOwU": {}
+    },
+    {
+      "kfvtsak": {}
+    },
+    {},
+    {
+      "jbmsrbmfa": {}
+    },
+    {
+      "ipsum ip": {}
+    },
+    {},
+    {
+      "ojbnpx": {},
+      "fzbfcujm": {}
+    },
+    {},
+    {
+      "svrxtrli": {},
+      "lorem ipsu": {}
+    },
+    {},
+    {
+      "gaGJs0k": {},
+      "dolor ": {}
+    },
+    {
+      "adipisci": {},
+      "gbvml": {}
+    },
+    {},
+    {},
+    {
+      "HgF7IG": {}
+    },
+    {
+      "sit ipsum": {}
+    },
+    {},
+    {
+      "sCAPwGbKoC": {}
+    },
+    {},
+    {},
+    {
+      "niwohx": {}
+    },
+    {
+      "sUhi77q2A": {},
+      "lorem adi": {}
+    },
+    {},
+    {
+      "lorem dolo": {},
+      "bE8vXjK": {}
+    },
+    {
+      "yrttcx": {}
+    },
+    {
+      "adipis": {},
+      "mifwsjecr": {}
+    },
+    {},
+    {
+      "s5TVCZ": {},
+      "ehsgksyuhu": {}
+    },
+    {},
+    {
+      "adipiscin": {}
+    },
+    {},
+    {
+      "CNDDj": {},
+      "mthdfm": {}
+    },
+    {},
+    {},
+    {
+      "adipiscin": {},
+      "ivcoduou": {}
+    },
+    {
+      "consecte": {},
+      "wKnv62SI69": {}
+    },
+    {
+      "chkxjpc": {}
+    },
+    {
+      "33t07Z": {}
+    },
+    {
+      "VYuHMR6": {}
+    },
+    {
+      "adipiscin": {}
+    },
+    {
+      "pmvdhpd": {},
+      "dolor dolo": {}
+    },
+    {
+      "AVAiNc9R": {},
+      "adipi": {}
+    },
+    {},
+    {},
+    {},
+    {},
+    {
+      "DJC5O": {},
+      "xkgjt": {}
+    }
+  ]
+}

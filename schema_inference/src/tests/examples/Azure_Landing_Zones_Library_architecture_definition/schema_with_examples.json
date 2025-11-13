@@ -1,0 +1,3453 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "management_groups": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "archetypes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "display_name": {
+              "type": "string"
+            },
+            "exists": {
+              "type": "boolean"
+            },
+            "id": {
+              "type": "string"
+            },
+            "parent_id": {
+              "type": [
+                "null",
+                "string"
+              ]
+            }
+          },
+          "required": [
+            "archetypes",
+            "display_name",
+            "exists",
+            "id",
+            "parent_id"
+          ]
+        }
+      },
+      "name": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "management_groups",
+      "name"
+    ]
+  },
+  "examples": [
+    {
+      "management_groups": [],
+      "name": "consectetur ipsum lor"
+    },
+    {
+      "management_groups": [],
+      "name": "co"
+    },
+    {
+      "management_groups": [],
+      "name": "RhxrnJgWQsNKVP"
+    },
+    {
+      "management_groups": [],
+      "name": "psbEhY71O"
+    },
+    {
+      "management_groups": [],
+      "name": "K1o"
+    },
+    {
+      "management_groups": [],
+      "name": "sit sit ipsu"
+    },
+    {
+      "management_groups": [],
+      "name": "IHXFSBjYOEnVIFDbAi"
+    },
+    {
+      "management_groups": [],
+      "name": "5uI"
+    },
+    {
+      "management_groups": [],
+      "name": "jxstiofoyjcjfbwz"
+    },
+    {
+      "management_groups": [],
+      "name": "ogzvgwom"
+    },
+    {
+      "management_groups": [],
+      "name": "consectet"
+    },
+    {
+      "management_groups": [],
+      "name": "fnmsjlayxzidwbbffdjt"
+    },
+    {
+      "management_groups": [],
+      "name": "s3Enu"
+    },
+    {
+      "management_groups": [],
+      "name": "fzh"
+    },
+    {
+      "management_groups": [],
+      "name": "amet dolor sit adi"
+    },
+    {
+      "management_groups": [],
+      "name": "Ln"
+    },
+    {
+      "management_groups": [],
+      "name": "consectetur adipisc"
+    },
+    {
+      "management_groups": [],
+      "name": "amet sit"
+    },
+    {
+      "management_groups": [],
+      "name": "ipsum ipsu"
+    },
+    {
+      "management_groups": [],
+      "name": "ipsum adipiscing"
+    },
+    {
+      "management_groups": [],
+      "name": "adipiscing ipsum si"
+    },
+    {
+      "management_groups": [],
+      "name": "5pOxeOsZtUdP6ho"
+    },
+    {
+      "management_groups": [],
+      "name": "amet sit amet ip"
+    },
+    {
+      "management_groups": [],
+      "name": "sit ipsum sit"
+    },
+    {
+      "management_groups": [],
+      "name": "5Ws"
+    },
+    {
+      "management_groups": [],
+      "name": "dol"
+    },
+    {
+      "management_groups": [],
+      "name": "txcplgwizjouubt"
+    },
+    {
+      "management_groups": [],
+      "name": "ip"
+    },
+    {
+      "management_groups": [],
+      "name": "sit"
+    },
+    {
+      "management_groups": [],
+      "name": "XqjUmfFKFYG"
+    },
+    {
+      "management_groups": [],
+      "name": "tes"
+    },
+    {
+      "management_groups": [],
+      "name": "sit ipsum"
+    },
+    {
+      "management_groups": [],
+      "name": "hht25vBC5BtFaFhYB7Aq"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "CTF054Q0YgQ5UrS",
+            "mkjoryffdmpv",
+            "M",
+            "ip",
+            "consect"
+          ],
+          "display_name": "POCsO1xRab",
+          "exists": false,
+          "id": "bj28HaqTlqA",
+          "parent_id": "wFC8"
+        },
+        {
+          "archetypes": [
+            "dolo",
+            "0",
+            "jpvoxanxouj",
+            "consect",
+            "XO"
+          ],
+          "display_name": "ljujdfm",
+          "exists": false,
+          "id": "adipiscing ipsum c",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "wjrnmmf",
+            "qisrw",
+            "lorem lorem c",
+            "enatnxti",
+            "lorem dolor ipsum"
+          ],
+          "display_name": "ejnhszf",
+          "exists": true,
+          "id": "dolor lorem i",
+          "parent_id": "sit lor"
+        },
+        {
+          "archetypes": [
+            "h3eddl7ZRtdDzZbAVCuB",
+            "mcctyqwktqurrbesec",
+            "c",
+            "hbzgsureircw",
+            "jwnpyzcmpb"
+          ],
+          "display_name": "lorem consectetur ame",
+          "exists": true,
+          "id": "f",
+          "parent_id": "s"
+        },
+        {
+          "archetypes": [
+            "U9lfvPdMrA",
+            "jfzsjl",
+            "lorem lorem lorem",
+            "f",
+            "u"
+          ],
+          "display_name": "dolo",
+          "exists": true,
+          "id": "adipiscin",
+          "parent_id": null
+        }
+      ],
+      "name": "lorem"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "y4d0rUBousuH",
+            "p",
+            "jgoarxdgyqthpwnafvme",
+            "2BB5JD2UWw6IlKJihLLf",
+            "xhj71EScSOWBKZ6Yt"
+          ],
+          "display_name": "consectetur",
+          "exists": true,
+          "id": "70E",
+          "parent_id": "XcyYctTEzGs5sU0FnR01"
+        },
+        {
+          "archetypes": [
+            "EQnzSCDh5sTFVRE6",
+            "qecwglmiwqdycuc",
+            "z3oKkiflav",
+            "kc4qj",
+            "dongorgpmorz"
+          ],
+          "display_name": "uqngsypzrqhlsglz",
+          "exists": false,
+          "id": "POKh0A5dK",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "co",
+            "abi",
+            "RDj5DS2j",
+            "adipiscing consecte",
+            "adipiscing "
+          ],
+          "display_name": "MjHYU0L2",
+          "exists": true,
+          "id": "yqezitgctm",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "OveGuFMHrZBX01YX5sR1",
+            "epirbigkmtoimrlplnk",
+            "ijijevyeavcm",
+            "enwsgbnmpn",
+            "adipiscing sit ip"
+          ],
+          "display_name": "consectetur c",
+          "exists": false,
+          "id": "lorem dolor amet ips",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "BGTE2S2",
+            "gworoxfnbcgmqgxh",
+            "firngo",
+            "kzhhgj",
+            "hssoadq"
+          ],
+          "display_name": "eusrvyvbjmfbttnrvc",
+          "exists": true,
+          "id": "efubgnuntjstiduyzb",
+          "parent_id": null
+        }
+      ],
+      "name": "4TX"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "oYhDILjNF",
+            "adipiscin",
+            "ZltfWHm",
+            "consect",
+            "HgXRnufJZ4W8qM5"
+          ],
+          "display_name": "GZVz",
+          "exists": true,
+          "id": "yiXa9dNU",
+          "parent_id": "sit"
+        },
+        {
+          "archetypes": [
+            "bmrchcvxytobmttaacy",
+            "zcwg",
+            "ceaygnj",
+            "pmgvcqhhlepbadcwnru",
+            "amet i"
+          ],
+          "display_name": "Yy2O0r3fGtmrwSQ9",
+          "exists": false,
+          "id": "8p820O5rgi5RnZMLJ",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "amet lorem consecte",
+            "sit amet ad",
+            "hjq",
+            "c",
+            "WHYAg"
+          ],
+          "display_name": "auuvyqvorbozk",
+          "exists": true,
+          "id": "fotifm",
+          "parent_id": "OImRnM9tPvNlFWnvnjP"
+        },
+        {
+          "archetypes": [
+            "Bso6DQrka",
+            "AGAyYgB1wE",
+            "kwltapylwrabi",
+            "pwjdlxemhjcx",
+            "dismcqgsp"
+          ],
+          "display_name": "adipiscing adipi",
+          "exists": false,
+          "id": "zemwo2RPX7SlInvs",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "amet amet sit ips",
+            "TTKfkNoXFtq6wt3bb7",
+            "pwlcftzf",
+            "giyzqmpekydaaezz",
+            "sit lorem ipsum "
+          ],
+          "display_name": "adipiscing sit lor",
+          "exists": true,
+          "id": "yxty",
+          "parent_id": null
+        }
+      ],
+      "name": "nahlksearzmr"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "adipisc",
+            "xrxkrxmza",
+            "jiqseuyj",
+            "lo",
+            "jNGS0"
+          ],
+          "display_name": "U347f1aCwAfzQPaXtHsPF",
+          "exists": true,
+          "id": "9bgS8fl",
+          "parent_id": "AeXYD2gnbu03161ng"
+        },
+        {
+          "archetypes": [
+            "amet ",
+            "u",
+            "lorem lorem c",
+            "sit lorem amet dol",
+            "adipiscing dolor"
+          ],
+          "display_name": "amet lorem sit sit",
+          "exists": false,
+          "id": "tjwieZwcNEIFF3KLzTsq",
+          "parent_id": "dekrsrmfpjr"
+        },
+        {
+          "archetypes": [
+            "adipis",
+            "qfplpbvqvuagpjdtylmo",
+            "pvkwv1nmuG0CyYeAK",
+            "qdDIs",
+            "usKUDy4VIH1Q3ee0Wo"
+          ],
+          "display_name": "sit dolor ipsum conse",
+          "exists": false,
+          "id": "BSucTSS6Ld0",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "8zMBuGkdudA1CaFoj8I",
+            "consecte",
+            "dkboszlunpxdeyzeervk",
+            "jewatrfghomyoqueucucg",
+            "m"
+          ],
+          "display_name": "adipiscing amet dol",
+          "exists": true,
+          "id": "sit a",
+          "parent_id": "Nl4dBRb9H0yAH7ERAq"
+        },
+        {
+          "archetypes": [
+            "azzmhqxxuwndxj",
+            "eo2ugBRqjqOMz3",
+            "ipsum ",
+            "o",
+            "lorem sit ipsum i"
+          ],
+          "display_name": "wwatwdmqmiecqjisehcr",
+          "exists": true,
+          "id": "tw",
+          "parent_id": "consectetur dolor ad"
+        }
+      ],
+      "name": "rjjzkgrpxsnrsqzjjxf"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "KoSEe",
+            "a",
+            "emrqccumsssztxlq",
+            "ipsum ip",
+            "kcOI5jm6q59"
+          ],
+          "display_name": "qznzqpuxavylqxatf",
+          "exists": false,
+          "id": "dolor ipsum cons",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "consectetur adip",
+            "eomfvhgtgyggcpmuzak",
+            "sivhithdzt",
+            "adipi",
+            "jptn"
+          ],
+          "display_name": "ovlovmzdmlzoqdbdfg",
+          "exists": false,
+          "id": "ifbkibtflinvvmjnw",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "dolor ipsum a",
+            "HJur0fP4",
+            "ezsfeiszqvillgogwtp",
+            "N",
+            "amet adipiscing conse"
+          ],
+          "display_name": "ltbtshdzfrjxhkjykm",
+          "exists": false,
+          "id": "zsdpddypowq",
+          "parent_id": "uqM51T4xf8KFChuV"
+        },
+        {
+          "archetypes": [
+            "nipaOr",
+            "obggiehmvzjs",
+            "rld",
+            "izbpK",
+            "oernafbmvlpipkyjcbfwr"
+          ],
+          "display_name": "0ClmQ",
+          "exists": false,
+          "id": "Aq2oAr5jKXk1vJh2qvGe",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "4m0N",
+            "dolor amet ",
+            "chkizagsqipkgweyifft",
+            "kxwtxp",
+            "consectetur dolor con"
+          ],
+          "display_name": "mkiinggekpprlatescgm",
+          "exists": false,
+          "id": "consectetur ",
+          "parent_id": null
+        }
+      ],
+      "name": "ietjjq"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "31AwybV7x",
+            "bgyodqyg",
+            "N8q9tOUjs5Mb",
+            "gmjtlhyujrnbfrab",
+            "RHfvC4hDi"
+          ],
+          "display_name": "N0Vejyq",
+          "exists": false,
+          "id": "nqzmpzovtl",
+          "parent_id": "sxa8"
+        },
+        {
+          "archetypes": [
+            "IqM",
+            "wzfdyvqwugza",
+            "consectetur adip",
+            "zhsiixgivqouzkpaqailf",
+            "dxhhtlqodyvzndjrugklh"
+          ],
+          "display_name": "lorem amet sit ip",
+          "exists": false,
+          "id": "mehsduxwa",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "consectetur do",
+            "cbrkucwjye",
+            "rscpwwaqkcejwcjtzaw",
+            "xehcxneqrjlu",
+            "UjIAkKhSip"
+          ],
+          "display_name": "lorem lorem dol",
+          "exists": false,
+          "id": "uv5vojNCgmVIwiUled",
+          "parent_id": "ipsum lorem"
+        },
+        {
+          "archetypes": [
+            "C4rlrNeBqJPG",
+            "sfy",
+            "sit consectetur sit d",
+            "iziefdqhgfehd",
+            "BGwWN2o"
+          ],
+          "display_name": "adipiscing",
+          "exists": false,
+          "id": "BE4XT0NSEbxgDcJzn5",
+          "parent_id": "qv25Bu8yrJGYtpQF4sL46"
+        },
+        {
+          "archetypes": [
+            "pwrjvnyu",
+            "sit lorem dol",
+            "Ktjm0WN6Y0c",
+            "cons",
+            "QhA"
+          ],
+          "display_name": "fqvg0h5rc",
+          "exists": true,
+          "id": "f",
+          "parent_id": "mofsazoqblfmw"
+        }
+      ],
+      "name": "tuxilx"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "inmadrvaisfrpftwo",
+            "uijxgv",
+            "axsylhth",
+            "cblhgvxfcees",
+            "akedxkajyrjlh"
+          ],
+          "display_name": "ylfatutrjhoumn",
+          "exists": false,
+          "id": "yhyvkgropzzsnebvg",
+          "parent_id": "amet ipsum lorem "
+        },
+        {
+          "archetypes": [
+            "Q39ouvFtUtfhO",
+            "znrdyqswgsmh",
+            "co2B3X",
+            "cutlh",
+            "gwqeyjdytmonncqjej"
+          ],
+          "display_name": "sit dolor sit",
+          "exists": false,
+          "id": "co",
+          "parent_id": "qdd"
+        },
+        {
+          "archetypes": [
+            "sit amet amet sit dol",
+            "d19dHBJ7Sbr",
+            "dolor adipiscing am",
+            "consec",
+            "vwuv"
+          ],
+          "display_name": "hngvzanvzklhbfzuzpal",
+          "exists": true,
+          "id": "iodukvfdqhu",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "sit amet am",
+            "yutsvopamzbk",
+            "4Iw6",
+            "sit ipsum co",
+            "bragtgh"
+          ],
+          "display_name": "C0eb8YyD1h4lenglSrQjA",
+          "exists": true,
+          "id": "sit dolor d",
+          "parent_id": "vgkgdgihjmkuiwx"
+        },
+        {
+          "archetypes": [
+            "dolor consect",
+            "amet cons",
+            "RS",
+            "BACzLL9AW1h57MI7wl",
+            "pbWj"
+          ],
+          "display_name": "lorem consectet",
+          "exists": true,
+          "id": "klchkcaiynwpskqxspft",
+          "parent_id": null
+        }
+      ],
+      "name": "consectetur dolor adi"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "zhvee",
+            "adipiscin",
+            "fodmqvuczvgsajuvkhk",
+            "dolor adi",
+            "ipsum lo"
+          ],
+          "display_name": "psyz",
+          "exists": false,
+          "id": "awImWf2AbGTFevPYyvcN",
+          "parent_id": "ygnbliernqjy"
+        },
+        {
+          "archetypes": [
+            "sit co",
+            "cssqrhdxexukm",
+            "csssgnbweu",
+            "dolor",
+            "ryYocgm2j"
+          ],
+          "display_name": "fZM4d",
+          "exists": false,
+          "id": "bgylnskbvfxo",
+          "parent_id": "lorem lorem "
+        },
+        {
+          "archetypes": [
+            "17mu8BfpAzLQhdn7n",
+            "jxvvzmbxa",
+            "adipis",
+            "sit",
+            "PQCuley"
+          ],
+          "display_name": "Fd4FJVU",
+          "exists": true,
+          "id": "vs",
+          "parent_id": "0A2NPRmrokuZroROt6"
+        },
+        {
+          "archetypes": [
+            "fGlM2rgJWcX4",
+            "lor",
+            "rszqdoccwndcnvljfeieg",
+            "vjlzdcsnhdfson",
+            "bwbgvbgnyyynwonojpb"
+          ],
+          "display_name": "vtehtxrygfvxvo",
+          "exists": true,
+          "id": "adipiscing co",
+          "parent_id": "ipsum amet amet ad"
+        },
+        {
+          "archetypes": [
+            "lospyfuabvnkflikubcqo",
+            "xhzgznmyafiphywevdyr",
+            "BbxzkaXXEECaw2vk",
+            "OhCDiw",
+            "OcDw8i4nDwmqh"
+          ],
+          "display_name": "d",
+          "exists": true,
+          "id": "amet ip",
+          "parent_id": "lorem ipsum lor"
+        }
+      ],
+      "name": "XmMWb9X"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "ldayfeczkjofusyv",
+            "lorem ",
+            "Jl5tC6Kto4SMI5h",
+            "lBchK4jn8geg",
+            "ep2qPzj8NpJsXb"
+          ],
+          "display_name": "yP42gSkDDeyPAi",
+          "exists": false,
+          "id": "dolor dolor i",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "cn",
+            "yxbltboxkkycbhoum",
+            "consectetur conse",
+            "zwlpswaepur",
+            "slhyjyhfyrdl"
+          ],
+          "display_name": "d82emrYk",
+          "exists": true,
+          "id": "ipsum ipsum dolor s",
+          "parent_id": "bkL81Ctdbj0v7QUrI"
+        },
+        {
+          "archetypes": [
+            "xpvwnrrfskunvkug",
+            "oguqgifvxams",
+            "emenngrrtenwcks",
+            "IZIS4Nu",
+            "qKzObL1JPC"
+          ],
+          "display_name": "sit ip",
+          "exists": true,
+          "id": "lorem amet sit ",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "adipisci",
+            "rS",
+            "hay2L4XU",
+            "s",
+            "cbrmwncnwhqvn"
+          ],
+          "display_name": "sit con",
+          "exists": true,
+          "id": "DTI",
+          "parent_id": "jhukmwjcpwv"
+        },
+        {
+          "archetypes": [
+            "ogtskfucaq",
+            "5uT8",
+            "amet sit adipi",
+            "ymuhdbsnxcfyr",
+            "lorem dolor consect"
+          ],
+          "display_name": "rjjnqoielilyq",
+          "exists": true,
+          "id": "amet sit consecte",
+          "parent_id": "rnlrirsauavzvnnpp"
+        }
+      ],
+      "name": "sit sit consectetur "
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "aazifmotpo",
+            "y3unODFcc",
+            "nafkhcdtomatzsmsq",
+            "pyeew",
+            "72Ek50bYa0K5NiG3yM"
+          ],
+          "display_name": "rvcuhjxopofs",
+          "exists": false,
+          "id": "UuqqEz1YirC7ZBZhe4l",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "vcb61gwPwb6",
+            "consectetur lorem ",
+            "jpuopqzxliunhiggmjdx",
+            "vywDMQNs9da",
+            "qznc"
+          ],
+          "display_name": "amet dolor adipi",
+          "exists": true,
+          "id": "izjjavctroixt",
+          "parent_id": "aucp"
+        },
+        {
+          "archetypes": [
+            "conse",
+            "adipiscing adipisci",
+            "sit dolor s",
+            "matulgjcmllgmotxrs",
+            "zqpvnyqmfl"
+          ],
+          "display_name": "sit sit adipiscing l",
+          "exists": false,
+          "id": "wdvxocgewinaoodf",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "ame",
+            "oxknoomfrnatbifj",
+            "txuknyzwdt",
+            "qnk3V",
+            "lvykwn"
+          ],
+          "display_name": "Ioej6UylF27hcemT1",
+          "exists": false,
+          "id": "consec",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "fazdkndebouoofxul",
+            "E4oXdScNoMY6eb",
+            "sit adipiscin",
+            "ipsum",
+            "tcqysfxoctp"
+          ],
+          "display_name": "dgrgwuf",
+          "exists": false,
+          "id": "amfxjeaeknzpquydwsyzb",
+          "parent_id": null
+        }
+      ],
+      "name": "1VWIhC4skRmZ"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "viyfuwj",
+            "nwfrpmla",
+            "sit amet consectet",
+            "fkyjejdv",
+            "adipiscing sit dol"
+          ],
+          "display_name": "lorem ",
+          "exists": true,
+          "id": "V7pO7krDgdqm",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "iyudzdzhgnbttbtnnntzp",
+            "QT5MOnRM",
+            "dolor amet dolor",
+            "pnmuv",
+            "pdpyadoy"
+          ],
+          "display_name": "do",
+          "exists": false,
+          "id": "uez",
+          "parent_id": "adipi"
+        },
+        {
+          "archetypes": [
+            "adipis",
+            "consectetu",
+            "sit lorem s",
+            "uscg",
+            "tmebmfabp"
+          ],
+          "display_name": "oKLFI4hHyVpnp0wE",
+          "exists": false,
+          "id": "dofysoigpyebbw",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "hQoaq30s",
+            "ipsum consectetur ame",
+            "yWzv",
+            "SieI0lKT2bCIMlYu",
+            "sit consectetur am"
+          ],
+          "display_name": "lorem sit consec",
+          "exists": true,
+          "id": "gioGPrRG",
+          "parent_id": "54L4tquAB"
+        },
+        {
+          "archetypes": [
+            "rifugwknjfgchy",
+            "pkmsfgu",
+            "ByLOmt0tnJW7qK",
+            "bxM5JQwB3Pa3vdKWnvk",
+            "kEWjf6Afy8idDE6bx"
+          ],
+          "display_name": "Dp",
+          "exists": true,
+          "id": "ipsum dolor ipsum d",
+          "parent_id": null
+        }
+      ],
+      "name": "sit dolo"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "9",
+            "s",
+            "Sx2F9zaVnwW2y3Df9iYxA",
+            "fvugnqjrplues",
+            "xulbcaeuxvxovqzb"
+          ],
+          "display_name": "oX",
+          "exists": false,
+          "id": "xSPGGS",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "adipiscing ",
+            "lorem ipsum",
+            "dolor sit dolor",
+            "lor",
+            "ipsum lorem co"
+          ],
+          "display_name": "04OYqVEGrjmwkW",
+          "exists": true,
+          "id": "oacvugqediciz",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "RJoGtRGoY",
+            "dzgnskpdmkityeejks",
+            "cxy",
+            "ipsum ipsum sit ",
+            "xmwjhu"
+          ],
+          "display_name": "c",
+          "exists": true,
+          "id": "Nv2FVGx4hbyY1XzPW278",
+          "parent_id": "sit l"
+        },
+        {
+          "archetypes": [
+            "s",
+            "LeLAmwW8festxU2",
+            "jxbwmobklmymi",
+            "ikgnlorgtvuzvk",
+            "phv"
+          ],
+          "display_name": "bkgpinjmcpsgwkufftnbo",
+          "exists": true,
+          "id": "ptbbuspafq",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "c",
+            "kz",
+            "wdsojl",
+            "adipiscing",
+            "m"
+          ],
+          "display_name": "eyhii",
+          "exists": false,
+          "id": "suwkvsfnenef",
+          "parent_id": null
+        }
+      ],
+      "name": "amet amet sit si"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "wvctq",
+            "xxakcmqstfy",
+            "hsksxlztrlrvvrvpah",
+            "vtqymyybnd",
+            "EM"
+          ],
+          "display_name": "sit conse",
+          "exists": true,
+          "id": "dolor ipsum i",
+          "parent_id": "fzbhrfol"
+        },
+        {
+          "archetypes": [
+            "sit adipis",
+            "ry",
+            "amet ",
+            "amjiojblbpqqktqwq",
+            "ipsum dolor ipsu"
+          ],
+          "display_name": "amet lorem lorem",
+          "exists": false,
+          "id": "suxmmwtedtftjr",
+          "parent_id": "qqardsfkqo"
+        },
+        {
+          "archetypes": [
+            "ozageargcekqufutiofg",
+            "i",
+            "sit consectet",
+            "zlmxdgxkkfnautzqzahy",
+            "adipiscing"
+          ],
+          "display_name": "lorem lorem dolor co",
+          "exists": true,
+          "id": "adipisc",
+          "parent_id": "jory"
+        },
+        {
+          "archetypes": [
+            "kSrDH",
+            "wapfjihuhieashd",
+            "KIRIGXMgf",
+            "xkavrkfyfnxcas",
+            "a"
+          ],
+          "display_name": "mywistrmcv",
+          "exists": false,
+          "id": "lore",
+          "parent_id": "1xMXUrso"
+        },
+        {
+          "archetypes": [
+            "YJVeX",
+            "tdyeebllsqgzmqt",
+            "xsvYI",
+            "YbkKjf",
+            "3mKpEJXlQcjw1he"
+          ],
+          "display_name": "Vc148PQoH3dwM",
+          "exists": true,
+          "id": "EKH",
+          "parent_id": "amet adipiscing am"
+        }
+      ],
+      "name": "WxcK2CHZaX3Do"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "ieataimfyrpli",
+            "ipsum sit adip",
+            "ad",
+            "fxzzqyuamjknmjd",
+            "sqxcnkiflnwsop"
+          ],
+          "display_name": "vQGJuDN7X5YctoBVRfdt",
+          "exists": true,
+          "id": "m9PUBDix87TQ",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "Mr3r24lUcumyLlGy",
+            "adipiscing lo",
+            "zkjkqwopefws",
+            "8TV2mZhlfTBPm9Ci",
+            "consectetur adipiscin"
+          ],
+          "display_name": "dolor lorem ipsum",
+          "exists": false,
+          "id": "yfjuyigdb",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "uif",
+            "UTBAnzUYosY",
+            "dolor cons",
+            "nttxnRlboA5bWssH9",
+            "m"
+          ],
+          "display_name": "dolor adipi",
+          "exists": false,
+          "id": "dolor dolo",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "lorem a",
+            "ig",
+            "4wkEQVn0Ob",
+            "ipsum ipsum amet",
+            "pyjcbqygrlx"
+          ],
+          "display_name": "sfmxarlxrkgrcfnvuer",
+          "exists": false,
+          "id": "vqaemxitplfa",
+          "parent_id": "dolor "
+        },
+        {
+          "archetypes": [
+            "hosgiid",
+            "amet amet dolo",
+            "zqoxnvajr",
+            "vxyjufz",
+            "g"
+          ],
+          "display_name": "sit ipsum ipsum lorem",
+          "exists": false,
+          "id": "ipsum conse",
+          "parent_id": "rtkuvaqhnmmnywtmz"
+        }
+      ],
+      "name": "ucxspycxe"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "sgi",
+            "dol",
+            "amet lo",
+            "ajCWI8",
+            "sit"
+          ],
+          "display_name": "tzaxdfciujosv",
+          "exists": true,
+          "id": "9PvIGPm02F3OYNJLBk",
+          "parent_id": "IB4sKsIR"
+        },
+        {
+          "archetypes": [
+            "1BONS79",
+            "nbfgjwbtvdaxyxs",
+            "lorem ipsum a",
+            "consectetur ipsum ip",
+            "brhkhyldkrwnsxmnywe"
+          ],
+          "display_name": "vnfkp",
+          "exists": false,
+          "id": "igwhw",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "uRE1Rdmmg6NQmFpHjZI",
+            "dolor consectetur lor",
+            "gegquf",
+            "uirwra",
+            "QQpmmNgF3"
+          ],
+          "display_name": "5r1NhIk4ZUQ9vGcZ",
+          "exists": true,
+          "id": "2bZ",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "qkowiuifesioyaisg",
+            "vC",
+            "dolor lor",
+            "reiqqykqeezwmellvegvg",
+            "pWgk"
+          ],
+          "display_name": "xptcqehe",
+          "exists": true,
+          "id": "lorem dolor adipisci",
+          "parent_id": "CTDlQeEe"
+        },
+        {
+          "archetypes": [
+            "dolor dolor d",
+            "lorem amet consectet",
+            "btwmctfdwttgyrzmehsrf",
+            "0jzh376sB6cS3HwtrbO",
+            "FY"
+          ],
+          "display_name": "CvSVs",
+          "exists": false,
+          "id": "amet ipsum ",
+          "parent_id": null
+        }
+      ],
+      "name": "dolor lorem adipis"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "moixuoz",
+            "ipsum lore",
+            "qz",
+            "YiVlQbF5ngAaf",
+            "consectetur lorem sit"
+          ],
+          "display_name": "Uur",
+          "exists": true,
+          "id": "Bt2GA72dvQA7T5QmdyjI",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "hrrqhjjh",
+            "qadmtkuesyvscijahyltf",
+            "f9DMY",
+            "dolor sit adi",
+            "Lo"
+          ],
+          "display_name": "gmyqmipqmgkdisxjjrwgy",
+          "exists": true,
+          "id": "sit ipsu",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "wlhhfk",
+            "amet lorem s",
+            "NIGXMAlKauxZRK8hZ",
+            "hzJ8YIPV0M",
+            "Z"
+          ],
+          "display_name": "ozuqehxkfpfqedfox",
+          "exists": true,
+          "id": "c",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "f73ooxbL6OXGa0xpeEhP",
+            "l",
+            "o",
+            "adipis",
+            "ihbinomk"
+          ],
+          "display_name": "3p7PJ",
+          "exists": false,
+          "id": "frrxauiljnkc",
+          "parent_id": "QU0Rm06REfx2p1"
+        },
+        {
+          "archetypes": [
+            "hqrfyxgnpxeveorklgny",
+            "dolor dol",
+            "uoazjcrsmdihsykzjlsra",
+            "vhtvdhzjkn",
+            "AdFk4XNbeOfXNTeyCANk"
+          ],
+          "display_name": "v9YVVC9KWk",
+          "exists": true,
+          "id": "sit adipis",
+          "parent_id": "Xvv5w17vG5MGmS1QeT"
+        }
+      ],
+      "name": "lorem lorem sit"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "7Qy",
+            "tmvgpjmzfttczlo",
+            "WZx8OVHklP",
+            "fgbybkefylqvnvupox",
+            "J9mvWdzUTFs"
+          ],
+          "display_name": "ILza54j4KaNsxgZOo",
+          "exists": false,
+          "id": "fruxgwedqxkeckwqmnf",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "consectetur amet lore",
+            "wfk",
+            "mzgiftclusie",
+            "qpcihnhpmzgaderoo",
+            "ipsu"
+          ],
+          "display_name": "kssc",
+          "exists": false,
+          "id": "vriwozyxfyg",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "Pq8eZSW",
+            "lpqawxjfcwqvwdw",
+            "D1eV",
+            "wiardsnx",
+            "pfr"
+          ],
+          "display_name": "o6GODV1f7rMlv224NCC",
+          "exists": false,
+          "id": "iOwMS8",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "2cHqLVJqAn0yo4JH8",
+            "amet consectetur con",
+            "ipsum adipisci",
+            "lR0B7PEZQ5m6ZyBG",
+            "Noyc"
+          ],
+          "display_name": "adipis",
+          "exists": true,
+          "id": "urbjimcvscrpgflqpf",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "adi",
+            "kbxylmocbshar",
+            "kzGs7O",
+            "oqcockkrrlhyzcblakds",
+            "sit amet adip"
+          ],
+          "display_name": "hg",
+          "exists": true,
+          "id": "mu",
+          "parent_id": null
+        }
+      ],
+      "name": "dolor consect"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "IXqX2VfGjZePuc",
+            "q",
+            "epsmre",
+            "yubj",
+            "ip"
+          ],
+          "display_name": "ipsum ",
+          "exists": true,
+          "id": "jwhrucvqnidphscu",
+          "parent_id": "adipiscing adipi"
+        },
+        {
+          "archetypes": [
+            "zmfzabrpzrvwyxnqta",
+            "dolor sit amet am",
+            "ItSX9z5LXlCV",
+            "ulGyWNylSmQiOL5YASQ7y",
+            "dolo"
+          ],
+          "display_name": "opsowisuosiidq",
+          "exists": false,
+          "id": "CWBCgNq2o0",
+          "parent_id": "vfmvkchvayapgbv"
+        },
+        {
+          "archetypes": [
+            "dol",
+            "sit ame",
+            "i",
+            "consectetur consect",
+            "fCikmUO2H0uVO"
+          ],
+          "display_name": "LPBKG5O2PYZbOpjRFQ",
+          "exists": true,
+          "id": "bzs1ly1ykntH8",
+          "parent_id": "zjaosvidurdlffoxqj"
+        },
+        {
+          "archetypes": [
+            "5CYiq0ZCvJRBfyz",
+            "consectetur co",
+            "tZP3vtKB4Y",
+            "zru",
+            "v"
+          ],
+          "display_name": "DqV",
+          "exists": false,
+          "id": "amet dolor ipsum c",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "oqyswnaw",
+            "fnewlmmhejime",
+            "consectetur i",
+            "akpvahbhitsgfkdd",
+            "o8Xrfw1eQ2WDGtIxS"
+          ],
+          "display_name": "ovS5gCtL",
+          "exists": true,
+          "id": "8JDQiXDlI",
+          "parent_id": null
+        }
+      ],
+      "name": "consectetur ip"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "swcdkupqxrvkdbyf",
+            "zehhftxb",
+            "U8fUYm",
+            "jB3Ufyk",
+            "sit lorem consecte"
+          ],
+          "display_name": "nhykbzqlakyy",
+          "exists": true,
+          "id": "9RHiNccSe9ndvq6Au",
+          "parent_id": "ipsum adip"
+        },
+        {
+          "archetypes": [
+            "c",
+            "u7wa2K4s9crj",
+            "e26AmM84SGndZ4s",
+            "yRADzVoavvcLG",
+            "figinnl"
+          ],
+          "display_name": "adipis",
+          "exists": true,
+          "id": "cgupvqh",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "gitzlhtjjqjzjngwdvt",
+            "bwzcmp",
+            "owplmq",
+            "hzdunxjuaeesd",
+            "xvneaiqomyqjnbgklpyjz"
+          ],
+          "display_name": "d",
+          "exists": true,
+          "id": "sjwpmvfmiw",
+          "parent_id": "6oY"
+        },
+        {
+          "archetypes": [
+            "mj",
+            "Jqrq2Z1NwqbwkCsbQhmaq",
+            "mxmnsmnNfwK",
+            "atbzqhxmxxzfoop",
+            "weerdc"
+          ],
+          "display_name": "4B",
+          "exists": true,
+          "id": "co",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "fshzznsa",
+            "amet amet sit ad",
+            "consectetu",
+            "nxzrydfchewmruhjk",
+            "1WrS3uq0fi7BEQ7FtO7"
+          ],
+          "display_name": "lorem si",
+          "exists": false,
+          "id": "eB4",
+          "parent_id": null
+        }
+      ],
+      "name": "jfcwov"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "consectetur dolor ",
+            "lvyaalylurbm",
+            "gczmzwvlqbzarfwigbvrt",
+            "xayoscsszpbrrdvapqy",
+            "efurnk"
+          ],
+          "display_name": "zF50MtM2CjW",
+          "exists": false,
+          "id": "NvMamj7Rjt",
+          "parent_id": "lscdyqj"
+        },
+        {
+          "archetypes": [
+            "adipiscing co",
+            "clcxuxjuepwtmhi",
+            "6W6HGs0E7WUCsbUUp3n",
+            "xm5K4i",
+            "hORDnVEO3odn"
+          ],
+          "display_name": "hxdxytclousawx",
+          "exists": false,
+          "id": "YE",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "lwrzuuesdvjcuzkdmmbig",
+            "eysffalujqvkrpowinrg",
+            "lorem sit sit",
+            "ad",
+            "sit"
+          ],
+          "display_name": "consectetur dolor a",
+          "exists": true,
+          "id": "Q96YyfeYtjXOprC2h",
+          "parent_id": "whzlpykvtogipysvyak"
+        },
+        {
+          "archetypes": [
+            "ckidlsdoe",
+            "sit amet dolor ad",
+            "dolor adipiscing dol",
+            "c",
+            "fapsjxenylzzaghz"
+          ],
+          "display_name": "lorem",
+          "exists": false,
+          "id": "sq8fvWS3NxtF6",
+          "parent_id": "KPsK57qHZ"
+        },
+        {
+          "archetypes": [
+            "AaYHLYr",
+            "iaBE2FGtW36",
+            "fgxfnfi",
+            "gepqssfbjtaqurhizi",
+            "BtGilu4X75y59nrCMB"
+          ],
+          "display_name": "rgixz",
+          "exists": true,
+          "id": "lB8d0ONe",
+          "parent_id": null
+        }
+      ],
+      "name": "fbhudltlbwabiosrxxh"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "9H6hEiafrmJGmOwUxj",
+            "vlypOg",
+            "wmaj",
+            "v5mLx3Wfb3OoDTJQy",
+            "lpzllxohynhfcogxftqwj"
+          ],
+          "display_name": "ezkgajudqh",
+          "exists": false,
+          "id": "mbxlmcnfgilibu",
+          "parent_id": "amet dol"
+        },
+        {
+          "archetypes": [
+            "consectetur sit",
+            "consect",
+            "sit s",
+            "dolor adipiscing s",
+            "qipbiamcqiaabsjht"
+          ],
+          "display_name": "ipsum",
+          "exists": true,
+          "id": "rzcusfesqzuhfymyfn",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "lorem c",
+            "sohiqugdfipxn",
+            "sit consectetur lore",
+            "PMkg",
+            "LvuvzeXVnm"
+          ],
+          "display_name": "amet ipsum",
+          "exists": true,
+          "id": "dolor a",
+          "parent_id": "lorem sit sit adi"
+        },
+        {
+          "archetypes": [
+            "adipi",
+            "adipiscing",
+            "nddoqkfedmvquo",
+            "g3TtXRQKg1j8UxLUbnpn",
+            "hnudos"
+          ],
+          "display_name": "adipiscing do",
+          "exists": false,
+          "id": "lorem lor",
+          "parent_id": "consectet"
+        },
+        {
+          "archetypes": [
+            "fizgigmmkai",
+            "ipsum adi",
+            "gIo5DZlE",
+            "oK3klQ29en4Vb1dFVf",
+            "D9S393KwoeQGek17PBB"
+          ],
+          "display_name": "qBoIRKAl",
+          "exists": false,
+          "id": "63Q",
+          "parent_id": null
+        }
+      ],
+      "name": "TJTgF12HSiPkKKa6Dj"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "P5fvc2kNf9wi",
+            "m",
+            "tQv42XFbdBZx8KhI8s",
+            "guflubwjqqzktpfmzxf",
+            "dphadxbvhaesbeqnsda"
+          ],
+          "display_name": "VPfSs9o",
+          "exists": true,
+          "id": "eidtcvumkbalctz",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "consectetur amet amet",
+            "dolor",
+            "kldnxzzld",
+            "cmgcqxrkfpxneo",
+            "hxogf"
+          ],
+          "display_name": "adipi",
+          "exists": true,
+          "id": "BrxV5o6XvdakxkE1fv80C",
+          "parent_id": "KPbm7IXZEDv"
+        },
+        {
+          "archetypes": [
+            "ztfszqfyybfdncpes",
+            "vjefth",
+            "TQJwpXiodJ",
+            "lorem s",
+            "sit"
+          ],
+          "display_name": "dolor",
+          "exists": false,
+          "id": "dsscakxlhlctngxxqga",
+          "parent_id": "ednrqjvaomqlunm"
+        },
+        {
+          "archetypes": [
+            "su57Ypxoy6TQCGhQPt",
+            "amet",
+            "amet",
+            "dolor lorem dolo",
+            "adi"
+          ],
+          "display_name": "tiqmy1",
+          "exists": true,
+          "id": "XNjFDHF4d3Us",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "cfsOSI9uAxF1hDoQLcs",
+            "gnnzwbriibrfv",
+            "amet a",
+            "lsqgoqpo",
+            "Haaqiq1s"
+          ],
+          "display_name": "cdouoaa",
+          "exists": false,
+          "id": "PW9xe07D0c",
+          "parent_id": "consectetur amet ame"
+        }
+      ],
+      "name": "consectetur ipsum "
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "94YdbVb",
+            "eBPYpspzl",
+            "sit",
+            "dxo",
+            "qtlzgapnf"
+          ],
+          "display_name": "yar",
+          "exists": true,
+          "id": "KFbSI",
+          "parent_id": "bnvbroookulqup"
+        },
+        {
+          "archetypes": [
+            "cmZufHJOg7",
+            "lorem sit sit si",
+            "50b1q5",
+            "cpkaefqadeeb",
+            "sexaswysxcpgc"
+          ],
+          "display_name": "OhVijYtL4",
+          "exists": true,
+          "id": "ipsu",
+          "parent_id": "y"
+        },
+        {
+          "archetypes": [
+            "7S5yL",
+            "hjnpulyzwymmffy",
+            "nRFwJigK",
+            "ccxnim",
+            "rqgzzlogpnfgckoit"
+          ],
+          "display_name": "ivnfdrn",
+          "exists": true,
+          "id": "nhhdherenrlnpsvvkch",
+          "parent_id": "kiunpcfh"
+        },
+        {
+          "archetypes": [
+            "ok",
+            "eyvfyotdeqddtzudop",
+            "g",
+            "uybalcxwxjxierojrserw",
+            "dbstvk"
+          ],
+          "display_name": "nGDYe8b",
+          "exists": true,
+          "id": "behwjlhewiajaqkvkantn",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "pmoqijutsz",
+            "QBuTio4eUKes",
+            "EeJAOJJ2ghVrXMo",
+            "ipsum ipsum",
+            "adipiscing con"
+          ],
+          "display_name": "xssnzklvgfdewrgrobxo",
+          "exists": true,
+          "id": "jtgpqm",
+          "parent_id": null
+        }
+      ],
+      "name": "qL38osDV7J7VGUceS3fJi"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "cz8rYIW4yOYV",
+            "u",
+            "u",
+            "consectetur",
+            "ipsum sit ipsum am"
+          ],
+          "display_name": "ipsum",
+          "exists": true,
+          "id": "vezmehcvyxsnjrabn",
+          "parent_id": "rbpaysujat"
+        },
+        {
+          "archetypes": [
+            "m1uQ3Ph18",
+            "ccucwfl",
+            "mlktkvuj",
+            "serbzgtjpozmvnj",
+            "PtRo"
+          ],
+          "display_name": "z",
+          "exists": false,
+          "id": "ipsu",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "lorem lorem a",
+            "PRG9bBjZRVGaeA6",
+            "amet",
+            "ditNze0bTmCuxWg",
+            "scbqrvqvc"
+          ],
+          "display_name": "agyfp",
+          "exists": true,
+          "id": "dolor adip",
+          "parent_id": "adipiscing sit lo"
+        },
+        {
+          "archetypes": [
+            "f",
+            "adipiscing sit",
+            "xnEz0Fm0U",
+            "lorem dolor adipisc",
+            "amet "
+          ],
+          "display_name": "rlytrl",
+          "exists": true,
+          "id": "06txyWMJxJE0LdYhZ5a4",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "rpkjxcvkuttnzfsrhiot",
+            "sit c",
+            "bie",
+            "rynvemqhxkf",
+            "lorem lorem amet amet"
+          ],
+          "display_name": "consectetu",
+          "exists": false,
+          "id": "xw",
+          "parent_id": "uqcghcikmk"
+        }
+      ],
+      "name": "uejpvemxrkzzlnegydeuk"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "LoifTGRfMmSKX",
+            "wfleocsrcibo",
+            "adipiscing sit",
+            "zjfxeup",
+            "raamvc"
+          ],
+          "display_name": "dqjdkxzqlovdym",
+          "exists": true,
+          "id": "sudyd",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "adipi",
+            "imggwjr",
+            "amet lorem ipsum ",
+            "YHlcx1Vo0oSgQ",
+            "consectetur"
+          ],
+          "display_name": "72A4esQtDh",
+          "exists": false,
+          "id": "krphrpzrljxirs",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "gktskw",
+            "sit ipsum sit",
+            "X5q0zI",
+            "qttfachpykjoyphtzukel",
+            "xwsko"
+          ],
+          "display_name": "mC0Rl4",
+          "exists": false,
+          "id": "xmebglaimitonqpkepb",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "oU",
+            "bufemh",
+            "adipiscing c",
+            "vcrsvdctqews",
+            "zeuxvlhtdqnygxuuzotp"
+          ],
+          "display_name": "exe",
+          "exists": false,
+          "id": "amet amet lo",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "wvhdl",
+            "ips",
+            "ruzjhfdrtyt",
+            "3oG9nOkJAJbm3l",
+            "adipiscing"
+          ],
+          "display_name": "amet ",
+          "exists": false,
+          "id": "ips",
+          "parent_id": "LwjTE"
+        }
+      ],
+      "name": "mXiT"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "7kyvF",
+            "eCc5",
+            "tVmllvM",
+            "CrXx1Nl",
+            "VJl04oBN3hI8LSWFrKGv"
+          ],
+          "display_name": "kbchlgvslxux",
+          "exists": false,
+          "id": "amet ",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "dbpfiqqto",
+            "QDYhKcSgQj8",
+            "HRjX2cmpfiNhe6yHDvCmJ",
+            "ZZe9q900f",
+            "khhhyzog"
+          ],
+          "display_name": "f",
+          "exists": true,
+          "id": "jrl",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "ame",
+            "oesraikjsfxp",
+            "qMNiKKgs1JnyCR1fcBb",
+            "QsPIZ",
+            "conse"
+          ],
+          "display_name": "jossqm",
+          "exists": false,
+          "id": "xmvf",
+          "parent_id": "lorem si"
+        },
+        {
+          "archetypes": [
+            "sit adipiscing con",
+            "lorem adipiscing",
+            "n",
+            "bpgz",
+            "d"
+          ],
+          "display_name": "dolor dolor",
+          "exists": false,
+          "id": "lorem dolor consecte",
+          "parent_id": "ame"
+        },
+        {
+          "archetypes": [
+            "amet sit co",
+            "s",
+            "vbozamljfegfhxyg",
+            "g",
+            "amet lorem dolor "
+          ],
+          "display_name": "nPo6CuqKdecOWCM0Hwjh",
+          "exists": true,
+          "id": "yzVUGkpbXrD",
+          "parent_id": "pmrxsnwtjzkbzy"
+        }
+      ],
+      "name": "zwvhlyntqrwmqictpx"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "xojbnpxmuilgelneugu",
+            "sit dolor lore",
+            "rwkjkkramniasaodaebd",
+            "oevnwenwybon",
+            "dsuvudeutxlxdyw"
+          ],
+          "display_name": "dI9ClQurjCA",
+          "exists": false,
+          "id": "amet adi",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "w",
+            "biumfpiadijkqtn",
+            "lorem d",
+            "adipiscing i",
+            "MmCIssp2m8Up"
+          ],
+          "display_name": "tlrgsyumzxbklhqdtwb",
+          "exists": false,
+          "id": "rzuisdskggfucgeesprx",
+          "parent_id": "ipsum"
+        },
+        {
+          "archetypes": [
+            "cnaxndrxczlowpcht",
+            "am",
+            "hg",
+            "juwssqsgkggkp",
+            "52UUlWnGc3hKPNQw"
+          ],
+          "display_name": "zwbrcrjwbybbadz",
+          "exists": true,
+          "id": "OUBwYn",
+          "parent_id": "ipsum amet do"
+        },
+        {
+          "archetypes": [
+            "1cGSaRrM",
+            "dolor sit consectetu",
+            "consectetur l",
+            "dolor dolor con",
+            "wsnyttxb"
+          ],
+          "display_name": "ipsum consectetur i",
+          "exists": false,
+          "id": "28ITfiIZhjEsijAXk",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "amet lorem dolor ip",
+            "qzwkqfdy",
+            "2RtJsr68j4S",
+            "G",
+            "sit ad"
+          ],
+          "display_name": "lorem a",
+          "exists": false,
+          "id": "M",
+          "parent_id": "pp"
+        }
+      ],
+      "name": "adipis"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "joreh",
+            "cGMG2TxohYQLBF",
+            "nmkmbpvj",
+            "UAy4kmK",
+            "lorem amet adipiscing"
+          ],
+          "display_name": "mylqwrktpxq",
+          "exists": false,
+          "id": "lorem sit adipisc",
+          "parent_id": "3ktljFiLG"
+        },
+        {
+          "archetypes": [
+            "d",
+            "conse",
+            "TzplsUmCY",
+            "mTq63SPV5QipzlA",
+            "yqmvhusw"
+          ],
+          "display_name": "rx",
+          "exists": true,
+          "id": "ktbtomurusgzxdz",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "sit",
+            "anopmhx",
+            "ocsctq",
+            "uswkqku",
+            "ipsum sit ipsum "
+          ],
+          "display_name": "amet dolor si",
+          "exists": true,
+          "id": "amet adipiscing lore",
+          "parent_id": "ayzsbftzyqgehyrxf"
+        },
+        {
+          "archetypes": [
+            "hcww",
+            "sit ipsum",
+            "ips",
+            "amet ips",
+            "z"
+          ],
+          "display_name": "yLLRTEFYb3F6oAW",
+          "exists": true,
+          "id": "cmjwxthivnqsek",
+          "parent_id": "4FfGYR55xAc"
+        },
+        {
+          "archetypes": [
+            "j",
+            "yhrcxheudyjqexkjxhnv",
+            "jZu2Il93ULU6moV",
+            "ldxcodmjawtfrv",
+            "ffsljtidowycti"
+          ],
+          "display_name": "guFkVuUoEOmr0yvMQ1J",
+          "exists": false,
+          "id": "sskcxkio",
+          "parent_id": null
+        }
+      ],
+      "name": "fufo"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "svrxtrlirmdpzbz",
+            "htwpr",
+            "ovgjpyqm",
+            "xtnulfnbv",
+            "pg5fY"
+          ],
+          "display_name": "Ph4",
+          "exists": true,
+          "id": "sit amet dolo",
+          "parent_id": "blbqwooqf"
+        },
+        {
+          "archetypes": [
+            "lorem amet lo",
+            "IPuQ0H8t5lwYcM2",
+            "uNeb2MkAr1rSUtpG",
+            "luudllzortpdx",
+            "amet amet d"
+          ],
+          "display_name": "lore",
+          "exists": true,
+          "id": "adipiscing sit adipi",
+          "parent_id": "adipisci"
+        },
+        {
+          "archetypes": [
+            "pmfrqnszyc",
+            "zncmksrmde",
+            "ijjf",
+            "adip",
+            "ydwwshowhzetiti"
+          ],
+          "display_name": "qadtkzqvtzrylgc",
+          "exists": false,
+          "id": "balojagwsvhrfhyfhf",
+          "parent_id": "uhgnluqtpgt"
+        },
+        {
+          "archetypes": [
+            "ipsum amet amet amet ",
+            "tnRbHySl9154BifT",
+            "ipsum lorem s",
+            "pqwbjqplqdme",
+            "consectetur lor"
+          ],
+          "display_name": "m7Kf9JsFwJzxTsZU6j1",
+          "exists": false,
+          "id": "npctkd",
+          "parent_id": "amet amet adipi"
+        },
+        {
+          "archetypes": [
+            "5ATUz",
+            "amet sit amet",
+            "4",
+            "LL4x2ZSg",
+            "amet dolor s"
+          ],
+          "display_name": "65YM",
+          "exists": false,
+          "id": "ebpkwm",
+          "parent_id": null
+        }
+      ],
+      "name": "ipsu"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "t",
+            "ahY4gjeU",
+            "wpkiqqkmngeo",
+            "cons",
+            "gkyj"
+          ],
+          "display_name": "consectetur lorem ",
+          "exists": false,
+          "id": "ipsum ipsum adipiscin",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "nBdei",
+            "sit sit",
+            "onsivswxvnntpa",
+            "s",
+            "ipsum ipsum lor"
+          ],
+          "display_name": "J7N0aQnkulfnopXfmdFoG",
+          "exists": true,
+          "id": "sit lorem adipis",
+          "parent_id": "6EynxVMr"
+        },
+        {
+          "archetypes": [
+            "dolor consectetur",
+            "i",
+            "s",
+            "ipsum ipsum con",
+            "al"
+          ],
+          "display_name": "sit",
+          "exists": true,
+          "id": "amet adipisc",
+          "parent_id": "2SFYmTjxgtO"
+        },
+        {
+          "archetypes": [
+            "3nmpZZUJjoc5hS",
+            "r",
+            "lorem adipiscin",
+            "oakpgktrvy",
+            "consectetur adipi"
+          ],
+          "display_name": "amet dolor amet ",
+          "exists": false,
+          "id": "vbixvukywvoqdaabnyou",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "lorem lor",
+            "jmwb2woXaVBfy9crlKm0",
+            "xfpfzkqiqurd",
+            "adipisci",
+            "EenRpF"
+          ],
+          "display_name": "sit consectetur con",
+          "exists": true,
+          "id": "Sja2viSJ0onHEL0OGmJ",
+          "parent_id": "cmb"
+        }
+      ],
+      "name": "ipsum ipsum s"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "X6tVukvUjOvkAxC25o9",
+            "494duZ6wSPl0Z572JNEM",
+            "7X5RhzsqhgDW1",
+            "ofpetluneasbohrqjhw",
+            "mewi"
+          ],
+          "display_name": "hftwezny",
+          "exists": false,
+          "id": "mrvnmaest",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "wwtrjjeqivggchuvxaroj",
+            "ivl",
+            "eaqdysegsjjpakoz",
+            "Wd9TXMSQWGN4la6",
+            "qrmlzhmcnrrzgfjixf"
+          ],
+          "display_name": "amet dolor conse",
+          "exists": false,
+          "id": "abu",
+          "parent_id": "DpAwKuKc9aDxi"
+        },
+        {
+          "archetypes": [
+            "hlcgehkpbonkamw",
+            "dk7lV0CBnuH",
+            "gtyeljiofthrziqpedd",
+            "adipiscing ",
+            "AYRdOhFmURXPx"
+          ],
+          "display_name": "dolo",
+          "exists": true,
+          "id": "ipsum ipsum amet si",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "7kFN8fIlm06BCmZouMy",
+            "lorem sit amet amet c",
+            "d",
+            "nakvwxnrrmtefqtzbz",
+            "sit ipsum "
+          ],
+          "display_name": "jdlgobnnlrrnd",
+          "exists": true,
+          "id": "dixrgicnfsxef",
+          "parent_id": "kftsuzkp"
+        },
+        {
+          "archetypes": [
+            "Oeq",
+            "lUzFLCQroCYulqviDJ9f",
+            "hkdxyhbgj",
+            "cczebppelkl",
+            "vfvldbyiigyu"
+          ],
+          "display_name": "amet dolor dolor lore",
+          "exists": false,
+          "id": "Wk9F3",
+          "parent_id": null
+        }
+      ],
+      "name": "wralb1HXS31Gl2"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "adipiscing conse",
+            "adi",
+            "TrnDSOlwvru1",
+            "cTglU",
+            "iglgxmeeooziypy"
+          ],
+          "display_name": "olkqgnkrwrdptnbcosmso",
+          "exists": true,
+          "id": "ckjvfda",
+          "parent_id": "zvanfhvha"
+        },
+        {
+          "archetypes": [
+            "ipsum a",
+            "O",
+            "23h8cq75hY5xGVv7W",
+            "consectetur sit",
+            "d1r3Dz0h1rW7Zu"
+          ],
+          "display_name": "swfNBI2Bb",
+          "exists": true,
+          "id": "HBOfwmnhn08MWavS4d9",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "sit sit sit",
+            "adipiscing consectet",
+            "devmwqacshkqbcmaikc",
+            "ptl",
+            "kFEIvF"
+          ],
+          "display_name": "dc",
+          "exists": true,
+          "id": "AUnsKc85FMvCfvlzO",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "Xo4",
+            "1maFKhQMZueoouOq",
+            "clbnjf",
+            "elrhgzjjoswnluayxrbt",
+            "llzusrqvsjpkf"
+          ],
+          "display_name": "fby",
+          "exists": false,
+          "id": "fragxjmeoktnmtbjfe",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "dolor sit d",
+            "svumnocahkbshmxwlmaa",
+            "consectetur ipsum ",
+            "conse",
+            "tnkoxukzvdsmvlcw"
+          ],
+          "display_name": "adipiscing ",
+          "exists": true,
+          "id": "ipsum ame",
+          "parent_id": null
+        }
+      ],
+      "name": "adipiscing lor"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "tsltylod",
+            "R4rtlK5Tix",
+            "bel",
+            "dol",
+            "dolor ad"
+          ],
+          "display_name": "bkzzyefczl",
+          "exists": true,
+          "id": "rrumuwnijpomktryzaktn",
+          "parent_id": "N6wQJFo9z"
+        },
+        {
+          "archetypes": [
+            "zBV8PAfiejays6",
+            "bQ4J4",
+            "rg811jNd",
+            "amet",
+            "lssaqe"
+          ],
+          "display_name": "amet dolor l",
+          "exists": false,
+          "id": "ipsum",
+          "parent_id": "dolor amet consectetu"
+        },
+        {
+          "archetypes": [
+            "lijdffjblcbdmqu",
+            "zqgslgcxl",
+            "dolor",
+            "mh",
+            "WxAmCDzXRLn"
+          ],
+          "display_name": "lorem lore",
+          "exists": true,
+          "id": "msakgkbkktco",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "FmyQh2UBC9Df6T",
+            "ipsum ",
+            "oskuqmjklrghxm",
+            "ha3SG7nv",
+            "hxqateivavjphofplpat"
+          ],
+          "display_name": "ipsum si",
+          "exists": false,
+          "id": "xLQiMvvE52xKIT",
+          "parent_id": "zghhxrqbephs"
+        },
+        {
+          "archetypes": [
+            "m494BKqZxIK5Bz5",
+            "conse",
+            "mvbluau",
+            "dmnmvieyoropdcdlbwdv",
+            "ipsum amet adi"
+          ],
+          "display_name": "xuS6daBbaIDn",
+          "exists": true,
+          "id": "FzfhOmQ45wWyaM",
+          "parent_id": null
+        }
+      ],
+      "name": "amet l"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "khf",
+            "ips",
+            "ipsum adipi",
+            "O1n2",
+            "bsvliszyftmzzmxxckyg"
+          ],
+          "display_name": "auufjefpmmcqbye",
+          "exists": true,
+          "id": "lorem adipi",
+          "parent_id": null
+        }
+      ],
+      "name": "lkutmhkkeeozp"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "doEs4eoFAP4tT2t"
+          ],
+          "display_name": "consectetur conse",
+          "exists": true,
+          "id": "rlldbzkkmzxru",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "do",
+            "ukmutjkpmrwkpfvs",
+            "lorem amet lorem adi",
+            "ygdsl",
+            "o6UXR62eecUESgk2M"
+          ],
+          "display_name": "dvese",
+          "exists": false,
+          "id": "eizrfbibvfqya",
+          "parent_id": null
+        }
+      ],
+      "name": "adipiscin"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "SNQHFUhF",
+            "ame",
+            "yughjckowhxrdgmef",
+            "uki"
+          ],
+          "display_name": "agdmfmlqn",
+          "exists": false,
+          "id": "yG",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "adipiscing sit",
+            "cydddw"
+          ],
+          "display_name": "zzvnwnuassriocyacmve",
+          "exists": false,
+          "id": "SNpq9G45YMTrm",
+          "parent_id": "ipsum lorem ipsum"
+        },
+        {
+          "archetypes": [
+            "bssempypdbedvwcuxf"
+          ],
+          "display_name": "pQ2MQV1Ii58zRkj7t",
+          "exists": false,
+          "id": "dolor consectetur con",
+          "parent_id": "wRqpxV9jpyr"
+        }
+      ],
+      "name": "bJgxowDQ7"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "dolor consectetu",
+            "amet dolor dolor i"
+          ],
+          "display_name": "sumarrxl",
+          "exists": true,
+          "id": "cclfgyyaaqyxst",
+          "parent_id": "ostqzamrwnyasldy"
+        }
+      ],
+      "name": "krmyozzdytdphbbjwbp"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "sxteflkzsmjfpyelipg",
+            "ips",
+            "xpxubgrmavqln",
+            "sit si",
+            "fgowekpebtqpocmmnebn"
+          ],
+          "display_name": "y",
+          "exists": false,
+          "id": "uFP1fJVUA",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "I1zyjAHWcHW"
+          ],
+          "display_name": "volwxriwry",
+          "exists": false,
+          "id": "zC2yoJjrVYRmkpw",
+          "parent_id": "IOredI6"
+        },
+        {
+          "archetypes": [
+            "dfskkvcyepr",
+            "fdzgKlQwAP5ftnueYt",
+            "jfbezyyebzswxwawoz",
+            "ochhssq",
+            "lorem lorem l"
+          ],
+          "display_name": "ufejiduskopopqzhcdpm",
+          "exists": false,
+          "id": "3toiSQ7BIZHBsm3Evd",
+          "parent_id": "bi"
+        }
+      ],
+      "name": "IDVL0jOxWzja"
+    },
+    {
+      "management_groups": [],
+      "name": "saogwwhpmhlkmysajztpq"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "7McG",
+            "hbvxiczxmctzhjwtx",
+            "DNnZI5Q381JOvVWlvGg0",
+            "lo"
+          ],
+          "display_name": "ipsum sit i",
+          "exists": false,
+          "id": "gAeiq3dEaw80Dq",
+          "parent_id": "BqcW97Fyh9Be8OUHn"
+        }
+      ],
+      "name": "nyeypcvwvlppskdijber"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "u2Is"
+          ],
+          "display_name": "dolor lorem sit ipsum",
+          "exists": true,
+          "id": "pewnwuuqulsnpzxs",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "oeriwpyktrtyen",
+            "igopb"
+          ],
+          "display_name": "qc9",
+          "exists": true,
+          "id": "adipiscing dolor ",
+          "parent_id": "ndzixa"
+        }
+      ],
+      "name": "rnngopmxuh"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "aqtmmgkpwolitibonv",
+            "sit ipsum sit s",
+            "dolor ipsum amet dol",
+            "arrgtxcsifmeuv"
+          ],
+          "display_name": "jc",
+          "exists": false,
+          "id": "ad",
+          "parent_id": "c1"
+        },
+        {
+          "archetypes": [
+            "amet consectetu",
+            "I2PFuMVTmsHhVqsq",
+            "sit ips",
+            "ubd"
+          ],
+          "display_name": "wf",
+          "exists": false,
+          "id": "qhnavn",
+          "parent_id": "Bd1fhBKfZDRBCyxA"
+        },
+        {
+          "archetypes": [
+            "oden",
+            "sit dolo",
+            "yhmx",
+            "ipsum lorem sit d",
+            "zswz"
+          ],
+          "display_name": "dolor amet lorem ",
+          "exists": true,
+          "id": "sbgvuns",
+          "parent_id": "qbudtwhxdomfruce"
+        },
+        {
+          "archetypes": [
+            "ad"
+          ],
+          "display_name": "BIzFPLNf0G1ViWbWYdN",
+          "exists": true,
+          "id": "gilaljieh",
+          "parent_id": "qYNfide"
+        },
+        {
+          "archetypes": [
+            "arco",
+            "dolor amet amet ips"
+          ],
+          "display_name": "hvqqriffsnv",
+          "exists": true,
+          "id": "dolo",
+          "parent_id": null
+        }
+      ],
+      "name": "consectetur lo"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "consec"
+          ],
+          "display_name": "yilr",
+          "exists": true,
+          "id": "kxAaRNKN4DI6",
+          "parent_id": null
+        }
+      ],
+      "name": "KeMc2x"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "RsbubE",
+            "XjKS04IY21rXM3IYwuJA",
+            "consectetur ame",
+            "eip",
+            "feuhcwnuwqdew"
+          ],
+          "display_name": "qohdilxuuvuwddutt",
+          "exists": true,
+          "id": "lr",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "WUiJoKRcEs34",
+            "lorem ipsum cons"
+          ],
+          "display_name": "ATw",
+          "exists": false,
+          "id": "ppwjcnnkxarrkqwrwhdp",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "sit",
+            "amet adipiscing sit a",
+            "6APCBWv02dS7OpxIYiOk",
+            "gfrodaqbfofosegp"
+          ],
+          "display_name": "adipiscing amet ",
+          "exists": true,
+          "id": "ujlxtjduwn",
+          "parent_id": "vgc"
+        },
+        {
+          "archetypes": [
+            "adipiscing dolor sit",
+            "consectetur"
+          ],
+          "display_name": "lore",
+          "exists": false,
+          "id": "r",
+          "parent_id": "BlMdtlPE2A2"
+        },
+        {
+          "archetypes": [
+            "amet amet amet conse"
+          ],
+          "display_name": "ivldruqcsdtijvbnpniom",
+          "exists": false,
+          "id": "3VJ352V7qacvBHM",
+          "parent_id": null
+        }
+      ],
+      "name": "consectetur dolor "
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "ttcxqgeyhmaswtbrfm"
+          ],
+          "display_name": "Ezgo8xH6LldkgljuD",
+          "exists": false,
+          "id": "Go7oNyHa92bq5VJZhUkr",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "adipiscing amet lo",
+            "amet ipsum c"
+          ],
+          "display_name": "lorem amet lorem a",
+          "exists": true,
+          "id": "znbdgng",
+          "parent_id": null
+        }
+      ],
+      "name": "sxwslfrfgwamauu"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "xtrmifw"
+          ],
+          "display_name": "jgPsrsl4TA7",
+          "exists": true,
+          "id": "a",
+          "parent_id": "3L307YxayTSSn"
+        },
+        {
+          "archetypes": [
+            "iujlhrhwnbifwi",
+            "hopuaipuwdqbdmcap",
+            "dolor i"
+          ],
+          "display_name": "nopdwxk",
+          "exists": true,
+          "id": "mivrrlkiaahjhr",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "dyvzeannan",
+            "consectetur",
+            "ame",
+            "mhphvifkp"
+          ],
+          "display_name": "eyhxcxuwopouuesasgxgy",
+          "exists": false,
+          "id": "sit dolor ips",
+          "parent_id": "9cS"
+        },
+        {
+          "archetypes": [
+            "am",
+            "am",
+            "sit lorem lorem lorem",
+            "ckdfdyxfmyxaz"
+          ],
+          "display_name": "qb",
+          "exists": false,
+          "id": "msxtuftremmlr",
+          "parent_id": null
+        }
+      ],
+      "name": "ybbmkllhljiuoyw"
+    },
+    {
+      "management_groups": [],
+      "name": "y4MG6r0"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "xbjfzrzehsgksyuhubud"
+          ],
+          "display_name": "fKEr5MH1y8QxC8La0zsEm",
+          "exists": true,
+          "id": "g3LgpB7YgwW5fsX3200y",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "sjmeti"
+          ],
+          "display_name": "couktwmeedpcc",
+          "exists": true,
+          "id": "pvzwbnrxolhfvat",
+          "parent_id": "am"
+        },
+        {
+          "archetypes": [
+            "xpnmothxezma",
+            "bmdy",
+            "rsrPxwz",
+            "pqsizdxmfjoecgztjs",
+            "hqlgxzg"
+          ],
+          "display_name": "yqdyyssrlhgoh",
+          "exists": false,
+          "id": "mk9",
+          "parent_id": "t8fEM"
+        },
+        {
+          "archetypes": [
+            "D5fcbsQcYS"
+          ],
+          "display_name": "ihrwvnbm",
+          "exists": true,
+          "id": "cwcjpp",
+          "parent_id": "dolor amet"
+        }
+      ],
+      "name": "ladhxxlgfo"
+    },
+    {
+      "management_groups": [],
+      "name": "dolor lor"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "a",
+            "dolor dolor do",
+            "amlfcidewj",
+            "elspysknyc"
+          ],
+          "display_name": "consectetur dol",
+          "exists": true,
+          "id": "zT2V5kGd6oGQDDDJNTDyj",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "memtvjpbvkcfvxfzf",
+            "lor"
+          ],
+          "display_name": "4mk1",
+          "exists": false,
+          "id": "sqwmtblefougluln",
+          "parent_id": "F24NYThf"
+        }
+      ],
+      "name": "riGWOB773uRcNqF9sqPh"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "TvLMaRjFZNUsElEi5rLH"
+          ],
+          "display_name": "amet amet amet",
+          "exists": true,
+          "id": "con",
+          "parent_id": null
+        }
+      ],
+      "name": "GDM8xNVZAHTOV"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [],
+          "display_name": "pk2oP4EUsimEczrE7Xe",
+          "exists": true,
+          "id": "kgkgktaw",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "amet lo",
+            "stexviksgvauardswuy",
+            "VyXF61gTuR0QZAx2SK",
+            "yxsatisizphwdqepkiqo",
+            "caeacszgcyspi"
+          ],
+          "display_name": "amet lorem ",
+          "exists": true,
+          "id": "Sx3",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "doezsgqcfpahna",
+            "conse",
+            "lorem ipsum ipsum a"
+          ],
+          "display_name": "dolor amet",
+          "exists": true,
+          "id": "kqtd",
+          "parent_id": "zsbnxdcmnivmomlgu"
+        },
+        {
+          "archetypes": [
+            "dolor consect",
+            "EnOGOQtK",
+            "aavltPRsSq5gVX",
+            "amet ad",
+            "nmoztykdsx"
+          ],
+          "display_name": "lorem amet",
+          "exists": true,
+          "id": "ppuzly",
+          "parent_id": null
+        }
+      ],
+      "name": "p"
+    },
+    {
+      "management_groups": [],
+      "name": "YbqmoP15xdsHZ6xXTwvD"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "D9tHNJ3sWbVhZN48G",
+            "iijrvfoaobog",
+            "TJvXyiaBqtYV6zYAP"
+          ],
+          "display_name": "cobhbuwwwntnnbfq",
+          "exists": false,
+          "id": "consectetur ",
+          "parent_id": null
+        }
+      ],
+      "name": "amet adipisc"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "adipiscin",
+            "ivcoduoudsudc",
+            "tuz",
+            "amet adipiscin"
+          ],
+          "display_name": "do",
+          "exists": true,
+          "id": "M0gFj4jBNUv",
+          "parent_id": "ijrnjrtaegxocqefyjed"
+        },
+        {
+          "archetypes": [
+            "xqx1to",
+            "MySGTY8",
+            "NzmWEM1",
+            "amet consectetu"
+          ],
+          "display_name": "QMS4IwpOl65P7H9OIt",
+          "exists": false,
+          "id": "dolor lorem sit lore",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "yljwinhbgabpcmub",
+            "WzI6OW0",
+            "kbtihesnuvca"
+          ],
+          "display_name": "hkyrgfyh",
+          "exists": false,
+          "id": "consectetur ip",
+          "parent_id": null
+        },
+        {
+          "archetypes": [],
+          "display_name": "ykwlu",
+          "exists": true,
+          "id": "eKocs5Fbxfh7A",
+          "parent_id": "oEASnc0u"
+        }
+      ],
+      "name": "bGge"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "rlljpfiyw",
+            "69Yb",
+            "j"
+          ],
+          "display_name": "m",
+          "exists": false,
+          "id": "xXfcWGNiFRM",
+          "parent_id": "vuvk"
+        },
+        {
+          "archetypes": [
+            "wvjwuedlqkszlu",
+            "lorem do"
+          ],
+          "display_name": "ttvuuwbjbzkmopdxjh",
+          "exists": false,
+          "id": "okvjxubkzhhfrnev",
+          "parent_id": "COqWPmaNes"
+        },
+        {
+          "archetypes": [
+            "mxrNnUPBxZmHd",
+            "ad",
+            "gpzjjmtiu"
+          ],
+          "display_name": "c",
+          "exists": true,
+          "id": "jatjdbocfhnk",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "U",
+            "JQEH8ycvjQCHVUl29m"
+          ],
+          "display_name": "cHRU",
+          "exists": true,
+          "id": "iymfxmcqam",
+          "parent_id": "Nd982yakwR8B"
+        }
+      ],
+      "name": "ptwf"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "dolor dolor adipi",
+            "sfrrzztyosxsufltbttg"
+          ],
+          "display_name": "ipsum lorem lorem con",
+          "exists": false,
+          "id": "qzuaslh",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "8CJYM",
+            "bdkkvdzvqguswhufl",
+            "jzFFd"
+          ],
+          "display_name": "BocP3mxUSRt6XXMk6",
+          "exists": false,
+          "id": "lorem consectetu",
+          "parent_id": null
+        }
+      ],
+      "name": "dqq"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "ipsum lorem lo"
+          ],
+          "display_name": "adipiscing ipsum c",
+          "exists": false,
+          "id": "tvvwqnuq",
+          "parent_id": "pirbbvjncpjwg"
+        },
+        {
+          "archetypes": [
+            "sit adipiscing consec"
+          ],
+          "display_name": "xvibsrrzmdqrvddpkga",
+          "exists": false,
+          "id": "jpgotwtrcxkwbpmztntly",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "hsvsx"
+          ],
+          "display_name": "adipiscing dolor l",
+          "exists": true,
+          "id": "PiyF",
+          "parent_id": "jgusicf"
+        }
+      ],
+      "name": "wlso"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "MV2RU2cfr58nxAf1",
+            "k"
+          ],
+          "display_name": "le7M9u4uEe1F02lgERy2Z",
+          "exists": true,
+          "id": "ylrKA5CwZY70JZigaPX",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "consectetur"
+          ],
+          "display_name": "consectetu",
+          "exists": false,
+          "id": "dob",
+          "parent_id": "s"
+        },
+        {
+          "archetypes": [
+            "YGYzJqOHW72ORha"
+          ],
+          "display_name": "ZcJChu",
+          "exists": false,
+          "id": "i",
+          "parent_id": null
+        }
+      ],
+      "name": "mRhyOOzu"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "osqdrmz",
+            "pHCbrGXS",
+            "eKNNPSRw6",
+            "dvsnwvysn"
+          ],
+          "display_name": "bfsszexggkfsetaveqp",
+          "exists": true,
+          "id": "bkepep",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "jjyfawy",
+            "G5v5vl7pYPqWd9",
+            "TdpVFvqxV0UsOp4",
+            "WCE3fdyVLX81FUM"
+          ],
+          "display_name": "agbdipbszlaqvzhtt",
+          "exists": false,
+          "id": "lorem amet lorem ",
+          "parent_id": "bpukqkfg"
+        },
+        {
+          "archetypes": [
+            "zlpaqup",
+            "rtslhtonmrwuzdw"
+          ],
+          "display_name": "3PODSsJJKfIhaNvOALV",
+          "exists": true,
+          "id": "hyjdgugsaymvwhilsh",
+          "parent_id": null
+        }
+      ],
+      "name": "SBa9kM"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "hhslavjgiipvwvhfazycg",
+            "ctzcveuvobxq"
+          ],
+          "display_name": "ipsum dolo",
+          "exists": false,
+          "id": "adipiscing ipsum ",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "kacdenaljefrrfmwnuyld",
+            "m",
+            "lrkgvpwpvfpcizkjrmye",
+            "cAPuKoYtSLqfVA88st",
+            "MvWk7vW3eiDSmZsBK"
+          ],
+          "display_name": "lNdZw",
+          "exists": false,
+          "id": "lpdzttalfksnsy",
+          "parent_id": "zlmwmiooakesugtg"
+        },
+        {
+          "archetypes": [
+            "consectetur a",
+            "P",
+            "ijbmpa",
+            "erufjuqjmwusnvcqkzn"
+          ],
+          "display_name": "ipsum sit amet ",
+          "exists": false,
+          "id": "lctjwdkqna",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "vTnnqAqN",
+            "CAFi3PlfE8jJ"
+          ],
+          "display_name": "amet sit ipsum dolor ",
+          "exists": true,
+          "id": "lorem sit sit",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "clbytdtbxtn",
+            "G67VSOjnGPD73BYFzil",
+            "ajbbvyczu",
+            "tvuqqag",
+            "qz9D0RJ2qJt8plUJ2s3M"
+          ],
+          "display_name": "KxYhBVBYIZBu",
+          "exists": false,
+          "id": "dolor",
+          "parent_id": null
+        }
+      ],
+      "name": "ipsum d"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "sit ipsum amet ip",
+            "adipiscing amet ",
+            "qkvubtgtauexynfgwrtv"
+          ],
+          "display_name": "ySXK4YoHK",
+          "exists": true,
+          "id": "amet sit lorem ad",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "zCQAElvyE2pdBSx9FPvxb",
+            "mYKeEdKlRJd",
+            "Hh8AgZZBlb6He8",
+            "amet",
+            "5WB"
+          ],
+          "display_name": "6GUXW7UgqGLzSPwtj5m",
+          "exists": true,
+          "id": "gizlklufcywlbkfyvy",
+          "parent_id": "a"
+        },
+        {
+          "archetypes": [
+            "cifume",
+            "adipisci",
+            "pkrccxyssozdc",
+            "OIXvP9AM6EXN5790dr"
+          ],
+          "display_name": "Ro",
+          "exists": true,
+          "id": "ipsum ipsum sit lore",
+          "parent_id": "2zItKI721nfgh0j"
+        },
+        {
+          "archetypes": [
+            "lB6ENAfCqlbM5XfqE",
+            "oFZ3aROBaES"
+          ],
+          "display_name": "lorem adipis",
+          "exists": true,
+          "id": "dolor ",
+          "parent_id": null
+        }
+      ],
+      "name": "dvzskkrerpwgnwtfpj"
+    },
+    {
+      "management_groups": [],
+      "name": "9ovY3F"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [
+            "hnhevetufcvwwcr",
+            "aqjgd",
+            "rrhrbkaxv"
+          ],
+          "display_name": "uqnarngcqpanf",
+          "exists": false,
+          "id": "co",
+          "parent_id": null
+        }
+      ],
+      "name": "lorem "
+    },
+    {
+      "management_groups": [],
+      "name": "36OUHG3Vv5jZ0qosEtal"
+    },
+    {
+      "management_groups": [],
+      "name": "s"
+    },
+    {
+      "management_groups": [
+        {
+          "archetypes": [],
+          "display_name": "esagorxkgjtvetjftgo",
+          "exists": false,
+          "id": "ipsum consectetu",
+          "parent_id": "oaaaoopxkemjfbmibv"
+        },
+        {
+          "archetypes": [
+            "agfaapbdonjqhezxftpw",
+            "s7xqQt",
+            "erpcou",
+            "yf",
+            "yaapgnghdglfawm"
+          ],
+          "display_name": "gambobyttqigrogzjj",
+          "exists": false,
+          "id": "dyhFaNklX",
+          "parent_id": null
+        },
+        {
+          "archetypes": [
+            "sit"
+          ],
+          "display_name": "ndmdxuzko",
+          "exists": true,
+          "id": "lorem lorem am",
+          "parent_id": "raxliVwUeJCCnK4"
+        },
+        {
+          "archetypes": [],
+          "display_name": "o1tNDRcxyntdj3PF",
+          "exists": false,
+          "id": "lu625RVkQQdfH9iHA",
+          "parent_id": "yiudndnw"
+        }
+      ],
+      "name": "pKKeV"
+    }
+  ]
+}

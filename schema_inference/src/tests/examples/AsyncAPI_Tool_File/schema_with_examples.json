@@ -1,0 +1,1936 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "JSON Schema for AsyncAPI tool discovery file.",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "title",
+      "filters"
+    ],
+    "properties": {
+      "title": {
+        "type": "string",
+        "description": "Human-readable name of the tool that will be visible to people in the list of tools.",
+        "examples": [
+          "AsyncAPI Generator",
+          "Cupid"
+        ]
+      },
+      "description": {
+        "type": "string",
+        "description": "By default scripts read description of repository there project is stored. You can override this behaviour by providing custom description."
+      },
+      "links": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "websiteUrl": {
+            "type": "string",
+            "description": "You can provide URL to the website where your project hosts some demo or project landing page.",
+            "format": "uri"
+          },
+          "docsUrl": {
+            "type": "string",
+            "description": "You can provide URL to project documentation in case you have more than just a readme file.",
+            "format": "uri"
+          },
+          "repoUrl": {
+            "type": "string",
+            "description": "You can provide URL to project codebase in case you have more than one tool present inside single repository.",
+            "format": "uri"
+          }
+        }
+      },
+      "filters": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "categories"
+        ],
+        "properties": {
+          "language": {
+            "description": "The language referred to is the runtime language selected by the user, not the generator or library language. For example, the Generator written in JavaScript generates Python code from the JavaScript template and the result of generation is a Python app, so the language for Generator is specified as Python. But for the Bundler library, users need to know if it can be integrated into their TypeScript codebase, so its language is specified as TypeScript. If some language in the schema's enum is omitted, it can be added through a pull request to the AsyncAPI website repository.",
+            "anyOf": [
+              {
+                "type": "string",
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "enum": [
+                      "Go",
+                      "Java",
+                      "JavaScript",
+                      "HTML",
+                      "C/C++",
+                      "C#",
+                      "Python",
+                      "TypeScript",
+                      "Kotlin",
+                      "Scala",
+                      "Markdown",
+                      "YAML",
+                      "R",
+                      "Ruby",
+                      "Rust",
+                      "Shell",
+                      "Groovy"
+                    ]
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "Go",
+                        "Java",
+                        "JavaScript",
+                        "HTML",
+                        "C/C++",
+                        "C#",
+                        "Python",
+                        "TypeScript",
+                        "Kotlin",
+                        "Scala",
+                        "Markdown",
+                        "YAML",
+                        "R",
+                        "Ruby",
+                        "Rust",
+                        "Shell",
+                        "Groovy"
+                      ]
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "technology": {
+            "type": "array",
+            "description": "Provide a list of different technologies used in the tool. Put details useful for tool user and tool contributor.",
+            "items": {
+              "type": "string",
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "Node js",
+                    "Hermes",
+                    "React JS",
+                    ".NET",
+                    "ASP.NET",
+                    "Springboot",
+                    "AWS",
+                    "Docker",
+                    "Node-red",
+                    "Maven",
+                    "Saas",
+                    "Kubernetes-native",
+                    "Scala",
+                    "Azure",
+                    "Jenkins",
+                    "Flask"
+                  ]
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "examples": [
+              "Express.js",
+              "Kafka"
+            ]
+          },
+          "categories": {
+            "type": "array",
+            "description": "Categories are used to group tools by different use case, like documentation or code generation. If have a list of fixed categories. If you use different one that your tool lands under \"other\" category. Feel free to add your category through a pull request to AsyncAPI website repository.",
+            "items": {
+              "type": "string",
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "api",
+                    "code-first",
+                    "code-generator",
+                    "converter",
+                    "directory",
+                    "documentation-generator",
+                    "editor",
+                    "ui-component",
+                    "dsl",
+                    "framework",
+                    "github-action",
+                    "mocking-and-testing",
+                    "validator",
+                    "compare-tool",
+                    "other",
+                    "cli",
+                    "bundler",
+                    "ide-extension"
+                  ]
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "minItems": 1,
+            "examples": [
+              "api",
+              "code-first",
+              "code-generator",
+              "converter",
+              "directory",
+              "documentation-generator",
+              "editor",
+              "ui-component",
+              "dsl",
+              "framework",
+              "github-action",
+              "mocking-and-testing",
+              "validator",
+              "compare-tool",
+              "other",
+              "cli",
+              "bundler",
+              "ide-extension"
+            ]
+          },
+          "hasCommercial": {
+            "type": "boolean",
+            "description": "Indicate if your tool is open source or commercial offering, like SAAS for example",
+            "default": false
+          }
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "title": "consectetur ipsum lor",
+      "filters": {
+        "categories": [
+          "dolor lorem ipsum "
+        ],
+        "language": 71.6,
+        "hasCommercial": false
+      },
+      "description": "e",
+      "links": {
+        "websiteUrl": "http://test.org/api/resource",
+        "docsUrl": "https://test.org/data/api"
+      }
+    },
+    {
+      "title": "co",
+      "filters": {
+        "categories": [
+          "RfLLFJM626ydghj"
+        ],
+        "language": true,
+        "hasCommercial": false
+      },
+      "description": "amet ipsum lo",
+      "links": {
+        "websiteUrl": "http://demo.net/api/data"
+      }
+    },
+    {
+      "title": "RhxrnJgWQsNKVP",
+      "filters": {
+        "categories": [
+          "consectetur "
+        ],
+        "language": 34,
+        "hasCommercial": false
+      },
+      "description": "sit ipsum lor"
+    },
+    {
+      "title": "psbEhY71O",
+      "filters": {
+        "categories": [
+          "ipsum adipiscing ips"
+        ],
+        "language": null,
+        "technology": []
+      },
+      "links": {
+        "websiteUrl": "ftp://test.org/api/v1",
+        "docsUrl": "https://test.org/resource/data"
+      }
+    },
+    {
+      "title": "K1o",
+      "filters": {
+        "categories": [
+          "sit consectetur l"
+        ],
+        "technology": [],
+        "hasCommercial": false
+      },
+      "description": "RwD"
+    },
+    {
+      "title": "sit sit ipsu",
+      "filters": {
+        "categories": [
+          "czbgq7DH43JoG"
+        ],
+        "language": 3.33,
+        "technology": []
+      },
+      "links": {
+        "docsUrl": "ftp://example.com/v1/resource",
+        "repoUrl": "ftp://test.org/data/api"
+      }
+    },
+    {
+      "title": "IHXFSBjYOEnVIFDbAi",
+      "filters": {
+        "categories": [
+          "boyscg"
+        ],
+        "language": 73
+      },
+      "description": "dolor consecte",
+      "links": {
+        "websiteUrl": "https://demo.net/data/resource",
+        "docsUrl": "http://example.com/v1/api"
+      }
+    },
+    {
+      "title": "5uI",
+      "filters": {
+        "categories": [
+          "th"
+        ],
+        "language": 80,
+        "technology": [],
+        "hasCommercial": false
+      },
+      "description": "consectetur l",
+      "links": {
+        "websiteUrl": "ftp://test.org/api/data",
+        "docsUrl": "ftp://demo.net/v1/data"
+      }
+    },
+    {
+      "title": "jxstiofoyjcjfbwz",
+      "filters": {
+        "categories": [
+          "f5dLuQZauXA9mB4KhMHh"
+        ]
+      },
+      "description": "olnnrmvhwtdjxrmurozeo"
+    },
+    {
+      "title": "ogzvgwom",
+      "filters": {
+        "categories": [
+          "vOxrRahHcP6vsBX1OV"
+        ],
+        "language": 47.01
+      }
+    },
+    {
+      "title": "consectet",
+      "filters": {
+        "categories": [
+          "4j9zlvNcyaek"
+        ],
+        "language": "kwxxyorwodnn",
+        "technology": [],
+        "hasCommercial": true
+      },
+      "links": {
+        "websiteUrl": "ftp://test.org/api/resource",
+        "docsUrl": "ftp://demo.net/resource/v1",
+        "repoUrl": "ftp://example.com/v1/api"
+      }
+    },
+    {
+      "title": "fnmsjlayxzidwbbffdjt",
+      "filters": {
+        "categories": [
+          "z6ujWIy9Ojd"
+        ],
+        "technology": []
+      },
+      "description": "ctcyuxog",
+      "links": {
+        "websiteUrl": "http://example.com/data/resource",
+        "docsUrl": "http://test.org/v1/data",
+        "repoUrl": "https://example.com/resource/api"
+      }
+    },
+    {
+      "title": "s3Enu",
+      "filters": {
+        "categories": [
+          "zffmulcihkocq"
+        ],
+        "hasCommercial": true
+      },
+      "description": "a"
+    },
+    {
+      "title": "fzh",
+      "filters": {
+        "categories": [
+          "hjs"
+        ],
+        "hasCommercial": false
+      },
+      "description": "lnqqbfsovbg",
+      "links": {
+        "docsUrl": "http://test.org/v1/resource",
+        "repoUrl": "http://example.com/resource/v1"
+      }
+    },
+    {
+      "title": "amet dolor sit adi",
+      "filters": {
+        "categories": [
+          "amet dol"
+        ],
+        "language": null,
+        "technology": []
+      },
+      "description": "xbj3lMIBShPdnPliENa"
+    },
+    {
+      "title": "Ln",
+      "filters": {
+        "categories": [
+          "hzqwatnpjzr"
+        ],
+        "hasCommercial": true
+      },
+      "description": "9Y5Fk",
+      "links": {
+        "websiteUrl": "ftp://example.com/v1/resource",
+        "docsUrl": "http://test.org/resource/api"
+      }
+    },
+    {
+      "title": "consectetur adipisc",
+      "filters": {
+        "categories": [
+          "r27Xz2gEDeIxw"
+        ],
+        "language": 30.19,
+        "technology": [],
+        "hasCommercial": true
+      }
+    },
+    {
+      "title": "amet sit",
+      "filters": {
+        "categories": [
+          "sravj"
+        ],
+        "technology": []
+      },
+      "links": {}
+    },
+    {
+      "title": "ipsum ipsu",
+      "filters": {
+        "categories": [
+          "bxcwebqxksd"
+        ],
+        "hasCommercial": true
+      },
+      "links": {
+        "websiteUrl": "http://demo.net/v1/resource",
+        "repoUrl": "http://example.com/v1/data"
+      }
+    },
+    {
+      "title": "ipsum adipiscing",
+      "filters": {
+        "categories": [
+          "w"
+        ],
+        "language": "aFfkbYh",
+        "technology": []
+      }
+    },
+    {
+      "title": "adipiscing ipsum si",
+      "filters": {
+        "categories": [
+          "ipsum lorem "
+        ],
+        "hasCommercial": false
+      },
+      "description": "qrsilakyxjx",
+      "links": {
+        "repoUrl": "ftp://test.org/v1/api"
+      }
+    },
+    {
+      "title": "5pOxeOsZtUdP6ho",
+      "filters": {
+        "categories": [
+          "zxwsfplqmfxaiizdpypy"
+        ],
+        "language": true,
+        "technology": [],
+        "hasCommercial": false
+      },
+      "description": "trnffzvlt"
+    },
+    {
+      "title": "amet sit amet ip",
+      "filters": {
+        "categories": [
+          "uufvqdwls"
+        ],
+        "language": 8,
+        "technology": [],
+        "hasCommercial": false
+      },
+      "description": "lorem s"
+    },
+    {
+      "title": "sit ipsum sit",
+      "filters": {
+        "categories": [
+          "vN3eIqOMcgG1XZi"
+        ],
+        "language": null
+      }
+    },
+    {
+      "title": "5Ws",
+      "filters": {
+        "categories": [
+          "adipiscing consect"
+        ]
+      },
+      "links": {
+        "repoUrl": "http://test.org/v1/resource"
+      }
+    },
+    {
+      "title": "dol",
+      "filters": {
+        "categories": [
+          "6AM5mckcBhfty2a"
+        ]
+      },
+      "description": "nsltg"
+    },
+    {
+      "title": "txcplgwizjouubt",
+      "filters": {
+        "categories": [
+          "bueu"
+        ],
+        "language": false,
+        "technology": [],
+        "hasCommercial": true
+      },
+      "description": "sit ipsum consectetur",
+      "links": {
+        "docsUrl": "http://test.org/resource/v1",
+        "repoUrl": "ftp://test.org/resource/api"
+      }
+    },
+    {
+      "title": "ip",
+      "filters": {
+        "categories": [
+          "52XICABGIYi9drm9n565"
+        ],
+        "language": 10.33,
+        "technology": []
+      },
+      "description": "cfbppjDXRN5GcfhyO5jE"
+    },
+    {
+      "title": "sit",
+      "filters": {
+        "categories": [
+          "gYPnP"
+        ],
+        "technology": []
+      },
+      "description": "31fEriqUZ",
+      "links": {
+        "repoUrl": "https://demo.net/v1/data"
+      }
+    },
+    {
+      "title": "XqjUmfFKFYG",
+      "filters": {
+        "categories": [
+          "jejaqedxlyzrgdg"
+        ],
+        "technology": [],
+        "hasCommercial": true
+      },
+      "description": "epszEJ0",
+      "links": {
+        "websiteUrl": "https://demo.net/v1/api",
+        "docsUrl": "https://demo.net/data/v1",
+        "repoUrl": "ftp://demo.net/data/resource"
+      }
+    },
+    {
+      "title": "tes",
+      "filters": {
+        "categories": [
+          "TQL8RvxNQnYBVftbzpvn"
+        ],
+        "hasCommercial": false
+      },
+      "links": {
+        "websiteUrl": "ftp://test.org/v1/resource",
+        "repoUrl": "http://test.org/resource/api"
+      }
+    },
+    {
+      "title": "sit ipsum",
+      "filters": {
+        "categories": [
+          "EGmgpWbvAI"
+        ],
+        "language": 33,
+        "technology": [],
+        "hasCommercial": true
+      },
+      "description": "yffuhhbtgepc"
+    },
+    {
+      "title": "hht25vBC5BtFaFhYB7Aq",
+      "filters": {
+        "categories": [
+          "adipiscing adi"
+        ],
+        "language": 71.59,
+        "technology": [],
+        "hasCommercial": true
+      },
+      "description": "yRLWACMo4dZhj9OrRtS",
+      "links": {
+        "websiteUrl": "http://example.com/v1/data",
+        "docsUrl": "https://demo.net/v1/data"
+      }
+    },
+    {
+      "title": "CTF054Q0YgQ5UrS",
+      "filters": {
+        "categories": [
+          "mkjoryffdmpv",
+          "M",
+          "ip",
+          "consect",
+          "POCsO1xRab"
+        ],
+        "language": "sit consecte",
+        "technology": [
+          "ipsum consectet",
+          "Ehq5FZvrybHEuZ",
+          "voxanxoujzentz",
+          "uDnaW9fjppAI7x",
+          "iwwfanwvrhzjr"
+        ]
+      },
+      "description": "wk",
+      "links": {
+        "websiteUrl": "https://example.com/data/api",
+        "docsUrl": "http://example.com/resource/data",
+        "repoUrl": "https://example.com/data/resource"
+      }
+    },
+    {
+      "title": "y4d0rUBousuH",
+      "filters": {
+        "categories": [
+          "p",
+          "jgoarxdgyqthpwnafvme",
+          "2BB5JD2UWw6IlKJihLLf",
+          "xhj71EScSOWBKZ6Yt",
+          "consectetur"
+        ],
+        "language": "wmijubkvait",
+        "technology": [
+          "XjF9ZBaHRLUAEQ",
+          "dolor a",
+          "h5sTFVRE61QMle1qBDt2N",
+          "amrlt",
+          "z3oKkiflav"
+        ],
+        "hasCommercial": false
+      },
+      "description": "jn",
+      "links": {
+        "docsUrl": "ftp://demo.net/v1/data",
+        "repoUrl": "ftp://test.org/v1/resource"
+      }
+    },
+    {
+      "title": "oYhDILjNF",
+      "filters": {
+        "categories": [
+          "adipiscin",
+          "ZltfWHm",
+          "consect",
+          "HgXRnufJZ4W8qM5",
+          "GZVz"
+        ],
+        "language": null,
+        "technology": [
+          "yiXa9dNU",
+          "adipiscing adi",
+          "vr",
+          "lorem",
+          "tobmttaacyck"
+        ],
+        "hasCommercial": true
+      },
+      "description": "ceaygnj"
+    },
+    {
+      "title": "adipisc",
+      "filters": {
+        "categories": [
+          "xrxkrxmza",
+          "jiqseuyj",
+          "lo",
+          "jNGS0",
+          "U347f1aCwAfzQPaXtHsPF"
+        ],
+        "technology": [
+          "lorem adipisc",
+          "cesnyddflgmcpi",
+          "xwywfceo",
+          "z",
+          "u"
+        ],
+        "hasCommercial": false
+      },
+      "description": "ksB",
+      "links": {
+        "websiteUrl": "https://test.org/resource/api",
+        "repoUrl": "https://test.org/resource/api"
+      }
+    },
+    {
+      "title": "KoSEe",
+      "filters": {
+        "categories": [
+          "a",
+          "emrqccumsssztxlq",
+          "ipsum ip",
+          "kcOI5jm6q59",
+          "qznzqpuxavylqxatf"
+        ],
+        "technology": [
+          "pTIUSDH",
+          "ud",
+          "eomfvhgtgyggcpmuzak",
+          "sivhithdzt",
+          "adipi"
+        ],
+        "hasCommercial": false
+      }
+    },
+    {
+      "title": "31AwybV7x",
+      "filters": {
+        "categories": [
+          "bgyodqyg",
+          "N8q9tOUjs5Mb",
+          "gmjtlhyujrnbfrab",
+          "RHfvC4hDi",
+          "N0Vejyq"
+        ],
+        "language": null,
+        "hasCommercial": false
+      },
+      "description": "YVArJs",
+      "links": {
+        "websiteUrl": "ftp://example.com/data/api",
+        "docsUrl": "https://test.org/data/v1"
+      }
+    },
+    {
+      "title": "inmadrvaisfrpftwo",
+      "filters": {
+        "categories": [
+          "uijxgv",
+          "axsylhth",
+          "cblhgvxfcees",
+          "akedxkajyrjlh",
+          "ylfatutrjhoumn"
+        ],
+        "language": "adipisci",
+        "technology": [
+          "VUi2KccSp",
+          "consectet",
+          "ebzkju",
+          "fiinith",
+          "ej6"
+        ]
+      },
+      "description": "adipiscing amet",
+      "links": {
+        "docsUrl": "https://demo.net/v1/resource"
+      }
+    },
+    {
+      "title": "zhvee",
+      "filters": {
+        "categories": [
+          "adipiscin",
+          "fodmqvuczvgsajuvkhk",
+          "dolor adi",
+          "ipsum lo",
+          "psyz"
+        ],
+        "language": null,
+        "technology": [
+          "1",
+          "rslyckj",
+          "dolor amet conse",
+          "sqnjzvrcksel",
+          "Nv7QmCU0yjpfYu"
+        ],
+        "hasCommercial": true
+      },
+      "description": "adipiscing ",
+      "links": {
+        "websiteUrl": "http://example.com/api/data",
+        "docsUrl": "https://test.org/api/data"
+      }
+    },
+    {
+      "title": "ldayfeczkjofusyv",
+      "filters": {
+        "categories": [
+          "lorem ",
+          "Jl5tC6Kto4SMI5h",
+          "lBchK4jn8geg",
+          "ep2qPzj8NpJsXb",
+          "yP42gSkDDeyPAi"
+        ],
+        "technology": [
+          "tkZfc37OFS",
+          "bl",
+          "oL",
+          "xuoxwhfdsvnzif",
+          "lpswaepurjom"
+        ],
+        "hasCommercial": false
+      },
+      "links": {
+        "docsUrl": "http://test.org/v1/api"
+      }
+    },
+    {
+      "title": "aazifmotpo",
+      "filters": {
+        "categories": [
+          "y3unODFcc",
+          "nafkhcdtomatzsmsq",
+          "pyeew",
+          "72Ek50bYa0K5NiG3yM",
+          "rvcuhjxopofs"
+        ],
+        "technology": [
+          "iggmkwvdh",
+          "sit ipsum amet ",
+          "adi",
+          "ipsum ",
+          "cb61gw"
+        ]
+      },
+      "description": "m",
+      "links": {
+        "docsUrl": "http://example.com/data/resource"
+      }
+    },
+    {
+      "title": "viyfuwj",
+      "filters": {
+        "categories": [
+          "nwfrpmla",
+          "sit amet consectet",
+          "fkyjejdv",
+          "adipiscing sit dol",
+          "lorem "
+        ],
+        "language": true,
+        "hasCommercial": true
+      },
+      "links": {
+        "websiteUrl": "http://example.com/data/v1",
+        "docsUrl": "http://demo.net/api/v1",
+        "repoUrl": "ftp://demo.net/v1/api"
+      }
+    },
+    {
+      "title": "9",
+      "filters": {
+        "categories": [
+          "s",
+          "Sx2F9zaVnwW2y3Df9iYxA",
+          "fvugnqjrplues",
+          "xulbcaeuxvxovqzb",
+          "oX"
+        ],
+        "language": 32.92,
+        "technology": [
+          "GSSRVc5s",
+          "Vpw",
+          "KIC2cel6",
+          "ipsum lorem co",
+          "04OYqVEGrjmwkW"
+        ],
+        "hasCommercial": true
+      },
+      "description": "9UG",
+      "links": {
+        "websiteUrl": "http://test.org/v1/api"
+      }
+    },
+    {
+      "title": "wvctq",
+      "filters": {
+        "categories": [
+          "xxakcmqstfy",
+          "hsksxlztrlrvvrvpah",
+          "vtqymyybnd",
+          "EM",
+          "sit conse"
+        ],
+        "technology": [
+          "ZJ1pu9hpOw",
+          "AszpLucV",
+          "dyqdxam",
+          "fxojievieflh",
+          "yedkhetgqdcm"
+        ]
+      },
+      "description": "uxmm"
+    },
+    {
+      "title": "ieataimfyrpli",
+      "filters": {
+        "categories": [
+          "ipsum sit adip",
+          "ad",
+          "fxzzqyuamjknmjd",
+          "sqxcnkiflnwsop",
+          "vQGJuDN7X5YctoBVRfdt"
+        ],
+        "language": null
+      },
+      "links": {
+        "websiteUrl": "https://example.com/resource/api"
+      }
+    },
+    {
+      "title": "sgi",
+      "filters": {
+        "categories": [
+          "dol",
+          "amet lo",
+          "ajCWI8",
+          "sit",
+          "tzaxdfciujosv"
+        ],
+        "language": null,
+        "technology": [
+          "IGPm02F3OYNJLBkF",
+          "IB4sKsIR",
+          "1BONS79",
+          "nbfgjwbtvdaxyxs",
+          "lorem ipsum a"
+        ]
+      },
+      "links": {
+        "websiteUrl": "http://demo.net/api/resource",
+        "repoUrl": "https://test.org/data/v1"
+      }
+    },
+    {
+      "title": "moixuoz",
+      "filters": {
+        "categories": [
+          "ipsum lore",
+          "qz",
+          "YiVlQbF5ngAaf",
+          "consectetur lorem sit",
+          "Uur"
+        ],
+        "language": "t2GA72dvQ",
+        "technology": [
+          "yrfbkeotosdzzhrrqh",
+          "lorem sit ame",
+          "korzdaukoqnjpxcotcsbo",
+          "0Tk",
+          "dkBYCLoNfzgow"
+        ],
+        "hasCommercial": true
+      },
+      "links": {
+        "websiteUrl": "https://example.com/data/api"
+      }
+    },
+    {
+      "title": "7Qy",
+      "filters": {
+        "categories": [
+          "tmvgpjmzfttczlo",
+          "WZx8OVHklP",
+          "fgbybkefylqvnvupox",
+          "J9mvWdzUTFs",
+          "ILza54j4KaNsxgZOo"
+        ],
+        "language": true,
+        "technology": [
+          "xgwedqxkec",
+          "Cu8A7NLlRROyQ2",
+          "3ZD9qtn",
+          "sit",
+          "ievvq"
+        ],
+        "hasCommercial": true
+      },
+      "description": "sit ipsum amet si"
+    },
+    {
+      "title": "IXqX2VfGjZePuc",
+      "filters": {
+        "categories": [
+          "q",
+          "epsmre",
+          "yubj",
+          "ip",
+          "ipsum "
+        ],
+        "technology": [
+          "1",
+          "adipiscing",
+          "dxL5ue7S0EstiwI77En7a",
+          "sit",
+          "rvwyxnqtanku"
+        ],
+        "hasCommercial": true
+      },
+      "description": "tSX9z5LXlCVNlK"
+    },
+    {
+      "title": "swcdkupqxrvkdbyf",
+      "filters": {
+        "categories": [
+          "zehhftxb",
+          "U8fUYm",
+          "jB3Ufyk",
+          "sit lorem consecte",
+          "nhykbzqlakyy"
+        ],
+        "language": "gfjerrimnpsey",
+        "technology": [
+          "lorem lorem a",
+          "etjanoaqqpccnxdso",
+          "ENl",
+          "sit consectetur cons",
+          "xhkelubvblpqydcf"
+        ],
+        "hasCommercial": true
+      },
+      "description": "dolor sit sit sit ips"
+    },
+    {
+      "title": "consectetur dolor ",
+      "filters": {
+        "categories": [
+          "lvyaalylurbm",
+          "gczmzwvlqbzarfwigbvrt",
+          "xayoscsszpbrrdvapqy",
+          "efurnk",
+          "zF50MtM2CjW"
+        ],
+        "technology": [
+          "iq",
+          "0",
+          "sdilrls",
+          "cons",
+          "ipsum lorem adipisci"
+        ],
+        "hasCommercial": true
+      },
+      "links": {
+        "websiteUrl": "ftp://test.org/data/v1",
+        "repoUrl": "ftp://demo.net/resource/v1"
+      }
+    },
+    {
+      "title": "9H6hEiafrmJGmOwUxj",
+      "filters": {
+        "categories": [
+          "vlypOg",
+          "wmaj",
+          "v5mLx3Wfb3OoDTJQy",
+          "lpzllxohynhfcogxftqwj",
+          "ezkgajudqh"
+        ],
+        "language": true,
+        "technology": [
+          "lsjybfdwdegcqju",
+          "itthcun",
+          "sit s",
+          "dolor adipiscing s",
+          "qipbiamcqiaabsjht"
+        ],
+        "hasCommercial": false
+      },
+      "description": "sit sit consectet",
+      "links": {
+        "websiteUrl": "http://example.com/api/data",
+        "repoUrl": "http://test.org/v1/resource"
+      }
+    },
+    {
+      "title": "P5fvc2kNf9wi",
+      "filters": {
+        "categories": [
+          "m",
+          "tQv42XFbdBZx8KhI8s",
+          "guflubwjqqzktpfmzxf",
+          "dphadxbvhaesbeqnsda",
+          "VPfSs9o"
+        ],
+        "language": false,
+        "technology": [
+          "vbnuyidfkrh",
+          "taavrplvdbeogjjdvh",
+          "ldkveseimhr",
+          "amet ",
+          "ncrhxogfeglhdklhj"
+        ]
+      },
+      "links": {
+        "repoUrl": "http://example.com/data/api"
+      }
+    },
+    {
+      "title": "94YdbVb",
+      "filters": {
+        "categories": [
+          "eBPYpspzl",
+          "sit",
+          "dxo",
+          "qtlzgapnf",
+          "yar"
+        ],
+        "language": 49.55,
+        "technology": [
+          "Uc5T2cGZcPHIHzWBM",
+          "hxzgehnnzsof",
+          "lorem sit sit si",
+          "50b1q5",
+          "cpkaefqadeeb"
+        ]
+      }
+    },
+    {
+      "title": "cz8rYIW4yOYV",
+      "filters": {
+        "categories": [
+          "u",
+          "u",
+          "consectetur",
+          "ipsum sit ipsum am",
+          "ipsum"
+        ],
+        "language": null
+      },
+      "description": "lseY64SGxPa",
+      "links": {
+        "websiteUrl": "https://test.org/v1/data",
+        "docsUrl": "http://demo.net/api/v1"
+      }
+    },
+    {
+      "title": "LoifTGRfMmSKX",
+      "filters": {
+        "categories": [
+          "wfleocsrcibo",
+          "adipiscing sit",
+          "zjfxeup",
+          "raamvc",
+          "dqjdkxzqlovdym"
+        ],
+        "language": null,
+        "hasCommercial": false
+      },
+      "description": "ipsu",
+      "links": {
+        "websiteUrl": "http://demo.net/data/v1"
+      }
+    },
+    {
+      "title": "7kyvF",
+      "filters": {
+        "categories": [
+          "eCc5",
+          "tVmllvM",
+          "CrXx1Nl",
+          "VJl04oBN3hI8LSWFrKGv",
+          "kbchlgvslxux"
+        ],
+        "language": 86,
+        "technology": [
+          "consectetur",
+          "xx",
+          "qtoiacfnsfkyksqrm",
+          "sit lorem sit cons",
+          "ebfcgrt"
+        ],
+        "hasCommercial": false
+      },
+      "description": "npwkvvczgzw"
+    },
+    {
+      "title": "xojbnpxmuilgelneugu",
+      "filters": {
+        "categories": [
+          "sit dolor lore",
+          "rwkjkkramniasaodaebd",
+          "oevnwenwybon",
+          "dsuvudeutxlxdyw",
+          "dI9ClQurjCA"
+        ],
+        "language": "amet adi",
+        "technology": [
+          "MOcuXDmKtbivwzNUGnPjh",
+          "P",
+          "MmCIssp2m8Up",
+          "tlrgsyumzxbklhqdtwb",
+          "dcqlnbmzc"
+        ],
+        "hasCommercial": false
+      },
+      "description": "ipsum ipsum ipsum ",
+      "links": {
+        "repoUrl": "http://example.com/v1/api"
+      }
+    },
+    {
+      "title": "joreh",
+      "filters": {
+        "categories": [
+          "cGMG2TxohYQLBF",
+          "nmkmbpvj",
+          "UAy4kmK",
+          "lorem amet adipiscing",
+          "mylqwrktpxq"
+        ],
+        "language": "lorem sit adi",
+        "technology": [
+          "jgryflrfkdmfckddd",
+          "ipsum sit cons",
+          "dolor consecte",
+          "consectetur con",
+          "adipisci"
+        ]
+      }
+    },
+    {
+      "title": "svrxtrlirmdpzbz",
+      "filters": {
+        "categories": [
+          "htwpr",
+          "ovgjpyqm",
+          "xtnulfnbv",
+          "pg5fY",
+          "Ph4"
+        ],
+        "technology": [
+          "sit amet dolo",
+          "adipiscing ipsu",
+          "ooqfkpqjmi",
+          "lorem ipsum amet i",
+          "ixej"
+        ]
+      },
+      "description": "rrmdqtvqjtkvuvpxokga"
+    },
+    {
+      "title": "t",
+      "filters": {
+        "categories": [
+          "ahY4gjeU",
+          "wpkiqqkmngeo",
+          "cons",
+          "gkyj",
+          "consectetur lorem "
+        ],
+        "language": 91.38,
+        "hasCommercial": true
+      },
+      "description": "sit ipsum sit",
+      "links": {
+        "websiteUrl": "http://demo.net/v1/api",
+        "docsUrl": "ftp://demo.net/resource/data"
+      }
+    },
+    {
+      "title": "X6tVukvUjOvkAxC25o9",
+      "filters": {
+        "categories": [
+          "494duZ6wSPl0Z572JNEM",
+          "7X5RhzsqhgDW1",
+          "ofpetluneasbohrqjhw",
+          "mewi",
+          "hftwezny"
+        ],
+        "technology": [
+          "QZHD",
+          "z",
+          "pbtww",
+          "jjeqivgg",
+          "brf"
+        ]
+      },
+      "links": {
+        "websiteUrl": "ftp://example.com/data/resource",
+        "docsUrl": "https://demo.net/resource/api",
+        "repoUrl": "http://demo.net/v1/resource"
+      }
+    },
+    {
+      "title": "adipiscing conse",
+      "filters": {
+        "categories": [
+          "adi",
+          "TrnDSOlwvru1",
+          "cTglU",
+          "iglgxmeeooziypy",
+          "olkqgnkrwrdptnbcosmso"
+        ],
+        "technology": [
+          "cfhu",
+          "sit adipiscing amet a",
+          "anfhvhafrai",
+          "amet sit amet con",
+          "adipiscing "
+        ]
+      },
+      "links": {
+        "repoUrl": "ftp://test.org/api/v1"
+      }
+    },
+    {
+      "title": "tsltylod",
+      "filters": {
+        "categories": [
+          "R4rtlK5Tix",
+          "bel",
+          "dol",
+          "dolor ad",
+          "bkzzyefczl"
+        ],
+        "language": 68.25,
+        "hasCommercial": false
+      },
+      "description": "yaxvcniggysxh",
+      "links": {
+        "repoUrl": "ftp://demo.net/v1/resource"
+      }
+    },
+    {
+      "title": "crsjz",
+      "filters": {
+        "categories": [
+          "amet do",
+          "adip",
+          "dolor adipisci"
+        ]
+      },
+      "description": "liszyftmzzmxxckyglq",
+      "links": {
+        "docsUrl": "ftp://test.org/v1/api",
+        "repoUrl": "ftp://test.org/resource/api"
+      }
+    },
+    {
+      "title": "sit lorem",
+      "filters": {
+        "categories": [
+          "s4eoFAP4tT2tGMaum",
+          "zwrlldbzkkmzxrunqurb"
+        ],
+        "language": null,
+        "hasCommercial": true
+      },
+      "links": {
+        "websiteUrl": "http://test.org/resource/api",
+        "repoUrl": "ftp://test.org/resource/v1"
+      }
+    },
+    {
+      "title": "pksqrontdncla",
+      "filters": {
+        "categories": [
+          "ghjckowhxrdgmefcigh",
+          "yxagdmf",
+          "tT6wtyGcAffG6lHc",
+          "l"
+        ],
+        "language": 77
+      }
+    },
+    {
+      "title": "ifkvqso",
+      "filters": {
+        "categories": [
+          "xrnS3vXtVoJz1Vg",
+          "3v2F"
+        ],
+        "hasCommercial": false
+      },
+      "links": {
+        "websiteUrl": "ftp://example.com/v1/api",
+        "docsUrl": "ftp://test.org/api/v1"
+      }
+    },
+    {
+      "title": "phmkrjnapglgftrr",
+      "filters": {
+        "categories": [
+          "zybenyWf7Za6pI6",
+          "lneodryfg",
+          "plgstircciucyngasai",
+          "sit consecte",
+          "cottlbipuf",
+          "jAHWcHWtZb0"
+        ],
+        "language": "vbheuixlklwkfpd",
+        "technology": [
+          "ipsum ip",
+          "sit dolor si"
+        ]
+      },
+      "description": "con",
+      "links": {
+        "docsUrl": "ftp://example.com/v1/resource"
+      }
+    },
+    {
+      "title": "v",
+      "filters": {
+        "categories": [
+          "v",
+          "whpmhlkmysajzt",
+          "sit sit ipsum amet a"
+        ],
+        "language": 4,
+        "technology": []
+      },
+      "links": {
+        "repoUrl": "http://test.org/api/data"
+      }
+    },
+    {
+      "title": "u7McGGGK",
+      "filters": {
+        "categories": [
+          "g83CgU8sw1U4",
+          "DNnZI5Q381JOvVWlvGg0",
+          "lo",
+          "ipsum sit i",
+          "jclbdgxbmajzvmgg"
+        ],
+        "language": false,
+        "technology": []
+      }
+    },
+    {
+      "title": "lorem lore",
+      "filters": {
+        "categories": [
+          "qrmodbwuzt",
+          "ipsum ipsum ipsum a",
+          "qulsn",
+          "consectetur amet ips",
+          "oeriwpyktrtyen"
+        ],
+        "language": null,
+        "technology": [
+          "KdeLbi673s8xYs6kdm",
+          "ixahoiuelzosqennmxdq"
+        ]
+      },
+      "links": {
+        "docsUrl": "https://demo.net/api/resource",
+        "repoUrl": "https://test.org/v1/data"
+      }
+    },
+    {
+      "title": "sUhi77q2A5ed7GE7Ygzk",
+      "filters": {
+        "categories": [
+          "sit sit amet",
+          "qRxzANyVRuJNbzrwz7U",
+          "rjcxbiwbyd",
+          "bL1DI5zI2",
+          "uMVTmsHhVqsqn"
+        ],
+        "technology": [],
+        "hasCommercial": true
+      },
+      "description": "sit amet ips"
+    },
+    {
+      "title": "ipsum co",
+      "filters": {
+        "categories": [
+          "syilrdjblqkele",
+          "dslkgipcqbwjqijigdjgo",
+          "uq",
+          "qt",
+          "lvqxxh"
+        ],
+        "language": true,
+        "technology": [
+          "jclqviq",
+          "RnRT3d7LQ"
+        ],
+        "hasCommercial": false
+      },
+      "description": "qpfipthsoc"
+    },
+    {
+      "title": "lorem dolor consectet",
+      "filters": {
+        "categories": [
+          "LJGYQFami27xUd0d",
+          "uJABpZO8DCeipy0k0ri7p",
+          "wqdewn",
+          "ohdilxu",
+          "wddu"
+        ]
+      },
+      "description": "sit ipsum amet "
+    },
+    {
+      "title": "consectetu",
+      "filters": {
+        "categories": [
+          "adipiscing ame",
+          "consec",
+          "amet adipiscing con",
+          "sit consect",
+          "xbfmmypouaszpvti"
+        ],
+        "technology": [
+          "zkdhqalk",
+          "ad",
+          "ZhUkr6vIOBY7JwYqc2pdQ",
+          "k"
+        ],
+        "hasCommercial": true
+      },
+      "description": "sit a",
+      "links": {
+        "websiteUrl": "https://demo.net/v1/data",
+        "docsUrl": "http://example.com/v1/api",
+        "repoUrl": "ftp://example.com/api/v1"
+      }
+    },
+    {
+      "title": "adipiscing adipis",
+      "filters": {
+        "categories": [
+          "n1S",
+          "ysidhfnndfws",
+          "adip",
+          "3L307YxayTSSn"
+        ],
+        "language": null,
+        "technology": [
+          "hzjnujxoogin",
+          "consectetu"
+        ]
+      },
+      "description": "wdqb",
+      "links": {
+        "websiteUrl": "http://test.org/api/resource",
+        "docsUrl": "http://example.com/data/v1",
+        "repoUrl": "http://demo.net/v1/resource"
+      }
+    },
+    {
+      "title": "adi",
+      "filters": {
+        "categories": [
+          "nyhwkr",
+          "iD83vKjlWtoAEOgb2CxL",
+          "lorem consectetur lo",
+          "adipiscing consect",
+          "adipiscing am",
+          "i"
+        ],
+        "language": 1.79
+      },
+      "description": "wupuiphkjmalm"
+    },
+    {
+      "title": "adipiscing adipis",
+      "filters": {
+        "categories": [
+          "rzehsgksyuhubud",
+          "fKEr5MH1y8QxC8La0zsEm"
+        ],
+        "hasCommercial": false
+      }
+    },
+    {
+      "title": "co",
+      "filters": {
+        "categories": [
+          "wjoi",
+          "do",
+          "exuwjatcbrd"
+        ],
+        "technology": [
+          "DcsGDYNJ7a3OAHXKZGA",
+          "consectetur ipsum",
+          "dolor dol"
+        ],
+        "hasCommercial": false
+      },
+      "description": "amet consec"
+    },
+    {
+      "title": "k7zWbk8Yb",
+      "filters": {
+        "categories": [
+          "ogtil1wsyg3FP9gJDVLB",
+          "kgesa",
+          "zT2V5kGd6oGQDDDJNTDyj",
+          "n"
+        ],
+        "language": true
+      },
+      "description": "LdZyhmY3m7n",
+      "links": {
+        "websiteUrl": "http://demo.net/api/data",
+        "docsUrl": "http://example.com/v1/api",
+        "repoUrl": "https://test.org/resource/data"
+      }
+    },
+    {
+      "title": "consecte",
+      "filters": {
+        "categories": [
+          "LMaRjF",
+          "thmemdyhpnlxqu",
+          "blxujq",
+          "M8",
+          "AoaXpuE77zPq",
+          "0PGecqC0BNkRgpw"
+        ],
+        "language": null,
+        "technology": [],
+        "hasCommercial": true
+      },
+      "description": "JqQ",
+      "links": {
+        "docsUrl": "ftp://test.org/resource/data"
+      }
+    },
+    {
+      "title": "amet ipsum ipsum ad",
+      "filters": {
+        "categories": [
+          "xmthdf",
+          "zXDFaNskNypApzTb"
+        ]
+      },
+      "description": "ysstexviksgvauardswuy",
+      "links": {
+        "websiteUrl": "https://test.org/data/api",
+        "docsUrl": "https://example.com/api/data"
+      }
+    },
+    {
+      "title": "pv",
+      "filters": {
+        "categories": [
+          "i"
+        ],
+        "language": "iysdxccpzay"
+      },
+      "description": "ddqgngsltfraw",
+      "links": {}
+    },
+    {
+      "title": "wD9tHNJ3",
+      "filters": {
+        "categories": [
+          "atd",
+          "ky40utvQ0mJaIeJqVxTJv",
+          "llnzmkuoffeaz"
+        ],
+        "language": null,
+        "technology": [
+          "oeupqecbox",
+          "dolor lorem lorem adi",
+          "aCVGQB2",
+          "bmuacrelv",
+          "smssuwrenpbyjtgseefjf"
+        ],
+        "hasCommercial": true
+      },
+      "description": "avfzvulcgkxa"
+    },
+    {
+      "title": "nbxskfwgsdrhgymplyg",
+      "filters": {
+        "categories": [
+          "xbp",
+          "cons",
+          "idmqwcndx"
+        ],
+        "language": true
+      },
+      "description": "4uvPGxPUajq4HfMjm5wk",
+      "links": {
+        "websiteUrl": "ftp://test.org/resource/data",
+        "docsUrl": "https://test.org/data/resource",
+        "repoUrl": "http://test.org/api/data"
+      }
+    },
+    {
+      "title": "WOBCwKnv62SI69Ybb",
+      "filters": {
+        "categories": [
+          "conse",
+          "xXfcWGNiFRM",
+          "ipsum ipsu"
+        ],
+        "language": 36,
+        "technology": [
+          "1Wj",
+          "sit",
+          "sit ipsum ame"
+        ]
+      },
+      "description": "VYTTY"
+    },
+    {
+      "title": "FybWhJ7SnQQ",
+      "filters": {
+        "categories": [
+          "yosxsufltbttgqvu",
+          "consec",
+          "qfezmiyewalizlouqv",
+          "lorem dolor dolo"
+        ],
+        "language": "consectetur lor",
+        "technology": [],
+        "hasCommercial": false
+      },
+      "links": {
+        "websiteUrl": "https://demo.net/v1/data",
+        "repoUrl": "https://test.org/resource/api"
+      }
+    },
+    {
+      "title": "lorem ipsum lo",
+      "filters": {
+        "categories": [
+          "adipiscing ipsum c"
+        ],
+        "language": true
+      }
+    },
+    {
+      "title": "tMV2RU2cfr58nxAf",
+      "filters": {
+        "categories": [
+          "k",
+          "le7M9u4uEe1F02lgERy2Z"
+        ],
+        "hasCommercial": false
+      },
+      "description": "oyqy3G"
+    },
+    {
+      "title": "SISNhOE7n7L97gT7",
+      "filters": {
+        "categories": [
+          "eKNNPSRw6",
+          "dvsnwvysn",
+          "bfsszexggkfsetaveqp",
+          "vescffyunnqtjjyfa",
+          "Qfcadz",
+          "g"
+        ],
+        "hasCommercial": true
+      },
+      "description": "mncvvcixlzlpwwjltp"
+    },
+    {
+      "title": "pmvdhpdqjvhv",
+      "filters": {
+        "categories": [
+          "ipsum lor",
+          "cgtrctzcveuvobxqs",
+          "ipsum dolo"
+        ],
+        "language": null,
+        "technology": [
+          "dolor lor",
+          "kacdenaljefrrfmwnuyld"
+        ],
+        "hasCommercial": false
+      }
+    },
+    {
+      "title": "dEmRkEkdLm3LrwERbZS",
+      "filters": {
+        "categories": [
+          "b",
+          "mp2PUYqNdHH",
+          "v",
+          "dolor co",
+          "4DPhw"
+        ],
+        "technology": [
+          "oYsiy6jXD6EwUHe",
+          "wxmfvpcmbpe",
+          "dz2r5oZOw63HYH"
+        ],
+        "hasCommercial": true
+      },
+      "links": {
+        "websiteUrl": "ftp://example.com/resource/v1",
+        "docsUrl": "ftp://example.com/resource/data",
+        "repoUrl": "http://demo.net/resource/api"
+      }
+    },
+    {
+      "title": "dol",
+      "filters": {
+        "categories": [
+          "az1tyZD9",
+          "ab8i3lX17XtayewFm"
+        ],
+        "language": null,
+        "technology": [
+          "consectetur",
+          "f",
+          "adipiscing ",
+          "fuhrmdvssxkxny"
+        ],
+        "hasCommercial": true
+      },
+      "links": {
+        "websiteUrl": "https://demo.net/v1/data",
+        "docsUrl": "ftp://test.org/resource/v1",
+        "repoUrl": "ftp://example.com/v1/data"
+      }
+    },
+    {
+      "title": "6sGqlYk",
+      "filters": {
+        "categories": [
+          "smxodfw",
+          "y",
+          "adipisci",
+          "hrbka",
+          "uqnarngcqpanf",
+          "xcvdfcjhuy"
+        ],
+        "language": null,
+        "technology": [
+          "dolor sit ame",
+          "BAHSEcwnNoGge8gH",
+          "ips",
+          "sit dolor "
+        ],
+        "hasCommercial": false
+      },
+      "description": "aIz6JhvF0oy"
+    },
+    {
+      "title": "q",
+      "filters": {
+        "categories": [
+          "onxtjxdvwh",
+          "PiFG7twV",
+          "adipiscing adipisc",
+          "amet lorem amet am",
+          "xKrGPqU3syNh5E"
+        ]
+      },
+      "description": "mawjcsk",
+      "links": {
+        "websiteUrl": "https://demo.net/data/resource",
+        "repoUrl": "http://example.com/v1/api"
+      }
+    },
+    {
+      "title": "lore",
+      "filters": {
+        "categories": [
+          "fn",
+          "kzxfevsxbokms",
+          "adipiscing amet co",
+          "umfgdncmdvjvwwzmrp",
+          "OVP5vqmxKxZk2YytDj8",
+          "yhrtx"
+        ],
+        "language": 21.53,
+        "hasCommercial": false
+      },
+      "description": "VU6YAiHs9Pq",
+      "links": {}
+    },
+    {
+      "title": "pmomyqazignqmoeio",
+      "filters": {
+        "categories": [
+          "sit ipsum ipsum ip",
+          "tronqlch",
+          "IL4zlDxmeDv",
+          "ips",
+          "agfaapbdonjqhezxftpw"
+        ],
+        "language": "ipsum adip",
+        "technology": [
+          "dolor ",
+          "Vd92z96bbLpHpsh",
+          "4tyAQTXoa",
+          "gemvhhczzsodwoqh"
+        ],
+        "hasCommercial": false
+      },
+      "description": "letv"
+    }
+  ]
+}

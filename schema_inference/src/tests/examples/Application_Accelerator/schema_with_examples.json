@@ -1,0 +1,6099 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://json.schemastore.org/accelerator.json",
+    "definitions": {
+      "AcceleratorOption": {
+        "type": "object",
+        "properties": {
+          "choices": {
+            "title": "choices",
+            "description": "A list of predefined choices",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "title": "text",
+                  "description": "The displayed text"
+                },
+                "value": {
+                  "title": "value",
+                  "description": "The value that the form returns for this choice"
+                }
+              },
+              "title": "choices"
+            }
+          },
+          "dataType": {
+            "anyOf": [
+              {
+                "const": "string"
+              },
+              {
+                "const": "number"
+              },
+              {
+                "const": "boolean"
+              },
+              {
+                "type": "string",
+                "pattern": "^$|^[A-Z][a-z0-9A-Z]*$"
+              },
+              {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 1,
+                "items": {
+                  "const": "string"
+                }
+              },
+              {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 1,
+                "items": {
+                  "const": "number"
+                }
+              },
+              {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 1,
+                "items": {
+                  "const": "boolean"
+                }
+              },
+              {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 1,
+                "items": {
+                  "type": "string",
+                  "pattern": "^$|^[A-Z][a-z0-9A-Z]*$"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "dataType",
+            "description": "The option data type"
+          },
+          "defaultValue": {
+            "title": "defaultValue",
+            "description": "The value used to pre-populate the option"
+          },
+          "dependsOn": {
+            "title": "dependsOn",
+            "description": "The dependency that controls this options visibility",
+            "allOf": [
+              {
+                "$ref": "#/definitions/DependsOn"
+              }
+            ]
+          },
+          "description": {
+            "type": "string",
+            "title": "description",
+            "description": "A tooltip to accompany the input"
+          },
+          "inputType": {
+            "enum": [
+              "text",
+              "textarea",
+              "checkbox",
+              "select",
+              "radio"
+            ],
+            "title": "inputType",
+            "description": "The HTML input type used to display the option"
+          },
+          "label": {
+            "type": "string",
+            "title": "label",
+            "description": "A human-readable version of the name identifying the option"
+          },
+          "name": {
+            "type": "string",
+            "title": "name",
+            "description": "A unique, camelCase name",
+            "minLength": 1,
+            "pattern": "^$|^[a-z][a-z0-9A-Z]*$"
+          },
+          "required": {
+            "type": "boolean",
+            "title": "required",
+            "description": "Whether the user is required to enter a value in the UI"
+          },
+          "validationRegex": {
+            "title": "validationRegex",
+            "description": "A regex that validates the string representation of the option value when set",
+            "allOf": [
+              {
+                "$ref": "#/definitions/Pattern"
+              }
+            ]
+          }
+        },
+        "anyOf": [
+          {
+            "properties": {
+              "dataType": {
+                "const": "string"
+              },
+              "defaultValue": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "properties": {
+              "dataType": {
+                "type": "array",
+                "items": {
+                  "const": "string"
+                }
+              },
+              "defaultValue": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "dataType": {
+                "const": "number"
+              },
+              "defaultValue": {
+                "type": "number"
+              }
+            }
+          },
+          {
+            "properties": {
+              "dataType": {
+                "type": "array",
+                "items": {
+                  "const": "number"
+                }
+              },
+              "defaultValue": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "dataType": {
+                "const": "boolean"
+              },
+              "defaultValue": {
+                "type": "boolean"
+              }
+            }
+          },
+          {
+            "properties": {
+              "dataType": {
+                "type": "array",
+                "items": {
+                  "const": "boolean"
+                }
+              },
+              "defaultValue": {
+                "type": "array",
+                "items": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "dataType": {
+                "type": "string",
+                "pattern": "^$|^[A-Z][a-z0-9A-Z]*$"
+              },
+              "defaultValue": {
+                "type": "object"
+              }
+            }
+          },
+          {
+            "properties": {
+              "dataType": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^$|^[A-Z][a-z0-9A-Z]*$"
+                }
+              },
+              "defaultValue": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "Chain-1": {
+        "type": "object",
+        "properties": {
+          "applyTo": {
+            "title": "applyTo",
+            "description": "The path patterns used to filter which files to apply the Transforms to",
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "title": "applyTo",
+              "minLength": 1,
+              "pattern": "^$|^[^/].*$"
+            }
+          },
+          "condition": {
+            "title": "condition",
+            "description": "The SpEL expression that determines if this Transform should execute",
+            "allOf": [
+              {
+                "$ref": "#/definitions/Expression"
+              }
+            ]
+          },
+          "name": {
+            "type": "string",
+            "title": "name",
+            "description": "The transform name"
+          },
+          "transformations": {
+            "title": "transformations",
+            "description": "A list of child Transforms to apply sequentially",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Chain-2"
+                },
+                {
+                  "$ref": "#/definitions/Combo-2"
+                },
+                {
+                  "$ref": "#/definitions/Exclude-2"
+                },
+                {
+                  "$ref": "#/definitions/Include-2"
+                },
+                {
+                  "$ref": "#/definitions/InvokeFragment-2"
+                },
+                {
+                  "$ref": "#/definitions/Let-2"
+                },
+                {
+                  "$ref": "#/definitions/Loop-2"
+                },
+                {
+                  "$ref": "#/definitions/Merge-2"
+                },
+                {
+                  "$ref": "#/definitions/OpenRewriteRecipe-2"
+                },
+                {
+                  "$ref": "#/definitions/Provenance-2"
+                },
+                {
+                  "$ref": "#/definitions/ReplaceText-2"
+                },
+                {
+                  "$ref": "#/definitions/RewritePath-2"
+                },
+                {
+                  "$ref": "#/definitions/UniquePath-2"
+                },
+                {
+                  "$ref": "#/definitions/UseEncoding-2"
+                },
+                {
+                  "$ref": "#/definitions/YTT-2"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "Chain-2": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "Chain"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/definitions/Chain-1"
+          }
+        ]
+      },
+      "Combo-1": {
+        "type": "object",
+        "properties": {
+          "applyTo": {
+            "title": "applyTo",
+            "description": "The path patterns used to filter which files to apply the Transforms to",
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "title": "applyTo",
+              "minLength": 1,
+              "pattern": "^$|^[^/].*$"
+            }
+          },
+          "chain": {
+            "title": "chain",
+            "description": "A list of child Transforms to apply sequentially",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Chain-2"
+                },
+                {
+                  "$ref": "#/definitions/Combo-2"
+                },
+                {
+                  "$ref": "#/definitions/Exclude-2"
+                },
+                {
+                  "$ref": "#/definitions/Include-2"
+                },
+                {
+                  "$ref": "#/definitions/InvokeFragment-2"
+                },
+                {
+                  "$ref": "#/definitions/Let-2"
+                },
+                {
+                  "$ref": "#/definitions/Loop-2"
+                },
+                {
+                  "$ref": "#/definitions/Merge-2"
+                },
+                {
+                  "$ref": "#/definitions/OpenRewriteRecipe-2"
+                },
+                {
+                  "$ref": "#/definitions/Provenance-2"
+                },
+                {
+                  "$ref": "#/definitions/ReplaceText-2"
+                },
+                {
+                  "$ref": "#/definitions/RewritePath-2"
+                },
+                {
+                  "$ref": "#/definitions/UniquePath-2"
+                },
+                {
+                  "$ref": "#/definitions/UseEncoding-2"
+                },
+                {
+                  "$ref": "#/definitions/YTT-2"
+                }
+              ]
+            }
+          },
+          "condition": {
+            "title": "condition",
+            "description": "The SpEL expression that determines if this Transform should execute",
+            "allOf": [
+              {
+                "$ref": "#/definitions/Expression"
+              }
+            ]
+          },
+          "exclude": {
+            "title": "exclude",
+            "description": "The path patterns used to filter which files to exclude",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "title": "exclude",
+              "minLength": 1,
+              "pattern": "^$|^[^/].*$"
+            }
+          },
+          "include": {
+            "title": "include",
+            "description": "The path patterns used to filter which files to include",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "title": "include",
+              "minLength": 1,
+              "pattern": "^$|^[^/].*$"
+            }
+          },
+          "let": {
+            "title": "let",
+            "description": "A list of additional variables and their values",
+            "type": "array",
+            "items": {
+              "title": "let",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/DerivedSymbol"
+                }
+              ]
+            }
+          },
+          "merge": {
+            "title": "merge",
+            "description": "A list of child Transforms to be executed in parallel",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Chain-2"
+                },
+                {
+                  "$ref": "#/definitions/Combo-2"
+                },
+                {
+                  "$ref": "#/definitions/Exclude-2"
+                },
+                {
+                  "$ref": "#/definitions/Include-2"
+                },
+                {
+                  "$ref": "#/definitions/InvokeFragment-2"
+                },
+                {
+                  "$ref": "#/definitions/Let-2"
+                },
+                {
+                  "$ref": "#/definitions/Loop-2"
+                },
+                {
+                  "$ref": "#/definitions/Merge-2"
+                },
+                {
+                  "$ref": "#/definitions/OpenRewriteRecipe-2"
+                },
+                {
+                  "$ref": "#/definitions/Provenance-2"
+                },
+                {
+                  "$ref": "#/definitions/ReplaceText-2"
+                },
+                {
+                  "$ref": "#/definitions/RewritePath-2"
+                },
+                {
+                  "$ref": "#/definitions/UniquePath-2"
+                },
+                {
+                  "$ref": "#/definitions/UseEncoding-2"
+                },
+                {
+                  "$ref": "#/definitions/YTT-2"
+                }
+              ]
+            }
+          },
+          "name": {
+            "type": "string",
+            "title": "name",
+            "description": "The transform name"
+          },
+          "onConflict": {
+            "title": "onConflict",
+            "description": "How conflict is handled when an operation produces multiple files at the same path",
+            "allOf": [
+              {
+                "$ref": "#/definitions/ConflictResolution"
+              }
+            ]
+          }
+        }
+      },
+      "Combo-2": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "Combo"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/Combo-1"
+          }
+        ]
+      },
+      "ConflictResolution": {
+        "enum": [
+          "Fail",
+          "UseFirst",
+          "UseLast",
+          "Append",
+          "FavorOwn",
+          "FavorForeign",
+          "NWayDiff"
+        ]
+      },
+      "DependsOn": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "name",
+            "description": "The options name",
+            "minLength": 1,
+            "pattern": "^$|^[a-z][a-z0-9A-Z]*$"
+          },
+          "value": {
+            "title": "value",
+            "description": "The desired options value to compare against"
+          }
+        }
+      },
+      "DerivedSymbol": {
+        "type": "object",
+        "properties": {
+          "expression": {
+            "title": "expression",
+            "description": "The SpEL expression to evaluate to compute the symbol value",
+            "allOf": [
+              {
+                "$ref": "#/definitions/Expression"
+              }
+            ]
+          },
+          "name": {
+            "type": "string",
+            "title": "name",
+            "description": "The name under which the new symbol will be added",
+            "minLength": 1,
+            "pattern": "^$|^[a-z][a-z0-9A-Z]*$"
+          }
+        }
+      },
+      "Exclude-1": {
+        "type": "object",
+        "properties": {
+          "condition": {
+            "title": "condition",
+            "description": "The SpEL expression that determines if this Transform should execute",
+            "allOf": [
+              {
+                "$ref": "#/definitions/Expression"
+              }
+            ]
+          },
+          "name": {
+            "type": "string",
+            "title": "name",
+            "description": "The transform name"
+          },
+          "patterns": {
+            "title": "patterns",
+            "description": "The path patterns used to filter which files to exclude",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "title": "patterns",
+              "minLength": 1,
+              "pattern": "^$|^[^/].*$"
+            }
+          }
+        }
+      },
+      "Exclude-2": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "Exclude"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/definitions/Exclude-1"
+          }
+        ]
+      },
+      "Expression": {
+        "type": "string"
+      },
+      "Include-1": {
+        "type": "object",
+        "properties": {
+          "condition": {
+            "title": "condition",
+            "description": "The SpEL expression that determines if this Transform should execute",
+            "allOf": [
+              {
+                "$ref": "#/definitions/Expression"
+              }
+            ]
+          },
+          "name": {
+            "type": "string",
+            "title": "name",
+            "description": "The transform name"
+          },
+          "patterns": {
+            "title": "patterns",
+            "description": "The path patterns used to filter which files to include",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "title": "patterns",
+              "minLength": 1,
+              "pattern": "^$|^[^/].*$"
+            }
+          }
+        }
+      },
+      "Include-2": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "Include"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/definitions/Include-1"
+          }
+        ]
+      },
+      "InvokeFragment-1": {
+        "type": "object",
+        "properties": {
+          "anchor": {
+            "type": "string",
+            "title": "anchor",
+            "pattern": "^$|^[^/]$|^[^/](.+)[^/]$"
+          },
+          "condition": {
+            "title": "condition",
+            "description": "The SpEL expression that determines if this Transform should execute",
+            "allOf": [
+              {
+                "$ref": "#/definitions/Expression"
+              }
+            ]
+          },
+          "let": {
+            "title": "let",
+            "type": "array",
+            "items": {
+              "title": "let",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/DerivedSymbol"
+                }
+              ]
+            }
+          },
+          "name": {
+            "type": "string",
+            "title": "name",
+            "description": "The transform name"
+          },
+          "reference": {
+            "type": "string",
+            "title": "reference",
+            "minLength": 1,
+            "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$"
+          }
+        }
+      },
+      "InvokeFragment-2": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "InvokeFragment"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/definitions/InvokeFragment-1"
+          }
+        ]
+      },
+      "Let-1": {
+        "type": "object",
+        "properties": {
+          "condition": {
+            "title": "condition",
+            "description": "The SpEL expression that determines if this Transform should execute",
+            "allOf": [
+              {
+                "$ref": "#/definitions/Expression"
+              }
+            ]
+          },
+          "in": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/Chain-2"
+              },
+              {
+                "$ref": "#/definitions/Combo-2"
+              },
+              {
+                "$ref": "#/definitions/Exclude-2"
+              },
+              {
+                "$ref": "#/definitions/Include-2"
+              },
+              {
+                "$ref": "#/definitions/InvokeFragment-2"
+              },
+              {
+                "$ref": "#/definitions/Let-2"
+              },
+              {
+                "$ref": "#/definitions/Loop-2"
+              },
+              {
+                "$ref": "#/definitions/Merge-2"
+              },
+              {
+                "$ref": "#/definitions/OpenRewriteRecipe-2"
+              },
+              {
+                "$ref": "#/definitions/Provenance-2"
+              },
+              {
+                "$ref": "#/definitions/ReplaceText-2"
+              },
+              {
+                "$ref": "#/definitions/RewritePath-2"
+              },
+              {
+                "$ref": "#/definitions/UniquePath-2"
+              },
+              {
+                "$ref": "#/definitions/UseEncoding-2"
+              },
+              {
+                "$ref": "#/definitions/YTT-2"
+              }
+            ]
+          },
+          "name": {
+            "type": "string",
+            "title": "name",
+            "description": "The transform name"
+          },
+          "noShadow": {
+            "type": "boolean",
+            "title": "noShadow",
+            "description": "Whether shadowing should be turned off"
+          },
+          "symbols": {
+            "title": "symbols",
+            "description": "A list of additional variables and their values",
+            "type": "array",
+            "items": {
+              "title": "symbols",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/DerivedSymbol"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "Let-2": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "Let"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/definitions/Let-1"
+          }
+        ]
+      },
+      "Loop-1": {
+        "type": "object",
+        "properties": {
+          "condition": {
+            "title": "condition",
+            "description": "The SpEL expression that determines if this Transform should execute",
+            "allOf": [
+              {
+                "$ref": "#/definitions/Expression"
+              }
+            ]
+          },
+          "doAsChain": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/Chain-2"
+              },
+              {
+                "$ref": "#/definitions/Combo-2"
+              },
+              {
+                "$ref": "#/definitions/Exclude-2"
+              },
+              {
+                "$ref": "#/definitions/Include-2"
+              },
+              {
+                "$ref": "#/definitions/InvokeFragment-2"
+              },
+              {
+                "$ref": "#/definitions/Let-2"
+              },
+              {
+                "$ref": "#/definitions/Loop-2"
+              },
+              {
+                "$ref": "#/definitions/Merge-2"
+              },
+              {
+                "$ref": "#/definitions/OpenRewriteRecipe-2"
+              },
+              {
+                "$ref": "#/definitions/Provenance-2"
+              },
+              {
+                "$ref": "#/definitions/ReplaceText-2"
+              },
+              {
+                "$ref": "#/definitions/RewritePath-2"
+              },
+              {
+                "$ref": "#/definitions/UniquePath-2"
+              },
+              {
+                "$ref": "#/definitions/UseEncoding-2"
+              },
+              {
+                "$ref": "#/definitions/YTT-2"
+              }
+            ]
+          },
+          "doAsMerge": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/Chain-2"
+              },
+              {
+                "$ref": "#/definitions/Combo-2"
+              },
+              {
+                "$ref": "#/definitions/Exclude-2"
+              },
+              {
+                "$ref": "#/definitions/Include-2"
+              },
+              {
+                "$ref": "#/definitions/InvokeFragment-2"
+              },
+              {
+                "$ref": "#/definitions/Let-2"
+              },
+              {
+                "$ref": "#/definitions/Loop-2"
+              },
+              {
+                "$ref": "#/definitions/Merge-2"
+              },
+              {
+                "$ref": "#/definitions/OpenRewriteRecipe-2"
+              },
+              {
+                "$ref": "#/definitions/Provenance-2"
+              },
+              {
+                "$ref": "#/definitions/ReplaceText-2"
+              },
+              {
+                "$ref": "#/definitions/RewritePath-2"
+              },
+              {
+                "$ref": "#/definitions/UniquePath-2"
+              },
+              {
+                "$ref": "#/definitions/UseEncoding-2"
+              },
+              {
+                "$ref": "#/definitions/YTT-2"
+              }
+            ]
+          },
+          "index": {
+            "type": "string",
+            "title": "index",
+            "description": "The variable's name to be assigned to the index of the current element on each iteration",
+            "pattern": "^$|^[a-z][a-z0-9A-Z]*$"
+          },
+          "name": {
+            "type": "string",
+            "title": "name",
+            "description": "The transform name"
+          },
+          "on": {
+            "title": "on",
+            "description": "A SpEL expression that evaluates a list that contains the elements to be iterated over",
+            "allOf": [
+              {
+                "$ref": "#/definitions/Expression"
+              }
+            ]
+          },
+          "var": {
+            "type": "string",
+            "title": "var",
+            "description": "The name of the variable to be assigned to the current element on each iteration",
+            "pattern": "^$|^[a-z][a-z0-9A-Z]*$"
+          }
+        }
+      },
+      "Loop-2": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "Loop"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/definitions/Loop-1"
+          }
+        ]
+      },
+      "Merge-1": {
+        "type": "object",
+        "properties": {
+          "condition": {
+            "title": "condition",
+            "description": "The SpEL expression that determines if this Transform should execute",
+            "allOf": [
+              {
+                "$ref": "#/definitions/Expression"
+              }
+            ]
+          },
+          "name": {
+            "type": "string",
+            "title": "name",
+            "description": "The transform name"
+          },
+          "sources": {
+            "title": "sources",
+            "description": "A list of child Transforms to be executed in parallel",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Chain-2"
+                },
+                {
+                  "$ref": "#/definitions/Combo-2"
+                },
+                {
+                  "$ref": "#/definitions/Exclude-2"
+                },
+                {
+                  "$ref": "#/definitions/Include-2"
+                },
+                {
+                  "$ref": "#/definitions/InvokeFragment-2"
+                },
+                {
+                  "$ref": "#/definitions/Let-2"
+                },
+                {
+                  "$ref": "#/definitions/Loop-2"
+                },
+                {
+                  "$ref": "#/definitions/Merge-2"
+                },
+                {
+                  "$ref": "#/definitions/OpenRewriteRecipe-2"
+                },
+                {
+                  "$ref": "#/definitions/Provenance-2"
+                },
+                {
+                  "$ref": "#/definitions/ReplaceText-2"
+                },
+                {
+                  "$ref": "#/definitions/RewritePath-2"
+                },
+                {
+                  "$ref": "#/definitions/UniquePath-2"
+                },
+                {
+                  "$ref": "#/definitions/UseEncoding-2"
+                },
+                {
+                  "$ref": "#/definitions/YTT-2"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "Merge-2": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "Merge"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/definitions/Merge-1"
+          }
+        ]
+      },
+      "OpenRewriteRecipe-1": {
+        "type": "object",
+        "properties": {
+          "condition": {
+            "title": "condition",
+            "description": "The SpEL expression that determines if this Transform should execute",
+            "allOf": [
+              {
+                "$ref": "#/definitions/Expression"
+              }
+            ]
+          },
+          "name": {
+            "type": "string",
+            "title": "name",
+            "description": "The transform name"
+          },
+          "options": {
+            "type": "object",
+            "title": "options",
+            "description": "Keys and values that depend on the class of the recipe"
+          },
+          "parseOrFail": {
+            "type": "boolean",
+            "title": "parseOrFail"
+          },
+          "recipe": {
+            "type": "string",
+            "pattern": "^[a-zA-Z_$][a-zA-Z\\d_$]*(?:\\.[a-zA-Z_$][a-zA-Z\\d_$]*)*$",
+            "title": "recipe",
+            "description": "Full qualified classname of the recipe"
+          }
+        }
+      },
+      "OpenRewriteRecipe-2": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "OpenRewriteRecipe"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/definitions/OpenRewriteRecipe-1"
+          }
+        ]
+      },
+      "Pattern": {
+        "type": "string",
+        "format": "regex"
+      },
+      "Provenance-1": {
+        "type": "object",
+        "properties": {
+          "condition": {
+            "title": "condition",
+            "description": "The SpEL expression that determines if this Transform should execute",
+            "allOf": [
+              {
+                "$ref": "#/definitions/Expression"
+              }
+            ]
+          },
+          "name": {
+            "type": "string",
+            "title": "name",
+            "description": "The transform name"
+          }
+        }
+      },
+      "Provenance-2": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "Provenance"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/definitions/Provenance-1"
+          }
+        ]
+      },
+      "ReplaceText-1": {
+        "type": "object",
+        "properties": {
+          "condition": {
+            "title": "condition",
+            "description": "The SpEL expression that determines if this Transform should execute",
+            "allOf": [
+              {
+                "$ref": "#/definitions/Expression"
+              }
+            ]
+          },
+          "name": {
+            "type": "string",
+            "title": "name",
+            "description": "The transform name"
+          },
+          "regex": {
+            "type": "object",
+            "properties": {
+              "pattern": {
+                "title": "pattern",
+                "description": "The regular expression that determines text that will be replaced",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/Pattern"
+                  }
+                ]
+              },
+              "with": {
+                "title": "with",
+                "description": "The SpEL expression that evaluates to the text that will replace the previous string",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/Expression"
+                  }
+                ]
+              }
+            },
+            "title": "regex",
+            "description": "The replacement rule using a single regular expression"
+          },
+          "substitutions": {
+            "title": "substitutions",
+            "description": "The replacement rules using literal text tokens",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "title": "text",
+                  "description": "The text that will be replaced",
+                  "minLength": 1
+                },
+                "with": {
+                  "title": "with",
+                  "description": "The SpEL expression that evaluates to the text that will replace the previous string",
+                  "allOf": [
+                    {
+                      "$ref": "#/definitions/Expression"
+                    }
+                  ]
+                }
+              },
+              "title": "substitutions"
+            }
+          }
+        }
+      },
+      "ReplaceText-2": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "ReplaceText"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/definitions/ReplaceText-1"
+          }
+        ]
+      },
+      "RewritePath-1": {
+        "type": "object",
+        "properties": {
+          "condition": {
+            "title": "condition",
+            "description": "The SpEL expression that determines if this Transform should execute",
+            "allOf": [
+              {
+                "$ref": "#/definitions/Expression"
+              }
+            ]
+          },
+          "matchOrFail": {
+            "type": "boolean",
+            "title": "matchOrFail",
+            "description": "Whether an error should occur if the regex doesn't match"
+          },
+          "name": {
+            "type": "string",
+            "title": "name",
+            "description": "The transform name"
+          },
+          "regex": {
+            "title": "regex",
+            "description": "The regular expression used to match each input files path",
+            "allOf": [
+              {
+                "$ref": "#/definitions/Pattern"
+              }
+            ]
+          },
+          "rewriteTo": {
+            "title": "rewriteTo",
+            "description": "The SpEL expression of the location that the file will be rewritten to",
+            "allOf": [
+              {
+                "$ref": "#/definitions/Expression"
+              }
+            ]
+          }
+        }
+      },
+      "RewritePath-2": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "RewritePath"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/definitions/RewritePath-1"
+          }
+        ]
+      },
+      "UniquePath-1": {
+        "type": "object",
+        "properties": {
+          "condition": {
+            "title": "condition",
+            "description": "The SpEL expression that determines if this Transform should execute",
+            "allOf": [
+              {
+                "$ref": "#/definitions/Expression"
+              }
+            ]
+          },
+          "name": {
+            "type": "string",
+            "title": "name",
+            "description": "The transform name"
+          },
+          "strategy": {
+            "title": "strategy",
+            "description": "How conflict is handled when an operation produces multiple files at the same path",
+            "allOf": [
+              {
+                "$ref": "#/definitions/ConflictResolution"
+              }
+            ]
+          }
+        }
+      },
+      "UniquePath-2": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "UniquePath"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/definitions/UniquePath-1"
+          }
+        ]
+      },
+      "UseEncoding-1": {
+        "type": "object",
+        "properties": {
+          "condition": {
+            "title": "condition",
+            "description": "The SpEL expression that determines if this Transform should execute",
+            "allOf": [
+              {
+                "$ref": "#/definitions/Expression"
+              }
+            ]
+          },
+          "encoding": {
+            "type": "object",
+            "title": "encoding",
+            "description": "The encuding to use, as recognized by the java java.nio.charset.Charset class"
+          },
+          "name": {
+            "type": "string",
+            "title": "name",
+            "description": "The transform name"
+          }
+        }
+      },
+      "UseEncoding-2": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "UseEncoding"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/definitions/UseEncoding-1"
+          }
+        ]
+      },
+      "YTT-1": {
+        "type": "object",
+        "properties": {
+          "allowList": {
+            "title": "allowList",
+            "description": "A list of variable names that are allowed to be passed to YTT",
+            "type": "array",
+            "items": {
+              "title": "allowList",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Pattern"
+                }
+              ]
+            }
+          },
+          "condition": {
+            "title": "condition",
+            "description": "The SpEL expression that determines if this Transform should execute",
+            "allOf": [
+              {
+                "$ref": "#/definitions/Expression"
+              }
+            ]
+          },
+          "denyList": {
+            "title": "denyList",
+            "description": "A list of variable names that are denied from being passed to YTT",
+            "type": "array",
+            "items": {
+              "title": "denyList",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Pattern"
+                }
+              ]
+            }
+          },
+          "extraArgs": {
+            "title": "extraArgs",
+            "description": "A list of SpEL expressions whose results are additional command line arguments",
+            "type": "array",
+            "items": {
+              "title": "extraArgs",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Expression"
+                }
+              ]
+            }
+          },
+          "name": {
+            "type": "string",
+            "title": "name",
+            "description": "The transform name"
+          }
+        }
+      },
+      "YTT-2": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "YTT"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/definitions/YTT-1"
+          }
+        ]
+      }
+    },
+    "properties": {
+      "accelerator": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "title": "description",
+            "description": "A more detailed description"
+          },
+          "displayName": {
+            "type": "string",
+            "title": "displayName",
+            "description": "A human-readable name"
+          },
+          "iconUrl": {
+            "type": "string",
+            "title": "iconUrl",
+            "description": "A URL pointing to an icon image"
+          },
+          "imports": {
+            "title": "imports",
+            "description": "The list of fragment to import",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "expose": {
+                  "title": "expose",
+                  "description": "The list of fragment options to make available as accelerator options",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "as": {
+                        "type": "string",
+                        "title": "as",
+                        "description": "The alias to use as the name of the option",
+                        "minLength": 1,
+                        "pattern": "^$|^[a-z][a-z0-9A-Z]*$"
+                      },
+                      "dependsOn": {
+                        "title": "dependsOn",
+                        "description": "The dependency that controls this options visibility",
+                        "allOf": [
+                          {
+                            "$ref": "#/definitions/DependsOn"
+                          }
+                        ]
+                      },
+                      "name": {
+                        "type": "string",
+                        "title": "name",
+                        "description": "The original name of the option",
+                        "minLength": 1,
+                        "pattern": "^\\*$|^$|^[a-z][a-z0-9A-Z]*$"
+                      }
+                    },
+                    "title": "expose"
+                  }
+                },
+                "exposeTypes": {
+                  "title": "exposeTypes",
+                  "description": "The list of fragment types to make available as accelerator types",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "as": {
+                        "type": "string",
+                        "title": "as",
+                        "description": "The alias to use as the name of the type",
+                        "minLength": 1,
+                        "pattern": "^$|^[A-Z][a-z0-9A-Z]*$"
+                      },
+                      "name": {
+                        "type": "string",
+                        "title": "name",
+                        "description": "The original name of the type",
+                        "minLength": 1,
+                        "pattern": "^\\*$|^$|^[A-Z][a-z0-9A-Z]*$"
+                      }
+                    },
+                    "title": "exposeTypes"
+                  }
+                },
+                "name": {
+                  "type": "string",
+                  "title": "name",
+                  "description": "The name of the fragment to import",
+                  "minLength": 1
+                }
+              },
+              "title": "imports"
+            }
+          },
+          "options": {
+            "title": "options",
+            "description": "The list of options passed to the UI to create input text boxes",
+            "type": "array",
+            "items": {
+              "title": "options",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/AcceleratorOption"
+                }
+              ]
+            }
+          },
+          "tags": {
+            "title": "tags",
+            "description": "A list of tags used to filter accelerators",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "title": "tags"
+            }
+          },
+          "types": {
+            "title": "types",
+            "description": "The definitions of custom types",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "title": "name",
+                  "description": "The capitalized name of this custom type",
+                  "minLength": 1,
+                  "pattern": "^$|^[A-Z][a-z0-9A-Z]*$"
+                },
+                "struct": {
+                  "title": "struct",
+                  "description": "A sequence of option definitions",
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "title": "struct",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/AcceleratorOption"
+                      }
+                    ]
+                  }
+                }
+              },
+              "title": "types"
+            }
+          }
+        },
+        "title": "accelerator",
+        "description": "The metadata (non-behavioral) part of an App Accelerator's accelerator.yaml file"
+      },
+      "engine": {
+        "anyOf": [
+          {
+            "$ref": "#/definitions/Chain-2"
+          },
+          {
+            "$ref": "#/definitions/Combo-2"
+          },
+          {
+            "$ref": "#/definitions/Exclude-2"
+          },
+          {
+            "$ref": "#/definitions/Include-2"
+          },
+          {
+            "$ref": "#/definitions/InvokeFragment-2"
+          },
+          {
+            "$ref": "#/definitions/Let-2"
+          },
+          {
+            "$ref": "#/definitions/Loop-2"
+          },
+          {
+            "$ref": "#/definitions/Merge-2"
+          },
+          {
+            "$ref": "#/definitions/OpenRewriteRecipe-2"
+          },
+          {
+            "$ref": "#/definitions/Provenance-2"
+          },
+          {
+            "$ref": "#/definitions/ReplaceText-2"
+          },
+          {
+            "$ref": "#/definitions/RewritePath-2"
+          },
+          {
+            "$ref": "#/definitions/UniquePath-2"
+          },
+          {
+            "$ref": "#/definitions/UseEncoding-2"
+          },
+          {
+            "$ref": "#/definitions/YTT-2"
+          }
+        ]
+      }
+    },
+    "type": "object"
+  },
+  "examples": [
+    {
+      "engine": "consecte"
+    },
+    {
+      "accelerator": {
+        "displayName": "RfLLFJM626ydghj",
+        "iconUrl": "dolor adipiscing",
+        "imports": [],
+        "options": [],
+        "tags": [],
+        "types": []
+      },
+      "engine": "g1K5Qf"
+    },
+    {
+      "accelerator": {
+        "description": "ipsu",
+        "displayName": "gWQs",
+        "imports": [],
+        "types": []
+      },
+      "engine": "sit amet ipsum"
+    },
+    {
+      "accelerator": {
+        "description": "bEh",
+        "types": []
+      },
+      "engine": 21.1
+    },
+    {
+      "engine": null
+    },
+    {
+      "accelerator": {
+        "description": "pxMXO7a6XSaYtAo",
+        "displayName": "ajrpotgvxaijjog",
+        "types": []
+      }
+    },
+    {
+      "accelerator": {
+        "description": "6lVk72gOnF0jnedEkh",
+        "iconUrl": "cggawxqjlfu",
+        "tags": [],
+        "types": []
+      },
+      "engine": null
+    },
+    {
+      "accelerator": {
+        "description": "IYQV",
+        "displayName": "qnwpokgdljugkyq",
+        "tags": []
+      },
+      "engine": "tEnpBLQEx7WHH"
+    },
+    {
+      "accelerator": {
+        "description": "stiofoyjcjfbwzxlcybpi",
+        "imports": [],
+        "options": [],
+        "types": []
+      }
+    },
+    {
+      "accelerator": {
+        "description": "adipis",
+        "displayName": "CRGvOxrRahHcP",
+        "imports": [],
+        "options": [],
+        "tags": []
+      }
+    },
+    {
+      "engine": null
+    },
+    {},
+    {
+      "engine": null
+    },
+    {
+      "accelerator": {
+        "displayName": "thjszrokks",
+        "iconUrl": "bgynamfjcqlffeiavk",
+        "imports": [],
+        "tags": [],
+        "types": []
+      },
+      "engine": "ipsum amet co"
+    },
+    {
+      "engine": false
+    },
+    {
+      "accelerator": {
+        "description": "d",
+        "displayName": "watnpjzrsrovqo",
+        "iconUrl": "vynelongxhrkalakql",
+        "tags": [],
+        "types": []
+      },
+      "engine": "NRbPiPBRaR"
+    },
+    {
+      "accelerator": {
+        "description": "ffkyuglphpaftlrrbuuhe",
+        "displayName": "stxeld",
+        "imports": [],
+        "options": [],
+        "tags": []
+      },
+      "engine": null
+    },
+    {
+      "accelerator": {
+        "iconUrl": "ravjuntsir",
+        "types": []
+      }
+    },
+    {
+      "accelerator": {
+        "description": "sit adipi",
+        "iconUrl": "ekg",
+        "options": [],
+        "types": []
+      },
+      "engine": 51.24
+    },
+    {
+      "accelerator": {
+        "description": "consectetur",
+        "displayName": "kN3QNuAiTss8v8M",
+        "options": [],
+        "types": []
+      },
+      "engine": 18.07
+    },
+    {
+      "engine": 89.25
+    },
+    {
+      "accelerator": {
+        "description": "fUemeM0Ln",
+        "imports": [],
+        "options": []
+      }
+    },
+    {
+      "accelerator": {
+        "displayName": "i"
+      }
+    },
+    {
+      "accelerator": {
+        "description": "GIvN3eIq",
+        "imports": [],
+        "options": [],
+        "tags": []
+      }
+    },
+    {
+      "accelerator": {
+        "description": "hzucwven",
+        "tags": []
+      }
+    },
+    {
+      "accelerator": {
+        "iconUrl": "M5mckcBhfty2aO4Tjjwa"
+      }
+    },
+    {},
+    {
+      "engine": 6.67
+    },
+    {
+      "engine": false
+    },
+    {
+      "accelerator": {
+        "displayName": "zgfbf",
+        "iconUrl": "YVvkvbOlj3B68Ppjp",
+        "options": [],
+        "tags": [],
+        "types": []
+      },
+      "engine": true
+    },
+    {
+      "accelerator": {
+        "description": "HxTQL8",
+        "iconUrl": "lorem consect",
+        "imports": [],
+        "options": [],
+        "tags": [],
+        "types": []
+      }
+    },
+    {
+      "accelerator": {
+        "description": "dolor lorem dolor s",
+        "displayName": "c",
+        "iconUrl": "E9ldqKWSfSvs",
+        "imports": [],
+        "options": []
+      }
+    },
+    {
+      "engine": 40
+    },
+    {
+      "accelerator": {
+        "description": "nw",
+        "types": [
+          {},
+          {
+            "struct": [
+              "gazomrdwhyemhq",
+              8,
+              34,
+              "consecte",
+              "h7sJnpMRX7"
+            ]
+          },
+          {
+            "struct": [
+              67,
+              77.66,
+              null,
+              null,
+              true
+            ]
+          },
+          {
+            "struct": [
+              "YEEhq5F",
+              "dolor ",
+              null,
+              false,
+              null
+            ]
+          },
+          {
+            "struct": [
+              47,
+              null,
+              90.56,
+              51,
+              null
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "accelerator": {
+        "displayName": "consectetu",
+        "iconUrl": "consecte",
+        "options": [
+          false,
+          33.2,
+          true,
+          84,
+          true
+        ],
+        "tags": [
+          "qthpwnafvmepykoeaqjfl",
+          "6IlKJihLLfGxTRcIden",
+          "lpvyvircuxydjzwmijub",
+          "nfdgfhuenzvla",
+          "vwmsntchqqceffyowp"
+        ],
+        "types": [
+          {
+            "struct": [
+              null,
+              null,
+              null,
+              97.35,
+              false
+            ]
+          },
+          {
+            "name": "vugyamrlthac",
+            "struct": [
+              null,
+              "consect",
+              78,
+              "dolor amet cons",
+              null
+            ]
+          },
+          {
+            "name": "dongorgpmo"
+          },
+          {
+            "struct": [
+              true,
+              null,
+              12.74,
+              42,
+              null
+            ]
+          },
+          {
+            "name": "adipiscing dolo"
+          }
+        ]
+      }
+    },
+    {
+      "engine": 19.31
+    },
+    {
+      "engine": "rxkrxmzaxsj"
+    },
+    {
+      "accelerator": {
+        "description": "consec",
+        "displayName": "a",
+        "iconUrl": "sit amet a",
+        "imports": [
+          {
+            "expose": [
+              {
+                "dependsOn": "xlqgkizigbps",
+                "name": "ipsum"
+              },
+              {
+                "as": "SjZMG",
+                "dependsOn": null
+              },
+              {
+                "as": "adipiscing ",
+                "name": "mY0Im3ifZ6Xj"
+              },
+              {
+                "as": "sit si",
+                "dependsOn": 28.32,
+                "name": "amet ips"
+              },
+              {
+                "as": "EW9ay",
+                "name": "YrtUsh9UUj"
+              }
+            ],
+            "name": "jptn"
+          },
+          {
+            "expose": [
+              {
+                "as": "lovmzdmlzoqd",
+                "dependsOn": 36.86
+              },
+              {
+                "as": "TtmdyueUnCtFYZD",
+                "dependsOn": null,
+                "name": "pfejfygdbby"
+              },
+              {
+                "dependsOn": "VYl9RnktS7MZuBB",
+                "name": "ckdimqqydywkf"
+              },
+              {
+                "dependsOn": null,
+                "name": "hdzfrjxhk"
+              },
+              {
+                "as": "Eq2O8ThLih6LI1O",
+                "dependsOn": "qM51T4xf8KFC",
+                "name": "xseqezeiti"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "ipsum "
+              },
+              {
+                "name": "zjscdfpddcmqhsm"
+              },
+              {
+                "name": "nauvdjf"
+              },
+              {
+                "as": "Ky7xfeo1Qjq",
+                "name": "ipsum "
+              },
+              {
+                "as": "abwWEXt9Kz",
+                "name": "ipsum lore"
+              }
+            ]
+          },
+          {
+            "name": "4m0N"
+          },
+          {
+            "expose": [
+              {
+                "dependsOn": "K7OoevixVTpf",
+                "name": "eyiff"
+              },
+              {
+                "dependsOn": 40.8
+              },
+              {},
+              {
+                "as": "consectetur dol",
+                "dependsOn": null
+              },
+              {
+                "as": "sit ipsum a",
+                "name": "LKQAbUjSg"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "mYJa1InStlTxx"
+              },
+              {},
+              {},
+              {
+                "name": "sit con"
+              },
+              {
+                "as": "zdJ47P"
+              }
+            ]
+          },
+          {
+            "expose": [
+              {},
+              {
+                "as": "h6AuLjna",
+                "name": "ipsum amet adi"
+              },
+              {
+                "as": "rfkmcnezfnwtqm",
+                "name": "k4X19D2p"
+              },
+              {
+                "as": "otyhuvauffak",
+                "dependsOn": null,
+                "name": "bzohirqzgzjum"
+              },
+              {
+                "as": "wpmoonx"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "blflkdxrlinbvau"
+              },
+              {
+                "as": "dolor amet ame"
+              },
+              {
+                "as": "upatqqwchmib"
+              },
+              {
+                "name": "8cueQ"
+              },
+              {}
+            ],
+            "name": "cpq"
+          }
+        ],
+        "options": [
+          65.72,
+          "adipis",
+          "3VS6Zq6",
+          55.95,
+          66
+        ],
+        "tags": [
+          "tPiNgFmCqPYWB0f",
+          "hnpdoxjzitixcbpcir",
+          "pbrtqvclqgtdopgupxqhs",
+          "aduigzfj",
+          "sit amet consec"
+        ],
+        "types": [
+          {
+            "name": "lorem adip",
+            "struct": [
+              4,
+              true,
+              61,
+              null,
+              false
+            ]
+          },
+          {},
+          {
+            "name": "lorem d",
+            "struct": [
+              "isezxaraepicrvq",
+              72,
+              13,
+              "fignjx",
+              21
+            ]
+          },
+          {
+            "name": "5uJmGOtlzncQ",
+            "struct": [
+              null,
+              "adipiscing adip",
+              70.25,
+              97.62,
+              false
+            ]
+          },
+          {
+            "struct": [
+              56.94,
+              20,
+              16.56,
+              "qthxwxwpjnufojt",
+              85
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "accelerator": {
+        "description": "HxI0956do6IiM5",
+        "displayName": "N8q9tOUjs5Mb",
+        "iconUrl": "sit",
+        "imports": [
+          {
+            "exposeTypes": [
+              {
+                "as": "jrnbfrabgmaz"
+              },
+              {},
+              {},
+              {
+                "as": "dolor i"
+              },
+              {
+                "as": "tnhvuoy",
+                "name": "YVArJsx"
+              }
+            ],
+            "name": "IqM"
+          },
+          {},
+          {
+            "exposeTypes": [
+              {
+                "as": "wugzazs",
+                "name": "cpwwzh"
+              },
+              {
+                "name": "eykkkbmmpz"
+              },
+              {
+                "name": "vtwdxhhtlq"
+              },
+              {
+                "as": "QBpjUaI",
+                "name": "UoefRDjrqhD"
+              },
+              {
+                "as": "consectet"
+              }
+            ],
+            "name": "So1"
+          },
+          {
+            "expose": [
+              {
+                "dependsOn": 85
+              },
+              {
+                "as": "adipiscing dol",
+                "dependsOn": null
+              },
+              {
+                "name": "sit lorem lore"
+              },
+              {
+                "as": "ipsum dolor ",
+                "dependsOn": "zawjurtjbfiwtjs",
+                "name": "UjIAkKhSi"
+              },
+              {
+                "as": "lorem lorem ",
+                "dependsOn": null,
+                "name": "lorem sit do"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "lcftoj",
+                "name": "lorem lor"
+              },
+              {
+                "as": "tyxmlxhfh"
+              },
+              {
+                "as": "lorem lorem "
+              },
+              {},
+              {
+                "as": "miazbkqizie",
+                "name": "iolfdoi"
+              }
+            ],
+            "name": "UvAxi1Pl1uX91DK"
+          },
+          {
+            "expose": [
+              {
+                "as": "swqsmakc",
+                "dependsOn": 38,
+                "name": "lorem amet "
+              },
+              {
+                "dependsOn": 34.19
+              },
+              {
+                "dependsOn": "khonvigrnxhpx"
+              },
+              {
+                "as": "wfvyrwagnakiiy",
+                "name": "uqyvvb"
+              },
+              {
+                "as": "consectetur",
+                "dependsOn": "olmdmq",
+                "name": "lorem adip"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "name": "consectetur l"
+              },
+              {
+                "as": "dqgfe0TX4uB3ld"
+              },
+              {
+                "as": "c9GhbEvjJtdVqC"
+              },
+              {
+                "as": "amet amet s",
+                "name": "consecte"
+              },
+              {
+                "name": "adipiscing sit "
+              }
+            ]
+          }
+        ],
+        "options": [
+          false,
+          "udjuyhq",
+          66,
+          "uFkkAN0kMr72",
+          26
+        ],
+        "types": [
+          {
+            "struct": [
+              null,
+              51,
+              13,
+              2,
+              "czzjmmglkrwwb"
+            ]
+          },
+          {
+            "name": "jgkivacsidzdyf",
+            "struct": [
+              false,
+              true,
+              false,
+              null,
+              "vUIkmwDdBOf1k4"
+            ]
+          },
+          {
+            "name": "BZaS01Kz",
+            "struct": [
+              null,
+              41.58,
+              95.34,
+              40.97,
+              false
+            ]
+          },
+          {
+            "name": "lkfxqrqlwhyip"
+          },
+          {
+            "name": "sit sit adipi"
+          }
+        ]
+      },
+      "engine": null
+    },
+    {
+      "accelerator": {
+        "description": "DbjP0atSnQLnU2Il1S",
+        "displayName": "lsaxsylh",
+        "imports": [
+          {
+            "expose": [
+              {
+                "dependsOn": false
+              },
+              {
+                "dependsOn": 46.24,
+                "name": "consec"
+              },
+              {
+                "dependsOn": null,
+                "name": "jgpwaf"
+              },
+              {
+                "dependsOn": 53
+              },
+              {
+                "dependsOn": 9.72,
+                "name": "trjhoumnkvyhyvk"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "name": "adipiscing ame"
+              },
+              {
+                "as": "adipis"
+              },
+              {
+                "as": "ebzkjuf"
+              },
+              {
+                "as": "cjwmlbeyzn"
+              },
+              {
+                "as": "swgsmhes",
+                "name": "lxudxtl"
+              }
+            ]
+          },
+          {
+            "expose": [
+              {
+                "as": "gwqeyjdytmonn",
+                "dependsOn": "aigoimxrbt"
+              },
+              {
+                "as": "ddrjeh",
+                "dependsOn": 40.49
+              },
+              {
+                "as": "lorem",
+                "dependsOn": "trmwzdkwqksh"
+              },
+              {
+                "as": "vwuvpy",
+                "dependsOn": 69.11,
+                "name": "sit cons"
+              },
+              {
+                "dependsOn": true,
+                "name": "4n8T8"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "tztiodukvfdqh"
+              },
+              {
+                "as": "lorem",
+                "name": "vopamzbkxnxo"
+              },
+              {
+                "as": "1R8KUdQb",
+                "name": "ipsum amet adi"
+              },
+              {
+                "as": "lorem a"
+              },
+              {
+                "as": "ipsum dolor "
+              }
+            ],
+            "name": "ipsum consectetu"
+          },
+          {
+            "expose": [
+              {
+                "as": "sbdJ5s"
+              },
+              {
+                "as": "hpoqakaojoa",
+                "dependsOn": false,
+                "name": "sgpezspssxkllm"
+              },
+              {
+                "as": "sc9XFA297dqusJ",
+                "dependsOn": 66
+              },
+              {
+                "as": "lorem consec",
+                "dependsOn": null,
+                "name": "2KUksyHvSYq"
+              },
+              {
+                "as": "xspftdrpovauflh",
+                "name": "dolor am"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "ekdokomopsciwr",
+                "name": "zdtaanvmzw"
+              },
+              {
+                "as": "xkrkesisaqm",
+                "name": "hapkeapf"
+              },
+              {
+                "as": "lorem sit",
+                "name": "aC4Hs3TiyVE9"
+              },
+              {
+                "as": "adlhsuhw",
+                "name": "lorem d"
+              },
+              {
+                "name": "VriPagyOyO"
+              }
+            ]
+          },
+          {
+            "expose": [
+              {
+                "dependsOn": 51,
+                "name": "amet c"
+              },
+              {},
+              {
+                "dependsOn": true,
+                "name": "ipsum consect"
+              },
+              {
+                "as": "aghdkpzkle"
+              },
+              {
+                "as": "mcwgpx"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "PqtS6tFUZyIdX",
+                "name": "2l5xgI"
+              },
+              {
+                "name": "hjacmqdjuuy"
+              },
+              {
+                "as": "dolor"
+              },
+              {
+                "name": "VCLaes"
+              },
+              {
+                "as": "gJI23t3iyrKiB3",
+                "name": "zHMorl"
+              }
+            ],
+            "name": "dolor adipiscin"
+          },
+          {
+            "exposeTypes": [
+              {
+                "as": "cdpwfhiq",
+                "name": "ezcomebjrj"
+              },
+              {
+                "name": "kfihagieelrxt"
+              },
+              {
+                "as": "3yKfv",
+                "name": "sihornz"
+              },
+              {
+                "as": "amet ",
+                "name": "ndbpzwciaigscds"
+              },
+              {
+                "as": "ipsum amet lor",
+                "name": "ipsum adipisc"
+              }
+            ]
+          }
+        ],
+        "tags": [
+          "amet ipsum amet ipsu",
+          "etACGQjrQ2G7ujVea8yr0",
+          "lorem lorem",
+          "mtmdtvndqplnciyzpedl",
+          "d"
+        ],
+        "types": [
+          {},
+          {
+            "name": "AaEvfAhYfVGpHkf",
+            "struct": [
+              54,
+              14,
+              false,
+              76.18,
+              null
+            ]
+          },
+          {
+            "name": "ipsum"
+          },
+          {
+            "name": "kiFCZPHJnva5",
+            "struct": [
+              "6TvpfEtjIUG",
+              null,
+              "zgxglv",
+              false,
+              50
+            ]
+          },
+          {
+            "struct": [
+              83,
+              false,
+              null,
+              26,
+              "consectet"
+            ]
+          }
+        ]
+      },
+      "engine": 38.73
+    },
+    {
+      "accelerator": {
+        "description": "consectetur ipsum",
+        "iconUrl": "gt0hfuvEElawsHIS",
+        "imports": [
+          {
+            "expose": [
+              {},
+              {
+                "as": "amet ipsu",
+                "dependsOn": 45,
+                "name": "syzkrk"
+              },
+              {
+                "as": "urrslyckjm",
+                "name": "kjbqqmyygnb"
+              },
+              {
+                "as": "dolor sit "
+              },
+              {
+                "as": "sit con",
+                "name": "amet am"
+              }
+            ]
+          },
+          {
+            "expose": [
+              {
+                "as": "adipiscing",
+                "dependsOn": "amet ame"
+              },
+              {
+                "as": "MQ0Xrv94AryYo",
+                "dependsOn": 26,
+                "name": "dolor l"
+              },
+              {},
+              {
+                "as": "mwbgylnskbvfxon",
+                "name": "consec"
+              },
+              {
+                "dependsOn": 25,
+                "name": "lcglkprdbfy"
+              }
+            ],
+            "exposeTypes": [
+              {},
+              {
+                "as": "vzmbx",
+                "name": "adipisc"
+              },
+              {
+                "name": "fhsovyaczknbx"
+              },
+              {
+                "as": "lbajakjomfiqme",
+                "name": "ipsum ipsum "
+              },
+              {
+                "name": "adipisci"
+              }
+            ],
+            "name": "ncneqwhcoubuxyf"
+          },
+          {
+            "expose": [
+              {
+                "dependsOn": 97.7
+              },
+              {
+                "as": "oN6O1azdTN7o8"
+              },
+              {
+                "name": "ukoxdkfhgrrp"
+              },
+              {
+                "as": "bgvbgn"
+              },
+              {
+                "dependsOn": null,
+                "name": "A1sOZUjsT4O7o"
+              }
+            ],
+            "exposeTypes": [
+              {},
+              {
+                "name": "gytskh"
+              },
+              {
+                "as": "yqhcqiektiw",
+                "name": "ynCvzXc"
+              },
+              {
+                "as": "VXLZ2ODNBwVruv",
+                "name": "jcrepkmmd"
+              },
+              {
+                "name": "Wy8CkVTQPf0"
+              }
+            ],
+            "name": "sit ipsum consectet"
+          },
+          {
+            "expose": [
+              {
+                "as": "OcDw8i4nDwm",
+                "dependsOn": 25,
+                "name": "TLnaC1YqaiaDltM"
+              },
+              {
+                "as": "adipiscing cons",
+                "dependsOn": null,
+                "name": "mfykqhaswvvcqfk"
+              },
+              {
+                "dependsOn": 68.28,
+                "name": "iYExPnZ"
+              },
+              {
+                "dependsOn": 25,
+                "name": "hinpvxoisnsur"
+              },
+              {
+                "as": "Q4OC7CGH",
+                "dependsOn": "ieimghjj",
+                "name": "adipiscing"
+              }
+            ],
+            "name": "ipsum dolor"
+          },
+          {
+            "expose": [
+              {
+                "as": "oqdzorxzb"
+              },
+              {
+                "name": "ngjsdgc"
+              },
+              {
+                "as": "conse",
+                "dependsOn": null
+              },
+              {
+                "as": "nx8zt5x",
+                "dependsOn": 40
+              },
+              {
+                "as": "kiqvvuqcdzkamq"
+              }
+            ]
+          }
+        ]
+      },
+      "engine": null
+    },
+    {
+      "accelerator": {
+        "displayName": "adipiscing ip",
+        "iconUrl": "vI",
+        "imports": [
+          {},
+          {
+            "name": "c"
+          },
+          {
+            "expose": [
+              {
+                "as": "2DX10Bi",
+                "name": "5hwYOMODIA6qp"
+              },
+              {
+                "as": "dolor a",
+                "dependsOn": false,
+                "name": "j8NpJsXbANTgdCK"
+              },
+              {
+                "as": "DeyPA",
+                "dependsOn": false,
+                "name": "jfxyqcnsyyx"
+              },
+              {
+                "as": "adipiscing "
+              },
+              {}
+            ],
+            "exposeTypes": [
+              {},
+              {
+                "as": "pBAngT80",
+                "name": "jwsnzrxzslhyjy"
+              },
+              {
+                "as": "gdujkbzx",
+                "name": "t9GTimrA"
+              },
+              {
+                "as": "nyzyfibev",
+                "name": "consectetur dol"
+              },
+              {
+                "name": "wxpvwnrrfskun"
+              }
+            ]
+          },
+          {
+            "expose": [
+              {
+                "dependsOn": "qWMpv",
+                "name": "amsytemenng"
+              },
+              {},
+              {
+                "as": "zccpfhmwcyizl",
+                "dependsOn": "zObL1JPCkQfoUB",
+                "name": "HHec6nc5IZo2XKF"
+              },
+              {
+                "name": "bmkgvmrq"
+              },
+              {
+                "as": "sit adipiscin"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "SaKDTIMPZLw",
+                "name": "D1xfL1Yrxk"
+              },
+              {
+                "name": "THDL52x5uT8"
+              },
+              {
+                "as": "4xnOon",
+                "name": "amet s"
+              },
+              {
+                "name": "ipsum ad"
+              },
+              {
+                "as": "KwyVPw",
+                "name": "DMdE46Vni1Ikn"
+              }
+            ]
+          },
+          {
+            "expose": [
+              {},
+              {
+                "as": "nlrirsau",
+                "dependsOn": null
+              },
+              {
+                "dependsOn": null,
+                "name": "pnkaxuappzqdec"
+              },
+              {
+                "as": "EhBUxF3SSb9NF",
+                "dependsOn": 95,
+                "name": "tiassdmseyhg"
+              },
+              {
+                "as": "wpqwvcn",
+                "dependsOn": "msmhklhzywa",
+                "name": "ASN07cQm4VdJY"
+              }
+            ],
+            "name": "sit consect"
+          }
+        ],
+        "options": [
+          false,
+          false,
+          49,
+          true,
+          null
+        ],
+        "types": [
+          {
+            "name": "ipsum i"
+          },
+          {
+            "name": "fuecrs",
+            "struct": [
+              72.76,
+              75,
+              "consectetur a",
+              true,
+              false
+            ]
+          },
+          {
+            "struct": [
+              true,
+              true,
+              true,
+              null,
+              null
+            ]
+          },
+          {
+            "name": "rjVYS",
+            "struct": [
+              "agnkpbuk",
+              33.39,
+              true,
+              null,
+              null
+            ]
+          },
+          {
+            "name": "O18KtqYiXy9eUK",
+            "struct": [
+              "consectetur ad",
+              null,
+              68,
+              "ymhbhxdsd",
+              null
+            ]
+          }
+        ]
+      },
+      "engine": 83.34
+    },
+    {},
+    {
+      "accelerator": {
+        "displayName": "consect",
+        "iconUrl": "nwfrpmla",
+        "imports": [
+          {
+            "expose": [
+              {
+                "dependsOn": true
+              },
+              {
+                "as": "cyaonxobwsy",
+                "name": "1wIkpw"
+              },
+              {},
+              {
+                "as": "lorem ipsum ",
+                "dependsOn": 44,
+                "name": "dzdzhgnbttbtn"
+              },
+              {
+                "as": "8RqJQT5MOnRMD",
+                "dependsOn": false
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "kEmeomtc5"
+              },
+              {},
+              {
+                "as": "ipsum ",
+                "name": "uezwhb"
+              },
+              {},
+              {
+                "as": "ishixcctic"
+              }
+            ],
+            "name": "consectet"
+          },
+          {
+            "expose": [
+              {},
+              {
+                "dependsOn": 8.76,
+                "name": "lorem lore"
+              },
+              {
+                "as": "amet amet s",
+                "dependsOn": 68.14,
+                "name": "ipsum ipsu"
+              },
+              {
+                "as": "amet dolor a",
+                "dependsOn": null,
+                "name": "soigpyebbwpehd"
+              },
+              {
+                "dependsOn": 5,
+                "name": "hqzalpdhj"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "name": "hsdboweptw"
+              },
+              {
+                "as": "sit dolor ip",
+                "name": "1UxYzDJX"
+              },
+              {
+                "as": "yqxgfjz"
+              },
+              {
+                "name": "Ay54L4tquABTAav"
+              },
+              {
+                "name": "sjoofkee"
+              }
+            ]
+          },
+          {
+            "exposeTypes": [
+              {
+                "as": "JoVGyByLOmt0",
+                "name": "tghdioak"
+              },
+              {},
+              {
+                "as": "B3Pa3vd",
+                "name": "dolor ipsum "
+              },
+              {
+                "name": "lorem adip"
+              },
+              {
+                "as": "AFv9z8Hocog"
+              }
+            ]
+          },
+          {
+            "expose": [
+              {
+                "as": "Nso5IUudsTF",
+                "dependsOn": 48
+              },
+              {},
+              {
+                "as": "SBC4xyLn"
+              },
+              {
+                "as": "wvcwvcmptdhupi",
+                "name": "lg9nKPt"
+              },
+              {
+                "dependsOn": 1,
+                "name": "ZeTohVpiHtc"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "dolor dolor lo",
+                "name": "lorem a"
+              },
+              {
+                "name": "FwstT4QTbr"
+              },
+              {
+                "as": "XSUzaQUrd2bx"
+              },
+              {
+                "as": "Ca9jvHPoULCgG",
+                "name": "jnklhnpuuzjt"
+              },
+              {
+                "as": "IzzqpuETC06zOC0"
+              }
+            ]
+          },
+          {
+            "expose": [
+              {
+                "as": "SK6oklRCbMPCA"
+              },
+              {
+                "as": "lorem con",
+                "name": "ACPdlHmrvZjDV"
+              },
+              {},
+              {
+                "name": "clakufxmnlo"
+              },
+              {
+                "as": "PqYOlcQdXBzz",
+                "dependsOn": true
+              }
+            ],
+            "exposeTypes": [
+              {
+                "name": "0iUtq4G"
+              },
+              {
+                "name": "xrjbtbm"
+              },
+              {},
+              {
+                "as": "iZHeh15r39AFtVV",
+                "name": "dolor ipsu"
+              },
+              {
+                "as": "sit ipsum ad",
+                "name": "ZCiUjeRV35"
+              }
+            ]
+          }
+        ],
+        "tags": [
+          "lore",
+          "bJHZROEo32C2TaqyDC",
+          "KYLMmcZLw6KNSa3QprjKY",
+          "onnzpegigityvygxv",
+          "ruszh"
+        ],
+        "types": [
+          {
+            "name": "m0VkVFL",
+            "struct": [
+              true,
+              63.0,
+              null,
+              true,
+              10.7
+            ]
+          },
+          {
+            "struct": [
+              99,
+              "conse",
+              37.96,
+              false,
+              62.88
+            ]
+          },
+          {
+            "name": "eykivyq"
+          },
+          {
+            "struct": [
+              null,
+              false,
+              48.16,
+              39.04,
+              null
+            ]
+          },
+          {
+            "name": "adipisc"
+          }
+        ]
+      }
+    },
+    {
+      "engine": "sthsj"
+    },
+    {
+      "accelerator": {
+        "description": "consectetur amet a",
+        "imports": [
+          {
+            "expose": [
+              {
+                "as": "3ePplIfbrKOY",
+                "dependsOn": true
+              },
+              {},
+              {
+                "dependsOn": 38,
+                "name": "qymyybndsb"
+              },
+              {
+                "dependsOn": false,
+                "name": "13xsZJ1pu9hpO"
+              },
+              {
+                "as": "AszpLucV",
+                "dependsOn": "amet lo",
+                "name": "ipsum"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "name": "dLONzTN2O6"
+              },
+              {
+                "as": "adipisc",
+                "name": "amet lorem l"
+              },
+              {
+                "as": "1SW4EC2UljVlTw"
+              },
+              {
+                "as": "qardsfk"
+              },
+              {
+                "as": "ozageargcekquf"
+              }
+            ]
+          },
+          {
+            "expose": [
+              {
+                "as": "lfgkbxyn"
+              },
+              {
+                "dependsOn": 45,
+                "name": "ymGbWV9N9aq6tSH"
+              },
+              {
+                "as": "skodzyfqcl",
+                "dependsOn": null,
+                "name": "qmmeshmozlqls"
+              },
+              {
+                "as": "6ZFCtvuM8P",
+                "dependsOn": null,
+                "name": "onuqcc"
+              },
+              {
+                "as": "kavrkfyfnxc",
+                "dependsOn": "amet ",
+                "name": "ayktxpvwndgb"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "GOzK6ZGYJVe"
+              },
+              {},
+              {
+                "name": "dyeebllsqgzm"
+              },
+              {},
+              {
+                "as": "svYIk9",
+                "name": "amet ipsum"
+              }
+            ],
+            "name": "fpgmpueraejwd"
+          },
+          {
+            "expose": [
+              {
+                "as": "adipiscing ad"
+              },
+              {
+                "as": "adipiscing lo"
+              },
+              {
+                "as": "yJvHUgtmJvWx",
+                "dependsOn": null,
+                "name": "HZaX3Do"
+              },
+              {
+                "as": "qXOwiHjGYDHsH",
+                "dependsOn": 85.89,
+                "name": "consectet"
+              },
+              {
+                "as": "VagVtv3",
+                "dependsOn": 0.82
+              }
+            ],
+            "name": "rtqcwvtylg"
+          },
+          {
+            "expose": [
+              {
+                "name": "Zbm8emzwG"
+              },
+              {
+                "as": "ipsum ipsum sit"
+              },
+              {
+                "as": "2A87wo",
+                "dependsOn": 55.96,
+                "name": "dolor a"
+              },
+              {
+                "as": "sit co",
+                "name": "amet lorem"
+              },
+              {
+                "as": "dolor sit adip",
+                "name": "MzotIQ"
+              }
+            ],
+            "name": "Bo2x"
+          },
+          {
+            "expose": [
+              {
+                "as": "zvuimhqatjerda",
+                "dependsOn": null,
+                "name": "yrsvpssfwtoosb"
+              },
+              {
+                "dependsOn": false,
+                "name": "amet ipsum"
+              },
+              {
+                "as": "fjqmzguzkik"
+              },
+              {
+                "as": "1QdORn",
+                "dependsOn": 77.28
+              },
+              {
+                "as": "amet a",
+                "name": "jScHGK"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "nbUZdSoY"
+              },
+              {},
+              {
+                "as": "fgcuecwlecbi",
+                "name": "boohu"
+              },
+              {
+                "name": "qrunnermdk"
+              },
+              {
+                "as": "jhiryrw"
+              }
+            ]
+          }
+        ],
+        "tags": [
+          "i",
+          "consectetur ipsum ",
+          "IC3ONdRAb4",
+          "dolor sit ad",
+          "ozyiwuq"
+        ],
+        "types": [
+          {},
+          {
+            "struct": [
+              true,
+              64,
+              true,
+              42,
+              true
+            ]
+          },
+          {
+            "struct": [
+              85.68,
+              true,
+              0,
+              "adipis",
+              44.1
+            ]
+          },
+          {
+            "name": "qZyYMWPcFjGsZoT",
+            "struct": [
+              77.08,
+              "lorem s",
+              false,
+              "ckphutynbewx",
+              false
+            ]
+          },
+          {
+            "struct": [
+              36,
+              false,
+              29,
+              false,
+              null
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "accelerator": {
+        "description": "nswrdz",
+        "displayName": "lilhd",
+        "imports": [
+          {
+            "expose": [
+              {
+                "dependsOn": 21.94
+              },
+              {},
+              {
+                "name": "nmbdadwsqxcn"
+              },
+              {
+                "as": "zjamjiqkjr",
+                "dependsOn": null
+              },
+              {
+                "as": "yuyva",
+                "dependsOn": 51.43
+              }
+            ],
+            "name": "dolor lorem sit ip"
+          },
+          {},
+          {
+            "expose": [
+              {
+                "as": "bzynrtu",
+                "dependsOn": null
+              },
+              {
+                "as": "IBqa1kQ4V",
+                "dependsOn": false,
+                "name": "adipiscing dolo"
+              },
+              {
+                "as": "N1HLjm0REzGQ",
+                "dependsOn": true,
+                "name": "ipsum lore"
+              },
+              {
+                "as": "4t7DoV7PkuScteo",
+                "dependsOn": null
+              },
+              {
+                "as": "fjuyigdbb",
+                "dependsOn": 31.58,
+                "name": "UTBAnzUYos"
+              }
+            ]
+          },
+          {
+            "expose": [
+              {
+                "as": "consec",
+                "dependsOn": "amet sit"
+              },
+              {
+                "as": "sit adipisc",
+                "name": "gjsmijhpo"
+              },
+              {
+                "as": "dolor dol",
+                "dependsOn": null,
+                "name": "hcqbodnkxjemrtf"
+              },
+              {
+                "name": "ipsum ipsum "
+              },
+              {
+                "as": "pyjcbqygrl"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "name": "lorem sit am"
+              },
+              {
+                "name": "vghvzuqtevj"
+              },
+              {
+                "as": "aemxitplfakgka"
+              },
+              {
+                "name": "smbpqesokgeph"
+              },
+              {
+                "as": "ZcxOmpc"
+              }
+            ],
+            "name": "fzapqqzie"
+          },
+          {
+            "expose": [
+              {
+                "as": "hnViy6PVAXYaMs",
+                "dependsOn": true,
+                "name": "lorem ipsum l"
+              },
+              {
+                "as": "ucxspycxe"
+              },
+              {
+                "dependsOn": null
+              },
+              {
+                "as": "kvssqx",
+                "dependsOn": true,
+                "name": "ZNq4c7HChtJE"
+              },
+              {
+                "as": "sit si",
+                "dependsOn": 22.21
+              }
+            ]
+          }
+        ],
+        "options": [
+          "O5LXUBBUqCgu",
+          null,
+          "04Pbs3CZwzk2yI",
+          "adipiscing lor",
+          "IuH5BuI95S3A"
+        ],
+        "types": [
+          {
+            "struct": [
+              true,
+              false,
+              null,
+              19,
+              "xbsnjbfwjfexpgh"
+            ]
+          },
+          {
+            "name": "ibpSGcMXq3OWP",
+            "struct": [
+              "dolor adipi",
+              88,
+              "tbbpsrkvpohem",
+              false,
+              false
+            ]
+          },
+          {
+            "name": "ad0L2RLTJgfBNFX",
+            "struct": [
+              true,
+              true,
+              null,
+              "amet sit",
+              "uiylssdagh"
+            ]
+          },
+          {
+            "name": "consecte"
+          },
+          {
+            "name": "vjgybcbnxwxyai",
+            "struct": [
+              false,
+              null,
+              false,
+              48,
+              null
+            ]
+          }
+        ]
+      },
+      "engine": 5
+    },
+    {
+      "accelerator": {
+        "iconUrl": "dol",
+        "options": [
+          "kMnK0d",
+          "sit do",
+          "axdfciujos",
+          "sit adipiscin",
+          "hzyoxinpgutjg"
+        ],
+        "types": [
+          {
+            "name": "B4sKsIR7A1BON"
+          },
+          {},
+          {
+            "struct": [
+              67,
+              56,
+              94.76,
+              false,
+              81
+            ]
+          },
+          {},
+          {
+            "name": "ocnnb",
+            "struct": [
+              "consectetur ip",
+              null,
+              null,
+              4,
+              35
+            ]
+          }
+        ]
+      },
+      "engine": false
+    },
+    {
+      "accelerator": {
+        "description": "NwB3YqqeTcQ70xYiVlQ",
+        "displayName": "consectetur lorem",
+        "iconUrl": "zzvluttm",
+        "options": [
+          "ixryomn",
+          63,
+          "lysyrfbkeotos",
+          77.87,
+          99.36
+        ],
+        "tags": [
+          "qhjjhwr",
+          "korzdaukoqnjpxcotcsbo",
+          "0Tk",
+          "dkBYCLoNfzgow",
+          "KODqyhvR4vwO0q"
+        ]
+      },
+      "engine": 16.2
+    },
+    {
+      "accelerator": {
+        "description": "CWBCpl",
+        "imports": [
+          {
+            "exposeTypes": [
+              {
+                "as": "rsqkuv",
+                "name": "rlijjxvfgbybkef"
+              },
+              {
+                "name": "hvjdwwlzlozfiub"
+              },
+              {
+                "as": "fpopkayxexpaq",
+                "name": "zOVpFK5yrG"
+              },
+              {
+                "as": "lorem a"
+              },
+              {}
+            ],
+            "name": "qmnfggtqboy"
+          },
+          {
+            "expose": [
+              {
+                "as": "3ZD9qtnU",
+                "dependsOn": true
+              },
+              {
+                "dependsOn": 78.65,
+                "name": "znndiiqucjirawv"
+              },
+              {
+                "as": "ipsum ",
+                "name": "cluvriwo"
+              },
+              {},
+              {
+                "as": "ipsum s",
+                "name": "consect"
+              }
+            ],
+            "name": "EY1dL3tjLZnWj9g"
+          },
+          {
+            "expose": [
+              {
+                "dependsOn": 98,
+                "name": "iardsnxbxbp"
+              },
+              {
+                "as": "GAttf6TxQmF3J",
+                "dependsOn": 80,
+                "name": "wPziOwMS8gI2"
+              },
+              {
+                "as": "ipsum sit con",
+                "name": "conse"
+              },
+              {
+                "as": "H8MXuFrVq",
+                "dependsOn": 25.21,
+                "name": "neswlyrmvr"
+              },
+              {
+                "dependsOn": false
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "7UPjZp5CmIc0O",
+                "name": "aovwnzktuk"
+              },
+              {},
+              {},
+              {
+                "as": "kbxylmocbsh",
+                "name": "BkzGs7O24JMhJgx"
+              },
+              {
+                "as": "lorem amet sit ",
+                "name": "sit lore"
+              }
+            ],
+            "name": "dolor"
+          },
+          {
+            "expose": [
+              {
+                "dependsOn": 70.74
+              },
+              {
+                "as": "lorem ame",
+                "dependsOn": "jykxjrkkzktkhc"
+              },
+              {
+                "as": "vzgop",
+                "dependsOn": true,
+                "name": "xjqqgyivfxsxxsv"
+              },
+              {
+                "dependsOn": false
+              },
+              {
+                "as": "gloqifnhdmcp",
+                "dependsOn": "azqoxvmvawzkop",
+                "name": "eljcmds"
+              }
+            ]
+          },
+          {}
+        ],
+        "options": [
+          26,
+          "HjBxNNW0hgZykN",
+          false,
+          91,
+          86
+        ],
+        "tags": [
+          "apbgrl",
+          "dlnfwzvzvfthkwidli",
+          "epgntcobhmx",
+          "jiyzdy",
+          "mojfvuihssodqmjxs"
+        ],
+        "types": [
+          {
+            "name": "sit amet adipi",
+            "struct": [
+              46,
+              49,
+              null,
+              null,
+              51.06
+            ]
+          },
+          {
+            "name": "rcenpryrudwbiz"
+          },
+          {
+            "struct": [
+              56.76,
+              80.66,
+              null,
+              "adipiscing l",
+              true
+            ]
+          },
+          {
+            "name": "nopraveva",
+            "struct": [
+              8,
+              "yC7Fmxc0zXu3",
+              96,
+              true,
+              11.94
+            ]
+          },
+          {
+            "name": "bnqkhxcyqn",
+            "struct": [
+              null,
+              70,
+              88,
+              52,
+              53.46
+            ]
+          }
+        ]
+      },
+      "engine": false
+    },
+    {
+      "accelerator": {
+        "description": "guwtcnevcribaxuwep",
+        "iconUrl": "ryubja",
+        "tags": [
+          "wdujwh",
+          "xobj",
+          "hscuxmdzwtfoyvveibdo",
+          "rvwyxnqtanku",
+          "qjkzefq"
+        ]
+      }
+    },
+    {
+      "engine": null
+    },
+    {
+      "accelerator": {
+        "description": "0QwsKqHAU",
+        "displayName": "nSz0Zqf7D91YANc",
+        "imports": [
+          {
+            "exposeTypes": [
+              {
+                "name": "adipiscin"
+              },
+              {
+                "name": "ayoscssz"
+              },
+              {
+                "as": "sit a",
+                "name": "amet ame"
+              },
+              {
+                "name": "ipsum co"
+              },
+              {
+                "name": "adipiscing "
+              }
+            ],
+            "name": "qiqwmduzhbieqnvfqpdm"
+          },
+          {
+            "expose": [
+              {
+                "as": "cdyqjkbccbs",
+                "dependsOn": false,
+                "name": "xjuepwtmhioct"
+              },
+              {
+                "as": "ipsum sit sit",
+                "name": "lhattgxfzojf"
+              },
+              {
+                "dependsOn": "adipisc",
+                "name": "amet amet dolor"
+              },
+              {
+                "as": "fbflyreiwcpfn",
+                "dependsOn": "qjsbx",
+                "name": "pkkuok"
+              },
+              {
+                "dependsOn": true,
+                "name": "eW8zjCEevp7Yk"
+              }
+            ]
+          },
+          {
+            "expose": [
+              {
+                "as": "kefuj"
+              },
+              {
+                "as": "sit ipsum ",
+                "dependsOn": 28,
+                "name": "f44fIZnZsNme8"
+              },
+              {
+                "as": "kccvie"
+              },
+              {
+                "as": "euouzuwhz",
+                "dependsOn": null,
+                "name": "0UIouK"
+              },
+              {}
+            ],
+            "name": "QgzuhCSjJlFYdm"
+          },
+          {
+            "expose": [
+              {
+                "dependsOn": "jbvawmufapsjx",
+                "name": "dolor adipisc"
+              },
+              {
+                "dependsOn": 35,
+                "name": "consect"
+              },
+              {
+                "dependsOn": "adipisc",
+                "name": "xqjinyvgouu"
+              },
+              {
+                "dependsOn": 25.94,
+                "name": "consectetur con"
+              },
+              {
+                "as": "sit ipsum",
+                "dependsOn": true,
+                "name": "GtW36nGKv"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "name": "P6okLMRQn"
+              },
+              {
+                "as": "adipiscing ",
+                "name": "ImPHNQJBb"
+              },
+              {
+                "as": "uyykyzfhlqlr"
+              },
+              {
+                "name": "jagyxemsg"
+              },
+              {
+                "name": "amet dolor"
+              }
+            ],
+            "name": "dltlbwabiosrxxhmczz"
+          },
+          {
+            "expose": [
+              {
+                "as": "Jl4sfAh",
+                "name": "fgkec"
+              },
+              {
+                "as": "mthwz",
+                "dependsOn": true,
+                "name": "jlltliscw"
+              },
+              {
+                "as": "0xhGlE",
+                "dependsOn": null,
+                "name": "consectetur sit"
+              },
+              {
+                "dependsOn": "pudiixrdp",
+                "name": "L0cX6z5E"
+              },
+              {
+                "as": "lorem sit ip"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "kIjXrPAm1P4q",
+                "name": "cTNFLT9VB"
+              },
+              {
+                "name": "PgnELW0"
+              },
+              {
+                "as": "lorem",
+                "name": "yvCoaVmdopnT"
+              },
+              {},
+              {
+                "name": "adipisci"
+              }
+            ],
+            "name": "LHJ"
+          }
+        ],
+        "types": [
+          {
+            "name": "amet ipsum lor",
+            "struct": [
+              false,
+              "consectet",
+              "wwnkoip",
+              28,
+              null
+            ]
+          },
+          {},
+          {
+            "struct": [
+              35,
+              true,
+              "wEdeUDzdtsGWm",
+              78,
+              62
+            ]
+          },
+          {},
+          {
+            "name": "bgfsgp",
+            "struct": [
+              false,
+              89.68,
+              80.2,
+              false,
+              true
+            ]
+          }
+        ]
+      },
+      "engine": null
+    },
+    {
+      "engine": null
+    },
+    {
+      "accelerator": {
+        "displayName": "dolor l",
+        "imports": [
+          {
+            "exposeTypes": [
+              {
+                "name": "aJ8DtQv"
+              },
+              {},
+              {
+                "name": "lorem"
+              },
+              {
+                "as": "pcozhv"
+              },
+              {
+                "as": "kphnvplz",
+                "name": "mC84nJtokAEk8a"
+              }
+            ],
+            "name": "u"
+          },
+          {
+            "exposeTypes": [
+              {
+                "name": "dafhxxoiv"
+              },
+              {
+                "as": "BtYOZcFX5uimAP",
+                "name": "taavrplvdbeog"
+              },
+              {
+                "as": "hF398CizYkR",
+                "name": "xrkfpxneod"
+              },
+              {
+                "name": "tdfzyqqyncgakv"
+              },
+              {
+                "name": "lorem ipsum"
+              }
+            ],
+            "name": "mTjn0EF7xKPbm7IX"
+          },
+          {
+            "exposeTypes": [
+              {
+                "as": "FqUBvErgpx"
+              },
+              {
+                "name": "K1AA6ZwjnVsWw"
+              },
+              {},
+              {
+                "as": "nojrtwfvyp",
+                "name": "4bskvZhSS"
+              },
+              {
+                "as": "L20dF",
+                "name": "p54Opcr9lh"
+              }
+            ],
+            "name": "jvaomqlun"
+          },
+          {
+            "expose": [
+              {
+                "as": "dolor adipisc",
+                "name": "osgwbftwkts"
+              },
+              {
+                "dependsOn": true,
+                "name": "evfsfVr9kwXvuC"
+              },
+              {
+                "dependsOn": null,
+                "name": "ddoomcdeb"
+              },
+              {
+                "dependsOn": 57.84
+              },
+              {
+                "dependsOn": 66.01
+              }
+            ],
+            "exposeTypes": [
+              {
+                "name": "cwfnjlsrxoy"
+              },
+              {
+                "as": "xvkblvvhegfcp"
+              },
+              {},
+              {
+                "as": "goqpornoaa",
+                "name": "Vf72ghH"
+              },
+              {
+                "name": "lhokt"
+              }
+            ],
+            "name": "adi"
+          },
+          {
+            "expose": [
+              {
+                "as": "xqxoa",
+                "name": "y330RuUuPQlApQ"
+              },
+              {
+                "as": "le1VqEJMDtoF5",
+                "dependsOn": 47
+              },
+              {
+                "dependsOn": null,
+                "name": "puguavnytoxkt"
+              },
+              {
+                "dependsOn": "consectetur ip",
+                "name": "qjblqoikxivvyg"
+              },
+              {
+                "as": "ixEhGE",
+                "dependsOn": true
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "Lk6gtJsvbJ",
+                "name": "zniutxcljj"
+              },
+              {},
+              {
+                "as": "gKIXjDZ"
+              },
+              {
+                "as": "hmkukbdjat",
+                "name": "odyckhmkkn"
+              },
+              {
+                "as": "lorem dolor sit"
+              }
+            ],
+            "name": "lkqfctekie"
+          }
+        ],
+        "options": [
+          61.92,
+          false,
+          false,
+          "dXTQEb",
+          false
+        ],
+        "tags": [
+          "ipsum sit amet sit",
+          "1Zqq1sywpx",
+          "K7oyAQdzbTk4goX",
+          "tupJpAaNoonSNbosfxw",
+          "a"
+        ]
+      },
+      "engine": 72
+    },
+    {
+      "accelerator": {
+        "displayName": "Ic",
+        "options": [
+          81,
+          false,
+          40,
+          90.04,
+          25.23
+        ],
+        "tags": [
+          "lorem s",
+          "conse",
+          "rXf",
+          "8o",
+          "d"
+        ]
+      },
+      "engine": null
+    },
+    {
+      "accelerator": {
+        "displayName": "hv",
+        "iconUrl": "krutauxtuiqszfve",
+        "imports": [
+          {
+            "expose": [
+              {
+                "as": "hHQzg2VZj9Else"
+              },
+              {
+                "name": "oowfhfgdvm"
+              },
+              {
+                "as": "jatrifwirxrd"
+              },
+              {
+                "name": "qlksty"
+              },
+              {
+                "as": "sit sit amet",
+                "name": "Mb3Yj"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "LI8DYFvYhltFJ",
+                "name": "zSvXP"
+              },
+              {
+                "as": "XMysjNo"
+              },
+              {
+                "name": "ipsum consectet"
+              },
+              {
+                "as": "stnabkydezlr"
+              },
+              {}
+            ]
+          },
+          {
+            "expose": [
+              {
+                "name": "sit dolo"
+              },
+              {
+                "as": "ipsum lorem ",
+                "dependsOn": null
+              },
+              {},
+              {
+                "name": "ipsum adip"
+              },
+              {
+                "as": "amet ",
+                "dependsOn": null
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "mcbanclorvekj",
+                "name": "Iw3p0Anau4di"
+              },
+              {
+                "name": "wrlytr"
+              },
+              {
+                "as": "wiwyijku"
+              },
+              {
+                "as": "consectetu",
+                "name": "dvyaxnvprp"
+              },
+              {
+                "as": "VEaqpUIuwz",
+                "name": "wchdqlnoa"
+              }
+            ],
+            "name": "MO6"
+          },
+          {
+            "expose": [
+              {
+                "dependsOn": true
+              },
+              {
+                "as": "nOSNOggorRE",
+                "name": "lorem ipsum "
+              },
+              {
+                "as": "qcghcikmkx"
+              },
+              {
+                "as": "consectetur",
+                "name": "99BFlq5ilWA5"
+              },
+              {
+                "as": "mVnghgftD6mVYfi",
+                "dependsOn": 22.93,
+                "name": "adipiscing l"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "consec"
+              },
+              {
+                "as": "kJAj4Gsjxspcp",
+                "name": "qawLTsE"
+              },
+              {
+                "as": "zqnkzalynyob",
+                "name": "consecte"
+              },
+              {
+                "as": "m8EZjDRYT"
+              },
+              {
+                "as": "qnjhvywo",
+                "name": "lorem sit ipsum"
+              }
+            ],
+            "name": "nicgwxfb"
+          },
+          {
+            "exposeTypes": [
+              {
+                "as": "vqajkksxzxtnr",
+                "name": "lorem ipsu"
+              },
+              {
+                "name": "HQjPNuPAh0iQQ"
+              },
+              {
+                "as": "ybglynixkhap"
+              },
+              {
+                "as": "isxvyiihditpne",
+                "name": "erauxpfvliius"
+              },
+              {
+                "name": "IuYi8gMl"
+              }
+            ]
+          },
+          {
+            "expose": [
+              {
+                "as": "Tj4Yr4A1",
+                "dependsOn": null,
+                "name": "ghvhzobj"
+              },
+              {
+                "as": "erwqq",
+                "name": "amet lorem lo"
+              },
+              {
+                "dependsOn": "amet ip"
+              },
+              {
+                "dependsOn": 59.59
+              },
+              {
+                "as": "ifoedgbesch"
+              }
+            ]
+          }
+        ],
+        "tags": [
+          "ezisesskxnqixykytjqo",
+          "dolor dolor adipiscin",
+          "DiucsVAxQDs",
+          "kzoi",
+          "vh"
+        ]
+      }
+    },
+    {
+      "accelerator": {
+        "description": "lorem ",
+        "iconUrl": "amet ipsum consect"
+      },
+      "engine": true
+    },
+    {
+      "accelerator": {
+        "description": "tluncl",
+        "displayName": "iitfeejqzfyoxveqdakuo",
+        "iconUrl": "g",
+        "imports": [
+          {
+            "name": "bgqysriroyzkbchlgv"
+          },
+          {
+            "exposeTypes": [
+              {},
+              {
+                "name": "wetsd"
+              },
+              {
+                "as": "xnfusjlrmvdpbs",
+                "name": "qrmoseuwbfgcdqd"
+              },
+              {
+                "as": "dolor sit a",
+                "name": "pjmz5L8yqSl9yq"
+              },
+              {
+                "as": "lorem con",
+                "name": "lorem dolor"
+              }
+            ]
+          },
+          {
+            "name": "consectetur adi"
+          },
+          {
+            "name": "atsnej"
+          },
+          {
+            "expose": [
+              {
+                "as": "oybltlw",
+                "dependsOn": "pfklswc",
+                "name": "JDQsPIZj7Ij6"
+              },
+              {
+                "as": "3gZ0h4W4rTWvca",
+                "dependsOn": null,
+                "name": "bmnfbxwpanzt"
+              },
+              {
+                "dependsOn": null
+              },
+              {
+                "as": "dolor",
+                "name": "syecitqys"
+              },
+              {
+                "as": "idcyxfnmpr",
+                "name": "sit dolor "
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "adipiscin"
+              },
+              {
+                "as": "ipsum cons"
+              },
+              {
+                "as": "consectetu"
+              },
+              {
+                "as": "uqKde",
+                "name": "amet amet conse"
+              },
+              {
+                "as": "lorem ipsu",
+                "name": "sit lorem i"
+              }
+            ],
+            "name": "con"
+          }
+        ],
+        "options": [
+          true,
+          "pmrxsnwtjzk",
+          0,
+          "URgXM7",
+          false
+        ]
+      }
+    },
+    {
+      "accelerator": {
+        "description": "mrffhsfzbfcujmiqkf",
+        "displayName": "amet amet ",
+        "imports": [
+          {
+            "exposeTypes": [
+              {
+                "as": "2nfXwwqY9ArVz9Z"
+              },
+              {
+                "as": "2t1QQaf",
+                "name": "RBYPLLCNQ5"
+              },
+              {
+                "as": "3i72ueIQvdrZf"
+              },
+              {
+                "as": "GX7pr8ka",
+                "name": "JXoqOIHu6rQ3yd"
+              },
+              {
+                "as": "amet i",
+                "name": "PPQwP"
+              }
+            ],
+            "name": "Issp2"
+          },
+          {
+            "expose": [
+              {
+                "name": "tlrgsyumzxbklh"
+              },
+              {
+                "dependsOn": 4
+              },
+              {
+                "as": "lorem amet sit ",
+                "dependsOn": false,
+                "name": "ipsum"
+              },
+              {
+                "as": "qexutedz"
+              },
+              {}
+            ],
+            "exposeTypes": [
+              {
+                "as": "54JDh",
+                "name": "J2Mfr"
+              },
+              {},
+              {
+                "as": "9soSyIj05U6ucs3",
+                "name": "LEEmqb4u"
+              },
+              {
+                "as": "c3hKPNQwX"
+              },
+              {}
+            ]
+          },
+          {
+            "expose": [
+              {
+                "dependsOn": 47,
+                "name": "jjgjm"
+              },
+              {
+                "as": "erushz"
+              },
+              {
+                "as": "ipsum amet ",
+                "dependsOn": null,
+                "name": "amet consecte"
+              },
+              {
+                "as": "dygdlbctco",
+                "name": "ebuwwsnytt"
+              },
+              {
+                "dependsOn": null,
+                "name": "consect"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "PpIQldlDLD8llE",
+                "name": "conse"
+              },
+              {
+                "as": "adipiscing lore"
+              },
+              {},
+              {
+                "as": "iupjxsiohhyzexs",
+                "name": "ZWlnEJ"
+              },
+              {
+                "as": "Q22akh",
+                "name": "amet dolor "
+              }
+            ],
+            "name": "vuebjsfwwsmdvemtqg"
+          },
+          {
+            "exposeTypes": [
+              {
+                "as": "4RvcevuefYxn"
+              },
+              {
+                "as": "adipiscing si"
+              },
+              {
+                "as": "M5LPKxu",
+                "name": "Wo9bwZouk82fHjb"
+              },
+              {
+                "as": "rJfvg"
+              },
+              {
+                "as": "bchmskefec"
+              }
+            ]
+          },
+          {
+            "expose": [
+              {
+                "as": "ymxwizyetrq",
+                "name": "LOzPAGZ"
+              },
+              {
+                "as": "ipsum lorem d",
+                "dependsOn": false
+              },
+              {
+                "name": "amet amet a"
+              },
+              {
+                "as": "IRlPlmnGX"
+              },
+              {
+                "as": "DhNLNEIh"
+              }
+            ]
+          }
+        ],
+        "options": [
+          "consect",
+          "lorem lorem am",
+          17,
+          null,
+          false
+        ]
+      }
+    },
+    {
+      "accelerator": {
+        "displayName": "dolor sit amet conse",
+        "options": [
+          false,
+          51.01,
+          6,
+          60.93,
+          true
+        ],
+        "types": [
+          {
+            "name": "rgcirntlkxe",
+            "struct": [
+              null,
+              63.14,
+              true,
+              null,
+              null
+            ]
+          },
+          {
+            "name": "gitqnwznfgfpoev",
+            "struct": [
+              50,
+              60,
+              30.73,
+              null,
+              false
+            ]
+          },
+          {
+            "name": "sit ame",
+            "struct": [
+              true,
+              60.01,
+              null,
+              1.02,
+              38.92
+            ]
+          },
+          {
+            "name": "ahgltl"
+          },
+          {}
+        ]
+      },
+      "engine": 80.67
+    },
+    {
+      "engine": 68.91
+    },
+    {},
+    {
+      "engine": 0
+    },
+    {},
+    {
+      "accelerator": {
+        "description": "ti9UpKR4rtlK5T",
+        "displayName": "adipiscing l",
+        "iconUrl": "dol",
+        "options": [
+          null,
+          "uxbkzzyefcz",
+          true,
+          68.25,
+          false
+        ],
+        "types": [
+          {
+            "struct": [
+              48,
+              null,
+              null,
+              63,
+              true
+            ]
+          },
+          {},
+          {
+            "struct": [
+              false,
+              "1P2451435zz",
+              false,
+              null,
+              true
+            ]
+          },
+          {
+            "name": "ipsum l",
+            "struct": [
+              "ecxxnoikhc",
+              86.74,
+              null,
+              41.28,
+              6.07
+            ]
+          },
+          {
+            "struct": [
+              null,
+              65.25,
+              false,
+              100,
+              18.92
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "accelerator": {
+        "iconUrl": "8slStgfIA",
+        "imports": [
+          {
+            "exposeTypes": [
+              {},
+              {},
+              {
+                "as": "consectetur ",
+                "name": "mzzmxxckyglqj"
+              },
+              {
+                "name": "loKDEgNd5lJvbX"
+              },
+              {
+                "name": "lkutmhkkeeo"
+              }
+            ]
+          },
+          {
+            "expose": [
+              {
+                "as": "adipiscing",
+                "dependsOn": null,
+                "name": "gOFgex8A9xugLk6"
+              },
+              {
+                "dependsOn": null
+              },
+              {
+                "as": "cmqcwsebkqq",
+                "dependsOn": null,
+                "name": "lxzejab"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "lorem l"
+              },
+              {
+                "name": "ipsum lorem"
+              },
+              {},
+              {
+                "name": "vfhys"
+              },
+              {
+                "as": "RlavT56Jz",
+                "name": "x7t6Wi57hHEpT"
+              }
+            ]
+          },
+          {
+            "name": "lorem amet adipiscing"
+          },
+          {
+            "expose": [
+              {
+                "as": "RGyS6Vr",
+                "dependsOn": false
+              }
+            ],
+            "exposeTypes": []
+          },
+          {
+            "exposeTypes": [
+              {},
+              {
+                "name": "kzdulq"
+              },
+              {
+                "as": "sit i",
+                "name": "lfjszwveb"
+              },
+              {
+                "as": "adipis"
+              }
+            ],
+            "name": "nKLTT"
+          }
+        ],
+        "options": [
+          "HsKuHjtu",
+          true,
+          59,
+          "lcxjwguomljdevp",
+          null
+        ],
+        "types": [
+          {
+            "struct": [
+              "adipiscing ",
+              44,
+              "amet sit con",
+              null,
+              "2oB55O"
+            ]
+          },
+          {
+            "name": "vstglur",
+            "struct": [
+              "adipiscin",
+              "vifwjstnsq"
+            ]
+          },
+          {
+            "name": "u0vFNTm",
+            "struct": [
+              false,
+              26,
+              null
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "accelerator": {
+        "description": "ipsum sit dolor ad",
+        "displayName": "r0k32HGe",
+        "iconUrl": "q",
+        "imports": [
+          {
+            "expose": [
+              {
+                "name": "lQb2Nh0qnCJ"
+              },
+              {
+                "dependsOn": 34,
+                "name": "mabbizevfgamni"
+              },
+              {
+                "dependsOn": null
+              }
+            ],
+            "name": "c2v"
+          },
+          {
+            "expose": [
+              {
+                "dependsOn": 26.4
+              },
+              {
+                "as": "o6UXR62eecUES",
+                "dependsOn": 64.15,
+                "name": "lorem conse"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "eizrfbibvfq"
+              }
+            ],
+            "name": "hgxgtssftmbwubpqvrccy"
+          },
+          {
+            "exposeTypes": [
+              {
+                "as": "pnpimauiqaqyto"
+              },
+              {},
+              {
+                "as": "lorem adipisci",
+                "name": "scotvzltbkwztn"
+              },
+              {
+                "as": "consectet"
+              }
+            ]
+          },
+          {
+            "expose": [
+              {
+                "dependsOn": 23
+              },
+              {
+                "as": "bIQRYrLUA",
+                "name": "dolor amet am"
+              },
+              {
+                "as": "SteA8",
+                "dependsOn": null,
+                "name": "adipi"
+              }
+            ],
+            "name": "SWWK68UrkQW96y"
+          },
+          {
+            "expose": [
+              {
+                "name": "lorem adipisci"
+              },
+              {
+                "as": "lorem a",
+                "dependsOn": "dolor amet sit "
+              },
+              {
+                "as": "lfvmvv",
+                "dependsOn": 76.31,
+                "name": "amet consectet"
+              },
+              {
+                "as": "xI9OzB4QJpX",
+                "dependsOn": true,
+                "name": "ipsum con"
+              },
+              {
+                "as": "hbyyggbagne",
+                "dependsOn": 17.23
+              }
+            ],
+            "name": "dolor"
+          }
+        ],
+        "tags": []
+      }
+    },
+    {
+      "engine": null
+    },
+    {
+      "engine": "dolor consec"
+    },
+    {
+      "accelerator": {
+        "tags": [
+          "y7TDvoL5kCvLpePtO"
+        ]
+      },
+      "engine": 8
+    },
+    {
+      "accelerator": {
+        "iconUrl": "Bbehs7svmxt0GkMnqE",
+        "imports": [
+          {
+            "expose": [
+              {
+                "dependsOn": 4,
+                "name": "xhwvd"
+              },
+              {
+                "dependsOn": true,
+                "name": "vcippdscyrryg"
+              }
+            ],
+            "exposeTypes": [
+              {},
+              {
+                "as": "juqwtmqfh"
+              },
+              {
+                "name": "zlnc1CL3"
+              },
+              {
+                "as": "consectetur "
+              },
+              {
+                "as": "r8DI7sC4",
+                "name": "ypxmfimpljgnrq"
+              }
+            ],
+            "name": "amet sit"
+          },
+          {
+            "name": "adipiscing i"
+          }
+        ],
+        "options": [],
+        "tags": [
+          "08Twh4k"
+        ],
+        "types": [
+          {
+            "name": "ipsum lore"
+          },
+          {
+            "name": "pax11FkFWsJ",
+            "struct": [
+              "adipiscing sit ",
+              "adipisc",
+              null,
+              "fruelnhwrbgk",
+              52
+            ]
+          },
+          {
+            "struct": [
+              false,
+              "txpayfzlqtcjct",
+              63,
+              true,
+              null
+            ]
+          }
+        ]
+      },
+      "engine": 72
+    },
+    {
+      "accelerator": {
+        "description": "bnnnpnuj",
+        "imports": [
+          {
+            "expose": [
+              {
+                "name": "9PACDNnZI5"
+              },
+              {},
+              {
+                "dependsOn": "sit adipis",
+                "name": "consect"
+              },
+              {
+                "as": "nmfJUvgAe",
+                "dependsOn": "bmajzvmggolga"
+              }
+            ]
+          },
+          {
+            "expose": [
+              {},
+              {
+                "as": "tnfutnyeypcv"
+              },
+              {
+                "as": "lxqijccajjzdhx"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "lorem con"
+              },
+              {
+                "as": "jlohhyvxtqbvfq"
+              }
+            ],
+            "name": "xef"
+          },
+          {
+            "expose": [
+              {},
+              {
+                "dependsOn": 30,
+                "name": "7dmV861rHaCE"
+              },
+              {
+                "as": "rracyho",
+                "name": "chNYxjOj2bn4St"
+              },
+              {
+                "as": "Q84mxgesMKI4WCV",
+                "dependsOn": "iaolavrtmqg",
+                "name": "NbcTECN4h892Rq"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "name": "mtikbrcxexrr"
+              },
+              {
+                "name": "fpwwkanuyjhle"
+              },
+              {
+                "as": "consectetu"
+              },
+              {
+                "name": "dhvwxjmkikwjjn"
+              }
+            ],
+            "name": "adipiscing adipis"
+          }
+        ],
+        "tags": []
+      },
+      "engine": 74.32
+    },
+    {
+      "engine": 68
+    },
+    {
+      "engine": "ddzyh"
+    },
+    {
+      "accelerator": {
+        "description": "ossyilrdjblqk",
+        "displayName": "pqxmoyxecxqafi",
+        "iconUrl": "xupjwqHcC",
+        "imports": [
+          {},
+          {},
+          {
+            "expose": [
+              {},
+              {
+                "as": "b4mKrZ3q5amJR",
+                "dependsOn": true
+              },
+              {
+                "as": "urCZuG9pgdTev",
+                "name": "rw2VvpgmPA5Yc"
+              }
+            ],
+            "name": "kysftdtnpxokhqtm"
+          }
+        ],
+        "types": []
+      },
+      "engine": 1
+    },
+    {
+      "engine": 89
+    },
+    {
+      "engine": null
+    },
+    {
+      "accelerator": {
+        "description": "rmifwsjecrhhhextlyfaa",
+        "imports": [
+          {},
+          {
+            "name": "d"
+          },
+          {
+            "expose": [
+              {
+                "dependsOn": false,
+                "name": "ArPr1Fcun"
+              },
+              {
+                "dependsOn": null
+              },
+              {
+                "as": "ycqgczgkspxzm",
+                "dependsOn": 15.07,
+                "name": "VVGILi04"
+              },
+              {
+                "as": "lkBPs",
+                "dependsOn": false,
+                "name": "ncrmt"
+              },
+              {
+                "dependsOn": "gkSdpi4SUYnYwye",
+                "name": "sit sit dol"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "name": "dolor do"
+              },
+              {
+                "name": "adipiscing lore"
+              },
+              {
+                "name": "aH8FWZi2cfQyVA"
+              }
+            ],
+            "name": "rlczasbzdqyesqkocp"
+          },
+          {
+            "expose": [
+              {
+                "as": "tamznq",
+                "name": "adipiscing"
+              },
+              {
+                "dependsOn": "msxtuftremm",
+                "name": "sit lorem sit i"
+              },
+              {
+                "as": "ipsum conse"
+              },
+              {
+                "as": "sit consectetu",
+                "dependsOn": "jytifzegkveo"
+              },
+              {
+                "as": "vslmicgoix",
+                "name": "hpahoqsxy"
+              }
+            ],
+            "name": "ipsum sit sit a"
+          },
+          {
+            "expose": [
+              {
+                "as": "mwcwyxmhxeuwpyd"
+              },
+              {
+                "as": "LQ1fTr5",
+                "name": "hkyoloz"
+              },
+              {
+                "as": "mojycmtod",
+                "dependsOn": false
+              },
+              {
+                "dependsOn": 91.15,
+                "name": "amet dolor cons"
+              },
+              {
+                "dependsOn": 61
+              }
+            ],
+            "exposeTypes": [
+              {
+                "name": "ipsum "
+              },
+              {
+                "as": "cyfpnsratilkab",
+                "name": "w6vvi4"
+              },
+              {
+                "as": "itpusavu"
+              },
+              {},
+              {
+                "name": "ispXv9zmMhghc"
+              }
+            ],
+            "name": "sit adipisc"
+          }
+        ],
+        "options": [
+          false
+        ],
+        "types": [
+          {
+            "name": "amet adipisci",
+            "struct": [
+              true,
+              20.98,
+              75.59,
+              63.8,
+              null,
+              null
+            ]
+          }
+        ]
+      },
+      "engine": 55
+    },
+    {
+      "accelerator": {
+        "description": "eueieqbswwldm",
+        "imports": [
+          {
+            "expose": [
+              {
+                "as": "oAEOgb",
+                "name": "xadwagonft"
+              },
+              {
+                "dependsOn": true,
+                "name": "dagpqawtjkcisl"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "ykujspemq",
+                "name": "adipis"
+              },
+              {
+                "name": "tlrtJrl1e7qV"
+              }
+            ]
+          },
+          {
+            "name": "cbpSjIU"
+          },
+          {
+            "expose": [
+              {
+                "as": "amet a",
+                "name": "consect"
+              },
+              {
+                "as": "xvfi3kHJUkyi",
+                "dependsOn": "tyIb0bySaj",
+                "name": "fuWpYQ1"
+              },
+              {
+                "as": "B6B5Pj8bQt7plp",
+                "name": "dolor amet ame"
+              },
+              {
+                "dependsOn": 22,
+                "name": "KnyZNuI"
+              },
+              {
+                "as": "ccfvjaqlfbsnyfj"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "aC5Eyxe"
+              }
+            ],
+            "name": "cdrbvqyzsyrcce"
+          },
+          {
+            "expose": [
+              {
+                "name": "t2bWI21"
+              },
+              {
+                "as": "jjqrtannese",
+                "dependsOn": "lorem ",
+                "name": "kgfwltktdsdzc"
+              },
+              {
+                "dependsOn": 76
+              },
+              {
+                "dependsOn": "amet ipsum"
+              }
+            ]
+          }
+        ],
+        "types": []
+      }
+    },
+    {
+      "accelerator": {
+        "description": "bjfzrzehsg",
+        "displayName": "uhubudqqnxxjybwildjbc",
+        "imports": [
+          {
+            "exposeTypes": [
+              {
+                "as": "amet amet sit",
+                "name": "cglzucjuxc"
+              },
+              {
+                "as": "wwkppfssjmetix"
+              }
+            ],
+            "name": "wqebzkncnjerrpvzwbn"
+          }
+        ],
+        "types": [
+          {
+            "struct": [
+              7,
+              null,
+              "amet ",
+              "pnmothxezmacr",
+              true
+            ]
+          },
+          {
+            "name": "xihhhrkjko"
+          },
+          {}
+        ]
+      },
+      "engine": "zhhawiv"
+    },
+    {
+      "accelerator": {
+        "description": "consectetur ad",
+        "displayName": "eiigalcpbil",
+        "imports": [
+          {
+            "expose": [],
+            "exposeTypes": [
+              {
+                "as": "csGDYNJ7a"
+              },
+              {
+                "name": "rxmrjatevxrei"
+              },
+              {
+                "as": "kuapvj"
+              }
+            ]
+          }
+        ],
+        "options": [
+          81,
+          "qgmezltbdfgj",
+          "aqnscxujoqa",
+          "aokaqezbw"
+        ],
+        "tags": [
+          "vqtkhxuh",
+          "HuhkKATCbBTSS",
+          "XbG2FiFHw3vqFmt",
+          "sit adipiscin",
+          "s"
+        ],
+        "types": [
+          {
+            "name": "5YHWETWpZJEyn",
+            "struct": [
+              null,
+              76
+            ]
+          },
+          {
+            "struct": [
+              null,
+              88,
+              46,
+              false,
+              false,
+              "itvezbkn"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "engine": 94.74
+    },
+    {
+      "engine": null
+    },
+    {
+      "accelerator": {
+        "description": "ipsum adipiscin",
+        "iconUrl": "wVxzXDFaNs",
+        "imports": [
+          {
+            "expose": [
+              {
+                "as": "consectetur",
+                "dependsOn": 63.95,
+                "name": "ysstexviksgvaua"
+              },
+              {
+                "dependsOn": 84.81
+              },
+              {
+                "dependsOn": 98,
+                "name": "nywcsisvr"
+              }
+            ],
+            "name": "otyxzyxsatisi"
+          },
+          {
+            "exposeTypes": [
+              {
+                "as": "amet ipsum ame",
+                "name": "iqzvcaeacs"
+              },
+              {
+                "name": "n21qaR"
+              }
+            ],
+            "name": "ZySx3mA"
+          },
+          {
+            "expose": [],
+            "exposeTypes": [
+              {
+                "name": "J1lzuDsX"
+              }
+            ]
+          },
+          {
+            "expose": [
+              {
+                "as": "lorem ipsum ip",
+                "dependsOn": "evA3TAO"
+              },
+              {
+                "as": "yxzsbnxdcmnivmo",
+                "dependsOn": true,
+                "name": "kccdjkmfrnrrip"
+              },
+              {
+                "as": "lorem dolor ",
+                "dependsOn": 70.83,
+                "name": "adipiscing lore"
+              }
+            ],
+            "name": "vsnmoztykds"
+          },
+          {
+            "exposeTypes": [
+              {
+                "as": "akddi4NZBl8LGDr",
+                "name": "pevsjecbpv"
+              },
+              {
+                "as": "nalfgolpsgj"
+              },
+              {
+                "name": "auccvhrhp"
+              },
+              {
+                "name": "adipiscing"
+              },
+              {
+                "as": "xubviqezpir"
+              }
+            ]
+          }
+        ],
+        "options": []
+      },
+      "engine": null
+    },
+    {
+      "accelerator": {
+        "displayName": "ipsu",
+        "iconUrl": "amet adi",
+        "imports": [],
+        "options": [
+          48,
+          11,
+          null,
+          "adipiscing"
+        ],
+        "tags": [
+          "lorem amet",
+          "consectetur ipsum",
+          "gv"
+        ]
+      },
+      "engine": null
+    },
+    {
+      "engine": null
+    },
+    {
+      "accelerator": {
+        "displayName": "ivcoduoudsudc",
+        "iconUrl": "uzxbpygug",
+        "imports": [
+          {
+            "expose": [
+              {
+                "name": "etnexphppludq"
+              },
+              {
+                "as": "fffyfnrkrabkase",
+                "dependsOn": "1tombxKQlB5",
+                "name": "NzmWEM11"
+              },
+              {
+                "as": "lorem ipsum ame"
+              },
+              {
+                "name": "pCwqGII9iD"
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "adipisci"
+              },
+              {
+                "as": "sit dolor am",
+                "name": "Fscpa"
+              },
+              {
+                "as": "Isf4tWzI6OW0wm",
+                "name": "ihesnuvca"
+              },
+              {}
+            ],
+            "name": "dolor dolor a"
+          }
+        ],
+        "options": [
+          "bvgqccusykwl",
+          null
+        ],
+        "tags": [
+          "eKocs5Fbxfh7A"
+        ],
+        "types": [
+          {
+            "name": "sit dolor am",
+            "struct": [
+              "lanccqshbalegb"
+            ]
+          },
+          {
+            "name": "lerwdfctdur",
+            "struct": [
+              true,
+              null,
+              false,
+              null,
+              null,
+              80.18
+            ]
+          },
+          {
+            "name": "adipiscing do"
+          }
+        ]
+      }
+    },
+    {
+      "accelerator": {
+        "description": "agizrnrcrqfjkyj",
+        "displayName": "iszkroonvxydwded",
+        "iconUrl": "rV2Yw1WjhAMyR9A",
+        "options": [
+          50.26
+        ]
+      }
+    },
+    {
+      "accelerator": {
+        "displayName": "consectetu",
+        "options": [
+          null,
+          false,
+          94.66,
+          null,
+          92
+        ],
+        "tags": [
+          "fltbttgqvuexpdozjyq",
+          "aslhadtcnflbnmtx",
+          "Yi9YOqWR1sWmCiq69"
+        ],
+        "types": [
+          {
+            "name": "BocP3mxUSRt6X"
+          },
+          {
+            "struct": [
+              null,
+              false,
+              67.89
+            ]
+          },
+          {
+            "struct": [
+              "amet si",
+              null
+            ]
+          },
+          {
+            "name": "DpLsfUgG59rGL",
+            "struct": [
+              "adipis",
+              0,
+              null,
+              null,
+              38.63,
+              null
+            ]
+          },
+          {
+            "name": "sit dolor "
+          }
+        ]
+      },
+      "engine": true
+    },
+    {
+      "accelerator": {
+        "description": "hwyvaz",
+        "displayName": "amet dolor amet",
+        "types": [
+          {
+            "name": "73mXHLXPP2",
+            "struct": [
+              "icD1WC2KJ"
+            ]
+          },
+          {
+            "name": "eSPQ8DiNOZ",
+            "struct": [
+              null,
+              53
+            ]
+          },
+          {},
+          {}
+        ]
+      }
+    },
+    {
+      "accelerator": {
+        "description": "ioqsytwrghanehdatiqx",
+        "displayName": "qziximbwnvwecmskwvs",
+        "imports": [
+          {
+            "expose": [
+              {
+                "as": "A5CwZY70",
+                "dependsOn": "ipsum l",
+                "name": "dolor si"
+              }
+            ]
+          },
+          {
+            "expose": [],
+            "exposeTypes": [
+              {
+                "as": "amet lorem ",
+                "name": "seyxo"
+              },
+              {
+                "name": "JqOHW72ORha"
+              },
+              {
+                "as": "bomdikcebyifsd",
+                "name": "sit lorem adipi"
+              },
+              {
+                "as": "JKWOYY3cpgRqRP"
+              },
+              {
+                "name": "olqmefi"
+              }
+            ],
+            "name": "1XQr1tHG"
+          },
+          {
+            "expose": [
+              {
+                "dependsOn": null
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "25Qbpb"
+              },
+              {},
+              {
+                "name": "consectet"
+              },
+              {
+                "as": "adipiscing",
+                "name": "ipsum lorem a"
+              }
+            ]
+          }
+        ],
+        "options": [
+          false
+        ],
+        "types": [
+          {
+            "name": "amet dolor dolo"
+          },
+          {
+            "name": "wtfesdl"
+          }
+        ]
+      }
+    },
+    {
+      "accelerator": {
+        "description": "tvatckmgolahnushxt",
+        "iconUrl": "jywgjzzxksqhh",
+        "imports": [],
+        "options": [
+          69.38
+        ]
+      },
+      "engine": "iqgsruke"
+    },
+    {},
+    {
+      "accelerator": {
+        "description": "mRkEkdLm3LrwER",
+        "displayName": "VUcQ8utpA",
+        "iconUrl": "gqbnoanqgitxdarmczfqf",
+        "options": [
+          false
+        ],
+        "tags": [
+          "6jXD6EwUHeX"
+        ]
+      }
+    },
+    {
+      "accelerator": {
+        "description": "dolor c",
+        "iconUrl": "ndlnaazdxeuwy",
+        "options": [],
+        "types": [
+          {
+            "name": "lorem dolor a",
+            "struct": [
+              "sit d",
+              88,
+              84.84,
+              23.05,
+              null
+            ]
+          },
+          {
+            "struct": [
+              true,
+              false,
+              "WQSyKIVQ5fB0dfv",
+              58.99,
+              null,
+              "fsfoukujhzjs"
+            ]
+          },
+          {
+            "struct": [
+              60,
+              "tasiabfwom",
+              null
+            ]
+          },
+          {},
+          {
+            "struct": [
+              "qsozhd",
+              83.81,
+              "WFUrxxx9Nw"
+            ]
+          }
+        ]
+      },
+      "engine": "gyugcghagln"
+    },
+    {
+      "accelerator": {
+        "description": "adipiscing",
+        "displayName": "ufcvwwcrdit",
+        "options": [
+          null,
+          true
+        ],
+        "types": [
+          {
+            "name": "KZS2WOFaQFo",
+            "struct": [
+              null,
+              true,
+              "gvxcvdfcjhuyi",
+              null,
+              "jgunumvhklv",
+              50
+            ]
+          },
+          {
+            "name": "upwfllhv",
+            "struct": [
+              "BzJHzQF",
+              70
+            ]
+          },
+          {},
+          {
+            "name": "dolor "
+          },
+          {
+            "name": "CMDfCmDhmXd",
+            "struct": [
+              81,
+              "E1nIvlJQeg",
+              45.67,
+              "mwqqxfkqmjqycjn"
+            ]
+          }
+        ]
+      },
+      "engine": 80
+    },
+    {
+      "accelerator": {
+        "displayName": "onxtjxdvwh",
+        "iconUrl": "dnnyijtozn",
+        "imports": [
+          {
+            "expose": [
+              {
+                "as": "6fAAROavRF6of7",
+                "dependsOn": true
+              },
+              {
+                "dependsOn": 99,
+                "name": "adipisci"
+              },
+              {
+                "as": "gRzHi5WUs7cc"
+              },
+              {
+                "as": "Umdo0V5",
+                "dependsOn": false
+              }
+            ],
+            "exposeTypes": [
+              {
+                "as": "lao3IaiSAOQj"
+              },
+              {
+                "as": "YIjPhAHI8YW",
+                "name": "pfedyvqzucn"
+              },
+              {
+                "as": "csb3wYg",
+                "name": "ipsum lorem sit"
+              },
+              {
+                "name": "rfsanvbwwgcol"
+              },
+              {
+                "name": "vztmqzvwx"
+              }
+            ],
+            "name": "dolor "
+          },
+          {
+            "exposeTypes": [],
+            "name": "ysqaquhnbntbi"
+          },
+          {
+            "expose": []
+          },
+          {
+            "expose": [
+              {
+                "name": "lorem dol"
+              },
+              {
+                "as": "consect",
+                "dependsOn": 73,
+                "name": "e7LU3O5i"
+              },
+              {
+                "name": "Co16F2p"
+              },
+              {
+                "as": "xfxvj"
+              },
+              {
+                "as": "dolor co",
+                "dependsOn": 63,
+                "name": "jFXQ6S0sJGQgSDs"
+              }
+            ],
+            "exposeTypes": [
+              {},
+              {
+                "name": "fzrlssnlup"
+              },
+              {
+                "as": "sit ad",
+                "name": "obbcwajyavi"
+              },
+              {
+                "name": "cgradmqawde"
+              }
+            ],
+            "name": "qKFbkWzpumP4kvtj7"
+          }
+        ],
+        "options": [
+          79,
+          "jcxrqedcc",
+          "nytxjuc"
+        ],
+        "tags": [
+          "do",
+          "zbjbstxbakvfyo",
+          "lorem adipiscing am"
+        ],
+        "types": [
+          {
+            "struct": [
+              true,
+              73,
+              "quomfgnxurkyu",
+              "Zuyk2MMAiV831"
+            ]
+          }
+        ]
+      },
+      "engine": 96.56
+    },
+    {
+      "engine": "dSalR"
+    },
+    {
+      "accelerator": {
+        "description": "amet lorem ipsum",
+        "imports": [
+          {
+            "expose": [
+              {
+                "name": "nUpHqqk0XU"
+              },
+              {
+                "dependsOn": null
+              },
+              {
+                "as": "ipsum"
+              },
+              {
+                "as": "lDxmeDveYQO",
+                "dependsOn": "lorem lore",
+                "name": "GlIiQ7"
+              }
+            ],
+            "name": "qihyjhriyperpcoubzw"
+          },
+          {
+            "expose": [
+              {
+                "as": "jxava",
+                "dependsOn": "iklrtugambob"
+              },
+              {}
+            ],
+            "exposeTypes": [
+              {},
+              {
+                "as": "jjkpbkd",
+                "name": "conse"
+              }
+            ]
+          }
+        ],
+        "options": [
+          null,
+          20.04,
+          23,
+          true,
+          "jEh4X8zJd"
+        ],
+        "tags": []
+      },
+      "engine": 47.38
+    }
+  ]
+}

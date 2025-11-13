@@ -1,0 +1,1517 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "base_archetype": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "policy_assignments_to_add": {
+        "type": "array",
+        "items": [
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "policy_assignments_to_remove": {
+        "type": "array",
+        "items": [
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "policy_definitions_to_add": {
+        "type": "array",
+        "items": [
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "policy_definitions_to_remove": {
+        "type": "array",
+        "items": [
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "policy_set_definitions_to_add": {
+        "type": "array",
+        "items": [
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "policy_set_definitions_to_remove": {
+        "type": "array",
+        "items": [
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "role_definitions_to_add": {
+        "type": "array",
+        "items": [
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "role_definitions_to_remove": {
+        "type": "array",
+        "items": [
+          {
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "required": [
+      "base_archetype",
+      "name"
+    ]
+  },
+  "examples": [
+    {
+      "base_archetype": "consectetur ipsum lor",
+      "name": "dolor lorem ipsum ",
+      "policy_assignments_to_add": [],
+      "policy_assignments_to_remove": [],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_add": [],
+      "policy_set_definitions_to_remove": [],
+      "role_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "co",
+      "name": "RfLLFJM626ydghj",
+      "policy_assignments_to_add": [],
+      "policy_definitions_to_add": [],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_remove": [],
+      "role_definitions_to_add": [],
+      "role_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "RhxrnJgWQsNKVP",
+      "name": "consectetur ",
+      "policy_assignments_to_add": [],
+      "policy_assignments_to_remove": [],
+      "policy_definitions_to_remove": [],
+      "role_definitions_to_add": [],
+      "role_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "psbEhY71O",
+      "name": "ipsum adipiscing ips",
+      "policy_assignments_to_add": [],
+      "policy_definitions_to_add": [],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_add": [],
+      "policy_set_definitions_to_remove": [],
+      "role_definitions_to_add": []
+    },
+    {
+      "base_archetype": "K1o",
+      "name": "sit consectetur l",
+      "policy_assignments_to_remove": [],
+      "policy_definitions_to_add": [],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_add": [],
+      "policy_set_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "sit sit ipsu",
+      "name": "czbgq7DH43JoG",
+      "policy_assignments_to_add": [],
+      "policy_definitions_to_add": [],
+      "policy_definitions_to_remove": [],
+      "role_definitions_to_add": []
+    },
+    {
+      "base_archetype": "IHXFSBjYOEnVIFDbAi",
+      "name": "boyscg",
+      "policy_assignments_to_add": [],
+      "policy_assignments_to_remove": [],
+      "policy_set_definitions_to_remove": [],
+      "role_definitions_to_add": [],
+      "role_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "5uI",
+      "name": "th",
+      "policy_assignments_to_add": [],
+      "policy_assignments_to_remove": [],
+      "policy_definitions_to_add": [],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_remove": [],
+      "role_definitions_to_add": [],
+      "role_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "jxstiofoyjcjfbwz",
+      "name": "f5dLuQZauXA9mB4KhMHh",
+      "policy_definitions_to_remove": [],
+      "role_definitions_to_add": [],
+      "role_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "ogzvgwom",
+      "name": "vOxrRahHcP6vsBX1OV",
+      "policy_assignments_to_add": [],
+      "policy_definitions_to_add": [],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_add": [],
+      "policy_set_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "consectet",
+      "name": "4j9zlvNcyaek",
+      "policy_assignments_to_add": [],
+      "policy_assignments_to_remove": [],
+      "policy_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "fnmsjlayxzidwbbffdjt",
+      "name": "z6ujWIy9Ojd",
+      "policy_assignments_to_remove": [],
+      "policy_definitions_to_remove": [],
+      "role_definitions_to_add": []
+    },
+    {
+      "base_archetype": "s3Enu",
+      "name": "zffmulcihkocq",
+      "policy_definitions_to_add": [],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_remove": [],
+      "role_definitions_to_add": []
+    },
+    {
+      "base_archetype": "fzh",
+      "name": "hjs",
+      "policy_definitions_to_add": [],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_add": [],
+      "role_definitions_to_add": [],
+      "role_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "amet dolor sit adi",
+      "name": "amet dol",
+      "policy_assignments_to_add": [],
+      "policy_assignments_to_remove": [],
+      "policy_definitions_to_add": [],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_add": [],
+      "policy_set_definitions_to_remove": [],
+      "role_definitions_to_add": []
+    },
+    {
+      "base_archetype": "Ln",
+      "name": "hzqwatnpjzr",
+      "policy_definitions_to_add": [],
+      "policy_set_definitions_to_remove": [],
+      "role_definitions_to_add": [],
+      "role_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "consectetur adipisc",
+      "name": "r27Xz2gEDeIxw",
+      "policy_assignments_to_add": [],
+      "policy_definitions_to_add": [],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "amet sit",
+      "name": "sravj",
+      "policy_assignments_to_remove": [],
+      "policy_set_definitions_to_add": []
+    },
+    {
+      "base_archetype": "ipsum ipsu",
+      "name": "bxcwebqxksd",
+      "policy_definitions_to_add": [],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_remove": [],
+      "role_definitions_to_add": []
+    },
+    {
+      "base_archetype": "ipsum adipiscing",
+      "name": "w",
+      "policy_assignments_to_add": [],
+      "policy_assignments_to_remove": [],
+      "policy_definitions_to_add": [],
+      "role_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "adipiscing ipsum si",
+      "name": "ipsum lorem ",
+      "policy_definitions_to_add": [],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_add": []
+    },
+    {
+      "base_archetype": "5pOxeOsZtUdP6ho",
+      "name": "zxwsfplqmfxaiizdpypy",
+      "policy_assignments_to_add": [],
+      "policy_assignments_to_remove": [],
+      "policy_definitions_to_add": [],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_add": [],
+      "policy_set_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "amet sit amet ip",
+      "name": "uufvqdwls",
+      "policy_assignments_to_add": [],
+      "policy_definitions_to_add": [],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_add": [],
+      "policy_set_definitions_to_remove": [],
+      "role_definitions_to_add": [],
+      "role_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "sit ipsum sit",
+      "name": "vN3eIqOMcgG1XZi",
+      "policy_assignments_to_add": [],
+      "policy_assignments_to_remove": [],
+      "policy_definitions_to_add": [],
+      "policy_definitions_to_remove": [],
+      "role_definitions_to_add": [],
+      "role_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "5Ws",
+      "name": "adipiscing consect",
+      "policy_set_definitions_to_add": [],
+      "role_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "dol",
+      "name": "6AM5mckcBhfty2a",
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_add": [],
+      "policy_set_definitions_to_remove": [],
+      "role_definitions_to_add": []
+    },
+    {
+      "base_archetype": "txcplgwizjouubt",
+      "name": "bueu",
+      "policy_assignments_to_add": [],
+      "policy_definitions_to_add": [],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_add": [],
+      "role_definitions_to_add": [],
+      "role_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "ip",
+      "name": "52XICABGIYi9drm9n565",
+      "policy_assignments_to_add": [],
+      "policy_assignments_to_remove": [],
+      "policy_definitions_to_add": [],
+      "policy_set_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "sit",
+      "name": "gYPnP",
+      "policy_assignments_to_remove": [],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "XqjUmfFKFYG",
+      "name": "jejaqedxlyzrgdg",
+      "policy_assignments_to_remove": [],
+      "policy_definitions_to_add": [],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_add": [],
+      "policy_set_definitions_to_remove": [],
+      "role_definitions_to_add": [],
+      "role_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "tes",
+      "name": "TQL8RvxNQnYBVftbzpvn",
+      "policy_definitions_to_add": [],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_add": [],
+      "role_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "sit ipsum",
+      "name": "EGmgpWbvAI",
+      "policy_assignments_to_add": [],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_add": [],
+      "role_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "hht25vBC5BtFaFhYB7Aq",
+      "name": "adipiscing adi",
+      "policy_assignments_to_add": [],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_add": [],
+      "role_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "CTF054Q0YgQ5UrS",
+      "name": "mkjoryffdmpv",
+      "policy_assignments_to_add": [
+        "bhfckujrqmhrwjsaahih"
+      ],
+      "policy_assignments_to_remove": [
+        "aqTlqARUywFC8gxuF0"
+      ],
+      "policy_set_definitions_to_add": [
+        "dolor lorem sit dolo"
+      ],
+      "role_definitions_to_add": [
+        "9lGV8AX"
+      ]
+    },
+    {
+      "base_archetype": "y4d0rUBousuH",
+      "name": "p",
+      "policy_definitions_to_remove": [
+        "amet adipiscing"
+      ],
+      "role_definitions_to_remove": [
+        "consectetur lorem l"
+      ]
+    },
+    {
+      "base_archetype": "oYhDILjNF",
+      "name": "adipiscin",
+      "policy_assignments_to_remove": [
+        "dolor lorem c"
+      ],
+      "policy_definitions_to_add": [
+        "lorem c"
+      ],
+      "policy_set_definitions_to_remove": [
+        "consectetur adipis"
+      ],
+      "role_definitions_to_remove": [
+        "xuzhqxzjnvukppg"
+      ]
+    },
+    {
+      "base_archetype": "adipisc",
+      "name": "xrxkrxmza",
+      "policy_definitions_to_add": [
+        "kvetwjfcdhp"
+      ],
+      "policy_set_definitions_to_add": [
+        "rskyss"
+      ],
+      "policy_set_definitions_to_remove": [
+        "wAfz"
+      ]
+    },
+    {
+      "base_archetype": "KoSEe",
+      "name": "a",
+      "policy_assignments_to_add": [
+        "sit amet a"
+      ],
+      "policy_assignments_to_remove": [
+        "adip"
+      ],
+      "policy_definitions_to_add": [
+        "ztxlqgkizig"
+      ],
+      "policy_definitions_to_remove": [
+        "oydfyhyznsevqnarojx"
+      ],
+      "role_definitions_to_add": [
+        "c"
+      ],
+      "role_definitions_to_remove": [
+        "mY0Im3ifZ6XjJeY"
+      ]
+    },
+    {
+      "base_archetype": "31AwybV7x",
+      "name": "bgyodqyg",
+      "policy_assignments_to_add": [
+        "zhzirt"
+      ],
+      "policy_assignments_to_remove": [
+        "dolor amet"
+      ],
+      "policy_definitions_to_remove": [
+        "FdmtDPQa2xhgkLvR"
+      ],
+      "policy_set_definitions_to_add": [
+        "uwx"
+      ],
+      "role_definitions_to_add": [
+        "dolor "
+      ]
+    },
+    {
+      "base_archetype": "inmadrvaisfrpftwo",
+      "name": "uijxgv",
+      "policy_assignments_to_add": [
+        "adipiscing cons"
+      ],
+      "policy_assignments_to_remove": [
+        "SgdAtqY5n"
+      ],
+      "policy_definitions_to_add": [
+        "amet do"
+      ],
+      "policy_set_definitions_to_add": [
+        "i0xoK2ao3Af56"
+      ],
+      "policy_set_definitions_to_remove": [
+        "sit ame"
+      ],
+      "role_definitions_to_remove": [
+        "rJXDFyY"
+      ]
+    },
+    {
+      "base_archetype": "zhvee",
+      "name": "adipiscin",
+      "policy_assignments_to_add": [
+        "sit"
+      ],
+      "policy_assignments_to_remove": [
+        "dolor dolor sit "
+      ],
+      "policy_definitions_to_add": [
+        "a"
+      ],
+      "policy_definitions_to_remove": [
+        "SBxO4Pbs77sn"
+      ],
+      "policy_set_definitions_to_add": [
+        "psyz"
+      ],
+      "policy_set_definitions_to_remove": [
+        "awImWf2AbGTFevPYyvcN"
+      ],
+      "role_definitions_to_remove": [
+        "ckselldv"
+      ]
+    },
+    {
+      "base_archetype": "ldayfeczkjofusyv",
+      "name": "lorem ",
+      "policy_assignments_to_add": [
+        "l5tC6Kto4SMI5"
+      ],
+      "policy_assignments_to_remove": [
+        "lBchK4jn8geg"
+      ],
+      "policy_definitions_to_add": [
+        "ipsum adipiscing ips"
+      ],
+      "policy_definitions_to_remove": [
+        "gphualqtcbl"
+      ],
+      "policy_set_definitions_to_add": [
+        "sit sit lorem d"
+      ],
+      "role_definitions_to_add": [
+        "Bdxtk"
+      ]
+    },
+    {
+      "base_archetype": "aazifmotpo",
+      "name": "y3unODFcc",
+      "policy_assignments_to_add": [
+        "amAsghTHCb"
+      ],
+      "policy_set_definitions_to_add": [
+        "doqegijiywmexwavawpy"
+      ],
+      "role_definitions_to_add": [
+        "kqhzrvcuhjxopofsv"
+      ],
+      "role_definitions_to_remove": [
+        "iggmkwvdh"
+      ]
+    },
+    {
+      "base_archetype": "viyfuwj",
+      "name": "nwfrpmla",
+      "policy_assignments_to_add": [
+        "QWDo1hQg6aJF5I"
+      ],
+      "policy_assignments_to_remove": [
+        "yubceeltygryehm"
+      ],
+      "policy_definitions_to_add": [
+        "iz"
+      ],
+      "policy_set_definitions_to_remove": [
+        "dzdzhgnbttbtnnntzp"
+      ],
+      "role_definitions_to_add": [
+        "ypqfsqmgmwxmmg"
+      ],
+      "role_definitions_to_remove": [
+        "meomtc5"
+      ]
+    },
+    {
+      "base_archetype": "9",
+      "name": "s",
+      "policy_assignments_to_remove": [
+        "adipiscing lo"
+      ],
+      "policy_definitions_to_add": [
+        "fjuwkxmczdvjljfsbki"
+      ],
+      "policy_set_definitions_to_add": [
+        "luesurxulbcae"
+      ]
+    },
+    {
+      "base_archetype": "wvctq",
+      "name": "xxakcmqstfy",
+      "policy_definitions_to_add": [
+        "S4A9UOBQ0"
+      ],
+      "role_definitions_to_add": [
+        "cz"
+      ]
+    },
+    {
+      "base_archetype": "ieataimfyrpli",
+      "name": "ipsum sit adip",
+      "policy_assignments_to_add": [
+        "mkao6GCG"
+      ],
+      "policy_definitions_to_remove": [
+        "ExiAt0biIfrR8wbC"
+      ],
+      "policy_set_definitions_to_add": [
+        "peiltukbhlf"
+      ],
+      "policy_set_definitions_to_remove": [
+        "dolor ipsum "
+      ]
+    },
+    {
+      "base_archetype": "sgi",
+      "name": "dol",
+      "policy_assignments_to_remove": [
+        "adipiscing "
+      ],
+      "policy_definitions_to_add": [
+        "bisbmkhidaznsda"
+      ],
+      "policy_set_definitions_to_remove": [
+        "HyUD85r95I"
+      ],
+      "role_definitions_to_remove": [
+        "vqoplenrjolxhphos"
+      ]
+    },
+    {
+      "base_archetype": "moixuoz",
+      "name": "ipsum lore",
+      "policy_assignments_to_add": [
+        "wjvdueranyfclacqzzvlu"
+      ],
+      "policy_definitions_to_remove": [
+        "0Lt4P6JEH6E"
+      ],
+      "policy_set_definitions_to_add": [
+        "7T5QmdyjIVIRh99s"
+      ]
+    },
+    {
+      "base_archetype": "7Qy",
+      "name": "tmvgpjmzfttczlo",
+      "policy_assignments_to_add": [
+        "vjzqtoeertovxunxxl"
+      ],
+      "policy_assignments_to_remove": [
+        "lqv"
+      ],
+      "policy_definitions_to_add": [
+        "poxrixvyrljq"
+      ],
+      "policy_definitions_to_remove": [
+        "fpopkayxexpaqhjcv"
+      ],
+      "policy_set_definitions_to_remove": [
+        "K5yrGsX8dhLMYYCtCu8"
+      ],
+      "role_definitions_to_add": [
+        "pessrkrw"
+      ],
+      "role_definitions_to_remove": [
+        "vmzgiftclusiev"
+      ]
+    },
+    {
+      "base_archetype": "IXqX2VfGjZePuc",
+      "name": "q",
+      "policy_assignments_to_add": [
+        "amet consectetur si"
+      ],
+      "policy_assignments_to_remove": [
+        "yubj"
+      ],
+      "policy_definitions_to_add": [
+        "fefpma"
+      ],
+      "policy_set_definitions_to_add": [
+        "ucvqnidphs"
+      ],
+      "policy_set_definitions_to_remove": [
+        "stiwI77En7aePL8Q"
+      ]
+    },
+    {
+      "base_archetype": "swcdkupqxrvkdbyf",
+      "name": "zehhftxb",
+      "policy_assignments_to_add": [
+        "ctvf"
+      ],
+      "policy_definitions_to_add": [
+        "Y67E5"
+      ],
+      "policy_set_definitions_to_add": [
+        "fSRZvfaIbFbQ6aF591F0Z"
+      ],
+      "role_definitions_to_remove": [
+        "lorem am"
+      ]
+    },
+    {
+      "base_archetype": "consectetur dolor ",
+      "name": "lvyaalylurbm",
+      "policy_assignments_to_remove": [
+        "adipi"
+      ],
+      "policy_set_definitions_to_remove": [
+        "HVr1cBok3kWD62b6ITgSS"
+      ],
+      "role_definitions_to_remove": [
+        "si"
+      ]
+    },
+    {
+      "base_archetype": "9H6hEiafrmJGmOwUxj",
+      "name": "vlypOg",
+      "policy_assignments_to_add": [
+        "majnphjlxddy"
+      ],
+      "policy_assignments_to_remove": [
+        "r"
+      ],
+      "policy_definitions_to_add": [
+        "rersqlpzllxohynh"
+      ],
+      "policy_definitions_to_remove": [
+        "amet"
+      ],
+      "policy_set_definitions_to_add": [
+        "c"
+      ],
+      "role_definitions_to_remove": [
+        "ezkgajudqh"
+      ]
+    },
+    {
+      "base_archetype": "P5fvc2kNf9wi",
+      "name": "m",
+      "policy_assignments_to_add": [
+        "Qv42XFbdBZx8KhI"
+      ],
+      "policy_definitions_to_add": [
+        "guflubwjqqzktpfmzxf"
+      ],
+      "policy_definitions_to_remove": [
+        "amet dolor"
+      ],
+      "policy_set_definitions_to_add": [
+        "sit"
+      ]
+    },
+    {
+      "base_archetype": "94YdbVb",
+      "name": "eBPYpspzl",
+      "policy_assignments_to_remove": [
+        "consectetur lorem "
+      ],
+      "policy_definitions_to_add": [
+        "lorem lorem consecte"
+      ],
+      "policy_definitions_to_remove": [
+        "R5aQa1E"
+      ],
+      "policy_set_definitions_to_add": [
+        "Uc5T2cGZcPHIHzWBM"
+      ],
+      "role_definitions_to_remove": [
+        "ge"
+      ]
+    },
+    {
+      "base_archetype": "cz8rYIW4yOYV",
+      "name": "u",
+      "policy_assignments_to_add": [
+        "iqszfveeneqyf"
+      ],
+      "policy_assignments_to_remove": [
+        "5GjxZt9RG2lcBE"
+      ],
+      "policy_set_definitions_to_add": [
+        "sit dolor adipisci"
+      ],
+      "policy_set_definitions_to_remove": [
+        "mlmwkjshgraoaiswlrfk"
+      ],
+      "role_definitions_to_add": [
+        "adipiscing ipsum sit"
+      ]
+    },
+    {
+      "base_archetype": "LoifTGRfMmSKX",
+      "name": "wfleocsrcibo",
+      "policy_assignments_to_add": [
+        "nmxpzjfxeupz"
+      ],
+      "policy_definitions_to_remove": [
+        "a"
+      ],
+      "policy_set_definitions_to_add": [
+        "dqjdkxzqlovdym"
+      ],
+      "policy_set_definitions_to_remove": [
+        "dyddhzkywimggwjrnavi"
+      ],
+      "role_definitions_to_add": [
+        "kkjcwxsklir"
+      ]
+    },
+    {
+      "base_archetype": "7kyvF",
+      "name": "eCc5",
+      "policy_assignments_to_remove": [
+        "zydxjkvklh"
+      ],
+      "policy_definitions_to_remove": [
+        "epdweearzuxkqtbgqysri"
+      ],
+      "policy_set_definitions_to_remove": [
+        "kbchlgvslxux"
+      ],
+      "role_definitions_to_add": [
+        "we"
+      ]
+    },
+    {
+      "base_archetype": "xojbnpxmuilgelneugu",
+      "name": "sit dolor lore",
+      "policy_set_definitions_to_add": [
+        "lorem consect"
+      ],
+      "role_definitions_to_add": [
+        "bRaI"
+      ],
+      "role_definitions_to_remove": [
+        "rV"
+      ]
+    },
+    {
+      "base_archetype": "joreh",
+      "name": "cGMG2TxohYQLBF",
+      "policy_assignments_to_add": [
+        "EzDeLZxmAL0iXweos"
+      ],
+      "policy_assignments_to_remove": [
+        "P3ZND6BM1QyUL4MH8Gy6"
+      ],
+      "policy_definitions_to_remove": [
+        "nxs"
+      ],
+      "policy_set_definitions_to_add": [
+        "sit am"
+      ],
+      "policy_set_definitions_to_remove": [
+        "amet sit lorem"
+      ],
+      "role_definitions_to_add": [
+        "lorem ips"
+      ],
+      "role_definitions_to_remove": [
+        "sit consect"
+      ]
+    },
+    {
+      "base_archetype": "svrxtrlirmdpzbz",
+      "name": "htwpr",
+      "policy_assignments_to_add": [
+        "qcffsnvsxtnulfnbvdn"
+      ],
+      "policy_definitions_to_add": [
+        "consectetur "
+      ],
+      "policy_definitions_to_remove": [
+        "oush"
+      ],
+      "policy_set_definitions_to_add": [
+        "jsgxeuihaggfyecralcd"
+      ],
+      "policy_set_definitions_to_remove": [
+        "wnzixejva"
+      ]
+    },
+    {
+      "base_archetype": "t",
+      "name": "ahY4gjeU",
+      "policy_assignments_to_add": [
+        "pk"
+      ],
+      "policy_assignments_to_remove": [
+        "dolor lorem sit ipsu"
+      ],
+      "policy_definitions_to_remove": [
+        "XZ"
+      ],
+      "policy_set_definitions_to_add": [
+        "eMHYfSCWDinj1l"
+      ],
+      "policy_set_definitions_to_remove": [
+        "ip"
+      ],
+      "role_definitions_to_remove": [
+        "lorem"
+      ]
+    },
+    {
+      "base_archetype": "X6tVukvUjOvkAxC25o9",
+      "name": "494duZ6wSPl0Z572JNEM",
+      "policy_assignments_to_add": [
+        "uysdkhgdcm"
+      ],
+      "policy_set_definitions_to_add": [
+        "m"
+      ],
+      "role_definitions_to_add": [
+        "K0OeNw8qp5zfX4"
+      ],
+      "role_definitions_to_remove": [
+        "MfVrnU"
+      ]
+    },
+    {
+      "base_archetype": "adipiscing conse",
+      "name": "adi",
+      "policy_assignments_to_add": [
+        "hfmsqejjhiwdcci"
+      ],
+      "policy_definitions_to_remove": [
+        "pBo3EjlJI9t6K5YMw9"
+      ],
+      "policy_set_definitions_to_add": [
+        "gnkrwrd"
+      ],
+      "policy_set_definitions_to_remove": [
+        "efHSETIZnZUh"
+      ],
+      "role_definitions_to_add": [
+        "lorem lore"
+      ]
+    },
+    {
+      "base_archetype": "tsltylod",
+      "name": "R4rtlK5Tix",
+      "policy_assignments_to_add": [
+        "ipsum "
+      ],
+      "policy_assignments_to_remove": [
+        "1oMyssW0T"
+      ],
+      "policy_set_definitions_to_add": [
+        "lorem ad"
+      ],
+      "policy_set_definitions_to_remove": [
+        "zrrumuw"
+      ],
+      "role_definitions_to_add": [
+        "adipiscing "
+      ]
+    },
+    {
+      "base_archetype": "crsjz",
+      "name": "ipsum cons",
+      "policy_assignments_to_add": [
+        "dolor adipisci"
+      ],
+      "policy_set_definitions_to_add": [
+        "liszyftmzzmxxckyglq"
+      ],
+      "policy_set_definitions_to_remove": [
+        "IbXW0lGj"
+      ]
+    },
+    {
+      "base_archetype": "sit lorem",
+      "name": "7IGWBr0k",
+      "policy_definitions_to_add": [
+        "ipsum conse"
+      ],
+      "policy_set_definitions_to_add": [
+        "wrlldb"
+      ],
+      "role_definitions_to_add": [
+        "84QWGOXPdCKP5WzDWUwyL"
+      ],
+      "role_definitions_to_remove": [
+        "kpfvspicggtowygd"
+      ]
+    },
+    {
+      "base_archetype": "pksqrontdncla",
+      "name": "ughjckowhxrdgm",
+      "policy_assignments_to_add": [
+        "uki"
+      ],
+      "policy_set_definitions_to_add": [
+        "dolor"
+      ],
+      "policy_set_definitions_to_remove": [
+        "yjiknalccnyeoaausqdrz"
+      ]
+    },
+    {
+      "base_archetype": "ifkvqso",
+      "name": "kjhfsx",
+      "policy_assignments_to_add": [],
+      "policy_assignments_to_remove": [
+        "lblnhixi"
+      ],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_remove": [
+        "mmwcrseuez"
+      ],
+      "role_definitions_to_remove": [
+        "m"
+      ]
+    },
+    {
+      "base_archetype": "phmkrjnapglgftrr",
+      "name": "zybenyWf7Za6pI6",
+      "policy_assignments_to_remove": [
+        "hlnqcqgsplgstircc"
+      ],
+      "policy_definitions_to_add": [
+        "FkeF"
+      ],
+      "role_definitions_to_add": [
+        "FP1fJVUAetKWnuwd"
+      ]
+    },
+    {
+      "base_archetype": "v",
+      "name": "sit ipsum",
+      "policy_definitions_to_add": [
+        "rAyC7Tcv8V"
+      ],
+      "role_definitions_to_add": [
+        "falaotnqd"
+      ],
+      "role_definitions_to_remove": [
+        "nnpufowibmrypgqm"
+      ]
+    },
+    {
+      "base_archetype": "u7McGGGK",
+      "name": "xiczxmctzhjwtxqgyv",
+      "policy_assignments_to_remove": [
+        "woqi"
+      ],
+      "policy_set_definitions_to_add": [
+        "g0d"
+      ],
+      "policy_set_definitions_to_remove": [
+        "ipsum sit i"
+      ],
+      "role_definitions_to_add": [
+        "vJVaFHMctqRc"
+      ],
+      "role_definitions_to_remove": [
+        "BqcW97Fyh9Be8OUHn"
+      ]
+    },
+    {
+      "base_archetype": "lorem lore",
+      "name": "rqrmodbwuztpewnwuu",
+      "policy_definitions_to_add": [
+        "L83SLo0"
+      ],
+      "policy_definitions_to_remove": [
+        "msetypvosliyqyigop"
+      ],
+      "policy_set_definitions_to_add": [],
+      "policy_set_definitions_to_remove": [
+        "a"
+      ],
+      "role_definitions_to_add": [
+        "Qr5xzQFh9u"
+      ]
+    },
+    {
+      "base_archetype": "sUhi77q2A5ed7GE7Ygzk",
+      "name": "EeCmzqRxzANyVRuJNb",
+      "policy_assignments_to_add": [
+        "z7UscTxc"
+      ],
+      "policy_assignments_to_remove": [
+        "gmawnapwmoy"
+      ],
+      "policy_definitions_to_add": [
+        "niqttfhncughhfv"
+      ],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_add": [
+        "do"
+      ],
+      "role_definitions_to_remove": [
+        "dolor dol"
+      ]
+    },
+    {
+      "base_archetype": "ipsum co",
+      "name": "hGJvYb8AkxAaRNKN4D",
+      "policy_assignments_to_add": [
+        "lorem ad"
+      ],
+      "policy_definitions_to_add": [
+        "OuxupjwqHcC"
+      ],
+      "policy_definitions_to_remove": [
+        "qt"
+      ],
+      "role_definitions_to_add": [
+        "osznaxfphvxhyafosfssx"
+      ],
+      "role_definitions_to_remove": [
+        "zjihmvinzgcbtbjrmnpa"
+      ]
+    },
+    {
+      "base_archetype": "lorem dolor consectet",
+      "name": "8vXjKS04IY21rXM3IYwu",
+      "policy_assignments_to_add": [
+        "pZO"
+      ],
+      "policy_definitions_to_add": [
+        "l"
+      ],
+      "policy_definitions_to_remove": [
+        "consect"
+      ],
+      "policy_set_definitions_to_add": [
+        "adipiscing ipsum "
+      ],
+      "policy_set_definitions_to_remove": [
+        "ohdilxu"
+      ]
+    },
+    {
+      "base_archetype": "consectetu",
+      "name": "cxqgeyhmaswtbrfmvn",
+      "policy_definitions_to_remove": [
+        "H6LldkgljuDxwGo7"
+      ],
+      "policy_set_definitions_to_add": [
+        "Ha92b"
+      ],
+      "policy_set_definitions_to_remove": [
+        "tgnijewexqczxdrevoq"
+      ]
+    },
+    {
+      "base_archetype": "adipiscing adipis",
+      "name": "consectetur ips",
+      "policy_definitions_to_remove": [
+        "ipsum sit "
+      ],
+      "policy_set_definitions_to_add": [
+        "cwljurl"
+      ],
+      "policy_set_definitions_to_remove": [
+        "lorem dolor d"
+      ]
+    },
+    {
+      "base_archetype": "adi",
+      "name": "pnyhwkrzupualwtlfjldy",
+      "policy_assignments_to_remove": [
+        "zjuwT4ai1aqIHnUSaSxEJ"
+      ],
+      "policy_set_definitions_to_add": [
+        "ipsum consectetur a"
+      ]
+    },
+    {
+      "base_archetype": "adipiscing adipis",
+      "name": "ZTKgB8Ix",
+      "policy_assignments_to_remove": [
+        "mkznlcpmh"
+      ],
+      "policy_set_definitions_to_add": [
+        "jwef8bmDWwMan"
+      ],
+      "policy_set_definitions_to_remove": [],
+      "role_definitions_to_add": [
+        "vbquzuyqwtgsqngyvuge"
+      ],
+      "role_definitions_to_remove": [
+        "Uy9dy2FP0Nkd"
+      ]
+    },
+    {
+      "base_archetype": "co",
+      "name": "adipiscin",
+      "policy_assignments_to_add": [
+        "eiigalcpbil"
+      ],
+      "policy_definitions_to_add": [
+        "axogv"
+      ],
+      "policy_set_definitions_to_add": [
+        "qoyaxql"
+      ],
+      "policy_set_definitions_to_remove": [
+        "mrjatevxreikbloiecqa"
+      ],
+      "role_definitions_to_add": [
+        "S4N97NoDl9BUc"
+      ],
+      "role_definitions_to_remove": [
+        "d"
+      ]
+    },
+    {
+      "base_archetype": "k7zWbk8Yb",
+      "name": "afkfktqntelspysk",
+      "policy_assignments_to_add": [],
+      "policy_definitions_to_add": [
+        "plScONNvKCed4XdHgM"
+      ],
+      "policy_set_definitions_to_remove": [
+        "agrfunjlvtnibvvgcknpz"
+      ],
+      "role_definitions_to_add": [
+        "catcecfa"
+      ],
+      "role_definitions_to_remove": [
+        "w"
+      ]
+    },
+    {
+      "base_archetype": "consecte",
+      "name": "LMaRjF",
+      "policy_definitions_to_remove": [
+        "yxbsqw"
+      ],
+      "policy_set_definitions_to_add": [
+        "swblxujqafdsokgaugimz"
+      ],
+      "role_definitions_to_add": [
+        "consectetur sit c"
+      ],
+      "role_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "amet ipsum ipsum ad",
+      "name": "lorem am",
+      "policy_assignments_to_add": [
+        "wVxzXDFaNs"
+      ],
+      "policy_assignments_to_remove": [
+        "pApzTb2"
+      ],
+      "policy_set_definitions_to_add": [
+        "s"
+      ],
+      "role_definitions_to_remove": [
+        "zGWSwRESEjl"
+      ]
+    },
+    {
+      "base_archetype": "pv",
+      "name": "a",
+      "policy_assignments_to_add": [
+        "dsHZ6xXTwv"
+      ],
+      "policy_assignments_to_remove": [
+        "jjhngcjbsfhlsvvgvyoy"
+      ],
+      "policy_definitions_to_remove": [
+        "adipiscing adip"
+      ],
+      "policy_set_definitions_to_add": [
+        "amet con"
+      ],
+      "policy_set_definitions_to_remove": [
+        "consectetur ad"
+      ],
+      "role_definitions_to_remove": [
+        "dolor ip"
+      ]
+    },
+    {
+      "base_archetype": "wD9tHNJ3",
+      "name": "lorem dolo",
+      "policy_definitions_to_add": [
+        "wDEGztp4ZijeC"
+      ],
+      "policy_definitions_to_remove": [
+        "XAcZTCAG8EyWI"
+      ],
+      "policy_set_definitions_to_add": [
+        "lorem adipisci"
+      ],
+      "policy_set_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "nbxskfwgsdrhgymplyg",
+      "name": "uzxbpygug",
+      "policy_assignments_to_add": [
+        "M0gFj4jBNUv"
+      ],
+      "policy_definitions_to_add": [
+        "dqewyfffyfn"
+      ],
+      "policy_set_definitions_to_add": [
+        "lorem d"
+      ],
+      "policy_set_definitions_to_remove": [
+        "dolor amet dolor "
+      ],
+      "role_definitions_to_add": [
+        "DMySGTY8"
+      ]
+    },
+    {
+      "base_archetype": "WOBCwKnv62SI69Ybb",
+      "name": "amet sit dol",
+      "policy_assignments_to_add": [
+        "lorem consect"
+      ],
+      "policy_definitions_to_add": [
+        "hxvuv"
+      ],
+      "policy_definitions_to_remove": [
+        "wvjwuedlqkszlu"
+      ],
+      "policy_set_definitions_to_add": [
+        "VYTTY"
+      ]
+    },
+    {
+      "base_archetype": "FybWhJ7SnQQ",
+      "name": "tyosxsufltbttgq",
+      "policy_definitions_to_add": [
+        "sit adipisci"
+      ],
+      "role_definitions_to_remove": [
+        "rajUeH"
+      ]
+    },
+    {
+      "base_archetype": "lorem ipsum lo",
+      "name": "yvaz",
+      "policy_assignments_to_add": [
+        "zgrymx"
+      ],
+      "policy_set_definitions_to_remove": [
+        "pirbbvjncpjwg"
+      ]
+    },
+    {
+      "base_archetype": "tMV2RU2cfr58nxAf",
+      "name": "xkyoe",
+      "policy_assignments_to_add": [
+        "amet lorem adipiscin"
+      ],
+      "policy_definitions_to_add": [
+        "ecmskwvsypkolgkg"
+      ],
+      "policy_definitions_to_remove": [
+        "vzwovdcaruftgwehhm"
+      ],
+      "policy_set_definitions_to_remove": [
+        "dob"
+      ],
+      "role_definitions_to_add": []
+    },
+    {
+      "base_archetype": "SISNhOE7n7L97gT7",
+      "name": "eKNNPSRw6",
+      "policy_assignments_to_remove": [
+        "zxksq"
+      ],
+      "policy_definitions_to_add": [
+        "5enRR8k3oqAmSjVaZ"
+      ],
+      "policy_definitions_to_remove": [
+        "adipiscing consectet"
+      ],
+      "policy_set_definitions_to_add": [
+        "adipis"
+      ],
+      "policy_set_definitions_to_remove": [
+        "tjjy"
+      ],
+      "role_definitions_to_add": [],
+      "role_definitions_to_remove": [
+        "G5v5vl7pYPqWd9"
+      ]
+    },
+    {
+      "base_archetype": "pmvdhpdqjvhv",
+      "name": "hfazycgtr",
+      "policy_assignments_to_add": [],
+      "policy_assignments_to_remove": [
+        "skdsml"
+      ],
+      "policy_definitions_to_remove": [
+        "ipsum adip"
+      ],
+      "policy_set_definitions_to_remove": [
+        "eqezmxrggw"
+      ],
+      "role_definitions_to_add": [
+        "DywVL"
+      ],
+      "role_definitions_to_remove": [
+        "sit amet sit ad"
+      ]
+    },
+    {
+      "base_archetype": "dEmRkEkdLm3LrwERbZS",
+      "name": "auexynfgwrtvgqbnoa",
+      "policy_assignments_to_add": [
+        "dolor co"
+      ],
+      "policy_definitions_to_add": [],
+      "policy_set_definitions_to_add": [
+        "dol"
+      ],
+      "role_definitions_to_add": [
+        "oYsiy6jXD6EwUHe"
+      ]
+    },
+    {
+      "base_archetype": "dol",
+      "name": "dolor c",
+      "policy_assignments_to_remove": [
+        "9GuLPQDwvpExuSRvS"
+      ],
+      "policy_definitions_to_remove": [],
+      "policy_set_definitions_to_add": [
+        "RcWgGYaS0p46iUZoWrO"
+      ],
+      "policy_set_definitions_to_remove": [
+        "xkxnydcrduqpw"
+      ],
+      "role_definitions_to_add": [
+        "amet ipsum sit "
+      ],
+      "role_definitions_to_remove": []
+    },
+    {
+      "base_archetype": "6sGqlYk",
+      "name": "smxodfw",
+      "policy_assignments_to_add": [
+        "byprrhrbkaxv"
+      ],
+      "policy_assignments_to_remove": [],
+      "policy_set_definitions_to_add": [],
+      "policy_set_definitions_to_remove": [
+        "lorem amet amet "
+      ],
+      "role_definitions_to_add": [
+        "0cUwjf3v"
+      ]
+    },
+    {
+      "base_archetype": "q",
+      "name": "yrtonxtjxdvwhfhmiaew",
+      "policy_assignments_to_add": [],
+      "policy_definitions_to_add": [
+        "s"
+      ],
+      "policy_set_definitions_to_add": [
+        "amet amet consect"
+      ],
+      "policy_set_definitions_to_remove": [
+        "s"
+      ],
+      "role_definitions_to_remove": [
+        "hkqdymwu"
+      ]
+    },
+    {
+      "base_archetype": "lore",
+      "name": "fn",
+      "policy_assignments_to_remove": [
+        "dkLPzBsHAmdBI"
+      ],
+      "policy_definitions_to_add": [
+        "pryumfgdncmdv"
+      ],
+      "policy_definitions_to_remove": [
+        "mrpykqtryigf"
+      ],
+      "policy_set_definitions_to_add": [
+        "Zk2YytDj8jlIOqg"
+      ],
+      "policy_set_definitions_to_remove": [
+        "dolor dolor sit dolor"
+      ],
+      "role_definitions_to_add": [
+        "vldohzrgpzxrruxckdg"
+      ],
+      "role_definitions_to_remove": [
+        "QLox1CT85z6hXxvF5H"
+      ]
+    },
+    {
+      "base_archetype": "pmomyqazignqmoeio",
+      "name": "goghevutronqlchiqvmk",
+      "policy_assignments_to_add": [
+        "ngvbiagpqiiprbs"
+      ],
+      "policy_assignments_to_remove": [
+        "lIiQ7MxY4YNvs7xqQt"
+      ],
+      "policy_set_definitions_to_add": [
+        "coubzwkzya"
+      ],
+      "policy_set_definitions_to_remove": [
+        "sit ipsum dol"
+      ],
+      "role_definitions_to_add": [
+        "mc0E7HPyk8p"
+      ],
+      "role_definitions_to_remove": [
+        "qigrogzjjk"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,805 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "RootConfig",
+    "type": "object",
+    "properties": {
+      "default_config": {
+        "anyOf": [
+          {
+            "$ref": "#/definitions/Config"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "project": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "items": {
+          "$ref": "#/definitions/ProjectConfig"
+        }
+      }
+    },
+    "definitions": {
+      "Arch": {
+        "oneOf": [
+          {
+            "type": "string",
+            "enum": [
+              "x86",
+              "x86-64",
+              "arm",
+              "arm64",
+              "riscv",
+              "z80",
+              "6502",
+              "power-isa",
+              "AVR",
+              "mips"
+            ]
+          },
+          {
+            "description": "enables both `Arch::X86` and `Arch::X86_64`",
+            "type": "string",
+            "enum": [
+              "x86/x86-64"
+            ]
+          }
+        ]
+      },
+      "Assembler": {
+        "type": "string",
+        "enum": [
+          "avr",
+          "ca65",
+          "fasm",
+          "gas",
+          "go",
+          "mars",
+          "masm",
+          "nasm"
+        ]
+      },
+      "Config": {
+        "type": "object",
+        "required": [
+          "assembler",
+          "instruction_set"
+        ],
+        "properties": {
+          "assembler": {
+            "$ref": "#/definitions/Assembler"
+          },
+          "instruction_set": {
+            "$ref": "#/definitions/Arch"
+          },
+          "opts": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/ConfigOptions"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "version": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "ConfigOptions": {
+        "type": "object",
+        "properties": {
+          "compile_flags_txt": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "compiler": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "default_diagnostics": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "diagnostics": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        }
+      },
+      "ProjectConfig": {
+        "type": "object",
+        "required": [
+          "assembler",
+          "instruction_set",
+          "path"
+        ],
+        "properties": {
+          "assembler": {
+            "$ref": "#/definitions/Assembler"
+          },
+          "instruction_set": {
+            "$ref": "#/definitions/Arch"
+          },
+          "opts": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/ConfigOptions"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "path": {
+            "type": "string"
+          },
+          "version": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "project": null
+    },
+    {
+      "default_config": 95.94,
+      "project": []
+    },
+    {
+      "default_config": null
+    },
+    {
+      "default_config": false,
+      "project": null
+    },
+    {
+      "project": []
+    },
+    {
+      "default_config": false,
+      "project": null
+    },
+    {
+      "default_config": 55.69,
+      "project": []
+    },
+    {
+      "default_config": true,
+      "project": []
+    },
+    {
+      "default_config": "gmzcircdvz",
+      "project": []
+    },
+    {
+      "default_config": null,
+      "project": []
+    },
+    {
+      "project": null
+    },
+    {},
+    {
+      "project": null
+    },
+    {
+      "default_config": 15.0
+    },
+    {
+      "project": null
+    },
+    {
+      "default_config": null
+    },
+    {
+      "default_config": 73.83
+    },
+    {
+      "default_config": true,
+      "project": null
+    },
+    {
+      "default_config": null,
+      "project": []
+    },
+    {
+      "default_config": null,
+      "project": null
+    },
+    {
+      "project": []
+    },
+    {
+      "default_config": "fUemeM0Ln"
+    },
+    {
+      "default_config": null,
+      "project": []
+    },
+    {
+      "default_config": "lnoiqxbogrqbc",
+      "project": []
+    },
+    {
+      "default_config": true
+    },
+    {
+      "default_config": false,
+      "project": null
+    },
+    {},
+    {
+      "project": []
+    },
+    {
+      "project": null
+    },
+    {
+      "default_config": null
+    },
+    {
+      "default_config": null
+    },
+    {
+      "default_config": null,
+      "project": []
+    },
+    {
+      "project": []
+    },
+    {
+      "default_config": false,
+      "project": null
+    },
+    {
+      "default_config": true
+    },
+    {
+      "project": [
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "project": null
+    },
+    {
+      "default_config": "ipsum amet ips",
+      "project": [
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "default_config": null
+    },
+    {
+      "default_config": false,
+      "project": null
+    },
+    {
+      "default_config": false
+    },
+    {
+      "default_config": true,
+      "project": [
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        }
+      ]
+    },
+    {},
+    {
+      "default_config": null
+    },
+    {
+      "project": null
+    },
+    {
+      "default_config": 87.51
+    },
+    {
+      "default_config": 33.28,
+      "project": [
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "default_config": null
+    },
+    {
+      "default_config": 61
+    },
+    {
+      "default_config": 96.75
+    },
+    {
+      "default_config": null,
+      "project": null
+    },
+    {
+      "project": null
+    },
+    {
+      "default_config": 35,
+      "project": [
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "project": [
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "default_config": true,
+      "project": null
+    },
+    {
+      "default_config": "Ic3Yw",
+      "project": null
+    },
+    {
+      "default_config": 45,
+      "project": null
+    },
+    {
+      "default_config": 59.94,
+      "project": [
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "default_config": true
+    },
+    {
+      "default_config": 90.84,
+      "project": null
+    },
+    {
+      "default_config": null,
+      "project": [
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "project": [
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        }
+      ]
+    },
+    {},
+    {
+      "project": [
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        }
+      ]
+    },
+    {},
+    {
+      "default_config": null
+    },
+    {
+      "default_config": 84,
+      "project": null
+    },
+    {
+      "default_config": false,
+      "project": [
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "project": [
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "project": null
+    },
+    {
+      "default_config": null
+    },
+    {
+      "default_config": "vBbeh",
+      "project": null
+    },
+    {
+      "default_config": 43
+    },
+    {
+      "project": [
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "project": null
+    },
+    {
+      "default_config": 20.98
+    },
+    {
+      "project": [
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "project": null
+    },
+    {
+      "default_config": 94.53
+    },
+    {
+      "default_config": null
+    },
+    {
+      "default_config": null
+    },
+    {
+      "default_config": 98,
+      "project": []
+    },
+    {
+      "project": []
+    },
+    {
+      "project": null
+    },
+    {
+      "default_config": null,
+      "project": [
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "default_config": null,
+      "project": []
+    },
+    {
+      "project": null
+    },
+    {
+      "default_config": null,
+      "project": null
+    },
+    {
+      "default_config": "qagizrnrcrqfjky",
+      "project": [
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/ProjectConfig",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "default_config": null,
+      "project": null
+    },
+    {
+      "default_config": true
+    },
+    {
+      "default_config": false
+    },
+    {
+      "default_config": 72.58,
+      "project": []
+    },
+    {},
+    {
+      "default_config": null,
+      "project": null
+    },
+    {
+      "default_config": false
+    },
+    {
+      "default_config": false,
+      "project": null
+    },
+    {
+      "default_config": null,
+      "project": null
+    },
+    {
+      "project": null
+    },
+    {
+      "default_config": 74
+    }
+  ]
+}

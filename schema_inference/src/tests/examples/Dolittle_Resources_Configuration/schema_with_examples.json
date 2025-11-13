@@ -1,0 +1,543 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "dolittle.io/schemas/DotNET.Fundamentals/ResourceTypes.Configuration/resources.json",
+    "title": "Resource Configuration",
+    "description": "The resource configurations mapped to tenant id",
+    "type": "object",
+    "additionalProperties": {
+      "$ref": "#/definitions/resourceTypeConfiguration"
+    },
+    "definitions": {
+      "resourceTypeConfiguration": {
+        "description": "The configuration of a resource type",
+        "type": "object",
+        "properties": {
+          "readModels": {
+            "description": "Configuration for the resource type for read models",
+            "type": "object"
+          },
+          "eventStore": {
+            "description": "Configuration for the resource type for the event store",
+            "type": "object"
+          }
+        },
+        "additionalProperties": true,
+        "required": [
+          "readModels",
+          "eventStore"
+        ]
+      }
+    }
+  },
+  "examples": [
+    {
+      "ipsum": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "consectetu": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {
+      "1knbhajF9": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "fvearhtU": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {
+      "CvFyc": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "amet do": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "consectet": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {
+      "3QVuHnI": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {
+      "nwjad": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "S6GTT1": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "zidwb": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {},
+    {
+      "GV9Ao": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "igoaobp": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {
+      "amet a": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "dolor": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {
+      "qYCu3X1": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "YttQEw": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "consec": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "jneyzed": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "adipisci": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "kxazs": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "consect": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {},
+    {
+      "txcplgwi": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "IWWcTgvfL": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "ipsum": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "wuomlln": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {
+      "azvzgfbfa": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {
+      "ICKEG": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "iuewfdunh": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "FaFhYB": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "cVPPDP2Qv": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "fhkghvmc": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "ipsum a": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {},
+    {
+      "R7wHxI09": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "GDbjP0at": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "sieFsJ79Wu": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {
+      "dolor lo": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "aazifmo": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "j6SGy3unOD": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {},
+    {},
+    {
+      "laVavC": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {},
+    {},
+    {
+      "IKX7PYJDZ": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "wcdkupqxr": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "ipsum ": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "jhphn": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "tuwyaupqu": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "GmOwU": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "kfvtsak": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {
+      "jbmsrbmfa": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "ipsum ip": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {
+      "ojbnpx": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "fzbfcujm": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {
+      "svrxtrli": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "lorem ipsu": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {
+      "gaGJs0k": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "dolor ": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "adipisci": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "gbvml": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {},
+    {
+      "HgF7IG": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "sit ipsum": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {
+      "sCAPwGbKoC": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {},
+    {
+      "niwohx": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "sUhi77q2A": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "lorem adi": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {
+      "lorem dolo": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "bE8vXjK": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "yrttcx": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "adipis": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "mifwsjecr": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {
+      "s5TVCZ": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "ehsgksyuhu": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {
+      "adipiscin": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {
+      "CNDDj": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "mthdfm": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {},
+    {
+      "adipiscin": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "ivcoduou": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "consecte": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "wKnv62SI69": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "chkxjpc": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "33t07Z": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "VYuHMR6": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "adipiscin": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "pmvdhpd": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "dolor dolo": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {
+      "AVAiNc9R": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "adipi": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    },
+    {},
+    {},
+    {},
+    {},
+    {
+      "DJC5O": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      },
+      "xkgjt": {
+        "_ref": "#/definitions/resourceTypeConfiguration",
+        "_placeholder": true
+      }
+    }
+  ]
+}

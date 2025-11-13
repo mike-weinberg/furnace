@@ -1,0 +1,1821 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://json.schemastore.org/azure-containerapp-template.json",
+    "description": "Container App versioned application definition.\nDefines the desired state of an immutable revision.\nAny changes to this section Will result in a new revision being created",
+    "properties": {
+      "containers": {
+        "oneOf": [
+          {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "args": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^\\[([^\\[].*)?\\]$",
+                      "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                    }
+                  ],
+                  "description": "Container start command arguments."
+                },
+                "command": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^\\[([^\\[].*)?\\]$",
+                      "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                    }
+                  ],
+                  "description": "Container start command."
+                },
+                "env": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "Environment variable name."
+                          },
+                          "secretRef": {
+                            "type": "string",
+                            "description": "Name of the Container App secret from which to pull the environment variable value."
+                          },
+                          "value": {
+                            "type": "string",
+                            "description": "Non-secret environment variable value."
+                          }
+                        },
+                        "description": "Container App container environment variable.",
+                        "additionalProperties": false
+                      }
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^\\[([^\\[].*)?\\]$",
+                      "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                    }
+                  ],
+                  "description": "Container environment variables."
+                },
+                "image": {
+                  "type": "string",
+                  "description": "Container image tag."
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Custom container name."
+                },
+                "probes": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "failureThreshold": {
+                            "oneOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string",
+                                "pattern": "^\\[([^\\[].*)?\\]$",
+                                "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                              }
+                            ],
+                            "description": "Minimum consecutive failures for the probe to be considered failed after having succeeded. Defaults to 3. Minimum value is 1. Maximum value is 10."
+                          },
+                          "httpGet": {
+                            "oneOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "host": {
+                                    "type": "string",
+                                    "description": "Host name to connect to, defaults to the pod IP. You probably want to set \"Host\" in httpHeaders instead."
+                                  },
+                                  "httpHeaders": {
+                                    "oneOf": [
+                                      {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "name": {
+                                              "type": "string",
+                                              "description": "The header field name"
+                                            },
+                                            "value": {
+                                              "type": "string",
+                                              "description": "The header field value"
+                                            }
+                                          },
+                                          "required": [],
+                                          "description": "HTTPHeader describes a custom header to be used in HTTP probes",
+                                          "additionalProperties": false
+                                        }
+                                      },
+                                      {
+                                        "type": "string",
+                                        "pattern": "^\\[([^\\[].*)?\\]$",
+                                        "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                                      }
+                                    ],
+                                    "description": "Custom headers to set in the request. HTTP allows repeated headers."
+                                  },
+                                  "path": {
+                                    "type": "string",
+                                    "description": "Path to access on the HTTP server."
+                                  },
+                                  "port": {
+                                    "oneOf": [
+                                      {
+                                        "type": "integer"
+                                      },
+                                      {
+                                        "type": "string",
+                                        "pattern": "^\\[([^\\[].*)?\\]$",
+                                        "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                                      }
+                                    ],
+                                    "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME."
+                                  },
+                                  "scheme": {
+                                    "oneOf": [
+                                      {
+                                        "type": "string",
+                                        "enum": [
+                                          "HTTP",
+                                          "HTTPS"
+                                        ]
+                                      },
+                                      {
+                                        "type": "string",
+                                        "pattern": "^\\[([^\\[].*)?\\]$",
+                                        "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                                      }
+                                    ],
+                                    "description": "Scheme to use for connecting to the host. Defaults to HTTP."
+                                  }
+                                },
+                                "required": [],
+                                "description": "HTTPGet specifies the http request to perform.",
+                                "additionalProperties": false
+                              },
+                              {
+                                "type": "string",
+                                "pattern": "^\\[([^\\[].*)?\\]$",
+                                "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                              }
+                            ],
+                            "description": "HTTPGet specifies the http request to perform."
+                          },
+                          "initialDelaySeconds": {
+                            "oneOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string",
+                                "pattern": "^\\[([^\\[].*)?\\]$",
+                                "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                              }
+                            ],
+                            "description": "Number of seconds after the container has started before liveness probes are initiated. Minimum value is 1. Maximum value is 60."
+                          },
+                          "periodSeconds": {
+                            "oneOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string",
+                                "pattern": "^\\[([^\\[].*)?\\]$",
+                                "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                              }
+                            ],
+                            "description": "How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1. Maximum value is 240."
+                          },
+                          "successThreshold": {
+                            "oneOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string",
+                                "pattern": "^\\[([^\\[].*)?\\]$",
+                                "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                              }
+                            ],
+                            "description": "Minimum consecutive successes for the probe to be considered successful after having failed. Defaults to 1. Must be 1 for liveness and startup. Minimum value is 1. Maximum value is 10."
+                          },
+                          "tcpSocket": {
+                            "oneOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "host": {
+                                    "type": "string",
+                                    "description": "Optional: Host name to connect to, defaults to the pod IP."
+                                  },
+                                  "port": {
+                                    "oneOf": [
+                                      {
+                                        "type": "integer"
+                                      },
+                                      {
+                                        "type": "string",
+                                        "pattern": "^\\[([^\\[].*)?\\]$",
+                                        "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                                      }
+                                    ],
+                                    "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME."
+                                  }
+                                },
+                                "required": [],
+                                "description": "TCPSocket specifies an action involving a TCP port. TCP hooks not yet supported.",
+                                "additionalProperties": false
+                              },
+                              {
+                                "type": "string",
+                                "pattern": "^\\[([^\\[].*)?\\]$",
+                                "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                              }
+                            ],
+                            "description": "TCPSocket specifies an action involving a TCP port. TCP hooks not yet supported."
+                          },
+                          "terminationGracePeriodSeconds": {
+                            "$comment": "The value of 'null' is UNDOCUMENTED.",
+                            "oneOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "null"
+                              },
+                              {
+                                "type": "string",
+                                "pattern": "^\\[([^\\[].*)?\\]$",
+                                "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                              }
+                            ],
+                            "description": "Optional duration in seconds the pod needs to terminate gracefully upon probe failure. The grace period is the duration in seconds after the processes running in the pod are sent a termination signal and the time when the processes are forcibly halted with a kill signal. Set this value longer than the expected cleanup time for your process. If this value is nil, the pod's terminationGracePeriodSeconds will be used. Otherwise, this value overrides the value provided by the pod spec. Value must be non-negative integer. The value zero indicates stop immediately via the kill signal (no opportunity to shut down). This is an alpha field and requires enabling ProbeTerminationGracePeriod feature gate. Maximum value is 3600 seconds (1 hour)"
+                          },
+                          "timeoutSeconds": {
+                            "oneOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "string",
+                                "pattern": "^\\[([^\\[].*)?\\]$",
+                                "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                              }
+                            ],
+                            "description": "Number of seconds after which the probe times out. Defaults to 1 second. Minimum value is 1. Maximum value is 240."
+                          },
+                          "type": {
+                            "oneOf": [
+                              {
+                                "type": "string",
+                                "enum": [
+                                  "Liveness",
+                                  "Readiness",
+                                  "Startup"
+                                ]
+                              },
+                              {
+                                "type": "string",
+                                "pattern": "^\\[([^\\[].*)?\\]$",
+                                "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                              }
+                            ],
+                            "description": "The type of probe."
+                          }
+                        },
+                        "description": "Probe describes a health check to be performed against a container to determine whether it is alive or ready to receive traffic.",
+                        "additionalProperties": false
+                      }
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^\\[([^\\[].*)?\\]$",
+                      "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                    }
+                  ],
+                  "description": "List of probes for the container."
+                },
+                "resources": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "cpu": {
+                          "oneOf": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "string",
+                              "pattern": "^\\[([^\\[].*)?\\]$",
+                              "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                            }
+                          ],
+                          "description": "Required CPU in cores, e.g. 0.5"
+                        },
+                        "memory": {
+                          "type": "string",
+                          "description": "Required memory, e.g. \"250Mb\""
+                        },
+                        "ephemeralStorage": {
+                          "type": "string",
+                          "description": "UNDOCUMENTED. The total amount of storage available to each replica."
+                        }
+                      },
+                      "description": "Container App container resource requirements.",
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^\\[([^\\[].*)?\\]$",
+                      "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                    }
+                  ],
+                  "description": "Container App container resource requirements."
+                },
+                "volumeMounts": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "mountPath": {
+                            "type": "string",
+                            "description": "Path within the container at which the volume should be mounted.Must not contain ':'."
+                          },
+                          "subPath": {
+                            "type": "string",
+                            "description": "Path within the volume from which the container's volume should be mounted. Defaults to \"\" (volume's root)."
+                          },
+                          "volumeName": {
+                            "type": "string",
+                            "description": "This must match the Name of a Volume."
+                          }
+                        },
+                        "description": "Volume mount for the Container App.",
+                        "additionalProperties": false
+                      }
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^\\[([^\\[].*)?\\]$",
+                      "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                    }
+                  ],
+                  "description": "Container volume mounts."
+                }
+              },
+              "description": "Container App container definition",
+              "additionalProperties": false
+            }
+          },
+          {
+            "type": "string",
+            "pattern": "^\\[([^\\[].*)?\\]$",
+            "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+          }
+        ],
+        "description": "List of container definitions for the Container App."
+      },
+      "initContainers": {
+        "oneOf": [
+          {
+            "type": "null"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "args": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^\\[([^\\[].*)?\\]$",
+                      "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                    }
+                  ],
+                  "description": "Container start command arguments."
+                },
+                "command": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^\\[([^\\[].*)?\\]$",
+                      "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                    }
+                  ],
+                  "description": "Container start command."
+                },
+                "env": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "Environment variable name."
+                          },
+                          "secretRef": {
+                            "type": "string",
+                            "description": "Name of the Container App secret from which to pull the environment variable value."
+                          },
+                          "value": {
+                            "type": "string",
+                            "description": "Non-secret environment variable value."
+                          }
+                        },
+                        "description": "Container App container environment variable.",
+                        "additionalProperties": false
+                      }
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^\\[([^\\[].*)?\\]$",
+                      "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                    }
+                  ],
+                  "description": "Container environment variables."
+                },
+                "image": {
+                  "type": "string",
+                  "description": "Container image tag."
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Custom container name."
+                },
+                "resources": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "cpu": {
+                          "oneOf": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "string",
+                              "pattern": "^\\[([^\\[].*)?\\]$",
+                              "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                            }
+                          ],
+                          "description": "Required CPU in cores, e.g. 0.5"
+                        },
+                        "memory": {
+                          "type": "string",
+                          "description": "Required memory, e.g. \"250Mb\""
+                        }
+                      },
+                      "description": "Container App container resource requirements.",
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^\\[([^\\[].*)?\\]$",
+                      "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                    }
+                  ],
+                  "description": "Container App container resource requirements."
+                },
+                "volumeMounts": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "mountPath": {
+                            "type": "string",
+                            "description": "Path within the container at which the volume should be mounted.Must not contain ':'."
+                          },
+                          "subPath": {
+                            "type": "string",
+                            "description": "Path within the volume from which the container's volume should be mounted. Defaults to \"\" (volume's root)."
+                          },
+                          "volumeName": {
+                            "type": "string",
+                            "description": "This must match the Name of a Volume."
+                          }
+                        },
+                        "description": "Volume mount for the Container App.",
+                        "additionalProperties": false
+                      }
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^\\[([^\\[].*)?\\]$",
+                      "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                    }
+                  ],
+                  "description": "Container volume mounts."
+                }
+              },
+              "description": "Container App init container definition",
+              "additionalProperties": false
+            }
+          },
+          {
+            "type": "string",
+            "pattern": "^\\[([^\\[].*)?\\]$",
+            "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+          }
+        ],
+        "description": "List of specialized containers that run before app containers."
+      },
+      "revisionSuffix": {
+        "type": "string",
+        "description": "User friendly suffix that is appended to the revision name"
+      },
+      "scale": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "maxReplicas": {
+                "oneOf": [
+                  {
+                    "type": "integer",
+                    "default": "10"
+                  },
+                  {
+                    "type": "string",
+                    "pattern": "^\\[([^\\[].*)?\\]$",
+                    "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                  }
+                ],
+                "description": "Optional. Maximum number of container replicas. Defaults to 10 if not set."
+              },
+              "minReplicas": {
+                "$comment": "The value of 'null' is UNDOCUMENTED.",
+                "oneOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "type": "string",
+                    "pattern": "^\\[([^\\[].*)?\\]$",
+                    "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                  }
+                ],
+                "description": "Optional. Minimum number of container replicas."
+              },
+              "rules": {
+                "$comment": "The value of 'null' is UNDOCUMENTED.",
+                "oneOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "azureQueue": {
+                          "oneOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "auth": {
+                                  "oneOf": [
+                                    {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "secretRef": {
+                                            "type": "string",
+                                            "description": "Name of the secret from which to pull the auth params."
+                                          },
+                                          "triggerParameter": {
+                                            "type": "string",
+                                            "description": "Trigger Parameter that uses the secret"
+                                          }
+                                        },
+                                        "description": "Auth Secrets for Scale Rule",
+                                        "additionalProperties": false
+                                      }
+                                    },
+                                    {
+                                      "type": "string",
+                                      "pattern": "^\\[([^\\[].*)?\\]$",
+                                      "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                                    }
+                                  ],
+                                  "description": "Authentication secrets for the queue scale rule."
+                                },
+                                "queueLength": {
+                                  "oneOf": [
+                                    {
+                                      "type": "integer"
+                                    },
+                                    {
+                                      "type": "string",
+                                      "pattern": "^\\[([^\\[].*)?\\]$",
+                                      "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                                    }
+                                  ],
+                                  "description": "Queue length."
+                                },
+                                "queueName": {
+                                  "type": "string",
+                                  "description": "Queue name."
+                                }
+                              },
+                              "description": "Container App container Azure Queue based scaling rule.",
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "string",
+                              "pattern": "^\\[([^\\[].*)?\\]$",
+                              "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                            }
+                          ],
+                          "description": "Container App container Azure Queue based scaling rule."
+                        },
+                        "custom": {
+                          "oneOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "auth": {
+                                  "oneOf": [
+                                    {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "secretRef": {
+                                            "type": "string",
+                                            "description": "Name of the secret from which to pull the auth params."
+                                          },
+                                          "triggerParameter": {
+                                            "type": "string",
+                                            "description": "Trigger Parameter that uses the secret"
+                                          }
+                                        },
+                                        "description": "Auth Secrets for Scale Rule",
+                                        "additionalProperties": false
+                                      }
+                                    },
+                                    {
+                                      "type": "string",
+                                      "pattern": "^\\[([^\\[].*)?\\]$",
+                                      "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                                    }
+                                  ],
+                                  "description": "Authentication secrets for the custom scale rule."
+                                },
+                                "metadata": {
+                                  "oneOf": [
+                                    {
+                                      "type": "object",
+                                      "additionalProperties": {
+                                        "type": "string"
+                                      },
+                                      "properties": {}
+                                    },
+                                    {
+                                      "type": "string",
+                                      "pattern": "^\\[([^\\[].*)?\\]$",
+                                      "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                                    }
+                                  ],
+                                  "description": "Metadata properties to describe custom scale rule."
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "description": "Type of the custom scale rule\neg: azure-servicebus, redis etc."
+                                }
+                              },
+                              "description": "Container App container Custom scaling rule.",
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "string",
+                              "pattern": "^\\[([^\\[].*)?\\]$",
+                              "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                            }
+                          ],
+                          "description": "Container App container Custom scaling rule."
+                        },
+                        "http": {
+                          "oneOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "auth": {
+                                  "oneOf": [
+                                    {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "secretRef": {
+                                            "type": "string",
+                                            "description": "Name of the secret from which to pull the auth params."
+                                          },
+                                          "triggerParameter": {
+                                            "type": "string",
+                                            "description": "Trigger Parameter that uses the secret"
+                                          }
+                                        },
+                                        "description": "Auth Secrets for Scale Rule",
+                                        "additionalProperties": false
+                                      }
+                                    },
+                                    {
+                                      "type": "string",
+                                      "pattern": "^\\[([^\\[].*)?\\]$",
+                                      "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                                    }
+                                  ],
+                                  "description": "Authentication secrets for the custom scale rule."
+                                },
+                                "metadata": {
+                                  "oneOf": [
+                                    {
+                                      "type": "object",
+                                      "additionalProperties": {
+                                        "type": "string"
+                                      },
+                                      "properties": {}
+                                    },
+                                    {
+                                      "type": "string",
+                                      "pattern": "^\\[([^\\[].*)?\\]$",
+                                      "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                                    }
+                                  ],
+                                  "description": "Metadata properties to describe http scale rule."
+                                }
+                              },
+                              "description": "Container App container Http scaling rule.",
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "string",
+                              "pattern": "^\\[([^\\[].*)?\\]$",
+                              "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                            }
+                          ],
+                          "description": "Container App container Http scaling rule."
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "Scale Rule Name"
+                        },
+                        "tcp": {
+                          "oneOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "auth": {
+                                  "oneOf": [
+                                    {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "secretRef": {
+                                            "type": "string",
+                                            "description": "Name of the secret from which to pull the auth params."
+                                          },
+                                          "triggerParameter": {
+                                            "type": "string",
+                                            "description": "Trigger Parameter that uses the secret"
+                                          }
+                                        },
+                                        "description": "Auth Secrets for Scale Rule",
+                                        "additionalProperties": false
+                                      }
+                                    },
+                                    {
+                                      "type": "string",
+                                      "pattern": "^\\[([^\\[].*)?\\]$",
+                                      "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                                    }
+                                  ],
+                                  "description": "Authentication secrets for the tcp scale rule."
+                                },
+                                "metadata": {
+                                  "oneOf": [
+                                    {
+                                      "type": "object",
+                                      "additionalProperties": {
+                                        "type": "string"
+                                      },
+                                      "properties": {}
+                                    },
+                                    {
+                                      "type": "string",
+                                      "pattern": "^\\[([^\\[].*)?\\]$",
+                                      "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                                    }
+                                  ],
+                                  "description": "Metadata properties to describe tcp scale rule."
+                                }
+                              },
+                              "description": "Container App container Tcp scaling rule.",
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "string",
+                              "pattern": "^\\[([^\\[].*)?\\]$",
+                              "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                            }
+                          ],
+                          "description": "Container App container Tcp scaling rule."
+                        }
+                      },
+                      "description": "Container App container scaling rule.",
+                      "additionalProperties": false
+                    }
+                  },
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "type": "string",
+                    "pattern": "^\\[([^\\[].*)?\\]$",
+                    "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                  }
+                ],
+                "description": "Scaling rules."
+              }
+            },
+            "description": "Container App scaling configurations.",
+            "additionalProperties": false
+          },
+          {
+            "type": "string",
+            "pattern": "^\\[([^\\[].*)?\\]$",
+            "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+          }
+        ],
+        "description": "Container App scaling configurations."
+      },
+      "serviceBinds": {
+        "$comment": "The value of 'null' is UNDOCUMENTED.",
+        "oneOf": [
+          {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Name of the service bind"
+                },
+                "serviceId": {
+                  "type": "string",
+                  "description": "Resource id of the target service"
+                }
+              },
+              "description": "Configuration to bind a ContainerApp to a dev ContainerApp Service",
+              "additionalProperties": false
+            }
+          },
+          {
+            "type": "null"
+          },
+          {
+            "type": "string",
+            "pattern": "^\\[([^\\[].*)?\\]$",
+            "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+          }
+        ],
+        "description": "List of container app services bound to the app"
+      },
+      "terminationGracePeriodSeconds": {
+        "oneOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          },
+          {
+            "type": "string",
+            "pattern": "^\\[([^\\[].*)?\\]$",
+            "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+          }
+        ],
+        "description": "Optional duration in seconds the Container App Instance needs to terminate gracefully. Value must be non-negative integer. The value zero indicates stop immediately via the kill signal (no opportunity to shut down). If this value is nil, the default grace period will be used instead. Set this value longer than the expected cleanup time for your process. Defaults to 30 seconds."
+      },
+      "volumes": {
+        "$comment": "The value of 'null' is UNDOCUMENTED.",
+        "oneOf": [
+          {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mountOptions": {
+                  "type": "string",
+                  "description": "Mount options used while mounting the AzureFile. Must be a comma-separated string."
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Volume name."
+                },
+                "secrets": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "path": {
+                            "type": "string",
+                            "description": "Path to project secret to. If no path is provided, path defaults to name of secret listed in secretRef."
+                          },
+                          "secretRef": {
+                            "type": "string",
+                            "description": "Name of the Container App secret from which to pull the secret value."
+                          }
+                        },
+                        "description": "Secret to be added to volume.",
+                        "additionalProperties": false
+                      }
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^\\[([^\\[].*)?\\]$",
+                      "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                    }
+                  ],
+                  "description": "List of secrets to be added in volume. If no secrets are provided, all secrets in collection will be added to volume."
+                },
+                "storageName": {
+                  "type": "string",
+                  "description": "Name of storage resource. No need to provide for EmptyDir and Secret."
+                },
+                "storageType": {
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "AzureFile",
+                        "EmptyDir",
+                        "Secret"
+                      ]
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^\\[([^\\[].*)?\\]$",
+                      "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+                    }
+                  ],
+                  "description": "Storage type for the volume. If not provided, use EmptyDir."
+                }
+              },
+              "description": "Volume definitions for the Container App.",
+              "additionalProperties": false
+            }
+          },
+          {
+            "type": "null"
+          },
+          {
+            "type": "string",
+            "pattern": "^\\[([^\\[].*)?\\]$",
+            "description": "Deployment template expression. See https://aka.ms/arm-template-expressions for more details on the ARM expression syntax."
+          }
+        ],
+        "description": "List of volume definitions for the Container App."
+      }
+    },
+    "additionalProperties": true,
+    "type": "object"
+  },
+  "examples": [
+    {
+      "initContainers": "consecte",
+      "scale": true,
+      "serviceBinds": 23.27,
+      "volumes": null,
+      "r1VjAr": 95.72,
+      "dolor d": "lorem sit lore",
+      "dolor am": "lorem amet con"
+    },
+    {
+      "containers": 95.94,
+      "initContainers": 58,
+      "revisionSuffix": "sit dolor consectetu",
+      "scale": 5.77,
+      "serviceBinds": 48,
+      "terminationGracePeriodSeconds": 51.24,
+      "volumes": false,
+      "amet ips": 21
+    },
+    {
+      "containers": null,
+      "revisionSuffix": "lorem lorem l",
+      "scale": null,
+      "terminationGracePeriodSeconds": false,
+      "consect": 65,
+      "qt6Yr": "sit ipsum l"
+    },
+    {
+      "containers": false,
+      "initContainers": "lorem",
+      "revisionSuffix": "qxbhxeztlp",
+      "scale": 4,
+      "serviceBinds": "zcctikwtrw",
+      "mjfeugslf": false,
+      "IIdF3M": null
+    },
+    {
+      "initContainers": null,
+      "revisionSuffix": "dnuauqba",
+      "scale": "SVyRwDZCRMAuB",
+      "terminationGracePeriodSeconds": null,
+      "volumes": 77,
+      "ehufcgps": "vjenrq",
+      "ektior": 86.72
+    },
+    {
+      "containers": false,
+      "initContainers": "MXO7a6XSaYtAo",
+      "revisionSuffix": "ajrpotgvxaijjog",
+      "uprhugog": null
+    },
+    {
+      "containers": 55.69,
+      "initContainers": null,
+      "revisionSuffix": "adipiscing adi",
+      "serviceBinds": null,
+      "terminationGracePeriodSeconds": null,
+      "volumes": 2.79,
+      "amet ": 89,
+      "dolor dol": 27.19,
+      "adipiscing": "mX0LbgJKRWn9DPW"
+    },
+    {
+      "containers": true,
+      "initContainers": null,
+      "revisionSuffix": "th",
+      "scale": 80,
+      "serviceBinds": 85.58,
+      "volumes": true,
+      "dolor dolo": "6MOQ4mVepKtEnpB"
+    },
+    {
+      "containers": "gmzcircdvz",
+      "initContainers": 6.87,
+      "terminationGracePeriodSeconds": 8,
+      "lfgyscxhsl": "amet dolor ame",
+      "dzuolnnrmv": "tdjxrm"
+    },
+    {
+      "containers": null,
+      "initContainers": 82.12,
+      "revisionSuffix": "adipiscing sit sit",
+      "scale": "khsacoaryjhluw",
+      "volumes": 47.01
+    },
+    {
+      "initContainers": null,
+      "revisionSuffix": "4j9zlvNcyaek",
+      "scale": "kwxxyorwodnn",
+      "serviceBinds": 41,
+      "terminationGracePeriodSeconds": false,
+      "volumes": 0.43,
+      "consecte": 16,
+      "tIAHUWj70Y": true,
+      "ZP5y4m": 4.22
+    },
+    {
+      "revisionSuffix": "ntswaeztgtejlfdn",
+      "serviceBinds": true,
+      "terminationGracePeriodSeconds": 9.05,
+      "pWVBZov7": 89.34,
+      "amet ": 98,
+      "ogbkvezi": "ipsum sit dolor"
+    },
+    {
+      "initContainers": null,
+      "revisionSuffix": "BJx42Sd9ILHF5qi9",
+      "scale": "cPwaTk42x6bm",
+      "serviceBinds": 98.29,
+      "terminationGracePeriodSeconds": null,
+      "volumes": true,
+      "y6I0D8Cn": false,
+      "rlnxy": false
+    },
+    {
+      "containers": 15.0,
+      "serviceBinds": "xFt79Vcp7FaCnxf",
+      "volumes": 76.46,
+      "Zg5twm": true,
+      "sit si": "amet dolor sit ",
+      "OedRq": "amet cons"
+    },
+    {
+      "initContainers": false,
+      "serviceBinds": 9.45,
+      "volumes": "consectetur ip",
+      "ykgcffek": 99
+    },
+    {
+      "containers": null,
+      "revisionSuffix": "hzqwatnpjzr",
+      "terminationGracePeriodSeconds": null,
+      "volumes": 13.94,
+      "nelongxhr": false
+    },
+    {
+      "containers": 73.83,
+      "revisionSuffix": "vr27Xz2",
+      "scale": true,
+      "serviceBinds": 57,
+      "terminationGracePeriodSeconds": false,
+      "volumes": 30.19,
+      "LTV4jBi": 3.05
+    },
+    {
+      "containers": true,
+      "initContainers": "avjun",
+      "serviceBinds": 96.9
+    },
+    {
+      "containers": null,
+      "initContainers": 80.79,
+      "revisionSuffix": "bxcwebqxksd",
+      "terminationGracePeriodSeconds": null,
+      "volumes": null
+    },
+    {
+      "containers": null,
+      "initContainers": "QEwzukN3Q",
+      "scale": true,
+      "serviceBinds": false,
+      "qtqesgkd": 69,
+      "HftalCS": true
+    },
+    {
+      "initContainers": 89.25,
+      "revisionSuffix": "ipsum lorem ",
+      "terminationGracePeriodSeconds": true,
+      "rsilakyxj": 39,
+      "gpfpaof": 24.92
+    },
+    {
+      "containers": "fUemeM0Ln",
+      "scale": "zxwsfplqmfxaii",
+      "terminationGracePeriodSeconds": null,
+      "adipiscin": 47
+    },
+    {
+      "containers": null,
+      "initContainers": 26,
+      "volumes": 7.98,
+      "lorem do": 8,
+      "lorem ": 53.92,
+      "ukfto": "wElaCndrPZbXs"
+    },
+    {
+      "containers": "lnoiqxbogrqbc",
+      "initContainers": 79.77,
+      "scale": "wo5NyDRVWu",
+      "volumes": 73.66
+    },
+    {
+      "containers": true,
+      "revisionSuffix": "adipiscing consect",
+      "qacjdaafmp": "ssm582XztzbhDz",
+      "RTLtYX2Sna": "hxplanehw",
+      "consect": 50
+    },
+    {
+      "containers": false,
+      "initContainers": null,
+      "revisionSuffix": "adipiscing amet amet",
+      "scale": 62,
+      "serviceBinds": true,
+      "terminationGracePeriodSeconds": null,
+      "nsltgr": true
+    },
+    {
+      "serviceBinds": null,
+      "terminationGracePeriodSeconds": false,
+      "jouubtci": 77,
+      "ipsum ": false
+    },
+    {
+      "initContainers": 6.67,
+      "revisionSuffix": "ZJZtHBzyzjitROUSYg",
+      "scale": null,
+      "terminationGracePeriodSeconds": null,
+      "volumes": 8
+    },
+    {
+      "initContainers": false,
+      "revisionSuffix": "amet",
+      "scale": false,
+      "serviceBinds": 64,
+      "terminationGracePeriodSeconds": "lcaizaltduw",
+      "fuuntuu": "qjdvzwr"
+    },
+    {
+      "containers": null,
+      "revisionSuffix": "zgfbf",
+      "scale": null,
+      "serviceBinds": true,
+      "terminationGracePeriodSeconds": 3.69,
+      "7tZBg4bLjY": null,
+      "lorem d": true,
+      "lorem": false
+    },
+    {
+      "containers": null,
+      "revisionSuffix": "hszdzsgdaulabhnsww",
+      "scale": "EpKRsz0u",
+      "serviceBinds": 4.2,
+      "terminationGracePeriodSeconds": 48,
+      "volumes": 29.83,
+      "amet sit": true,
+      "myclz": 10,
+      "sgvunxy": 53
+    },
+    {
+      "containers": null,
+      "initContainers": 46.1,
+      "revisionSuffix": "FBbz0zIE9ldqKWSf",
+      "serviceBinds": "ipsum c",
+      "terminationGracePeriodSeconds": "wnxlc",
+      "BV3YIv": "lorem do"
+    },
+    {
+      "initContainers": 40,
+      "revisionSuffix": "consectetu",
+      "serviceBinds": "ipsum amet a",
+      "terminationGracePeriodSeconds": 43.84,
+      "adipis": 70,
+      "yotsia": 50,
+      "Sjkk4Cxgl5": false
+    },
+    {
+      "containers": false,
+      "initContainers": null,
+      "serviceBinds": "icgmwj",
+      "volumes": 48,
+      "ipsum ipsu": null,
+      "azsbhf": 52,
+      "jrqmh": 85.91
+    },
+    {
+      "containers": true,
+      "revisionSuffix": "consecte",
+      "scale": "consectet",
+      "terminationGracePeriodSeconds": null,
+      "sit lorem ": true,
+      "adipi": "1FamZEkL6zHlaOx",
+      "ujyoep": null
+    },
+    {
+      "initContainers": 19.31,
+      "scale": null,
+      "terminationGracePeriodSeconds": null
+    },
+    {
+      "initContainers": "rxkrxmzaxsj",
+      "revisionSuffix": "0kU1wmgisK2p5kFU347f1",
+      "scale": false,
+      "serviceBinds": 52,
+      "terminationGracePeriodSeconds": 0.63,
+      "hIXNmja3B": true,
+      "sit s": false
+    },
+    {
+      "containers": "ipsum amet ips",
+      "initContainers": 10.99,
+      "serviceBinds": false,
+      "volumes": 33,
+      "ssztx": true,
+      "ipsum ipsu": "lorem amet a",
+      "dfyhyzn": 97.31
+    },
+    {
+      "containers": null,
+      "scale": "bV7xnMykGaBij",
+      "serviceBinds": null,
+      "terminationGracePeriodSeconds": 27.06,
+      "tdhyq": 40,
+      "gmjtlhyu": "adipiscing dolo"
+    },
+    {
+      "containers": false,
+      "initContainers": false,
+      "scale": true,
+      "terminationGracePeriodSeconds": "ieFsJ79W",
+      "volumes": true,
+      "axsylh": "Wk8P21l1CohMs0",
+      "sit l": false,
+      "dolor ": 37.06
+    },
+    {
+      "containers": false,
+      "terminationGracePeriodSeconds": 55,
+      "volumes": 25,
+      "dcijmmeaj": "ISBxO",
+      "dolor lore": 29.85
+    },
+    {
+      "containers": true,
+      "initContainers": 6,
+      "scale": 30.9,
+      "terminationGracePeriodSeconds": 35.29,
+      "volumes": 47.54,
+      "bazmksow": false
+    },
+    {
+      "revisionSuffix": "P",
+      "serviceBinds": null,
+      "volumes": 54.49,
+      "3SLh6cYjE": "ipsum adipisc",
+      "lorem cons": true
+    },
+    {
+      "containers": null,
+      "revisionSuffix": "consect",
+      "scale": 68.12,
+      "serviceBinds": null,
+      "terminationGracePeriodSeconds": null,
+      "aIAMC5QOn": true,
+      "aonxobw": "lorem i",
+      "IkpwSY": "gdqmlOb"
+    },
+    {
+      "initContainers": "sthsj",
+      "scale": false,
+      "serviceBinds": 20.85,
+      "terminationGracePeriodSeconds": 39.62,
+      "adipisci": false,
+      "xmScytTx": false,
+      "pL2EGS9A": 94
+    },
+    {
+      "containers": 87.51,
+      "revisionSuffix": "swxxakcmqst",
+      "scale": 69.98,
+      "terminationGracePeriodSeconds": "OYuO87mvmKD",
+      "volumes": "czvtq",
+      "Yd41WXtE": false,
+      "iwxjh": 57.15
+    },
+    {
+      "containers": 33.28,
+      "initContainers": 67,
+      "scale": "n7QLBuBshZuj6Bm",
+      "serviceBinds": 30,
+      "sit dolor": false,
+      "ipsum lor": 42.84,
+      "qxcnkif": false
+    },
+    {
+      "containers": null,
+      "revisionSuffix": "dkxhrbwmadlu",
+      "scale": 9,
+      "serviceBinds": 51,
+      "adipi": 18
+    },
+    {
+      "containers": 61,
+      "revisionSuffix": "uozhmjodzqzjlconbcdhu",
+      "scale": true,
+      "serviceBinds": 31
+    },
+    {
+      "containers": 96.75,
+      "revisionSuffix": "tmvgpjmzfttczlo",
+      "scale": null,
+      "volumes": null,
+      "xx2Znq": 66,
+      "lnbok": "jdwwlzlozfiub",
+      "consecte": "5jgcZuHb"
+    },
+    {
+      "containers": null,
+      "initContainers": null,
+      "revisionSuffix": "DZ9J",
+      "serviceBinds": 82,
+      "smredweml": true
+    },
+    {
+      "initContainers": null,
+      "serviceBinds": 17.28,
+      "terminationGracePeriodSeconds": 58.17
+    },
+    {
+      "containers": 35,
+      "initContainers": 87,
+      "revisionSuffix": "Z7baB7CXPc",
+      "scale": 26.18,
+      "serviceBinds": "hbjujouhwblg",
+      "terminationGracePeriodSeconds": 68.54,
+      "adipisci": null
+    },
+    {
+      "initContainers": null,
+      "terminationGracePeriodSeconds": 76,
+      "volumes": "consecte"
+    },
+    {
+      "containers": true,
+      "initContainers": "akigi",
+      "revisionSuffix": "vmolgvnyxxiednfbd",
+      "yukphnv": null,
+      "9fK9R6Wtc7": 22.66
+    },
+    {
+      "containers": "Ic3Yw",
+      "initContainers": false,
+      "serviceBinds": "dolor i",
+      "volumes": null,
+      "dxohu": 95
+    },
+    {
+      "containers": 45,
+      "initContainers": false,
+      "serviceBinds": true,
+      "terminationGracePeriodSeconds": "uajhb",
+      "okovgn": 21.34,
+      "kcwuve": "snweblmuroow",
+      "9QcLc7": false
+    },
+    {
+      "containers": 59.94,
+      "initContainers": 75.99,
+      "revisionSuffix": "RfMmSKXWY1nCl",
+      "scale": 91,
+      "serviceBinds": 60,
+      "terminationGracePeriodSeconds": 34,
+      "volumes": true,
+      "sit ipsum": true,
+      "adipisc": true
+    },
+    {
+      "containers": true,
+      "scale": 68,
+      "serviceBinds": false,
+      "terminationGracePeriodSeconds": 33.54,
+      "volumes": 96.09,
+      "jkvklh": true
+    },
+    {
+      "containers": 90.84,
+      "initContainers": "sit amet adi",
+      "revisionSuffix": "BpjBHlW",
+      "scale": false,
+      "serviceBinds": false,
+      "terminationGracePeriodSeconds": 83,
+      "gufbtkwfcu": "sit ipsum ",
+      "consec": "k0F1lG27eJHRBYP"
+    },
+    {
+      "containers": null,
+      "initContainers": null,
+      "serviceBinds": null,
+      "terminationGracePeriodSeconds": null,
+      "volumes": null,
+      "lncbeoxvsn": false
+    },
+    {
+      "initContainers": 68.91,
+      "terminationGracePeriodSeconds": "lorem ipsum con",
+      "volumes": 88,
+      "lzTSzWJZp": "6MDprn92"
+    },
+    {
+      "scale": "uaexd",
+      "terminationGracePeriodSeconds": 25,
+      "volumes": false,
+      "lorem sit ": 86.18
+    },
+    {
+      "initContainers": 0,
+      "revisionSuffix": "kvUjOvkAxC25o9L7YGp",
+      "volumes": 97.63,
+      "oqmqjhwvn": 72,
+      "RJ5I0yw0": 70,
+      "amet i": false
+    },
+    {
+      "revisionSuffix": "buuezjlqrthmdhmbj",
+      "serviceBinds": true,
+      "terminationGracePeriodSeconds": "ujrigl",
+      "volumes": 49.1,
+      "sit si": 31.64
+    },
+    {
+      "containers": null,
+      "scale": "HhscO50",
+      "serviceBinds": null,
+      "terminationGracePeriodSeconds": 73.45,
+      "volumes": "ipsum ",
+      "ipsum do": 7.13
+    },
+    {
+      "containers": 84,
+      "initContainers": "lorem ipsum",
+      "scale": 8.47,
+      "serviceBinds": true,
+      "terminationGracePeriodSeconds": true
+    },
+    {
+      "containers": false,
+      "initContainers": 29,
+      "revisionSuffix": "GWBr0k32HG",
+      "scale": 62.85,
+      "serviceBinds": "amet ipsum dol",
+      "lQb2Nh0q": 78.4
+    },
+    {
+      "initContainers": null,
+      "revisionSuffix": "qrontdnclaxyughj",
+      "scale": false,
+      "serviceBinds": 19.43,
+      "terminationGracePeriodSeconds": 17.7,
+      "volumes": 63,
+      "dolor i": "ipsum l",
+      "nFtT6wty": null
+    },
+    {
+      "initContainers": "dolor consec",
+      "scale": 67.04,
+      "serviceBinds": false,
+      "terminationGracePeriodSeconds": "itgokwtcclfg"
+    },
+    {
+      "containers": null,
+      "terminationGracePeriodSeconds": 52.63,
+      "volumes": null,
+      "qmTPQUGzyb": 86
+    },
+    {
+      "containers": "vBbeh",
+      "initContainers": "yC7Tcv8VL",
+      "serviceBinds": false,
+      "volumes": 4,
+      "sit co": null,
+      "dxemccrvc": "pdscyrrygfqxy",
+      "juqwtmq": 31.07
+    },
+    {
+      "containers": 43,
+      "revisionSuffix": "sit sit sit amet sit",
+      "serviceBinds": 11,
+      "volumes": 76,
+      "9PACDNn": "85geiPpkG7Dfis",
+      "sit ips": 27
+    },
+    {
+      "initContainers": 68,
+      "revisionSuffix": "rqrmodbwuztpewnwuu",
+      "terminationGracePeriodSeconds": 52.51,
+      "gzwoeriwp": null,
+      "osliyqyi": "KdeLbi673s8xY"
+    },
+    {
+      "initContainers": "ddzyh",
+      "scale": null,
+      "serviceBinds": 40,
+      "volumes": true
+    },
+    {
+      "containers": 20.98,
+      "revisionSuffix": "yilr",
+      "scale": "sit amet do",
+      "serviceBinds": true,
+      "terminationGracePeriodSeconds": 48.34,
+      "volumes": true,
+      "adipisc": 5
+    },
+    {
+      "initContainers": 89,
+      "revisionSuffix": "2",
+      "serviceBinds": null,
+      "terminationGracePeriodSeconds": null,
+      "volumes": null
+    },
+    {
+      "initContainers": null,
+      "terminationGracePeriodSeconds": true,
+      "amet do": "brfmvnsyxbf",
+      "H6Lldkgl": 83.9
+    },
+    {
+      "containers": 94.53,
+      "serviceBinds": "ipsum do",
+      "dolor i": null,
+      "lyfaaywkx": null
+    },
+    {
+      "containers": null,
+      "scale": null,
+      "serviceBinds": "amet lore",
+      "sit ad": "jlWtoAEOgb2C",
+      "xadwago": null,
+      "consec": 26
+    },
+    {
+      "containers": null,
+      "scale": "ZTKgB8Ix",
+      "terminationGracePeriodSeconds": "mkznlcpmh"
+    },
+    {
+      "containers": 98,
+      "initContainers": 4,
+      "revisionSuffix": "0juupaBfLetB4fiWb4",
+      "scale": "tiufpnvikunr",
+      "jatevxrei": true,
+      "JulfMavoGS": 81,
+      "zqgmezl": true
+    },
+    {
+      "initContainers": 94.74,
+      "revisionSuffix": "aezvamlfc",
+      "scale": 38.78,
+      "volumes": true
+    },
+    {
+      "initContainers": null,
+      "revisionSuffix": "LMaRjF",
+      "volumes": true,
+      "bsqwap": 85.34,
+      "conse": 48,
+      "afdsokga": null
+    },
+    {
+      "containers": null,
+      "initContainers": 64.51,
+      "revisionSuffix": "amet adipiscing ",
+      "scale": 35.87,
+      "terminationGracePeriodSeconds": false,
+      "aNskNypA": 76.93,
+      "awrqdq": 72,
+      "5fEJ7BzGWS": "SEjl6"
+    },
+    {
+      "containers": null,
+      "initContainers": 3,
+      "revisionSuffix": "sP5t6t7",
+      "serviceBinds": true,
+      "adipisc": "ddqgngsltfr",
+      "gvyoy": null
+    },
+    {
+      "initContainers": null,
+      "revisionSuffix": "ipsum amet ipsum",
+      "serviceBinds": 99,
+      "terminationGracePeriodSeconds": "consectetu",
+      "tvQ0mJaI": 9,
+      "BFtXAcZTC": false
+    },
+    {
+      "containers": null,
+      "initContainers": true,
+      "revisionSuffix": "sit lore",
+      "serviceBinds": 48.15,
+      "terminationGracePeriodSeconds": true,
+      "tuzxb": null,
+      "gughxi": null
+    },
+    {
+      "containers": "qagizrnrcrqfjky",
+      "initContainers": 83,
+      "serviceBinds": false,
+      "terminationGracePeriodSeconds": 70,
+      "dwdedclcl": true
+    },
+    {
+      "containers": null,
+      "initContainers": "3vKgk",
+      "scale": false,
+      "volumes": 90.25,
+      "TeTVqNYWk4": null
+    },
+    {
+      "containers": true,
+      "scale": null,
+      "serviceBinds": false,
+      "terminationGracePeriodSeconds": true,
+      "tvvwqn": null,
+      "jyxfuopur": 75,
+      "2pWNU4": 77.77
+    },
+    {
+      "containers": false,
+      "scale": null
+    },
+    {
+      "containers": 72.58,
+      "initContainers": 2.69,
+      "scale": true,
+      "serviceBinds": 59.77
+    },
+    {
+      "revisionSuffix": "amet sit lorem c",
+      "scale": "tK01Zrla96",
+      "serviceBinds": "ctzcveuvob",
+      "consec": 48.25,
+      "adipiscin": 28.71
+    },
+    {
+      "containers": null,
+      "initContainers": true,
+      "revisionSuffix": "sit i",
+      "scale": null,
+      "serviceBinds": 89.15,
+      "volumes": "RbZSHVUcQ8u",
+      "dolor ": "bnoanqgitxdarm",
+      "dolor": true
+    },
+    {
+      "containers": false,
+      "revisionSuffix": "dolor adipis",
+      "scale": null,
+      "serviceBinds": false,
+      "terminationGracePeriodSeconds": 85,
+      "euwyuiak": 92
+    },
+    {
+      "containers": false,
+      "initContainers": "consecte",
+      "serviceBinds": 89
+    },
+    {
+      "containers": null,
+      "initContainers": "adipiscing do",
+      "revisionSuffix": "uxvor",
+      "scale": null,
+      "serviceBinds": 95.69,
+      "terminationGracePeriodSeconds": "oznaoh",
+      "volumes": 57.9
+    },
+    {
+      "initContainers": "dSalR",
+      "scale": 22,
+      "serviceBinds": 66.54,
+      "terminationGracePeriodSeconds": false,
+      "volumes": null,
+      "lorem si": null,
+      "ipsum ": null,
+      "yumfg": 69.15
+    },
+    {
+      "containers": 74,
+      "revisionSuffix": "ipsum sit amet ",
+      "scale": "UYlTwnUpHqqk0",
+      "oaaaoopxk": 57.64,
+      "meDveYQObq": 60.77,
+      "amet lorem": null
+    }
+  ]
+}

@@ -1,0 +1,240 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "title": ".appsemblerc.yaml",
+  "description": "A .appsemblerc.yaml file may be used to configure either an app or a block.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "description": "The name of a block. By default the name in package.json is used.",
+      "type": "string",
+      "pattern": "^@([\\da-z](?:(?!.*--)[\\da-z-]*[\\da-z])?)/([\\da-z](?:(?!.*--)[\\da-z-]*[\\da-z])?)$"
+    },
+    "description": {
+      "description": "A short description of the block. By default the description in package.json is used.",
+      "maxLength": 160
+    },
+    "version": {
+      "description": "A semantic version of the block representation of the block version. By default the version in package.json is used."
+    },
+    "longDescription": {
+      "description": "The long description of the block. Markdown is supported. By default the content of README.md is used.",
+      "type": "string"
+    },
+    "layout": {
+      "description": "The type of layout to be used for the block.",
+      "enum": [
+        "float",
+        "grow",
+        "hidden",
+        "static",
+        null
+      ],
+      "default": "static"
+    },
+    "output": {
+      "description": "Where to read build output from.",
+      "type": "string",
+      "default": "dist"
+    },
+    "webpack": {
+      "description": "The path to the webpack configuration file relative to the block project directory. By default a file named webpack.config.js is used, with a fallback to the webpack configuration from @appsemble/webpack-config.",
+      "type": "string"
+    },
+    "events": {
+      "type": "object",
+      "description": "An object describing the names of the events the block can listen and emit to. By default this is extracted from the block\u2019s TypeScript module augmentations.",
+      "additionalProperties": false,
+      "properties": {
+        "listen": {
+          "description": "The events the block listens on.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "emit": {
+          "description": "The events the block may emit.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "actions": {
+      "description": "An object which describes the actions a block can trigger. This will be used to validate app definitions. By default this is extracted from the block\u2019s TypeScript module augmentations.",
+      "type": "object",
+      "additionalProperties": true
+    },
+    "parameters": {
+      "description": "A JSON schema which describes the block parameters. By default this is extracted from the block\u2019s TypeScript module augmentations."
+    },
+    "iconBackground": {
+      "description": "The background color to use for maskable icons.",
+      "type": "string",
+      "pattern": "^#[a-zA-Z\\d]{6}$"
+    },
+    "wildcardActions": {
+      "type": "boolean",
+      "description": "Whether action validation for wildcard action is skipped.\n\nIf true, ignore unused actions that fall under '$any'."
+    },
+    "context": {
+      "type": "object",
+      "description": "A context which can be specified using the --context command line parameter.",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "remote": {
+            "description": "The remote the app should be under.\n\nIf remote is specified, this will override --remote passed on the command line.",
+            "type": "string",
+            "format": "uri",
+            "default": "https://appsemble.app"
+          },
+          "organization": {
+            "description": "The organization ID the app should be under.\n\nIf organization is specified, this will override --organization passed on the command line.",
+            "type": "string",
+            "pattern": "^([\\da-z](?:(?!.*--)[\\da-z-]*[\\da-z])?)$",
+            "minLength": 1,
+            "maxLength": 30
+          },
+          "icon": {
+            "description": "The path to the app icon to use.\n\nIf icon is specified, this will override --icon passed on the command line.",
+            "type": "string",
+            "default": "icon.png"
+          },
+          "iconBackground": {
+            "description": "The background color to use for maskable icons.\n\nIf iconBackground is specified, this will override --icon-background passed on the command line.",
+            "type": "string",
+            "pattern": "^#[a-zA-Z\\d]{6}$"
+          },
+          "maskableIcon": {
+            "description": "The path to the maskable app icon to use.\n\nIf maskableIcon is specified, this will override --maskable-icon passed on the command line.",
+            "type": "string",
+            "default": "maskable-icon.png"
+          },
+          "id": {
+            "description": "The id of the app to update.\n\nIf id is specified, this will override --id passed on the command line.",
+            "type": "integer",
+            "minimum": 1
+          },
+          "variant": {
+            "description": "The alternative app variant to use instead.\n\nIf variant is specified, this will override --variant passed on the command line.",
+            "type": "string"
+          },
+          "visibility": {
+            "description": "Determine the app visibility of the app in the Appsemble app store.\n\nThis doesn\u2019t affect whether or not the app can be accessed on its own domain.\n\n- public: The app is publicly listed in the Appsemble app store.\n- unlisted: The app store page can be accessed, but the app isn\u2019t listed publicly in the Appsemble app store.\n- private: The app is only visible to people who are part of the organization.\n\nIf visibility is specified, this will override --visibility passed on the command line.",
+            "default": "unlisted",
+            "enum": [
+              "public",
+              "unlisted",
+              "private"
+            ]
+          },
+          "showAppDefinition": {
+            "description": "Whether the app-definition should be shown.\n\nIf showAppDefinition is specified, this will override --show-app-definition passed on the command line.",
+            "type": "boolean"
+          },
+          "template": {
+            "description": "Whether the app should be a template app.\n\nIf template is specified, this will override --template passed on the command line.",
+            "type": "boolean",
+            "default": false
+          },
+          "sentryDsn": {
+            "type": "string",
+            "format": "uri",
+            "description": "The custom Sentry DSN for the app.\n\nIf sentryDsn is specified, this will override --sentry-dsn passed on the command line."
+          },
+          "sentryEnvironment": {
+            "type": "string",
+            "description": "The custom Sentry environment to use for the app.\n\nIf sentryEnvironment is specified, this will override --sentry-environment passed on the command line."
+          },
+          "demoMode": {
+            "type": "boolean",
+            "description": "Whether the app should be in demoMode.\n\nIf demoMode is specified, this will override --demo-mode passed on the command line."
+          },
+          "appLock": {
+            "enum": [
+              "fullLock",
+              "studioLock",
+              "unlocked"
+            ],
+            "description": "Set the value of AppLock for your app.\n\nIf appLock is specified, this will override --app-lock passed on the command line."
+          },
+          "collections": {
+            "type": "array",
+            "items": [
+              {
+                "type": "integer",
+                "description": "The app collection id."
+              }
+            ],
+            "description": "A list of collections the app should be added to.\n\nIf collections is specified, this will override --collections passed on the command line."
+          },
+          "googleAnalyticsId": {
+            "type": "string",
+            "description": "The Google Analytics ID that should be used for the app.\n\nIf googleAnalyticsId is specified, this will override --google-analytics-id passed on the command line."
+          },
+          "metaPixelId": {
+            "type": "string",
+            "description": "The Meta Pixel ID that should be used for the app.\n\nIf metaPixelId is specified, this will override --meta-pixel-id passed on the command line."
+          },
+          "msClarityId": {
+            "type": "string",
+            "description": "The MS Clarity ID that should be used for the app.\n\nIf msClarityId is specified, this will override --ms-clarity-id passed on the command line."
+          },
+          "resources": {
+            "type": "boolean",
+            "description": "Whether to publish resources from the resources directory.\n\nIf resources is specified, this will override --resources passed on the command line."
+          },
+          "assets": {
+            "type": "boolean",
+            "description": "Whether to publish assets from the assets directory.\n\nIf assets is specified, this will override --assets passed on the command line."
+          },
+          "assetsClonable": {
+            "type": "boolean",
+            "description": "Whether app assets should be clonable.\n\nIf assetsClonable is specified, this will override --assets-clonable passed on the command line."
+          },
+          "members": {
+            "type": "boolean",
+            "description": "Whether to publish seed members from `members/index.json` after publishing the app.\n\nIf members is specified, this will override --members passed on the command line."
+          },
+          "dbName": {
+            "type": "string",
+            "description": "The name of the external app database."
+          },
+          "dbHost": {
+            "type": "string",
+            "description": "The host of the external app database."
+          },
+          "dbPort": {
+            "type": "integer",
+            "description": "The port of the external app database."
+          },
+          "dbUser": {
+            "type": "string",
+            "description": "The user of the external app database."
+          },
+          "supportedLanguages": {
+            "type": "array",
+            "description": "Languages officially supported by the app",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

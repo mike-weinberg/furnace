@@ -1,0 +1,693 @@
+{
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://gitlab.com/chromaway/core-tools/rell-toolbox/-/raw/dev/seeder/src/main/resources/chromia-seeder-config-schema.json",
+    "title": "Chromia Seeder Configuration Schema",
+    "type": "object",
+    "properties": {
+      "modules": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^.*\\.yml$",
+          "format": "uri-reference"
+        }
+      },
+      "default_entity_handler": {
+        "type": "string",
+        "enum": [
+          "generate",
+          "error"
+        ]
+      }
+    },
+    "required": [
+      "modules"
+    ],
+    "additionalProperties": false
+  },
+  "examples": [
+    {
+      "modules": []
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": []
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": []
+    },
+    {
+      "modules": []
+    },
+    {
+      "modules": []
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": []
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": []
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": []
+    },
+    {
+      "modules": []
+    },
+    {
+      "modules": []
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": []
+    },
+    {
+      "modules": [
+        "CTF054Q0YgQ5",
+        "consectet",
+        "gazomrdwhyemhq",
+        "ipsum",
+        "dhncyh"
+      ],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [
+        "y4d0rUBous",
+        "brppztilbq",
+        "ipsum adipi",
+        "cscauxmzp",
+        "B5JD2UWw6Il"
+      ],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [
+        "oYhDILjNF",
+        "adipiscin",
+        "ZltfWHml",
+        "sxpocu",
+        "wclcuncl"
+      ]
+    },
+    {
+      "modules": [
+        "adipisci",
+        "xrxkrxmza",
+        "jiqseuyj",
+        "lorem",
+        "amet sit"
+      ]
+    },
+    {
+      "modules": [
+        "KoSEebg",
+        "emrqccumsssz",
+        "lqgkiz",
+        "kcOI5jm6q5",
+        "SjZMG"
+      ],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [
+        "31AwybV7x",
+        "bgyodqyg",
+        "N8q9tOUjs5",
+        "tTpEwTBr5WvPFc",
+        "lorem ip"
+      ]
+    },
+    {
+      "modules": [
+        "inmadrvaisfrp",
+        "sJ79Wux3",
+        "lsaxsylh",
+        "SgdAtqY5n",
+        "lorem "
+      ],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [
+        "zhveegt",
+        "Kgt0h",
+        "vuczvg",
+        "dolor con",
+        "ry7pvgQpcXwQ"
+      ]
+    },
+    {
+      "modules": [
+        "ldayfeczkjof",
+        "yvzbazmksowmuww",
+        "adipiscing c",
+        "sit lorem sit",
+        "qrmolyhg"
+      ],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [
+        "aazifmotp",
+        "snkxifrmnbbnh",
+        "ipsum ",
+        "hxcboduus",
+        "qdoqe"
+      ],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [
+        "viyfuwjf",
+        "0nQLCAaIAMC",
+        "qfkyjejdvrfy",
+        "yubceeltygry",
+        "dletizv"
+      ]
+    },
+    {
+      "modules": [
+        "9UVRT",
+        "vcwcvlptf",
+        "wkxmc",
+        "consectetur ",
+        "fvugnqjrplu"
+      ],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [
+        "wvctqsw",
+        "akcmqs",
+        "adipiscing amet",
+        "S4A9UOBQ0",
+        "vpahhyiapgpvbx"
+      ]
+    },
+    {
+      "modules": [
+        "ieataimfyrp",
+        "PikC1d3p2n59",
+        "CGYRFDejah2SO2g",
+        "dolor amet ad",
+        "1RJLLjtAUW"
+      ],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [
+        "sgibwi",
+        "amet lor",
+        "ajCWI8f",
+        "zruib8FRjaN",
+        "SZIHyUD85r95I3"
+      ],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [
+        "moixuozh",
+        "lorem consec",
+        "zjlconbcdhudrba",
+        "zzvluttm",
+        "0Lt4P6JEH6"
+      ],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [
+        "7QyCWB",
+        "gpjmzfttczlo",
+        "WZx8OVHkl",
+        "2Znqc5dylm6BNZG",
+        "poxrixvyrl"
+      ],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [
+        "IXqX2VfGjZe",
+        "bwqqeppektusryu",
+        "zqklK7",
+        "consectetur do",
+        "adipiscin"
+      ]
+    },
+    {
+      "modules": [
+        "swcdkupqxrvk",
+        "uqtyze",
+        "v3DddLU8f",
+        "fuoelxtck",
+        "oqrxgxw"
+      ]
+    },
+    {
+      "modules": [
+        "consectetur d",
+        "7AZ7baB7CXPcCNj",
+        "adipisc",
+        "vlqbzarfw",
+        "ipsum adip"
+      ]
+    },
+    {
+      "modules": [
+        "9H6hEiafrmJGm",
+        "ipsum consectet",
+        "qppnetrwmaj",
+        "v5mLx3Wfb3OoD",
+        "QyN0iLgU2lux3mi"
+      ]
+    },
+    {
+      "modules": [
+        "P5fvc2kNf9",
+        "sit lorem ",
+        "tQv42XFbdBZx8",
+        "ywuzogryukphnv",
+        "zktpfmzxfohfel"
+      ],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [
+        "94YdbVbU",
+        "eBPYpspzl",
+        "sit lo",
+        "lorem s",
+        "lorem lorem co"
+      ],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [
+        "cz8rYIW4yO",
+        "consectetu",
+        "NR8lZklFl",
+        "hHQzg2VZj9Else",
+        "xsnjrab"
+      ],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [
+        "LoifTGRfMmS",
+        "adipiscing dol",
+        "sit ipsum sit l",
+        "ciboljycnfmbd",
+        "lyenece"
+      ]
+    },
+    {
+      "modules": [
+        "7kyvFgh",
+        "amet amet ip",
+        "VmllvM7n",
+        "3YjOhayVJl04",
+        "uxkqtbgq"
+      ]
+    },
+    {
+      "modules": [
+        "xojbnpxmuilgel",
+        "DuNzmAsgZQP2y",
+        "lorem conse",
+        "lorem consec",
+        "sit ipsum "
+      ],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [
+        "jorehlp",
+        "U2lXBFfdlJ3ZS",
+        "amet amet ame",
+        "vjflpvdu",
+        "amet amet "
+      ],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [
+        "svrxtrlirmdp",
+        "adipi",
+        "lzTSzWJZpwJ6MD",
+        "xtnulfnbv",
+        "pg5fYRf"
+      ],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [
+        "tfisu",
+        "cdbtj",
+        "pkiqq",
+        "sit ipsum a",
+        "lorem consecte"
+      ],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [
+        "X6tVukvUjOvkAx",
+        "2PRlt494duZ6",
+        "twzztknntq",
+        "K7X5RhzsqhgDW1",
+        "ofpetluneasboh"
+      ]
+    },
+    {
+      "modules": [
+        "adipiscing c",
+        "ezjlqrthm",
+        "dolor d",
+        "YlAcTglUB",
+        "pBo3EjlJI9t6K"
+      ]
+    },
+    {
+      "modules": [
+        "tsltylod",
+        "R4rtlK5Ti",
+        "adipiscing",
+        "ipsum dolor ",
+        "dolor ad"
+      ]
+    },
+    {
+      "modules": [
+        "khfcff"
+      ]
+    },
+    {
+      "modules": [
+        "HgF7IGWB",
+        "P4tT2tGMa"
+      ],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [
+        "sit ipsum sit",
+        "FUhFfB",
+        "AKOrw"
+      ],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [
+        "yMkmAoPzxr"
+      ],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [
+        "sCAPwGbKoCqmTPQ",
+        "zybenyWf7Za6",
+        "mavqlneod"
+      ]
+    },
+    {
+      "modules": []
+    },
+    {
+      "modules": [
+        "amet ipsum ame"
+      ],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [
+        "niwohxhi",
+        "ic1X7"
+      ]
+    },
+    {
+      "modules": [
+        "sUhi77q2A5ed7G",
+        "sit sit cons",
+        "sit ipsum si",
+        "mzqRxzANyVRuJ",
+        "amet dolor ipsu"
+      ],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [
+        "dolor i"
+      ],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [
+        "lorem dolor con",
+        "nponv",
+        "vxovwwhuqxovjip",
+        "ipsum conse",
+        "mmbdg"
+      ],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [
+        "yrttcxq",
+        "gvfpkglt"
+      ]
+    },
+    {
+      "modules": [
+        "adipisci",
+        "mifwsjecrhhhex",
+        "7mba62",
+        "rljovscajhu"
+      ]
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [
+        "s5TVCZTK",
+        "SoyT6V",
+        "mkznlcpmh",
+        "adipiscing dol"
+      ],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [
+        "adipiscing lo",
+        "ipsum adip"
+      ],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [
+        "poedhqbq"
+      ],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [
+        "CNDDj",
+        "mthdfma",
+        "mnaqheqkgkg",
+        "adipiscing "
+      ],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": []
+    },
+    {
+      "modules": [
+        "ibjNpPSIegs"
+      ],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [
+        "adipiscing ad",
+        "adipiscing ipsu",
+        "oudsudccgscykge",
+        "consec"
+      ],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [
+        "consectetur",
+        "Knv62",
+        "69YbbU",
+        "consect"
+      ],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [
+        "chkxjpceso",
+        "tyosxsufltbt"
+      ]
+    },
+    {
+      "modules": [
+        "33t07Zb",
+        "consectetur ",
+        "amet adipis"
+      ]
+    },
+    {
+      "modules": [
+        "VYuHMR6U2P",
+        "fjkcwzxky",
+        "hpddsczgwzbkmg"
+      ],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [
+        "adipiscing ad",
+        "consect",
+        "adipiscing "
+      ]
+    },
+    {
+      "modules": [
+        "pmvdhpdqjv",
+        "01Zrla96e",
+        "jifvzfsss",
+        "d4NTscTio3j",
+        "ipsum cons"
+      ]
+    },
+    {
+      "modules": [
+        "AVAiNc9Rdm7",
+        "kvubtgtau",
+        "ziiglct",
+        "gqbnoanqgitxdar"
+      ],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "error"
+    },
+    {
+      "modules": [
+        "Rm1pjBvS67R"
+      ],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": []
+    },
+    {
+      "modules": [],
+      "default_entity_handler": "generate"
+    },
+    {
+      "modules": [
+        "DJC5O",
+        "xkgjt",
+        "consectetur d",
+        "sit ipsum ips"
+      ],
+      "default_entity_handler": "generate"
+    }
+  ]
+}

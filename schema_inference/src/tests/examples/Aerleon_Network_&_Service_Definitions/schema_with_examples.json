@@ -1,0 +1,1252 @@
+{
+  "schema": {
+    "$id": "urn:aerleon:schemas:aerleon-definitions:1.0.0",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$comment": "https://aerleon.readthedocs.io/en/latest/reference/naming/",
+    "title": "Aerleon Network & Service Definitions",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "networks": {
+        "title": "Network Definition Section",
+        "description": "Policy files can reference the networks in this section by name. A network is a list of IP addresses or CIDR IP address ranges and may contain other networks.",
+        "type": "object",
+        "additionalProperties": {
+          "$ref": "#/$defs/networkDefinition"
+        },
+        "propertyNames": {
+          "$ref": "#/$defs/token"
+        }
+      },
+      "services": {
+        "title": "Service Definition Section",
+        "description": "Policy files can reference the services in this section by name. A service is a list of port/protocol pairs (e.g. port: 80, protocol: tcp) and can include port ranges. A service can include other services.",
+        "type": "object",
+        "additionalProperties": {
+          "$ref": "#/$defs/serviceDefinition"
+        },
+        "propertyNames": {
+          "$ref": "#/$defs/token"
+        }
+      }
+    },
+    "$defs": {
+      "token": {
+        "type": "string",
+        "pattern": "^[-_a-zA-Z0-9]+$"
+      },
+      "comment": {
+        "description": "Attach a comment directly to a value. This comment may be included in generated output on platforms that support it.",
+        "type": "string"
+      },
+      "address": {
+        "description": "Specifies an IP address or CIDR IP address range expression.",
+        "type": "string"
+      },
+      "fqdn": {
+        "description": "Specifies a fully qualified domain name with two or more labels.",
+        "type": "string",
+        "pattern": "^(?!.*://)(?=.{1,255}$)((.{1,63}\\.){1,127}(?![0-9]*$)[a-z0-9-]+\\.?)$"
+      },
+      "port": {
+        "description": "Specifies a port or port range.",
+        "oneOf": [
+          {
+            "type": "string",
+            "pattern": "^\\d+-\\d+|^\\d+$"
+          },
+          {
+            "type": "integer"
+          }
+        ]
+      },
+      "protocol": {
+        "description": "Specifies a protocol by name or number.",
+        "oneOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "networkDefinition": {
+        "type": "object",
+        "title": "Network Definition",
+        "description": "Defines a named network, composed of IP addresses, IP address ranges, and references to other networks.\nAn object with the \"address\" property adds that address or address range to the network.\nAn object with the \"name\" property includes the contents of that network into this one.\nA single string also includes the content of that network into this one.",
+        "additionalProperties": false,
+        "required": [
+          "values"
+        ],
+        "properties": {
+          "values": {
+            "description": "Defines a named network, composed of IP addresses, IP address ranges, and references to other networks.\nAn object with the \"address\" property adds that address or address range to the network.\nAn object with the \"name\" property includes the contents of that network into this one.\nA single string also includes the content of that network into this one.",
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "title": "Network Reference",
+                  "description": "Include another network by name.",
+                  "$ref": "#/$defs/token"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "address"
+                  ],
+                  "properties": {
+                    "address": {
+                      "$ref": "#/$defs/address"
+                    },
+                    "comment": {
+                      "$ref": "#/$defs/comment"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "fqdn"
+                  ],
+                  "properties": {
+                    "fqdn": {
+                      "$ref": "#/$defs/fqdn"
+                    },
+                    "comment": {
+                      "$ref": "#/$defs/comment"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "title": "Network Reference",
+                  "required": [
+                    "name"
+                  ],
+                  "properties": {
+                    "name": {
+                      "description": "Include another network by name.",
+                      "$ref": "#/$defs/token"
+                    },
+                    "comment": {
+                      "$ref": "#/$defs/comment"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          }
+        }
+      },
+      "serviceDefinition": {
+        "type": "array",
+        "title": "Service Definition",
+        "description": "Defines a named service, composed of portocol, port pairs and/or references to other services.",
+        "items": {
+          "oneOf": [
+            {
+              "type": "object",
+              "required": [
+                "port",
+                "protocol"
+              ],
+              "properties": {
+                "port": {
+                  "$ref": "#/$defs/port"
+                },
+                "protocol": {
+                  "$ref": "#/$defs/protocol"
+                },
+                "comment": {
+                  "$ref": "#/$defs/comment"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "title": "Service Reference",
+              "description": "Include another service by name.",
+              "required": [
+                "name"
+              ],
+              "properties": {
+                "name": {
+                  "description": "Include another service by name.",
+                  "$ref": "#/$defs/token"
+                },
+                "comment": {
+                  "$ref": "#/$defs/comment"
+                }
+              },
+              "additionalProperties": false
+            }
+          ]
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "services": {
+        "consec": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "jscppn": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "0HUAk0Yxf": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "pnojbb": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "efadaenzsj": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "rjihenph": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "dolor s": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "ipsum ": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "dolor l": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "wqxbh": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "services": {
+        "fnpyabivv": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "suSVyR": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "vFyczbgq7": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "xofnj": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "dolor ": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {},
+      "services": {
+        "nsleurm": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "sit co": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "IYQVr": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {}
+    },
+    {
+      "networks": {
+        "gmzcirc": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {}
+    },
+    {
+      "networks": {
+        "consectet": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "adipiscin": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "vOxrRahHc": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "eqjuytftlv": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "services": {
+        "6z4j9zlvN": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "BojDM": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {},
+    {
+      "services": {
+        "7xBJx42": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "sit consec": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {},
+      "services": {
+        "thjszro": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "t79Vcp7F": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "services": {
+        "V9AoxeN9mV": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "sit adipi": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "lvjwexj": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {}
+    },
+    {
+      "networks": {}
+    },
+    {
+      "networks": {
+        "consecte": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "ymmxhepzez": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {}
+    },
+    {
+      "networks": {
+        "consec": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "bxcwebq": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "iismjk": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "ianceau": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "tvlijvq": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "services": {}
+    },
+    {
+      "networks": {
+        "fUemeM0": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "5b9RXXmYO": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "dolor ": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "yepygocalx": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "lnoiqxbog": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "hzucwv": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "sssksq": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "08w2S": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "6AM5mckc": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {}
+    },
+    {},
+    {
+      "services": {}
+    },
+    {
+      "services": {
+        "adipisci": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "ipsum": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "ipsum ": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {}
+    },
+    {
+      "networks": {
+        "iojtrpzsij": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "consectetu": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "T22qw": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "CKEGmgpW": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "IE9ld": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "scsjhd": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "conse": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "services": {}
+    },
+    {
+      "networks": {
+        "consecte": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "bvhtlg": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "Haz3Wx": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "services": {}
+    },
+    {
+      "services": {
+        "txrxkrxmza": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "jiqseu": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "ipsum ame": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "adipi": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "kjkatyjfqk": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "odqygj": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {}
+    },
+    {
+      "networks": {
+        "xZjBVL4": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "ieFsJ7": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "consectet": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "amvfod": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "lorem": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {}
+    },
+    {},
+    {
+      "networks": {
+        "6nW0v": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "nwfrpm": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {}
+    },
+    {
+      "services": {
+        "lorem sit ": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {}
+    },
+    {
+      "networks": {},
+      "services": {}
+    },
+    {
+      "networks": {
+        "dwdkxhrbwm": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "amet ": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "dolor lore": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {},
+      "services": {
+        "2XJ8tEwHi": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "zjlconbcdh": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {}
+    },
+    {
+      "networks": {
+        "KX7PYJDZ9": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "ibaxuweps": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "ryubja": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "fefpma": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "services": {
+        "hwkhjcIhMw": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "uqtyz": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {}
+    },
+    {
+      "services": {
+        "wyaupqubs": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "amet dolo": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "cibxeqcz": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "sit lor": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "p0G644uk": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "Zx8Kh": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "Ic3Yw": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "vghgkewg": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {},
+      "services": {}
+    },
+    {
+      "networks": {},
+      "services": {}
+    },
+    {
+      "networks": {
+        "tluncl": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "tVmllv": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "ZyCrXx1NlL": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {}
+    },
+    {
+      "networks": {
+        "amet am": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "sit amet": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "services": {
+        "fcpdjxwdcf": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "adipi": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {},
+    {
+      "services": {}
+    },
+    {},
+    {
+      "networks": {
+        "midztgpsxh": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "adipisc": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "lorem ": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "jqpA1": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {}
+    },
+    {
+      "networks": {
+        "gF7IGWBr": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "services": {
+        "SNQHFU": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "xdqnl": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "services": {
+        "dolor co": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "sxteflkzs": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "ipsum co": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "sit ips": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "hpmhl": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "sajztpqr": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {},
+      "services": {}
+    },
+    {
+      "services": {}
+    },
+    {
+      "services": {
+        "amet co": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "yhwlybby": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {},
+      "services": {}
+    },
+    {
+      "services": {}
+    },
+    {
+      "services": {
+        "olclzzgvfp": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "wtbrfmvn": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {}
+    },
+    {
+      "networks": {
+        "eueieqbs": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "iD83vKjlW": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {}
+    },
+    {
+      "networks": {
+        "bjfzrze": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "8IxMiuW": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "BfKEr": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {}
+    },
+    {
+      "services": {}
+    },
+    {
+      "services": {
+        "ljsNeND": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "qthmemdyhp": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "NDDjiMfPH": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "sit lor": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "7Xe8pnx5": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "gb6zsP5t6": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "sit con": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "services": {
+        "lorem i": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "NJ3sWbVhZN": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "adipisc": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "ivcoduou": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "dccgscykg": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "gughxi": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "lljpfiywso": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "bWhJ7": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "amet sit c": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "ipsum lore": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "xhwyv": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "sit ame": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "vioqsyt": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {}
+    },
+    {},
+    {
+      "networks": {
+        "VAiNc": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "bfzuq": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "conse": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "brzii": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "gjvxnzv": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {}
+    },
+    {
+      "networks": {
+        "GqlYkUVmeZ": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {
+        "36OUHG3Vv": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        },
+        "uxvord": {
+          "_ref": "#/$defs/networkDefinition",
+          "_placeholder": true
+        }
+      },
+      "services": {
+        "ijtozn": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        },
+        "sit c": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "services": {
+        "dSalR": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    },
+    {
+      "networks": {},
+      "services": {
+        "C5Oa8v": {
+          "_ref": "#/$defs/serviceDefinition",
+          "_placeholder": true
+        }
+      }
+    }
+  ]
+}

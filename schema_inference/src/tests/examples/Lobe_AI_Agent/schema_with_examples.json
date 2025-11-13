@@ -1,0 +1,6385 @@
+{
+  "schema": {
+    "type": "object",
+    "properties": {
+      "author": {
+        "type": "string"
+      },
+      "config": {
+        "type": "object",
+        "properties": {
+          "compressThreshold": {
+            "type": "number"
+          },
+          "displayMode": {
+            "type": "string",
+            "enum": [
+              "chat",
+              "docs"
+            ]
+          },
+          "enableCompressThreshold": {
+            "type": "boolean"
+          },
+          "enableHistoryCount": {
+            "type": "boolean"
+          },
+          "enableMaxTokens": {
+            "type": "boolean"
+          },
+          "fewShots": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "user",
+                    "system",
+                    "assistant",
+                    "function"
+                  ]
+                }
+              },
+              "required": [
+                "content",
+                "role"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "historyCount": {
+            "type": "number"
+          },
+          "inputTemplate": {
+            "type": "string"
+          },
+          "knowledgeBases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "avatar": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "description": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "not": {}
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "enabled": {
+                  "type": "boolean"
+                },
+                "id": {
+                  "type": "string"
+                },
+                "isPublic": {
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "type": "string"
+                },
+                "settings": {},
+                "type": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              },
+              "required": [
+                "avatar",
+                "createdAt",
+                "id",
+                "isPublic",
+                "name",
+                "type",
+                "updatedAt"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "model": {
+            "type": "string"
+          },
+          "openingMessage": {
+            "type": "string"
+          },
+          "openingQuestions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "params": {
+            "type": "object",
+            "properties": {
+              "frequency_penalty": {
+                "type": "number",
+                "default": 0
+              },
+              "max_tokens": {
+                "type": "number"
+              },
+              "presence_penalty": {
+                "type": "number",
+                "default": 0
+              },
+              "temperature": {
+                "type": "number",
+                "default": 0
+              },
+              "top_p": {
+                "type": "number",
+                "default": 1
+              }
+            },
+            "additionalProperties": false
+          },
+          "plugins": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "systemRole": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "systemRole"
+        ],
+        "additionalProperties": false
+      },
+      "createdAt": {
+        "type": "string"
+      },
+      "examples": {
+        "$ref": "#/properties/config/properties/fewShots"
+      },
+      "homepage": {
+        "type": "string"
+      },
+      "identifier": {
+        "type": "string"
+      },
+      "knowledgeCount": {
+        "type": "number"
+      },
+      "meta": {
+        "type": "object",
+        "properties": {
+          "avatar": {
+            "type": "string"
+          },
+          "backgroundColor": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "avatar",
+          "description",
+          "tags",
+          "title"
+        ],
+        "additionalProperties": false
+      },
+      "pluginCount": {
+        "type": "number"
+      },
+      "schemaVersion": {
+        "type": "number"
+      },
+      "summary": {
+        "type": "string"
+      },
+      "tokenUsage": {
+        "type": "number"
+      }
+    },
+    "required": [
+      "author",
+      "config",
+      "createdAt",
+      "homepage",
+      "identifier",
+      "knowledgeCount",
+      "meta",
+      "pluginCount",
+      "schemaVersion",
+      "tokenUsage"
+    ],
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  },
+  "examples": [
+    {
+      "author": "consectetur ipsum lor",
+      "config": {
+        "systemRole": "dolor lorem ipsum ",
+        "compressThreshold": -602.32,
+        "enableCompressThreshold": true,
+        "enableHistoryCount": false,
+        "fewShots": [],
+        "knowledgeBases": [],
+        "model": "dolor dolor",
+        "openingMessage": "nz",
+        "openingQuestions": [],
+        "params": {
+          "temperature": 409.14,
+          "top_p": -544.2
+        },
+        "plugins": []
+      },
+      "createdAt": "wjl",
+      "homepage": "dolor amet a",
+      "identifier": "amet sit ipsum sit ip",
+      "knowledgeCount": 850.78,
+      "meta": {
+        "avatar": "dolor consectetur ",
+        "description": "e4JSnE2NiiU",
+        "tags": [],
+        "title": "amet adipiscing do",
+        "category": "wde"
+      },
+      "pluginCount": 360.96,
+      "schemaVersion": 192.82,
+      "tokenUsage": -230.47,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "wasrngqcl"
+    },
+    {
+      "author": "co",
+      "config": {
+        "systemRole": "RfLLFJM626ydghj",
+        "compressThreshold": 669.02,
+        "displayMode": "docs",
+        "enableCompressThreshold": false,
+        "enableHistoryCount": false,
+        "enableMaxTokens": true,
+        "fewShots": [],
+        "historyCount": -668.55,
+        "inputTemplate": "g1K",
+        "openingMessage": "OSuPBhet2qTPe9Ps3TwA",
+        "openingQuestions": [],
+        "params": {
+          "max_tokens": 289.93,
+          "top_p": -384.95
+        }
+      },
+      "createdAt": "ca48hT942uSE6R",
+      "homepage": "kscfykrogpx",
+      "identifier": "dHWlTdosvW8",
+      "knowledgeCount": 645.47,
+      "meta": {
+        "avatar": "sit lorem lor",
+        "description": "wxnnciflkgcfokjced",
+        "tags": [],
+        "title": "lorem amet ",
+        "backgroundColor": "si"
+      },
+      "pluginCount": 674.42,
+      "schemaVersion": 588.68,
+      "tokenUsage": -36.51,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "m"
+    },
+    {
+      "author": "RhxrnJgWQsNKVP",
+      "config": {
+        "systemRole": "consectetur ",
+        "compressThreshold": -810.74,
+        "enableCompressThreshold": false,
+        "enableHistoryCount": false,
+        "enableMaxTokens": false,
+        "historyCount": -483.31,
+        "inputTemplate": "ad"
+      },
+      "createdAt": "qpoglurivvbe",
+      "homepage": "ppohyokj",
+      "identifier": "pblb",
+      "knowledgeCount": 246.18,
+      "meta": {
+        "avatar": "adip",
+        "description": "h",
+        "tags": [],
+        "title": "lorem sit ipsum sit a"
+      },
+      "pluginCount": -878.43,
+      "schemaVersion": -33.71,
+      "tokenUsage": 956.17
+    },
+    {
+      "author": "psbEhY71O",
+      "config": {
+        "systemRole": "ipsum adipiscing ips",
+        "compressThreshold": 225.84,
+        "displayMode": "chat",
+        "enableHistoryCount": false,
+        "enableMaxTokens": false,
+        "fewShots": [],
+        "historyCount": 502.36,
+        "inputTemplate": "ynnqqsgrmjfeu",
+        "knowledgeBases": [],
+        "openingMessage": "ZiCfx2L",
+        "openingQuestions": []
+      },
+      "createdAt": "ieahkwaxsqlfhgqyf",
+      "homepage": "l",
+      "identifier": "cpuxbdkpc",
+      "knowledgeCount": 391.51,
+      "meta": {
+        "avatar": "xqhtwenaiqzkilo",
+        "description": "oakawwmurgoxb",
+        "tags": [],
+        "title": "jqv"
+      },
+      "pluginCount": 677.0,
+      "schemaVersion": -237.96,
+      "tokenUsage": -893.65
+    },
+    {
+      "author": "K1o",
+      "config": {
+        "systemRole": "sit consectetur l",
+        "displayMode": "chat",
+        "enableCompressThreshold": false,
+        "enableHistoryCount": true,
+        "enableMaxTokens": false,
+        "fewShots": [],
+        "historyCount": 661.26,
+        "inputTemplate": "lilsdpwplkjjuvpzss",
+        "knowledgeBases": [],
+        "openingQuestions": [],
+        "params": {
+          "frequency_penalty": 324.12,
+          "top_p": -211.39
+        }
+      },
+      "createdAt": "lorem conse",
+      "homepage": "O7GTmo6eBl",
+      "identifier": "0rPx9WOxxgmhZ",
+      "knowledgeCount": -445.9,
+      "meta": {
+        "avatar": "xxbgkhogxixyrhbzxmbt",
+        "description": "oyavdvpfjh",
+        "tags": [],
+        "title": "s",
+        "category": "sit amet consectetur"
+      },
+      "pluginCount": -572.1,
+      "schemaVersion": -317.18,
+      "tokenUsage": -689.28,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "adipiscing ipsum ipsu"
+    },
+    {
+      "author": "sit sit ipsu",
+      "config": {
+        "systemRole": "czbgq7DH43JoG",
+        "compressThreshold": 915.53,
+        "displayMode": "docs",
+        "enableHistoryCount": false,
+        "enableMaxTokens": true,
+        "fewShots": [],
+        "knowledgeBases": [],
+        "model": "FYg2oRuDgzv2"
+      },
+      "createdAt": "ctWqTXLMmE79",
+      "homepage": "lorem ipsum amet c",
+      "identifier": "con",
+      "knowledgeCount": 93.73,
+      "meta": {
+        "avatar": "VL3L644N7ZJnA8",
+        "description": "adipis",
+        "tags": [],
+        "title": "onclq",
+        "backgroundColor": "lorem ipsum ",
+        "category": "IaeZ5u12odhfdHo3"
+      },
+      "pluginCount": 69.77,
+      "schemaVersion": 99.86,
+      "tokenUsage": 524.86
+    },
+    {
+      "author": "IHXFSBjYOEnVIFDbAi",
+      "config": {
+        "systemRole": "boyscg",
+        "compressThreshold": -970.94,
+        "enableMaxTokens": false,
+        "fewShots": [],
+        "historyCount": 630.36,
+        "knowledgeBases": [],
+        "model": "KRWn9DPWga",
+        "openingMessage": "aprklgtfosvyee",
+        "openingQuestions": [],
+        "plugins": []
+      },
+      "createdAt": "I4JVSaCsNbTQu3",
+      "homepage": "pnvclpmfuwzpfgazlhaiz",
+      "identifier": "ipsum adipisci",
+      "knowledgeCount": 537.05,
+      "meta": {
+        "avatar": "ipsum lorem ipsum ame",
+        "description": "YJ7WeKfYa",
+        "tags": [],
+        "title": "dydctnnoi",
+        "backgroundColor": "mealfifezi"
+      },
+      "pluginCount": -925.01,
+      "schemaVersion": 69.05,
+      "tokenUsage": 778.38,
+      "summary": "GIQWc8Mxgoe"
+    },
+    {
+      "author": "5uI",
+      "config": {
+        "systemRole": "th",
+        "compressThreshold": -909.21,
+        "displayMode": "chat",
+        "enableMaxTokens": false,
+        "fewShots": [],
+        "inputTemplate": "wO7MdzHMO4IHH",
+        "knowledgeBases": [],
+        "openingMessage": "LQEx7WHHjmf6ZdQxPBu",
+        "openingQuestions": [],
+        "params": {
+          "frequency_penalty": 434.25,
+          "max_tokens": -120.51,
+          "temperature": -185.56
+        }
+      },
+      "createdAt": "adipiscing ipsum dol",
+      "homepage": "2MSkqK",
+      "identifier": "consectetur do",
+      "knowledgeCount": 347.38,
+      "meta": {
+        "avatar": "ldoxotjaniozyxqno",
+        "description": "lorem lo",
+        "tags": [],
+        "title": "consectetur con",
+        "category": "0bD7"
+      },
+      "pluginCount": -477.53,
+      "schemaVersion": -658.19,
+      "tokenUsage": 873.47,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "ijfcbdxn"
+    },
+    {
+      "author": "jxstiofoyjcjfbwz",
+      "config": {
+        "systemRole": "f5dLuQZauXA9mB4KhMHh",
+        "enableHistoryCount": false,
+        "enableMaxTokens": true,
+        "fewShots": [],
+        "inputTemplate": "djxrmurozeov",
+        "knowledgeBases": [],
+        "openingMessage": "7eo5GCzYDywWbBNatvNGE",
+        "openingQuestions": [],
+        "params": {
+          "max_tokens": -824.18,
+          "presence_penalty": -899.67,
+          "temperature": -378.04
+        }
+      },
+      "createdAt": "l",
+      "homepage": "zsamlofapvijbnvmdcw",
+      "identifier": "ocbcqwgup",
+      "knowledgeCount": 975.18,
+      "meta": {
+        "avatar": "oygzboech",
+        "description": "tocelfkobhdeu",
+        "tags": [],
+        "title": "ipsum consectetur"
+      },
+      "pluginCount": 629.26,
+      "schemaVersion": 902.68,
+      "tokenUsage": -567.53,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "fcvdsye"
+    },
+    {
+      "author": "ogzvgwom",
+      "config": {
+        "systemRole": "vOxrRahHcP6vsBX1OV",
+        "compressThreshold": 912.72,
+        "displayMode": "chat",
+        "inputTemplate": "65Q548",
+        "knowledgeBases": [],
+        "model": "pzmnlalobmnwcvhnlr",
+        "openingMessage": "amet amet sit adi",
+        "openingQuestions": [],
+        "plugins": []
+      },
+      "createdAt": "oiirlfj",
+      "homepage": "consectetu",
+      "identifier": "sit ad",
+      "knowledgeCount": -977.48,
+      "meta": {
+        "avatar": "sonyhs",
+        "description": "mauhuzukwkioqro",
+        "tags": [],
+        "title": "KDh6y6YqyIZGcu",
+        "category": "sit sit consect"
+      },
+      "pluginCount": 649.95,
+      "schemaVersion": -451.68,
+      "tokenUsage": 476.4,
+      "summary": "c"
+    },
+    {
+      "author": "consectet",
+      "config": {
+        "systemRole": "4j9zlvNcyaek",
+        "compressThreshold": -451.27,
+        "enableCompressThreshold": true,
+        "historyCount": 342.35,
+        "knowledgeBases": [],
+        "model": "shiulospffsmdstcq",
+        "openingMessage": "AHUWj70",
+        "params": {
+          "presence_penalty": 373.83
+        }
+      },
+      "createdAt": "frvbqagkdxctjwahz",
+      "homepage": "XjQ9um",
+      "identifier": "lorem con",
+      "knowledgeCount": 878.65,
+      "meta": {
+        "avatar": "xw",
+        "description": "dolor d",
+        "tags": [],
+        "title": "ipsum dolor ",
+        "backgroundColor": "l5",
+        "category": "oqpvsgrnxdlzbs"
+      },
+      "pluginCount": 799.77,
+      "schemaVersion": 218.06,
+      "tokenUsage": -885.76,
+      "summary": "lorem sit ipsum a"
+    },
+    {
+      "author": "fnmsjlayxzidwbbffdjt",
+      "config": {
+        "systemRole": "z6ujWIy9Ojd",
+        "displayMode": "docs",
+        "enableCompressThreshold": true,
+        "enableMaxTokens": true,
+        "historyCount": -43.62,
+        "inputTemplate": "lorem dolor",
+        "knowledgeBases": [],
+        "openingMessage": "mnyefhtlkcdq",
+        "openingQuestions": [],
+        "params": {
+          "frequency_penalty": -377.8,
+          "max_tokens": 815.91,
+          "temperature": -542.1
+        },
+        "plugins": []
+      },
+      "createdAt": "hltxy",
+      "homepage": "s",
+      "identifier": "xqRpM75PKjY4vdGA0UAGD",
+      "knowledgeCount": 322.76,
+      "meta": {
+        "avatar": "0LwpzUF9bq1RKOcbyVTb8",
+        "description": "sit dolor dolor c",
+        "tags": [],
+        "title": "kxfqukhdohmqgkbrthf",
+        "category": "AJLDHwQE"
+      },
+      "pluginCount": -735.14,
+      "schemaVersion": 264.07,
+      "tokenUsage": -352.79,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "yN0X9dGwwt"
+    },
+    {
+      "author": "s3Enu",
+      "config": {
+        "systemRole": "zffmulcihkocq",
+        "enableCompressThreshold": true,
+        "enableHistoryCount": true,
+        "enableMaxTokens": true,
+        "fewShots": [],
+        "historyCount": 784.86,
+        "knowledgeBases": [],
+        "model": "l",
+        "openingMessage": "amet lorem sit ",
+        "openingQuestions": [],
+        "params": {
+          "frequency_penalty": 788.69,
+          "max_tokens": -962.06
+        },
+        "plugins": []
+      },
+      "createdAt": "r3OBF45WKFtV",
+      "homepage": "pj",
+      "identifier": "AtBUWiIC6p5ivS",
+      "knowledgeCount": -748.09,
+      "meta": {
+        "avatar": "5YRg7fmhlRIhmUtnX",
+        "description": "7ZcbXsC3B",
+        "tags": [],
+        "title": "adi",
+        "backgroundColor": "dolor ",
+        "category": "yhjogadxlwetf"
+      },
+      "pluginCount": -272.11,
+      "schemaVersion": 491.09,
+      "tokenUsage": 997.74
+    },
+    {
+      "author": "fzh",
+      "config": {
+        "systemRole": "hjs",
+        "enableCompressThreshold": false,
+        "enableHistoryCount": false,
+        "fewShots": [],
+        "historyCount": 261.9,
+        "knowledgeBases": [],
+        "model": "Z",
+        "openingMessage": "amet dol",
+        "openingQuestions": [],
+        "params": {
+          "frequency_penalty": -339.41,
+          "max_tokens": 651.79,
+          "presence_penalty": -350.44,
+          "top_p": -649.64
+        },
+        "plugins": []
+      },
+      "createdAt": "BsiRzDLgY3",
+      "homepage": "amet ipsu",
+      "identifier": "lorem dolor",
+      "knowledgeCount": -26.33,
+      "meta": {
+        "avatar": "dolor ipsum dolo",
+        "description": "ipsum adipiscing co",
+        "tags": [],
+        "title": "ijxajrmmhngm"
+      },
+      "pluginCount": -632.04,
+      "schemaVersion": -582.58,
+      "tokenUsage": 983.4,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "adipiscing sit a"
+    },
+    {
+      "author": "amet dolor sit adi",
+      "config": {
+        "systemRole": "amet dol",
+        "compressThreshold": 147.6,
+        "displayMode": "chat",
+        "enableCompressThreshold": true,
+        "enableHistoryCount": true,
+        "fewShots": [],
+        "historyCount": -812.01,
+        "inputTemplate": "ShPdnPl",
+        "knowledgeBases": [],
+        "model": "Ocw2PGgEQDxFIQQnvRili",
+        "openingMessage": "a",
+        "plugins": []
+      },
+      "createdAt": "adipiscing consec",
+      "homepage": "lorem sit con",
+      "identifier": "bskyroonsa",
+      "knowledgeCount": -922.71,
+      "meta": {
+        "avatar": "sit lorem consec",
+        "description": "yvxzksyfcinztcgtkcu",
+        "tags": [],
+        "title": "adipiscing",
+        "backgroundColor": "lv"
+      },
+      "pluginCount": 549.23,
+      "schemaVersion": 689.63,
+      "tokenUsage": 126.85,
+      "summary": "sultwjjhzdzql"
+    },
+    {
+      "author": "Ln",
+      "config": {
+        "systemRole": "hzqwatnpjzr",
+        "enableCompressThreshold": true,
+        "enableHistoryCount": true,
+        "enableMaxTokens": true,
+        "inputTemplate": "wGn81y",
+        "knowledgeBases": [],
+        "model": "byMBVRHbaswNRbPiPBRaR",
+        "openingMessage": "szbirvgwboaeslxylnj",
+        "openingQuestions": [],
+        "params": {
+          "max_tokens": 608.31,
+          "presence_penalty": -783.91,
+          "top_p": -714.24
+        }
+      },
+      "createdAt": "doqgpjikoetjkko",
+      "homepage": "he0aqFaN3PRTNacV",
+      "identifier": "gaobri",
+      "knowledgeCount": 382.28,
+      "meta": {
+        "avatar": "vyymfqqdqowxzhsrh",
+        "description": "35w6oCidwlvIXsF",
+        "tags": [],
+        "title": "mgueru"
+      },
+      "pluginCount": 141.54,
+      "schemaVersion": -658.96,
+      "tokenUsage": 275.85,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      }
+    },
+    {
+      "author": "consectetur adipisc",
+      "config": {
+        "systemRole": "r27Xz2gEDeIxw",
+        "compressThreshold": 334.88,
+        "displayMode": "chat",
+        "enableCompressThreshold": false,
+        "enableHistoryCount": true,
+        "historyCount": -103.38,
+        "inputTemplate": "consecte",
+        "knowledgeBases": [],
+        "model": "adipiscing adipisci",
+        "openingMessage": "plqewmhsmsdywdn",
+        "openingQuestions": [],
+        "params": {
+          "frequency_penalty": -861.99,
+          "presence_penalty": 106.17,
+          "top_p": -30.1
+        }
+      },
+      "createdAt": "FZveYjOPxg56jVTnbi2d",
+      "homepage": "YfT55y9UCXzvJO",
+      "identifier": "dydeqsa",
+      "knowledgeCount": 397.41,
+      "meta": {
+        "avatar": "MtI3",
+        "description": "dsHh2BcQmqgw8",
+        "tags": [],
+        "title": "dkix",
+        "category": "w0P79a7kfP"
+      },
+      "pluginCount": 701.43,
+      "schemaVersion": -335.63,
+      "tokenUsage": -668.24,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "Xb6GYHC1"
+    },
+    {
+      "author": "amet sit",
+      "config": {
+        "systemRole": "sravj",
+        "displayMode": "chat",
+        "enableHistoryCount": true,
+        "inputTemplate": "dolor lorem ipsum lor",
+        "knowledgeBases": [],
+        "model": "tpworachnirztpdtyzk",
+        "openingMessage": "wgddogmnlqnn",
+        "params": {
+          "frequency_penalty": 816.54,
+          "max_tokens": -208.16,
+          "presence_penalty": 155.92,
+          "top_p": 128.44
+        },
+        "plugins": []
+      },
+      "createdAt": "su4uOgrsUfE8oD",
+      "homepage": "visj",
+      "identifier": "dolor ip",
+      "knowledgeCount": 244.8,
+      "meta": {
+        "avatar": "giaotvfgadq",
+        "description": "adipis",
+        "tags": [],
+        "title": "amet amet sit dolor c",
+        "backgroundColor": "spdrmamfflxekumz"
+      },
+      "pluginCount": 497.52,
+      "schemaVersion": 42.3,
+      "tokenUsage": 138.24
+    },
+    {
+      "author": "ipsum ipsu",
+      "config": {
+        "systemRole": "bxcwebqxksd",
+        "enableCompressThreshold": true,
+        "enableMaxTokens": false,
+        "fewShots": [],
+        "inputTemplate": "enRpZT1J",
+        "model": "fGfbSf0QIyTyRQuu",
+        "openingMessage": "KxB",
+        "params": {
+          "max_tokens": 111.39,
+          "presence_penalty": -907.91,
+          "temperature": -967.93
+        }
+      },
+      "createdAt": "vrxervdsfymwvgigtcg",
+      "homepage": "sit amet ip",
+      "identifier": "79jy5GYlhQpbC7No9",
+      "knowledgeCount": 80.11,
+      "meta": {
+        "avatar": "sit adipiscing",
+        "description": "trJx5A0k6Zy1j",
+        "tags": [],
+        "title": "hdJQWkcj4K",
+        "backgroundColor": "vfylsc"
+      },
+      "pluginCount": 922.54,
+      "schemaVersion": 18.58,
+      "tokenUsage": 199.58,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      }
+    },
+    {
+      "author": "ipsum adipiscing",
+      "config": {
+        "systemRole": "w",
+        "compressThreshold": -340.4,
+        "displayMode": "chat",
+        "fewShots": [],
+        "historyCount": -711.66,
+        "knowledgeBases": [],
+        "model": "txYMWMAolHD",
+        "openingMessage": "zkc",
+        "openingQuestions": [],
+        "params": {
+          "frequency_penalty": 242.68,
+          "presence_penalty": -24.86,
+          "temperature": -204.27,
+          "top_p": -213.27
+        },
+        "plugins": []
+      },
+      "createdAt": "qkyjfjxety",
+      "homepage": "B2SYlLTom0JzEppgy",
+      "identifier": "5jr0O",
+      "knowledgeCount": -716.3,
+      "meta": {
+        "avatar": "sit",
+        "description": "ABN",
+        "tags": [],
+        "title": "58WUX1OVEFQJcE72tYP",
+        "backgroundColor": "yohordjeoygptdxd"
+      },
+      "pluginCount": 481.01,
+      "schemaVersion": -103.7,
+      "tokenUsage": 132.24,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "rmYCrKVfCjVcZ"
+    },
+    {
+      "author": "adipiscing ipsum si",
+      "config": {
+        "systemRole": "ipsum lorem ",
+        "enableCompressThreshold": false,
+        "enableHistoryCount": false,
+        "knowledgeBases": [],
+        "model": "y",
+        "openingMessage": "3a1LoLmLbJm",
+        "openingQuestions": [],
+        "params": {
+          "max_tokens": -22.4,
+          "presence_penalty": -595.5
+        },
+        "plugins": []
+      },
+      "createdAt": "SvDwZ",
+      "homepage": "adipiscing consec",
+      "identifier": "irxychdk",
+      "knowledgeCount": -284.49,
+      "meta": {
+        "avatar": "ovkbyxgjgsevakum",
+        "description": "ipsum",
+        "tags": [],
+        "title": "gtezriqswx",
+        "category": "k1QGEvCFbS"
+      },
+      "pluginCount": 508.38,
+      "schemaVersion": -943.56,
+      "tokenUsage": -729.0,
+      "summary": "xYkBG"
+    },
+    {
+      "author": "5pOxeOsZtUdP6ho",
+      "config": {
+        "systemRole": "zxwsfplqmfxaiizdpypy",
+        "compressThreshold": -124.57,
+        "displayMode": "docs",
+        "enableCompressThreshold": false,
+        "enableHistoryCount": true,
+        "enableMaxTokens": true,
+        "fewShots": [],
+        "historyCount": 326.88,
+        "inputTemplate": "ft",
+        "model": "adipiscing dolor",
+        "openingMessage": "lorem amet conse",
+        "params": {
+          "frequency_penalty": -796.45,
+          "presence_penalty": -306.41
+        }
+      },
+      "createdAt": "f8M9DBjPDl0Kf8z5zdIzW",
+      "homepage": "jjzxmcmliehpxtsz",
+      "identifier": "dolor dolor do",
+      "knowledgeCount": 261.07,
+      "meta": {
+        "avatar": "jqhvfcsqeikfolpteg",
+        "description": "ljtnwqbtlacqrlpqlqlh",
+        "tags": [],
+        "title": "swf5sAOULzNGtZjkDEg"
+      },
+      "pluginCount": 137.86,
+      "schemaVersion": 164.04,
+      "tokenUsage": -429.03,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "vuHqFZkPrmA"
+    },
+    {
+      "author": "amet sit amet ip",
+      "config": {
+        "systemRole": "uufvqdwls",
+        "compressThreshold": 358.93,
+        "displayMode": "chat",
+        "enableCompressThreshold": true,
+        "enableMaxTokens": true,
+        "fewShots": [],
+        "historyCount": -83.24,
+        "knowledgeBases": [],
+        "model": "twElaCndrPZbXs",
+        "params": {
+          "max_tokens": -525.5
+        },
+        "plugins": []
+      },
+      "createdAt": "BRkjlcdhF",
+      "homepage": "zgkubm",
+      "identifier": "briwdwttnhnwvjiaa",
+      "knowledgeCount": -378.92,
+      "meta": {
+        "avatar": "eztrmochazjqtmzzmbuna",
+        "description": "ndjjndhwdrizvkzndazk",
+        "tags": [],
+        "title": "4Fr3L",
+        "backgroundColor": "sit dolor a"
+      },
+      "pluginCount": 115.33,
+      "schemaVersion": -30.99,
+      "tokenUsage": 956.04,
+      "summary": "qfxsokxiaqh"
+    },
+    {
+      "author": "sit ipsum sit",
+      "config": {
+        "systemRole": "vN3eIqOMcgG1XZi",
+        "compressThreshold": 153.84,
+        "displayMode": "chat",
+        "enableMaxTokens": false,
+        "fewShots": [],
+        "model": "helgwavevld",
+        "openingQuestions": [],
+        "plugins": []
+      },
+      "createdAt": "dolor do",
+      "homepage": "qarglwwdctlsqzwzxoke",
+      "identifier": "qmvvwyvmsacnirzg",
+      "knowledgeCount": 327.6,
+      "meta": {
+        "avatar": "amet ad",
+        "description": "yzM2Q9rf",
+        "tags": [],
+        "title": "nzffqwtgfihhkksnrbqv",
+        "backgroundColor": "zKIxmdqjTYj2VwTEOU"
+      },
+      "pluginCount": 155.76,
+      "schemaVersion": -565.69,
+      "tokenUsage": 294.14,
+      "summary": "dunmwuglgtoc"
+    },
+    {
+      "author": "5Ws",
+      "config": {
+        "systemRole": "adipiscing consect",
+        "enableMaxTokens": false,
+        "historyCount": -775.4,
+        "inputTemplate": "2SR8m",
+        "knowledgeBases": [],
+        "model": "lorem cons",
+        "openingQuestions": [],
+        "plugins": []
+      },
+      "createdAt": "bhD",
+      "homepage": "dolor amet con",
+      "identifier": "Dxw57l4YZr3KCcGkr1vY",
+      "knowledgeCount": -266.62,
+      "meta": {
+        "avatar": "lore",
+        "description": "O8VgA",
+        "tags": [],
+        "title": "amet adipiscing co",
+        "backgroundColor": "Pk",
+        "category": "lorem ipsum "
+      },
+      "pluginCount": -462.04,
+      "schemaVersion": -842.88,
+      "tokenUsage": 503.97,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "oyuvptw"
+    },
+    {
+      "author": "dol",
+      "config": {
+        "systemRole": "6AM5mckcBhfty2a",
+        "enableHistoryCount": true,
+        "fewShots": [],
+        "inputTemplate": "zkbjlvaw",
+        "knowledgeBases": [],
+        "model": "ipsum ipsum amet lor",
+        "openingMessage": "TGbNOshxsBVoa6F0pfY",
+        "openingQuestions": [],
+        "params": {
+          "frequency_penalty": 39.9,
+          "temperature": -800.36,
+          "top_p": 6.82
+        },
+        "plugins": []
+      },
+      "createdAt": "dolo",
+      "homepage": "nxpaqnuqtb",
+      "identifier": "sit lore",
+      "knowledgeCount": -79.48,
+      "meta": {
+        "avatar": "7PQYZdMLOv7mZmgf3",
+        "description": "wL",
+        "tags": [],
+        "title": "v",
+        "backgroundColor": "yiogatiaosb",
+        "category": "eUpy"
+      },
+      "pluginCount": 955.32,
+      "schemaVersion": 953.79,
+      "tokenUsage": -885.05,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      }
+    },
+    {
+      "author": "txcplgwizjouubt",
+      "config": {
+        "systemRole": "bueu",
+        "compressThreshold": 660.66,
+        "displayMode": "docs",
+        "enableCompressThreshold": true,
+        "enableHistoryCount": true,
+        "enableMaxTokens": false,
+        "fewShots": [],
+        "inputTemplate": "LrmAz3pkXc9xjo1w",
+        "knowledgeBases": [],
+        "plugins": []
+      },
+      "createdAt": "CIVxN0bGg1JpXnv2",
+      "homepage": "bhuy",
+      "identifier": "lorem sit ad",
+      "knowledgeCount": 760.73,
+      "meta": {
+        "avatar": "cgkbtfuirpk",
+        "description": "ozldlzmxdphsfoxt",
+        "tags": [],
+        "title": "adipiscing ipsum ",
+        "category": "ame"
+      },
+      "pluginCount": -13.66,
+      "schemaVersion": -310.5,
+      "tokenUsage": -332.49,
+      "summary": "ixcjayimcqjrxmekjuba"
+    },
+    {
+      "author": "ip",
+      "config": {
+        "systemRole": "52XICABGIYi9drm9n565",
+        "compressThreshold": -584.71,
+        "displayMode": "chat",
+        "enableCompressThreshold": false,
+        "enableMaxTokens": true,
+        "fewShots": [],
+        "historyCount": -511.31,
+        "inputTemplate": "cignkgthxwhrqqen",
+        "openingMessage": "sit dolor amet lorem ",
+        "params": {
+          "frequency_penalty": 583.85,
+          "presence_penalty": 379.17,
+          "temperature": -583.82
+        }
+      },
+      "createdAt": "5MBdhFdYKmLIv",
+      "homepage": "Uk6I",
+      "identifier": "stt",
+      "knowledgeCount": 964.96,
+      "meta": {
+        "avatar": "swijnqmubeyayqde",
+        "description": "fypmooaoho",
+        "tags": [],
+        "title": "mrnzesdwqpzlk",
+        "backgroundColor": "lorem dolor d",
+        "category": "uzoigZwCE8b14WgS"
+      },
+      "pluginCount": -644.77,
+      "schemaVersion": -24.5,
+      "tokenUsage": 911.42,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "adipiscing dol"
+    },
+    {
+      "author": "sit",
+      "config": {
+        "systemRole": "gYPnP",
+        "displayMode": "chat",
+        "enableCompressThreshold": false,
+        "enableHistoryCount": false,
+        "fewShots": [],
+        "historyCount": -434.63,
+        "inputTemplate": "VhX2Zi5oX",
+        "model": "ui",
+        "params": {
+          "frequency_penalty": 679.31
+        },
+        "plugins": []
+      },
+      "createdAt": "AqLFT",
+      "homepage": "svtpcmuby",
+      "identifier": "gtboldxmt",
+      "knowledgeCount": -623.0,
+      "meta": {
+        "avatar": "iOqN8cxKgcz",
+        "description": "peeP1LuTbVJ",
+        "tags": [],
+        "title": "ipsum lorem adipi",
+        "backgroundColor": "Lw6pW",
+        "category": "mzveiglnnxjwlrdtgs"
+      },
+      "pluginCount": -329.09,
+      "schemaVersion": 588.51,
+      "tokenUsage": 542.82,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      }
+    },
+    {
+      "author": "XqjUmfFKFYG",
+      "config": {
+        "systemRole": "jejaqedxlyzrgdg",
+        "displayMode": "docs",
+        "enableCompressThreshold": false,
+        "enableHistoryCount": false,
+        "enableMaxTokens": true,
+        "fewShots": [],
+        "historyCount": -168.04,
+        "inputTemplate": "w7mMjBHqPUVpUb0nu0Y",
+        "openingMessage": "mmdpf",
+        "params": {
+          "frequency_penalty": 730.48,
+          "max_tokens": 69.82,
+          "presence_penalty": -28.82,
+          "top_p": 929.24
+        },
+        "plugins": []
+      },
+      "createdAt": "J97QdAuvZjBJZKd",
+      "homepage": "sit amet dolo",
+      "identifier": "t0bqtPp8gBDUpkUWJ3",
+      "knowledgeCount": -210.15,
+      "meta": {
+        "avatar": "lpdontgqeztjaxd",
+        "description": "rzmab",
+        "tags": [],
+        "title": "ipsum amet co",
+        "category": "usjhxutwnhb"
+      },
+      "pluginCount": 711.64,
+      "schemaVersion": -227.83,
+      "tokenUsage": 127.26
+    },
+    {
+      "author": "tes",
+      "config": {
+        "systemRole": "TQL8RvxNQnYBVftbzpvn",
+        "enableCompressThreshold": false,
+        "enableMaxTokens": false,
+        "historyCount": -693.21,
+        "knowledgeBases": [],
+        "model": "lorem adipisci",
+        "openingQuestions": [],
+        "plugins": []
+      },
+      "createdAt": "ygumyclzbhijzevgwd",
+      "homepage": "OdE9",
+      "identifier": "M",
+      "knowledgeCount": 355.7,
+      "meta": {
+        "avatar": "consect",
+        "description": "faqxjcwqiszowavmxnk",
+        "tags": [],
+        "title": "f",
+        "backgroundColor": "CHn9SSPVizhu4HT1SJc"
+      },
+      "pluginCount": 324.95,
+      "schemaVersion": -582.59,
+      "tokenUsage": 735.13,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      }
+    },
+    {
+      "author": "sit ipsum",
+      "config": {
+        "systemRole": "EGmgpWbvAI",
+        "compressThreshold": 710.82,
+        "enableCompressThreshold": true,
+        "fewShots": [],
+        "inputTemplate": "ffuhhbtgep",
+        "knowledgeBases": [],
+        "openingMessage": "lorem s",
+        "params": {
+          "max_tokens": 716.02,
+          "presence_penalty": -179.82,
+          "top_p": -882.05
+        }
+      },
+      "createdAt": "kWf",
+      "homepage": "vohkgkmt",
+      "identifier": "amet",
+      "knowledgeCount": -476.68,
+      "meta": {
+        "avatar": "fncgSmRWzQKMKNj",
+        "description": "nzrzjuv",
+        "tags": [],
+        "title": "dol",
+        "backgroundColor": "consectet",
+        "category": "kEwNeweKEXNGMt"
+      },
+      "pluginCount": 53.56,
+      "schemaVersion": -227.48,
+      "tokenUsage": -92.9,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "qbfhnrc"
+    },
+    {
+      "author": "hht25vBC5BtFaFhYB7Aq",
+      "config": {
+        "systemRole": "adipiscing adi",
+        "compressThreshold": 472.54,
+        "enableCompressThreshold": true,
+        "enableHistoryCount": true,
+        "enableMaxTokens": false,
+        "historyCount": -658.52,
+        "inputTemplate": "xgl5BEDltbOIFs",
+        "knowledgeBases": [],
+        "openingMessage": "iwuqiw",
+        "params": {
+          "frequency_penalty": 220.52,
+          "max_tokens": 86.32,
+          "presence_penalty": 930.39,
+          "temperature": -35.74
+        },
+        "plugins": []
+      },
+      "createdAt": "y1cRWlzYFi",
+      "homepage": "tntgolpvyurxtkp",
+      "identifier": "amet",
+      "knowledgeCount": -229.44,
+      "meta": {
+        "avatar": "ipsum consectetu",
+        "description": "do",
+        "tags": [],
+        "title": "ipsum ad",
+        "category": "dolor am"
+      },
+      "pluginCount": 857.23,
+      "schemaVersion": 876.84,
+      "tokenUsage": -430.34,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      }
+    },
+    {
+      "author": "CTF054Q0YgQ5UrS",
+      "config": {
+        "systemRole": "mkjoryffdmpv",
+        "compressThreshold": 986.72,
+        "enableCompressThreshold": false,
+        "enableHistoryCount": true,
+        "enableMaxTokens": false,
+        "fewShots": [
+          {
+            "content": "POCsO1xRab",
+            "role": "assistant"
+          },
+          {
+            "content": "bj28HaqTlqA",
+            "role": "function"
+          },
+          {
+            "content": "wFC8",
+            "role": "user"
+          },
+          {
+            "content": "uF0XMwLYI4",
+            "role": "user"
+          },
+          {
+            "content": "4IXv9lGV8AXOT",
+            "role": "user"
+          }
+        ],
+        "historyCount": -291.54,
+        "knowledgeBases": [
+          {
+            "avatar": "sit sit",
+            "createdAt": "2021-01-15T12:00:00Z",
+            "id": "h3pYM",
+            "isPublic": null,
+            "name": "hzjrqisrwkhejuten",
+            "type": "nxtinbt",
+            "updatedAt": "2021-01-30T08:00:00Z",
+            "description": 20.17
+          },
+          {
+            "avatar": "mlrebdjdfsfqlwzkd",
+            "createdAt": "2020-11-09T02:00:00Z",
+            "id": "lorem ipsum adipis",
+            "isPublic": false,
+            "name": "sit dolor consectetur",
+            "type": null,
+            "updatedAt": "2020-02-03T10:00:00Z",
+            "description": 54.86,
+            "enabled": true,
+            "settings": 38
+          },
+          {
+            "avatar": "opfjIGILcwcp6g5wP9JLW",
+            "createdAt": "2024-04-25T21:00:00Z",
+            "id": "dolo",
+            "isPublic": null,
+            "name": "m0w",
+            "type": "cmpbwebwr",
+            "updatedAt": "2020-06-22T11:00:00Z",
+            "enabled": true
+          },
+          {
+            "avatar": "u",
+            "createdAt": "2021-09-21T19:00:00Z",
+            "id": "ecirbqhleiemiigxnikmu",
+            "isPublic": true,
+            "name": "AQWPWoAjo77Ij8Y3",
+            "type": "LQjTiTK4bw22jo",
+            "updatedAt": "2021-04-25T18:00:00Z",
+            "description": 64.01,
+            "enabled": false,
+            "settings": 90.72
+          },
+          {
+            "avatar": null,
+            "createdAt": "2021-10-04T04:00:00Z",
+            "id": "zVgtuJ",
+            "isPublic": false,
+            "name": "con",
+            "type": null,
+            "updatedAt": "2021-04-18T22:00:00Z",
+            "description": 18.92,
+            "enabled": false,
+            "settings": true
+          }
+        ],
+        "model": "hqbfgsrygnwyawzmn",
+        "openingMessage": "dqbhhpujujj",
+        "openingQuestions": [
+          "rwgxzbqwpvf",
+          "3sotYX",
+          "Xwthqorw5LEryiv0QAxBZ",
+          "wf",
+          "gaxQ1"
+        ],
+        "plugins": [
+          "g1RGNFcf2v",
+          "LOpiYQaU",
+          "goztcueu",
+          "fmkbxy",
+          "wrqmjrhthhixrsjruupf"
+        ]
+      },
+      "createdAt": "vuyruqsdiseqakubitpph",
+      "homepage": "consect",
+      "identifier": "ipsum dol",
+      "knowledgeCount": 314.62,
+      "meta": {
+        "avatar": "dolor",
+        "description": "dolor ipsum consect",
+        "tags": [
+          "ktnuuggiuutli",
+          "sjfdkkhjvtivxeemdg",
+          "dolor amet amet a",
+          "fmfwjmhohknbzstpohqyu",
+          "cmwgawwzuvxfstpnulq"
+        ],
+        "title": "tppcfxzvdoqrorztgsdtc",
+        "backgroundColor": "uquvkcmfjxhzr"
+      },
+      "pluginCount": -267.39,
+      "schemaVersion": -376.1,
+      "tokenUsage": -595.06,
+      "summary": "lcohkibhpznxshbrsztq"
+    },
+    {
+      "author": "y4d0rUBousuH",
+      "config": {
+        "systemRole": "p",
+        "enableHistoryCount": false,
+        "enableMaxTokens": false,
+        "fewShots": [
+          {
+            "content": "tcsrcsca",
+            "role": "function"
+          },
+          {
+            "content": "amet adipiscing ",
+            "role": "system"
+          },
+          {
+            "content": "D",
+            "role": "system"
+          },
+          {
+            "content": "jyoepoddppcnjts",
+            "role": "user"
+          },
+          {
+            "content": "msbsrulpvyvircuxyd",
+            "role": "assistant"
+          }
+        ],
+        "historyCount": 936.45,
+        "inputTemplate": "xXcyYctTEzGs5sU",
+        "model": "RLUAEQn",
+        "openingMessage": "Dh5sTFVRE61QMle1qBDt2",
+        "params": {
+          "max_tokens": 546.04,
+          "presence_penalty": 961.18,
+          "top_p": -187.74
+        }
+      },
+      "createdAt": "jdwbzprm",
+      "homepage": "tjnkqd",
+      "identifier": "8Q3sscWGij3XNGpR6J",
+      "knowledgeCount": 996.95,
+      "meta": {
+        "avatar": "adipiscing dolor dolo",
+        "description": "giclhvgubutb",
+        "tags": [
+          "con",
+          "dolor ",
+          "RDj5DS2j",
+          "adipiscing consecte",
+          "adipiscing "
+        ],
+        "title": "MjHYU0L2",
+        "backgroundColor": "yqezitgctm"
+      },
+      "pluginCount": 244.82,
+      "schemaVersion": -173.6,
+      "tokenUsage": 71.56,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      }
+    },
+    {
+      "author": "oYhDILjNF",
+      "config": {
+        "systemRole": "adipiscin",
+        "displayMode": "docs",
+        "enableCompressThreshold": false,
+        "enableHistoryCount": false,
+        "enableMaxTokens": true,
+        "fewShots": [
+          {
+            "content": "ips",
+            "role": "function"
+          },
+          {
+            "content": "bvzttwclcuncluodybvz",
+            "role": "system"
+          },
+          {
+            "content": "yiXa9dNU",
+            "role": "function"
+          },
+          {
+            "content": "sit",
+            "role": "function"
+          },
+          {
+            "content": "vr",
+            "role": "system"
+          }
+        ],
+        "historyCount": -816.35,
+        "openingQuestions": [
+          "dv",
+          "g",
+          "dolor sit adipi",
+          "consectet",
+          "adipi"
+        ],
+        "params": {
+          "frequency_penalty": 963.09,
+          "temperature": -464.39
+        },
+        "plugins": [
+          "Hr2bEcTaOgmfAgPr2HYy",
+          "p121u4W8U9DUWGFy1xUIR",
+          "hcdysfvqpp",
+          "consectetur amet ",
+          "qirtpjwhj"
+        ]
+      },
+      "createdAt": "wbtdkzwbaauauuvyqvorb",
+      "homepage": "snbtfotifmlotwukcu",
+      "identifier": "hriqenufjfervnlhgymrh",
+      "knowledgeCount": -653.88,
+      "meta": {
+        "avatar": "p",
+        "description": "MQ2XQXHD43x1AU",
+        "tags": [
+          "h",
+          "1Qbeu8OL1v",
+          "amet ",
+          "sw",
+          "rud"
+        ],
+        "title": "bKFAmNc5DLA",
+        "backgroundColor": "d",
+        "category": "2FGK2bPJSkZXr"
+      },
+      "pluginCount": 896.15,
+      "schemaVersion": -894.88,
+      "tokenUsage": 90.8,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "O6hDTTKfkNoXFtq6wt3bb"
+    },
+    {
+      "author": "adipisc",
+      "config": {
+        "systemRole": "xrxkrxmza",
+        "enableCompressThreshold": false,
+        "enableMaxTokens": true,
+        "fewShots": [
+          {
+            "content": "mgisK2p5kFU3",
+            "role": "user"
+          },
+          {
+            "content": "sit dolor sit lor",
+            "role": "function"
+          },
+          {
+            "content": "rauiohr",
+            "role": "user"
+          },
+          {
+            "content": "9bgS8fl",
+            "role": "function"
+          },
+          {
+            "content": "AeXYD2gnbu03161ng",
+            "role": "system"
+          }
+        ],
+        "historyCount": 257.67,
+        "model": "yx",
+        "openingMessage": "oxumjieykmkowqmr",
+        "plugins": [
+          "dolor l",
+          "gka",
+          "IFF3KLzTsqC1t1FuMAr",
+          "qlsnexhwqhxawyi",
+          "qvuagpjdtylmotp"
+        ]
+      },
+      "createdAt": "hedYLzJI",
+      "homepage": "lkvckpdhwsiy",
+      "identifier": "kihptmkxuoowrxbc",
+      "knowledgeCount": 696.86,
+      "meta": {
+        "avatar": "qmhljbdp",
+        "description": "BSucTSS6Ld0",
+        "tags": [
+          "SOv",
+          "uGkdudA1CaFoj8",
+          "ffxordkboszlunpxde",
+          "ipsum amet consect",
+          "jewatrfghomyoqueucucg"
+        ],
+        "title": "m",
+        "backgroundColor": "ixfdqcwmkqexblsaz",
+        "category": "szmtnjpkrupan"
+      },
+      "pluginCount": 976.41,
+      "schemaVersion": -373.19,
+      "tokenUsage": 337.98,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      }
+    },
+    {
+      "author": "KoSEe",
+      "config": {
+        "systemRole": "a",
+        "compressThreshold": -381.89,
+        "displayMode": "docs",
+        "enableHistoryCount": true,
+        "enableMaxTokens": false,
+        "fewShots": [
+          {
+            "content": "ztxlqgkizig",
+            "role": "user"
+          },
+          {
+            "content": "Rw",
+            "role": "user"
+          },
+          {
+            "content": "3QvVb",
+            "role": "system"
+          },
+          {
+            "content": "narojxztdzassklfj",
+            "role": "system"
+          },
+          {
+            "content": "USDHdwIE9kIDmZrqTo",
+            "role": "assistant"
+          }
+        ],
+        "historyCount": -645.09,
+        "inputTemplate": "W9ayRt3wx",
+        "knowledgeBases": [
+          {
+            "avatar": null,
+            "createdAt": "2022-10-30T09:00:00Z",
+            "id": "xigdswnyjp",
+            "isPublic": null,
+            "name": "ovlovmzdmlzoqdbdfg",
+            "type": null,
+            "updatedAt": "2022-11-22T23:00:00Z",
+            "description": true,
+            "settings": "nN4muQC17N"
+          },
+          {
+            "avatar": "pfejfygdbbywai",
+            "createdAt": "2022-09-12T18:00:00Z",
+            "id": "adipiscing",
+            "isPublic": false,
+            "name": "zqvillgogwtpae",
+            "type": "adipiscing adipisci",
+            "updatedAt": "2023-06-11T14:00:00Z",
+            "enabled": true
+          },
+          {
+            "avatar": "nP1ggLMHx",
+            "createdAt": "2023-09-12T13:00:00Z",
+            "id": "q2O8ThLih",
+            "isPublic": null,
+            "name": "DB11JgnQ5Hp83siSM3RkN",
+            "type": "eitij",
+            "updatedAt": "2021-12-26T17:00:00Z",
+            "enabled": false,
+            "settings": "nqpppqu"
+          },
+          {
+            "avatar": "ddcmqhsmxoerna",
+            "createdAt": "2021-02-26T01:00:00Z",
+            "id": "ZBKvK",
+            "isPublic": null,
+            "name": "jcbfw",
+            "type": "amet lorem ",
+            "updatedAt": "2024-07-13T22:00:00Z",
+            "settings": 33
+          },
+          {
+            "avatar": "dolor ipsum ",
+            "createdAt": "2020-11-14T18:00:00Z",
+            "id": "ewjpdwgjnbfciexbegj",
+            "isPublic": null,
+            "name": "K7OoevixVTpfKcMq",
+            "type": "lorem sit s",
+            "updatedAt": "2023-06-10T04:00:00Z",
+            "description": 94,
+            "enabled": false,
+            "settings": "tkkvwmkiin"
+          }
+        ],
+        "model": "ipsum ame",
+        "openingMessage": "latescgmnjl",
+        "params": {
+          "frequency_penalty": 870.06,
+          "presence_penalty": 452.31,
+          "top_p": -856.6
+        },
+        "plugins": [
+          "3JufJjsGTChzZDJ84BaFo",
+          "ofytphnhlqwkndhs",
+          "JC5ZtBiM",
+          "fnwtq",
+          "x4wk4X19D2paEPod"
+        ]
+      },
+      "createdAt": "consectetu",
+      "homepage": "ipsum lorem",
+      "identifier": "gHbMlF2j4WsTk",
+      "knowledgeCount": -411.85,
+      "meta": {
+        "avatar": "b6idAVv6ZozYL6z5d",
+        "description": "kepmxirsnenwlgq",
+        "tags": [
+          "a3Vf",
+          "upatqqwchmibtsf",
+          "8c",
+          "amet ipsum ",
+          "e94ylZO1eOBbiKJ96iQB"
+        ],
+        "title": "oblzmirdqcnflhrvul",
+        "category": "hnpdoxjzitixcbpcir"
+      },
+      "pluginCount": 250.6,
+      "schemaVersion": 288.21,
+      "tokenUsage": 71.8,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "wnlwvhhsegzbevjluadu"
+    },
+    {
+      "author": "31AwybV7x",
+      "config": {
+        "systemRole": "bgyodqyg",
+        "compressThreshold": -653.97,
+        "enableCompressThreshold": false,
+        "enableMaxTokens": true,
+        "historyCount": -417.83,
+        "model": "gmjtlhyujrnbfrab",
+        "openingMessage": "ocilxdmdfjdzcvzt",
+        "openingQuestions": [
+          "nqzmpzovtl",
+          "lorem dol",
+          "adipiscing adi",
+          "qM4218n",
+          "conse"
+        ],
+        "plugins": [
+          "adipiscing lore",
+          "consectetur adip",
+          "zhsiixgivqouzkpaqailf",
+          "dxhhtlqodyvzndjrugklh",
+          "lorem amet sit ip"
+        ]
+      },
+      "createdAt": "umehsduxwa",
+      "homepage": "So1",
+      "identifier": "ipsum lorem",
+      "knowledgeCount": -784.18,
+      "meta": {
+        "avatar": "cwjyeoyx",
+        "description": "hnbd",
+        "tags": [
+          "fk",
+          "peqtehzpxehc",
+          "kMQwAVsp",
+          "sit",
+          "lorem adipisci"
+        ],
+        "title": "ipsum",
+        "backgroundColor": "dolor do"
+      },
+      "pluginCount": -395.39,
+      "schemaVersion": -86.76,
+      "tokenUsage": -335.69,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      }
+    },
+    {
+      "author": "inmadrvaisfrpftwo",
+      "config": {
+        "systemRole": "uijxgv",
+        "compressThreshold": -104.25,
+        "displayMode": "docs",
+        "enableCompressThreshold": false,
+        "enableMaxTokens": false,
+        "historyCount": -876.08,
+        "inputTemplate": "wewmfcqhwa",
+        "knowledgeBases": [
+          {
+            "avatar": "adipi",
+            "createdAt": "2020-03-14T18:00:00Z",
+            "id": "afxkcyylfatu",
+            "isPublic": null,
+            "name": "rJXDFyY",
+            "type": "xxylutdwp",
+            "updatedAt": "2020-03-25T16:00:00Z",
+            "description": 31,
+            "settings": "amet ipsum lo"
+          },
+          {
+            "avatar": null,
+            "createdAt": "2021-09-28T11:00:00Z",
+            "id": "fiinith",
+            "isPublic": false,
+            "name": "ipsu",
+            "type": "Pi6MT1oRD",
+            "updatedAt": "2021-09-13T21:00:00Z",
+            "description": 24,
+            "enabled": false,
+            "settings": true
+          },
+          {
+            "avatar": "ltgi",
+            "createdAt": "2023-02-03T23:00:00Z",
+            "id": "adipiscing a",
+            "isPublic": false,
+            "name": "a",
+            "type": "oC7Nr0avqHuE3Oe",
+            "updatedAt": "2024-03-14T10:00:00Z",
+            "enabled": true
+          },
+          {
+            "avatar": "amet dolor i",
+            "createdAt": "2021-07-18T20:00:00Z",
+            "id": "z0xd19dHB",
+            "isPublic": null,
+            "name": "z",
+            "type": "2OySr0fgWAW4U",
+            "updatedAt": "2023-08-15T08:00:00Z",
+            "description": 69.11,
+            "enabled": true,
+            "settings": null
+          },
+          {
+            "avatar": null,
+            "createdAt": "2024-08-24T10:00:00Z",
+            "id": "Bs",
+            "isPublic": false,
+            "name": "fzszalt",
+            "type": "iodukvfdqhu",
+            "updatedAt": "2020-11-18T10:00:00Z",
+            "description": true
+          }
+        ],
+        "model": "vopamzbkxnxojyj",
+        "plugins": [
+          "amet lorem i",
+          "ipsum amet adipisci",
+          "lorem",
+          "D1h4lenglSrQjAUtsbdJ5",
+          "NrSUqLHNay"
+        ]
+      },
+      "createdAt": "Xt",
+      "homepage": "w",
+      "identifier": "Jq4bRW3dF",
+      "knowledgeCount": -389.81,
+      "meta": {
+        "avatar": "kll",
+        "description": "consectetur dol",
+        "tags": [
+          "adipiscing adipis",
+          "lgE8G7c3n",
+          "wd",
+          "fvkl",
+          "Uks"
+        ],
+        "title": "5G0LRyO4SKnVh"
+      },
+      "pluginCount": 94.76,
+      "schemaVersion": 624.86,
+      "tokenUsage": -989.89,
+      "summary": "ryhgjpbbsqqyrvy"
+    },
+    {
+      "author": "zhvee",
+      "config": {
+        "systemRole": "adipiscin",
+        "compressThreshold": -801.05,
+        "displayMode": "chat",
+        "enableCompressThreshold": true,
+        "historyCount": 939.14,
+        "knowledgeBases": [
+          {
+            "avatar": null,
+            "createdAt": "2020-02-25T17:00:00Z",
+            "id": "SBxO4Pbs77sn",
+            "isPublic": false,
+            "name": "psyz",
+            "type": null,
+            "updatedAt": "2023-09-17T19:00:00Z",
+            "description": 38,
+            "enabled": true
+          },
+          {
+            "avatar": "bGTFevPYyvcNOD7",
+            "createdAt": "2024-07-27T07:00:00Z",
+            "id": "dolor amet ipsum ",
+            "isPublic": null,
+            "name": "consectetur adipi",
+            "type": null,
+            "updatedAt": "2022-07-31T22:00:00Z",
+            "settings": 9.06
+          },
+          {
+            "avatar": "ENIu7ZBK66hRRRpFd1lX",
+            "createdAt": "2020-10-20T09:00:00Z",
+            "id": "94",
+            "isPublic": null,
+            "name": "zlkaxlwahc",
+            "type": "gob9VSbqG8h3FUEj",
+            "updatedAt": "2020-08-14T06:00:00Z",
+            "description": "17mu8BfpAzLQh",
+            "enabled": true,
+            "settings": null
+          },
+          {
+            "avatar": "jxvvzmbxa",
+            "createdAt": "2020-12-01T01:00:00Z",
+            "id": "hsbovmrrlie",
+            "isPublic": true,
+            "name": "knbxnoutaxvsw",
+            "type": null,
+            "updatedAt": "2022-08-05T06:00:00Z",
+            "description": true,
+            "settings": "jqljbyzm"
+          },
+          {
+            "avatar": null,
+            "createdAt": "2024-03-25T11:00:00Z",
+            "id": "glqmhmdzjsszbmntr",
+            "isPublic": true,
+            "name": "fg1HheGZAxljvkqA2N9",
+            "type": "amet sit ipsu",
+            "updatedAt": "2020-09-03T06:00:00Z",
+            "description": 57.33,
+            "enabled": true,
+            "settings": 8
+          }
+        ],
+        "model": "ipsum sit adipiscing ",
+        "openingMessage": "0sA1sOZUjsT4O7om05",
+        "params": {
+          "frequency_penalty": -236.28,
+          "max_tokens": 198.26,
+          "presence_penalty": 219.32,
+          "temperature": -724.89
+        },
+        "plugins": [
+          "hcqiek",
+          "lorem cons",
+          "amet lorem ip",
+          "bcqouw",
+          "mqljthijkz"
+        ]
+      },
+      "createdAt": "evdyryjlajkea",
+      "homepage": "ECaw2vkljArYHJm",
+      "identifier": "OcDw8i4nDwmqh",
+      "knowledgeCount": -980.83,
+      "meta": {
+        "avatar": "consectetu",
+        "description": "dolor sit ipsum",
+        "tags": [
+          "sit ipsum dolor ame",
+          "uazudeencrmfykqhasw",
+          "cqfkvgefzyeisum",
+          "fvxmceo",
+          "moqbjhpho"
+        ],
+        "title": "rjvirxrlzmno",
+        "backgroundColor": "tieimghjji",
+        "category": "iyraimisdeuytoqdz"
+      },
+      "pluginCount": 83.22,
+      "schemaVersion": 343.14,
+      "tokenUsage": 803.73,
+      "summary": "ssetxngjsdgcpy"
+    },
+    {
+      "author": "ldayfeczkjofusyv",
+      "config": {
+        "systemRole": "lorem ",
+        "compressThreshold": -226.92,
+        "enableCompressThreshold": false,
+        "enableHistoryCount": false,
+        "enableMaxTokens": true,
+        "knowledgeBases": [
+          {
+            "avatar": "Y",
+            "createdAt": "2023-09-07T14:00:00Z",
+            "id": "lorem amet adipiscin",
+            "isPublic": null,
+            "name": "jMJe",
+            "type": null,
+            "updatedAt": "2024-07-06T14:00:00Z",
+            "description": false,
+            "enabled": false
+          },
+          {
+            "avatar": "sXbANTgdCKCdqRG6dM",
+            "createdAt": "2023-04-19T22:00:00Z",
+            "id": "sYxo25MgFS673cB",
+            "isPublic": true,
+            "name": "z7gerIWDFpBAngT80BKS",
+            "type": "8P39SB",
+            "updatedAt": "2021-08-01T14:00:00Z",
+            "enabled": true,
+            "settings": 81.74
+          },
+          {
+            "avatar": null,
+            "createdAt": "2023-09-10T04:00:00Z",
+            "id": "jkbzx",
+            "isPublic": true,
+            "name": "consectetur",
+            "type": "lorem i",
+            "updatedAt": "2024-11-04T09:00:00Z",
+            "enabled": true
+          },
+          {
+            "avatar": "libaevjyrth",
+            "createdAt": "2023-02-17T15:00:00Z",
+            "id": "pvwnrrfskunvk",
+            "isPublic": null,
+            "name": "VVJqWMpvm",
+            "type": null,
+            "updatedAt": "2024-12-18T00:00:00Z",
+            "description": 88,
+            "settings": 3.76
+          },
+          {
+            "avatar": "FoOPVlF1hzR0FIZIS4Nus",
+            "createdAt": "2023-08-18T08:00:00Z",
+            "id": "zObL1JPCkQfoUBFPQzT",
+            "isPublic": true,
+            "name": "lor",
+            "type": null,
+            "updatedAt": "2023-02-27T22:00:00Z",
+            "enabled": true
+          }
+        ],
+        "model": "pxuttbmkgvmrqgnkj",
+        "openingQuestions": [
+          "n",
+          "sit con",
+          "i",
+          "oqrvpjhukmwjcpwvhj",
+          "consec"
+        ],
+        "params": {
+          "frequency_penalty": 556.77,
+          "max_tokens": -934.21,
+          "top_p": -323.23
+        },
+        "plugins": [
+          "zlsdkezymuhd",
+          "IbT",
+          "ipsum a",
+          "s",
+          "skrwfeomqbmxytfdwoe"
+        ]
+      },
+      "createdAt": "IdnoD3PF",
+      "homepage": "sit adipiscing",
+      "identifier": "w",
+      "knowledgeCount": -127.54,
+      "meta": {
+        "avatar": "vnnppzfolulzghjrzpn",
+        "description": "zt",
+        "tags": [
+          "oodbvmazltn",
+          "ugsE8mshI2VWEE7N",
+          "ipsum co",
+          "N0",
+          "sit"
+        ],
+        "title": "uqmsmhklhzywainbl",
+        "backgroundColor": "yarfxtbovziv",
+        "category": "eofklctfvcievhx"
+      },
+      "pluginCount": 769.44,
+      "schemaVersion": -961.26,
+      "tokenUsage": -818.07,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "lorem amet amet dolor"
+    },
+    {
+      "author": "aazifmotpo",
+      "config": {
+        "systemRole": "y3unODFcc",
+        "compressThreshold": -416.64,
+        "displayMode": "chat",
+        "enableCompressThreshold": false,
+        "enableHistoryCount": true,
+        "enableMaxTokens": true,
+        "fewShots": [
+          {
+            "content": "jWWRbLO2K5jl2Hj",
+            "role": "function"
+          },
+          {
+            "content": "adipiscing con",
+            "role": "user"
+          },
+          {
+            "content": "n",
+            "role": "assistant"
+          },
+          {
+            "content": "dnx",
+            "role": "function"
+          },
+          {
+            "content": "jrjhaxpxsibzxxjptiggm",
+            "role": "function"
+          }
+        ],
+        "historyCount": -449.87,
+        "inputTemplate": "sit adip",
+        "model": "lorem adi",
+        "openingMessage": "libaywcj",
+        "params": {
+          "frequency_penalty": 873.25,
+          "max_tokens": -439.71,
+          "temperature": 987.39
+        }
+      },
+      "createdAt": "v5hQ90b7Bp7h",
+      "homepage": "ipsum sit ",
+      "identifier": "UHvy",
+      "knowledgeCount": -261.54,
+      "meta": {
+        "avatar": "msqbytcsqzncmnol",
+        "description": "nk",
+        "tags": [
+          "8vwaYfTQIt4UyZaVgLS",
+          "conse",
+          "adipiscing adipisci",
+          "sit dolor s",
+          "matulgjcmllgmotxrs"
+        ],
+        "title": "zqpvnyqmfl",
+        "category": "6aczEV9vvzvzOiT"
+      },
+      "pluginCount": 73.08,
+      "schemaVersion": -667.14,
+      "tokenUsage": 345.84,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "ipsum lorem amet s"
+    },
+    {
+      "author": "viyfuwj",
+      "config": {
+        "systemRole": "nwfrpmla",
+        "compressThreshold": -138.26,
+        "enableCompressThreshold": false,
+        "fewShots": [
+          {
+            "content": "cyaonxobwsyubc",
+            "role": "system"
+          },
+          {
+            "content": "IkpwSY",
+            "role": "assistant"
+          },
+          {
+            "content": "gdqml",
+            "role": "user"
+          },
+          {
+            "content": "IHkh2LwlqyOW",
+            "role": "system"
+          },
+          {
+            "content": "G8RqJQT5MOnRMDpD1",
+            "role": "function"
+          }
+        ],
+        "historyCount": 350.45,
+        "inputTemplate": "dolor ",
+        "openingMessage": "adip"
+      },
+      "createdAt": "begobaaocwdafj",
+      "homepage": "igQeV",
+      "identifier": "lorem co",
+      "knowledgeCount": -314.56,
+      "meta": {
+        "avatar": "cCgV",
+        "description": "ipsum ip",
+        "tags": [
+          "mebmfabpmjrlmxnrrkzii",
+          "consectet",
+          "amet dolor adipi",
+          "amet adipiscing con",
+          "amet"
+        ],
+        "title": "lorem lorem cons",
+        "backgroundColor": "ipsum cons",
+        "category": "vhqzalpdhjkukjmks"
+      },
+      "pluginCount": 451.81,
+      "schemaVersion": -608.35,
+      "tokenUsage": 914.31,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      }
+    },
+    {
+      "author": "9",
+      "config": {
+        "systemRole": "s",
+        "displayMode": "docs",
+        "enableCompressThreshold": true,
+        "enableMaxTokens": true,
+        "fewShots": [
+          {
+            "content": "lorem a",
+            "role": "system"
+          },
+          {
+            "content": "lorem dolor d",
+            "role": "function"
+          },
+          {
+            "content": "mltrf",
+            "role": "user"
+          },
+          {
+            "content": "sit amet dolo",
+            "role": "function"
+          },
+          {
+            "content": "KpL2EGS9A6T5fxE1nSUa",
+            "role": "user"
+          }
+        ],
+        "inputTemplate": "consectetur sit",
+        "knowledgeBases": [
+          {
+            "avatar": "NzGlvSSKfqapWCKIC",
+            "createdAt": "2024-12-11T13:00:00Z",
+            "id": "eb",
+            "isPublic": null,
+            "name": "t",
+            "type": null,
+            "updatedAt": "2024-05-02T20:00:00Z",
+            "description": "vhumnhdfjeubvo",
+            "enabled": true,
+            "settings": "edicizapsofni"
+          },
+          {
+            "avatar": "sit ipsum consect",
+            "createdAt": "2021-05-18T21:00:00Z",
+            "id": "h3BQyppp0uHFJ318g",
+            "isPublic": null,
+            "name": "ipsum ipsum sit ",
+            "type": "mwjhu",
+            "updatedAt": "2024-10-04T00:00:00Z",
+            "description": 19
+          },
+          {
+            "avatar": null,
+            "createdAt": "2023-03-24T16:00:00Z",
+            "id": "njxdakvwukruwyzsvd",
+            "isPublic": null,
+            "name": "lorem dolo",
+            "type": null,
+            "updatedAt": "2020-11-07T19:00:00Z"
+          },
+          {
+            "avatar": "adipisc",
+            "createdAt": "2020-10-26T02:00:00Z",
+            "id": "ame",
+            "isPublic": null,
+            "name": "wktogwlaqmra",
+            "type": null,
+            "updatedAt": "2024-06-23T15:00:00Z",
+            "description": false,
+            "settings": false
+          },
+          {
+            "avatar": "AIPoVYX9YyeHp",
+            "createdAt": "2021-12-16T08:00:00Z",
+            "id": "bkgpinjmcpsgwkufftnbo",
+            "isPublic": false,
+            "name": "jxrkxfpekoetakjtkzep",
+            "type": "expq",
+            "updatedAt": "2020-09-23T19:00:00Z",
+            "enabled": true
+          }
+        ],
+        "model": "2k6ruvv"
+      },
+      "createdAt": "xydiifgjserql",
+      "homepage": "ewiojjzzgglbcojs",
+      "identifier": "NCcP2wKiUAV9x2UGs",
+      "knowledgeCount": 612.04,
+      "meta": {
+        "avatar": "uyzmj",
+        "description": "nfjtpq",
+        "tags": [
+          "ipsum ",
+          "adipiscing ips",
+          "nrcjkf",
+          "f",
+          "hmsyfsuwb"
+        ],
+        "title": "ipsum consectetu",
+        "category": "ivdfcmlqtrbtmhpvjqe"
+      },
+      "pluginCount": 458.48,
+      "schemaVersion": 5.3,
+      "tokenUsage": 676.4,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "fuctzltitwxmtf"
+    },
+    {
+      "author": "wvctq",
+      "config": {
+        "systemRole": "xxakcmqstfy",
+        "enableCompressThreshold": false,
+        "enableHistoryCount": false,
+        "enableMaxTokens": false,
+        "fewShots": [
+          {
+            "content": "vrvpahhyiapg",
+            "role": "user"
+          },
+          {
+            "content": "wu",
+            "role": "user"
+          },
+          {
+            "content": "flaouxdhkg",
+            "role": "system"
+          },
+          {
+            "content": "dolor adipis",
+            "role": "assistant"
+          },
+          {
+            "content": "jfwudnyqzr",
+            "role": "system"
+          }
+        ],
+        "inputTemplate": "dxamjiojblbpqqktqwqy",
+        "knowledgeBases": [
+          {
+            "avatar": "qlTpNhhCYv",
+            "createdAt": "2024-10-25T03:00:00Z",
+            "id": "xmmwtedtf",
+            "isPublic": null,
+            "name": "V",
+            "type": "dsfkqophytpwnx",
+            "updatedAt": "2024-04-19T07:00:00Z",
+            "description": 7.63,
+            "enabled": false
+          },
+          {
+            "avatar": "tiofgamtenslyqzl",
+            "createdAt": "2022-08-08T03:00:00Z",
+            "id": "adipiscing d",
+            "isPublic": true,
+            "name": "qzahyhsndiecahuqeezfo",
+            "type": "IQ6jRo6Vd20V2aLmwurW",
+            "updatedAt": "2021-08-20T14:00:00Z",
+            "description": 35.0,
+            "enabled": false
+          },
+          {
+            "avatar": null,
+            "createdAt": "2023-01-18T23:00:00Z",
+            "id": "hMpFlwwxX3zaZQyn5nF",
+            "isPublic": null,
+            "name": "dolo",
+            "type": null,
+            "updatedAt": "2020-02-09T03:00:00Z",
+            "enabled": false
+          },
+          {
+            "avatar": null,
+            "createdAt": "2024-03-15T01:00:00Z",
+            "id": "U2KZ0Hhqcpj",
+            "isPublic": null,
+            "name": "uthhgdfhcxhqysxztd",
+            "type": "lorem s",
+            "updatedAt": "2022-07-30T23:00:00Z",
+            "description": null,
+            "enabled": true,
+            "settings": null
+          },
+          {
+            "avatar": "xsvYI",
+            "createdAt": "2020-12-03T11:00:00Z",
+            "id": "ip",
+            "isPublic": true,
+            "name": "3mKpEJXlQcjw1he",
+            "type": null,
+            "updatedAt": "2022-12-31T16:00:00Z",
+            "description": null
+          }
+        ],
+        "openingQuestions": [
+          "adipiscing lorem c",
+          "adipis",
+          "YRaL5RTxeWfOq",
+          "HZaX3D",
+          "adipisci"
+        ],
+        "params": {
+          "presence_penalty": -725.81,
+          "temperature": -705.94,
+          "top_p": 638.78
+        },
+        "plugins": [
+          "amet amet amet adi",
+          "hoffuitactiix",
+          "atx",
+          "PQ",
+          "cwvtylgavxotov"
+        ]
+      },
+      "createdAt": "s",
+      "homepage": "ips",
+      "identifier": "nhlnkFDS6Dff",
+      "knowledgeCount": -554.67,
+      "meta": {
+        "avatar": "zjglecxejxlbhkeeastgr",
+        "description": "d",
+        "tags": [
+          "po",
+          "63e2BM",
+          "adipiscing sit",
+          "gu",
+          "1xdrCvKD066"
+        ],
+        "title": "adipiscing lorem",
+        "category": "lorem ipsum co"
+      },
+      "pluginCount": 22.67,
+      "schemaVersion": 471.3,
+      "tokenUsage": 832.72
+    },
+    {
+      "author": "ieataimfyrpli",
+      "config": {
+        "systemRole": "ipsum sit adip",
+        "compressThreshold": 805.06,
+        "displayMode": "chat",
+        "enableCompressThreshold": true,
+        "knowledgeBases": [
+          {
+            "avatar": null,
+            "createdAt": "2023-12-15T12:00:00Z",
+            "id": "FExiAt0biIfrR8wbC",
+            "isPublic": null,
+            "name": "MyvQGJuDN7X5YctoBVR",
+            "type": "dolor lorem sit ip",
+            "updatedAt": "2024-03-30T21:00:00Z",
+            "description": 55
+          },
+          {
+            "avatar": null,
+            "createdAt": "2020-04-03T23:00:00Z",
+            "id": "dzxhphxhwxetbifkp",
+            "isPublic": false,
+            "name": "ovkrqhzzzkjkqwope",
+            "type": "smknrpkaiazv",
+            "updatedAt": "2023-11-08T14:00:00Z",
+            "description": "iymgtyre",
+            "enabled": true,
+            "settings": 7.45
+          },
+          {
+            "avatar": "Mz66nxX5tpi",
+            "createdAt": "2020-05-27T12:00:00Z",
+            "id": "vu",
+            "isPublic": null,
+            "name": "co",
+            "type": null,
+            "updatedAt": "2022-07-11T23:00:00Z"
+          },
+          {
+            "avatar": "dolor am",
+            "createdAt": "2024-03-09T07:00:00Z",
+            "id": "Us19gxFML9",
+            "isPublic": false,
+            "name": "MyxWhrB",
+            "type": null,
+            "updatedAt": "2023-09-25T09:00:00Z",
+            "enabled": false,
+            "settings": true
+          },
+          {
+            "avatar": null,
+            "createdAt": "2020-01-26T11:00:00Z",
+            "id": "amet sit do",
+            "isPublic": null,
+            "name": "B",
+            "type": "lorem a",
+            "updatedAt": "2020-03-29T12:00:00Z",
+            "description": 11.11,
+            "enabled": false
+          }
+        ],
+        "openingMessage": "fvqamvjbf",
+        "openingQuestions": [
+          "6xgeM5pOB38J",
+          "fmxarlxrkgrcfnvuerrkt",
+          "aemxitplfakgkasvhosg",
+          "amet amet ",
+          "yqjKsdjoysl5OZ36wXn7"
+        ],
+        "params": {
+          "top_p": -625.65
+        },
+        "plugins": [
+          "u",
+          "akbne",
+          "XYa",
+          "yeaoeagcaxsucxspycxes",
+          "5Uf78zYTRM5"
+        ]
+      },
+      "createdAt": "A4GC8TI2ZG",
+      "homepage": "ChtJEaXa",
+      "identifier": "gNjKp58wCs08f1I8D",
+      "knowledgeCount": -773.08,
+      "meta": {
+        "avatar": "guL0v",
+        "description": "consectetur ame",
+        "tags": [
+          "mvjkewko",
+          "pkuqfykoio",
+          "uI95S3A8xLBBVZ",
+          "wdtjuxbsnjbfwjfexpgh",
+          "a"
+        ],
+        "title": "ibpSGcMXq3OWPqRxA",
+        "backgroundColor": "snqo",
+        "category": "s"
+      },
+      "pluginCount": 338.41,
+      "schemaVersion": -165.22,
+      "tokenUsage": 683.46,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "jiIDIxQvXR"
+    },
+    {
+      "author": "sgi",
+      "config": {
+        "systemRole": "dol",
+        "displayMode": "docs",
+        "enableCompressThreshold": true,
+        "enableHistoryCount": true,
+        "enableMaxTokens": false,
+        "historyCount": -351.75,
+        "knowledgeBases": [
+          {
+            "avatar": null,
+            "createdAt": "2020-06-18T12:00:00Z",
+            "id": "zaxdfciuj",
+            "isPublic": false,
+            "name": "sit adipiscing ame",
+            "type": null,
+            "updatedAt": "2023-09-23T06:00:00Z",
+            "enabled": false
+          },
+          {
+            "avatar": "tjguhgobdipwbxlepsrbw",
+            "createdAt": "2020-09-15T07:00:00Z",
+            "id": "mawlyxqiqg",
+            "isPublic": false,
+            "name": "o",
+            "type": "jcduzaugfpypwbaik",
+            "updatedAt": "2022-05-27T15:00:00Z",
+            "description": 31.15,
+            "enabled": false
+          },
+          {
+            "avatar": "F62liqkza0suh1",
+            "createdAt": "2022-05-10T07:00:00Z",
+            "id": "hwbkismwsbffc",
+            "isPublic": null,
+            "name": "ysfzxwe",
+            "type": null,
+            "updatedAt": "2023-05-15T03:00:00Z",
+            "description": 61.09,
+            "enabled": true,
+            "settings": false
+          },
+          {
+            "avatar": null,
+            "createdAt": "2021-02-17T06:00:00Z",
+            "id": "uirwra",
+            "isPublic": null,
+            "name": "Gz2OHvQDkL5r1NhIk4ZU",
+            "type": null,
+            "updatedAt": "2022-06-25T16:00:00Z",
+            "description": null,
+            "settings": 72
+          },
+          {
+            "avatar": null,
+            "createdAt": "2024-11-30T04:00:00Z",
+            "id": "p",
+            "isPublic": false,
+            "name": "2vWtok",
+            "type": "ikssikjilha",
+            "updatedAt": "2024-04-11T02:00:00Z"
+          }
+        ],
+        "model": "9y2nWaBfJiHP",
+        "openingQuestions": [
+          "consecte",
+          "pWgk",
+          "xptcqehe",
+          "tftqvsfd",
+          "lQeEeYezzyL"
+        ],
+        "plugins": [
+          "dolor ame",
+          "cd",
+          "consectetur ",
+          "tg",
+          "zmehsrfofjixwzfawtty"
+        ]
+      },
+      "createdAt": "ojihaqbredjljsthm",
+      "homepage": "consecte",
+      "identifier": "VCc",
+      "knowledgeCount": -414.81,
+      "meta": {
+        "avatar": "ipsum amet lore",
+        "description": "aoal",
+        "tags": [
+          "Nd9",
+          "5003AB7Xdx",
+          "CngJVxmtF",
+          "vqzpbqkklwcejnmbfqor",
+          "idwrkrobnkfmg"
+        ],
+        "title": "dolor ipsum consecte",
+        "category": "ntucxrvryduv"
+      },
+      "pluginCount": 901.92,
+      "schemaVersion": 830.15,
+      "tokenUsage": -167.75,
+      "summary": "bUcR0eAnTPaxsjb9Yqa2O"
+    },
+    {
+      "author": "moixuoz",
+      "config": {
+        "systemRole": "ipsum lore",
+        "compressThreshold": 358.12,
+        "enableHistoryCount": true,
+        "enableMaxTokens": true,
+        "fewShots": [
+          {
+            "content": "sit",
+            "role": "system"
+          },
+          {
+            "content": "dolo",
+            "role": "user"
+          },
+          {
+            "content": "a",
+            "role": "user"
+          },
+          {
+            "content": "WTVDUurkxBt2GA72dv",
+            "role": "function"
+          },
+          {
+            "content": "oevghpmdeoxxuf",
+            "role": "assistant"
+          }
+        ],
+        "inputTemplate": "hjjhwr",
+        "model": "Q9ib",
+        "openingQuestions": [
+          "scijahyltfecjwtejfk",
+          "YCLoNfzgowzKigO",
+          "oewykewptnuga",
+          "consectetu",
+          "tsnxw"
+        ],
+        "params": {
+          "max_tokens": -491.72,
+          "presence_penalty": 287.3,
+          "temperature": 51.69
+        }
+      },
+      "createdAt": "sit sit dolor",
+      "homepage": "tRUV0dyhzJ8YI",
+      "identifier": "qatsrozuq",
+      "knowledgeCount": -692.04,
+      "meta": {
+        "avatar": "sit dolor",
+        "description": "tgvtqchahkbptbhhmije",
+        "tags": [
+          "unawjgbmdry",
+          "adi",
+          "DS3q1UpPVBLs9cHX6h1Ud",
+          "owoqyjaeqmaweu",
+          "GxgtHQU0R"
+        ],
+        "title": "amet co",
+        "backgroundColor": "dolor adip"
+      },
+      "pluginCount": 467.63,
+      "schemaVersion": 239.46,
+      "tokenUsage": -732.54,
+      "summary": "a"
+    },
+    {
+      "author": "7Qy",
+      "config": {
+        "systemRole": "tmvgpjmzfttczlo",
+        "compressThreshold": 114.5,
+        "enableCompressThreshold": false,
+        "enableHistoryCount": true,
+        "enableMaxTokens": false,
+        "historyCount": 630.3,
+        "model": "ln",
+        "openingMessage": "NZGYVLI2Pv3Y6PBvMl"
+      },
+      "createdAt": "5jgcZuH",
+      "homepage": "p",
+      "identifier": "n",
+      "knowledgeCount": -578.64,
+      "meta": {
+        "avatar": "consectetur ",
+        "description": "K5yrGsX8dhLMYYCtCu8",
+        "tags": [
+          "ipsum ipsum co",
+          "srkrwfkjiodhcxdofdwau",
+          "qpcihnhpmzgaderoo",
+          "ipsu",
+          "kssc"
+        ],
+        "title": "x8FAgLGSJrj7n7W",
+        "backgroundColor": "consec"
+      },
+      "pluginCount": -92.14,
+      "schemaVersion": 801.31,
+      "tokenUsage": -357.89,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      }
+    },
+    {
+      "author": "IXqX2VfGjZePuc",
+      "config": {
+        "systemRole": "q",
+        "compressThreshold": 162.6,
+        "enableCompressThreshold": false,
+        "enableHistoryCount": true,
+        "knowledgeBases": [
+          {
+            "avatar": null,
+            "createdAt": "2022-04-22T01:00:00Z",
+            "id": "rfefpmaqh",
+            "isPublic": null,
+            "name": "xobj",
+            "type": null,
+            "updatedAt": "2021-10-31T22:00:00Z",
+            "description": false,
+            "enabled": false
+          },
+          {
+            "avatar": null,
+            "createdAt": "2021-03-24T17:00:00Z",
+            "id": "zmfzabrpzrvwyxnqta",
+            "isPublic": false,
+            "name": "fvfloisuzkypu",
+            "type": "VNlKV0cfsa1YWItCeYm",
+            "updatedAt": "2024-03-14T23:00:00Z",
+            "description": 95.19,
+            "enabled": true,
+            "settings": "FaXwNoqrt"
+          },
+          {
+            "avatar": "adipiscing ",
+            "createdAt": "2023-10-16T13:00:00Z",
+            "id": "CWBCgNq2o0",
+            "isPublic": null,
+            "name": "vfmvkchvayapgbv",
+            "type": "YmCLbY",
+            "updatedAt": "2021-06-16T18:00:00Z",
+            "description": 72.18,
+            "enabled": false,
+            "settings": 10
+          },
+          {
+            "avatar": "sit sit ipsum d",
+            "createdAt": "2020-02-14T20:00:00Z",
+            "id": "dpkqosajmdrfetlljp",
+            "isPublic": null,
+            "name": "amet sit amet amet",
+            "type": "bzs1ly1ykntH8",
+            "updatedAt": "2024-11-13T17:00:00Z",
+            "enabled": true,
+            "settings": 73
+          },
+          {
+            "avatar": "sit adipis",
+            "createdAt": "2023-03-01T13:00:00Z",
+            "id": "ipsum sit adipis",
+            "isPublic": null,
+            "name": "1nRFEQKxaZTgLO3",
+            "type": "consectetur co",
+            "updatedAt": "2021-08-15T14:00:00Z",
+            "enabled": false
+          }
+        ],
+        "openingMessage": "G3UsU8PVbw",
+        "openingQuestions": [
+          "lorem dolor lorem a",
+          "ij",
+          "uvroq",
+          "wnawkdszkmgtwsw",
+          "fjevfrtuakp"
+        ],
+        "plugins": [
+          "dolor dolo",
+          "gfkd",
+          "dolor",
+          "lorem do",
+          "wvg"
+        ]
+      },
+      "createdAt": "tIxS",
+      "homepage": "ovS5gCtL",
+      "identifier": "sit",
+      "knowledgeCount": 753.02,
+      "meta": {
+        "avatar": "9YsxYdIhza3ifUB",
+        "description": "Yq7kN",
+        "tags": [
+          "kh",
+          "hpqeuwimfivoeaygf",
+          "r",
+          "o60AjVSZS1K2y3",
+          "x9dpU6h17e1m4oS"
+        ],
+        "title": "dolor ipsum ",
+        "backgroundColor": "ojsaneqkbjiew",
+        "category": "shgovfa"
+      },
+      "pluginCount": -624.77,
+      "schemaVersion": -278.97,
+      "tokenUsage": -585.33,
+      "summary": "sit"
+    },
+    {
+      "author": "swcdkupqxrvkdbyf",
+      "config": {
+        "systemRole": "zehhftxb",
+        "compressThreshold": 836.06,
+        "displayMode": "chat",
+        "enableCompressThreshold": false,
+        "enableMaxTokens": true,
+        "fewShots": [
+          {
+            "content": "Y67E5",
+            "role": "system"
+          },
+          {
+            "content": "fSRZvfaIbFbQ6aF591F0Z",
+            "role": "system"
+          },
+          {
+            "content": "basczfbjh",
+            "role": "system"
+          },
+          {
+            "content": "pkdhwjwetjanoa",
+            "role": "user"
+          },
+          {
+            "content": "sit adipis",
+            "role": "function"
+          }
+        ],
+        "historyCount": -844.13,
+        "model": "dlsudmm",
+        "openingMessage": "ylBWeZ",
+        "openingQuestions": [
+          "lorem dolor do",
+          "ip",
+          "sit ipsum a",
+          "GGAl8vld",
+          "cgupvqh"
+        ],
+        "plugins": [
+          "hzxqawrnd",
+          "jngw",
+          "ydega",
+          "cmptwtowplmqjipabpapu",
+          "ipsum ipsum amet i"
+        ]
+      },
+      "createdAt": "xvneaiqomyqjnbgklpyjz",
+      "homepage": "d",
+      "identifier": "fvvsjwpmvfmiwyibu",
+      "knowledgeCount": -831.49,
+      "meta": {
+        "avatar": "buzzskphhhwvwqjhajelh",
+        "description": "a",
+        "tags": [
+          "lorem ipsum dolor ",
+          "juyjlsxfcvatb",
+          "hxmxxzfoopwepshl",
+          "adip",
+          "4B"
+        ],
+        "title": "a",
+        "backgroundColor": "fshzznsa",
+        "category": "lzhvoxls"
+      },
+      "pluginCount": 58.33,
+      "schemaVersion": 823.32,
+      "tokenUsage": 929.07
+    },
+    {
+      "author": "consectetur dolor ",
+      "config": {
+        "systemRole": "lvyaalylurbm",
+        "displayMode": "chat",
+        "enableCompressThreshold": false,
+        "enableHistoryCount": false,
+        "historyCount": 261.76,
+        "inputTemplate": "a",
+        "knowledgeBases": [
+          {
+            "avatar": null,
+            "createdAt": "2021-11-19T07:00:00Z",
+            "id": "adipiscin",
+            "isPublic": null,
+            "name": "xayoscsszpbrrdvapqy",
+            "type": "ipsum co",
+            "updatedAt": "2023-10-12T05:00:00Z",
+            "description": true,
+            "settings": true
+          },
+          {
+            "avatar": "yldvoiinqiqafeysdilr",
+            "createdAt": "2022-06-16T12:00:00Z",
+            "id": "lorem adipisc",
+            "isPublic": null,
+            "name": "dgfdReCg",
+            "type": null,
+            "updatedAt": "2023-08-05T11:00:00Z",
+            "description": 22
+          },
+          {
+            "avatar": null,
+            "createdAt": "2024-05-02T09:00:00Z",
+            "id": "JfUf7poFDUuDfh",
+            "isPublic": true,
+            "name": "tg",
+            "type": "eugtjpi",
+            "updatedAt": "2021-08-06T11:00:00Z",
+            "description": 97.43,
+            "enabled": false,
+            "settings": false
+          },
+          {
+            "avatar": null,
+            "createdAt": "2023-08-26T16:00:00Z",
+            "id": "pdvhxdxy",
+            "isPublic": true,
+            "name": "lTs9NxRc4fXNLyA",
+            "type": null,
+            "updatedAt": "2024-06-27T06:00:00Z",
+            "description": true,
+            "enabled": false,
+            "settings": 51
+          },
+          {
+            "avatar": "Eevp7Yk6S",
+            "createdAt": "2021-04-16T21:00:00Z",
+            "id": "5zkmWx05",
+            "isPublic": null,
+            "name": "Q",
+            "type": null,
+            "updatedAt": "2020-11-22T12:00:00Z",
+            "description": 28,
+            "enabled": false,
+            "settings": "covfvhqfbzjrz"
+          }
+        ],
+        "openingQuestions": [
+          "zgw",
+          "rghlw",
+          "W8W2",
+          "ubdbptyblu",
+          "svyakgvqxjjr"
+        ],
+        "plugins": [
+          "lorem s",
+          "lorem amet lorem dol",
+          "lsucmgmzrsenu",
+          "lzz",
+          "f"
+        ]
+      },
+      "createdAt": "dsftjzepgdlkflb",
+      "homepage": "ipsum adipi",
+      "identifier": "XX6sTkUuPwAaYHL",
+      "knowledgeCount": 620.35,
+      "meta": {
+        "avatar": "sit ipsum ",
+        "description": "consectetur dol",
+        "tags": [
+          "yfnpi",
+          "sit ipsum do",
+          "gepqssfbjtaqurhizi",
+          "BtGilu4X75y59nrCMB",
+          "rgixz"
+        ],
+        "title": "ad",
+        "category": "consectetur amet"
+      },
+      "pluginCount": -874.19,
+      "schemaVersion": 173.23,
+      "tokenUsage": -173.75,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "dltlbwabiosrxxhmczz"
+    },
+    {
+      "author": "9H6hEiafrmJGmOwUxj",
+      "config": {
+        "systemRole": "vlypOg",
+        "compressThreshold": -280.19,
+        "enableCompressThreshold": true,
+        "enableHistoryCount": false,
+        "enableMaxTokens": false,
+        "fewShots": [
+          {
+            "content": "ddyoafknvrersqlpzllx",
+            "role": "assistant"
+          },
+          {
+            "content": "3miVkLfaWB",
+            "role": "user"
+          },
+          {
+            "content": "wezkgajudqhj",
+            "role": "function"
+          },
+          {
+            "content": "WS",
+            "role": "function"
+          },
+          {
+            "content": "jybf",
+            "role": "system"
+          }
+        ],
+        "historyCount": -864.33,
+        "model": "j",
+        "openingQuestions": [
+          "xGlsCYgFEIe",
+          "QFTp9KRDfHbmYp7",
+          "jhtdlqwaoltullz",
+          "adipis",
+          "i"
+        ],
+        "plugins": [
+          "VlUXz7SJ",
+          "adipiscin",
+          "ipsum lo",
+          "xntcovc",
+          "eirqec"
+        ]
+      },
+      "createdAt": "LvuvzeXVnm",
+      "homepage": "amet ipsum",
+      "identifier": "lorem d",
+      "knowledgeCount": 311.13,
+      "meta": {
+        "avatar": "nexdufcxzhtvywl",
+        "description": "iiJOzokhDZNWJ",
+        "tags": [
+          "g3TtXRQKg1j8UxLUbnpn",
+          "hnudos",
+          "adipiscing do",
+          "ipsum dol",
+          "pa"
+        ],
+        "title": "iakjcktwslptagngw",
+        "backgroundColor": "FnrE",
+        "category": "WCoK3klQ29en"
+      },
+      "pluginCount": 835.8,
+      "schemaVersion": 533.14,
+      "tokenUsage": -965.99,
+      "summary": "WKHD9S393KwoeQGek"
+    },
+    {
+      "author": "P5fvc2kNf9wi",
+      "config": {
+        "systemRole": "m",
+        "compressThreshold": -109.79,
+        "displayMode": "docs",
+        "enableCompressThreshold": false,
+        "enableHistoryCount": true,
+        "enableMaxTokens": true,
+        "fewShots": [
+          {
+            "content": "hI8sZ",
+            "role": "assistant"
+          },
+          {
+            "content": "yukphnvpl",
+            "role": "function"
+          },
+          {
+            "content": "pfm",
+            "role": "assistant"
+          },
+          {
+            "content": "adipisci",
+            "role": "system"
+          },
+          {
+            "content": "Ek8aCOVXQv",
+            "role": "user"
+          }
+        ],
+        "historyCount": 404.63,
+        "inputTemplate": "d",
+        "openingMessage": "adipiscing ",
+        "openingQuestions": [
+          "dolor lore",
+          "X5ui",
+          "dolor l",
+          "taavrplvdbeogjjdvh",
+          "ldkveseimhr"
+        ],
+        "params": {
+          "frequency_penalty": 155.17,
+          "max_tokens": 235.08,
+          "presence_penalty": -836.34,
+          "top_p": 819.23
+        },
+        "plugins": [
+          "dfzyqqyn",
+          "V5o6",
+          "dakxkE1f",
+          "ipsum consec",
+          "vP3GWpOsA2SIJFqUB"
+        ]
+      },
+      "createdAt": "zqfyybfdncp",
+      "homepage": "A6Zwjn",
+      "identifier": "WwTQJwpXiodJOofI",
+      "knowledgeCount": 531.43,
+      "meta": {
+        "avatar": "civcR",
+        "description": "dsscakxlhlctngxxqga",
+        "tags": [
+          "MCWLqVZzh",
+          "OCXFDIG",
+          "57Ypxoy6",
+          "Gh",
+          "izrdrvdckbjchc"
+        ],
+        "title": "adi",
+        "backgroundColor": "iqmy18csXNjF",
+        "category": "lorem ipsum lorem "
+      },
+      "pluginCount": -815.62,
+      "schemaVersion": 748.81,
+      "tokenUsage": 156.71
+    },
+    {
+      "author": "94YdbVb",
+      "config": {
+        "systemRole": "eBPYpspzl",
+        "displayMode": "chat",
+        "enableCompressThreshold": true,
+        "enableHistoryCount": true,
+        "enableMaxTokens": false,
+        "knowledgeBases": [
+          {
+            "avatar": "amet s",
+            "createdAt": "2021-02-08T11:00:00Z",
+            "id": "yar",
+            "isPublic": true,
+            "name": "consectetur sit ",
+            "type": null,
+            "updatedAt": "2024-02-14T13:00:00Z",
+            "enabled": true
+          },
+          {
+            "avatar": "oookulquphxzgehnnz",
+            "createdAt": "2023-11-28T03:00:00Z",
+            "id": "ucallnehnzcnkevcpka",
+            "isPublic": false,
+            "name": "A6lDWZx",
+            "type": null,
+            "updatedAt": "2023-12-15T05:00:00Z",
+            "description": 91,
+            "enabled": false
+          },
+          {
+            "avatar": null,
+            "createdAt": "2023-06-26T02:00:00Z",
+            "id": "idqtiiKAOZhhpX0jnza",
+            "isPublic": null,
+            "name": "G7S5yLU714rxG",
+            "type": "6815EDnm",
+            "updatedAt": "2022-07-01T07:00:00Z",
+            "description": 62.71,
+            "settings": null
+          },
+          {
+            "avatar": null,
+            "createdAt": "2020-10-17T03:00:00Z",
+            "id": "Z1gg4FuE0F37ESU3Tbbrv",
+            "isPublic": false,
+            "name": "mks",
+            "type": "Z",
+            "updatedAt": "2022-11-19T10:00:00Z",
+            "description": 25,
+            "settings": 73
+          },
+          {
+            "avatar": "adipiscing consec",
+            "createdAt": "2024-08-09T22:00:00Z",
+            "id": "aqgnzf",
+            "isPublic": null,
+            "name": "gs4on9hwdmbjBQIzHl",
+            "type": null,
+            "updatedAt": "2024-01-03T10:00:00Z",
+            "description": null,
+            "enabled": true
+          }
+        ],
+        "openingMessage": "consectetur adipisci",
+        "params": {
+          "frequency_penalty": -13.7,
+          "presence_penalty": -783.74,
+          "temperature": -538.19,
+          "top_p": -346.57
+        }
+      },
+      "createdAt": "xjxier",
+      "homepage": "dolor dolor dolor ",
+      "identifier": "eu",
+      "knowledgeCount": -972.7,
+      "meta": {
+        "avatar": "vkyofnm",
+        "description": "adipiscing lore",
+        "tags": [
+          "ipsum ",
+          "Bs",
+          "uwlmqi",
+          "kantntsspmoqijutszzo",
+          "adipiscing lore"
+        ],
+        "title": "aum",
+        "backgroundColor": "EeJAOJJ2ghVrXMo",
+        "category": "ipsum amet dolor "
+      },
+      "pluginCount": 566.95,
+      "schemaVersion": -859.64,
+      "tokenUsage": 444.0
+    },
+    {
+      "author": "cz8rYIW4yOYV",
+      "config": {
+        "systemRole": "u",
+        "compressThreshold": -233.39,
+        "displayMode": "chat",
+        "fewShots": [
+          {
+            "content": "ipsum sit ipsum am",
+            "role": "system"
+          },
+          {
+            "content": "Qzg2VZj",
+            "role": "assistant"
+          },
+          {
+            "content": "snweblmuroowfhfg",
+            "role": "user"
+          },
+          {
+            "content": "mlmwkjshgraoaiswlrfk",
+            "role": "user"
+          },
+          {
+            "content": "adipiscing ipsum sit",
+            "role": "function"
+          }
+        ],
+        "historyCount": -29.02,
+        "inputTemplate": "ujlqaxvdomoyedizwxqvi",
+        "model": "consectetur dolor d",
+        "openingMessage": "ipsu",
+        "plugins": [
+          "ipsu",
+          "YVBEclZWgiDEmh7ZGJGrQ",
+          "ditNze0bTmCuxWg",
+          "scbqrvqvc",
+          "agyfp"
+        ]
+      },
+      "createdAt": "am",
+      "homepage": "sit adipiscin",
+      "identifier": "ZpHg",
+      "knowledgeCount": 947.24,
+      "meta": {
+        "avatar": "dolor si",
+        "description": "ekjfmkwnfwtoyui",
+        "tags": [
+          "ip",
+          "flAwBmKHyV2u06txyWMJ",
+          "consectetur ",
+          "consecte",
+          "d"
+        ],
+        "title": "prpkjxcv",
+        "backgroundColor": "tnzfsrhio"
+      },
+      "pluginCount": 920.72,
+      "schemaVersion": -611.75,
+      "tokenUsage": 29.61,
+      "summary": "c"
+    },
+    {
+      "author": "LoifTGRfMmSKX",
+      "config": {
+        "systemRole": "wfleocsrcibo",
+        "compressThreshold": -274.94,
+        "enableCompressThreshold": true,
+        "fewShots": [
+          {
+            "content": "stlyene",
+            "role": "user"
+          },
+          {
+            "content": "a",
+            "role": "function"
+          },
+          {
+            "content": "qdq",
+            "role": "function"
+          },
+          {
+            "content": "dolor adipi",
+            "role": "system"
+          },
+          {
+            "content": "dolor consectet",
+            "role": "user"
+          }
+        ],
+        "historyCount": 727.86,
+        "inputTemplate": "kcdee",
+        "knowledgeBases": [
+          {
+            "avatar": "Eop1wQFaZuxuYxYHlc",
+            "createdAt": "2022-02-02T23:00:00Z",
+            "id": "fwfscritssjly",
+            "isPublic": null,
+            "name": "gnxwunygwkrphr",
+            "type": null,
+            "updatedAt": "2021-02-02T12:00:00Z",
+            "description": 34.54
+          },
+          {
+            "avatar": "gktskw",
+            "createdAt": "2023-09-06T12:00:00Z",
+            "id": "s",
+            "isPublic": false,
+            "name": "X5q0zI",
+            "type": null,
+            "updatedAt": "2021-02-14T23:00:00Z",
+            "description": 39,
+            "enabled": true
+          },
+          {
+            "avatar": null,
+            "createdAt": "2021-09-05T11:00:00Z",
+            "id": "sofcwkugiwxwskosjf",
+            "isPublic": null,
+            "name": "sexzoqxrznzncubrarh",
+            "type": "qi5ycFIsZdWolEqOe4W",
+            "updatedAt": "2020-12-21T22:00:00Z",
+            "description": null,
+            "enabled": true
+          },
+          {
+            "avatar": "cFxvW",
+            "createdAt": "2021-04-19T19:00:00Z",
+            "id": "pibiqeecmzsajrcugluw",
+            "isPublic": true,
+            "name": "jibkhe",
+            "type": "hdlbjpiiiv",
+            "updatedAt": "2020-03-11T12:00:00Z",
+            "settings": 97
+          },
+          {
+            "avatar": null,
+            "createdAt": "2024-02-22T12:00:00Z",
+            "id": "3oG9nOkJAJbm3l",
+            "isPublic": null,
+            "name": "gp",
+            "type": null,
+            "updatedAt": "2020-10-31T00:00:00Z",
+            "enabled": false
+          }
+        ],
+        "openingMessage": "sit sit amet dolor",
+        "openingQuestions": [
+          "SgL4kD3kQkFX40eooRy",
+          "ipsum consectetur ",
+          "lorem lorem ipsum lor",
+          "ranfjeksn",
+          "6boLZxw"
+        ],
+        "params": {
+          "frequency_penalty": 76.63,
+          "presence_penalty": -648.12,
+          "temperature": 241.46
+        },
+        "plugins": [
+          "O",
+          "zjl",
+          "xgsvhgyficwqg",
+          "npgudamyulutngs",
+          "kfph"
+        ]
+      },
+      "createdAt": "KRcfizAPKbhtmNg9",
+      "homepage": "lorem cons",
+      "identifier": "cvtkcg",
+      "knowledgeCount": 52.77,
+      "meta": {
+        "avatar": "stsapbmdh",
+        "description": "adipiscing conse",
+        "tags": [
+          "ipsum ipsum ipsum",
+          "dolor sit ipsum s",
+          "uWyXa",
+          "ga1",
+          "hct"
+        ],
+        "title": "sit amet l",
+        "backgroundColor": "f",
+        "category": "amet ipsum sit do"
+      },
+      "pluginCount": -303.79,
+      "schemaVersion": -913.97,
+      "tokenUsage": -349.83
+    },
+    {
+      "author": "7kyvF",
+      "config": {
+        "systemRole": "eCc5",
+        "displayMode": "docs",
+        "fewShots": [
+          {
+            "content": "zZyCrXx1NlLj",
+            "role": "system"
+          },
+          {
+            "content": "lorem a",
+            "role": "function"
+          },
+          {
+            "content": "kqtbgqysriroyzkbchlgv",
+            "role": "function"
+          },
+          {
+            "content": "xgbpibhssuxxnfusj",
+            "role": "function"
+          },
+          {
+            "content": "m",
+            "role": "user"
+          }
+        ],
+        "inputTemplate": "crdzqyblbmtzy",
+        "knowledgeBases": [
+          {
+            "avatar": "lorem",
+            "createdAt": "2023-11-09T23:00:00Z",
+            "id": "dolor sit ame",
+            "isPublic": false,
+            "name": "ipsum dolor ad",
+            "type": null,
+            "updatedAt": "2022-03-31T08:00:00Z",
+            "enabled": true
+          },
+          {
+            "avatar": null,
+            "createdAt": "2021-07-09T00:00:00Z",
+            "id": "aavhkqfqs",
+            "isPublic": true,
+            "name": "PBTl8bMvXi3aTRFkxBn",
+            "type": "ohqqdppchwpfklswcbla",
+            "updatedAt": "2020-11-12T15:00:00Z",
+            "description": 37,
+            "settings": null
+          },
+          {
+            "avatar": "odyjo",
+            "createdAt": "2024-01-05T23:00:00Z",
+            "id": "mirx",
+            "isPublic": null,
+            "name": "consectetu",
+            "type": "HhNdDFmc",
+            "updatedAt": "2023-10-06T16:00:00Z",
+            "description": 77,
+            "enabled": true
+          },
+          {
+            "avatar": "mscjiqchwlqiepqdelc",
+            "createdAt": "2023-05-21T06:00:00Z",
+            "id": "amet sit co",
+            "isPublic": true,
+            "name": "consectetur conse",
+            "type": null,
+            "updatedAt": "2020-01-15T02:00:00Z",
+            "description": false,
+            "enabled": false,
+            "settings": "dolor adi"
+          },
+          {
+            "avatar": null,
+            "createdAt": "2021-06-16T10:00:00Z",
+            "id": "g",
+            "isPublic": true,
+            "name": "dolor ipsum am",
+            "type": null,
+            "updatedAt": "2021-03-14T21:00:00Z",
+            "description": true,
+            "enabled": false,
+            "settings": true
+          }
+        ],
+        "openingMessage": "amet amet consectetur",
+        "openingQuestions": [
+          "iuqgm",
+          "kpbX",
+          "fyirpmrxs",
+          "amet ipsum dolor ",
+          "adipiscing adi"
+        ]
+      },
+      "createdAt": "hlyn",
+      "homepage": "2cQ4lfEONGvS9Fy8lI0XU",
+      "identifier": "7aA",
+      "knowledgeCount": -98.72,
+      "meta": {
+        "avatar": "ipsum sit amet sit a",
+        "description": "consectetur dolo",
+        "tags": [
+          "zupg",
+          "vkhwjoum",
+          "WbUbAxbePqGkM5Uw7v",
+          "ipsum con",
+          "s"
+        ],
+        "title": "ZODpiRMKsehX2PqcfYQ7B",
+        "backgroundColor": "v"
+      },
+      "pluginCount": -303.7,
+      "schemaVersion": 993.0,
+      "tokenUsage": 786.07
+    },
+    {
+      "author": "xojbnpxmuilgelneugu",
+      "config": {
+        "systemRole": "sit dolor lore",
+        "enableMaxTokens": false,
+        "fewShots": [
+          {
+            "content": "PaC",
+            "role": "user"
+          },
+          {
+            "content": "jjgvzlhtkzvx",
+            "role": "function"
+          },
+          {
+            "content": "2t1QQa",
+            "role": "user"
+          },
+          {
+            "content": "dol",
+            "role": "function"
+          },
+          {
+            "content": "pplq",
+            "role": "system"
+          }
+        ],
+        "inputTemplate": "3i72ueIQvdrZf6pmg8",
+        "model": "adip",
+        "openingMessage": "w",
+        "openingQuestions": [
+          "dolor consectetur s",
+          "u6rQ3ydnejhvwBPPQwP",
+          "sit sit dolor dolo",
+          "sit sit",
+          "gpiwlbofax"
+        ]
+      },
+      "createdAt": "ad",
+      "homepage": "ymuqawpdc",
+      "identifier": "isdskggfucgeesprxlae",
+      "knowledgeCount": 33.11,
+      "meta": {
+        "avatar": "cnaxndrxczlowpcht",
+        "description": "am",
+        "tags": [
+          "hg",
+          "juwssqsgkggkp",
+          "52UUlWnGc3hKPNQw",
+          "zwbrcrjwbybbadz",
+          "erus"
+        ],
+        "title": "YnK0ikPso",
+        "category": "Sa"
+      },
+      "pluginCount": 392.67,
+      "schemaVersion": -427.95,
+      "tokenUsage": 251.32,
+      "summary": "lorem sit lorem "
+    },
+    {
+      "author": "joreh",
+      "config": {
+        "systemRole": "cGMG2TxohYQLBF",
+        "compressThreshold": 60.82,
+        "displayMode": "docs",
+        "enableMaxTokens": true,
+        "historyCount": -611.03,
+        "inputTemplate": "y4kmKNAIBP3ZND6BM1Qy",
+        "params": {
+          "max_tokens": -203.13,
+          "top_p": -855.16
+        }
+      },
+      "createdAt": "kxeieendpnagh",
+      "homepage": "ipsu",
+      "identifier": "ipsum sit cons",
+      "knowledgeCount": -139.96,
+      "meta": {
+        "avatar": "raeuuoftgy",
+        "description": "tyrdgkelygebd",
+        "tags": [
+          "husw",
+          "rx",
+          "LD27v",
+          "WQXSq",
+          "dzzfcoflg"
+        ],
+        "title": "LDq32R7IeRgUOmje",
+        "backgroundColor": "adipiscing lo",
+        "category": "sit ipsum am"
+      },
+      "pluginCount": -213.5,
+      "schemaVersion": -919.4,
+      "tokenUsage": 325.68,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "VCn"
+    },
+    {
+      "author": "svrxtrlirmdpzbz",
+      "config": {
+        "systemRole": "htwpr",
+        "compressThreshold": 314.5,
+        "enableHistoryCount": true,
+        "enableMaxTokens": false,
+        "model": "RsDjApg5fYRfE99",
+        "openingMessage": "hopk",
+        "params": {
+          "max_tokens": -110.23,
+          "presence_penalty": 293.67,
+          "top_p": 130.78
+        }
+      },
+      "createdAt": "ecralcda",
+      "homepage": "wnzixejva",
+      "identifier": "rrmdqtvqjtkvuvpxokga",
+      "knowledgeCount": 617.48,
+      "meta": {
+        "avatar": "XAiW3QH25aEbuoC",
+        "description": "gazuocbynwutu",
+        "tags": [
+          "gzchjuhky",
+          "T86grMQr5CVdrbXG7Lu",
+          "idbztvydwwsh",
+          "gPs7DPGYRNbiUz8NZU",
+          "ylgcgxrbalojagwsvhrfh"
+        ],
+        "title": "dolor i"
+      },
+      "pluginCount": 181.78,
+      "schemaVersion": 701.99,
+      "tokenUsage": -72.83
+    },
+    {
+      "author": "t",
+      "config": {
+        "systemRole": "ahY4gjeU",
+        "compressThreshold": -878.28,
+        "displayMode": "docs",
+        "enableCompressThreshold": false,
+        "enableMaxTokens": false,
+        "fewShots": [
+          {
+            "content": "p71ccWhkIveMHYf",
+            "role": "function"
+          },
+          {
+            "content": "inj1lHbCnBdeiRhDIz",
+            "role": "function"
+          },
+          {
+            "content": "sit lorem consecte",
+            "role": "function"
+          },
+          {
+            "content": "saugauwdfgcxqcueb",
+            "role": "user"
+          },
+          {
+            "content": "feiecffgucfbnf",
+            "role": "system"
+          }
+        ],
+        "historyCount": 418.31,
+        "inputTemplate": "yI6EynxVMr",
+        "model": "amet ipsum a",
+        "openingMessage": "bv2clkXtQ",
+        "params": {
+          "frequency_penalty": -761.84,
+          "presence_penalty": -263.05
+        },
+        "plugins": [
+          "umws",
+          "yqgoepdyhxffgvvto",
+          "conse",
+          "consectetur",
+          "nI4k5sVMjhHfxpOYkmY8"
+        ]
+      },
+      "createdAt": "mlxmblhrvbi",
+      "homepage": "ukywvoqdaabnyouty",
+      "identifier": "lorem lor",
+      "knowledgeCount": 363.84,
+      "meta": {
+        "avatar": "jmwb2woXaVBfy9crlKm0",
+        "description": "xfpfzkqiqurd",
+        "tags": [
+          "adipisci",
+          "EenRpF",
+          "sit consectetur con",
+          "nF",
+          "d"
+        ],
+        "title": "consect",
+        "category": "URyeQM7"
+      },
+      "pluginCount": 402.89,
+      "schemaVersion": -874.6,
+      "tokenUsage": -609.18,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      }
+    },
+    {
+      "author": "X6tVukvUjOvkAxC25o9",
+      "config": {
+        "systemRole": "494duZ6wSPl0Z572JNEM",
+        "compressThreshold": -422.77,
+        "enableHistoryCount": true,
+        "enableMaxTokens": false,
+        "fewShots": [
+          {
+            "content": "5I0yw0VHm",
+            "role": "system"
+          },
+          {
+            "content": "luneasbohrq",
+            "role": "assistant"
+          },
+          {
+            "content": "1ggXBMfVrnU1l9",
+            "role": "system"
+          },
+          {
+            "content": "hdvynxtpzdfrqlwiguja",
+            "role": "assistant"
+          },
+          {
+            "content": "Ogp4YeOn79cfTfZVPBOka",
+            "role": "system"
+          }
+        ],
+        "historyCount": -99.95,
+        "inputTemplate": "amet dolor dolor am",
+        "knowledgeBases": [
+          {
+            "avatar": null,
+            "createdAt": "2020-07-07T17:00:00Z",
+            "id": "tvnubztupsrunqx",
+            "isPublic": true,
+            "name": "ooba",
+            "type": null,
+            "updatedAt": "2022-05-19T16:00:00Z",
+            "enabled": false,
+            "settings": true
+          },
+          {
+            "avatar": null,
+            "createdAt": "2023-12-05T06:00:00Z",
+            "id": "u4mD9zCzutZae",
+            "isPublic": null,
+            "name": "DpAwKuKc9aDxi",
+            "type": null,
+            "updatedAt": "2021-01-15T08:00:00Z",
+            "description": 10.26,
+            "enabled": true
+          },
+          {
+            "avatar": "otebdxbbmbeye",
+            "createdAt": "2024-04-09T00:00:00Z",
+            "id": "BnuHJHw2CxD0LUZwSf",
+            "isPublic": null,
+            "name": "ykXvyh11lyr",
+            "type": "amet lorem sit ipsum",
+            "updatedAt": "2023-12-22T16:00:00Z",
+            "settings": 10
+          },
+          {
+            "avatar": "zpzmcelwvzp",
+            "createdAt": "2024-03-26T17:00:00Z",
+            "id": "sit ip",
+            "isPublic": true,
+            "name": "dolor l",
+            "type": "ylwezophaoqsuya",
+            "updatedAt": "2023-10-26T01:00:00Z",
+            "description": 67,
+            "enabled": true,
+            "settings": "nrrmtef"
+          },
+          {
+            "avatar": "ndm",
+            "createdAt": "2020-12-16T23:00:00Z",
+            "id": "tjdlgob",
+            "isPublic": true,
+            "name": "FVMoypik7X0SqUH",
+            "type": "consectetur amet cons",
+            "updatedAt": "2020-04-15T13:00:00Z",
+            "enabled": false
+          }
+        ],
+        "openingMessage": "AOeq8MnLvrEYL15HvAGr",
+        "openingQuestions": [
+          "conse",
+          "ipsum ipsum d",
+          "sit d",
+          "91",
+          "cczebppelkl"
+        ],
+        "params": {
+          "frequency_penalty": 305.85,
+          "max_tokens": 720.49,
+          "temperature": 540.37
+        },
+        "plugins": [
+          "adipiscing consecte",
+          "adipiscing ",
+          "Wk9F3",
+          "mjhafa",
+          "XS3"
+        ]
+      },
+      "createdAt": "l29csV7rWBBhPM",
+      "homepage": "G",
+      "identifier": "Lgj3KuUVlFcmjtORrnhUX",
+      "knowledgeCount": -48.75,
+      "meta": {
+        "avatar": "xmVekq75MNsP5win",
+        "description": "dolor amet con",
+        "tags": [
+          "imexaourauluc",
+          "amet sit lorem a",
+          "si",
+          "xnuz",
+          "fgtocngyrrh"
+        ],
+        "title": "qkujcjiqdu",
+        "backgroundColor": "awsjcmummtzlnhrxw"
+      },
+      "pluginCount": -544.44,
+      "schemaVersion": -480.44,
+      "tokenUsage": -772.69,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "E3b6vwNk4sFy5gUh"
+    },
+    {
+      "author": "adipiscing conse",
+      "config": {
+        "systemRole": "adi",
+        "compressThreshold": -98.22,
+        "enableMaxTokens": false,
+        "historyCount": -270.43,
+        "inputTemplate": "YlAcTglUBI",
+        "model": "adipiscing sit",
+        "openingMessage": "fdgdvytyolkqgnkrwrd",
+        "openingQuestions": [
+          "efHSETIZnZUh",
+          "fdaoxrxx",
+          "anfhvhafrai",
+          "amet sit amet con",
+          "adipiscing "
+        ]
+      },
+      "createdAt": "amet",
+      "homepage": "GVv7WCLtw3azy4FjG5",
+      "identifier": "cwhuyvizn",
+      "knowledgeCount": -404.84,
+      "meta": {
+        "avatar": "sit sit sit",
+        "description": "lapcpol",
+        "tags": [
+          "dol",
+          "xxaqgpk",
+          "S4",
+          "bw",
+          "sit sit sit"
+        ],
+        "title": "adipiscing consectet",
+        "backgroundColor": "i"
+      },
+      "pluginCount": -58.48,
+      "schemaVersion": 698.36,
+      "tokenUsage": 289.54,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "dolor amet "
+    },
+    {
+      "author": "tsltylod",
+      "config": {
+        "systemRole": "R4rtlK5Tix",
+        "compressThreshold": -678.16,
+        "displayMode": "chat",
+        "enableCompressThreshold": true,
+        "enableHistoryCount": false,
+        "enableMaxTokens": true,
+        "fewShots": [
+          {
+            "content": "ssW0T3TsoJ",
+            "role": "function"
+          },
+          {
+            "content": "zrrumuw",
+            "role": "function"
+          },
+          {
+            "content": "adipiscing ",
+            "role": "function"
+          },
+          {
+            "content": "yzak",
+            "role": "assistant"
+          },
+          {
+            "content": "N6wQJFo9z",
+            "role": "function"
+          }
+        ],
+        "historyCount": -184.42,
+        "inputTemplate": "rlcdbdakhyecxx",
+        "knowledgeBases": [
+          {
+            "avatar": null,
+            "createdAt": "2021-05-06T12:00:00Z",
+            "id": "ijBJzm4hsP",
+            "isPublic": null,
+            "name": "aqeyjiwayyeden",
+            "type": "LZ8MB2KYw3myoxM5cKnYU",
+            "updatedAt": "2021-03-11T20:00:00Z",
+            "description": 91,
+            "settings": 93
+          },
+          {
+            "avatar": null,
+            "createdAt": "2022-06-11T17:00:00Z",
+            "id": "dolor",
+            "isPublic": false,
+            "name": "dolor dolor con",
+            "type": null,
+            "updatedAt": "2020-05-24T06:00:00Z",
+            "description": false,
+            "enabled": false
+          },
+          {
+            "avatar": "hch97cvh",
+            "createdAt": "2021-12-17T22:00:00Z",
+            "id": "dolor ipsum dolor lo",
+            "isPublic": null,
+            "name": "coblnfkrdxtlmz",
+            "type": null,
+            "updatedAt": "2020-04-04T02:00:00Z",
+            "description": 73.36,
+            "enabled": true,
+            "settings": "oskuqmjklrg"
+          },
+          {
+            "avatar": null,
+            "createdAt": "2020-11-14T15:00:00Z",
+            "id": "ha3SG7nv",
+            "isPublic": false,
+            "name": "qateivavjp",
+            "type": null,
+            "updatedAt": "2022-04-07T18:00:00Z",
+            "description": 58.62,
+            "enabled": true,
+            "settings": "ipsum si"
+          },
+          {
+            "avatar": null,
+            "createdAt": "2022-06-06T10:00:00Z",
+            "id": "LQiMv",
+            "isPublic": null,
+            "name": "ufgkbfjefosiwabe",
+            "type": "humfxzxlp",
+            "updatedAt": "2021-07-08T17:00:00Z",
+            "enabled": true
+          }
+        ],
+        "model": "consectetur ip",
+        "openingQuestions": [
+          "ZdCXaV70",
+          "sit l",
+          "l6IPHLhh",
+          "iySyo",
+          "ipsum amet adi"
+        ],
+        "params": {
+          "frequency_penalty": -618.03,
+          "presence_penalty": -872.45
+        },
+        "plugins": [
+          "sit sit ipsum lor",
+          "4zoeHMWAyITs",
+          "rubpcgimrd",
+          "consectetur con",
+          "kcRD"
+        ]
+      },
+      "createdAt": "gackwninqgvwoevfpshck",
+      "homepage": "sit",
+      "identifier": "pv20",
+      "knowledgeCount": 763.53,
+      "meta": {
+        "avatar": "urgte",
+        "description": "amet dolor lorem ",
+        "tags": [
+          "pmtldmkqwtrixch",
+          "ame",
+          "thikxlgkqyiwhsjpubbeq",
+          "oty",
+          "sj"
+        ],
+        "title": "0yecyeS2aM",
+        "category": "sit dolo"
+      },
+      "pluginCount": -152.81,
+      "schemaVersion": -193.18,
+      "tokenUsage": 304.1,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "ulxctlcr"
+    },
+    {
+      "author": "crsjz",
+      "config": {
+        "systemRole": "ipsum cons",
+        "compressThreshold": 855.81,
+        "enableCompressThreshold": false,
+        "fewShots": [
+          {
+            "content": "bsvliszyftmzzmxxckyg",
+            "role": "function"
+          },
+          {
+            "content": "consectetur consectet",
+            "role": "system"
+          },
+          {
+            "content": "wendtpxdgbyqdtlkutm",
+            "role": "assistant"
+          },
+          {
+            "content": "ylkI8Kzb5tsS2gen9",
+            "role": "user"
+          },
+          {
+            "content": "X1YZ",
+            "role": "function"
+          }
+        ],
+        "historyCount": 982.53,
+        "inputTemplate": "usvolzydkyo",
+        "model": "ebkqqdpoenqscbsz",
+        "openingMessage": "jPr1UdtXdncQ7R3mY9Yns",
+        "plugins": [
+          "consectetur amet ",
+          "z"
+        ]
+      },
+      "createdAt": "1Ex7t6Wi57hHE",
+      "homepage": "Vr7fTnbM5",
+      "identifier": "joldmtqyudmlayqiqrux",
+      "knowledgeCount": 145.5,
+      "meta": {
+        "avatar": "tpouvzkzdulqcbnfs",
+        "description": "dolor ipsum lorem adi",
+        "tags": [
+          "ebkcfgptqmfppttn",
+          "consectetur"
+        ],
+        "title": "Hjtu",
+        "backgroundColor": "mruwpe"
+      },
+      "pluginCount": -208.91,
+      "schemaVersion": -721.85,
+      "tokenUsage": -686.32,
+      "summary": "jlZLG0SC8n"
+    },
+    {
+      "author": "sit lorem",
+      "config": {
+        "systemRole": "7IGWBr0k",
+        "enableCompressThreshold": false,
+        "enableHistoryCount": true,
+        "fewShots": [
+          {
+            "content": "amet ipsum dolor ame",
+            "role": "system"
+          },
+          {
+            "content": "lQb2Nh0qnCJYh2",
+            "role": "assistant"
+          }
+        ],
+        "historyCount": 172.18,
+        "openingMessage": "9lYopbEFt5HJOhgJ",
+        "openingQuestions": [
+          "dolor ipsum amet ip",
+          "FE0fp3RAQdZmiB"
+        ],
+        "params": {
+          "presence_penalty": -205.81,
+          "top_p": 683.44
+        },
+        "plugins": [
+          "dolor ",
+          "agdcrdkruor",
+          "hgxgtssftmbwubpqvrccy",
+          "adipiscing amet conse",
+          "lorem consectetur"
+        ]
+      },
+      "createdAt": "Nb",
+      "homepage": "jnqpiyhaazgipnjspcsst",
+      "identifier": "lo",
+      "knowledgeCount": 759.56,
+      "meta": {
+        "avatar": "nhwiirzs",
+        "description": "do",
+        "tags": [
+          "adipiscing am",
+          "bIQRYrLUA"
+        ],
+        "title": "syPOFcn4UYZ",
+        "backgroundColor": "adipiscing lorem ad"
+      },
+      "pluginCount": 82.66,
+      "schemaVersion": -151.48,
+      "tokenUsage": 956.63
+    },
+    {
+      "author": "pksqrontdncla",
+      "config": {
+        "systemRole": "ughjckowhxrdgm",
+        "compressThreshold": -549.21,
+        "displayMode": "docs",
+        "enableCompressThreshold": true,
+        "enableHistoryCount": true,
+        "inputTemplate": "akfnisyji",
+        "knowledgeBases": [
+          {
+            "avatar": "ffG6lHcbXRO",
+            "createdAt": "2020-08-26T19:00:00Z",
+            "id": "zvnwnuassriocyacmv",
+            "isPublic": false,
+            "name": "1qB8YkoMLEIE7pF",
+            "type": null,
+            "updatedAt": "2021-01-06T03:00:00Z",
+            "description": 1.63,
+            "enabled": false,
+            "settings": "sit amet"
+          },
+          {
+            "avatar": "5eezfgQvVyKpQ2MQV1Ii",
+            "createdAt": "2021-12-12T13:00:00Z",
+            "id": "ydethq",
+            "isPublic": null,
+            "name": "tsglojsggjtzegkhgoja",
+            "type": null,
+            "updatedAt": "2022-02-09T04:00:00Z",
+            "description": "Q70YjJ",
+            "enabled": false,
+            "settings": false
+          },
+          {
+            "avatar": "lore",
+            "createdAt": "2021-12-03T14:00:00Z",
+            "id": "cbmpvpnqvsnbaawi",
+            "isPublic": false,
+            "name": "qu9JB6yo",
+            "type": "ajafwdu",
+            "updatedAt": "2023-09-11T01:00:00Z",
+            "description": true,
+            "enabled": false,
+            "settings": true
+          },
+          {
+            "avatar": null,
+            "createdAt": "2022-09-12T22:00:00Z",
+            "id": "ed",
+            "isPublic": false,
+            "name": "rvp",
+            "type": null,
+            "updatedAt": "2020-01-17T10:00:00Z",
+            "description": null,
+            "enabled": true
+          }
+        ],
+        "model": "adipis",
+        "openingQuestions": []
+      },
+      "createdAt": "lhkipimyryehxqtwxebnm",
+      "homepage": "wrykc",
+      "identifier": "jyewkf",
+      "knowledgeCount": -826.29,
+      "meta": {
+        "avatar": "gxcavmwssgqcxw",
+        "description": "mumieugtczwonsfwpbqvm",
+        "tags": [
+          "consectetur ip",
+          "iekvghcopfirygzcrykzf",
+          "amet sit l",
+          "ZIFbREGKT"
+        ],
+        "title": "zkzcwpmgdjmaswpscia"
+      },
+      "pluginCount": -94.16,
+      "schemaVersion": -540.58,
+      "tokenUsage": 240.35,
+      "summary": "nQ4sTEUG"
+    },
+    {
+      "author": "ifkvqso",
+      "config": {
+        "systemRole": "kjhfsx",
+        "compressThreshold": 608.08,
+        "displayMode": "chat",
+        "enableHistoryCount": true,
+        "historyCount": -801.4,
+        "inputTemplate": "2FXRAFP",
+        "model": "E1gQSjVk8VCK8wmQ",
+        "openingQuestions": [
+          "Ja0LQnVVZHQwC",
+          "qwdkffpucnkq",
+          "lorem adip",
+          "mbf"
+        ],
+        "plugins": [
+          "sit",
+          "mNJItzqIy",
+          "OZAyUl5sOYRGQg4IqL80U",
+          "hrh"
+        ]
+      },
+      "createdAt": "omxighbahqfmhtglt",
+      "homepage": "amexguntuwxkrxulv",
+      "identifier": "BB6o7ipTRssJV",
+      "knowledgeCount": -230.83,
+      "meta": {
+        "avatar": "tofedffvqhstatft",
+        "description": "rfa",
+        "tags": [
+          "RNE",
+          "mjnxesgpabfsgsiwx",
+          "bqfbame"
+        ],
+        "title": "zCkpbMKsP3spKD0ro18",
+        "backgroundColor": "ugbropbqvm",
+        "category": "pcnfeq"
+      },
+      "pluginCount": -833.01,
+      "schemaVersion": 187.2,
+      "tokenUsage": -253.43,
+      "summary": "cons"
+    },
+    {
+      "author": "phmkrjnapglgftrr",
+      "config": {
+        "systemRole": "zybenyWf7Za6pI6",
+        "displayMode": "docs",
+        "enableMaxTokens": false,
+        "fewShots": [
+          {
+            "content": "fgowekpebtqpocmmnebn",
+            "role": "user"
+          },
+          {
+            "content": "jkinrwcottl",
+            "role": "user"
+          },
+          {
+            "content": "KWnuw",
+            "role": "user"
+          },
+          {
+            "content": "jlzuhyvolwxriw",
+            "role": "assistant"
+          },
+          {
+            "content": "rxlptl",
+            "role": "system"
+          }
+        ],
+        "historyCount": -542.24,
+        "inputTemplate": "s0rpM",
+        "knowledgeBases": [
+          {
+            "avatar": null,
+            "createdAt": "2020-06-17T18:00:00Z",
+            "id": "dolor lorem ame",
+            "isPublic": true,
+            "name": "consectetur dolor ",
+            "type": null,
+            "updatedAt": "2024-01-03T23:00:00Z",
+            "description": false,
+            "enabled": false,
+            "settings": null
+          },
+          {
+            "avatar": null,
+            "createdAt": "2023-09-05T04:00:00Z",
+            "id": "fdzgKlQwAP5ftnueYt",
+            "isPublic": false,
+            "name": "amet ame",
+            "type": "lorem adipisci",
+            "updatedAt": "2024-12-12T15:00:00Z",
+            "enabled": false,
+            "settings": true
+          }
+        ],
+        "model": "1IWwdeebTT",
+        "params": {
+          "frequency_penalty": -270.85,
+          "max_tokens": -735.5,
+          "top_p": 143.78
+        }
+      },
+      "createdAt": "M2l6tupNrE3toiSQ7BI",
+      "homepage": "lorem amet dolor a",
+      "identifier": "dx5etwyJI7CtvWP",
+      "knowledgeCount": 719.87,
+      "meta": {
+        "avatar": "lo",
+        "description": "adipiscing adipis",
+        "tags": [
+          "f8teV7XPu8DSWy9zQ",
+          "sgsbkca",
+          "uiiuoyyl",
+          "dolor"
+        ],
+        "title": "rnhkxwxymiwawbr",
+        "backgroundColor": "taiabudqbvo",
+        "category": "nzt4Q8O9lAkDF"
+      },
+      "pluginCount": 751.98,
+      "schemaVersion": 252.95,
+      "tokenUsage": 255.93,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      }
+    },
+    {
+      "author": "v",
+      "config": {
+        "systemRole": "sit ipsum",
+        "enableCompressThreshold": false,
+        "enableHistoryCount": false,
+        "enableMaxTokens": false,
+        "fewShots": [
+          {
+            "content": "sajztpqrekher",
+            "role": "user"
+          },
+          {
+            "content": "amet adipiscing",
+            "role": "system"
+          },
+          {
+            "content": "conse",
+            "role": "user"
+          }
+        ],
+        "historyCount": 34.76,
+        "model": "pdscyrrygfqxyupjuq",
+        "params": {
+          "max_tokens": -432.83,
+          "top_p": -589.9
+        },
+        "plugins": [
+          "x6xB6u",
+          "pCWjmDmlEOHNr6xd6",
+          "ypxmfimpljgnrqagrmhp",
+          "Z3"
+        ]
+      },
+      "createdAt": "amet amet",
+      "homepage": "consectetur",
+      "identifier": "08Twh4k",
+      "knowledgeCount": -718.43,
+      "meta": {
+        "avatar": "uamfO9xCpax11F",
+        "description": "kDFpCx",
+        "tags": [],
+        "title": "nocibwqnslnz",
+        "backgroundColor": "mkJfYzs",
+        "category": "gptgxutxpayfzl"
+      },
+      "pluginCount": 240.96,
+      "schemaVersion": 525.88,
+      "tokenUsage": -769.89,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "sit ipsum dolor l"
+    },
+    {
+      "author": "u7McGGGK",
+      "config": {
+        "systemRole": "xiczxmctzhjwtxqgyv",
+        "displayMode": "docs",
+        "inputTemplate": "ipsum sit adipiscing ",
+        "knowledgeBases": [
+          {
+            "avatar": null,
+            "createdAt": "2020-05-05T06:00:00Z",
+            "id": "dolor ipsum ip",
+            "isPublic": true,
+            "name": "zwvJVaFHMctqRciZFB2",
+            "type": null,
+            "updatedAt": "2020-03-11T03:00:00Z"
+          },
+          {
+            "avatar": null,
+            "createdAt": "2022-04-01T03:00:00Z",
+            "id": "e8OUHnXUF6l7KgZ1YBLLS",
+            "isPublic": null,
+            "name": "dolor dolor lorem ips",
+            "type": null,
+            "updatedAt": "2021-01-21T04:00:00Z",
+            "description": 84
+          }
+        ],
+        "model": "p6Om2U8xBJs",
+        "openingMessage": "tqbvfqqfscctinq",
+        "openingQuestions": [
+          "pzclmqjul",
+          "ywhnammcewnr",
+          "ygpc",
+          "8lz72Wus",
+          "afxsib"
+        ],
+        "plugins": []
+      },
+      "createdAt": "dolo",
+      "homepage": "cwza",
+      "identifier": "ultiutlqzcol",
+      "knowledgeCount": -426.79,
+      "meta": {
+        "avatar": "tmqgmpm",
+        "description": "lorem consectetu",
+        "tags": [
+          "dzzwsg",
+          "adipiscing dolor s",
+          "ikbrcxexrrq",
+          "adipiscing sit lore",
+          "wkanuyj"
+        ],
+        "title": "0RydYUZ44B",
+        "backgroundColor": "dolor consectetur adi",
+        "category": "adipiscing am"
+      },
+      "pluginCount": -165.25,
+      "schemaVersion": 373.49,
+      "tokenUsage": 237.48,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "z"
+    },
+    {
+      "author": "lorem lore",
+      "config": {
+        "systemRole": "rqrmodbwuztpewnwuu",
+        "enableCompressThreshold": true,
+        "enableHistoryCount": true,
+        "inputTemplate": "adipisci",
+        "knowledgeBases": [
+          {
+            "avatar": null,
+            "createdAt": "2023-10-09T22:00:00Z",
+            "id": "consectetur",
+            "isPublic": null,
+            "name": "sit lorem ",
+            "type": null,
+            "updatedAt": "2023-02-09T17:00:00Z",
+            "enabled": true,
+            "settings": "adipi"
+          }
+        ],
+        "openingMessage": "jvhyebfpbrvuvr",
+        "openingQuestions": [
+          "sit am",
+          "qennmxdqxycygxnx",
+          "umy",
+          "lorem a"
+        ],
+        "plugins": [
+          "lZtkZ3JbuxfVYovvplMt",
+          "jaaqzernmqki",
+          "IayYrnZxZxD2uLm",
+          "sit sit am"
+        ]
+      },
+      "createdAt": "arlxvuzwgypoivp",
+      "homepage": "adipiscing dolor lo",
+      "identifier": "dolor consectet",
+      "knowledgeCount": -344.28,
+      "meta": {
+        "avatar": "adipiscing sit ipsum",
+        "description": "otxnootwonguytfzowdod",
+        "tags": [
+          "consectetu",
+          "awcwberxdja",
+          "dolor lorem sit lorem",
+          "consectetur amet dolo"
+        ],
+        "title": "edxoaeubeu",
+        "backgroundColor": "ahhzut",
+        "category": "consectetur consect"
+      },
+      "pluginCount": -274.79,
+      "schemaVersion": 981.12,
+      "tokenUsage": -127.56
+    },
+    {
+      "author": "sUhi77q2A5ed7GE7Ygzk",
+      "config": {
+        "systemRole": "EeCmzqRxzANyVRuJNb",
+        "compressThreshold": -426.95,
+        "displayMode": "docs",
+        "enableCompressThreshold": false,
+        "fewShots": [],
+        "historyCount": -415.73,
+        "inputTemplate": "adipiscin",
+        "knowledgeBases": [
+          {
+            "avatar": "wmoykowrniqttfhncugh",
+            "createdAt": "2021-07-12T06:00:00Z",
+            "id": "jcuubd",
+            "isPublic": true,
+            "name": "qUNrHaYFS",
+            "type": null,
+            "updatedAt": "2022-01-14T14:00:00Z",
+            "description": "swcvjq",
+            "enabled": false,
+            "settings": false
+          },
+          {
+            "avatar": "lorem consecte",
+            "createdAt": "2021-04-14T05:00:00Z",
+            "id": "owU5gqCiY8VYrneCyg",
+            "isPublic": null,
+            "name": "hiqb",
+            "type": null,
+            "updatedAt": "2021-01-13T05:00:00Z",
+            "description": "ipsum",
+            "settings": false
+          },
+          {
+            "avatar": null,
+            "createdAt": "2020-05-25T08:00:00Z",
+            "id": "con",
+            "isPublic": null,
+            "name": "domfrucef",
+            "type": "o",
+            "updatedAt": "2021-06-21T14:00:00Z",
+            "description": "zryczqrqtmb",
+            "settings": true
+          }
+        ],
+        "model": "consectetur amet ad",
+        "openingMessage": "lorem consectet"
+      },
+      "createdAt": "qYNfide",
+      "homepage": "sit sit dol",
+      "identifier": "KJ4zfDUrZ",
+      "knowledgeCount": 298.97,
+      "meta": {
+        "avatar": "lorem ipsum consectet",
+        "description": "co",
+        "tags": [
+          "R",
+          "cs"
+        ],
+        "title": "ndt"
+      },
+      "pluginCount": -63.71,
+      "schemaVersion": -195.1,
+      "tokenUsage": -978.37,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "lor"
+    },
+    {
+      "author": "ipsum co",
+      "config": {
+        "systemRole": "hGJvYb8AkxAaRNKN4D",
+        "compressThreshold": 882.1,
+        "enableCompressThreshold": true,
+        "enableHistoryCount": true,
+        "fewShots": [
+          {
+            "content": "OuxupjwqHcC",
+            "role": "user"
+          }
+        ],
+        "historyCount": 696.66,
+        "params": {
+          "top_p": 8.34
+        },
+        "plugins": []
+      },
+      "createdAt": "amet ipsum",
+      "homepage": "adipiscing lorem ipsu",
+      "identifier": "xsmsorzj",
+      "knowledgeCount": -343.9,
+      "meta": {
+        "avatar": "qpfipthsoc",
+        "description": "xrw2VvpgmPA5YcSA",
+        "tags": [
+          "namggficgdrgy",
+          "ipsum amet sit s",
+          "si"
+        ],
+        "title": "0qEU",
+        "backgroundColor": "consectetu"
+      },
+      "pluginCount": 52.56,
+      "schemaVersion": 978.72,
+      "tokenUsage": 931.72,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "consectetur ad"
+    },
+    {
+      "author": "lorem dolor consectet",
+      "config": {
+        "systemRole": "8vXjKS04IY21rXM3IYwu",
+        "compressThreshold": -131.71,
+        "displayMode": "docs",
+        "enableMaxTokens": false,
+        "fewShots": [],
+        "historyCount": -718.35,
+        "inputTemplate": "feuhcwnuwqdew",
+        "knowledgeBases": [
+          {
+            "avatar": null,
+            "createdAt": "2020-11-22T04:00:00Z",
+            "id": "C4VWYW0ijWTVQcTmCmR",
+            "isPublic": null,
+            "name": "tdogpsamhxx",
+            "type": null,
+            "updatedAt": "2020-03-08T13:00:00Z",
+            "description": 72.32,
+            "settings": "TwULvxeHtvM8"
+          }
+        ],
+        "model": "s",
+        "openingQuestions": [
+          "hdpa",
+          "sit",
+          "amet adipiscing sit a",
+          "6APCBWv02dS7OpxIYiOk",
+          "gfrodaqbfofosegp"
+        ],
+        "params": {
+          "frequency_penalty": 41.27,
+          "presence_penalty": -792.13,
+          "temperature": 496.81
+        },
+        "plugins": [
+          "tjduwnjzvgc",
+          "zxqptzhwvbr",
+          "lore"
+        ]
+      },
+      "createdAt": "consectetur a",
+      "homepage": "lMdtlP",
+      "identifier": "wrrM4YNSqkOCz88y",
+      "knowledgeCount": -815.02,
+      "meta": {
+        "avatar": "wthuwjxmpmwezqwkxupxy",
+        "description": "ygabilnqcoiutp",
+        "tags": [
+          "xnrenulacobaf",
+          "foqrhafh",
+          "Xh5",
+          "aybuoqanq",
+          "bptkivhqxfohzzrve"
+        ],
+        "title": "v",
+        "category": "z"
+      },
+      "pluginCount": -192.52,
+      "schemaVersion": 882.37,
+      "tokenUsage": 774.8,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      }
+    },
+    {
+      "author": "consectetu",
+      "config": {
+        "systemRole": "cxqgeyhmaswtbrfmvn",
+        "enableHistoryCount": true,
+        "fewShots": [
+          {
+            "content": "ldkgljuDxwGo7oNyHa92",
+            "role": "user"
+          },
+          {
+            "content": "ad",
+            "role": "user"
+          },
+          {
+            "content": "ehyjoqluy",
+            "role": "assistant"
+          },
+          {
+            "content": "gbwgb",
+            "role": "user"
+          }
+        ],
+        "historyCount": -672.74,
+        "inputTemplate": "ehpFqaSS30SBoPnq0aEc",
+        "openingMessage": "lorem adip",
+        "openingQuestions": [
+          "obuaewmqwy"
+        ],
+        "params": {
+          "frequency_penalty": 452.61,
+          "max_tokens": -356.99,
+          "presence_penalty": -773.36,
+          "temperature": -398.37
+        },
+        "plugins": [
+          "d",
+          "ondnib",
+          "BJ3",
+          "qtkmjdqeogsc",
+          "blptwntaz"
+        ]
+      },
+      "createdAt": "TmwJW2OFX6",
+      "homepage": "qjhhpaiuy",
+      "identifier": "lorem adipiscing ips",
+      "knowledgeCount": 447.72,
+      "meta": {
+        "avatar": "adipiscing conse",
+        "description": "ghjswzcdklguhvlf",
+        "tags": [],
+        "title": "tTS",
+        "backgroundColor": "dolor sit ipsum a",
+        "category": "axuqyfipxqvwq"
+      },
+      "pluginCount": 8.59,
+      "schemaVersion": -104.44,
+      "tokenUsage": -647.6,
+      "summary": "fvlntahlmnffoxyukv"
+    },
+    {
+      "author": "adipiscing adipis",
+      "config": {
+        "systemRole": "consectetur ips",
+        "enableHistoryCount": true,
+        "enableMaxTokens": false,
+        "fewShots": [
+          {
+            "content": "lyfaaywkxpxvyvjak",
+            "role": "assistant"
+          },
+          {
+            "content": "dolor adipiscing dol",
+            "role": "function"
+          },
+          {
+            "content": "amet ipsu",
+            "role": "assistant"
+          },
+          {
+            "content": "oo",
+            "role": "system"
+          }
+        ],
+        "historyCount": 969.45,
+        "knowledgeBases": [
+          {
+            "avatar": "g",
+            "createdAt": "2020-07-22T07:00:00Z",
+            "id": "RL38C",
+            "isPublic": true,
+            "name": "uDVVG",
+            "type": "xkaxmivrrlki",
+            "updatedAt": "2020-02-08T22:00:00Z",
+            "description": "sQS8FN",
+            "enabled": true
+          },
+          {
+            "avatar": "lorem ",
+            "createdAt": "2023-12-27T00:00:00Z",
+            "id": "fvjkchjvmhphvifkp",
+            "isPublic": null,
+            "name": "OntAXi",
+            "type": null,
+            "updatedAt": "2023-02-21T19:00:00Z",
+            "description": 69,
+            "settings": 91
+          },
+          {
+            "avatar": "acrktloo",
+            "createdAt": "2024-01-21T21:00:00Z",
+            "id": "kzbspbhsakrfobd",
+            "isPublic": false,
+            "name": "tckdfdyxfmyxazsyq",
+            "type": "rKUwNRvF0Nm",
+            "updatedAt": "2023-02-15T14:00:00Z",
+            "enabled": false
+          },
+          {
+            "avatar": "sit dol",
+            "createdAt": "2022-06-03T04:00:00Z",
+            "id": "dtqduenslnjsjyt",
+            "isPublic": null,
+            "name": "adipiscing ipsum ips",
+            "type": "5EugkYGr",
+            "updatedAt": "2022-02-25T02:00:00Z",
+            "description": null,
+            "settings": 13
+          }
+        ],
+        "model": "hpahoqsxyv",
+        "openingMessage": "ipsum sit sit a",
+        "openingQuestions": [
+          "qmwcwyx",
+          "consectetur sit ",
+          "yduvjujprwcthxpndr",
+          "6IBH9esgJXcHG7q",
+          "Z6xCk"
+        ]
+      },
+      "createdAt": "askuztlcvmr",
+      "homepage": "ucbarrarcyf",
+      "identifier": "dtafrpbkdyzmjyjjdxif",
+      "knowledgeCount": -632.74,
+      "meta": {
+        "avatar": "pusavuyxszc",
+        "description": "ispXv9zmMhghcD9nB9",
+        "tags": [
+          "4441Ot2Ik"
+        ],
+        "title": "amet adipiscing s",
+        "category": "ipsum s"
+      },
+      "pluginCount": 275.92,
+      "schemaVersion": 239.56,
+      "tokenUsage": 166.22,
+      "summary": "91xOda1za8hcEEf1sv"
+    },
+    {
+      "author": "adi",
+      "config": {
+        "systemRole": "pnyhwkrzupualwtlfjldy",
+        "displayMode": "chat",
+        "enableHistoryCount": true,
+        "enableMaxTokens": false,
+        "fewShots": [
+          {
+            "content": "adwagonftsasjmpqueef",
+            "role": "system"
+          },
+          {
+            "content": "w",
+            "role": "assistant"
+          }
+        ],
+        "historyCount": -207.49,
+        "inputTemplate": "puiphkjmalm",
+        "openingMessage": "hN4eGXDD1PinQ",
+        "openingQuestions": [
+          "con",
+          "tyuatzunbagseo",
+          "ipsum amet lorem ad",
+          "YqidBkVKxvfi3kHJUk",
+          "S5wp1rpO4eKPp"
+        ],
+        "plugins": [
+          "dolor consectetur i",
+          "bxppkpexulmoqgkzz",
+          "L4S",
+          "lorem sit ipsum conse"
+        ]
+      },
+      "createdAt": "sit lorem amet ipsum",
+      "homepage": "NOYw0faidZQvqAjFt",
+      "identifier": "f",
+      "knowledgeCount": -501.07,
+      "meta": {
+        "avatar": "aC5Eyx",
+        "description": "Ds4",
+        "tags": [],
+        "title": "amet lore"
+      },
+      "pluginCount": 888.35,
+      "schemaVersion": 995.88,
+      "tokenUsage": 388.92
+    },
+    {
+      "author": "adipiscing adipis",
+      "config": {
+        "systemRole": "ZTKgB8Ix",
+        "displayMode": "docs",
+        "enableCompressThreshold": false,
+        "enableHistoryCount": true,
+        "enableMaxTokens": false,
+        "historyCount": 823.89,
+        "knowledgeBases": [
+          {
+            "avatar": "ildjbczafmujpafjcx",
+            "createdAt": "2023-05-20T22:00:00Z",
+            "id": "bquz",
+            "isPublic": null,
+            "name": "chuxwwwkppfssjmetixzc",
+            "type": null,
+            "updatedAt": "2023-07-24T23:00:00Z",
+            "description": 62,
+            "settings": null
+          },
+          {
+            "avatar": "ccbl",
+            "createdAt": "2024-07-08T19:00:00Z",
+            "id": "zwbnrxolhfvat",
+            "isPublic": null,
+            "name": "am",
+            "type": null,
+            "updatedAt": "2024-07-27T17:00:00Z",
+            "settings": false
+          },
+          {
+            "avatar": null,
+            "createdAt": "2020-04-17T10:00:00Z",
+            "id": "tsfqbm",
+            "isPublic": true,
+            "name": "xihhhrkjkor",
+            "type": "ixzhhawivfz",
+            "updatedAt": "2020-10-04T11:00:00Z",
+            "description": 27,
+            "settings": "cucytyqdyyss"
+          },
+          {
+            "avatar": null,
+            "createdAt": "2021-07-20T00:00:00Z",
+            "id": "p0MXGmk9",
+            "isPublic": null,
+            "name": "t8fEM",
+            "type": "D5fcbsQcYS",
+            "updatedAt": "2021-04-23T21:00:00Z",
+            "description": false,
+            "settings": true
+          }
+        ],
+        "model": "sit",
+        "openingMessage": "dolor amet amet dolo",
+        "openingQuestions": [
+          "6MBbhq34CpnH",
+          "uwpgesftkhddcbbgbdos",
+          "onrf",
+          "rtdfuuzrztobaiihjwtqp",
+          "ff"
+        ],
+        "plugins": [
+          "4XQerCS2bI1M37a9uE",
+          "vpl",
+          "BMnDyh4JiFFsG",
+          "sit"
+        ]
+      },
+      "createdAt": "aZ9peC7XcH9FMznlZy",
+      "homepage": "ZBgWoYUz9NflS5",
+      "identifier": "xmvoecieixwmommfe",
+      "knowledgeCount": 441.19,
+      "meta": {
+        "avatar": "amet adipiscing ",
+        "description": "aasdyvgsiopb",
+        "tags": [
+          "ocrkmlvewptgillxg",
+          "amet ipsum ip",
+          "AsPuaMwMaIfGvutmp",
+          "wx",
+          "Lp3PiI"
+        ],
+        "title": "G",
+        "category": "TH9CI9zElfkJVanVz"
+      },
+      "pluginCount": -673.12,
+      "schemaVersion": 948.6,
+      "tokenUsage": 947.43,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "adipiscing lorem sit "
+    },
+    {
+      "author": "co",
+      "config": {
+        "systemRole": "adipiscin",
+        "compressThreshold": -335.6,
+        "enableCompressThreshold": false,
+        "enableHistoryCount": true,
+        "enableMaxTokens": false,
+        "inputTemplate": "B",
+        "model": "adipi",
+        "openingMessage": "consectetur cons",
+        "openingQuestions": [
+          "YtyVFQNP3EPxbUlY4Okuy",
+          "kua",
+          "amet lorem dolor ip",
+          "ZdrEVSH8jHxCaCbXQ7"
+        ],
+        "plugins": [
+          "Rf3",
+          "HNbt7cIzbNk7d1iPUZ",
+          "sit sit ipsum amet ad",
+          "HuhkKATCbBTSS"
+        ]
+      },
+      "createdAt": "XbG2FiFHw3vqFmt",
+      "homepage": "sit adipiscin",
+      "identifier": "s",
+      "knowledgeCount": -829.8,
+      "meta": {
+        "avatar": "sit lorem a",
+        "description": "adipiscing sit dol",
+        "tags": [
+          "ixvypaupziprjlywifl",
+          "ezbknve",
+          "es4FLdxKsCVRpB0Iv6",
+          "4r7lbOTDc9i13n1",
+          "4L6R3aTo32r9wca"
+        ],
+        "title": "ipsum ",
+        "category": "1CrfBHr"
+      },
+      "pluginCount": -609.4,
+      "schemaVersion": 881.78,
+      "tokenUsage": -864.45,
+      "summary": "sit consectetur"
+    },
+    {
+      "author": "k7zWbk8Yb",
+      "config": {
+        "systemRole": "afkfktqntelspysk",
+        "compressThreshold": 863.95,
+        "displayMode": "docs",
+        "enableCompressThreshold": false,
+        "fewShots": [
+          {
+            "content": "lk",
+            "role": "assistant"
+          },
+          {
+            "content": "yenbygnsmmmpqsmkeai",
+            "role": "assistant"
+          },
+          {
+            "content": "YUFteY0pfyFM9ANV",
+            "role": "user"
+          },
+          {
+            "content": "co",
+            "role": "user"
+          }
+        ],
+        "historyCount": 830.34,
+        "inputTemplate": "dolor ",
+        "params": {
+          "max_tokens": -144.02,
+          "presence_penalty": -561.15,
+          "temperature": 613.78,
+          "top_p": -122.36
+        }
+      },
+      "createdAt": "tyoglydnjiclpu",
+      "homepage": "riGWOB773uRcNqF9sqPh",
+      "identifier": "sit conse",
+      "knowledgeCount": -535.35,
+      "meta": {
+        "avatar": "amet adipiscin",
+        "description": "XGWTOZPfjfF6oflL",
+        "tags": [
+          "ipsum si",
+          "dxjgxibeniheci",
+          "lorem dolor lorem",
+          "832C1jJpKgG5",
+          "yczlajqr"
+        ],
+        "title": "tecl",
+        "backgroundColor": "consectetur lorem d"
+      },
+      "pluginCount": -582.2,
+      "schemaVersion": 901.02,
+      "tokenUsage": 202.28,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "amet consectetur"
+    },
+    {
+      "author": "consecte",
+      "config": {
+        "systemRole": "LMaRjF",
+        "enableHistoryCount": false,
+        "knowledgeBases": [
+          {
+            "avatar": null,
+            "createdAt": "2020-02-26T18:00:00Z",
+            "id": "swblxujqafdsokgaugimz",
+            "isPublic": false,
+            "name": "hvnvrnbbglwlqescgjix",
+            "type": null,
+            "updatedAt": "2020-02-16T03:00:00Z",
+            "description": 19.09,
+            "settings": null
+          },
+          {
+            "avatar": "qZHVCzPzJ",
+            "createdAt": "2021-02-26T14:00:00Z",
+            "id": "X9oG8DCkeLoVXCj",
+            "isPublic": null,
+            "name": "vAGWzI2bi8ul4",
+            "type": "lfpt",
+            "updatedAt": "2022-12-13T02:00:00Z",
+            "description": 98,
+            "enabled": true
+          },
+          {
+            "avatar": null,
+            "createdAt": "2020-12-25T07:00:00Z",
+            "id": "adipiscing si",
+            "isPublic": false,
+            "name": "bIjg3dJ1B5Bq7av",
+            "type": "knigbipfmxocargjtdx",
+            "updatedAt": "2023-05-13T10:00:00Z",
+            "settings": 80.05
+          },
+          {
+            "avatar": null,
+            "createdAt": "2022-10-14T22:00:00Z",
+            "id": "CaFQad4JfWjXu",
+            "isPublic": null,
+            "name": "YQ1ncYbZvyh",
+            "type": "tgehmvkqmt",
+            "updatedAt": "2021-05-08T17:00:00Z",
+            "description": true
+          },
+          {
+            "avatar": "lorem con",
+            "createdAt": "2024-07-20T21:00:00Z",
+            "id": "dolo",
+            "isPublic": false,
+            "name": "s",
+            "type": "ren",
+            "updatedAt": "2023-09-21T11:00:00Z",
+            "description": 77,
+            "enabled": true,
+            "settings": 11
+          }
+        ],
+        "openingMessage": "kjifmivchpmtrozdkkqm",
+        "openingQuestions": [
+          "dVAL1",
+          "CxDUSkfkLvAEEHCURhb"
+        ],
+        "params": {
+          "max_tokens": -572.16,
+          "presence_penalty": 275.23,
+          "top_p": 941.17
+        }
+      },
+      "createdAt": "vIiBOy871ZPijo4u",
+      "homepage": "qrfivebdajkotftuqm",
+      "identifier": "dssxvoxhwrkfawzi",
+      "knowledgeCount": -630.38,
+      "meta": {
+        "avatar": "hikg",
+        "description": "a",
+        "tags": [
+          "qgxvnooopgllk",
+          "owhzhfpcyzabyzllwwcvd",
+          "T2iY4wlDszCHNvcY",
+          "sit amet ipsum adipis",
+          "0mHlpVSgYNfMZrzTexg2E"
+        ],
+        "title": "xYXvD2zqy5ngJRgdrCAX",
+        "backgroundColor": "ipsum d",
+        "category": "lnn9xkotW2whILIAlw3j"
+      },
+      "pluginCount": 168.49,
+      "schemaVersion": 445.92,
+      "tokenUsage": 492.82,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "SGq0Thu8"
+    },
+    {
+      "author": "amet ipsum ipsum ad",
+      "config": {
+        "systemRole": "lorem am",
+        "compressThreshold": 351.82,
+        "displayMode": "docs",
+        "enableCompressThreshold": false,
+        "enableHistoryCount": false,
+        "enableMaxTokens": false,
+        "fewShots": [
+          {
+            "content": "b",
+            "role": "system"
+          },
+          {
+            "content": "kgkgktaw",
+            "role": "system"
+          },
+          {
+            "content": "dolor adipiscing adip",
+            "role": "user"
+          },
+          {
+            "content": "J7BzGW",
+            "role": "user"
+          }
+        ],
+        "historyCount": 417.85,
+        "inputTemplate": "jl6bK",
+        "model": "61g",
+        "openingQuestions": [
+          "vkjwspz",
+          "yxsatisizphwdqepkiqo",
+          "caeacszgcyspi",
+          "amet lorem ",
+          "lorem consectetur"
+        ],
+        "plugins": [
+          "si",
+          "ayjowe",
+          "dolor sit lore",
+          "conse",
+          "lorem ipsum ipsum a"
+        ]
+      },
+      "createdAt": "dolor amet",
+      "homepage": "t",
+      "identifier": "dolor consecte",
+      "knowledgeCount": 993.9,
+      "meta": {
+        "avatar": "zsbnxdcmnivmomlgu",
+        "description": "dolor consect",
+        "tags": [
+          "vwuvabpjkaaie"
+        ],
+        "title": "lorem cons"
+      },
+      "pluginCount": -675.7,
+      "schemaVersion": 329.94,
+      "tokenUsage": 693.52,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "yvsnmoz"
+    },
+    {
+      "author": "pv",
+      "config": {
+        "systemRole": "a",
+        "compressThreshold": -401.61,
+        "enableHistoryCount": true,
+        "enableMaxTokens": true,
+        "historyCount": 612.58,
+        "knowledgeBases": [
+          {
+            "avatar": "tsjjhngcjbsfhlsv",
+            "createdAt": "2024-08-19T08:00:00Z",
+            "id": "yoyqgf",
+            "isPublic": null,
+            "name": "YYRWBHg",
+            "type": "hV8S8CMgAmexWV",
+            "updatedAt": "2023-08-01T19:00:00Z"
+          },
+          {
+            "avatar": null,
+            "createdAt": "2022-02-17T18:00:00Z",
+            "id": "adipiscing",
+            "isPublic": true,
+            "name": "8o",
+            "type": "1GPu7R",
+            "updatedAt": "2020-02-24T01:00:00Z",
+            "description": 2.77
+          }
+        ],
+        "openingMessage": "consectet",
+        "openingQuestions": [
+          "5lokUFgUQHqA9uy",
+          "XTNLRU6HA4Yp5Qu"
+        ],
+        "params": {
+          "max_tokens": 739.58,
+          "temperature": 776.18,
+          "top_p": -944.57
+        },
+        "plugins": [
+          "con",
+          "zzdjdfcmlrebesykus"
+        ]
+      },
+      "createdAt": "DvQ0TfPdxRMwLIqPI0",
+      "homepage": "zhabqgwjqjtzwgeibwen",
+      "identifier": "mpffjgjbhh",
+      "knowledgeCount": -522.97,
+      "meta": {
+        "avatar": "povbklrugraedjvqcvni",
+        "description": "cons",
+        "tags": [
+          "osMA",
+          "amet sit",
+          "iqzyz"
+        ],
+        "title": "Y0WRg"
+      },
+      "pluginCount": -389.61,
+      "schemaVersion": -546.78,
+      "tokenUsage": -813.98,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "wkcraanwbhmfwmsa"
+    },
+    {
+      "author": "wD9tHNJ3",
+      "config": {
+        "systemRole": "lorem dolo",
+        "enableCompressThreshold": true,
+        "enableMaxTokens": false,
+        "historyCount": -358.9,
+        "inputTemplate": "foaobogtjt",
+        "knowledgeBases": [
+          {
+            "avatar": "llnzmkuoffeaz",
+            "createdAt": "2020-08-19T18:00:00Z",
+            "id": "dolor lor",
+            "isPublic": true,
+            "name": "GeoN",
+            "type": null,
+            "updatedAt": "2021-12-19T06:00:00Z",
+            "description": 97,
+            "settings": 36.47
+          },
+          {
+            "avatar": "VGQB273dEWbgOkB0X2N2C",
+            "createdAt": "2022-06-07T22:00:00Z",
+            "id": "uwre",
+            "isPublic": true,
+            "name": "ad",
+            "type": null,
+            "updatedAt": "2024-04-11T07:00:00Z",
+            "description": true,
+            "enabled": true,
+            "settings": "lorem adipisci"
+          }
+        ],
+        "model": "consec",
+        "plugins": []
+      },
+      "createdAt": "dolor adi",
+      "homepage": "Q",
+      "identifier": "vducfwdcz",
+      "knowledgeCount": 609.77,
+      "meta": {
+        "avatar": "ozmihj",
+        "description": "sit sit ipsum si",
+        "tags": [],
+        "title": "ipsum consectetur lor",
+        "category": "qtpcwbg"
+      },
+      "pluginCount": -432.83,
+      "schemaVersion": 874.18,
+      "tokenUsage": -80.34,
+      "summary": "yciimryzlnmtzfhuzux"
+    },
+    {
+      "author": "nbxskfwgsdrhgymplyg",
+      "config": {
+        "systemRole": "uzxbpygug",
+        "compressThreshold": 838.92,
+        "displayMode": "chat",
+        "enableMaxTokens": true,
+        "fewShots": [
+          {
+            "content": "phppludqewyfffyfnrkra",
+            "role": "user"
+          }
+        ],
+        "historyCount": -646.84,
+        "inputTemplate": "dolor amet dolor ",
+        "knowledgeBases": [
+          {
+            "avatar": "lorem dolor amet ",
+            "createdAt": "2021-01-28T23:00:00Z",
+            "id": "zuhqkfumqwwgqus",
+            "isPublic": null,
+            "name": "qsxojgqeyyrynz",
+            "type": null,
+            "updatedAt": "2023-02-18T00:00:00Z",
+            "description": null,
+            "enabled": true,
+            "settings": 68
+          },
+          {
+            "avatar": "lorem sit dol",
+            "createdAt": "2023-04-17T13:00:00Z",
+            "id": "0",
+            "isPublic": null,
+            "name": "wprxijohcxiukoyru",
+            "type": null,
+            "updatedAt": "2022-01-27T22:00:00Z",
+            "description": "buLMlH",
+            "enabled": true,
+            "settings": 72.99
+          },
+          {
+            "avatar": null,
+            "createdAt": "2022-12-13T12:00:00Z",
+            "id": "rg",
+            "isPublic": true,
+            "name": "sit dolor ",
+            "type": "W0Ui8GOHY",
+            "updatedAt": "2022-11-13T18:00:00Z",
+            "description": false,
+            "settings": 69.54
+          },
+          {
+            "avatar": null,
+            "createdAt": "2021-09-16T08:00:00Z",
+            "id": "bxfh7AH",
+            "isPublic": null,
+            "name": "oEASnc0u",
+            "type": "5tdf1rJwzYLTtt",
+            "updatedAt": "2024-02-02T14:00:00Z",
+            "enabled": true
+          }
+        ],
+        "model": "durerqpqjofgobxi",
+        "openingMessage": "mhhrfmxdjcjeqkkj",
+        "params": {
+          "max_tokens": -965.74,
+          "presence_penalty": -414.01,
+          "top_p": -944.9
+        },
+        "plugins": [
+          "consectetur dolor"
+        ]
+      },
+      "createdAt": "qs",
+      "homepage": "consectetur lorem i",
+      "identifier": "dolor adipiscin",
+      "knowledgeCount": -955.92,
+      "meta": {
+        "avatar": "sit adipiscing si",
+        "description": "G",
+        "tags": [
+          "YfPkZ",
+          "S8EZlSRPrSx",
+          "amet sit ipsum ",
+          "i6C6H93hBpva"
+        ],
+        "title": "qfhanny",
+        "backgroundColor": "mhliiajmdwl",
+        "category": "xuvlbinxjawyzcnys"
+      },
+      "pluginCount": -157.5,
+      "schemaVersion": -637.04,
+      "tokenUsage": -220.9
+    },
+    {
+      "author": "WOBCwKnv62SI69Ybb",
+      "config": {
+        "systemRole": "amet sit dol",
+        "compressThreshold": -249.37,
+        "enableCompressThreshold": true,
+        "enableHistoryCount": true,
+        "historyCount": 709.86,
+        "inputTemplate": "uvkhu",
+        "openingMessage": "edlqkszlufdnuvttv"
+      },
+      "createdAt": "nb",
+      "homepage": "DIKh3wrw3JyZw3Wey8ss",
+      "identifier": "qbfshci",
+      "knowledgeCount": 828.08,
+      "meta": {
+        "avatar": "rfaqbh",
+        "description": "pfjhqftrljvfobb",
+        "tags": [
+          "ugpzjjmt",
+          "iaseyjatjdb",
+          "me3lQaqbdDIsIMIxFu"
+        ],
+        "title": "jQCHVUl2",
+        "category": "cHRU"
+      },
+      "pluginCount": -747.62,
+      "schemaVersion": 221.44,
+      "tokenUsage": -318.47,
+      "summary": "amet si"
+    },
+    {
+      "author": "FybWhJ7SnQQ",
+      "config": {
+        "systemRole": "tyosxsufltbttgq",
+        "enableCompressThreshold": false,
+        "enableHistoryCount": false,
+        "enableMaxTokens": true,
+        "knowledgeBases": [
+          {
+            "avatar": "alizlouqvvbdkkv",
+            "createdAt": "2020-10-18T08:00:00Z",
+            "id": "guswhufldgyz",
+            "isPublic": true,
+            "name": "q",
+            "type": "dolor am",
+            "updatedAt": "2021-04-03T06:00:00Z",
+            "description": 91,
+            "enabled": false,
+            "settings": null
+          },
+          {
+            "avatar": "EQVjlviRjMM",
+            "createdAt": "2024-03-13T16:00:00Z",
+            "id": "adipiscing amet sit",
+            "isPublic": false,
+            "name": "lorem lorem lorem",
+            "type": "hfyj",
+            "updatedAt": "2020-07-26T00:00:00Z"
+          },
+          {
+            "avatar": "ksclhvwctwbci",
+            "createdAt": "2021-06-25T09:00:00Z",
+            "id": "lorem sit ",
+            "isPublic": true,
+            "name": "K4j",
+            "type": "V",
+            "updatedAt": "2020-10-17T07:00:00Z",
+            "description": 43,
+            "enabled": true,
+            "settings": null
+          },
+          {
+            "avatar": "ygkufneknbxlccgb",
+            "createdAt": "2023-12-16T16:00:00Z",
+            "id": "qtyfcpr",
+            "isPublic": false,
+            "name": "uuljzilh",
+            "type": "rk3sE9",
+            "updatedAt": "2024-12-14T22:00:00Z",
+            "settings": "gwuaiztncba"
+          },
+          {
+            "avatar": null,
+            "createdAt": "2020-02-05T05:00:00Z",
+            "id": "unCytW",
+            "isPublic": null,
+            "name": "giF",
+            "type": null,
+            "updatedAt": "2020-02-25T12:00:00Z",
+            "description": null,
+            "enabled": false
+          }
+        ],
+        "model": "lorem sit ipsum lo",
+        "openingMessage": "thdVAxXvh7FpgM5O",
+        "plugins": [
+          "ipsum dolor ipsum ",
+          "wbudahbxjwjzvzq",
+          "ramf1KXCHX2HIPS"
+        ]
+      },
+      "createdAt": "mltsnpfyc",
+      "homepage": "nq",
+      "identifier": "ipsum consectetur",
+      "knowledgeCount": -322.78,
+      "meta": {
+        "avatar": "rtjcyw",
+        "description": "3B5PeNBs9bf8CZM0a",
+        "tags": [],
+        "title": "rncahdtjeajcy",
+        "backgroundColor": "qykntvnfxlkwsko",
+        "category": "LlEd9"
+      },
+      "pluginCount": -771.85,
+      "schemaVersion": 622.2,
+      "tokenUsage": -285.8,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "ipsum "
+    },
+    {
+      "author": "lorem ipsum lo",
+      "config": {
+        "systemRole": "yvaz",
+        "compressThreshold": 598.17,
+        "displayMode": "docs",
+        "enableCompressThreshold": false,
+        "historyCount": 563.76,
+        "model": "fuopurrwdbhjdbmwulw",
+        "openingMessage": "vibsrrzmdqrvddpkgam",
+        "params": {
+          "frequency_penalty": 677.56,
+          "max_tokens": -758.93,
+          "presence_penalty": -959.2,
+          "top_p": -983.09
+        },
+        "plugins": [
+          "amet sit adip",
+          "tcjedssgyxebyibsb",
+          "amet dolor consec",
+          "xjgusicfcwcogkcw"
+        ]
+      },
+      "createdAt": "adi",
+      "homepage": "p4NCP3ckh2dd5mb9SxZ4",
+      "identifier": "c",
+      "knowledgeCount": 54.58,
+      "meta": {
+        "avatar": "stnyelbuuony",
+        "description": "cmWLByT4Zyhip",
+        "tags": [
+          "BEt",
+          "cpdb"
+        ],
+        "title": "si"
+      },
+      "pluginCount": 170.84,
+      "schemaVersion": 954.35,
+      "tokenUsage": -991.82,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      }
+    },
+    {
+      "author": "tMV2RU2cfr58nxAf",
+      "config": {
+        "systemRole": "xkyoe",
+        "compressThreshold": 918.52,
+        "enableHistoryCount": false,
+        "enableMaxTokens": true,
+        "historyCount": -199.99,
+        "inputTemplate": "lorem si",
+        "model": "sypkolgkgkxnxyaggj",
+        "openingMessage": "amet c",
+        "openingQuestions": [
+          "9NufVO6A",
+          "bckwrseyxovnvkogrnuyx"
+        ]
+      },
+      "createdAt": "kovb",
+      "homepage": "amet ipsum ipsum lo",
+      "identifier": "UoNJvJ",
+      "knowledgeCount": 160.16,
+      "meta": {
+        "avatar": "kiykkjppu",
+        "description": "vxagcshsrvyndjtil",
+        "tags": [],
+        "title": "adipis",
+        "backgroundColor": "eaprjkjjfzo"
+      },
+      "pluginCount": -386.94,
+      "schemaVersion": 763.72,
+      "tokenUsage": -750.21,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "ragatusqmheanoaw"
+    },
+    {
+      "author": "SISNhOE7n7L97gT7",
+      "config": {
+        "systemRole": "eKNNPSRw6",
+        "displayMode": "docs",
+        "enableCompressThreshold": false,
+        "inputTemplate": "bfsszexggkfsetaveqp",
+        "model": "escffyunnqtjjyfaw",
+        "openingQuestions": [
+          "lorem lorem lorem",
+          "g",
+          "gubzzmnc",
+          "cixlzlpww",
+          "adipiscing s"
+        ]
+      },
+      "createdAt": "cbktpuzwnt",
+      "homepage": "xagbdipbszlaqvzhttpr",
+      "identifier": "W1WHOoeuwOgRRDjm",
+      "knowledgeCount": 596.82,
+      "meta": {
+        "avatar": "MaMXKCEpzucG",
+        "description": "consectetur ipsum ",
+        "tags": [],
+        "title": "lore",
+        "backgroundColor": "qmshoop",
+        "category": "l17IHDDhHG4YiMsblz"
+      },
+      "pluginCount": -7.15,
+      "schemaVersion": -172.96,
+      "tokenUsage": -519.84,
+      "summary": "amet ipsum "
+    },
+    {
+      "author": "pmvdhpdqjvhv",
+      "config": {
+        "systemRole": "hfazycgtr",
+        "compressThreshold": 536.61,
+        "enableCompressThreshold": true,
+        "fewShots": [],
+        "historyCount": 829.3,
+        "model": "do",
+        "openingQuestions": [
+          "ichct",
+          "cfhlGa",
+          "QKDywVLoiZYlILD",
+          "lrkgvpwpvfpcizkjrmye"
+        ],
+        "plugins": []
+      },
+      "createdAt": "PuKoYtSLq",
+      "homepage": "tIy",
+      "identifier": "dolor sit ipsum",
+      "knowledgeCount": -656.39,
+      "meta": {
+        "avatar": "epugun",
+        "description": "f",
+        "tags": [
+          "ipsum amet",
+          "ipsum s"
+        ],
+        "title": "rMALh9VUaAozRHS7x07CE",
+        "category": "lorem dolor "
+      },
+      "pluginCount": -478.74,
+      "schemaVersion": 41.79,
+      "tokenUsage": -995.53
+    },
+    {
+      "author": "dEmRkEkdLm3LrwERbZS",
+      "config": {
+        "systemRole": "auexynfgwrtvgqbnoa",
+        "compressThreshold": 299.2,
+        "displayMode": "docs",
+        "enableCompressThreshold": true,
+        "enableHistoryCount": false,
+        "enableMaxTokens": true,
+        "fewShots": [
+          {
+            "content": "lklslmei",
+            "role": "function"
+          },
+          {
+            "content": "consectetur sit ",
+            "role": "assistant"
+          }
+        ],
+        "historyCount": 998.93,
+        "inputTemplate": "wxmfvpcmbpe",
+        "model": "jo",
+        "openingMessage": "gZZBlb6H",
+        "openingQuestions": [],
+        "params": {
+          "max_tokens": 420.1,
+          "temperature": -276.96,
+          "top_p": 881.75
+        },
+        "plugins": [
+          "uztcgnp",
+          "fxuopmvfxqgizl",
+          "bvgyfobxyjynmy",
+          "a",
+          "xvcifumeftcdspkrccxy"
+        ]
+      },
+      "createdAt": "amet ipsum adipisc",
+      "homepage": "dolor sit dolor ipsum",
+      "identifier": "ajufdfjvogjsgdubefmcw",
+      "knowledgeCount": -494.28,
+      "meta": {
+        "avatar": "2zItKI721nfgh0j",
+        "description": "6aPo2glJa",
+        "tags": [
+          "91qNDR",
+          "iiuuu",
+          "a",
+          "OCLRqf4DRgkDLvo1OjY9R",
+          "j5wlapemyP76nM"
+        ],
+        "title": "VivGnROz0hc0M8OF"
+      },
+      "pluginCount": 995.44,
+      "schemaVersion": 494.6,
+      "tokenUsage": -627.38
+    },
+    {
+      "author": "dol",
+      "config": {
+        "systemRole": "dolor c",
+        "displayMode": "docs",
+        "enableHistoryCount": true,
+        "fewShots": [
+          {
+            "content": "r",
+            "role": "system"
+          },
+          {
+            "content": "euwyuiakbjnfpyoo",
+            "role": "assistant"
+          }
+        ],
+        "historyCount": 571.9,
+        "inputTemplate": "ssfifolqlvmzhours",
+        "knowledgeBases": [
+          {
+            "avatar": null,
+            "createdAt": "2024-04-05T22:00:00Z",
+            "id": "clwbciedqsmlecske",
+            "isPublic": true,
+            "name": "KTLVvcwW6Duuy",
+            "type": null,
+            "updatedAt": "2024-01-14T10:00:00Z",
+            "enabled": true,
+            "settings": null
+          },
+          {
+            "avatar": null,
+            "createdAt": "2020-03-09T20:00:00Z",
+            "id": "wzeihsqsozhdvviwjihh",
+            "isPublic": null,
+            "name": "amet dolor co",
+            "type": "OQ9p7Yogqsco",
+            "updatedAt": "2022-06-18T16:00:00Z",
+            "enabled": true,
+            "settings": "consec"
+          },
+          {
+            "avatar": null,
+            "createdAt": "2023-10-31T06:00:00Z",
+            "id": "hgmpurlup",
+            "isPublic": null,
+            "name": "xAO3jhHy",
+            "type": "sit amet lorem ",
+            "updatedAt": "2022-03-08T07:00:00Z",
+            "settings": 99.84
+          },
+          {
+            "avatar": null,
+            "createdAt": "2022-02-18T13:00:00Z",
+            "id": "sit",
+            "isPublic": null,
+            "name": "rnpm",
+            "type": null,
+            "updatedAt": "2024-03-16T06:00:00Z",
+            "description": 65,
+            "enabled": true,
+            "settings": null
+          }
+        ],
+        "model": "TUeX",
+        "openingMessage": "jj4lRx8YFzrx46pYRoHHC"
+      },
+      "createdAt": "lorem ",
+      "homepage": "lorem lore",
+      "identifier": "consectetur ad",
+      "knowledgeCount": 505.35,
+      "meta": {
+        "avatar": "yzmavrqteeiny",
+        "description": "NS9VxcM66OuGuWR",
+        "tags": [
+          "ipsum amet co",
+          "jar9Cc89yVZd",
+          "dolor adipiscin"
+        ],
+        "title": "bfqs7WJRA3NROwYGWZn",
+        "backgroundColor": "dzvlUfEcopBmt2Scicu"
+      },
+      "pluginCount": -377.18,
+      "schemaVersion": -208.06,
+      "tokenUsage": 542.82
+    },
+    {
+      "author": "6sGqlYk",
+      "config": {
+        "systemRole": "smxodfw",
+        "compressThreshold": 279.4,
+        "displayMode": "chat",
+        "enableCompressThreshold": false,
+        "historyCount": 327.84,
+        "inputTemplate": "KZS2WOFaQFohN",
+        "knowledgeBases": [],
+        "model": "consect",
+        "openingMessage": "ipsum lorem ",
+        "openingQuestions": [
+          "ipsum amet ",
+          "GOTxBAHS",
+          "khtupwfllhvedhnl",
+          "sit dolor amet",
+          "aIz6JhvF0oy"
+        ],
+        "plugins": [
+          "amet ipsum amet ",
+          "ipsum a",
+          "bjimwfojforcc",
+          "uOkM2C"
+        ]
+      },
+      "createdAt": "dol",
+      "homepage": "iwxdlnudqffhypcluzbcc",
+      "identifier": "0lgYYFplzC488frO",
+      "knowledgeCount": -792.39,
+      "meta": {
+        "avatar": "sit amet ipsum amet i",
+        "description": "Dc3ofo0",
+        "tags": [
+          "ipsum dolor dolor si",
+          "uyswM5xQw3v"
+        ],
+        "title": "consect",
+        "category": "6"
+      },
+      "pluginCount": 161.87,
+      "schemaVersion": -80.81,
+      "tokenUsage": -527.94,
+      "examples": {
+        "_ref": "#/properties/config/properties/fewShots",
+        "_placeholder": true
+      },
+      "summary": "rcuvyb"
+    },
+    {
+      "author": "q",
+      "config": {
+        "systemRole": "yrtonxtjxdvwhfhmiaew",
+        "compressThreshold": -873.55,
+        "displayMode": "docs",
+        "enableHistoryCount": true,
+        "enableMaxTokens": false,
+        "fewShots": [
+          {
+            "content": "si",
+            "role": "user"
+          },
+          {
+            "content": "AROavRF6of7sCR9vgxU",
+            "role": "user"
+          },
+          {
+            "content": "mawjcsk",
+            "role": "system"
+          },
+          {
+            "content": "uthybbvwgze",
+            "role": "assistant"
+          }
+        ],
+        "inputTemplate": "si",
+        "knowledgeBases": [
+          {
+            "avatar": null,
+            "createdAt": "2020-07-05T05:00:00Z",
+            "id": "rwmsfymqcofpql",
+            "isPublic": false,
+            "name": "dsgjjib",
+            "type": null,
+            "updatedAt": "2023-10-05T18:00:00Z",
+            "description": false
+          },
+          {
+            "avatar": "adipiscing amet ",
+            "createdAt": "2020-09-15T01:00:00Z",
+            "id": "z",
+            "isPublic": true,
+            "name": "Jl",
+            "type": "ll",
+            "updatedAt": "2023-02-08T11:00:00Z",
+            "description": 78,
+            "enabled": true,
+            "settings": 67
+          }
+        ],
+        "model": "goehamexdbyiaku",
+        "openingMessage": "ipsum ipsum do"
+      },
+      "createdAt": "vwxke",
+      "homepage": "consectetur",
+      "identifier": "xkfnqcgobstypitdl",
+      "knowledgeCount": 870.09,
+      "meta": {
+        "avatar": "TwaApdCpdbXFa",
+        "description": "1",
+        "tags": [
+          "ad",
+          "lorem dolor dolor ad",
+          "jeuhpkidwkqpxfxvjtr"
+        ],
+        "title": "ipsum dolor ",
+        "backgroundColor": "oDj",
+        "category": "ysv"
+      },
+      "pluginCount": -387.55,
+      "schemaVersion": 144.23,
+      "tokenUsage": 48.02,
+      "summary": "sj1OTNo8uN"
+    },
+    {
+      "author": "lore",
+      "config": {
+        "systemRole": "fn",
+        "displayMode": "docs",
+        "enableCompressThreshold": true,
+        "enableMaxTokens": true,
+        "historyCount": -116.54,
+        "inputTemplate": "yEROi1OUKP7YDnpiFe",
+        "knowledgeBases": [
+          {
+            "avatar": "Z117DQL",
+            "createdAt": "2023-04-28T12:00:00Z",
+            "id": "tryigfjpjvewvkimdzee",
+            "isPublic": null,
+            "name": "xjzqfwfsh",
+            "type": null,
+            "updatedAt": "2022-04-10T23:00:00Z"
+          }
+        ],
+        "openingMessage": "enzfh",
+        "openingQuestions": [
+          "ruxc",
+          "aQeHCVjntHQDj",
+          "adipiscing ad"
+        ],
+        "params": {
+          "presence_penalty": -691.5,
+          "temperature": 555.33,
+          "top_p": -755.65
+        }
+      },
+      "createdAt": "tpg",
+      "homepage": "wrakusrworqzpawjqn",
+      "identifier": "MCHCUyjOeW2vFCaWK2",
+      "knowledgeCount": 218.47,
+      "meta": {
+        "avatar": "adipiscin",
+        "description": "lore",
+        "tags": [
+          "bbmvxx",
+          "wubwqdlojsn",
+          "ggwbrinhojlxxsplrqxn",
+          "PfDFch5pmPSF2TQo",
+          "ipsum consectetur am"
+        ],
+        "title": "sit sit lorem",
+        "backgroundColor": "eNiRCaEGN",
+        "category": "s"
+      },
+      "pluginCount": -52.15,
+      "schemaVersion": 333.77,
+      "tokenUsage": -269.6,
+      "summary": "olpc"
+    },
+    {
+      "author": "pmomyqazignqmoeio",
+      "config": {
+        "systemRole": "goghevutronqlchiqvmk",
+        "compressThreshold": 152.76,
+        "enableCompressThreshold": false,
+        "enableHistoryCount": false,
+        "enableMaxTokens": false,
+        "fewShots": [
+          {
+            "content": "agfaapbdonjqhezxftpw",
+            "role": "system"
+          },
+          {
+            "content": "xseewtepchg",
+            "role": "function"
+          }
+        ],
+        "historyCount": 543.41,
+        "inputTemplate": "96bbLpH",
+        "knowledgeBases": [
+          {
+            "avatar": "t4tyA",
+            "createdAt": "2023-11-03T23:00:00Z",
+            "id": "gambobyttqigrogzjj",
+            "isPublic": null,
+            "name": "dyhFaNklX",
+            "type": "elvxndm",
+            "updatedAt": "2020-09-16T06:00:00Z"
+          },
+          {
+            "avatar": null,
+            "createdAt": "2023-03-10T01:00:00Z",
+            "id": "lorem lorem am",
+            "isPublic": null,
+            "name": "raxliVwUeJCCnK4",
+            "type": "o1tNDRcxyntdj3PF",
+            "updatedAt": "2022-05-04T16:00:00Z",
+            "description": 35.05,
+            "settings": "uesrbco"
+          }
+        ],
+        "openingMessage": "ipsum adipiscing a",
+        "openingQuestions": [
+          "okfkm",
+          "jqiwzmplk",
+          "sit amet adipiscin",
+          "sit consectetur dolor"
+        ],
+        "params": {
+          "max_tokens": -411.67,
+          "temperature": -246.85
+        },
+        "plugins": [
+          "djstkckmrzhgzhl",
+          "uzwogja"
+        ]
+      },
+      "createdAt": "dHN9H",
+      "homepage": "OYLgd3cblmN",
+      "identifier": "yvdpyjmgex",
+      "knowledgeCount": 952.35,
+      "meta": {
+        "avatar": "sit sit sit adi",
+        "description": "qzzbtqamfxunnjkyvwzne",
+        "tags": [
+          "ErSwNGa8Pi"
+        ],
+        "title": "niwloeynidc",
+        "category": "lorem consectet"
+      },
+      "pluginCount": 645.77,
+      "schemaVersion": 586.12,
+      "tokenUsage": -198.9,
+      "summary": "fTsrG"
+    }
+  ]
+}

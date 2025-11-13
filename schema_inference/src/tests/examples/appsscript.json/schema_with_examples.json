@@ -1,0 +1,5901 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://json.schemastore.org/appsscript.json",
+    "definitions": {
+      "homepageTrigger": {
+        "title": "homepage trigger",
+        "type": "object",
+        "description": "The Google Workspace add-on manifest configuration for homepage triggers.",
+        "properties": {
+          "enabled": {
+            "description": "Whether or not homepage (non-contextual) cards are enabled in Calendar. Defaults to true.",
+            "type": "boolean"
+          },
+          "runFunction": {
+            "description": "The name of the function to run when this trigger fires. You must implement this function in your add-on project. This function must build and return an array of Card objects.",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "properties": {
+      "runtimeVersion": {
+        "description": "Version of the server to use when executing this project.",
+        "type": "string",
+        "enum": [
+          "STABLE",
+          "V8",
+          "DEPRECATED_ES5"
+        ],
+        "default": "STABLE"
+      },
+      "timeZone": {
+        "description": "The script time zone in one of the available ZoneId values such as \"America/Denver\".",
+        "type": "string",
+        "default": "America/New_York"
+      },
+      "dependencies": {
+        "title": "dependencies",
+        "description": "A list of advanced services and libraries.",
+        "type": "object",
+        "properties": {
+          "enabledAdvancedServices": {
+            "description": "The list of advanced services enabled for use by the script project.",
+            "type": "array",
+            "items": {
+              "title": "advanced service",
+              "description": "A single advanced service.",
+              "type": "object",
+              "required": [
+                "userSymbol",
+                "serviceId",
+                "version"
+              ],
+              "properties": {
+                "userSymbol": {
+                  "description": "The identifier used to refer to this service in the code of the Apps Script project.",
+                  "type": "string",
+                  "default": "Sheets"
+                },
+                "serviceId": {
+                  "description": "The identifier of the service that is shown in the API discovery document (e.g., drive).",
+                  "type": "string",
+                  "default": "sheets"
+                },
+                "version": {
+                  "description": "The enabled version of the service (e.g., \"v1\").",
+                  "type": "string",
+                  "default": "v4"
+                }
+              }
+            }
+          },
+          "libraries": {
+            "description": "The list of libraries used by the script project.",
+            "type": "array",
+            "items": {
+              "title": "library",
+              "description": "A single library.",
+              "type": "object",
+              "required": [
+                "userSymbol",
+                "libraryId",
+                "version"
+              ],
+              "properties": {
+                "userSymbol": {
+                  "description": "The label that is used in the script project code to refer to this library.",
+                  "type": "string",
+                  "default": "OAuth2"
+                },
+                "libraryId": {
+                  "description": "The script ID of the library's script project. You can find a script ID in the library script's URL or in the script editor by selecting **File > Project properties**.",
+                  "type": "string",
+                  "default": "1B7FSrk5Zi6L1rSxxTDgDEUsPzlukDsi4KGuTMorsTQHhGBzBkMun4iDF",
+                  "maxLength": 57,
+                  "minLength": 57
+                },
+                "version": {
+                  "description": "The version of the library that is used by the script. This is either a version number or stable, meaning the last version created.",
+                  "type": "string",
+                  "default": "41"
+                },
+                "developmentMode": {
+                  "description": "If true, version is ignored and the script uses the current library project saved code, even if that code has not been saved to a new version.",
+                  "type": "boolean",
+                  "default": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "webapp": {
+        "title": "script",
+        "description": "The script project's web app configuration. Only used if the project is deployed as a web app.",
+        "type": "object",
+        "properties": {
+          "access": {
+            "description": "The levels of permission for running the web app.",
+            "type": "string",
+            "enum": [
+              "MYSELF",
+              "DOMAIN",
+              "ANYONE",
+              "ANYONE_ANONYMOUS"
+            ],
+            "default": "MYSELF"
+          },
+          "executeAs": {
+            "description": "The identity under which the web app executes.",
+            "type": "string",
+            "enum": [
+              "USER_ACCESSING",
+              "USER_DEPLOYING"
+            ],
+            "default": "USER_DEPLOYING"
+          }
+        }
+      },
+      "exceptionLogging": {
+        "description": "The location where exceptions are logged.",
+        "type": "string",
+        "enum": [
+          "NONE",
+          "STACKDRIVER"
+        ]
+      },
+      "oauthScopes": {
+        "description": "The definition of authorization scopes used by the script project.",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "urlFetchWhitelist": {
+        "description": "A list of HTTPS URL prefixes. If present, any URL endpoint fetched must match one of the prefixes in this list. This can help to protect user data.",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "format": "hostname"
+        }
+      },
+      "executionApi": {
+        "title": "api options",
+        "description": "The script project's API executable configuration. Only used if the project is deployed for API execution.",
+        "type": "object",
+        "properties": {
+          "access": {
+            "description": "Determines who has permission to run the script from the API.",
+            "type": "string",
+            "enum": [
+              "MYSELF",
+              "DOMAIN",
+              "ANYONE",
+              "ANYONE_ANONYMOUS"
+            ]
+          }
+        }
+      },
+      "sheets": {
+        "title": "sheet manifest",
+        "description": "Defines manifest values specific to Sheets.",
+        "type": "object",
+        "properties": {
+          "macros": {
+            "description": "A list of defined macros and their associated properties.",
+            "type": "array",
+            "items": {
+              "title": "macros",
+              "description": "A defined macros and it's associated properties.",
+              "type": "object",
+              "properties": {
+                "menuName": {
+                  "description": "The name of the macro as it appears in the Google Sheets UI.",
+                  "type": "string",
+                  "default": "My Macro"
+                },
+                "functionName": {
+                  "description": "The name of the Apps Script function that executes the macro. By default this matches the menuName for functions automatically created, but this is not a requirement.",
+                  "type": "string",
+                  "default": "myFunction"
+                },
+                "defaultShortcut": {
+                  "description": "Defines the keyboard shortcut that executes the macro. This must be of the form Ctrl+Alt+Shift+Number, where Number is a single-digit. Macros without shortcuts can only be executed from the Tools > Macros menu.",
+                  "type": "string",
+                  "default": "Ctrl+Alt+Shift+1"
+                }
+              },
+              "required": [
+                "menuName",
+                "functionName",
+                "defaultShortcut"
+              ]
+            }
+          }
+        }
+      },
+      "dataStudio": {
+        "title": "add-on manifest",
+        "description": "Data Studio add-on manifest.",
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Display name for add-on.",
+            "type": "string"
+          },
+          "logoUrl": {
+            "description": "URL for logo image of add-on.",
+            "type": "string",
+            "format": "hostname"
+          },
+          "company": {
+            "description": "Company name for the add-on.",
+            "type": "string"
+          },
+          "addonUrl": {
+            "type": "string",
+            "format": "hostname"
+          },
+          "companyUrl": {
+            "type": "string",
+            "format": "hostname"
+          },
+          "supportUrl": {
+            "description": "URL for support information of the add-on.",
+            "type": "string",
+            "format": "hostname"
+          },
+          "description": {
+            "description": "Short description about the add-on.",
+            "type": "string"
+          },
+          "sources": {
+            "description": "List of sources or services that can be accessed with this add-on.",
+            "type": "array",
+            "items": {
+              "description": "A single source type.",
+              "type": "string"
+            }
+          },
+          "templates": {
+            "title": "templates",
+            "description": "Map of template name to report ID.",
+            "type": "object"
+          },
+          "shortDescription": {
+            "description": "Even shorter description used in gallery cards. Only a maximum of 114 characters will be shown on the card.",
+            "type": "string"
+          },
+          "authType": {
+            "description": "List of AuthTypes supported.",
+            "type": "array",
+            "items": {
+              "description": "Types of Authorization supported by the add-on.",
+              "type": "string",
+              "enum": [
+                "NONE",
+                "KEY",
+                "USER_PASS",
+                "OAUTH2"
+              ]
+            }
+          },
+          "privacyPolicyUrl": {
+            "description": "Url for privacy policy information about the add-on.",
+            "type": "string",
+            "format": "hostname"
+          },
+          "termsOfServiceUrl": {
+            "description": "Url for terms of service information about the add-on.",
+            "type": "string",
+            "format": "hostname"
+          }
+        },
+        "required": [
+          "name",
+          "logoUrl",
+          "company",
+          "supportUrl",
+          "description"
+        ]
+      },
+      "addOns": {
+        "title": "add-ons",
+        "description": "G Suite Add-ons",
+        "type": "object",
+        "properties": {
+          "common": {
+            "title": "common options",
+            "description": "Common properties between all G Suite add-on types.",
+            "type": "object",
+            "properties": {
+              "name": {
+                "description": "The add-on name.",
+                "type": "string"
+              },
+              "logoUrl": {
+                "description": "The logo URL.",
+                "type": "string",
+                "format": "uri"
+              },
+              "layoutProperties": {
+                "title": "layout options",
+                "description": "Layout properties.",
+                "type": "object",
+                "properties": {
+                  "primaryColor": {
+                    "description": "The color of toolbar. Defaults to grey (#424242).",
+                    "type": "string"
+                  },
+                  "secondaryColor": {
+                    "description": "The default color of buttons. Defaults to the primary color (if it is set); otherwise defaults to blue (#2196F3).",
+                    "type": "string"
+                  }
+                }
+              },
+              "homepageTrigger": {
+                "title": "homepage trigger",
+                "description": "Homepage trigger data",
+                "type": "object",
+                "properties": {
+                  "enabled": {
+                    "description": "Whether or not homepage (non-contextual) cards are enabled. Defaults to true.",
+                    "type": "boolean"
+                  },
+                  "runFunctions": {
+                    "description": "The name of the function to run",
+                    "type": "string"
+                  }
+                }
+              },
+              "universalActions": {
+                "description": "Universal add-on actions",
+                "type": "array",
+                "items": {
+                  "title": "actions",
+                  "description": "Actions",
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "description": "The action label.",
+                      "type": "string"
+                    },
+                    "openLink": {
+                      "description": "The link's URL",
+                      "type": "string",
+                      "format": "hostname"
+                    },
+                    "runFunction": {
+                      "description": "Required for each defined universal action if openLink is not present. If provided, the name of the Apps Script function that executes when the user selects this action.",
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "openLinkUrlPrefixes": {
+                "description": "Link prefixes.",
+                "type": "array",
+                "items": {
+                  "description": "A link prefix.",
+                  "type": "string"
+                }
+              },
+              "useLocaleFromApp": {
+                "description": "Use the locale from the host application?",
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "logoUrl",
+              "name"
+            ]
+          },
+          "gmail": {
+            "title": "add-on metadata",
+            "description": "Gmail add-on metadata.",
+            "type": "object",
+            "properties": {
+              "contextualTriggers": {
+                "description": "Contextual triggers.",
+                "type": "array",
+                "items": {
+                  "title": "contextual trigger",
+                  "description": "A contextual trigger.",
+                  "type": "object",
+                  "properties": {
+                    "onTriggerFunction": {
+                      "description": "The name of the Apps Script function that executes when this contextual trigger fires (that is, when a message is opened in Gmail). The function specified here must build and return an array of Card objects.",
+                      "type": "string"
+                    },
+                    "unconditional": {
+                      "title": "unconditional",
+                      "description": "Used to specify that the contextual trigger is fired for all Gmail messages. This is currently the only option, so this should always be an empty object.",
+                      "type": "object"
+                    }
+                  }
+                }
+              },
+              "homepageTrigger": {
+                "title": "homepage trigger",
+                "description": "The trigger function specification for creating the add-on homepage in the Gmail host.",
+                "type": "object",
+                "properties": {
+                  "enabled": {
+                    "description": "Whether or not homepage (non-contextual) cards are enabled in Gmail. Defaults to true.",
+                    "type": "boolean"
+                  },
+                  "runFunction": {
+                    "description": "The name of the function to run when this trigger fires. You must implement this function in your add-on project. This function must build and return an array of Card objects.",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "calendar": {
+            "title": "calendar metadata",
+            "description": "Calendar add-on metadata.",
+            "type": "object",
+            "properties": {
+              "homepageTrigger": {
+                "title": "homepage trigger",
+                "description": "The trigger function specification for creating the add-on homepage in the Calendar host.",
+                "type": "object",
+                "properties": {
+                  "enabled": {
+                    "description": "Whether or not homepage (non-contextual) cards are enabled in Calendar. Defaults to true.",
+                    "type": "boolean"
+                  },
+                  "runFunction": {
+                    "description": "The name of the function to run when this trigger fires. You must implement this function in your add-on project. This function must build and return an array of Card objects.",
+                    "type": "string"
+                  }
+                }
+              },
+              "eventOpenTrigger": {
+                "title": "event",
+                "description": "When a Calendar event is opened",
+                "type": "object",
+                "properties": {
+                  "runFunction": {
+                    "description": "Event handler function",
+                    "type": "string"
+                  }
+                }
+              },
+              "eventUpdateTrigger": {
+                "title": "event",
+                "description": "When a Calendar event is updated",
+                "type": "object",
+                "properties": {
+                  "runFunction": {
+                    "description": "Event handler function",
+                    "type": "string"
+                  }
+                }
+              },
+              "eventAccess": {
+                "description": "Handler access to Calendar event",
+                "type": "string",
+                "enum": [
+                  "METADATA",
+                  "READ",
+                  "WRITE",
+                  "READ_WRITE"
+                ]
+              }
+            }
+          },
+          "sheets": {
+            "title": "add-on options",
+            "description": "Configurations for the Google Workspace Add-on's appearance and behavior within the Sheets host application.",
+            "type": "object",
+            "properties": {
+              "homepageTrigger": {
+                "$ref": "#/definitions/homepageTrigger"
+              },
+              "onFileScopeGrantedTrigger": {
+                "title": "contextual trigger",
+                "type": "object",
+                "description": "A configuration for a contextual trigger that fires when the add-on presents the request file scope dialog.",
+                "properties": {
+                  "runFunction": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "title": "JSON schema for Google Apps Script manifest files",
+    "type": "object"
+  },
+  "examples": [
+    {
+      "timeZone": "lorem lor",
+      "webapp": {
+        "access": "MYSELF",
+        "executeAs": "USER_ACCESSING"
+      },
+      "exceptionLogging": "NONE",
+      "oauthScopes": [],
+      "sheets": {
+        "macros": []
+      },
+      "dataStudio": {
+        "name": "e",
+        "logoUrl": "j7uff0LYTH8xIZ",
+        "company": "jebruzwwjlvejrsrbqng",
+        "supportUrl": "9NIQ0Wobtqn62tO",
+        "description": "qddtotlpjzdmt",
+        "companyUrl": "kbjznz",
+        "templates": {},
+        "privacyPolicyUrl": "iheassztn",
+        "termsOfServiceUrl": "amet amet ipsum conse"
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "webapp": {
+        "executeAs": "USER_DEPLOYING"
+      },
+      "oauthScopes": [],
+      "urlFetchWhitelist": []
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "dependencies": {
+        "enabledAdvancedServices": [],
+        "libraries": []
+      },
+      "webapp": {
+        "access": "MYSELF",
+        "executeAs": "USER_DEPLOYING"
+      },
+      "oauthScopes": [],
+      "urlFetchWhitelist": [],
+      "sheets": {
+        "macros": []
+      }
+    },
+    {
+      "runtimeVersion": "V8",
+      "timeZone": "earhtUcMiX",
+      "webapp": {},
+      "exceptionLogging": "STACKDRIVER",
+      "oauthScopes": [],
+      "urlFetchWhitelist": [],
+      "executionApi": {
+        "access": "ANYONE"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "https://test.org/resource/data",
+          "name": "wtvqpbxxjqamqhkvd",
+          "layoutProperties": {
+            "primaryColor": "sit adipiscin",
+            "secondaryColor": "rslMd6gMJwrBu8NGPEjb8"
+          },
+          "universalActions": []
+        },
+        "calendar": {
+          "homepageTrigger": {
+            "enabled": true,
+            "runFunction": "xqhtwenaiqzkilo"
+          }
+        },
+        "sheets": {
+          "homepageTrigger": {
+            "_ref": "#/definitions/homepageTrigger",
+            "_placeholder": true
+          },
+          "onFileScopeGrantedTrigger": {
+            "runFunction": "murgoxbcuohilnspskrtj"
+          }
+        }
+      }
+    },
+    {
+      "timeZone": "3NjHXbWNdbIsuSVyRwD",
+      "webapp": {},
+      "exceptionLogging": "STACKDRIVER",
+      "oauthScopes": [],
+      "executionApi": {
+        "access": "ANYONE"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "https://test.org/data/api",
+          "name": "9SRt",
+          "universalActions": [],
+          "openLinkUrlPrefixes": [],
+          "useLocaleFromApp": true
+        },
+        "calendar": {
+          "homepageTrigger": {
+            "runFunction": "consectetur ipsum d"
+          },
+          "eventUpdateTrigger": {},
+          "eventAccess": "READ"
+        },
+        "sheets": {
+          "homepageTrigger": {
+            "_ref": "#/definitions/homepageTrigger",
+            "_placeholder": true
+          },
+          "onFileScopeGrantedTrigger": {}
+        }
+      }
+    },
+    {
+      "runtimeVersion": "V8",
+      "timeZone": "Fyczbgq7DH43JoGw7cx",
+      "exceptionLogging": "NONE",
+      "oauthScopes": [],
+      "sheets": {
+        "macros": []
+      },
+      "dataStudio": {
+        "name": "Yg2oRuDgzv22Y",
+        "logoUrl": "jomokynfcvjgpydaeq",
+        "company": "sit",
+        "supportUrl": "WB4cqNGPDRXtbpv97Qk5",
+        "description": "conse",
+        "addonUrl": "lore",
+        "companyUrl": "qiT",
+        "templates": {},
+        "authType": [],
+        "privacyPolicyUrl": "lorem consectetur a"
+      }
+    },
+    {
+      "runtimeVersion": "STABLE",
+      "timeZone": "6lVk72gOnF0jnedEkh",
+      "webapp": {
+        "access": "ANYONE",
+        "executeAs": "USER_ACCESSING"
+      },
+      "exceptionLogging": "NONE",
+      "urlFetchWhitelist": [],
+      "executionApi": {
+        "access": "ANYONE_ANONYMOUS"
+      },
+      "sheets": {
+        "macros": []
+      }
+    },
+    {
+      "runtimeVersion": "V8",
+      "dependencies": {
+        "enabledAdvancedServices": []
+      },
+      "oauthScopes": [],
+      "urlFetchWhitelist": [],
+      "executionApi": {
+        "access": "DOMAIN"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "http://demo.net/v1/api",
+          "name": "ijrzpbkopqxoon",
+          "layoutProperties": {
+            "secondaryColor": "LQEx7WHHjmf6ZdQxPBu"
+          },
+          "homepageTrigger": {
+            "enabled": false,
+            "runFunctions": "sit adipiscing l"
+          }
+        },
+        "sheets": {
+          "homepageTrigger": {
+            "_ref": "#/definitions/homepageTrigger",
+            "_placeholder": true
+          },
+          "onFileScopeGrantedTrigger": {}
+        }
+      }
+    },
+    {
+      "runtimeVersion": "V8",
+      "timeZone": "tiofoyjc",
+      "dependencies": {
+        "enabledAdvancedServices": [],
+        "libraries": []
+      },
+      "urlFetchWhitelist": [],
+      "executionApi": {},
+      "sheets": {},
+      "dataStudio": {
+        "name": "aiulzflxpdqndrxzdzuol",
+        "logoUrl": "vdoncjnaapkzwvufs",
+        "company": "gviq",
+        "supportUrl": "cg",
+        "description": "CzYDywWbB",
+        "companyUrl": "orxcefzradz",
+        "sources": [],
+        "authType": [],
+        "privacyPolicyUrl": "ad"
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "timeZone": "goykztoq",
+      "dependencies": {
+        "enabledAdvancedServices": []
+      },
+      "webapp": {},
+      "exceptionLogging": "STACKDRIVER",
+      "oauthScopes": [],
+      "sheets": {
+        "macros": []
+      },
+      "dataStudio": {
+        "name": "consectetur sit conse",
+        "logoUrl": "vvpe",
+        "company": "ryxzjmzupzmnlal",
+        "supportUrl": "zyqonvyvvakcppowfs",
+        "description": "YHutPBmvSpWI22ls2TP",
+        "addonUrl": "onyhsrsmauhuzu",
+        "companyUrl": "tJOQIzUuLai1nzdVudq5U",
+        "sources": [],
+        "shortDescription": "wojxcmnvgueuxwys",
+        "authType": [],
+        "privacyPolicyUrl": "umdvok",
+        "termsOfServiceUrl": "lb"
+      }
+    },
+    {
+      "timeZone": "6z4j9zlvNcyaekorW",
+      "dependencies": {},
+      "oauthScopes": [],
+      "sheets": {
+        "macros": []
+      },
+      "dataStudio": {
+        "name": "hiulospffsmdstcqf",
+        "logoUrl": "AHUWj70",
+        "company": "7YoQ0U3GPePjS3xecGj",
+        "supportUrl": "0as9ljjfTpOwmiU6dfQW",
+        "description": "t2skzfnR",
+        "addonUrl": "hjlrma",
+        "sources": [],
+        "templates": {},
+        "authType": [],
+        "privacyPolicyUrl": "n2Rq"
+      }
+    },
+    {
+      "dependencies": {},
+      "webapp": {},
+      "oauthScopes": [],
+      "urlFetchWhitelist": [],
+      "dataStudio": {
+        "name": "do",
+        "logoUrl": "lorem dolor con",
+        "company": "zbhcrklgutlvgiyfd",
+        "supportUrl": "cy",
+        "description": "ogbkvezijefmjmpc",
+        "companyUrl": "lorem amet ip",
+        "sources": [],
+        "templates": {},
+        "shortDescription": "wmlefit",
+        "authType": [],
+        "privacyPolicyUrl": "yaxcqujeuomvwi"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "ftp://test.org/api/resource",
+          "name": "A0UAGDPNOnXdqIbLtuexJ",
+          "layoutProperties": {},
+          "homepageTrigger": {
+            "enabled": true
+          },
+          "universalActions": [],
+          "openLinkUrlPrefixes": [],
+          "useLocaleFromApp": true
+        },
+        "gmail": {
+          "contextualTriggers": []
+        },
+        "sheets": {
+          "homepageTrigger": {
+            "_ref": "#/definitions/homepageTrigger",
+            "_placeholder": true
+          },
+          "onFileScopeGrantedTrigger": {
+            "runFunction": "ukhdohmqgkbrthfql"
+          }
+        }
+      }
+    },
+    {
+      "timeZone": "adipiscing sit ips",
+      "oauthScopes": [],
+      "urlFetchWhitelist": [],
+      "executionApi": {},
+      "sheets": {
+        "macros": []
+      },
+      "dataStudio": {
+        "name": "hdzghlxjag",
+        "logoUrl": "exwjyafj",
+        "company": "gqamgi",
+        "supportUrl": "y6I0D8CnEr3OB",
+        "description": "j7EvsqWXX5LxAiwE1",
+        "addonUrl": "sit",
+        "companyUrl": "OArXVI5YR",
+        "sources": [],
+        "shortDescription": "j3pqlNu",
+        "authType": [],
+        "privacyPolicyUrl": "lorem sit cons",
+        "termsOfServiceUrl": "hmxlvfxjwfktpkpgtbqkk"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "http://example.com/v1/data",
+          "name": "PahkrE42",
+          "homepageTrigger": {
+            "enabled": true
+          },
+          "openLinkUrlPrefixes": [],
+          "useLocaleFromApp": false
+        },
+        "gmail": {},
+        "calendar": {
+          "eventOpenTrigger": {
+            "runFunction": "x0KHAmqyXAt"
+          },
+          "eventUpdateTrigger": {},
+          "eventAccess": "READ_WRITE"
+        }
+      }
+    },
+    {
+      "runtimeVersion": "STABLE",
+      "timeZone": "thjszrokks",
+      "dependencies": {
+        "enabledAdvancedServices": []
+      },
+      "exceptionLogging": "NONE",
+      "oauthScopes": [],
+      "urlFetchWhitelist": [],
+      "executionApi": {
+        "access": "ANYONE_ANONYMOUS"
+      },
+      "sheets": {
+        "macros": []
+      },
+      "addOns": {
+        "gmail": {
+          "contextualTriggers": []
+        },
+        "calendar": {
+          "eventOpenTrigger": {
+            "runFunction": "ipsum i"
+          },
+          "eventUpdateTrigger": {
+            "runFunction": "iRzDLgY"
+          }
+        },
+        "sheets": {}
+      }
+    },
+    {
+      "timeZone": "hoyscqigoaobpdry",
+      "dependencies": {
+        "enabledAdvancedServices": [],
+        "libraries": []
+      },
+      "webapp": {
+        "access": "DOMAIN"
+      },
+      "exceptionLogging": "NONE",
+      "urlFetchWhitelist": [],
+      "executionApi": {
+        "access": "ANYONE_ANONYMOUS"
+      },
+      "dataStudio": {
+        "name": "aJ",
+        "logoUrl": "g",
+        "company": "wXmCEc3lXCasKC4b",
+        "supportUrl": "enbpshugbm",
+        "description": "nOPikMXiNOcQEgipRj",
+        "addonUrl": "xzksyfcinztcgtkcuyh",
+        "templates": {},
+        "authType": [],
+        "termsOfServiceUrl": "uvoyowusul"
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "dependencies": {
+        "enabledAdvancedServices": [],
+        "libraries": []
+      },
+      "exceptionLogging": "STACKDRIVER",
+      "oauthScopes": [],
+      "executionApi": {},
+      "sheets": {}
+    },
+    {
+      "runtimeVersion": "STABLE",
+      "webapp": {
+        "access": "ANYONE_ANONYMOUS",
+        "executeAs": "USER_DEPLOYING"
+      },
+      "oauthScopes": [],
+      "urlFetchWhitelist": [],
+      "sheets": {
+        "macros": []
+      },
+      "dataStudio": {
+        "name": "eIxwgPi",
+        "logoUrl": "do",
+        "company": "stxeld",
+        "supportUrl": "consecte",
+        "description": "ZKKP",
+        "addonUrl": "ipsum sit ips",
+        "companyUrl": "ewmhsmsdywdnabfbymos",
+        "sources": [],
+        "templates": {},
+        "authType": [],
+        "privacyPolicyUrl": "ib"
+      },
+      "addOns": {
+        "calendar": {
+          "homepageTrigger": {},
+          "eventOpenTrigger": {},
+          "eventAccess": "METADATA"
+        },
+        "sheets": {
+          "homepageTrigger": {
+            "_ref": "#/definitions/homepageTrigger",
+            "_placeholder": true
+          }
+        }
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "dependencies": {},
+      "exceptionLogging": "STACKDRIVER",
+      "oauthScopes": [],
+      "executionApi": {},
+      "dataStudio": {
+        "name": "xxcqwh",
+        "logoUrl": "lo",
+        "company": "gcpvqcidkulnfnzkhrxb",
+        "supportUrl": "kljstjnmfqfpgrixbvirp",
+        "description": "sit",
+        "companyUrl": "dolor ipsum co",
+        "templates": {},
+        "shortDescription": "bmsx",
+        "authType": [],
+        "termsOfServiceUrl": "lorem consectetur do"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "http://demo.net/api/v1",
+          "name": "zSR0Sbarp",
+          "homepageTrigger": {},
+          "useLocaleFromApp": false
+        },
+        "gmail": {
+          "homepageTrigger": {
+            "enabled": true,
+            "runFunction": "OTDjb"
+          }
+        },
+        "sheets": {
+          "onFileScopeGrantedTrigger": {
+            "runFunction": "80UGJO2a3qaEmvgOy"
+          }
+        }
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "timeZone": "mixuwrek",
+      "dependencies": {
+        "libraries": []
+      },
+      "exceptionLogging": "STACKDRIVER",
+      "executionApi": {
+        "access": "MYSELF"
+      },
+      "dataStudio": {
+        "name": "adipiscing",
+        "logoUrl": "adipiscing lorem a",
+        "company": "wpznvjc",
+        "supportUrl": "aocekiozuoveszynp",
+        "description": "ipsum sit lor",
+        "companyUrl": "cDa",
+        "shortDescription": "ervdsfy",
+        "authType": []
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "https://test.org/data/api",
+          "name": "ipsum si",
+          "homepageTrigger": {
+            "enabled": false
+          },
+          "openLinkUrlPrefixes": [],
+          "useLocaleFromApp": true
+        },
+        "gmail": {
+          "homepageTrigger": {
+            "enabled": true,
+            "runFunction": "Q"
+          }
+        },
+        "calendar": {
+          "eventOpenTrigger": {},
+          "eventUpdateTrigger": {
+            "runFunction": "qooihpjykweyvkwdhna"
+          },
+          "eventAccess": "READ"
+        }
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "timeZone": "consectetur",
+      "dependencies": {
+        "enabledAdvancedServices": []
+      },
+      "webapp": {
+        "access": "MYSELF"
+      },
+      "exceptionLogging": "STACKDRIVER",
+      "urlFetchWhitelist": [],
+      "executionApi": {},
+      "addOns": {
+        "common": {
+          "logoUrl": "https://demo.net/v1/data",
+          "name": "dolor lorem lorem do",
+          "layoutProperties": {},
+          "homepageTrigger": {
+            "enabled": false
+          },
+          "universalActions": [],
+          "openLinkUrlPrefixes": [],
+          "useLocaleFromApp": false
+        },
+        "gmail": {
+          "contextualTriggers": [],
+          "homepageTrigger": {
+            "enabled": true,
+            "runFunction": "amet amet amet d"
+          }
+        },
+        "sheets": {
+          "homepageTrigger": {
+            "_ref": "#/definitions/homepageTrigger",
+            "_placeholder": true
+          },
+          "onFileScopeGrantedTrigger": {}
+        }
+      }
+    },
+    {
+      "timeZone": "ireeagqw",
+      "dependencies": {
+        "enabledAdvancedServices": [],
+        "libraries": []
+      },
+      "sheets": {
+        "macros": []
+      },
+      "dataStudio": {
+        "name": "himyhhlrhetop",
+        "logoUrl": "l",
+        "company": "490wJ3vySvDwZGgaNhPnG",
+        "supportUrl": "xychdkjumui",
+        "description": "e5",
+        "companyUrl": "oeosqikjaehut",
+        "sources": [],
+        "shortDescription": "NR24TyspG7Aqjz38o6xz",
+        "authType": []
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "https://example.com/resource/data",
+          "name": "K413QVUTQVdkOAoOm",
+          "homepageTrigger": {
+            "runFunctions": "attgrpeseus"
+          },
+          "universalActions": [],
+          "openLinkUrlPrefixes": [],
+          "useLocaleFromApp": false
+        },
+        "gmail": {
+          "homepageTrigger": {
+            "runFunction": "vzdehpixfmlpzpe"
+          }
+        },
+        "calendar": {
+          "homepageTrigger": {},
+          "eventUpdateTrigger": {
+            "runFunction": "consectetur consecte"
+          }
+        }
+      }
+    },
+    {
+      "runtimeVersion": "V8",
+      "dependencies": {
+        "libraries": []
+      },
+      "webapp": {
+        "executeAs": "USER_DEPLOYING"
+      },
+      "urlFetchWhitelist": [],
+      "dataStudio": {
+        "name": "bc4KkVIAw",
+        "logoUrl": "lorem a",
+        "company": "7hJ6L5yBwwve9TQHmn7Z",
+        "supportUrl": "consectetur con",
+        "description": "emyzdjdbgcq",
+        "templates": {},
+        "shortDescription": "DnWK",
+        "authType": [],
+        "privacyPolicyUrl": "dRL3w9o4pvxH4"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "https://example.com/data/v1",
+          "name": "mj",
+          "layoutProperties": {
+            "primaryColor": "iaLo0A7eZhpzrBF"
+          },
+          "homepageTrigger": {
+            "runFunctions": "dolor dolor ipsum ad"
+          },
+          "universalActions": [],
+          "openLinkUrlPrefixes": []
+        },
+        "sheets": {
+          "homepageTrigger": {
+            "_ref": "#/definitions/homepageTrigger",
+            "_placeholder": true
+          },
+          "onFileScopeGrantedTrigger": {}
+        }
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "dependencies": {
+        "libraries": []
+      },
+      "webapp": {},
+      "sheets": {
+        "macros": []
+      },
+      "dataStudio": {
+        "name": "a",
+        "logoUrl": "e",
+        "company": "amet ipsum ipsum co",
+        "supportUrl": "nUIwtwElaCndrPZ",
+        "description": "y",
+        "companyUrl": "amet s",
+        "sources": [],
+        "privacyPolicyUrl": "BRkjlcdhF"
+      }
+    },
+    {
+      "runtimeVersion": "V8",
+      "timeZone": "GIvN3eIq",
+      "exceptionLogging": "NONE",
+      "oauthScopes": [],
+      "executionApi": {},
+      "sheets": {},
+      "dataStudio": {
+        "name": "o5NyDRVWu7VqkAq2aYkYA",
+        "logoUrl": "VTTns",
+        "company": "amet amet am",
+        "supportUrl": "e",
+        "description": "11ifUARO91",
+        "sources": [],
+        "templates": {},
+        "shortDescription": "qmvvwyvmsacnirzg",
+        "privacyPolicyUrl": "xgveduxsn"
+      },
+      "addOns": {
+        "calendar": {
+          "homepageTrigger": {
+            "enabled": false
+          },
+          "eventOpenTrigger": {
+            "runFunction": "dolor ipsum"
+          }
+        },
+        "sheets": {
+          "homepageTrigger": {
+            "_ref": "#/definitions/homepageTrigger",
+            "_placeholder": true
+          },
+          "onFileScopeGrantedTrigger": {}
+        }
+      }
+    },
+    {
+      "runtimeVersion": "V8",
+      "webapp": {},
+      "exceptionLogging": "STACKDRIVER",
+      "oauthScopes": [],
+      "urlFetchWhitelist": []
+    },
+    {
+      "runtimeVersion": "V8",
+      "dependencies": {
+        "libraries": []
+      },
+      "oauthScopes": [],
+      "urlFetchWhitelist": [],
+      "executionApi": {
+        "access": "ANYONE_ANONYMOUS"
+      },
+      "sheets": {},
+      "dataStudio": {
+        "name": "2aO4Tjjw",
+        "logoUrl": "l",
+        "company": "zkbjlvaw",
+        "supportUrl": "lorem lorem ",
+        "description": "lkawoden",
+        "sources": [],
+        "templates": {},
+        "authType": [],
+        "termsOfServiceUrl": "vdlmimhp"
+      }
+    },
+    {
+      "exceptionLogging": "NONE",
+      "oauthScopes": [],
+      "urlFetchWhitelist": [],
+      "sheets": {},
+      "dataStudio": {
+        "name": "udomwbueuavljdroaz",
+        "logoUrl": "vWh6D",
+        "company": "cljdtkrbykvtctsuugpz",
+        "supportUrl": "CYFD2saP",
+        "description": "nZK8",
+        "companyUrl": "ubhuyjhpln",
+        "shortDescription": "izeskxgwx",
+        "privacyPolicyUrl": "hB9D2hLrToI4"
+      }
+    },
+    {
+      "timeZone": "dolor ",
+      "exceptionLogging": "STACKDRIVER",
+      "urlFetchWhitelist": [],
+      "sheets": {
+        "macros": []
+      },
+      "dataStudio": {
+        "name": "bhfzfxyynfcxsg",
+        "logoUrl": "cfbppjDXRN5GcfhyO5jE",
+        "company": "enyqkrkugonrnjclldjza",
+        "supportUrl": "5MBdhFdYKmLIv",
+        "description": "Uk6I",
+        "companyUrl": "zmpnsdkgugvuchs",
+        "sources": [],
+        "shortDescription": "cons",
+        "authType": [],
+        "privacyPolicyUrl": "H",
+        "termsOfServiceUrl": "d"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "https://demo.net/data/v1",
+          "name": "nzesdwqpzlkhk",
+          "universalActions": [],
+          "openLinkUrlPrefixes": []
+        },
+        "gmail": {
+          "contextualTriggers": [],
+          "homepageTrigger": {
+            "enabled": false,
+            "runFunction": "xwjq"
+          }
+        },
+        "sheets": {
+          "onFileScopeGrantedTrigger": {
+            "runFunction": "emy"
+          }
+        }
+      }
+    },
+    {
+      "timeZone": "tgYPnPXoOFVx31f",
+      "dependencies": {
+        "enabledAdvancedServices": [],
+        "libraries": []
+      },
+      "webapp": {},
+      "exceptionLogging": "NONE",
+      "oauthScopes": [],
+      "executionApi": {},
+      "dataStudio": {
+        "name": "ui",
+        "logoUrl": "yfepobhcmlhpnsutsvtp",
+        "company": "zbr",
+        "supportUrl": "lorem a",
+        "description": "vs",
+        "addonUrl": "lorem dolor sit",
+        "sources": [],
+        "authType": [],
+        "privacyPolicyUrl": "sit lorem ipsum dol",
+        "termsOfServiceUrl": "vpr"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "ftp://example.com/v1/data",
+          "name": "sit sit",
+          "layoutProperties": {
+            "primaryColor": "zosiK2Hw9TQBO",
+            "secondaryColor": "Hc0iVP7u2P7yf1rZ1"
+          },
+          "openLinkUrlPrefixes": []
+        },
+        "gmail": {
+          "contextualTriggers": []
+        },
+        "calendar": {
+          "eventOpenTrigger": {
+            "runFunction": "sTBstbsDG22p0gu"
+          },
+          "eventAccess": "READ"
+        },
+        "sheets": {
+          "homepageTrigger": {
+            "_ref": "#/definitions/homepageTrigger",
+            "_placeholder": true
+          },
+          "onFileScopeGrantedTrigger": {}
+        }
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "dependencies": {
+        "enabledAdvancedServices": []
+      },
+      "webapp": {
+        "access": "MYSELF",
+        "executeAs": "USER_ACCESSING"
+      },
+      "oauthScopes": [],
+      "executionApi": {
+        "access": "DOMAIN"
+      },
+      "sheets": {},
+      "dataStudio": {
+        "name": "ipsum adipiscing si",
+        "logoUrl": "i",
+        "company": "wjpgfacc",
+        "supportUrl": "EJ0sf",
+        "description": "elogrttgta",
+        "companyUrl": "nnhgwzmmdpf",
+        "templates": {},
+        "shortDescription": "HtE1E7zCN",
+        "authType": [],
+        "termsOfServiceUrl": "d"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "ftp://example.com/resource/data",
+          "name": "vDrgHNtTGt0bqtPp8gB",
+          "layoutProperties": {
+            "secondaryColor": "4QXBlP"
+          },
+          "homepageTrigger": {
+            "runFunctions": "adipiscing sit ipsu"
+          },
+          "universalActions": [],
+          "openLinkUrlPrefixes": [],
+          "useLocaleFromApp": true
+        },
+        "gmail": {
+          "homepageTrigger": {
+            "runFunction": "m"
+          }
+        },
+        "calendar": {
+          "homepageTrigger": {
+            "runFunction": "wzgyvusjh"
+          }
+        }
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "dependencies": {},
+      "webapp": {},
+      "exceptionLogging": "STACKDRIVER",
+      "oauthScopes": [],
+      "urlFetchWhitelist": [],
+      "executionApi": {},
+      "sheets": {
+        "macros": []
+      },
+      "dataStudio": {
+        "name": "dolor lore",
+        "logoUrl": "dolor dol",
+        "company": "jmeyxodyfbkjwdbl",
+        "supportUrl": "oo",
+        "description": "consectetur s",
+        "addonUrl": "DfORoZWF37WAOdE",
+        "sources": [],
+        "templates": {},
+        "privacyPolicyUrl": "gpvunmewpuz"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "http://test.org/api/data",
+          "name": "sit dolor consec",
+          "layoutProperties": {
+            "primaryColor": "ACHn9SS"
+          },
+          "universalActions": [],
+          "openLinkUrlPrefixes": [],
+          "useLocaleFromApp": false
+        }
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "timeZone": "KEGmgp",
+      "webapp": {
+        "access": "ANYONE_ANONYMOUS",
+        "executeAs": "USER_DEPLOYING"
+      },
+      "exceptionLogging": "NONE",
+      "urlFetchWhitelist": [],
+      "executionApi": {},
+      "dataStudio": {
+        "name": "yffuhhbtgepc",
+        "logoUrl": "eol",
+        "company": "ojhbclvrzjeucgdz",
+        "supportUrl": "kscatcqgmz",
+        "description": "lorem lorem consectet",
+        "companyUrl": "kqrawtnzrzjuvbpgjft",
+        "sources": [],
+        "templates": {},
+        "shortDescription": "sit dolor ame",
+        "authType": [],
+        "privacyPolicyUrl": "sit",
+        "termsOfServiceUrl": "f803RCVcTMdnrFPgFwXNa"
+      },
+      "addOns": {
+        "gmail": {
+          "contextualTriggers": []
+        },
+        "sheets": {
+          "onFileScopeGrantedTrigger": {
+            "runFunction": "WVLGn"
+          }
+        }
+      }
+    },
+    {
+      "timeZone": "Xl1n",
+      "dependencies": {
+        "libraries": []
+      },
+      "webapp": {
+        "access": "ANYONE",
+        "executeAs": "USER_ACCESSING"
+      },
+      "oauthScopes": [],
+      "executionApi": {
+        "access": "ANYONE_ANONYMOUS"
+      },
+      "sheets": {
+        "macros": []
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "http://demo.net/v1/data",
+          "name": "si",
+          "layoutProperties": {},
+          "homepageTrigger": {
+            "runFunctions": "ipsum ipsum a"
+          },
+          "universalActions": [],
+          "openLinkUrlPrefixes": [],
+          "useLocaleFromApp": true
+        },
+        "calendar": {
+          "eventOpenTrigger": {
+            "runFunction": "hshsijcoen"
+          },
+          "eventUpdateTrigger": {},
+          "eventAccess": "WRITE"
+        },
+        "sheets": {
+          "onFileScopeGrantedTrigger": {
+            "runFunction": "hobzo"
+          }
+        }
+      }
+    },
+    {
+      "runtimeVersion": "V8",
+      "timeZone": "rmrwrixicgmwjrgaz",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "adipisc",
+            "serviceId": "sit dolor amet lorem",
+            "version": "lorem dolor"
+          },
+          {
+            "userSymbol": "h7sJnpMRX75B",
+            "serviceId": "W",
+            "version": "aqTlqARUywFC8gxuF0"
+          },
+          {
+            "userSymbol": "jpvoxanxouj",
+            "serviceId": "consect",
+            "version": "XO"
+          },
+          {
+            "userSymbol": "ljujdfm",
+            "serviceId": "7xzh3pYM1wPFDDni",
+            "version": "Bc9mqceYouIZlDwvlMjdx"
+          },
+          {
+            "userSymbol": "ipsum ame",
+            "serviceId": "dumlre",
+            "version": "5ZC"
+          }
+        ]
+      },
+      "webapp": {
+        "access": "ANYONE_ANONYMOUS",
+        "executeAs": "USER_DEPLOYING"
+      },
+      "oauthScopes": [
+        "http://example.com/api/v1",
+        "http://example.com/v1/api",
+        "http://test.org/v1/resource",
+        "ftp://example.com/v1/resource",
+        "https://test.org/api/resource"
+      ],
+      "dataStudio": {
+        "name": "IGlFsc8",
+        "logoUrl": "ktqurrbesecaefsrhb",
+        "company": "amet consectetur ame",
+        "supportUrl": "adipiscing do",
+        "description": "bgqruaxqoxzkjnazp",
+        "addonUrl": "XLU9lfvPdMrAkvlD",
+        "companyUrl": "A1laeiJaEAQ",
+        "authType": [
+          "OAUTH2",
+          "KEY",
+          "KEY",
+          "USER_PASS",
+          "KEY"
+        ],
+        "privacyPolicyUrl": "odzuxpr",
+        "termsOfServiceUrl": "hrwmzxcshprozprfytzg"
+      },
+      "addOns": {
+        "gmail": {
+          "contextualTriggers": [
+            {
+              "onTriggerFunction": "amet dolor i",
+              "unconditional": {}
+            },
+            {
+              "onTriggerFunction": "s",
+              "unconditional": {}
+            },
+            {
+              "onTriggerFunction": "YDj"
+            },
+            {
+              "unconditional": {}
+            },
+            {
+              "onTriggerFunction": "adipiscing dolor",
+              "unconditional": {}
+            }
+          ],
+          "homepageTrigger": {}
+        },
+        "sheets": {
+          "homepageTrigger": {
+            "_ref": "#/definitions/homepageTrigger",
+            "_placeholder": true
+          }
+        }
+      }
+    },
+    {
+      "runtimeVersion": "V8",
+      "timeZone": "consectetu",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "fubrppztilb",
+            "serviceId": "dgyqthpwnafvmepykoeaq",
+            "version": "tujyoepoddppc"
+          },
+          {
+            "userSymbol": "xhj71EScSOWBKZ6Yt",
+            "serviceId": "consectetur",
+            "version": "dolo"
+          },
+          {
+            "userSymbol": "uxXcyYctTEzGs",
+            "serviceId": "U0FnR01ESGUgsONgj",
+            "version": "TFVRE61Q"
+          },
+          {
+            "userSymbol": "8TCkXSYXo7aEPAVsbfr5",
+            "serviceId": "lorem lorem ",
+            "version": "r"
+          },
+          {
+            "userSymbol": "PUxFzNhHFoHPpKCJ",
+            "serviceId": "mmasr",
+            "version": "ypzrq"
+          }
+        ],
+        "libraries": [
+          {
+            "userSymbol": "84UwvJPOKh0A5dK",
+            "libraryId": "consectetur lorem amet lorem lorem",
+            "version": "tgkqmqrpnc"
+          },
+          {
+            "userSymbol": "adipiscing consecte",
+            "libraryId": "adipiscing adipiscing consectetur consectetur ipsum",
+            "version": "ppzwzxdatyqezitgctmr"
+          },
+          {
+            "userSymbol": "ibninqohvluwwv",
+            "libraryId": "amet adipiscing amet sit sit",
+            "version": "ipsum cons",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "oimrlplnktzijijevyea",
+            "libraryId": "adipiscing amet ipsum sit adipiscing",
+            "version": "vbrpzeynd",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "s",
+            "libraryId": "pwvnusmfgyducwflvgworoxfnbcgmqgxhxsqfirngoreiszimsyfvpnvq",
+            "version": "ame"
+          }
+        ]
+      },
+      "exceptionLogging": "NONE",
+      "dataStudio": {
+        "name": "amet dolor l",
+        "logoUrl": "nrvce",
+        "company": "wzgakajynkdxwwkrourk",
+        "supportUrl": "mcieahi",
+        "description": "sit ip",
+        "addonUrl": "kfkrfkuhnfenjblso",
+        "templates": {},
+        "authType": [
+          "OAUTH2",
+          "NONE",
+          "KEY",
+          "KEY",
+          "KEY"
+        ]
+      },
+      "addOns": {
+        "calendar": {
+          "homepageTrigger": {
+            "runFunction": "64YOLJxYx"
+          },
+          "eventOpenTrigger": {
+            "runFunction": "iL"
+          },
+          "eventUpdateTrigger": {
+            "runFunction": "do"
+          },
+          "eventAccess": "METADATA"
+        }
+      }
+    },
+    {
+      "timeZone": "adipisci",
+      "exceptionLogging": "NONE",
+      "urlFetchWhitelist": [
+        "consectetur sit ",
+        "sit ipsum s",
+        "lorem ip",
+        "pocusficovxuzhqxzj",
+        "consectetur adipi"
+      ],
+      "executionApi": {
+        "access": "ANYONE_ANONYMOUS"
+      },
+      "sheets": {
+        "macros": [
+          {
+            "menuName": "adipiscing lo",
+            "functionName": "lgnomqvrdnam",
+            "defaultShortcut": "tobmttaacyck"
+          },
+          {
+            "menuName": "consectetur ipsu",
+            "functionName": "lorem ",
+            "defaultShortcut": "uzotknpx"
+          },
+          {
+            "menuName": "hhlepbadcwnrueyj",
+            "functionName": "nvkwqvhxcnifhjs",
+            "defaultShortcut": "trknzgzwvryhcdys"
+          },
+          {
+            "menuName": "porbasp",
+            "functionName": "duqirtpjwhjqtalvmunvl",
+            "defaultShortcut": "cons"
+          },
+          {
+            "menuName": "qg",
+            "functionName": "qvorbozksemouimepykr",
+            "defaultShortcut": "kcurqqizlnjqguyidg"
+          }
+        ]
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "ftp://example.com/resource/data",
+          "name": "ips",
+          "layoutProperties": {
+            "primaryColor": "GAyYgB1wExkyIL",
+            "secondaryColor": "rFBJJy4xq9gwhRicJv62"
+          },
+          "openLinkUrlPrefixes": [
+            "bKFAmNc5DLA",
+            "l",
+            "rH2FGK2bPJSk",
+            "hyboceqsmgoljkmjdm",
+            "nigyjixaay"
+          ],
+          "useLocaleFromApp": true
+        },
+        "gmail": {
+          "contextualTriggers": [
+            {
+              "onTriggerFunction": "sit consectetu",
+              "unconditional": {}
+            },
+            {
+              "unconditional": {}
+            },
+            {
+              "onTriggerFunction": "ly6jbck87EIFZA3HL4c5",
+              "unconditional": {}
+            },
+            {
+              "unconditional": {}
+            },
+            {
+              "onTriggerFunction": "tycsznahlksearzmrs"
+            }
+          ]
+        },
+        "calendar": {
+          "eventOpenTrigger": {
+            "runFunction": "adipiscing co"
+          },
+          "eventAccess": "READ_WRITE"
+        }
+      }
+    },
+    {
+      "timeZone": "xrxkrxmza",
+      "exceptionLogging": "STACKDRIVER",
+      "urlFetchWhitelist": [
+        "consec",
+        "consectetur ",
+        "2p5kF",
+        "ycwaljlckrrau",
+        "odouqfeaxlk"
+      ],
+      "executionApi": {
+        "access": "ANYONE_ANONYMOUS"
+      },
+      "dataStudio": {
+        "name": "lorem ipsum do",
+        "logoUrl": "cfaiwxwy",
+        "company": "lorem ipsum sit lorem",
+        "supportUrl": "u",
+        "description": "lorem lorem c",
+        "addonUrl": "mjieykmkowqmrup",
+        "companyUrl": "dolor l",
+        "sources": [
+          "cNEIFF3KL",
+          "nb9180hkzORPCn",
+          "SGl3r1Ms4b17tB1b8IK3",
+          "consectetur ",
+          "IVKpvkwv1nmuG0C"
+        ],
+        "templates": {},
+        "authType": [
+          "OAUTH2",
+          "KEY",
+          "OAUTH2",
+          "USER_PASS",
+          "USER_PASS"
+        ]
+      },
+      "addOns": {
+        "gmail": {
+          "contextualTriggers": [
+            {},
+            {
+              "onTriggerFunction": "mkxuo",
+              "unconditional": {}
+            },
+            {},
+            {
+              "unconditional": {}
+            },
+            {
+              "onTriggerFunction": "g"
+            }
+          ],
+          "homepageTrigger": {
+            "enabled": false,
+            "runFunction": "nqjolsiasssy"
+          }
+        },
+        "sheets": {}
+      }
+    },
+    {
+      "runtimeVersion": "V8",
+      "timeZone": "amet ips",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "emrqccumsssztxlq",
+            "serviceId": "ipsum ip",
+            "version": "kcOI5jm6q59"
+          },
+          {
+            "userSymbol": "qznzqpuxavylqxatf",
+            "serviceId": "mY0Im3ifZ6XjJeY",
+            "version": "ddllyergebgadtsr"
+          },
+          {
+            "userSymbol": "sivhithdzt",
+            "serviceId": "adipi",
+            "version": "jptn"
+          },
+          {
+            "userSymbol": "ovlovmzdmlzoqdbdfg",
+            "serviceId": "eD4utHnN4muQC17",
+            "version": "1MLnlwm6phdd51cuDVYl9"
+          },
+          {
+            "userSymbol": "OAI682OW",
+            "serviceId": "sit ipsum c",
+            "version": "bk3oK"
+          }
+        ]
+      },
+      "oauthScopes": [
+        "ftp://demo.net/resource/data",
+        "ftp://example.com/v1/resource",
+        "ftp://example.com/data/v1",
+        "http://example.com/v1/data",
+        "http://test.org/api/data"
+      ],
+      "urlFetchWhitelist": [
+        "xOqh2tulCcJFP",
+        "I1OAuuqM51T4xf8KFC",
+        "qxseq",
+        "ipsum ",
+        "ijjschgsvnqpppqurldzl"
+      ],
+      "executionApi": {
+        "access": "MYSELF"
+      },
+      "sheets": {},
+      "dataStudio": {
+        "name": "kOGbmdDZBKvKy7xfeo1Qj",
+        "logoUrl": "mefrgjlgw",
+        "company": "muizpkbw",
+        "supportUrl": "h2qvGeng",
+        "description": "fwqiujsmzch",
+        "addonUrl": "dolor lore",
+        "templates": {},
+        "shortDescription": "consectetur ipsum a",
+        "authType": [
+          "KEY",
+          "OAUTH2",
+          "OAUTH2",
+          "KEY",
+          "KEY"
+        ],
+        "privacyPolicyUrl": "xp"
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "webapp": {
+        "access": "ANYONE_ANONYMOUS",
+        "executeAs": "USER_DEPLOYING"
+      },
+      "urlFetchWhitelist": [
+        "sit lore",
+        "ygjezfgccaanhjp",
+        "gNHFdmtDPQa",
+        "hg",
+        "ipsum "
+      ],
+      "executionApi": {}
+    },
+    {
+      "runtimeVersion": "V8",
+      "timeZone": "ZjBVL4rwsieFsJ79Wu",
+      "dependencies": {
+        "libraries": [
+          {
+            "userSymbol": "sit sit adipisc",
+            "libraryId": "v1KSgdAtqY5ngllSx8bHi0xoK2ao3Af56AmbUVTQvrJXDFyY7r7YzpQHK",
+            "version": "nebvgrhfrebzkjufugs"
+          },
+          {
+            "userSymbol": "Utfh",
+            "libraryId": "npJCLmcMzB6gQEco2B3Xj3UCUptIwwPqneat3oLoC7Nr0avqHuE3OeUWe",
+            "version": "ddr",
+            "developmentMode": true
+          },
+          {
+            "userSymbol": "ipsum ipsum lorem dol",
+            "libraryId": "zbnlpysahpkjpllevsitvwuvpygzrafihibcdrlxfzszaltstztiodukv",
+            "version": "sit con",
+            "developmentMode": true
+          },
+          {
+            "userSymbol": "qaObY5",
+            "libraryId": "vopamzbkxnxojyjwszptbragtghqzcepteqaedjqyomnersqkubcllizt",
+            "version": "vgkgdgihjmkuiwx"
+          },
+          {
+            "userSymbol": "Jq4bRW3dF",
+            "libraryId": "xkllmkppzkuwdyypoyjecmznzaxfbufoufvklchkcaiynwpskqxspftdr",
+            "version": "iyfkesryhgjpbbsqqyrv"
+          }
+        ]
+      },
+      "exceptionLogging": "STACKDRIVER",
+      "oauthScopes": [
+        "ftp://example.com/api/resource",
+        "http://test.org/api/data",
+        "https://example.com/data/resource",
+        "https://example.com/data/api",
+        "https://demo.net/api/data"
+      ],
+      "urlFetchWhitelist": [
+        "dolor consectetur",
+        "czdw7uEkgRT9v44s",
+        "9",
+        "ojteec",
+        "amet dolor lorem "
+      ],
+      "sheets": {
+        "macros": [
+          {
+            "menuName": "dol",
+            "functionName": "9E",
+            "defaultShortcut": "adlhsuhw"
+          },
+          {
+            "menuName": "kevXgwS9tzyx",
+            "functionName": "OyOOpPveyX2g",
+            "defaultShortcut": "xtrkqk"
+          },
+          {
+            "menuName": "adipiscin",
+            "functionName": "ULhVbp",
+            "defaultShortcut": "adipiscing"
+          },
+          {
+            "menuName": "wmcywwmcwgpxqw",
+            "functionName": "kjrgisyintvkobu",
+            "defaultShortcut": "z2l5xgI7oynHLl0Y"
+          },
+          {
+            "menuName": "77eeq",
+            "functionName": "d",
+            "defaultShortcut": "v"
+          }
+        ]
+      },
+      "dataStudio": {
+        "name": "VCLa",
+        "logoUrl": "NYv",
+        "company": "cons",
+        "supportUrl": "pzvibqgdthk",
+        "description": "5CEYnnt48qPEynwnfV",
+        "addonUrl": "dolor amet lorem dolo",
+        "companyUrl": "ame",
+        "shortDescription": "jxmnau",
+        "authType": [
+          "OAUTH2",
+          "USER_PASS",
+          "NONE",
+          "NONE",
+          "USER_PASS"
+        ],
+        "privacyPolicyUrl": "ipsum s"
+      }
+    },
+    {
+      "runtimeVersion": "V8",
+      "dependencies": {
+        "libraries": [
+          {
+            "userSymbol": "exlpch",
+            "libraryId": "lorem dolor dolor sit sit",
+            "version": "gsajuv",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "7pvgQpcXwQLR79zPzawIm",
+            "libraryId": "lyckjmvbkljpsqnjzvrckselldvxhegsftxcssqrhdxexukmhfubfzjpq",
+            "version": "uhizxl",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "lorem lorem ip",
+            "libraryId": "dolor lorem consectetur amet adipiscing",
+            "version": "ym"
+          },
+          {
+            "userSymbol": "lor",
+            "libraryId": "sagnzdxntmdcdxvnfbzekawvqmxxtchknyhxuahczgihpayhsbovmrrli",
+            "version": "lorem a",
+            "developmentMode": true
+          },
+          {
+            "userSymbol": "yty",
+            "libraryId": "axvswzivkwqrsfhfeivhgsqiytncneqwhcoubuxyfaqkwetyppfqyrwak",
+            "version": "xl",
+            "developmentMode": false
+          }
+        ]
+      },
+      "sheets": {
+        "macros": [
+          {
+            "menuName": "J3hy",
+            "functionName": "amet am",
+            "defaultShortcut": "pecboyqqnjlxbtyjw"
+          },
+          {
+            "menuName": "LezRMrSoE3",
+            "functionName": "ipsum consec",
+            "defaultShortcut": "gxjLDLHiTxPk8BHRK5nXb"
+          },
+          {
+            "menuName": "kMe",
+            "functionName": "vzXceMJW044r7o9FD5bmu",
+            "defaultShortcut": "sjcrepkmmdygskukzmeu"
+          },
+          {
+            "menuName": "r",
+            "functionName": "klj",
+            "defaultShortcut": "sit sit lorem"
+          },
+          {
+            "menuName": "dolor sit ip",
+            "functionName": "wvcqwiscrfhhspfa",
+            "defaultShortcut": "dolor sit ipsum"
+          }
+        ]
+      },
+      "dataStudio": {
+        "name": "dolor consectetu",
+        "logoUrl": "n",
+        "company": "ipsum ip",
+        "supportUrl": "NRr54W834OACEK8Vm",
+        "description": "QqR2GiYE",
+        "addonUrl": "ckwfbuhi",
+        "companyUrl": "bjhphojnvqfkdorpaqv",
+        "sources": [
+          "st",
+          "amet consec",
+          "dol",
+          "hdwiyraimisd",
+          "adipi"
+        ],
+        "templates": {},
+        "privacyPolicyUrl": "P"
+      }
+    },
+    {
+      "runtimeVersion": "V8",
+      "timeZone": "adipiscing ip",
+      "dependencies": {
+        "libraries": [
+          {
+            "userSymbol": "YDM3oBkWbUvJ",
+            "libraryId": "2DX10BiUzFlJaBlBchK4jn8gegzLlXCtOEJvKINL0FByP42gSkDDeyPAi",
+            "version": "sYxo25MgFS673cB"
+          },
+          {
+            "userSymbol": "oL",
+            "libraryId": "xuoxwhfdsvnzifjrlyjwsnzrxzslhyjyhfyrdlglrrxziizntdfhklwtn",
+            "version": "y",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "td",
+            "libraryId": "avbqwkmywxpvwnrrfskunvkugrjbbrfhpuaktfcylwanrcunursywzccp",
+            "version": "IZIS4Nu",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "zObL1JPCkQfoUBFPQzT",
+            "libraryId": "adipiscing ipsum lorem adipiscing sit",
+            "version": "hay2L4XU"
+          },
+          {
+            "userSymbol": "o5g",
+            "libraryId": "QMqFyxLubSSfFSaKDTIMPZLwsXzD1xfL1Yrxk7m3ETHDL52x5uT8BRhyj",
+            "version": "muhdbsn"
+          }
+        ]
+      },
+      "webapp": {
+        "access": "ANYONE"
+      },
+      "exceptionLogging": "NONE",
+      "oauthScopes": [
+        "https://demo.net/data/resource",
+        "https://test.org/data/api",
+        "https://example.com/resource/data",
+        "ftp://test.org/api/resource",
+        "https://test.org/data/v1"
+      ],
+      "executionApi": {
+        "access": "DOMAIN"
+      },
+      "sheets": {
+        "macros": [
+          {
+            "menuName": "U9OFmS7fC4ZTW0BJvE",
+            "functionName": "KL9nICVA7pswQ9",
+            "defaultShortcut": "lorem lorem consect"
+          },
+          {
+            "menuName": "EhBUxF3SSb9NFugsE",
+            "functionName": "bSShCSj",
+            "defaultShortcut": "gtrwpqwvcn"
+          },
+          {
+            "menuName": "wBQn",
+            "functionName": "ipsum consectet",
+            "defaultShortcut": "wainbldjctu"
+          },
+          {
+            "menuName": "adi",
+            "functionName": "ojc",
+            "defaultShortcut": "eltpjksikmomjj"
+          },
+          {
+            "menuName": "hxxacfn",
+            "functionName": "lorem amet amet dolor",
+            "defaultShortcut": "HrA"
+          }
+        ]
+      }
+    },
+    {
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "lwtjdysnkxi",
+            "serviceId": "adipisci",
+            "version": "si"
+          },
+          {
+            "userSymbol": "amAsghTHCb",
+            "serviceId": "amet amet adipis",
+            "version": "ipsum a"
+          },
+          {
+            "userSymbol": "72Ek50bYa0K5NiG3yM",
+            "serviceId": "rvcuhjxopofs",
+            "version": "qVQF2aargnSkD"
+          },
+          {
+            "userSymbol": "Zhe4lZ4A",
+            "serviceId": "qwomlfeiyma",
+            "version": "9P5w"
+          },
+          {
+            "userSymbol": "5hQ90b7Bp7httnjDCUHv",
+            "serviceId": "symsqbytcsqzn",
+            "version": "gqj"
+          }
+        ]
+      },
+      "exceptionLogging": "STACKDRIVER",
+      "urlFetchWhitelist": [
+        "waYfTQIt4U",
+        "sit sit dolor",
+        "vdhfggzzzyxirtwrqmat",
+        "pvgEAApDIT4PRrIS",
+        "ZG6"
+      ],
+      "sheets": {
+        "macros": [
+          {
+            "menuName": "lorem sit sit a",
+            "functionName": "3",
+            "defaultShortcut": "wdvxocgewinaoodf"
+          },
+          {
+            "menuName": "bqmibd",
+            "functionName": "JHCmQGaUetnxrgm",
+            "defaultShortcut": "G570"
+          },
+          {
+            "menuName": "Xzqnk",
+            "functionName": "zsylvykwnngz",
+            "defaultShortcut": "ipsum adipisc"
+          },
+          {
+            "menuName": "PL9f4a1tVwzpY",
+            "functionName": "ipsum c",
+            "defaultShortcut": "tkvyzdd"
+          },
+          {
+            "menuName": "WJIm3VA8",
+            "functionName": "adipiscing consecte",
+            "defaultShortcut": "aqgpvybajhiu"
+          }
+        ]
+      },
+      "dataStudio": {
+        "name": "ipsum",
+        "logoUrl": "tcqysfxoctp",
+        "company": "dgrgwuf",
+        "supportUrl": "qamfxjeaeknzpqu",
+        "description": "adipiscin",
+        "sources": [
+          "FMCPy",
+          "PB2I0E0pp16f3gq",
+          "By",
+          "fejtzvqr",
+          "zpyplmjfzt"
+        ],
+        "templates": {},
+        "shortDescription": "ig",
+        "authType": [
+          "OAUTH2",
+          "KEY",
+          "OAUTH2",
+          "OAUTH2",
+          "NONE"
+        ],
+        "termsOfServiceUrl": "Qbvhbu253SP"
+      },
+      "addOns": {
+        "gmail": {
+          "contextualTriggers": [
+            {},
+            {
+              "onTriggerFunction": "consectetur amet ",
+              "unconditional": {}
+            },
+            {
+              "onTriggerFunction": "dftybmftrnrgkyfoqcl"
+            },
+            {
+              "onTriggerFunction": "iQzSY2eCPR3kH",
+              "unconditional": {}
+            },
+            {
+              "onTriggerFunction": "nuwszeydyfgm"
+            }
+          ]
+        },
+        "calendar": {
+          "homepageTrigger": {
+            "enabled": false,
+            "runFunction": "ipsum "
+          },
+          "eventOpenTrigger": {}
+        },
+        "sheets": {
+          "homepageTrigger": {
+            "_ref": "#/definitions/homepageTrigger",
+            "_placeholder": true
+          },
+          "onFileScopeGrantedTrigger": {}
+        }
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "dependencies": {
+        "libraries": [
+          {
+            "userSymbol": "QH0nQLCAaIAM",
+            "libraryId": "mfwdrcyaonxobwsyubceeltygryehmcbgfeqajooedwpjegkruzpennzs",
+            "version": "consectet",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "gvkrhirjndrmemfbgfib",
+            "libraryId": "ukcakymsuezwhbyxeidcrcufzwwenamcuxfuuutmebmfabpmjrlmxnrrk",
+            "version": "ipsum ipsum",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "tkwhdpwuy",
+            "libraryId": "amet adipiscing ipsum lorem lorem",
+            "version": "ehdrga",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "ahtrwtczfo",
+            "libraryId": "hsdboweptwaloqeviowtjvkmouoessdwmcdgnrhsnkkyxpxhgilltlaiz",
+            "version": "gwknjfgc",
+            "developmentMode": true
+          },
+          {
+            "userSymbol": "7OyJoVGyByLOmt0tnJW7",
+            "libraryId": "dolor sit lorem dolor amet",
+            "version": "jA7FyKFEbYCP5ACkEWj",
+            "developmentMode": false
+          }
+        ]
+      },
+      "webapp": {
+        "access": "ANYONE_ANONYMOUS",
+        "executeAs": "USER_DEPLOYING"
+      },
+      "exceptionLogging": "NONE",
+      "oauthScopes": [
+        "https://test.org/api/data",
+        "https://example.com/api/data",
+        "http://test.org/api/resource",
+        "http://demo.net/v1/data",
+        "https://demo.net/resource/v1"
+      ],
+      "urlFetchWhitelist": [
+        "ipsum adipis",
+        "sit lorem a",
+        "lorem dolor dolor lo",
+        "jslmxjkp",
+        "CSS120f"
+      ],
+      "dataStudio": {
+        "name": "jdrzlubkmedjthha",
+        "logoUrl": "ipsum amet",
+        "company": "y",
+        "supportUrl": "bsgdtgdniadoog",
+        "description": "evWkk8",
+        "companyUrl": "vy3L7iNAqJx",
+        "sources": [
+          "jxipqnplomogdu",
+          "Ca9jvHPoULCgGdB75",
+          "AtFKVX9vTiN8Ww3St",
+          "TC06zOC0V5uI",
+          "SK6oklRCbMPCA79l6"
+        ],
+        "templates": {},
+        "shortDescription": "evwlll",
+        "privacyPolicyUrl": "anicer",
+        "termsOfServiceUrl": "rxuolgt"
+      },
+      "addOns": {
+        "calendar": {
+          "homepageTrigger": {
+            "enabled": false,
+            "runFunction": "consectetur dol"
+          },
+          "eventOpenTrigger": {},
+          "eventAccess": "METADATA"
+        },
+        "sheets": {
+          "homepageTrigger": {
+            "_ref": "#/definitions/homepageTrigger",
+            "_placeholder": true
+          },
+          "onFileScopeGrantedTrigger": {
+            "runFunction": "zhBlZN93s0iUtq4G"
+          }
+        }
+      }
+    },
+    {
+      "timeZone": "tsthsjwnzka",
+      "webapp": {
+        "access": "DOMAIN",
+        "executeAs": "USER_ACCESSING"
+      },
+      "exceptionLogging": "NONE",
+      "oauthScopes": [
+        "https://example.com/resource/v1",
+        "https://test.org/resource/data",
+        "http://example.com/api/v1",
+        "https://test.org/data/v1",
+        "ftp://test.org/resource/v1"
+      ],
+      "urlFetchWhitelist": [
+        "amet cons",
+        "ulbcaeuxvxovqzbui",
+        "dtlTD4nL",
+        "ssubyhvitgjfhhlilxebz",
+        "t"
+      ],
+      "executionApi": {},
+      "sheets": {}
+    },
+    {
+      "runtimeVersion": "STABLE",
+      "webapp": {},
+      "sheets": {
+        "macros": [
+          {
+            "menuName": "nxb",
+            "functionName": "ipsum s",
+            "defaultShortcut": "RzS"
+          },
+          {
+            "menuName": "O87mvmKDJs5g9Z",
+            "functionName": "y",
+            "defaultShortcut": "Yd41WXtEMrXt13xs"
+          },
+          {
+            "menuName": "1pu9hpOw",
+            "functionName": "AszpLucV",
+            "defaultShortcut": "dyqdxam"
+          },
+          {
+            "menuName": "fxojievieflh",
+            "functionName": "yedkhetgqdcm",
+            "defaultShortcut": "1SW4EC2UljVlTwPBVMM"
+          },
+          {
+            "menuName": "I",
+            "functionName": "fkqophytpwnx",
+            "defaultShortcut": "ZeetbEie"
+          }
+        ]
+      },
+      "dataStudio": {
+        "name": "ipsu",
+        "logoUrl": "i",
+        "company": "sit consectet",
+        "supportUrl": "zlmxdgxkkfnautzqzahy",
+        "description": "adipiscing",
+        "sources": [
+          "consectetur amet i",
+          "sit",
+          "jory",
+          "kSrDH",
+          "wapfjihuhieashd"
+        ],
+        "templates": {},
+        "authType": [
+          "NONE",
+          "USER_PASS",
+          "KEY",
+          "USER_PASS",
+          "NONE"
+        ],
+        "privacyPolicyUrl": "zPMEf6eVqQ2Dg",
+        "termsOfServiceUrl": "amet lorem"
+      }
+    },
+    {
+      "runtimeVersion": "STABLE",
+      "timeZone": "nswrdz",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "uBshZu",
+            "serviceId": "gwfxz",
+            "version": "CGYRFDejah2SO2gGxunAF"
+          },
+          {
+            "userSymbol": "oppeiltukbhlfkj",
+            "serviceId": "oB",
+            "version": "lorem dolo"
+          },
+          {
+            "userSymbol": "ytfazxqbzynrtumrqc",
+            "serviceId": "IBqa1kQ4VD",
+            "version": "ZxQOs999ywyN1"
+          },
+          {
+            "userSymbol": "ytxlsu8TV2mZhlfTBP",
+            "serviceId": "iymgtyr",
+            "version": "rncexi"
+          },
+          {
+            "userSymbol": "kyyfjuyigdbbbtdbni",
+            "serviceId": "tllfktvghvxhive",
+            "version": "nttxnRlboA5bWssH9"
+          }
+        ],
+        "libraries": [
+          {
+            "userSymbol": "lorem dolor adip",
+            "libraryId": "hilpxvnsrhcqbodnkxjemrtfvqamvjbferpyjcbqygrlxzormybcmrwdz",
+            "version": "ghvzuqte"
+          },
+          {
+            "userSymbol": "vqaemxitplfa",
+            "libraryId": "consectetur dolor sit ipsum consectetur",
+            "version": "TptuhBBMyV47MI"
+          },
+          {
+            "userSymbol": "dolor dolor ipsum",
+            "libraryId": "xyjufzapqqziecapiwakbnerboppjuyeaoeagcaxsucxspycxesxwoytc",
+            "version": "kvs"
+          },
+          {
+            "userSymbol": "umkxnmztowvnfbnnvidfc",
+            "libraryId": "jNnZ9XmtCO5LXUBBUqCguL0vB04Pbs3CZwzk2yI27KzWNn5zIuH5BuI95",
+            "version": "lzjp",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "vps",
+            "libraryId": "consectetur dolor consectetur adipiscing lorem",
+            "version": "consectetur conse"
+          }
+        ]
+      },
+      "webapp": {
+        "access": "DOMAIN",
+        "executeAs": "USER_ACCESSING"
+      },
+      "exceptionLogging": "STACKDRIVER",
+      "oauthScopes": [
+        "http://example.com/api/data",
+        "http://example.com/data/resource",
+        "https://test.org/data/resource",
+        "https://test.org/v1/data",
+        "https://test.org/api/v1"
+      ],
+      "urlFetchWhitelist": [
+        "snqo",
+        "amet con",
+        "0KHrkEBxNyR",
+        "XRlHDddO6kp",
+        "1xG6ATy7WvgPIU9Y6Xu5A"
+      ],
+      "dataStudio": {
+        "name": "aw",
+        "logoUrl": "dtlvjopddelusdtwjsu",
+        "company": "consectetur",
+        "supportUrl": "xKYcOtXDBcfrV",
+        "description": "iajjemaviofiqm",
+        "companyUrl": "J8yg9s",
+        "sources": [
+          "bs1bdglTh9",
+          "McWwEyBm1Pgk1VWpnu66",
+          "QMjAguTukkjiF",
+          "a",
+          "consectetur sit amet "
+        ],
+        "shortDescription": "rmvzgahxcopnszyixgfz",
+        "authType": [
+          "OAUTH2",
+          "KEY",
+          "NONE",
+          "USER_PASS",
+          "KEY"
+        ],
+        "termsOfServiceUrl": "ruxvhpnrrofbiw"
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "dol",
+            "serviceId": "amet lo",
+            "version": "ajCWI8"
+          },
+          {
+            "userSymbol": "sit",
+            "serviceId": "tzaxdfciujosv",
+            "version": "sit adipiscing ame"
+          },
+          {
+            "userSymbol": "hzyoxinpgutjguhgob",
+            "serviceId": "hphos",
+            "version": "1BONS79"
+          },
+          {
+            "userSymbol": "nbfgjwbtvdaxyxs",
+            "serviceId": "lorem ipsum a",
+            "version": "consectetur ipsum ip"
+          },
+          {
+            "userSymbol": "brhkhyldkrwnsxmnywe",
+            "serviceId": "vnfkp",
+            "version": "yigwhwbkism"
+          }
+        ]
+      },
+      "exceptionLogging": "NONE",
+      "oauthScopes": [
+        "http://example.com/resource/data",
+        "https://demo.net/v1/data",
+        "ftp://example.com/v1/api",
+        "ftp://demo.net/v1/api",
+        "https://demo.net/api/data"
+      ],
+      "urlFetchWhitelist": [
+        "gegquf",
+        "uirwra",
+        "QQpmmNgF3",
+        "5r1NhIk4ZUQ9vGcZ",
+        "owav"
+      ],
+      "sheets": {},
+      "dataStudio": {
+        "name": "2vWtok",
+        "logoUrl": "I5atTqcu",
+        "company": "rb",
+        "supportUrl": "rre",
+        "description": "9y2nWaBfJiHP",
+        "companyUrl": "consecte",
+        "sources": [
+          "consectetur l",
+          "xptcqehe",
+          "tftqvsfd",
+          "lQeEeYezzyL",
+          "co"
+        ],
+        "templates": {},
+        "termsOfServiceUrl": "mct"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "http://demo.net/data/v1",
+          "name": "zmehsrfofjixwzfawtty",
+          "layoutProperties": {
+            "primaryColor": "trbOdPlhwCvSV",
+            "secondaryColor": "q0mZIVCcsCbOv9Z2"
+          },
+          "universalActions": [
+            {
+              "label": "d",
+              "openLink": "epoywvxllyubjhyidfxzb",
+              "runFunction": "7PZO"
+            },
+            {
+              "openLink": "pS"
+            },
+            {
+              "label": "i",
+              "openLink": "quFqL6Mti0OzQJeFy",
+              "runFunction": "dolor ipsum dol"
+            },
+            {
+              "runFunction": "c"
+            },
+            {
+              "label": "cxrvryduvyxkviqdn",
+              "openLink": "dol",
+              "runFunction": "dolor dolor ipsum"
+            }
+          ]
+        },
+        "gmail": {
+          "contextualTriggers": [
+            {},
+            {
+              "onTriggerFunction": "lo",
+              "unconditional": {}
+            },
+            {},
+            {
+              "unconditional": {}
+            },
+            {}
+          ]
+        },
+        "sheets": {
+          "homepageTrigger": {
+            "_ref": "#/definitions/homepageTrigger",
+            "_placeholder": true
+          },
+          "onFileScopeGrantedTrigger": {}
+        }
+      }
+    },
+    {
+      "runtimeVersion": "STABLE",
+      "timeZone": "NwB3YqqeTcQ70xYiVlQ",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "amet lo",
+            "serviceId": "a",
+            "version": "l"
+          },
+          {
+            "userSymbol": "Uur",
+            "serviceId": "ixryom",
+            "version": "birlysyrfbkeotosdz"
+          },
+          {
+            "userSymbol": "QQNrxws2QNahETyWjS",
+            "serviceId": "scijahyltfecjwtejfk",
+            "version": "YCLoNfzgowzKigO"
+          },
+          {
+            "userSymbol": "oewykewptnuga",
+            "serviceId": "consectetu",
+            "version": "tsnxw"
+          },
+          {
+            "userSymbol": "amnvi",
+            "serviceId": "XMAlKaux",
+            "version": "pzdvhhzmxzk"
+          }
+        ],
+        "libraries": [
+          {
+            "userSymbol": "qatsrozuq",
+            "libraryId": "fmjswtgvtqchahkbptbhhmijesiqroxawjhmjoagxrovsegmgyihbinom",
+            "version": "ydwtbkbizojyz",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "c",
+            "libraryId": "hcbgsklbaweartkhyyfctxqhqrfyxgnpxeveorklgnyhwsxquoazjcrsm",
+            "version": "gmfv",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "SQash6f",
+            "libraryId": "kvwtnhlbnexuqacrcuqsbkllqespizvtulzpueuccmywhnujjyjwyjnyq",
+            "version": "zeducklyudhvevipm"
+          },
+          {
+            "userSymbol": "vwbfvk",
+            "libraryId": "sit sit sit adipiscing lorem",
+            "version": "iljgzfvxarcmd"
+          },
+          {
+            "userSymbol": "gfu",
+            "libraryId": "qejssngjjtvihflemgoojjkwsjnritmsmnkxrfwvkcfmlgzeobgthtvbm",
+            "version": "dolor sit ips",
+            "developmentMode": true
+          }
+        ]
+      },
+      "webapp": {
+        "executeAs": "USER_DEPLOYING"
+      },
+      "exceptionLogging": "NONE",
+      "oauthScopes": [
+        "http://demo.net/v1/api",
+        "https://example.com/api/v1",
+        "ftp://test.org/v1/data",
+        "https://demo.net/v1/api",
+        "http://test.org/resource/v1"
+      ],
+      "urlFetchWhitelist": [
+        "cgnhmawli",
+        "cqgjfotrtlrocopgw",
+        "cokYf1",
+        "ver",
+        "ipsum adi"
+      ],
+      "executionApi": {
+        "access": "ANYONE_ANONYMOUS"
+      },
+      "sheets": {
+        "macros": [
+          {
+            "menuName": "amet conse",
+            "functionName": "sfZb409RK6TeR",
+            "defaultShortcut": "dolor ipsum amet co"
+          },
+          {
+            "menuName": "nkthdxgsvxyefx",
+            "functionName": "0G",
+            "defaultShortcut": "zgipinjhrjn"
+          },
+          {
+            "menuName": "uPI11Zq5XlkyHAkC",
+            "functionName": "Hxzzgi7ozebKr2d",
+            "defaultShortcut": "ljgxpvfvdlpgw"
+          },
+          {
+            "menuName": "zwk",
+            "functionName": "nwqolpjzhua",
+            "defaultShortcut": "gyzxjxoxjds"
+          },
+          {
+            "menuName": "kw8fsZQ",
+            "functionName": "amet ipsum a",
+            "defaultShortcut": "amet consectetur"
+          }
+        ]
+      },
+      "dataStudio": {
+        "name": "c",
+        "logoUrl": "zqeztztjrrotlsw",
+        "company": "wikxdx",
+        "supportUrl": "aepk",
+        "description": "amet sit ipsum am",
+        "addonUrl": "adipiscing ",
+        "companyUrl": "jnqkybzviiomvem",
+        "sources": [
+          "kJHLxhXheRnOLyltX",
+          "omfqoydgncpmvahxn",
+          "sit lorem ",
+          "lorem adipiscing ad",
+          "xttzjqcopzzlnyolczm"
+        ],
+        "templates": {},
+        "authType": [
+          "KEY",
+          "OAUTH2",
+          "KEY",
+          "NONE",
+          "NONE"
+        ],
+        "termsOfServiceUrl": "lorem ad"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "https://example.com/v1/api",
+          "name": "dolor consect",
+          "layoutProperties": {
+            "secondaryColor": "ipsum"
+          },
+          "homepageTrigger": {
+            "enabled": true
+          },
+          "universalActions": [
+            {
+              "label": "rytwdykkgvioq"
+            },
+            {
+              "label": "amet i",
+              "openLink": "ZhimooP3TuLzE64V6",
+              "runFunction": "jut"
+            },
+            {
+              "label": "oqrahvwtcysocq"
+            },
+            {
+              "runFunction": "o"
+            },
+            {
+              "openLink": "dol"
+            }
+          ]
+        },
+        "gmail": {
+          "contextualTriggers": [
+            {
+              "onTriggerFunction": "amet"
+            },
+            {
+              "onTriggerFunction": "hxolembjcnzozeentamxu",
+              "unconditional": {}
+            },
+            {
+              "onTriggerFunction": "dolo",
+              "unconditional": {}
+            },
+            {
+              "onTriggerFunction": "3wpaYZXjBCl6c",
+              "unconditional": {}
+            },
+            {
+              "unconditional": {}
+            }
+          ]
+        },
+        "sheets": {
+          "homepageTrigger": {
+            "_ref": "#/definitions/homepageTrigger",
+            "_placeholder": true
+          }
+        }
+      }
+    },
+    {
+      "runtimeVersion": "STABLE",
+      "webapp": {
+        "access": "ANYONE_ANONYMOUS",
+        "executeAs": "USER_DEPLOYING"
+      },
+      "exceptionLogging": "STACKDRIVER",
+      "urlFetchWhitelist": [
+        "fZXQRNx",
+        "8OVHklPTIY4W",
+        "bkefylqvnvupoxrix",
+        "ljqessw",
+        "5jgcZuH"
+      ],
+      "executionApi": {},
+      "sheets": {},
+      "dataStudio": {
+        "name": "gZOoJA8",
+        "logoUrl": "rGsX8dh",
+        "company": "keckwqmnfggtqboybezn",
+        "supportUrl": "mzgiftclusie",
+        "description": "qpcihnhpmzgaderoo",
+        "sources": [
+          "hb5nwH",
+          "vriwozyxfyg",
+          "adipisc",
+          "bvsulximvwbpxidpv",
+          "dwulmwb"
+        ],
+        "shortDescription": "iardsnxbxbpjo",
+        "authType": [
+          "OAUTH2",
+          "USER_PASS",
+          "USER_PASS",
+          "OAUTH2",
+          "NONE"
+        ]
+      },
+      "addOns": {
+        "gmail": {
+          "homepageTrigger": {
+            "enabled": false
+          }
+        }
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "timeZone": "consectetur adipisc",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "Nd1",
+            "serviceId": "uwepsmredwemlkheepzwd",
+            "version": "1"
+          },
+          {
+            "userSymbol": "adipiscing",
+            "serviceId": "dxL5ue7S0EstiwI77En7a",
+            "version": "sit"
+          },
+          {
+            "userSymbol": "rvwyxnqtanku",
+            "serviceId": "qjkzefq",
+            "version": "skopboiienkuqk"
+          },
+          {
+            "userSymbol": "vuoimbv",
+            "serviceId": "SQ7yYhF",
+            "version": "FaXwNoqrt2"
+          },
+          {
+            "userSymbol": "viM6AtC",
+            "serviceId": "llcqgwg",
+            "version": "txvfmvkchvayapgb"
+          }
+        ]
+      },
+      "exceptionLogging": "STACKDRIVER",
+      "urlFetchWhitelist": [
+        "wehpygthhocldef",
+        "woviurtmprlpny",
+        "consectetur sit dolor",
+        "cx1o7nxH4",
+        "kkunjhgvup"
+      ],
+      "executionApi": {}
+    },
+    {
+      "timeZone": "wcdkupqxrvkdbyffrmp",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "bexccxhaoekivyym",
+            "serviceId": "oqrxgx",
+            "version": "nhykbzqlakyy"
+          },
+          {
+            "userSymbol": "0Z07q",
+            "serviceId": "lorem am",
+            "version": "imn"
+          },
+          {
+            "userSymbol": "adipiscing dolor do",
+            "serviceId": "ipsum adip",
+            "version": "c"
+          },
+          {
+            "userSymbol": "u7wa2K4s9crj",
+            "serviceId": "e26AmM84SGndZ4s",
+            "version": "yRADzVoavvcLG"
+          },
+          {
+            "userSymbol": "figinnl",
+            "serviceId": "adipis",
+            "version": "fr"
+          }
+        ],
+        "libraries": [
+          {
+            "userSymbol": "vqhsozrhz",
+            "libraryId": "awrndcrrvuouydegaqdoahsevcdfbvzphzdunxjuaeesdusxvneaiqomy",
+            "version": "sit consectetur conse",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "za",
+            "libraryId": "amet ipsum consectetur consectetur consectetur",
+            "version": "xHicUMCh6SD6",
+            "developmentMode": true
+          },
+          {
+            "userSymbol": "mj",
+            "libraryId": "A2UwLR3Mvcd80XMgRHzmPFmxmnsmnNfwKBGNHlEOsSjGV8vb7gW91kjPh",
+            "version": "bvbc",
+            "developmentMode": true
+          },
+          {
+            "userSymbol": "adi",
+            "libraryId": "lorem dolor amet consectetur sit",
+            "version": "sit consectetu",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "oxlsnx",
+            "libraryId": "dfchewmruhjkspsjkqsasfcxvqyjitmxmggaeihbskddwrrjfcwovkmdu",
+            "version": "cons",
+            "developmentMode": false
+          }
+        ]
+      },
+      "webapp": {
+        "access": "ANYONE_ANONYMOUS"
+      },
+      "oauthScopes": [
+        "ftp://test.org/resource/v1",
+        "ftp://test.org/v1/resource",
+        "ftp://test.org/data/v1",
+        "ftp://test.org/v1/data",
+        "ftp://test.org/resource/v1"
+      ],
+      "dataStudio": {
+        "name": "pKmJ",
+        "logoUrl": "sit sit adipisci",
+        "company": "w",
+        "supportUrl": "uhxvvvwbkqlbpjdmjg",
+        "description": "wsnzvatqoavrizmrf",
+        "companyUrl": "cons",
+        "sources": [
+          "JfsyujD2SlJbH9oHjVTu",
+          "iLviR3So5",
+          "xqfvwwiacuxrbr",
+          "ddbpkmv",
+          "vr17RIOaHZgb"
+        ],
+        "templates": {},
+        "shortDescription": "xoROo6dXxFPCsuOu5k",
+        "authType": [
+          "OAUTH2",
+          "KEY",
+          "NONE",
+          "USER_PASS",
+          "OAUTH2"
+        ]
+      }
+    },
+    {
+      "runtimeVersion": "STABLE",
+      "dependencies": {},
+      "webapp": {
+        "access": "ANYONE"
+      },
+      "exceptionLogging": "NONE",
+      "urlFetchWhitelist": [
+        "nSz0Zqf7D91YANc",
+        "a",
+        "ig",
+        "eu",
+        "mDSm3FNPL3rhINml"
+      ],
+      "executionApi": {}
+    },
+    {
+      "timeZone": "wyaupqubspqchujeki",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "jTQ2DawGK",
+            "serviceId": "fpjxucaxrg",
+            "version": "rersqlpzllxohynh"
+          },
+          {
+            "userSymbol": "epcaulsa",
+            "serviceId": "ezkgajudqh",
+            "version": "Q3FWSCRv7dni"
+          },
+          {
+            "userSymbol": "ips",
+            "serviceId": "lorem ame",
+            "version": "fvmjnehlvcnmobymlgtq"
+          },
+          {
+            "userSymbol": "psmcnafvgym",
+            "serviceId": "sViBM1aHBUWAB8X",
+            "version": "qzuh"
+          },
+          {
+            "userSymbol": "jyrltft",
+            "serviceId": "yJmf7LSopbnToC",
+            "version": "sit consectetur lore"
+          }
+        ],
+        "libraries": [
+          {
+            "userSymbol": "qecuopjijkcuuf",
+            "libraryId": "kOlVmfsQV7Gk4iYlh38sUZ72AxJrZyyeXMz039qoLYTYr2RpZ1bnSUVKx",
+            "version": "i",
+            "developmentMode": true
+          },
+          {
+            "userSymbol": "sit adipiscing lor",
+            "libraryId": "RzbptLqqydzoTYubywgyV2SCKTaqFq2EgIo5DZlEWCoK3klQ29en4Vb1d",
+            "version": "WKHD9S393KwoeQGek"
+          },
+          {
+            "userSymbol": "BoIrnGryJTzWfUdYnRIks",
+            "libraryId": "sit adipiscing adipiscing sit amet",
+            "version": "wdrS9"
+          },
+          {
+            "userSymbol": "0AygNZ",
+            "libraryId": "bqhshabsjthjgaidstraoekoilzzdllsxbjyliuvvgqutfgsmdqzejqyf",
+            "version": "4YHCDqZBi73l2zxQ"
+          },
+          {
+            "userSymbol": "BuMXR",
+            "libraryId": "qgyvmkvaxlgbnwkubaumwqkoolejakgoprsoiayzkwkrnwhhlbinhtzwa",
+            "version": "lVYl"
+          }
+        ]
+      },
+      "webapp": {
+        "access": "MYSELF",
+        "executeAs": "USER_DEPLOYING"
+      },
+      "sheets": {
+        "macros": [
+          {
+            "menuName": "ml",
+            "functionName": "B5U4tZDMa4UJPD4X",
+            "defaultShortcut": "amet cons"
+          },
+          {
+            "menuName": "kyry5vXLx",
+            "functionName": "lorem dolor ipsu",
+            "defaultShortcut": "dolor lorem dol"
+          },
+          {
+            "menuName": "c1quxLYBntl4",
+            "functionName": "jiosoz",
+            "defaultShortcut": "Sm90jvZq8"
+          },
+          {
+            "menuName": "qtVDhvHty9eZdqyBDztKa",
+            "functionName": "UlvNVY12e",
+            "defaultShortcut": "MJK193H"
+          },
+          {
+            "menuName": "naoorxhzjyrimudmdlj",
+            "functionName": "amfwwvyu",
+            "defaultShortcut": "bqoeopsvbyqpe"
+          }
+        ]
+      },
+      "dataStudio": {
+        "name": "do",
+        "logoUrl": "DEejeiUpKH6eiodUc4",
+        "company": "wspaqxevsr",
+        "supportUrl": "lBy5Byv9a",
+        "description": "3IUc2fG",
+        "addonUrl": "unh",
+        "sources": [
+          "yqesznbcqhgahd",
+          "am",
+          "JkCip8ieLtSIXjjmi",
+          "jrxlcpafbtwgkljv",
+          "lzqxqrbsyoiwwfedrt"
+        ],
+        "authType": [
+          "USER_PASS",
+          "KEY",
+          "USER_PASS",
+          "USER_PASS",
+          "KEY"
+        ],
+        "privacyPolicyUrl": "o",
+        "termsOfServiceUrl": "lorem dolor ipsum l"
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "timeZone": "dolor l",
+      "webapp": {
+        "executeAs": "USER_DEPLOYING"
+      },
+      "exceptionLogging": "NONE",
+      "oauthScopes": [
+        "http://demo.net/resource/data",
+        "https://test.org/data/api",
+        "ftp://test.org/data/api",
+        "http://example.com/api/v1",
+        "ftp://example.com/data/api"
+      ],
+      "executionApi": {
+        "access": "ANYONE"
+      },
+      "dataStudio": {
+        "name": "consectet",
+        "logoUrl": "KrFZKA9fK9R6Wt",
+        "company": "to",
+        "supportUrl": "lorem ",
+        "description": "sit",
+        "shortDescription": "ipsum ipsum ipsum lor",
+        "termsOfServiceUrl": "adipiscing "
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "https://demo.net/v1/data",
+          "name": "co",
+          "homepageTrigger": {
+            "enabled": true,
+            "runFunctions": "fU7VabZQLAYjcl"
+          },
+          "universalActions": [
+            {
+              "label": "BhF398CizYkR",
+              "openLink": "xrkfpxneodv",
+              "runFunction": "tdfzyqqyncgakvyfjvg"
+            },
+            {
+              "openLink": "mTjn0EF7xKPbm7IX"
+            },
+            {
+              "label": "JFqUBvErgpxO6KRu",
+              "openLink": "A6Zwjn"
+            },
+            {
+              "label": "TQJwpXiodJ",
+              "runFunction": "pcha"
+            },
+            {
+              "label": "ipsum dolor ",
+              "openLink": "cakxlhlctngxxqg",
+              "runFunction": "MCWLqVZzh"
+            }
+          ],
+          "openLinkUrlPrefixes": [
+            "whkhxsu57Ypxoy6TQCGhQ",
+            "yckqvfqmpvu",
+            "consectetur ",
+            "tiqmy1",
+            "dolor consectetur"
+          ],
+          "useLocaleFromApp": false
+        },
+        "gmail": {
+          "contextualTriggers": [
+            {
+              "onTriggerFunction": "adipis",
+              "unconditional": {}
+            },
+            {
+              "onTriggerFunction": "rededgkzrcwfnjlsrx",
+              "unconditional": {}
+            },
+            {
+              "unconditional": {}
+            },
+            {
+              "onTriggerFunction": "vkblvvhegfcprrsls"
+            },
+            {
+              "onTriggerFunction": "mrafvzbhbntcywcdou",
+              "unconditional": {}
+            }
+          ],
+          "homepageTrigger": {
+            "enabled": false,
+            "runFunction": "uzjbwzmwbqhduppowo"
+          }
+        },
+        "calendar": {},
+        "sheets": {
+          "onFileScopeGrantedTrigger": {}
+        }
+      }
+    },
+    {
+      "runtimeVersion": "V8",
+      "webapp": {
+        "access": "MYSELF",
+        "executeAs": "USER_DEPLOYING"
+      },
+      "exceptionLogging": "NONE",
+      "urlFetchWhitelist": [
+        "ghgk",
+        "lorem s",
+        "conse",
+        "rXf",
+        "8o"
+      ],
+      "executionApi": {
+        "access": "DOMAIN"
+      },
+      "sheets": {},
+      "addOns": {
+        "gmail": {
+          "homepageTrigger": {
+            "enabled": false,
+            "runFunction": "BA"
+          }
+        },
+        "calendar": {
+          "eventOpenTrigger": {},
+          "eventUpdateTrigger": {},
+          "eventAccess": "READ"
+        },
+        "sheets": {
+          "homepageTrigger": {
+            "_ref": "#/definitions/homepageTrigger",
+            "_placeholder": true
+          }
+        }
+      }
+    },
+    {
+      "runtimeVersion": "STABLE",
+      "timeZone": "hv",
+      "dependencies": {},
+      "webapp": {},
+      "oauthScopes": [
+        "http://test.org/data/v1",
+        "http://demo.net/resource/api",
+        "ftp://example.com/resource/api",
+        "ftp://demo.net/v1/resource",
+        "ftp://demo.net/v1/api"
+      ],
+      "urlFetchWhitelist": [
+        "5GjxZt9RG2lcBE",
+        "oowfhfgdvmlm",
+        "xSrqOaJatR2A",
+        "ccucwfl",
+        "mlktkvuj"
+      ],
+      "executionApi": {},
+      "sheets": {},
+      "addOns": {
+        "common": {
+          "logoUrl": "https://demo.net/data/resource",
+          "name": "8DYFvY",
+          "layoutProperties": {
+            "primaryColor": "RoXuzSvXPdk"
+          },
+          "universalActions": [
+            {
+              "label": "am",
+              "openLink": "PRG9bBjZRVGaeA6",
+              "runFunction": "skbdiq"
+            },
+            {
+              "label": "wkf",
+              "openLink": "xWgqg"
+            },
+            {
+              "label": "quvxrdiemomohqwjsxnn",
+              "openLink": "sit lorem adipis"
+            },
+            {
+              "label": "ekjfmkwnfwtoyui",
+              "runFunction": "mcekjl"
+            },
+            {
+              "label": "lfvpsapsjnwpugubvfi",
+              "openLink": "d",
+              "runFunction": "rpkjxcvkuttnzfsrhiot"
+            }
+          ],
+          "useLocaleFromApp": false
+        },
+        "calendar": {
+          "eventOpenTrigger": {},
+          "eventUpdateTrigger": {}
+        }
+      }
+    },
+    {
+      "runtimeVersion": "STABLE",
+      "timeZone": "consecte",
+      "dependencies": {
+        "libraries": [
+          {
+            "userSymbol": "AMn3xyQjO0v6GWDyqam9",
+            "libraryId": "3L8wn5jXK86OcbDYfAftauGmWdnpzVvR5i1LULzfikljmIVX0hYlerKcn",
+            "version": "YxYHlcx1Vo0oS",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "ssjlywk",
+            "libraryId": "dolor amet dolor sit lorem",
+            "version": "s8ZjxQ1MS",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "PR7lPkN",
+            "libraryId": "wgwikcnairteulfttmnqqttfachpykjoyphtzukelddlwskyeghoxjvym",
+            "version": "mebglaimitonqpkepbaif"
+          },
+          {
+            "userSymbol": "bufemh",
+            "libraryId": "adipiscing consectetur ipsum dolor adipiscing",
+            "version": "amet consectetur c",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "WoL8jV",
+            "libraryId": "lhtdqnygxuuzotpxwexelgppaydahohmuberwruzjhfdrtytksuekbggv",
+            "version": "Jbm3",
+            "developmentMode": false
+          }
+        ]
+      },
+      "webapp": {
+        "executeAs": "USER_DEPLOYING"
+      },
+      "exceptionLogging": "NONE",
+      "oauthScopes": [
+        "https://example.com/v1/data",
+        "http://test.org/resource/api",
+        "https://demo.net/api/v1",
+        "ftp://example.com/v1/data",
+        "ftp://test.org/v1/data"
+      ],
+      "executionApi": {
+        "access": "DOMAIN"
+      },
+      "sheets": {},
+      "dataStudio": {
+        "name": "sit conse",
+        "logoUrl": "ipsum ipsum amet d",
+        "company": "ipsum consectetur ",
+        "supportUrl": "lorem lorem ipsum lor",
+        "description": "ranfjeksn",
+        "addonUrl": "ag",
+        "templates": {},
+        "shortDescription": "gdbafigyqlr",
+        "authType": [
+          "USER_PASS",
+          "OAUTH2",
+          "OAUTH2",
+          "OAUTH2",
+          "USER_PASS"
+        ],
+        "privacyPolicyUrl": "hgyficwqglla"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "ftp://example.com/data/v1",
+          "name": "5t9LH2grWe5CE9f",
+          "layoutProperties": {
+            "primaryColor": "dolor dolor amet amet",
+            "secondaryColor": "amet adipis"
+          },
+          "homepageTrigger": {
+            "runFunctions": "rzscv"
+          },
+          "openLinkUrlPrefixes": [
+            "adip",
+            "adipiscing",
+            "amet",
+            "dol",
+            "n9VtBFNCju"
+          ],
+          "useLocaleFromApp": true
+        },
+        "sheets": {
+          "homepageTrigger": {
+            "_ref": "#/definitions/homepageTrigger",
+            "_placeholder": true
+          }
+        }
+      }
+    },
+    {
+      "runtimeVersion": "V8",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "XHeCc56utVml",
+            "serviceId": "jkvklhu",
+            "version": "amet lorem lo"
+          },
+          {
+            "userSymbol": "consectetur i",
+            "serviceId": "g",
+            "version": "xkqtbgqysriroyz"
+          },
+          {
+            "userSymbol": "vxqgwxstnmpdr",
+            "serviceId": "consectetur",
+            "version": "xx"
+          },
+          {
+            "userSymbol": "qtoiacfnsfkyksqrm",
+            "serviceId": "sit lorem sit cons",
+            "version": "ebfcgrt"
+          },
+          {
+            "userSymbol": "Dv",
+            "serviceId": "L1zZZe9q900foc7",
+            "version": "d"
+          }
+        ]
+      },
+      "exceptionLogging": "NONE",
+      "oauthScopes": [
+        "ftp://example.com/v1/resource",
+        "ftp://demo.net/api/resource",
+        "ftp://test.org/data/resource",
+        "https://example.com/v1/api",
+        "http://demo.net/data/resource"
+      ],
+      "urlFetchWhitelist": [
+        "a",
+        "kxBnj0IqMNi",
+        "nqdcqbuljzbxkomrhro",
+        "conse",
+        "jossqm"
+      ],
+      "executionApi": {},
+      "dataStudio": {
+        "name": "consectetu",
+        "logoUrl": "l",
+        "company": "ame",
+        "supportUrl": "jm",
+        "description": "adipiscing conse",
+        "addonUrl": "bpgz",
+        "companyUrl": "tMgs1BMu",
+        "sources": [
+          "qyscifgrltaxetvbozam",
+          "elfgykxkisgnbk",
+          "consectetur ",
+          "adipiscing sit do",
+          "ujygposhkixtiuqgmcfc"
+        ],
+        "templates": {},
+        "termsOfServiceUrl": "cqvvSerLjto"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "https://example.com/api/v1",
+          "name": "5HTMQ2ENtfVM3mfLjzcuz",
+          "homepageTrigger": {
+            "enabled": true,
+            "runFunctions": "l"
+          }
+        },
+        "calendar": {
+          "eventUpdateTrigger": {
+            "runFunction": "lorem adipiscing adip"
+          }
+        },
+        "sheets": {
+          "homepageTrigger": {
+            "_ref": "#/definitions/homepageTrigger",
+            "_placeholder": true
+          }
+        }
+      }
+    },
+    {
+      "runtimeVersion": "STABLE",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "ff",
+            "serviceId": "WuBpjBHlWo",
+            "version": "dCnOMu1qWoeUz"
+          },
+          {
+            "userSymbol": "lorem consectet",
+            "serviceId": "jclejQTwO",
+            "version": "consectetur sit "
+          },
+          {
+            "userSymbol": "acaiywvdsuvudeutx",
+            "serviceId": "zcdijbozmfrihem",
+            "version": "adipiscing adi"
+          },
+          {
+            "userSymbol": "adip",
+            "serviceId": "amet c",
+            "version": "biumfpiadijkqtn"
+          },
+          {
+            "userSymbol": "lorem d",
+            "serviceId": "adipiscing i",
+            "version": "MmCIssp2m8Up"
+          }
+        ],
+        "libraries": [
+          {
+            "userSymbol": "lrgsyumzxbk",
+            "libraryId": "uymuqawpdcqlnbmzcajqnztqexutedzxyurwcnaxndrxczlowpchtsdrb",
+            "version": "ipsu"
+          },
+          {
+            "userSymbol": "juwssqsgkggkp",
+            "libraryId": "52UUlWnGc3hKPNQwX6M80dPfOx0c6cdah9Z4lQXTq8TQryUGE5A1cGSaR",
+            "version": "xrwDVVUyMD"
+          },
+          {
+            "userSymbol": "lv",
+            "libraryId": "lorem consectetur adipiscing consectetur amet",
+            "version": "kkesjvcevedsnprgo"
+          },
+          {
+            "userSymbol": "sit con",
+            "libraryId": "mzeemmbjxoeazagyqzwkqfdyiywjfhynkurdzjnvuefmpdcxukuhqntbs",
+            "version": "rfxwvuebjsfw"
+          },
+          {
+            "userSymbol": "jYkEVNo2tABRcNEXw",
+            "libraryId": "bumhhfvfznhupwdraekihotknufzajvgiezwcodafsnhpcicvjsikogou",
+            "version": "jnj",
+            "developmentMode": true
+          }
+        ]
+      },
+      "exceptionLogging": "NONE",
+      "sheets": {},
+      "addOns": {
+        "calendar": {},
+        "sheets": {}
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "timeZone": "pjqobnqnwtjfdvrpln",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "zDeLZ",
+            "serviceId": "ntlkxefpqlolr",
+            "version": "qmylqwrkt"
+          },
+          {
+            "userSymbol": "HkZwchD2tWG4Tz3ktljF",
+            "serviceId": "sit i",
+            "version": "ips"
+          },
+          {
+            "userSymbol": "ipsu",
+            "serviceId": "ipsum sit cons",
+            "version": "dolor consecte"
+          },
+          {
+            "userSymbol": "consectetur con",
+            "serviceId": "adipisci",
+            "version": "tyrdgkelygebd"
+          },
+          {
+            "userSymbol": "husw",
+            "serviceId": "rx",
+            "version": "LD27v"
+          }
+        ],
+        "libraries": [
+          {
+            "userSymbol": "usgzxdzzfcoflgm",
+            "libraryId": "q32R7IeRgUOmjek8o2iuDw7oDmgQvEQfdQ9bC9Z9G8dD0yBBxY8otXUYQ",
+            "version": "qhcwwxg"
+          },
+          {
+            "userSymbol": "lorem i",
+            "libraryId": "amet ipsum adipiscing lorem ipsum",
+            "version": "yLLRTEFYb3F6oAW"
+          },
+          {
+            "userSymbol": "TEo",
+            "libraryId": "thivnqsekyiweanhpubmjxvwtjqojhqxgjejkcqiugtzejzkidviwoezx",
+            "version": "uzuxatldxcodmjawtfrv",
+            "developmentMode": true
+          },
+          {
+            "userSymbol": "eicnmeb",
+            "libraryId": "adipiscing amet sit dolor amet",
+            "version": "gqqhmidrqckiqhwhs",
+            "developmentMode": true
+          },
+          {
+            "userSymbol": "skcxkiotvcuyzyoxp",
+            "libraryId": "hU64CBh0qhg5zXeDUVlDY4fK3MWsEaXIl6ncSeOibTMORSkAK1OEY0pla",
+            "version": "amet sit amet"
+          }
+        ]
+      },
+      "exceptionLogging": "STACKDRIVER",
+      "urlFetchWhitelist": [
+        "consectetur lorem con",
+        "adipi",
+        "dolor ",
+        "am",
+        "lorem ipsum adipisc"
+      ],
+      "dataStudio": {
+        "name": "fkztkolsnlkw",
+        "logoUrl": "dolo",
+        "company": "pqfotlklpfvbungg",
+        "supportUrl": "hHU8ts84w",
+        "description": "J9xwRJ2ANFLEkhy9FE",
+        "addonUrl": "yuJD",
+        "templates": {}
+      }
+    },
+    {
+      "timeZone": "xtrlirm",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "a",
+            "serviceId": "htwpr",
+            "version": "ovgjpyqm"
+          },
+          {
+            "userSymbol": "xtnulfnbv",
+            "serviceId": "pg5fY",
+            "version": "Ph4"
+          },
+          {
+            "userSymbol": "hopk",
+            "serviceId": "adipiscing ipsu",
+            "version": "ooqfkpqjmi"
+          },
+          {
+            "userSymbol": "lorem ipsum amet i",
+            "serviceId": "ixej",
+            "version": "amet adipiscing adip"
+          },
+          {
+            "userSymbol": "tvqjtkvuvpx",
+            "serviceId": "pGyKuXAiW3QH25aEbu",
+            "version": "RxhPOKQH"
+          }
+        ]
+      },
+      "webapp": {
+        "access": "ANYONE"
+      },
+      "executionApi": {
+        "access": "ANYONE_ANONYMOUS"
+      },
+      "dataStudio": {
+        "name": "pmfrqnszyc",
+        "logoUrl": "zncmksrmde",
+        "company": "ijjf",
+        "supportUrl": "adip",
+        "description": "ydwwshowhzetiti",
+        "addonUrl": "adtkzqvtzrylgcgxrb",
+        "companyUrl": "fhicjaqjelkfspt",
+        "privacyPolicyUrl": "hgn",
+        "termsOfServiceUrl": "iutszehpqquuoifsankse"
+      }
+    },
+    {
+      "webapp": {
+        "access": "DOMAIN"
+      },
+      "exceptionLogging": "NONE",
+      "oauthScopes": [
+        "http://example.com/api/data",
+        "https://test.org/api/resource",
+        "ftp://test.org/resource/v1",
+        "ftp://example.com/data/v1",
+        "http://test.org/resource/data"
+      ],
+      "urlFetchWhitelist": [
+        "baudeo",
+        "jzfvbruoqxz",
+        "enamfl",
+        "lo",
+        "sit sit"
+      ],
+      "executionApi": {},
+      "sheets": {
+        "macros": [
+          {
+            "menuName": "0R130GGTJb4mEC",
+            "functionName": "ips",
+            "defaultShortcut": "pho"
+          },
+          {
+            "menuName": "varfei",
+            "functionName": "ipsum ",
+            "defaultShortcut": "QTMxRF4D"
+          },
+          {
+            "menuName": "adipiscing dolor",
+            "functionName": "mkf",
+            "defaultShortcut": "xlbnnbpezehxg"
+          },
+          {
+            "menuName": "aeeuhrraldumjvvbc",
+            "functionName": "mwsnvftdjci",
+            "defaultShortcut": "3nmpZZUJjoc5hS"
+          },
+          {
+            "menuName": "r",
+            "functionName": "lorem adipiscin",
+            "defaultShortcut": "oakpgktrvy"
+          }
+        ]
+      },
+      "dataStudio": {
+        "name": "xiwg",
+        "logoUrl": "dBqOYct3YWy",
+        "company": "voqdaabnyou",
+        "supportUrl": "si",
+        "description": "Rzj",
+        "addonUrl": "2whqYfhoUFGg",
+        "templates": {},
+        "shortDescription": "xfpfzkqiqurd",
+        "privacyPolicyUrl": "mmcfsgnxemttvxpfnyf",
+        "termsOfServiceUrl": "consect"
+      }
+    },
+    {
+      "timeZone": "itie",
+      "dependencies": {
+        "libraries": [
+          {
+            "userSymbol": "kAxC25o9L7YGp",
+            "libraryId": "qdvtwzztknntqvnpzuysdkhgdcmuwzpaebwislpwrbqjzggxkcuxmewig",
+            "version": "ip"
+          },
+          {
+            "userSymbol": "adipiscing s",
+            "libraryId": "lorem consectetur adipiscing sit adipiscing",
+            "version": "z",
+            "developmentMode": true
+          },
+          {
+            "userSymbol": "qlwigujaikqcgxvbrfy",
+            "libraryId": "v6QtZBDDDbYsBkJebn2QSfBTUBex63MvLJC0IfTRgG8OPDA9rCfFPQ8qm",
+            "version": "lorem dolor ",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "zutZaeYSADDpA",
+            "libraryId": "twwbmtymuwyhlcgehkpbonkamwimhiesaoshqzxwgtyeljiofthrziqpe",
+            "version": "yh11l",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "consectetur am",
+            "libraryId": "WgKFerGhfM8K9EgkC2Y8KUIkHrYYnirbl75A2l9JLraHMRW5bQf0Gay02",
+            "version": "QQEVk",
+            "developmentMode": true
+          }
+        ]
+      },
+      "oauthScopes": [
+        "ftp://test.org/v1/resource",
+        "https://demo.net/v1/data",
+        "http://test.org/resource/api",
+        "https://test.org/data/api",
+        "ftp://example.com/api/v1"
+      ],
+      "urlFetchWhitelist": [
+        "sit sit consectetu",
+        "consecte",
+        "adipiscing ",
+        "con",
+        "xefupuqfbqfulnhhnl"
+      ],
+      "sheets": {
+        "macros": [
+          {
+            "menuName": "lUzFLCQroCYulqviDJ9f",
+            "functionName": "hkdxyhbgj",
+            "defaultShortcut": "cczebppelkl"
+          },
+          {
+            "menuName": "vfvldbyiigyu",
+            "functionName": "amet dolor dolor lore",
+            "defaultShortcut": "kueznxeknyzkkj"
+          },
+          {
+            "menuName": "XS3",
+            "functionName": "l29csV7rWBBhPM",
+            "defaultShortcut": "G"
+          },
+          {
+            "menuName": "Lgj3KuUVlFcmjtORrnhUX",
+            "functionName": "jjftbehyyqqhryjd",
+            "defaultShortcut": "suKWy1x"
+          },
+          {
+            "menuName": "lorem ",
+            "functionName": "raulucmydwnlemcdbdp",
+            "defaultShortcut": "Sa2GdnppkE0x"
+          }
+        ]
+      },
+      "dataStudio": {
+        "name": "kujcjiqdudnjz",
+        "logoUrl": "jcmummtzlnhrxwyfgc",
+        "company": "CE0Dd",
+        "supportUrl": "jjqexhnk",
+        "description": "n1YL",
+        "companyUrl": "amet adipiscing dolo",
+        "sources": [
+          "sit dolor si",
+          "kT1m72b",
+          "rcaawbgwgqcbmsc",
+          "JtfEVxvLedB",
+          "amet dolor sit dolor"
+        ],
+        "templates": {},
+        "shortDescription": "d",
+        "authType": [
+          "USER_PASS",
+          "OAUTH2",
+          "USER_PASS",
+          "OAUTH2",
+          "NONE"
+        ],
+        "termsOfServiceUrl": "8JHJmmw"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "http://demo.net/api/resource",
+          "name": "shoflpyqoaifllawwzao",
+          "layoutProperties": {
+            "primaryColor": "ipsum d"
+          },
+          "openLinkUrlPrefixes": [
+            "sdcet",
+            "qmqgoCgAYMbh9i3zy",
+            "a",
+            "lorem ipsum dolo",
+            "w"
+          ]
+        },
+        "gmail": {
+          "homepageTrigger": {
+            "runFunction": "fGEA9I73Ct"
+          }
+        },
+        "calendar": {
+          "homepageTrigger": {},
+          "eventUpdateTrigger": {
+            "runFunction": "adipiscing c"
+          }
+        }
+      }
+    },
+    {
+      "dependencies": {},
+      "webapp": {},
+      "exceptionLogging": "STACKDRIVER",
+      "oauthScopes": [
+        "https://demo.net/data/resource",
+        "http://demo.net/resource/v1",
+        "ftp://test.org/v1/api",
+        "https://test.org/resource/v1",
+        "http://test.org/data/v1"
+      ],
+      "executionApi": {
+        "access": "MYSELF"
+      },
+      "sheets": {
+        "macros": [
+          {
+            "menuName": "jriglg",
+            "functionName": "jlJI9",
+            "defaultShortcut": "lorem conse"
+          },
+          {
+            "menuName": "olkqgnkrwrdptnbcosmso",
+            "functionName": "c",
+            "defaultShortcut": "ipsum dolor co"
+          },
+          {
+            "menuName": "sit adipiscing amet a",
+            "functionName": "anfhvhafrai",
+            "defaultShortcut": "amet sit amet con"
+          },
+          {
+            "menuName": "adipiscing ",
+            "functionName": "co",
+            "defaultShortcut": "GVv7WCLtw3azy4FjG5"
+          },
+          {
+            "menuName": "cwhuyvizn",
+            "functionName": "ipsum sit ",
+            "defaultShortcut": "2BbLfLHBOfwmnhn"
+          }
+        ]
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "webapp": {},
+      "exceptionLogging": "NONE",
+      "oauthScopes": [
+        "ftp://example.com/data/v1",
+        "http://example.com/v1/api",
+        "ftp://demo.net/v1/api",
+        "https://example.com/api/resource",
+        "http://test.org/v1/api"
+      ],
+      "urlFetchWhitelist": [
+        "dol",
+        "dolor ad",
+        "bkzzyefczl",
+        "zrrumuw",
+        "a35c3YhFvpo6R3rxN"
+      ],
+      "sheets": {},
+      "dataStudio": {
+        "name": "xxykkltzrlcdbdakh",
+        "logoUrl": "bQ4J4",
+        "company": "rg811jNd",
+        "supportUrl": "amet",
+        "description": "lssaqe",
+        "companyUrl": "haldvsgkbjp",
+        "authType": [
+          "OAUTH2",
+          "USER_PASS",
+          "USER_PASS",
+          "USER_PASS",
+          "KEY"
+        ],
+        "termsOfServiceUrl": "dAgdhDOWq7ngd"
+      }
+    },
+    {
+      "runtimeVersion": "STABLE",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "ips",
+            "serviceId": "ipsum adipi",
+            "version": "O1n2"
+          }
+        ]
+      },
+      "oauthScopes": [
+        "http://test.org/data/resource",
+        "http://example.com/resource/api",
+        "http://example.com/resource/data"
+      ],
+      "urlFetchWhitelist": [
+        "glqjue",
+        "loKDEgNd5lJvbXVtycSt",
+        "mhkkeeozp"
+      ],
+      "executionApi": {
+        "access": "ANYONE"
+      },
+      "sheets": {},
+      "addOns": {
+        "common": {
+          "logoUrl": "ftp://example.com/v1/data",
+          "name": "sit consectetur a",
+          "universalActions": [
+            {
+              "openLink": "usvolzydkyo"
+            },
+            {
+              "label": "ebkqqdpoenqscbsz",
+              "openLink": "jPr1UdtXdncQ7R3mY9Yns"
+            },
+            {
+              "openLink": "RlavT56Jz",
+              "runFunction": "x7t6Wi57hHEpT52YzO"
+            }
+          ],
+          "useLocaleFromApp": false
+        },
+        "sheets": {
+          "homepageTrigger": {
+            "_ref": "#/definitions/homepageTrigger",
+            "_placeholder": true
+          }
+        }
+      }
+    },
+    {
+      "runtimeVersion": "V8",
+      "timeZone": "si",
+      "webapp": {
+        "access": "DOMAIN",
+        "executeAs": "USER_DEPLOYING"
+      },
+      "exceptionLogging": "NONE",
+      "urlFetchWhitelist": [
+        "inqaifpekrwdjerawq",
+        "xrun",
+        "cwgjtmabbizevfgamnixo",
+        "picggtowygdslvlfytu",
+        "bcbtmscewqeduv"
+      ],
+      "executionApi": {},
+      "sheets": {
+        "macros": [
+          {
+            "menuName": "wagdcr",
+            "functionName": "fqyas",
+            "defaultShortcut": "ipsum ad"
+          },
+          {
+            "menuName": "birfzqwrw",
+            "functionName": "OZOgg",
+            "defaultShortcut": "adipiscing amet conse"
+          },
+          {
+            "menuName": "lorem consectetur",
+            "functionName": "Nb",
+            "defaultShortcut": "jnqpiyhaazgipnjspcsst"
+          },
+          {
+            "menuName": "lo",
+            "functionName": "nhwiirzs",
+            "defaultShortcut": "do"
+          }
+        ]
+      },
+      "dataStudio": {
+        "name": "ipsum ",
+        "logoUrl": "oao",
+        "company": "vhptlyinkxwtspsiclzbp",
+        "supportUrl": "ayhqo",
+        "description": "SWWK68UrkQW96y",
+        "addonUrl": "xhwfdzjauzacznibkrlox",
+        "companyUrl": "lfvm",
+        "shortDescription": "npilihrk",
+        "authType": [
+          "USER_PASS"
+        ],
+        "termsOfServiceUrl": "ywmxepvbhyjgjz"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "https://test.org/resource/api",
+          "name": "mmw",
+          "universalActions": [
+            {
+              "runFunction": "dolor"
+            },
+            {
+              "openLink": "roe",
+              "runFunction": "pBdB25vfczqUoAv"
+            }
+          ],
+          "openLinkUrlPrefixes": [
+            "xozitpxpvxesxqodsgsaq",
+            "adipiscing amet lo",
+            "7nJBiiSqjIz",
+            "uqkgika",
+            "adipiscing adipiscin"
+          ],
+          "useLocaleFromApp": true
+        }
+      }
+    },
+    {
+      "timeZone": "sit ipsum sit lorem ",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "ame",
+            "serviceId": "yughjckowhxrdgmef",
+            "version": "uki"
+          },
+          {
+            "userSymbol": "agdmfmlqn",
+            "serviceId": "tyGcAffG6lHcbXROh",
+            "version": "zvnwnuassriocyacmv"
+          },
+          {
+            "userSymbol": "CHSNpq9",
+            "serviceId": "amet amet sit sit",
+            "version": "ipsum dolor ipsu"
+          },
+          {
+            "userSymbol": "lore",
+            "serviceId": "consectetur l",
+            "version": "sit amet"
+          }
+        ]
+      },
+      "exceptionLogging": "NONE",
+      "oauthScopes": [],
+      "urlFetchWhitelist": [],
+      "sheets": {},
+      "addOns": {
+        "common": {
+          "logoUrl": "http://example.com/resource/data",
+          "name": "ruwodyz",
+          "layoutProperties": {
+            "secondaryColor": "dethqp"
+          },
+          "universalActions": [
+            {
+              "label": "I",
+              "openLink": "ipsum dolor consecte",
+              "runFunction": "xmaocjgjmrywv"
+            },
+            {
+              "label": "efmrresddzlwcbmpvpn"
+            },
+            {
+              "openLink": "ad",
+              "runFunction": "g4nzKAFKVQtkSnalD"
+            },
+            {
+              "openLink": "con"
+            },
+            {
+              "label": "consectetur adi",
+              "openLink": "ed",
+              "runFunction": "rvp"
+            }
+          ],
+          "useLocaleFromApp": false
+        },
+        "gmail": {
+          "homepageTrigger": {
+            "runFunction": "adipis"
+          }
+        },
+        "sheets": {
+          "onFileScopeGrantedTrigger": {
+            "runFunction": "lhkipimyryehxqtwxebnm"
+          }
+        }
+      }
+    },
+    {
+      "timeZone": "yMkmAoPzxrn",
+      "exceptionLogging": "NONE",
+      "oauthScopes": [
+        "http://demo.net/resource/v1",
+        "http://test.org/api/v1",
+        "http://test.org/resource/api",
+        "https://example.com/api/data",
+        "http://test.org/data/resource"
+      ],
+      "urlFetchWhitelist": [
+        "amet consectetur i",
+        "O2H6bQ",
+        "xetkrmyozzdytdp"
+      ],
+      "executionApi": {
+        "access": "MYSELF"
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "timeZone": "xteflkzsmj",
+      "dependencies": {},
+      "webapp": {
+        "access": "ANYONE",
+        "executeAs": "USER_DEPLOYING"
+      },
+      "exceptionLogging": "NONE",
+      "oauthScopes": [
+        "https://test.org/api/data"
+      ],
+      "sheets": {},
+      "dataStudio": {
+        "name": "aYOAGkIiP6nqJ2kyLk",
+        "logoUrl": "Qff",
+        "company": "sit sit sit",
+        "supportUrl": "lorem ",
+        "description": "y",
+        "addonUrl": "YmtfXi4zVizI1",
+        "companyUrl": "d8vB8Wr6ZJB05",
+        "templates": {}
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "timeZone": "o20sLErAyC7Tcv8V",
+      "oauthScopes": [
+        "ftp://test.org/v1/api",
+        "ftp://example.com/api/v1",
+        "http://example.com/data/resource"
+      ],
+      "sheets": {},
+      "dataStudio": {
+        "name": "nnpufowibmrypgqm",
+        "logoUrl": "xyup",
+        "company": "lorem lorem ",
+        "supportUrl": "OmrVRbmA",
+        "description": "ipsum lorem consect",
+        "addonUrl": "BpCWjmDmlEO",
+        "companyUrl": "hlxjwqypxmfimpljgnrqa",
+        "sources": [
+          "sKcF6vjQLupagXz08Twh4",
+          "ECuamf",
+          "Cpax",
+          "nenuhokorjpalddauryh",
+          "amet consectetur "
+        ],
+        "templates": {},
+        "shortDescription": "bgk",
+        "authType": [
+          "OAUTH2",
+          "KEY",
+          "USER_PASS",
+          "OAUTH2",
+          "USER_PASS"
+        ],
+        "privacyPolicyUrl": "txpayfzlqtcjctcleja",
+        "termsOfServiceUrl": "dolor ipsum consec"
+      }
+    },
+    {
+      "runtimeVersion": "STABLE",
+      "timeZone": "bnnnpnuj",
+      "exceptionLogging": "STACKDRIVER",
+      "oauthScopes": [
+        "ftp://test.org/data/resource",
+        "ftp://demo.net/resource/data",
+        "https://example.com/resource/data",
+        "http://test.org/data/resource"
+      ],
+      "executionApi": {
+        "access": "DOMAIN"
+      },
+      "sheets": {},
+      "dataStudio": {
+        "name": "fincvblhcgldmkjio",
+        "logoUrl": "sit s",
+        "company": "aw80DqqHBqcW97Fyh9Be",
+        "supportUrl": "tnfutnyeypcvwvl",
+        "description": "lxqijccajjzdhxsumijb",
+        "addonUrl": "npzdlcn",
+        "templates": {},
+        "shortDescription": "bvfqqfscctinqn",
+        "termsOfServiceUrl": "9fBD"
+      }
+    },
+    {
+      "timeZone": "u2Is",
+      "webapp": {
+        "access": "MYSELF",
+        "executeAs": "USER_ACCESSING"
+      },
+      "exceptionLogging": "STACKDRIVER",
+      "dataStudio": {
+        "name": "ipsum ",
+        "logoUrl": "qulsn",
+        "company": "consectetur amet ips",
+        "supportUrl": "oeriwpyktrtyen",
+        "description": "igopb",
+        "addonUrl": "lorem adipiscing lor",
+        "companyUrl": "adipiscing do",
+        "templates": {},
+        "shortDescription": "3ar",
+        "authType": [
+          "KEY",
+          "USER_PASS"
+        ],
+        "privacyPolicyUrl": "SOlGFC5iN26g5o4H3f0",
+        "termsOfServiceUrl": "xacryptp"
+      }
+    },
+    {
+      "timeZone": "amet conse",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "5ed7GE7YgzkHjIFMIH9",
+            "serviceId": "buarrgtxcsif",
+            "version": "7UscTxcsj9pEc1Fb"
+          },
+          {
+            "userSymbol": "efwmsyljhkbwcqjjjlxp",
+            "serviceId": "sit ips",
+            "version": "ubd"
+          },
+          {
+            "userSymbol": "wf",
+            "serviceId": "eiklooebjjlbwcdlpcv",
+            "version": "nkaufedvyfoafohy"
+          }
+        ]
+      },
+      "exceptionLogging": "STACKDRIVER",
+      "dataStudio": {
+        "name": "consecte",
+        "logoUrl": "a",
+        "company": "wzwhiqbmewsb",
+        "supportUrl": "sit amet",
+        "description": "qqbudtwhxdomfruc",
+        "addonUrl": "lorem l",
+        "companyUrl": "rN8O7f9NQOUDe6f",
+        "sources": [],
+        "shortDescription": "gilaljieh",
+        "privacyPolicyUrl": "sit adipisci"
+      }
+    },
+    {
+      "runtimeVersion": "STABLE",
+      "timeZone": "RS6uCO",
+      "dependencies": {
+        "enabledAdvancedServices": [],
+        "libraries": [
+          {
+            "userSymbol": "aRNKN4DI62kg4MbnuzqtI",
+            "libraryId": "yahxpigwzqtttlvqxxhnkdhzjclqviqgzluxsmsorzjihmvinzgcbtbjr",
+            "version": "xrw2VvpgmPA5YcSA",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "sftdtnpxokhqtmpsnbpb",
+            "libraryId": "h18d5BvcXLbWG97GDAGbF867BVJerwTOqbe1fFJosGEQPUC83nsjIW8Ws",
+            "version": "sit adipisci",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "dolor ",
+            "libraryId": "lorem consectetur ipsum sit sit",
+            "version": "vjhsnofbfdxrwnslfqua"
+          }
+        ]
+      },
+      "webapp": {
+        "access": "ANYONE_ANONYMOUS",
+        "executeAs": "USER_ACCESSING"
+      },
+      "exceptionLogging": "NONE",
+      "urlFetchWhitelist": [
+        "kqAKQYjVdiXXBo9k7jaVA",
+        "adipisci",
+        "hPI",
+        "consectetur adipis"
+      ],
+      "executionApi": {
+        "access": "DOMAIN"
+      },
+      "sheets": {
+        "macros": [
+          {
+            "menuName": "lorem dolor i",
+            "functionName": "8x6fqiY5ZM1nfOrCYMHNo",
+            "defaultShortcut": "u"
+          },
+          {
+            "menuName": "ibdwvdxwwulcg",
+            "functionName": "6J",
+            "defaultShortcut": "W8"
+          }
+        ]
+      },
+      "addOns": {
+        "calendar": {
+          "eventOpenTrigger": {},
+          "eventUpdateTrigger": {}
+        }
+      }
+    },
+    {
+      "timeZone": "haia",
+      "dependencies": {
+        "libraries": [
+          {
+            "userSymbol": "rnafd",
+            "libraryId": "consectetur amet adipiscing sit consectetur",
+            "version": "tlcewraucaxx",
+            "developmentMode": true
+          },
+          {
+            "userSymbol": "consec",
+            "libraryId": "gexfxzpyxqohdilxuuvuwdduttratflfsiutdogpsamhxxmlpsvijltjt",
+            "version": "ppwjcnnkxarrkqwrwhdp",
+            "developmentMode": true
+          },
+          {
+            "userSymbol": "dolor lore",
+            "libraryId": "amet ipsum adipiscing amet amet",
+            "version": "PCBWv02dS7OpxIYiOk",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "amet sit",
+            "libraryId": "aoiudkzuhvweyrahyhyzdimwchlgnbigkiwpzxqptzhwvbrcukkihlmle",
+            "version": "DehAywrrM4YNSqkOCz88",
+            "developmentMode": true
+          }
+        ]
+      },
+      "oauthScopes": [
+        "http://test.org/data/v1",
+        "https://example.com/resource/data",
+        "ftp://demo.net/resource/data",
+        "https://example.com/resource/data",
+        "https://test.org/resource/v1"
+      ],
+      "sheets": {}
+    },
+    {
+      "timeZone": "ttcxqgeyhmaswtbrfm",
+      "webapp": {},
+      "oauthScopes": [
+        "https://test.org/resource/data"
+      ],
+      "sheets": {},
+      "dataStudio": {
+        "name": "pvti",
+        "logoUrl": "Go7oNyHa92bq5VJZhUkr",
+        "company": "IOBY7J",
+        "supportUrl": "amet ipsum c",
+        "description": "lorem amet lorem a",
+        "companyUrl": "ehpFqaSS30SBoPnq0aEc",
+        "shortDescription": "lorem adip",
+        "authType": [
+          "USER_PASS"
+        ],
+        "termsOfServiceUrl": "DX"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "ftp://demo.net/api/data",
+          "name": "cu",
+          "homepageTrigger": {},
+          "universalActions": [
+            {
+              "label": "d"
+            },
+            {
+              "label": "cyeBIBJ3w12wiY7Qh",
+              "runFunction": "cwhwdurzysafg"
+            }
+          ],
+          "openLinkUrlPrefixes": [
+            "dolo",
+            "JaHF9J26NxrrKcvW6MM",
+            "eynsm",
+            "unumrdzn",
+            "zcdklguhvlfakissmnyb"
+          ],
+          "useLocaleFromApp": false
+        },
+        "gmail": {
+          "contextualTriggers": [
+            {
+              "onTriggerFunction": "qyfipxqvwqnleyho",
+              "unconditional": {}
+            },
+            {
+              "unconditional": {}
+            }
+          ]
+        },
+        "calendar": {
+          "homepageTrigger": {
+            "enabled": false,
+            "runFunction": "mnH57WzY49"
+          },
+          "eventOpenTrigger": {},
+          "eventUpdateTrigger": {},
+          "eventAccess": "READ"
+        },
+        "sheets": {
+          "homepageTrigger": {
+            "_ref": "#/definitions/homepageTrigger",
+            "_placeholder": true
+          },
+          "onFileScopeGrantedTrigger": {
+            "runFunction": "adipisci"
+          }
+        }
+      }
+    },
+    {
+      "runtimeVersion": "STABLE",
+      "oauthScopes": [
+        "http://example.com/data/resource",
+        "https://test.org/v1/api"
+      ],
+      "executionApi": {
+        "access": "ANYONE"
+      },
+      "sheets": {
+        "macros": [
+          {
+            "menuName": "7mba",
+            "functionName": "kxpxvyvjaktssfj",
+            "defaultShortcut": "WvArPr1Fcun2u9WsHLX"
+          },
+          {
+            "menuName": "g",
+            "functionName": "wdqb",
+            "defaultShortcut": "zmcvd"
+          },
+          {
+            "menuName": "DVVGILi04yb3",
+            "functionName": "sit amet dolor l",
+            "defaultShortcut": "vbasxsQS8FNh7Y8"
+          },
+          {
+            "menuName": "lorem ",
+            "functionName": "v",
+            "defaultShortcut": "consecte"
+          }
+        ]
+      },
+      "dataStudio": {
+        "name": "dolor",
+        "logoUrl": "ryBKphuuZk5r4f4W",
+        "company": "LHYVlQaSp",
+        "supportUrl": "ad",
+        "description": "VAIHS18y9cSLdr",
+        "companyUrl": "qkocphstckdfdy",
+        "templates": {},
+        "shortDescription": "adipiscing c",
+        "privacyPolicyUrl": "rKUwNRvF0Nm",
+        "termsOfServiceUrl": "adipisc"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "https://test.org/v1/resource",
+          "name": "rBxvW",
+          "layoutProperties": {},
+          "universalActions": [
+            {
+              "label": "5Uvn",
+              "runFunction": "lorem ame"
+            },
+            {
+              "label": "micevnhjlyzfcczh",
+              "runFunction": "a"
+            },
+            {
+              "label": "xyvpljjdhoifripcpkzch",
+              "runFunction": "wpyduvjujprwcthxpndr"
+            },
+            {
+              "label": "olozbhcoubon",
+              "runFunction": "Z6xCk"
+            },
+            {
+              "runFunction": "L"
+            }
+          ],
+          "useLocaleFromApp": false
+        },
+        "gmail": {},
+        "sheets": {}
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "webapp": {
+        "executeAs": "USER_DEPLOYING"
+      },
+      "exceptionLogging": "STACKDRIVER",
+      "oauthScopes": [
+        "ftp://test.org/v1/api",
+        "https://test.org/data/v1",
+        "ftp://example.com/v1/resource",
+        "http://test.org/api/v1",
+        "http://demo.net/resource/data"
+      ],
+      "urlFetchWhitelist": [
+        "lorem adipi",
+        "xadwagonftsa",
+        "adipiscing am",
+        "i",
+        "awtjkci"
+      ],
+      "sheets": {
+        "macros": [
+          {
+            "menuName": "rykujspemqkdqxbnummw",
+            "functionName": "ipsum ame",
+            "defaultShortcut": "adipisci"
+          },
+          {
+            "menuName": "RxtSw5Xmq",
+            "functionName": "ip",
+            "defaultShortcut": "sit consecte"
+          }
+        ]
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "webapp": {
+        "access": "DOMAIN",
+        "executeAs": "USER_ACCESSING"
+      },
+      "exceptionLogging": "STACKDRIVER",
+      "urlFetchWhitelist": [
+        "yuhubudqqnxxj",
+        "adipiscing dolor sit",
+        "8La"
+      ],
+      "sheets": {
+        "macros": [
+          {
+            "menuName": "amet amet sit sit do",
+            "functionName": "bquz",
+            "defaultShortcut": "qwtgsqngyvug"
+          },
+          {
+            "menuName": "sjmeti",
+            "functionName": "couktwmeedpcc",
+            "defaultShortcut": "rp"
+          },
+          {
+            "menuName": "bnrxolhfvatz",
+            "functionName": "am",
+            "defaultShortcut": "xpnmothxezma"
+          }
+        ]
+      },
+      "dataStudio": {
+        "name": "ca",
+        "logoUrl": "xihhhrkjkor",
+        "company": "sizdxmfjoecgztjsfdlj",
+        "supportUrl": "consecte",
+        "description": "yqdyyssrlhgoh",
+        "companyUrl": "mk9",
+        "sources": [
+          "dolor ipsum sit lo"
+        ],
+        "authType": [
+          "KEY",
+          "NONE",
+          "NONE"
+        ]
+      }
+    },
+    {
+      "runtimeVersion": "STABLE",
+      "dependencies": {},
+      "webapp": {
+        "access": "ANYONE"
+      },
+      "exceptionLogging": "STACKDRIVER",
+      "oauthScopes": [
+        "http://example.com/api/v1",
+        "http://demo.net/resource/api",
+        "http://test.org/resource/api",
+        "http://example.com/v1/api",
+        "http://test.org/resource/data"
+      ],
+      "urlFetchWhitelist": [
+        "iu",
+        "qoyaxql",
+        "rxmrjatevxreikbloi"
+      ],
+      "executionApi": {
+        "access": "ANYONE"
+      },
+      "sheets": {
+        "macros": [
+          {
+            "menuName": "S4N97NoDl9BUc",
+            "functionName": "bXQ7N",
+            "defaultShortcut": "l"
+          }
+        ]
+      },
+      "dataStudio": {
+        "name": "adi",
+        "logoUrl": "HNbt7cIzbNk7d1iPUZ",
+        "company": "sit sit ipsum amet ad",
+        "supportUrl": "HuhkKATCbBTSS",
+        "description": "XbG2FiFHw3vqFmt",
+        "addonUrl": "ipsum ipsum adipi",
+        "companyUrl": "amet lorem sit lore",
+        "shortDescription": "ybSZ1v405LaXL8vK",
+        "privacyPolicyUrl": "PAwVvUYl8dzFZkI",
+        "termsOfServiceUrl": "ipsum cons"
+      }
+    },
+    {
+      "timeZone": "bhjiki",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "ipsum dolor ip",
+            "serviceId": "adipiscing do",
+            "version": "sit amet amet"
+          },
+          {
+            "userSymbol": "H5g2",
+            "serviceId": "sit",
+            "version": "lnulktwu"
+          },
+          {
+            "userSymbol": "sit",
+            "serviceId": "bn",
+            "version": "mmmp"
+          },
+          {
+            "userSymbol": "agrfunjlvtnibvvgcknpz",
+            "serviceId": "fbaesoxfewmmta",
+            "version": "mt"
+          }
+        ],
+        "libraries": [
+          {
+            "userSymbol": "ipsum sit cons",
+            "libraryId": "zaqtyoglydnjiclpuyihdnurlyyxisbqgnzhgrdhvdukkxkbplunusqvr",
+            "version": "zsrz",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "gsgpcn",
+            "libraryId": "032aOx54fhDGjbisfAwxMweDYWMW8nJDR7g8BaxNP9NVlgBqKKAQUNjsF",
+            "version": "ame",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "pk",
+            "libraryId": "wpscwydaqhmmagxlnyekktlxwwglaqclpxecqacbypmggpojelkmlesob",
+            "version": "mrtlhggywgpxajfn",
+            "developmentMode": true
+          }
+        ]
+      },
+      "webapp": {},
+      "oauthScopes": [],
+      "executionApi": {},
+      "sheets": {}
+    },
+    {
+      "timeZone": "TvLMaRjFZNUsElEi5rLH",
+      "dependencies": {},
+      "exceptionLogging": "NONE",
+      "oauthScopes": [
+        "ftp://example.com/resource/v1",
+        "ftp://demo.net/api/v1",
+        "http://demo.net/api/data"
+      ],
+      "urlFetchWhitelist": [
+        "vlotrtogpnslot",
+        "ecqC0BNkRg",
+        "Q5KbokT7",
+        "lwqZHVCzPzJmCGq",
+        "sit adipisc"
+      ],
+      "executionApi": {
+        "access": "MYSELF"
+      },
+      "sheets": {
+        "macros": []
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "timeZone": "mmedqcro",
+      "dependencies": {
+        "libraries": [
+          {
+            "userSymbol": "mnaqheqkgkgkta",
+            "libraryId": "dqaojxcmozlknusjsmsmeeyapukunywcsisvrvkjwspzpwgjmzzortntk",
+            "version": "amet ipsum amet dol",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "zvcaeacszgcyspiiuw",
+            "libraryId": "nvkskxflbajsayjowekimhuudvfprsgifdispacjdjsqzyxzsbnxdcmni",
+            "version": "dolor lorem amet"
+          },
+          {
+            "userSymbol": "dolor consect",
+            "libraryId": "EnOGOQtKAEKnKtsiWyQ2kP0bmmuQrpRlhnVGepDTmeMrcPJKW9C79b1FR",
+            "version": "VTKjZSwkfe",
+            "developmentMode": false
+          }
+        ]
+      },
+      "webapp": {
+        "access": "MYSELF",
+        "executeAs": "USER_ACCESSING"
+      },
+      "exceptionLogging": "NONE",
+      "oauthScopes": [
+        "https://example.com/api/data",
+        "https://test.org/resource/v1",
+        "ftp://demo.net/resource/api"
+      ],
+      "urlFetchWhitelist": [
+        "z",
+        "dol",
+        "hpxljgptotrxubviqe",
+        "uQMP"
+      ],
+      "executionApi": {
+        "access": "MYSELF"
+      },
+      "dataStudio": {
+        "name": "JFI9MSb5iosTsyT9AN",
+        "logoUrl": "njnh",
+        "company": "ipsum consectetur am",
+        "supportUrl": "ixnyduulber",
+        "description": "w",
+        "addonUrl": "Kh6Whk8nl2eb",
+        "sources": [
+          "hLitp5MZp0iSBMbfYyG9",
+          "amet amet s",
+          "taszuxukeydrc"
+        ],
+        "templates": {}
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "http://example.com/data/api",
+          "name": "ipsum si",
+          "useLocaleFromApp": false
+        },
+        "gmail": {
+          "contextualTriggers": [
+            {
+              "onTriggerFunction": "sit sit ipsum dol",
+              "unconditional": {}
+            },
+            {
+              "onTriggerFunction": "htm"
+            },
+            {
+              "unconditional": {}
+            },
+            {
+              "onTriggerFunction": "amet lorem "
+            },
+            {
+              "onTriggerFunction": "8GyvQazcvzs9zBIJTQh",
+              "unconditional": {}
+            }
+          ],
+          "homepageTrigger": {
+            "runFunction": "llu"
+          }
+        },
+        "sheets": {
+          "homepageTrigger": {
+            "_ref": "#/definitions/homepageTrigger",
+            "_placeholder": true
+          },
+          "onFileScopeGrantedTrigger": {
+            "runFunction": "adipis"
+          }
+        }
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "timeZone": "ipsu",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "dsHZ6xXTwv",
+            "serviceId": "tsjjhngcjbsfhlsv",
+            "version": "adipiscin"
+          },
+          {
+            "userSymbol": "xxlkvvsulocsufpduzszm",
+            "serviceId": "sit ipsum ipsum adipi",
+            "version": "ypwuhxphzkxaznzfyeig"
+          },
+          {
+            "userSymbol": "iy",
+            "serviceId": "sit ipsum",
+            "version": "xzj"
+          },
+          {
+            "userSymbol": "consectet",
+            "serviceId": "adipisci",
+            "version": "ipsum ipsum con"
+          },
+          {
+            "userSymbol": "qifs",
+            "serviceId": "ikylutqps",
+            "version": "okxvgyr"
+          }
+        ],
+        "libraries": []
+      },
+      "webapp": {
+        "access": "ANYONE_ANONYMOUS"
+      },
+      "oauthScopes": [
+        "ftp://example.com/data/v1",
+        "https://test.org/api/v1"
+      ],
+      "urlFetchWhitelist": [
+        "zdjdfcm",
+        "iesbynnfdnmjrwt",
+        "TyE",
+        "jpohro"
+      ],
+      "dataStudio": {
+        "name": "ebrzccjaoa",
+        "logoUrl": "ipsum dolor ",
+        "company": "zhlwsf",
+        "supportUrl": "pxe",
+        "description": "dt1KH0cABP",
+        "companyUrl": "v",
+        "sources": [
+          "consectetur s",
+          "cons",
+          "cgfmwwdqldbvwy",
+          "Y0WRg",
+          "hfcib"
+        ],
+        "privacyPolicyUrl": "ame",
+        "termsOfServiceUrl": "2dsEn0CSbDCH6k"
+      }
+    },
+    {
+      "timeZone": "D9tHNJ3sWbVhZN48G",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "ztp4ZijeCBF",
+            "serviceId": "oiukdalhiut",
+            "version": "YAPEV4pO4HlXLOjgeI"
+          },
+          {
+            "userSymbol": "hjbawpfe",
+            "serviceId": "VGQB273dEWbgOkB0X2N2C",
+            "version": "suwrenpbyjtgse"
+          },
+          {
+            "userSymbol": "sit am",
+            "serviceId": "adipiscin",
+            "version": "avfzvulcgkxa"
+          }
+        ]
+      },
+      "urlFetchWhitelist": [],
+      "executionApi": {
+        "access": "DOMAIN"
+      },
+      "sheets": {
+        "macros": [
+          {
+            "menuName": "ozmihj",
+            "functionName": "sit sit ipsum si",
+            "defaultShortcut": "ig"
+          },
+          {
+            "menuName": "djje",
+            "functionName": "qtpcwbg",
+            "defaultShortcut": "qqrizyciim"
+          },
+          {
+            "menuName": "tkrixzoaqhhdju",
+            "functionName": "mf",
+            "defaultShortcut": "dolor adipisci"
+          },
+          {
+            "menuName": "H4lnRXjoey",
+            "functionName": "ipsum dol",
+            "defaultShortcut": "fywydigm"
+          },
+          {
+            "menuName": "sjyrkdqrjjql",
+            "functionName": "zlxmfwbgvyxpnmz",
+            "defaultShortcut": "yayuvrbajonzsjjlaq"
+          }
+        ]
+      },
+      "dataStudio": {
+        "name": "lpgypixwzpuwkh",
+        "logoUrl": "i3IyI5bCCKcKpR",
+        "company": "i",
+        "supportUrl": "sit conse",
+        "description": "ik5Z7SVQFcMn0PA5pC",
+        "addonUrl": "xzyrkrbervbhqbmthigne",
+        "companyUrl": "ipsum ipsum lorem dol",
+        "templates": {},
+        "authType": [
+          "OAUTH2",
+          "NONE",
+          "NONE",
+          "KEY"
+        ],
+        "privacyPolicyUrl": "knpsgukkpxijl",
+        "termsOfServiceUrl": "sit ipsum amet dolor "
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "timeZone": "ivcoduoudsudc",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "xbp",
+            "serviceId": "cons",
+            "version": "idmqwcndx"
+          },
+          {
+            "userSymbol": "l2LrLL",
+            "serviceId": "vPGxPUajq4HfMjm",
+            "version": "kj"
+          },
+          {
+            "userSymbol": "dolor amet dolor ",
+            "serviceId": "ombxKQlB5DnhZ",
+            "version": "amet lo"
+          },
+          {
+            "userSymbol": "wgqusxokwivqjpg",
+            "serviceId": "adipiscing adip",
+            "version": "dmaunpaxzwkmmuyljw"
+          },
+          {
+            "userSymbol": "wwprxijohcx",
+            "serviceId": "uhepijkskb",
+            "version": "s"
+          }
+        ],
+        "libraries": [
+          {
+            "userSymbol": "WZgbUT",
+            "libraryId": "cyu3hsZUdZqOegXR6z2CXIly6JYRDrmGdpDbDKIoEC2sXz3ZIgu5tdf1r",
+            "version": "lorem sit ipsum ips",
+            "developmentMode": true
+          },
+          {
+            "userSymbol": "WQx5RMsExcT",
+            "libraryId": "kcmtqounoovismvyrvzgbutyaqpdhixbwxejfodumannpwsirqsrfwbeb",
+            "version": "dolor adipiscin",
+            "developmentMode": true
+          },
+          {
+            "userSymbol": "9JvayxhTrKKEWv",
+            "libraryId": "zmvessrhsjybrmhgskdymynzxdlgjarfiyssxvyosvmhliiajmdwlmwwx",
+            "version": "dvF3xc069f",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "lyVP7X6mUVhhl",
+            "libraryId": "9ry4QxFnkUjWhEWqm8FYBKbENnwOVfoqzf7fDHDnpm6S3Skn7UJ2aWoY1",
+            "version": "buf06mziiIN5j4vA",
+            "developmentMode": true
+          },
+          {
+            "userSymbol": "xwbqlxycppsjfdspy",
+            "libraryId": "qfckxkwgfnienggoyxlnebbrvgcixoifphvxizxujnywgsjvmbiaevlyf",
+            "version": "a",
+            "developmentMode": true
+          }
+        ]
+      },
+      "webapp": {
+        "executeAs": "USER_ACCESSING"
+      },
+      "exceptionLogging": "STACKDRIVER",
+      "urlFetchWhitelist": [
+        "dXfckjPp4",
+        "d",
+        "eusaodapklbgqvduicp",
+        "amet adipisc"
+      ],
+      "dataStudio": {
+        "name": "qxtsajjumivozhiq",
+        "logoUrl": "ohiryxnwewjlfxq",
+        "company": "lore",
+        "supportUrl": "gwjemiqvrdcopwicjkum",
+        "description": "si",
+        "addonUrl": "ipsum ipsum adipisc",
+        "sources": [
+          "nvlblnfkklbaothfoko",
+          "jpwqgvlxflsylr",
+          "GTvBoZx",
+          "xvqaxgypsas"
+        ],
+        "templates": {},
+        "shortDescription": "nppsvdmv",
+        "authType": [
+          "KEY",
+          "OAUTH2",
+          "NONE",
+          "OAUTH2"
+        ]
+      }
+    },
+    {
+      "runtimeVersion": "V8",
+      "webapp": {
+        "access": "ANYONE",
+        "executeAs": "USER_DEPLOYING"
+      },
+      "exceptionLogging": "STACKDRIVER",
+      "urlFetchWhitelist": [
+        "69Yb",
+        "j",
+        "m",
+        "S8yPHHH055i1hj",
+        "vkhuw"
+      ],
+      "sheets": {},
+      "addOns": {
+        "common": {
+          "logoUrl": "https://demo.net/resource/api",
+          "name": "lufdnuvttvuuwb",
+          "layoutProperties": {
+            "primaryColor": "DIKh3wrw3JyZw3Wey8ss",
+            "secondaryColor": "lZzACOqWPmaNesBy0SXRn"
+          },
+          "homepageTrigger": {
+            "enabled": false
+          },
+          "openLinkUrlPrefixes": [
+            "ugzuugpzjjmtiuarxj",
+            "aTvieIfmsFzQ13sU",
+            "JQEH8ycvjQCHVUl29m",
+            "cHRU"
+          ],
+          "useLocaleFromApp": true
+        },
+        "gmail": {
+          "homepageTrigger": {
+            "enabled": false,
+            "runFunction": "amjmqbzzwkaejsz"
+          }
+        },
+        "calendar": {
+          "homepageTrigger": {
+            "runFunction": "fgv"
+          },
+          "eventOpenTrigger": {
+            "runFunction": "qNkKHHFItlsliBbH80CS"
+          }
+        }
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "timeZone": "consectetu",
+      "exceptionLogging": "STACKDRIVER",
+      "sheets": {}
+    },
+    {
+      "runtimeVersion": "V8",
+      "timeZone": "hwyvaz",
+      "dependencies": {
+        "libraries": [
+          {
+            "userSymbol": "amet adipisci",
+            "libraryId": "73mXHLXPP2jerwicD1WC2KJdtxfwLfqWyOjmWVgMVUUXxLqHU0TQg4x1e",
+            "version": "mfustcjedssgyxebyibs",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "dolor sit sit amet co",
+            "libraryId": "consectetur dolor dolor ipsum sit",
+            "version": "wlso",
+            "developmentMode": false
+          },
+          {
+            "userSymbol": "adi",
+            "libraryId": "rrfxnbcuafmrhlzrivgthunjsfxdzymtjyfvzobfuplktxvkcdghxolmi",
+            "version": "cpdb"
+          },
+          {
+            "userSymbol": "uggjfe",
+            "libraryId": "mxqygyjkuevaulchxkmbscbnmirfzxpizouicmpfjdtanjcawlqqzwnzu",
+            "version": "sqhohsoookcp",
+            "developmentMode": false
+          }
+        ]
+      },
+      "webapp": {
+        "access": "ANYONE",
+        "executeAs": "USER_DEPLOYING"
+      },
+      "exceptionLogging": "NONE",
+      "oauthScopes": [
+        "ftp://demo.net/v1/data",
+        "https://test.org/v1/api",
+        "http://demo.net/api/v1",
+        "http://test.org/v1/api",
+        "https://example.com/data/resource"
+      ],
+      "sheets": {},
+      "dataStudio": {
+        "name": "JmI5fEPlArHU",
+        "logoUrl": "sZHCMXAwO",
+        "company": "c",
+        "supportUrl": "qyqzcbh",
+        "description": "JLSe9ctQ4a0kp",
+        "companyUrl": "bzv",
+        "sources": [
+          "ipsum ipsum ipsum co",
+          "6",
+          "hbjjedpqxitjvhwv"
+        ],
+        "shortDescription": "iCNN26RrphsUP",
+        "authType": [
+          "NONE"
+        ],
+        "privacyPolicyUrl": "adi"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "http://test.org/v1/api",
+          "name": "mvwarrwo",
+          "homepageTrigger": {
+            "enabled": false,
+            "runFunctions": "Z5qp"
+          },
+          "openLinkUrlPrefixes": [
+            "MI3Tsjf"
+          ]
+        },
+        "gmail": {
+          "contextualTriggers": [],
+          "homepageTrigger": {
+            "enabled": true,
+            "runFunction": "sit lorem ip"
+          }
+        },
+        "calendar": {
+          "eventUpdateTrigger": {
+            "runFunction": "lorem ame"
+          }
+        },
+        "sheets": {
+          "onFileScopeGrantedTrigger": {
+            "runFunction": "dvjvvrfZZkEXPEn3lmuK"
+          }
+        }
+      }
+    },
+    {
+      "runtimeVersion": "V8",
+      "timeZone": "ioqsytwrghanehdatiqx",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "amet lorem adipiscin",
+            "serviceId": "02l",
+            "version": "DqLH"
+          }
+        ],
+        "libraries": []
+      },
+      "exceptionLogging": "STACKDRIVER",
+      "oauthScopes": [
+        "https://test.org/v1/data"
+      ],
+      "urlFetchWhitelist": [
+        "wZY70JZigaPXm",
+        "consectetur"
+      ],
+      "executionApi": {
+        "access": "ANYONE_ANONYMOUS"
+      },
+      "sheets": {},
+      "dataStudio": {
+        "name": "dol",
+        "logoUrl": "s",
+        "company": "rlqxvk",
+        "supportUrl": "sferrpclvkovbomdikc",
+        "description": "UoNJvJ",
+        "addonUrl": "kiykkjppu",
+        "authType": [
+          "USER_PASS"
+        ],
+        "privacyPolicyUrl": "amet amet co"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "https://demo.net/resource/v1",
+          "name": "ck4Ubt1XQr1tHGzlK5YoJ",
+          "layoutProperties": {
+            "primaryColor": "ragatusqmheanoaw"
+          },
+          "homepageTrigger": {
+            "enabled": true,
+            "runFunctions": "amet adi"
+          },
+          "universalActions": [
+            {
+              "label": "dolor amet ipsum ",
+              "openLink": "lorem dolo"
+            }
+          ],
+          "openLinkUrlPrefixes": [
+            "amet si",
+            "ipsum consectet"
+          ],
+          "useLocaleFromApp": true
+        },
+        "gmail": {
+          "contextualTriggers": [
+            {
+              "onTriggerFunction": "obgrbnmgtlklkmlxco"
+            }
+          ],
+          "homepageTrigger": {
+            "enabled": true
+          }
+        }
+      }
+    },
+    {
+      "runtimeVersion": "STABLE",
+      "dependencies": {},
+      "webapp": {
+        "executeAs": "USER_DEPLOYING"
+      },
+      "exceptionLogging": "NONE",
+      "oauthScopes": [
+        "http://example.com/data/resource",
+        "ftp://demo.net/data/v1",
+        "http://demo.net/data/resource"
+      ],
+      "sheets": {}
+    },
+    {
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "aZxq",
+            "serviceId": "hvyhgahgnzhs",
+            "version": "ctzcveuvobxq"
+          },
+          {
+            "userSymbol": "ipsum dolo",
+            "serviceId": "dyheveqezmxrggwl",
+            "version": "DywVL"
+          },
+          {
+            "userSymbol": "X5CibL7L",
+            "serviceId": "PzpZK1K0nLf",
+            "version": "wiffqxgndgl"
+          },
+          {
+            "userSymbol": "KoYtSLqfVA88stGp",
+            "serviceId": "Wk7vW3eiDSmZsBKjo",
+            "version": "bvjhql"
+          },
+          {
+            "userSymbol": "sit sit ipsum consec",
+            "serviceId": "dolor",
+            "version": "lorem dolor sit am"
+          }
+        ],
+        "libraries": [
+          {
+            "userSymbol": "vIJczlSXqVpFmY",
+            "libraryId": "axczijbmpaojpnugafitcgeplmwxsudahlpvyzulctjwdkqnafgwpdyzg",
+            "version": "amet",
+            "developmentMode": true
+          },
+          {
+            "userSymbol": "kmpheeeecmfybpm",
+            "libraryId": "fsF29kdEEGRZgBd6UhVe5THJoyH39kyhg4MKi8OjpBgXQbvdeY5f8XlmB",
+            "version": "qagqajkiqpntgvnyxak",
+            "developmentMode": true
+          },
+          {
+            "userSymbol": "lqjyxfftvg",
+            "libraryId": "consectetur sit ipsum adipiscing lorem",
+            "version": "adi",
+            "developmentMode": false
+          }
+        ]
+      },
+      "webapp": {
+        "access": "MYSELF",
+        "executeAs": "USER_DEPLOYING"
+      },
+      "exceptionLogging": "STACKDRIVER",
+      "oauthScopes": [
+        "ftp://demo.net/data/v1",
+        "https://example.com/data/api",
+        "http://example.com/api/data"
+      ],
+      "urlFetchWhitelist": [],
+      "executionApi": {
+        "access": "ANYONE"
+      },
+      "sheets": {},
+      "dataStudio": {
+        "name": "vxhiavzljkfcf",
+        "logoUrl": "lorem amet lorem sit",
+        "company": "dolor adipiscing cons",
+        "supportUrl": "dolor dolor ad",
+        "description": "istlzcfjfsx",
+        "addonUrl": "jfplsbqtfmyglw",
+        "sources": [
+          "lorem dolor consectet"
+        ],
+        "templates": {},
+        "shortDescription": "o",
+        "privacyPolicyUrl": "gpOgGx0LLZeLjtpvAGs",
+        "termsOfServiceUrl": "sit dolor ad"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "https://demo.net/v1/resource",
+          "name": "ipsum dolor ",
+          "layoutProperties": {
+            "primaryColor": "lorem consecte"
+          },
+          "homepageTrigger": {
+            "enabled": true,
+            "runFunctions": "dolor adipiscing "
+          },
+          "useLocaleFromApp": false
+        },
+        "calendar": {
+          "homepageTrigger": {
+            "runFunction": "5d0"
+          },
+          "eventUpdateTrigger": {
+            "runFunction": "ah"
+          },
+          "eventAccess": "READ"
+        },
+        "sheets": {
+          "onFileScopeGrantedTrigger": {
+            "runFunction": "vbbgschfkqleyexjr"
+          }
+        }
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "timeZone": "kdqbzsbfzuqkvubt",
+      "dependencies": {
+        "libraries": []
+      },
+      "webapp": {},
+      "exceptionLogging": "NONE",
+      "oauthScopes": [
+        "http://demo.net/data/resource",
+        "ftp://test.org/api/data",
+        "ftp://demo.net/api/data"
+      ],
+      "executionApi": {
+        "access": "DOMAIN"
+      },
+      "sheets": {},
+      "dataStudio": {
+        "name": "dol",
+        "logoUrl": "zCQAElvyE2pdBSx9FPvxb",
+        "company": "mYKeEdKlRJd",
+        "supportUrl": "Hh8AgZZBlb6He8",
+        "description": "amet",
+        "addonUrl": "K4oxmcF6EC6O01m5",
+        "sources": [
+          "amet consectetur",
+          "dolor sit a",
+          "fc",
+          "lbkfyvy"
+        ],
+        "templates": {},
+        "authType": [
+          "KEY",
+          "KEY",
+          "NONE",
+          "NONE",
+          "USER_PASS"
+        ],
+        "termsOfServiceUrl": "jnTfhRKzOfg36TSI9hg"
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "http://demo.net/data/v1",
+          "name": "ipsum sit am",
+          "homepageTrigger": {
+            "enabled": true
+          }
+        },
+        "gmail": {
+          "contextualTriggers": [],
+          "homepageTrigger": {
+            "runFunction": "pjqft"
+          }
+        },
+        "calendar": {
+          "homepageTrigger": {
+            "runFunction": "koipoywwfcccv"
+          },
+          "eventOpenTrigger": {
+            "runFunction": "argxcepasoz"
+          },
+          "eventAccess": "METADATA"
+        },
+        "sheets": {
+          "onFileScopeGrantedTrigger": {}
+        }
+      }
+    },
+    {
+      "runtimeVersion": "V8",
+      "timeZone": "dolor c",
+      "webapp": {},
+      "exceptionLogging": "NONE",
+      "urlFetchWhitelist": [
+        "r",
+        "wvpEx"
+      ],
+      "executionApi": {},
+      "dataStudio": {
+        "name": "dbixopigojrs",
+        "logoUrl": "gxydtvf",
+        "company": "sit conse",
+        "supportUrl": "xkxnydcrduqpw",
+        "description": "mlecskedbp",
+        "addonUrl": "ujbjuymiikmuz",
+        "companyUrl": "adipiscing sit sit ",
+        "templates": {},
+        "authType": [
+          "USER_PASS"
+        ],
+        "termsOfServiceUrl": "sozhdvviwjihhtxh"
+      }
+    },
+    {
+      "runtimeVersion": "V8",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "consecte",
+            "serviceId": "smxodfw",
+            "version": "y"
+          },
+          {
+            "userSymbol": "adipisci",
+            "serviceId": "hrbka",
+            "version": "uqnarngcqpanf"
+          }
+        ],
+        "libraries": []
+      },
+      "webapp": {
+        "executeAs": "USER_ACCESSING"
+      },
+      "exceptionLogging": "STACKDRIVER",
+      "oauthScopes": [
+        "ftp://test.org/api/data",
+        "https://test.org/resource/v1",
+        "http://test.org/resource/v1",
+        "https://test.org/resource/v1",
+        "ftp://test.org/resource/data"
+      ],
+      "urlFetchWhitelist": [
+        "amet ipsum",
+        "sit"
+      ],
+      "executionApi": {
+        "access": "MYSELF"
+      },
+      "sheets": {
+        "macros": [
+          {
+            "menuName": "BzJHz",
+            "functionName": "aIz6JhvF0oy",
+            "defaultShortcut": "KgOjR2ZeqPV8evt"
+          },
+          {
+            "menuName": "dolor adipiscing",
+            "functionName": "Qeg40CuO",
+            "defaultShortcut": "1NM5nz"
+          }
+        ]
+      },
+      "addOns": {
+        "common": {
+          "logoUrl": "ftp://example.com/api/v1",
+          "name": "XiNmlr6KfCX8e",
+          "layoutProperties": {
+            "primaryColor": "0lgYYFplzC488frO",
+            "secondaryColor": "sit amet ipsum amet i"
+          },
+          "homepageTrigger": {
+            "runFunctions": "gcgv"
+          },
+          "universalActions": [],
+          "openLinkUrlPrefixes": [
+            "cnukikhjqyjrj",
+            "UmzWGoHD6KCo",
+            "xqrcuvybiaspnbxv"
+          ],
+          "useLocaleFromApp": false
+        },
+        "gmail": {
+          "contextualTriggers": [],
+          "homepageTrigger": {
+            "runFunction": "r"
+          }
+        },
+        "calendar": {
+          "eventOpenTrigger": {
+            "runFunction": "cjcnjsul"
+          },
+          "eventUpdateTrigger": {
+            "runFunction": "si"
+          },
+          "eventAccess": "WRITE"
+        }
+      }
+    },
+    {
+      "runtimeVersion": "DEPRECATED_ES5",
+      "oauthScopes": [
+        "http://demo.net/data/v1",
+        "https://demo.net/v1/data",
+        "https://example.com/data/resource",
+        "https://example.com/data/resource"
+      ],
+      "urlFetchWhitelist": [
+        "dgp79aBWcJe"
+      ],
+      "sheets": {},
+      "dataStudio": {
+        "name": "ajsnygcyhmszj",
+        "logoUrl": "qefs",
+        "company": "adipiscing d",
+        "supportUrl": "Hi5WUs7ccZ1q",
+        "description": "Umdo0V",
+        "companyUrl": "rwmsfymqcofpql",
+        "sources": [
+          "fscpdmvoerdloo",
+          "umkfqbubrakxfayqobha",
+          "YgxPr2GGCUy5OoRcFY",
+          "ad",
+          "lorem sit s"
+        ],
+        "shortDescription": "vztmqzvwx",
+        "authType": [
+          "NONE"
+        ],
+        "termsOfServiceUrl": "bnyuyysqaquhnbntbiga"
+      }
+    },
+    {
+      "timeZone": "consectet",
+      "dependencies": {
+        "enabledAdvancedServices": [
+          {
+            "userSymbol": "kzxfevsxbokms",
+            "serviceId": "adipiscing amet co",
+            "version": "umfgdncmdvjvwwzmrp"
+          },
+          {
+            "userSymbol": "OVP5vqmxKxZk2YytDj8",
+            "serviceId": "yhrtx",
+            "version": "rgjiojhkttyvl"
+          },
+          {
+            "userSymbol": "enzfh",
+            "serviceId": "xrruxckdgj",
+            "version": "CVjntHQDjQd95kmYX"
+          },
+          {
+            "userSymbol": "Vp2dfhfjx3mZ1PbyXTP",
+            "serviceId": "PM8Lc2xNG0xMC",
+            "version": "Sx73EaLnlPpXvjkfg3"
+          },
+          {
+            "userSymbol": "lgQll",
+            "serviceId": "si",
+            "version": "xiwdoewchhux"
+          }
+        ],
+        "libraries": [
+          {
+            "userSymbol": "ggwbrinhojlxxsplrqxn",
+            "libraryId": "PfDFch5pmPSF2TQoLUmbGQ7nCHgyrwedt3IG1e9HmHDPw8kgyLZRc0btf",
+            "version": "vibdbqlysilxgn"
+          },
+          {
+            "userSymbol": "9C",
+            "libraryId": "cevgdjiqofcapoqbtxogeraufjtjcmqpkxnnibtbpxlsugbsltwpaoqnq",
+            "version": "am",
+            "developmentMode": false
+          }
+        ]
+      },
+      "oauthScopes": [
+        "http://example.com/resource/v1",
+        "ftp://example.com/v1/resource"
+      ],
+      "urlFetchWhitelist": [],
+      "addOns": {
+        "common": {
+          "logoUrl": "http://example.com/resource/data",
+          "name": "julatrbsfbwkljbys",
+          "layoutProperties": {
+            "primaryColor": "sit s",
+            "secondaryColor": "xFM"
+          },
+          "homepageTrigger": {
+            "enabled": true
+          },
+          "universalActions": [
+            {
+              "label": "lVlJM",
+              "openLink": "dolor am",
+              "runFunction": "ipsu"
+            }
+          ],
+          "useLocaleFromApp": false
+        },
+        "gmail": {},
+        "calendar": {
+          "eventOpenTrigger": {},
+          "eventUpdateTrigger": {
+            "runFunction": "dlxidbgckhbyezakmtjef"
+          },
+          "eventAccess": "METADATA"
+        }
+      }
+    },
+    {
+      "runtimeVersion": "STABLE",
+      "timeZone": "amet lorem ipsum",
+      "exceptionLogging": "STACKDRIVER",
+      "oauthScopes": [
+        "ftp://test.org/v1/api",
+        "ftp://test.org/data/resource",
+        "http://demo.net/data/v1",
+        "ftp://test.org/data/v1"
+      ],
+      "urlFetchWhitelist": [
+        "utronqlchiqvmkjor"
+      ],
+      "executionApi": {
+        "access": "ANYONE_ANONYMOUS"
+      },
+      "sheets": {
+        "macros": []
+      }
+    }
+  ]
+}

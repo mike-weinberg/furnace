@@ -1,0 +1,810 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/aquaproj/aqua/v2/pkg/config/registry/config",
+  "$ref": "#/$defs/Config",
+  "$defs": {
+    "Alias": {
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name"
+      ]
+    },
+    "Build": {
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "go_install",
+            "go_build"
+          ]
+        },
+        "path": {
+          "type": "string"
+        },
+        "files": {
+          "items": {
+            "$ref": "#/$defs/File"
+          },
+          "type": "array"
+        },
+        "excluded_envs": {
+          "$ref": "#/$defs/SupportedEnvs"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "Cargo": {
+      "properties": {
+        "features": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "all_features": {
+          "type": "boolean"
+        },
+        "locked": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "Checksum": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "github_release",
+            "http"
+          ]
+        },
+        "asset": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "file_format": {
+          "type": "string"
+        },
+        "algorithm": {
+          "type": "string",
+          "enum": [
+            "md5",
+            "sha1",
+            "sha256",
+            "sha512"
+          ]
+        },
+        "pattern": {
+          "$ref": "#/$defs/ChecksumPattern"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "replacements": {
+          "$ref": "#/$defs/Replacements"
+        },
+        "cosign": {
+          "$ref": "#/$defs/Cosign"
+        },
+        "minisign": {
+          "$ref": "#/$defs/Minisign"
+        },
+        "github_artifact_attestations": {
+          "$ref": "#/$defs/GitHubArtifactAttestations"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "ChecksumPattern": {
+      "properties": {
+        "checksum": {
+          "type": "string"
+        },
+        "file": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "checksum"
+      ]
+    },
+    "Config": {
+      "properties": {
+        "packages": {
+          "$ref": "#/$defs/PackageInfos"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "packages"
+      ]
+    },
+    "Cosign": {
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "opts": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "signature": {
+          "$ref": "#/$defs/DownloadedFile"
+        },
+        "certificate": {
+          "$ref": "#/$defs/DownloadedFile"
+        },
+        "key": {
+          "$ref": "#/$defs/DownloadedFile"
+        },
+        "bundle": {
+          "$ref": "#/$defs/DownloadedFile"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "DownloadedFile": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "github_release",
+            "http"
+          ]
+        },
+        "repo_owner": {
+          "type": "string"
+        },
+        "repo_name": {
+          "type": "string"
+        },
+        "asset": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "type"
+      ]
+    },
+    "File": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "src": {
+          "type": "string"
+        },
+        "dir": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        },
+        "hard": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "FormatOverride": {
+      "properties": {
+        "goos": {
+          "type": "string",
+          "enum": [
+            "aix",
+            "android",
+            "darwin",
+            "dragonfly",
+            "freebsd",
+            "illumos",
+            "ios",
+            "linux",
+            "netbsd",
+            "openbsd",
+            "plan9",
+            "solaris",
+            "windows"
+          ]
+        },
+        "format": {
+          "type": "string",
+          "examples": [
+            "tar.gz",
+            "raw",
+            "zip"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "goos",
+        "format"
+      ]
+    },
+    "FormatOverrides": {
+      "items": {
+        "$ref": "#/$defs/FormatOverride"
+      },
+      "type": "array"
+    },
+    "GitHubArtifactAttestations": {
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "predicate_type": {
+          "type": "string"
+        },
+        "signer_workflow": {
+          "type": "string"
+        },
+        "signer-workflow": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "Minisign": {
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "github_release",
+            "http"
+          ]
+        },
+        "repo_owner": {
+          "type": "string"
+        },
+        "repo_name": {
+          "type": "string"
+        },
+        "asset": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "public_key": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "Override": {
+      "properties": {
+        "goos": {
+          "type": "string",
+          "enum": [
+            "darwin",
+            "linux",
+            "windows"
+          ]
+        },
+        "goarch": {
+          "type": "string",
+          "enum": [
+            "amd64",
+            "arm64"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "github_release",
+            "github_content",
+            "github_archive",
+            "http",
+            "go",
+            "go_install",
+            "cargo",
+            "go_build"
+          ]
+        },
+        "format": {
+          "type": "string",
+          "examples": [
+            "tar.gz",
+            "raw",
+            "zip"
+          ]
+        },
+        "asset": {
+          "type": "string"
+        },
+        "crate": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "go_version_path": {
+          "type": "string"
+        },
+        "complete_windows_ext": {
+          "type": "boolean"
+        },
+        "windows_ext": {
+          "type": "string"
+        },
+        "append_ext": {
+          "type": "boolean"
+        },
+        "cargo": {
+          "$ref": "#/$defs/Cargo"
+        },
+        "files": {
+          "items": {
+            "$ref": "#/$defs/File"
+          },
+          "type": "array"
+        },
+        "replacements": {
+          "$ref": "#/$defs/Replacements"
+        },
+        "checksum": {
+          "$ref": "#/$defs/Checksum"
+        },
+        "cosign": {
+          "$ref": "#/$defs/Cosign"
+        },
+        "slsa_provenance": {
+          "$ref": "#/$defs/SLSAProvenance"
+        },
+        "minisign": {
+          "$ref": "#/$defs/Minisign"
+        },
+        "github_artifact_attestations": {
+          "$ref": "#/$defs/GitHubArtifactAttestations"
+        },
+        "vars": {
+          "items": {
+            "$ref": "#/$defs/Var"
+          },
+          "type": "array"
+        },
+        "envs": {
+          "$ref": "#/$defs/SupportedEnvs"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "Overrides": {
+      "items": {
+        "$ref": "#/$defs/Override"
+      },
+      "type": "array"
+    },
+    "PackageInfo": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "aliases": {
+          "items": {
+            "$ref": "#/$defs/Alias"
+          },
+          "type": "array"
+        },
+        "search_words": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "github_release",
+            "github_content",
+            "github_archive",
+            "http",
+            "go",
+            "go_install",
+            "cargo",
+            "go_build"
+          ]
+        },
+        "repo_owner": {
+          "type": "string"
+        },
+        "repo_name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        },
+        "asset": {
+          "type": "string"
+        },
+        "crate": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string",
+          "examples": [
+            "tar.gz",
+            "raw",
+            "zip",
+            "dmg"
+          ]
+        },
+        "version_filter": {
+          "type": "string"
+        },
+        "version_prefix": {
+          "type": "string"
+        },
+        "go_version_path": {
+          "type": "string"
+        },
+        "rosetta2": {
+          "type": "boolean"
+        },
+        "windows_arm_emulation": {
+          "type": "boolean"
+        },
+        "no_asset": {
+          "type": "boolean"
+        },
+        "version_source": {
+          "type": "string",
+          "enum": [
+            "github_tag"
+          ]
+        },
+        "complete_windows_ext": {
+          "type": "boolean"
+        },
+        "windows_ext": {
+          "type": "string"
+        },
+        "private": {
+          "type": "boolean"
+        },
+        "append_ext": {
+          "type": "boolean"
+        },
+        "cargo": {
+          "$ref": "#/$defs/Cargo"
+        },
+        "build": {
+          "$ref": "#/$defs/Build"
+        },
+        "overrides": {
+          "items": {
+            "$ref": "#/$defs/Override"
+          },
+          "type": "array"
+        },
+        "format_overrides": {
+          "items": {
+            "$ref": "#/$defs/FormatOverride"
+          },
+          "type": "array"
+        },
+        "files": {
+          "items": {
+            "$ref": "#/$defs/File"
+          },
+          "type": "array"
+        },
+        "replacements": {
+          "$ref": "#/$defs/Replacements"
+        },
+        "supported_envs": {
+          "$ref": "#/$defs/SupportedEnvs"
+        },
+        "checksum": {
+          "$ref": "#/$defs/Checksum"
+        },
+        "cosign": {
+          "$ref": "#/$defs/Cosign"
+        },
+        "slsa_provenance": {
+          "$ref": "#/$defs/SLSAProvenance"
+        },
+        "minisign": {
+          "$ref": "#/$defs/Minisign"
+        },
+        "github_artifact_attestations": {
+          "$ref": "#/$defs/GitHubArtifactAttestations"
+        },
+        "github_immutable_release": {
+          "type": "boolean"
+        },
+        "vars": {
+          "items": {
+            "$ref": "#/$defs/Var"
+          },
+          "type": "array"
+        },
+        "version_constraint": {
+          "type": "string"
+        },
+        "version_overrides": {
+          "items": {
+            "$ref": "#/$defs/VersionOverride"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "type"
+      ]
+    },
+    "PackageInfos": {
+      "items": {
+        "$ref": "#/$defs/PackageInfo"
+      },
+      "type": "array"
+    },
+    "Replacements": {
+      "properties": {
+        "darwin": {
+          "type": "string"
+        },
+        "linux": {
+          "type": "string"
+        },
+        "windows": {
+          "type": "string"
+        },
+        "amd64": {
+          "type": "string"
+        },
+        "arm64": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SLSAProvenance": {
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "github_release",
+            "http"
+          ]
+        },
+        "repo_owner": {
+          "type": "string"
+        },
+        "repo_name": {
+          "type": "string"
+        },
+        "asset": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "source_uri": {
+          "type": "string"
+        },
+        "source_tag": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "SupportedEnvs": {
+      "items": {
+        "type": "string",
+        "enum": [
+          "all",
+          "darwin",
+          "linux",
+          "windows",
+          "amd64",
+          "arm64",
+          "darwin/amd64",
+          "darwin/arm64",
+          "linux/amd64",
+          "linux/arm64",
+          "windows/amd64",
+          "windows/arm64"
+        ]
+      },
+      "type": "array"
+    },
+    "Var": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "default": true
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name"
+      ]
+    },
+    "VersionOverride": {
+      "properties": {
+        "version_constraint": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "github_release",
+            "github_content",
+            "github_archive",
+            "http",
+            "go",
+            "go_install",
+            "cargo",
+            "go_build"
+          ]
+        },
+        "repo_owner": {
+          "type": "string"
+        },
+        "repo_name": {
+          "type": "string"
+        },
+        "asset": {
+          "type": "string"
+        },
+        "crate": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string",
+          "examples": [
+            "tar.gz",
+            "raw",
+            "zip"
+          ]
+        },
+        "go_version_path": {
+          "type": "string"
+        },
+        "version_filter": {
+          "type": "string"
+        },
+        "version_prefix": {
+          "type": "string"
+        },
+        "version_source": {
+          "type": "string"
+        },
+        "windows_ext": {
+          "type": "string"
+        },
+        "error_message": {
+          "type": "string"
+        },
+        "rosetta2": {
+          "type": "boolean"
+        },
+        "windows_arm_emulation": {
+          "type": "boolean"
+        },
+        "complete_windows_ext": {
+          "type": "boolean"
+        },
+        "no_asset": {
+          "type": "boolean"
+        },
+        "append_ext": {
+          "type": "boolean"
+        },
+        "cargo": {
+          "$ref": "#/$defs/Cargo"
+        },
+        "files": {
+          "items": {
+            "$ref": "#/$defs/File"
+          },
+          "type": "array"
+        },
+        "format_overrides": {
+          "$ref": "#/$defs/FormatOverrides"
+        },
+        "replacements": {
+          "$ref": "#/$defs/Replacements"
+        },
+        "checksum": {
+          "$ref": "#/$defs/Checksum"
+        },
+        "cosign": {
+          "$ref": "#/$defs/Cosign"
+        },
+        "slsa_provenance": {
+          "$ref": "#/$defs/SLSAProvenance"
+        },
+        "minisign": {
+          "$ref": "#/$defs/Minisign"
+        },
+        "github_artifact_attestations": {
+          "$ref": "#/$defs/GitHubArtifactAttestations"
+        },
+        "github_immutable_release": {
+          "type": "boolean"
+        },
+        "build": {
+          "$ref": "#/$defs/Build"
+        },
+        "vars": {
+          "items": {
+            "$ref": "#/$defs/Var"
+          },
+          "type": "array"
+        },
+        "overrides": {
+          "$ref": "#/$defs/Overrides"
+        },
+        "supported_envs": {
+          "$ref": "#/$defs/SupportedEnvs"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    }
+  }
+}

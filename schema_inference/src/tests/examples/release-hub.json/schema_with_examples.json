@@ -1,0 +1,911 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "$schema": {
+        "description": "Path to the JSON schema for IDE autocompletion.",
+        "type": "string"
+      },
+      "dryRun": {
+        "description": "Run commands in dry-run mode without making actual changes.",
+        "default": false,
+        "type": "boolean"
+      },
+      "defaultReleaseType": {
+        "description": "Default release type",
+        "default": "patch",
+        "type": "string",
+        "enum": [
+          "major",
+          "minor",
+          "patch"
+        ]
+      },
+      "targets": {
+        "default": {
+          "node": true,
+          "jsr": false,
+          "deno": false
+        },
+        "description": "Defines which manifest files to update their version fields.",
+        "type": "object",
+        "properties": {
+          "node": {
+            "description": "Update version in package.json (Node.js).",
+            "default": true,
+            "type": "boolean"
+          },
+          "jsr": {
+            "description": "Update version in jsr.json (JSR registry).",
+            "default": false,
+            "type": "boolean"
+          },
+          "deno": {
+            "description": "Update version in deno.json or deno.jsonc (Deno project).",
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "sync": {
+        "description": "Controls version sync behavior for targets.",
+        "default": true,
+        "anyOf": [
+          {
+            "description": "Whether to sync versions across all or none of the targets.",
+            "type": "boolean"
+          },
+          {
+            "description": "Sync only specific groups of targets.",
+            "type": "array",
+            "items": {
+              "description": "A group of targets to sync together.",
+              "minItems": 2,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "node",
+                  "jsr",
+                  "deno"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "hooks": {
+        "description": "Shell commands to run at various lifecycle stages. Each key is a lifecycle hook name and the value is the command(s) to run.",
+        "type": "object",
+        "propertyNames": {
+          "type": "string",
+          "pattern": "^(before|after):(init|version|commit|tag|push|publish(?::(npm|jsr))?)$"
+        },
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "additionalProperties": false
+  },
+  "examples": [
+    {
+      "dryRun": false,
+      "defaultReleaseType": "major"
+    },
+    {
+      "$schema": "jscpp",
+      "dryRun": false
+    },
+    {
+      "$schema": "djhfocurhqptrjihen",
+      "dryRun": false,
+      "targets": {
+        "deno": false
+      },
+      "sync": true,
+      "hooks": {
+        "lorem amet": true
+      }
+    },
+    {
+      "$schema": "dolor lorem sit "
+    },
+    {
+      "dryRun": true,
+      "targets": {
+        "node": true,
+        "jsr": false
+      },
+      "sync": 17,
+      "hooks": {
+        "SVyRwDZCR": null
+      }
+    },
+    {
+      "$schema": "JpxMXO7a6XSaYt",
+      "dryRun": true,
+      "defaultReleaseType": "minor",
+      "targets": {
+        "node": false,
+        "deno": false
+      },
+      "sync": 23.86
+    },
+    {
+      "$schema": "HXFSB",
+      "dryRun": true,
+      "defaultReleaseType": "major",
+      "targets": {
+        "node": true,
+        "jsr": true,
+        "deno": true
+      },
+      "sync": 95.07,
+      "hooks": {
+        "scggawx": 35.24,
+        "dolor co": null
+      }
+    },
+    {
+      "$schema": "iovrthlbofxhja",
+      "defaultReleaseType": "patch",
+      "targets": {
+        "jsr": false
+      },
+      "hooks": {
+        "MO4IHHi6uK": null
+      }
+    },
+    {
+      "$schema": "3QVuHnI5v",
+      "dryRun": false,
+      "defaultReleaseType": "major",
+      "targets": {},
+      "sync": 8
+    },
+    {
+      "$schema": "p9Zp1HCRGvOxrRahH",
+      "dryRun": true,
+      "defaultReleaseType": "minor",
+      "targets": {},
+      "sync": 56
+    },
+    {
+      "dryRun": false,
+      "targets": {
+        "node": true,
+        "jsr": false
+      },
+      "hooks": {}
+    },
+    {
+      "defaultReleaseType": "patch",
+      "targets": {
+        "jsr": false
+      },
+      "hooks": {}
+    },
+    {
+      "dryRun": false,
+      "defaultReleaseType": "minor",
+      "targets": {
+        "node": false
+      },
+      "sync": 5.6
+    },
+    {
+      "$schema": "consect",
+      "defaultReleaseType": "minor"
+    },
+    {
+      "dryRun": false,
+      "targets": {
+        "node": false,
+        "deno": true
+      },
+      "sync": "consectetur ip",
+      "hooks": {
+        "ipsum adip": null
+      }
+    },
+    {
+      "$schema": "fimzlvjwexjkcwpmgqd",
+      "dryRun": false,
+      "defaultReleaseType": "major",
+      "hooks": {}
+    },
+    {
+      "$schema": "zffkyug",
+      "dryRun": false,
+      "defaultReleaseType": "patch",
+      "targets": {
+        "node": false,
+        "deno": false
+      },
+      "hooks": {
+        "lskLpQ": 20,
+        "iSoqpS": false
+      }
+    },
+    {
+      "$schema": "awsravjuntsirzxxcqwhb",
+      "defaultReleaseType": "major",
+      "targets": {
+        "node": true,
+        "deno": false
+      },
+      "sync": 57,
+      "hooks": {
+        "Q8UKiV": null,
+        "nrwgddog": true
+      }
+    },
+    {
+      "$schema": "ipsum sit adipiscin",
+      "dryRun": true,
+      "targets": {
+        "node": true
+      },
+      "sync": 13.06
+    },
+    {
+      "$schema": "adipiscing dolor c",
+      "dryRun": true,
+      "defaultReleaseType": "minor",
+      "sync": 64
+    },
+    {
+      "dryRun": true,
+      "targets": {
+        "jsr": true,
+        "deno": false
+      },
+      "hooks": {}
+    },
+    {
+      "$schema": "grkcrhvhtb",
+      "targets": {
+        "node": true
+      }
+    },
+    {
+      "$schema": "nrfgxqtsuzckfakxyepyg",
+      "dryRun": true,
+      "sync": 29.59,
+      "hooks": {
+        "UQGdojn": "vauhwxhq"
+      }
+    },
+    {
+      "$schema": "nCB5ZBn2Cm",
+      "dryRun": true,
+      "defaultReleaseType": "major",
+      "targets": {},
+      "sync": "wo5NyDRVWu"
+    },
+    {
+      "$schema": "uhzucwvenxsssk",
+      "targets": {
+        "node": false,
+        "deno": true
+      }
+    },
+    {
+      "$schema": "kylqxfbealdcik",
+      "defaultReleaseType": "patch",
+      "targets": {},
+      "hooks": {
+        "vqzkbjlv": 76,
+        "bL2LTByb": null
+      }
+    },
+    {
+      "sync": null,
+      "hooks": {
+        "rloequd": null
+      }
+    },
+    {
+      "dryRun": true,
+      "defaultReleaseType": "minor",
+      "targets": {},
+      "sync": false
+    },
+    {
+      "dryRun": false,
+      "defaultReleaseType": "minor",
+      "sync": null,
+      "hooks": {
+        "gqnujxwc": false,
+        "altduwv": 35.9
+      }
+    },
+    {
+      "$schema": "getfcnpnvnyldqapkpzi",
+      "defaultReleaseType": "major",
+      "hooks": {}
+    },
+    {
+      "$schema": "esqhszdzsgdaulabhnsw",
+      "defaultReleaseType": "minor",
+      "targets": {
+        "deno": false
+      },
+      "hooks": {
+        "C2cude4s7": true
+      }
+    },
+    {
+      "$schema": "lsezFBbz0zIE9ldqK",
+      "targets": {
+        "jsr": false
+      },
+      "sync": 86.79
+    },
+    {
+      "dryRun": true,
+      "defaultReleaseType": "minor",
+      "targets": {
+        "jsr": true,
+        "deno": false
+      },
+      "sync": "ipsum amet a",
+      "hooks": {}
+    },
+    {
+      "$schema": "TF054Q0YgQ5UrS",
+      "targets": {
+        "node": false,
+        "deno": false
+      },
+      "hooks": {}
+    },
+    {
+      "$schema": "dolor dolor i",
+      "dryRun": false,
+      "defaultReleaseType": "major",
+      "targets": {
+        "node": false,
+        "deno": false
+      },
+      "sync": null
+    },
+    {
+      "dryRun": true,
+      "defaultReleaseType": "major",
+      "targets": {
+        "deno": true
+      },
+      "hooks": {
+        "ezkido": "ne0R3KHgXRnuf"
+      }
+    },
+    {
+      "dryRun": false
+    },
+    {
+      "$schema": "oSEebgSSkDQM",
+      "dryRun": true,
+      "defaultReleaseType": "minor",
+      "targets": {
+        "jsr": false
+      },
+      "hooks": {
+        "dolor": "lorem amet a",
+        "dfyhyzn": 97.31
+      }
+    },
+    {
+      "$schema": "wkjkatyjfqkenaldej",
+      "dryRun": true,
+      "defaultReleaseType": "major",
+      "targets": {
+        "deno": false
+      },
+      "sync": "tTpEwTBr5WvPFc",
+      "hooks": {
+        "lorem": true,
+        "zuwxwkelq": 9
+      }
+    },
+    {
+      "$schema": "GDbjP0atSnQLnU2",
+      "dryRun": true,
+      "sync": true
+    },
+    {
+      "$schema": "hveegtamvfodmqvu",
+      "dryRun": true,
+      "targets": {
+        "jsr": false,
+        "deno": false
+      },
+      "sync": "7pvgQpcXwQLR79z"
+    },
+    {
+      "$schema": "dolor lorem ame",
+      "dryRun": true,
+      "defaultReleaseType": "minor",
+      "targets": {
+        "jsr": true
+      },
+      "hooks": {}
+    },
+    {
+      "defaultReleaseType": "major",
+      "targets": {
+        "deno": false
+      },
+      "hooks": {
+        "y3unODF": 19,
+        "QHamA": "adipis"
+      }
+    },
+    {
+      "$schema": "iyfuwjfjwnupopdrbmru",
+      "dryRun": true,
+      "targets": {
+        "node": true,
+        "jsr": true,
+        "deno": true
+      },
+      "sync": null,
+      "hooks": {
+        "2jqz1wIkpw": 77.77
+      }
+    },
+    {
+      "dryRun": false
+    },
+    {
+      "$schema": "vctqswx",
+      "defaultReleaseType": "minor",
+      "hooks": {
+        "fysyh": "OYuO87mvmKD",
+        "csr7vaKqK": 7
+      }
+    },
+    {
+      "$schema": "laVavCn",
+      "sync": "shZuj6Bmkao6GCG"
+    },
+    {
+      "$schema": "gibwifsioeqfpwbisbmk",
+      "dryRun": false,
+      "targets": {
+        "jsr": true
+      },
+      "sync": 100
+    },
+    {
+      "$schema": "Jt2",
+      "defaultReleaseType": "minor",
+      "targets": {
+        "node": true,
+        "jsr": true,
+        "deno": false
+      },
+      "sync": 16,
+      "hooks": {
+        "lorem ": "amet lor",
+        "amet ": 70
+      }
+    },
+    {
+      "$schema": "rklull",
+      "dryRun": true,
+      "targets": {
+        "node": true,
+        "jsr": true
+      },
+      "sync": false,
+      "hooks": {
+        "uwrlijjx": 90.72
+      }
+    },
+    {
+      "$schema": "XqX2VfGjZePucb2X1jM",
+      "defaultReleaseType": "patch"
+    },
+    {
+      "dryRun": false,
+      "targets": {
+        "node": false,
+        "jsr": true,
+        "deno": true
+      }
+    },
+    {
+      "$schema": "hwrj",
+      "dryRun": false,
+      "targets": {
+        "node": false,
+        "jsr": false,
+        "deno": true
+      },
+      "hooks": {
+        "gczmzwvlqb": 35
+      }
+    },
+    {
+      "dryRun": true,
+      "targets": {},
+      "hooks": {
+        "qchujekie": false,
+        "ccjqharnj": "3hi5Iany"
+      }
+    },
+    {
+      "$schema": "cibxeqczjdvvm",
+      "dryRun": false,
+      "defaultReleaseType": "patch",
+      "sync": null,
+      "hooks": {}
+    },
+    {
+      "$schema": "vbauathaqmci",
+      "defaultReleaseType": "minor",
+      "targets": {
+        "node": true,
+        "jsr": true,
+        "deno": true
+      },
+      "sync": 69,
+      "hooks": {
+        "lzgap": null,
+        "R5aQa1": true
+      }
+    },
+    {
+      "$schema": "dD",
+      "targets": {
+        "node": true,
+        "jsr": false,
+        "deno": true
+      }
+    },
+    {
+      "$schema": "oifTGRf",
+      "defaultReleaseType": "patch",
+      "sync": "fleocsrcibo",
+      "hooks": {
+        "sit ipsum": true
+      }
+    },
+    {
+      "$schema": "ekjncdtgrqffvzy",
+      "dryRun": false,
+      "defaultReleaseType": "minor",
+      "sync": false
+    },
+    {
+      "$schema": "ojbnpxm",
+      "defaultReleaseType": "minor",
+      "targets": {
+        "node": true,
+        "jsr": false,
+        "deno": false
+      },
+      "sync": false,
+      "hooks": {
+        "gZQP2yxA": false
+      }
+    },
+    {
+      "$schema": "IOlsAKSHU2lXBFfdlJ3Z",
+      "defaultReleaseType": "minor"
+    },
+    {
+      "dryRun": true
+    },
+    {
+      "targets": {
+        "node": true,
+        "deno": true
+      },
+      "sync": 11.81
+    },
+    {
+      "dryRun": true,
+      "targets": {
+        "jsr": true
+      },
+      "sync": 10.0,
+      "hooks": {}
+    },
+    {
+      "defaultReleaseType": "patch",
+      "sync": "adipis",
+      "hooks": {
+        "thmdhmb": "elatcetlop",
+        "o3EjlJI9": "pyvqjznfk"
+      }
+    },
+    {
+      "$schema": "sltylodharyvexfdngc",
+      "defaultReleaseType": "major",
+      "targets": {
+        "node": true,
+        "jsr": false
+      },
+      "sync": null,
+      "hooks": {
+        "bkzzyef": 77
+      }
+    },
+    {
+      "$schema": "khf",
+      "dryRun": true,
+      "defaultReleaseType": "patch",
+      "sync": 8.47,
+      "hooks": {
+        "O1n2L": 95
+      }
+    },
+    {
+      "$schema": "doEs4eoFAP4tT2t",
+      "dryRun": true,
+      "sync": 98.93
+    },
+    {
+      "dryRun": true,
+      "defaultReleaseType": "patch",
+      "targets": {
+        "node": true,
+        "jsr": false
+      },
+      "sync": null
+    },
+    {
+      "dryRun": false,
+      "defaultReleaseType": "minor",
+      "targets": {},
+      "sync": 67.04,
+      "hooks": {
+        "ipsum cons": "itgokwtcclfg"
+      }
+    },
+    {
+      "$schema": "sxteflkzsmjfpyelipg",
+      "dryRun": true,
+      "defaultReleaseType": "patch",
+      "sync": 8
+    },
+    {
+      "$schema": "sit ipsum",
+      "targets": {
+        "node": false,
+        "deno": false
+      },
+      "sync": false
+    },
+    {
+      "$schema": "7McG",
+      "dryRun": false,
+      "defaultReleaseType": "patch",
+      "hooks": {}
+    },
+    {
+      "dryRun": true,
+      "defaultReleaseType": "minor"
+    },
+    {
+      "dryRun": false,
+      "defaultReleaseType": "patch",
+      "targets": {
+        "node": false,
+        "deno": false
+      },
+      "hooks": {
+        "VtdIG": false
+      }
+    },
+    {
+      "$schema": "consec",
+      "sync": true,
+      "hooks": {
+        "sit amet": true
+      }
+    },
+    {
+      "dryRun": true,
+      "targets": {
+        "node": false
+      },
+      "sync": null,
+      "hooks": {
+        "rnafdw": false,
+        "xovji": null
+      }
+    },
+    {
+      "dryRun": false,
+      "defaultReleaseType": "minor",
+      "sync": 25.31
+    },
+    {
+      "$schema": "xtrmifw",
+      "defaultReleaseType": "major",
+      "hooks": {}
+    },
+    {
+      "$schema": "qeueieqbswwldmzxipd",
+      "dryRun": true,
+      "defaultReleaseType": "major",
+      "sync": 65.21,
+      "hooks": {}
+    },
+    {
+      "$schema": "xbjfzrzehsgksyuhubud",
+      "targets": {
+        "deno": true
+      },
+      "sync": "jwef8bmDWwM",
+      "hooks": {}
+    },
+    {
+      "$schema": "gvw",
+      "dryRun": false,
+      "defaultReleaseType": "major",
+      "targets": {
+        "node": false,
+        "deno": false
+      }
+    },
+    {
+      "dryRun": true,
+      "targets": {
+        "node": false,
+        "jsr": true,
+        "deno": false
+      },
+      "hooks": {
+        "ogtil1wsy": 58
+      }
+    },
+    {
+      "dryRun": false,
+      "defaultReleaseType": "major",
+      "targets": {
+        "deno": true
+      },
+      "sync": true
+    },
+    {
+      "$schema": "pk2oP4EUsimEczrE7Xe",
+      "defaultReleaseType": "major",
+      "targets": {
+        "node": false,
+        "jsr": false,
+        "deno": true
+      },
+      "sync": 63.95,
+      "hooks": {
+        "sstex": "SqZcXbQjS0W6",
+        "VyXF61gTu": 68.26
+      }
+    },
+    {
+      "$schema": "YbqmoP15xdsHZ6xXTwvD",
+      "dryRun": false,
+      "sync": 32
+    },
+    {
+      "dryRun": false,
+      "defaultReleaseType": "major",
+      "sync": null,
+      "hooks": {
+        "obchjxsle": false,
+        "tvQ0mJaI": 9
+      }
+    },
+    {
+      "$schema": "adipiscing adipis",
+      "dryRun": true,
+      "defaultReleaseType": "patch",
+      "targets": {
+        "jsr": true
+      },
+      "sync": null
+    },
+    {
+      "$schema": "rlljpfiyw",
+      "defaultReleaseType": "patch",
+      "hooks": {}
+    },
+    {
+      "$schema": "dolor dolor adipi",
+      "dryRun": true,
+      "targets": {}
+    },
+    {
+      "$schema": "ipsum lorem lo",
+      "targets": {
+        "node": false,
+        "jsr": false,
+        "deno": false
+      },
+      "sync": false,
+      "hooks": {
+        "consect": null,
+        "rwdbhjd": 95
+      }
+    },
+    {
+      "$schema": "MV2RU2cfr58nxAf1",
+      "targets": {
+        "jsr": true,
+        "deno": true
+      }
+    },
+    {
+      "$schema": "osqdrmz",
+      "dryRun": true,
+      "defaultReleaseType": "minor",
+      "sync": null
+    },
+    {
+      "defaultReleaseType": "minor",
+      "targets": {
+        "jsr": true,
+        "deno": true
+      },
+      "sync": "tK01Zrla96",
+      "hooks": {
+        "rctzcveuvo": 91
+      }
+    },
+    {
+      "$schema": "sit ipsum amet ip",
+      "dryRun": true,
+      "sync": 89.15
+    },
+    {
+      "$schema": "lEaz1tyZD9GuLP",
+      "defaultReleaseType": "minor",
+      "targets": {},
+      "hooks": {}
+    },
+    {
+      "$schema": "hnhevetufcvwwcr",
+      "dryRun": false,
+      "defaultReleaseType": "patch",
+      "hooks": {
+        "i9yGSGKZS": 100
+      }
+    },
+    {
+      "$schema": "36OUHG3Vv5jZ0qosEtal",
+      "defaultReleaseType": "major",
+      "sync": null
+    },
+    {
+      "dryRun": false,
+      "defaultReleaseType": "patch",
+      "targets": {
+        "jsr": true
+      },
+      "sync": false
+    },
+    {
+      "$schema": "D",
+      "dryRun": false,
+      "defaultReleaseType": "minor",
+      "sync": "sit amet si",
+      "hooks": {}
+    }
+  ]
+}

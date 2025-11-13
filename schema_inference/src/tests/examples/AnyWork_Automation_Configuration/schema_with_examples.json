@@ -1,0 +1,874 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://json.schemastore.org/anywork-ac-1.0.json",
+    "additionalProperties": true,
+    "allOf": [
+      {
+        "if": {
+          "properties": {
+            "ctype": {
+              "const": "swagger-codegen"
+            }
+          }
+        },
+        "then": {
+          "required": [
+            "swagger-codegen"
+          ],
+          "properties": {
+            "swagger-codegen": {
+              "title": "swagger codegen",
+              "type": "object",
+              "description": "swagger-codegen Configuration",
+              "additionalProperties": false,
+              "required": [
+                "schemas"
+              ],
+              "properties": {
+                "schemas": {
+                  "type": "array",
+                  "description": "List of schemas (microservices) to generate it's libraries.",
+                  "items": {
+                    "title": "schema",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "name",
+                      "actions"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "pattern": "[a-zA-Z]+",
+                        "description": "Name of schema. This will be used to generate codes, only `[a-zA-Z]+` is accepted.",
+                        "examples": [
+                          "authorization"
+                        ]
+                      },
+                      "disable": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "Disables all actions over this schema."
+                      },
+                      "actions": {
+                        "type": "array",
+                        "description": "Determines the actions should be applied over this schema.",
+                        "uniqueItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "title": "action",
+                              "type": "object",
+                              "additionalProperties": false,
+                              "description": "Defines a download schema task.",
+                              "required": [
+                                "type",
+                                "sourceUrl",
+                                "id"
+                              ],
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "const": "download",
+                                  "description": "Type of action to apply."
+                                },
+                                "sourceUrl": {
+                                  "type": "string",
+                                  "examples": [
+                                    "http://somewhere/path/to/swagger.json"
+                                  ],
+                                  "pattern": "http[s]?:\\/\\/.*\\/swagger\\.json",
+                                  "description": "Source of `swagger.json` schema to download"
+                                },
+                                "id": {
+                                  "type": "number",
+                                  "description": "A unique specific ID of this download to be referenced (`DOWNLOAD_ID`).",
+                                  "default": 0
+                                },
+                                "disable": {
+                                  "$ref": "#/definitions/disable"
+                                }
+                              }
+                            },
+                            {
+                              "title": "action",
+                              "type": "object",
+                              "additionalProperties": true,
+                              "description": "Defines a TS code generator task.",
+                              "required": [
+                                "type",
+                                "ngVersion",
+                                "id",
+                                "downloadId"
+                              ],
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "const": "generate",
+                                  "description": "Type of action to apply."
+                                },
+                                "ngVersion": {
+                                  "$ref": "#/definitions/version",
+                                  "description": "Specifies Angular version which codes will be generated for.",
+                                  "default": "12.2.14"
+                                },
+                                "id": {
+                                  "type": "number",
+                                  "description": "A unique specific ID of this generation to be referenced (`GENERATE_ID`).",
+                                  "default": 0
+                                },
+                                "downloadId": {
+                                  "type": "number",
+                                  "description": "The `DOWNLOAD_ID` of downloaded schema to generate codes based on.",
+                                  "default": 0
+                                },
+                                "disable": {
+                                  "$ref": "#/definitions/disable"
+                                }
+                              }
+                            },
+                            {
+                              "title": "action",
+                              "type": "object",
+                              "additionalProperties": false,
+                              "description": "Defines a code correction task.",
+                              "required": [
+                                "type",
+                                "generateId"
+                              ],
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "const": "correction",
+                                  "description": "Type of action to apply."
+                                },
+                                "generateId": {
+                                  "$ref": "#/definitions/generateId"
+                                },
+                                "disable": {
+                                  "$ref": "#/definitions/disable"
+                                }
+                              }
+                            },
+                            {
+                              "title": "action",
+                              "type": "object",
+                              "additionalProperties": false,
+                              "description": "Defines a TS code builder task.",
+                              "required": [
+                                "type",
+                                "typescriptVersion",
+                                "id",
+                                "generateId"
+                              ],
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "const": "build",
+                                  "description": "Type of action to apply."
+                                },
+                                "typescriptVersion": {
+                                  "$ref": "#/definitions/version",
+                                  "description": "Specifies TypeScript version to install before build.",
+                                  "default": "4.3.5"
+                                },
+                                "id": {
+                                  "type": "number",
+                                  "description": "A unique specific ID of this build to be referenced (`BUILD_ID`)."
+                                },
+                                "generateId": {
+                                  "$ref": "#/definitions/generateId"
+                                },
+                                "disable": {
+                                  "$ref": "#/definitions/disable"
+                                }
+                              }
+                            },
+                            {
+                              "title": "action",
+                              "type": "object",
+                              "additionalProperties": false,
+                              "description": "Defines a `npm publish` task.",
+                              "required": [
+                                "type",
+                                "registryUrl",
+                                "token",
+                                "id"
+                              ],
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "const": "publish",
+                                  "description": "Type of action to apply."
+                                },
+                                "registryUrl": {
+                                  "type": "string",
+                                  "description": "The Url of registry accepting this repository.",
+                                  "pattern": "http[s]?://.*",
+                                  "default": "http://verdaccio.anywork.local:4873"
+                                },
+                                "token": {
+                                  "type": "string",
+                                  "description": "Token to use access registry.",
+                                  "default": "bzKaK7hK2OAoCK9d72S0UevXGZEjj8rZpv8AFoaZ+/w=",
+                                  "examples": [
+                                    "bzKaK7hK2OAoCK9d72S0UevXGZEjj8rZpv8AFoaZ+/w="
+                                  ]
+                                },
+                                "buildId": {
+                                  "$ref": "#/definitions/buildId"
+                                },
+                                "id": {
+                                  "type": "number",
+                                  "description": "A unique specific ID of this publish to be referenced (`PUBLISH_ID`).",
+                                  "default": 0
+                                },
+                                "disable": {
+                                  "$ref": "#/definitions/disable"
+                                }
+                              }
+                            },
+                            {
+                              "title": "action",
+                              "type": "object",
+                              "additionalProperties": false,
+                              "description": "Defines a Api install task.",
+                              "required": [
+                                "type",
+                                "targetPath",
+                                "publishId"
+                              ],
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "const": "install",
+                                  "description": "Type of action to apply."
+                                },
+                                "publishId": {
+                                  "type": "number",
+                                  "description": "The `PUBLISH_ID` to use for this task.",
+                                  "default": 0
+                                },
+                                "targetPath": {
+                                  "type": "string",
+                                  "description": "The relative or absolute physical path of directory containing `packages.json` to install specified"
+                                },
+                                "disable": {
+                                  "$ref": "#/definitions/disable"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "definitions": {
+      "version": {
+        "pattern": "^[\\^~]?(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+      },
+      "buildId": {
+        "type": "number",
+        "description": "The `BUILD_ID` to use for this task.",
+        "default": 0
+      },
+      "generateId": {
+        "type": "number",
+        "description": "The `GENERATE_ID` to use for this task.",
+        "default": 0
+      },
+      "disable": {
+        "type": "boolean",
+        "description": "Determines if this task is disabled.",
+        "default": true
+      }
+    },
+    "description": "Used to configure any part of AnyWork automation.",
+    "properties": {
+      "ctype": {
+        "type": "string",
+        "description": "type of configuration, means who will use this configuration."
+      },
+      "cversion": {
+        "type": "integer",
+        "default": 1,
+        "description": "Version of configuration. The reader will parse configuration based on this."
+      }
+    },
+    "required": [
+      "ctype",
+      "cversion"
+    ],
+    "title": "AnyWork Automation Configuration schema",
+    "type": "object"
+  },
+  "examples": [
+    {
+      "ctype": "consectetur ipsum lor",
+      "cversion": 116
+    },
+    {
+      "ctype": "co",
+      "cversion": 964,
+      "ulmaljw": null,
+      "dghjjZhx": null,
+      "xdd60s3": null
+    },
+    {
+      "ctype": "RhxrnJgWQsNKVP",
+      "cversion": -267
+    },
+    {
+      "ctype": "psbEhY71O",
+      "cversion": 841
+    },
+    {
+      "ctype": "K1o",
+      "cversion": 56,
+      "XbWNdbIsu": 50
+    },
+    {
+      "ctype": "sit sit ipsu",
+      "cversion": -209,
+      "dolor lor": 0,
+      "usavilg": null,
+      "pISvvJm": 16
+    },
+    {
+      "ctype": "IHXFSBjYOEnVIFDbAi",
+      "cversion": 376,
+      "sit ad": "hqyohd"
+    },
+    {
+      "ctype": "5uI",
+      "cversion": 654
+    },
+    {
+      "ctype": "jxstiofoyjcjfbwz",
+      "cversion": 829,
+      "adipiscing": "aiulzflxpdqndrx",
+      "qzmxv": 49.94,
+      "1Vjw4QDXO": null
+    },
+    {
+      "ctype": "ogzvgwom",
+      "cversion": 425,
+      "khsacoary": "sit consectetu",
+      "consectetu": true
+    },
+    {
+      "ctype": "consectet",
+      "cversion": 928,
+      "lorem ad": true,
+      "aHBojDM": false
+    },
+    {
+      "ctype": "fnmsjlayxzidwbbffdjt",
+      "cversion": 744,
+      "zbhcrklgu": 57,
+      "giyfdarvbm": false
+    },
+    {
+      "ctype": "s3Enu",
+      "cversion": 497,
+      "bzopon": false,
+      "adipiscin": "cPwaTk42x6bm",
+      "8oNaEovy": false
+    },
+    {
+      "ctype": "fzh",
+      "cversion": -837,
+      "adipisc": false
+    },
+    {
+      "ctype": "amet dolor sit adi",
+      "cversion": 448,
+      "eN9mV": 5.44
+    },
+    {
+      "ctype": "Ln",
+      "cversion": -343,
+      "lvjwexj": true,
+      "pmgqddjzvy": null,
+      "wGn81y": 41.52
+    },
+    {
+      "ctype": "consectetur adipisc",
+      "cversion": -170,
+      "glphpaf": 57,
+      "rbuuhehep": 76.12
+    },
+    {
+      "ctype": "amet sit",
+      "cversion": -722,
+      "amet adipi": false,
+      "irzxxc": 40
+    },
+    {
+      "ctype": "ipsum ipsu",
+      "cversion": 813,
+      "wrekg": 52,
+      "dolor amet": null
+    },
+    {
+      "ctype": "ipsum adipiscing",
+      "cversion": -944,
+      "zukN3QN": "iTss8",
+      "txYMWMA": 13.05,
+      "DHfta": 10.79
+    },
+    {
+      "ctype": "adipiscing ipsum si",
+      "cversion": -272,
+      "lorem ips": 86.5
+    },
+    {
+      "ctype": "5pOxeOsZtUdP6ho",
+      "cversion": 226
+    },
+    {
+      "ctype": "amet sit amet ip",
+      "cversion": -450,
+      "qdwlscrabc": 75
+    },
+    {
+      "ctype": "sit ipsum sit",
+      "cversion": -93,
+      "n2CmDRpjTi": 17,
+      "Jwo5NyDRVW": "thelgwave"
+    },
+    {
+      "ctype": "5Ws",
+      "cversion": 764
+    },
+    {
+      "ctype": "dol",
+      "cversion": -43,
+      "lqxfbea": true,
+      "mgtpk": null,
+      "zznsltgrrv": "Ya1vbL2"
+    },
+    {
+      "ctype": "txcplgwizjouubt",
+      "cversion": -783,
+      "amet ": 0.48,
+      "xhQIb9jJ": 78.31
+    },
+    {
+      "ctype": "ip",
+      "cversion": 239,
+      "wuomlln": null,
+      "dzbhfzfxy": null
+    },
+    {
+      "ctype": "sit",
+      "cversion": -721,
+      "amet ": false,
+      "etrWBf": 62
+    },
+    {
+      "ctype": "XqjUmfFKFYG",
+      "cversion": 906,
+      "kvbOlj": false,
+      "rgdgt": null,
+      "lorem d": true
+    },
+    {
+      "ctype": "tes",
+      "cversion": 269,
+      "rpzsijq": 45.53,
+      "Vftbz": "n0NvEl64J"
+    },
+    {
+      "ctype": "sit ipsum",
+      "cversion": -391
+    },
+    {
+      "ctype": "hht25vBC5BtFaFhYB7Aq",
+      "cversion": 359,
+      "mPjdn": "amet ",
+      "JSjkk": false,
+      "gl5BEDlt": 36
+    },
+    {
+      "ctype": "CTF054Q0YgQ5UrS",
+      "cversion": 360,
+      "gazomrdwh": null,
+      "azsbhf": 52
+    },
+    {
+      "ctype": "y4d0rUBousuH",
+      "cversion": -985,
+      "ujgoarxdg": 94,
+      "amet adipi": 2,
+      "xmzpwl": true
+    },
+    {
+      "ctype": "oYhDILjNF",
+      "cversion": 743,
+      "muezk": "sit ipsum ",
+      "lorem ": null
+    },
+    {
+      "ctype": "adipisc",
+      "cversion": -473,
+      "xkrxm": null,
+      "gelzk": 17.47,
+      "mgisK2p": 62.53
+    },
+    {
+      "ctype": "KoSEe",
+      "cversion": -940,
+      "mikvj": 48
+    },
+    {
+      "ctype": "31AwybV7x",
+      "cversion": -550
+    },
+    {
+      "ctype": "inmadrvaisfrpftwo",
+      "cversion": -632,
+      "3oZpBI": false,
+      "1KSgdAt": "fceesjz"
+    },
+    {
+      "ctype": "zhvee",
+      "cversion": -467,
+      "Kgt0h": 80
+    },
+    {
+      "ctype": "ldayfeczkjofusyv",
+      "cversion": 977,
+      "atjoe": "6Kto4SMI5hwY"
+    },
+    {
+      "ctype": "aazifmotpo",
+      "cversion": 548,
+      "3SLh6cYjE": "ipsum adipisc",
+      "lorem cons": true
+    },
+    {
+      "ctype": "viyfuwj",
+      "cversion": -545,
+      "nupopdrbm": false,
+      "adipiscing": 44,
+      "sit si": null
+    },
+    {
+      "ctype": "9",
+      "cversion": 521
+    },
+    {
+      "ctype": "wvctq",
+      "cversion": 444,
+      "xakcmqstfy": null,
+      "RzS4A": true
+    },
+    {
+      "ctype": "ieataimfyrpli",
+      "cversion": -108,
+      "sit adi": 19
+    },
+    {
+      "ctype": "sgi",
+      "cversion": -868,
+      "nRuJkMnK": 71
+    },
+    {
+      "ctype": "moixuoz",
+      "cversion": -372,
+      "lorem co": 86,
+      "wjvduerany": 12.38
+    },
+    {
+      "ctype": "7Qy",
+      "cversion": -61,
+      "pl0XnXxf": 87,
+      "qkuvjzqt": null,
+      "ipsum am": null
+    },
+    {
+      "ctype": "IXqX2VfGjZePuc",
+      "cversion": -947,
+      "amet cons": true
+    },
+    {
+      "ctype": "swcdkupqxrvkdbyf",
+      "cversion": -545,
+      "Kv3Ddd": null,
+      "ctvfu": null,
+      "sit adip": 63
+    },
+    {
+      "ctype": "consectetur dolor ",
+      "cversion": -241,
+      "qHAUw5vn": 52,
+      "vgczmzwv": false
+    },
+    {
+      "ctype": "9H6hEiafrmJGmOwUxj",
+      "cversion": -622,
+      "ppnetrw": false,
+      "amet ": "fpjxucaxr",
+      "ZOkQRM": true
+    },
+    {
+      "ctype": "P5fvc2kNf9wi",
+      "cversion": 654
+    },
+    {
+      "ctype": "94YdbVb",
+      "cversion": 521,
+      "amet si": 40,
+      "etneco": 6.54
+    },
+    {
+      "ctype": "cz8rYIW4yOYV",
+      "cversion": -992
+    },
+    {
+      "ctype": "LoifTGRfMmSKX",
+      "cversion": 614,
+      "fleocsrc": "sit dolor d",
+      "sit ipsum": true
+    },
+    {
+      "ctype": "7kyvF",
+      "cversion": -775
+    },
+    {
+      "ctype": "xojbnpxmuilgelneugu",
+      "cversion": -136,
+      "sgZQP": "fbtkwfcujjg"
+    },
+    {
+      "ctype": "joreh",
+      "cversion": -122
+    },
+    {
+      "ctype": "svrxtrlirmdpzbz",
+      "cversion": 416,
+      "lzTSzWJZp": "6MDprn92"
+    },
+    {
+      "ctype": "t",
+      "cversion": -534,
+      "lorem c": 10.49,
+      "amet d": 25,
+      "adipiscin": 62.83
+    },
+    {
+      "ctype": "X6tVukvUjOvkAxC25o9",
+      "cversion": 253,
+      "bivyjsrev": false,
+      "K7X5Rhzsq": 92.12
+    },
+    {
+      "ctype": "adipiscing conse",
+      "cversion": 647
+    },
+    {
+      "ctype": "tsltylod",
+      "cversion": -395
+    },
+    {
+      "ctype": "crsjz",
+      "cversion": -387,
+      "consec": 8.47
+    },
+    {
+      "ctype": "sit lorem",
+      "cversion": -534,
+      "GWBr0k3": null,
+      "GMaumLlzP": true,
+      "lQb2Nh0q": 78.4
+    },
+    {
+      "ctype": "pksqrontdncla",
+      "cversion": 827,
+      "ghjckowhx": 19.43,
+      "knfupsmW": "ipsum l",
+      "nFtT6wty": null
+    },
+    {
+      "ctype": "ifkvqso",
+      "cversion": -625,
+      "sjusumar": 88.96,
+      "1VggCno6": 89,
+      "FP6sE": true
+    },
+    {
+      "ctype": "phmkrjnapglgftrr",
+      "cversion": 528,
+      "LpePtO4K4": 8,
+      "sit ad": "vxhlnqcqgsplgst",
+      "qpocmmn": 26.32
+    },
+    {
+      "ctype": "v",
+      "cversion": -438
+    },
+    {
+      "ctype": "u7McGGGK",
+      "cversion": 100,
+      "vcukpyn": "txqgyvwihzycc",
+      "OvVWlv": null
+    },
+    {
+      "ctype": "lorem lore",
+      "cversion": 757,
+      "hiboehvemx": 16.51,
+      "1WWNXA": 52.51
+    },
+    {
+      "ctype": "sUhi77q2A5ed7GE7Ygzk",
+      "cversion": 105,
+      "eCmzqR": "consectetur",
+      "ioqakhjkyt": "jcxbi"
+    },
+    {
+      "ctype": "ipsum co",
+      "cversion": 143,
+      "sit sit do": 16,
+      "kxAaRNK": 48.34,
+      "yovKeMc2x": "I4R6ar3Kuq"
+    },
+    {
+      "ctype": "lorem dolor consectet",
+      "cversion": 244,
+      "iudpsvxov": false,
+      "xovji": null,
+      "BpZO8DCe": 91.47
+    },
+    {
+      "ctype": "consectetu",
+      "cversion": 133,
+      "dolor": 25.31,
+      "amet do": "brfmvnsyxbf",
+      "H6Lldkgl": 83.9
+    },
+    {
+      "ctype": "adipiscing adipis",
+      "cversion": -53
+    },
+    {
+      "ctype": "adi",
+      "cversion": 281,
+      "eieqbswwl": 2.44
+    },
+    {
+      "ctype": "adipiscing adipis",
+      "cversion": -550,
+      "pclzojqdiu": true,
+      "dqqnxxjy": 69,
+      "8QxC8La": false
+    },
+    {
+      "ctype": "co",
+      "cversion": -455
+    },
+    {
+      "ctype": "k7zWbk8Yb",
+      "cversion": -30,
+      "lorem": 38.78,
+      "syg3FP9gJD": 77,
+      "consecte": 94.81
+    },
+    {
+      "ctype": "consecte",
+      "cversion": 509,
+      "dolor a": 90
+    },
+    {
+      "ctype": "amet ipsum ipsum ad",
+      "cversion": -532,
+      "amet lorem": null
+    },
+    {
+      "ctype": "pv",
+      "cversion": -952
+    },
+    {
+      "ctype": "wD9tHNJ3",
+      "cversion": -385
+    },
+    {
+      "ctype": "nbxskfwgsdrhgymplyg",
+      "cversion": 562,
+      "cykgecmbqi": 31.32,
+      "wcndxelqt": "jxijrnjrt"
+    },
+    {
+      "ctype": "WOBCwKnv62SI69Ybb",
+      "cversion": 541,
+      "consec": "zkroonvxydwd",
+      "uvkhuw": 46
+    },
+    {
+      "ctype": "FybWhJ7SnQQ",
+      "cversion": 978,
+      "yosxsufl": 1,
+      "mlcdbcujuz": null,
+      "ipsum ad": false
+    },
+    {
+      "ctype": "lorem ipsum lo",
+      "cversion": -750
+    },
+    {
+      "ctype": "tMV2RU2cfr58nxAf",
+      "cversion": 759,
+      "kyoeb": 62.15
+    },
+    {
+      "ctype": "SISNhOE7n7L97gT7",
+      "cversion": 569,
+      "trgwxjs": "994ySMrsu5enRR8",
+      "dolor ": "gsrukejucyu"
+    },
+    {
+      "ctype": "pmvdhpdqjvhv",
+      "cversion": 911,
+      "ipsum l": null,
+      "conse": "consec"
+    },
+    {
+      "ctype": "dEmRkEkdLm3LrwERbZS",
+      "cversion": 116
+    },
+    {
+      "ctype": "dol",
+      "cversion": -606,
+      "Y3F70GiA": null
+    },
+    {
+      "ctype": "6sGqlYk",
+      "cversion": 530,
+      "mxodf": "ywbyp"
+    },
+    {
+      "ctype": "q",
+      "cversion": 244,
+      "axihptpuxv": null,
+      "dnnyijt": null
+    },
+    {
+      "ctype": "lore",
+      "cversion": 498
+    },
+    {
+      "ctype": "pmomyqazignqmoeio",
+      "cversion": 246,
+      "qqk0XUPI": null,
+      "bbbJIL4zlD": true
+    }
+  ]
+}

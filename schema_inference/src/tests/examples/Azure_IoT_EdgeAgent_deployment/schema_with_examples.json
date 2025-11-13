@@ -1,0 +1,6221 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "definitions": {
+      "moduleType": {
+        "enum": [
+          "docker"
+        ]
+      },
+      "status": {
+        "enum": [
+          "running",
+          "stopped"
+        ]
+      },
+      "restartPolicy": {
+        "enum": [
+          "never",
+          "on-failure",
+          "on-unhealthy",
+          "always"
+        ]
+      },
+      "imagePullPolicy": {
+        "enum": [
+          "never",
+          "on-create"
+        ]
+      },
+      "startupOrder": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 4294967295
+      },
+      "moduleSettings": {
+        "type": "object",
+        "required": [
+          "image"
+        ],
+        "properties": {
+          "image": {
+            "type": "string",
+            "examples": [
+              "mcr.microsoft.com/azureiotedge-agent:1.0"
+            ]
+          }
+        },
+        "patternProperties": {
+          "^(createoptions|createOptions)[0-9]*$": {
+            "$ref": "#/definitions/createOptions"
+          }
+        },
+        "additionalProperties": false
+      },
+      "env": {
+        "type": "object",
+        "patternProperties": {
+          "^[^\\+#$\\s\\.]+$": {
+            "type": "object",
+            "required": [
+              "value"
+            ],
+            "properties": {
+              "value": {
+                "type": [
+                  "number",
+                  "string",
+                  "boolean"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "createOptions": {
+        "type": "string",
+        "contentMediaType": "application/json"
+      }
+    },
+    "id": "https://json.schemastore.org/azure-iot-edgeagent-deployment-1.1.json",
+    "properties": {
+      "$edgeAgent": {
+        "type": "object",
+        "title": "Configuration for the edgeAgent module",
+        "required": [
+          "properties.desired"
+        ],
+        "properties": {
+          "properties.desired": {
+            "type": "object",
+            "required": [
+              "schemaVersion",
+              "runtime",
+              "systemModules",
+              "modules"
+            ],
+            "properties": {
+              "schemaVersion": {
+                "type": "string",
+                "pattern": "1.1"
+              },
+              "runtime": {
+                "type": "object",
+                "required": [
+                  "type",
+                  "settings"
+                ],
+                "properties": {
+                  "type": {
+                    "$ref": "#/definitions/moduleType"
+                  },
+                  "settings": {
+                    "type": "object",
+                    "properties": {
+                      "minDockerVersion": {
+                        "type": "string",
+                        "examples": [
+                          "v1.25"
+                        ]
+                      },
+                      "loggingOptions": {
+                        "type": "string"
+                      },
+                      "registryCredentials": {
+                        "type": "object",
+                        "patternProperties": {
+                          "^[^\\.\\$# ]+$": {
+                            "type": "object",
+                            "required": [
+                              "username",
+                              "password",
+                              "address"
+                            ],
+                            "properties": {
+                              "username": {
+                                "type": "string"
+                              },
+                              "password": {
+                                "type": "string"
+                              },
+                              "address": {
+                                "type": "string",
+                                "pattern": "^[^\\s]+$"
+                              }
+                            },
+                            "additionalProperties": false
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "additionalProperties": false
+              },
+              "systemModules": {
+                "type": "object",
+                "required": [
+                  "edgeAgent",
+                  "edgeHub"
+                ],
+                "properties": {
+                  "edgeAgent": {
+                    "type": "object",
+                    "required": [
+                      "type",
+                      "settings"
+                    ],
+                    "properties": {
+                      "type": {
+                        "$ref": "#/definitions/moduleType"
+                      },
+                      "settings": {
+                        "$ref": "#/definitions/moduleSettings"
+                      },
+                      "env": {
+                        "$ref": "#/definitions/env"
+                      },
+                      "imagePullPolicy": {
+                        "$ref": "#/definitions/imagePullPolicy"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "edgeHub": {
+                    "type": "object",
+                    "title": "The Edgehub Schema",
+                    "required": [
+                      "type",
+                      "settings",
+                      "status",
+                      "restartPolicy"
+                    ],
+                    "properties": {
+                      "type": {
+                        "$ref": "#/definitions/moduleType"
+                      },
+                      "settings": {
+                        "$ref": "#/definitions/moduleSettings"
+                      },
+                      "env": {
+                        "$ref": "#/definitions/env"
+                      },
+                      "status": {
+                        "$ref": "#/definitions/status"
+                      },
+                      "restartPolicy": {
+                        "$ref": "#/definitions/restartPolicy"
+                      },
+                      "imagePullPolicy": {
+                        "$ref": "#/definitions/imagePullPolicy"
+                      },
+                      "startupOrder": {
+                        "$ref": "#/definitions/startupOrder"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "additionalProperties": false
+              },
+              "modules": {
+                "type": "object",
+                "patternProperties": {
+                  "^[a-zA-Z0-9_-]+$": {
+                    "type": "object",
+                    "required": [
+                      "type",
+                      "status",
+                      "restartPolicy",
+                      "settings"
+                    ],
+                    "properties": {
+                      "version": {
+                        "type": "string",
+                        "examples": [
+                          "1.0"
+                        ]
+                      },
+                      "type": {
+                        "$ref": "#/definitions/moduleType"
+                      },
+                      "status": {
+                        "$ref": "#/definitions/status"
+                      },
+                      "restartPolicy": {
+                        "$ref": "#/definitions/restartPolicy"
+                      },
+                      "env": {
+                        "$ref": "#/definitions/env"
+                      },
+                      "settings": {
+                        "$ref": "#/definitions/moduleSettings"
+                      },
+                      "imagePullPolicy": {
+                        "$ref": "#/definitions/imagePullPolicy"
+                      },
+                      "startupOrder": {
+                        "$ref": "#/definitions/startupOrder"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "$edgeAgent"
+    ],
+    "title": "JSON schema for Azure IoT EdgeAgent Deployment version 1.1",
+    "type": "object"
+  },
+  "examples": [
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "consectetur ips",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "bnFbmOHnKYaXRvj7uff"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "conse",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "EbAx",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "RhxrnJgWQsN",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "vrjFKqt6Yrv",
+              "loggingOptions": "eggbrvlastqivqpo",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "psbEhY71O",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "tfwsbksxe",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "K1oFK6",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "qba",
+              "loggingOptions": "85f8DjCeUH",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "sit sit ip",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "dolor lorem lorem ip",
+              "loggingOptions": "consectetur dolor ",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "IHXFSBjYOEnVI",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "lorem lorem sit ",
+              "loggingOptions": "dolor dolor consec"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "5uIYQV",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "qnwpokgdljugkyq"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "jxstiofoyjcj",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "ipp"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "ogzvgwom",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "w9z80bqDYlM",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "consectet",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "adipi",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "fnmsjlayxzidwb",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "oiFOtO8d",
+              "loggingOptions": "okz"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "s3EnuT2",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "adipisc",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "fzhcec",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {}
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "amet dolor si",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "LntD9",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "consectetur s",
+              "loggingOptions": "srov"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "consectetur ad",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "r27Xz2gEDeIxw",
+              "loggingOptions": "lskLp"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "amet sit",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "ravjuntsir"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "ipsum ips",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "bxcwebqxksd"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "ipsum adipis",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "zukN3QNuAiTs",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "adipiscing ips",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "lorem ipsum amet ",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "5pOxeOsZtUdP",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "amet adi"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "amet sit ame",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "uufvqdwls",
+              "loggingOptions": "e",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "sit ipsum s",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "lfxmfmsgetd",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "5Ws8Wf",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "dolor ",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "M5mckcBhfty2aO4Tjjwa"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "txcplgwizjou",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "dolor lorem amet",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "consectetur lor",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "sit lo",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "amet consectetur ips"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "XqjUmfFKFY",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "jejaqedxlyzrgdg",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "tesqhs",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "ipsum lorem",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "sit ipsum",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "Gmg",
+              "loggingOptions": "I",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "hht25vBC5BtFaF",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "7Aq92a81",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "CTF054Q0YgQ5",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "mkjoryffdmpv",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "y4d0rUBous",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "amet amet amet adi",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "oYhDILjNF",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "consectetur sit ",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "adipisci",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "rxkrxmzaxsjiqs",
+              "loggingOptions": "mgisK2p5kFU3"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "KoSEebg",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "31AwybV7x",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "ipsum adipiscing sit",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "inmadrvaisfrp",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "oewsexuqls",
+              "loggingOptions": "v1KSgdAtqY5ngl",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "zhveegt",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "gt0hfuvEElawsHIS",
+              "loggingOptions": "dolor adipisc",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "ldayfeczkjof",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {}
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "aazifmotp",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "y3unODFcc",
+              "loggingOptions": "amAsghTHCb"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "viyfuwjf",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "amet amet sit sit",
+              "loggingOptions": "sit amet consectet",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "9UVRT",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "adipiscing lo",
+              "loggingOptions": "fjuwkxmczdvjljfsbki"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "wvctqsw",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "ieataimfyrp",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "demwbxgwfxz"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "sgibwi",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "adipiscing ",
+              "loggingOptions": "bisbmkhidaznsda"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "moixuozh",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "consectetur "
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "7QyCWB",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "amet dolo",
+              "loggingOptions": "fZXQRNx"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "IXqX2VfGjZe",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "qq",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "swcdkupqxrvk",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "qty",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "consectetur d",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "Z7baB7CXPc",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "9H6hEiafrmJGm",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "lyvlypOggwNsb"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "P5fvc2kNf9",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "aJ8Dt",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "94YdbVbU",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "s"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "cz8rYIW4yO",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "LoifTGRfMmS",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "wfleocsrcibo",
+              "loggingOptions": "nmxpzjfxeupz"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "7kyvFgh",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "iitfeejqzfyoxveqdakuo",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "xojbnpxmuilgel",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "uNzmAsg"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "jorehlp",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "eulncbeoxvsnmkmbp"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "svrxtrlirmdp",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "phtw",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "tfisu",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "ipsum ",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "X6tVukvUjOvkAx",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "eixzxbiv",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "adipiscing c",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "tsltylod",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "xh",
+              "loggingOptions": "fdngcy",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "crsjzhe",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "adip"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "sit lorem",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "onulhvexwonbeusq",
+              "loggingOptions": "wrlldb"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "pksqrontdnc",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "A",
+              "loggingOptions": "dolor si"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "ifkvqsoe",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "jusumarrxlbln",
+              "loggingOptions": "no66bbM63QT",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "phmkrjnapglg",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "rtnkkabfkuczvaygoyxg"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "vhmjl",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "LEr",
+              "loggingOptions": "dolor dolor c",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "u7McGGGK",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "g83CgU8sw1U4",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "lorem lor",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {}
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "sUhi77q2A5ed7G",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "ckeodonqoozvwbuarr",
+              "loggingOptions": "csifmeuvtrjcxbiwbyd",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "ipsum co",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "yilr",
+              "loggingOptions": "kxAaRNKN4DI6"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "lorem dolor con",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "consectet",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "adipiscing ame",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "adipiscing ad",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "fgitysidhfn",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "adipis",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "dolor ipsum amet "
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "adipiscing ad",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "ZTKgB8Ix",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "conse",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "k7zWbk8Yb",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "ipsum dolor ip",
+              "loggingOptions": "syg3FP9gJDVLBiHX6CFXB",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "consecte",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "NeNDPzgpj3154dRN0bKS"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "amet ipsum ips",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "mthdf",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "pvagf",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "dsHZ6xXTwv",
+              "loggingOptions": "sjjhng",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "wD9tHNJ3",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "cons",
+              "loggingOptions": "ky40utvQ0mJaIeJqVxTJv"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "nbxskfwgsdrhgy",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "dccgscykgecmbqidmqwc",
+              "loggingOptions": "conse",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "WOBCwKnv62SI6",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "FybWhJ7SnQ",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {}
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "lorem ipsum",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "adipiscing ipsum c",
+              "loggingOptions": "amet adipisci"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "tMV2RU2cfr58",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "jrjaVuO4sJhhR",
+              "loggingOptions": "adipiscing ",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "SISNhOE7n7L9",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "tuhbpqqrssjywgjzz"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "NrsRCaZxqvtK01Z",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "ipsum s",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "dEmRkEkdLm3Lrw",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "c",
+              "loggingOptions": "b"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "dolor ",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "x",
+              "loggingOptions": "ndlnaazdxeuwy"
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "6sGqlYkU",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "mxo",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "qpwwh",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "jxdvwhfhmia",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "lorem ",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "loggingOptions": "amet consectetur "
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    },
+    {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "pmomyqazignqm",
+          "runtime": {
+            "type": {
+              "_ref": "#/definitions/moduleType",
+              "_placeholder": true
+            },
+            "settings": {
+              "minDockerVersion": "jftgog",
+              "loggingOptions": "nwcLE6",
+              "registryCredentials": {}
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              }
+            },
+            "edgeHub": {
+              "type": {
+                "_ref": "#/definitions/moduleType",
+                "_placeholder": true
+              },
+              "settings": {
+                "_ref": "#/definitions/moduleSettings",
+                "_placeholder": true
+              },
+              "status": {
+                "_ref": "#/definitions/status",
+                "_placeholder": true
+              },
+              "restartPolicy": {
+                "_ref": "#/definitions/restartPolicy",
+                "_placeholder": true
+              },
+              "env": {
+                "_ref": "#/definitions/env",
+                "_placeholder": true
+              },
+              "imagePullPolicy": {
+                "_ref": "#/definitions/imagePullPolicy",
+                "_placeholder": true
+              },
+              "startupOrder": {
+                "_ref": "#/definitions/startupOrder",
+                "_placeholder": true
+              }
+            }
+          },
+          "modules": {}
+        }
+      }
+    }
+  ]
+}

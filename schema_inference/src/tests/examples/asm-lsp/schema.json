@@ -1,0 +1,165 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RootConfig",
+  "type": "object",
+  "properties": {
+    "default_config": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/Config"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "project": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ProjectConfig"
+      }
+    }
+  },
+  "definitions": {
+    "Arch": {
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [
+            "x86",
+            "x86-64",
+            "arm",
+            "arm64",
+            "riscv",
+            "z80",
+            "6502",
+            "power-isa",
+            "AVR",
+            "mips"
+          ]
+        },
+        {
+          "description": "enables both `Arch::X86` and `Arch::X86_64`",
+          "type": "string",
+          "enum": [
+            "x86/x86-64"
+          ]
+        }
+      ]
+    },
+    "Assembler": {
+      "type": "string",
+      "enum": [
+        "avr",
+        "ca65",
+        "fasm",
+        "gas",
+        "go",
+        "mars",
+        "masm",
+        "nasm"
+      ]
+    },
+    "Config": {
+      "type": "object",
+      "required": [
+        "assembler",
+        "instruction_set"
+      ],
+      "properties": {
+        "assembler": {
+          "$ref": "#/definitions/Assembler"
+        },
+        "instruction_set": {
+          "$ref": "#/definitions/Arch"
+        },
+        "opts": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ConfigOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "ConfigOptions": {
+      "type": "object",
+      "properties": {
+        "compile_flags_txt": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "compiler": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "default_diagnostics": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "diagnostics": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    },
+    "ProjectConfig": {
+      "type": "object",
+      "required": [
+        "assembler",
+        "instruction_set",
+        "path"
+      ],
+      "properties": {
+        "assembler": {
+          "$ref": "#/definitions/Assembler"
+        },
+        "instruction_set": {
+          "$ref": "#/definitions/Arch"
+        },
+        "opts": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ConfigOptions"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "path": {
+          "type": "string"
+        },
+        "version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

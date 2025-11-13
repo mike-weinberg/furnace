@@ -1,0 +1,5479 @@
+{
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Config",
+    "description": "A configuration item which may be stored in various places, eg as `bacon.toml`\nalong a `Cargo.toml` file or as `prefs.toml` in the xdg config directory.\n\nLeaf values are options (and not Default) so that they don't\noverride previously set values when applied to settings.",
+    "type": "object",
+    "properties": {
+      "additional_alias_args": {
+        "description": "Extra arguments appended when a job runs a cargo alias.",
+        "type": [
+          "array",
+          "null"
+        ],
+        "items": {
+          "type": "string"
+        }
+      },
+      "allow_failures": {
+        "description": "Whether to consider that we can have a success\nwhen we have test failures",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "allow_warnings": {
+        "description": "Whether to consider that we can have a success\nwhen we have warnings. This is especially useful\nfor \"cargo run\" jobs",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "analyzer": {
+        "description": "The analyzer interpreting the output of the command, the\nstandard cargo dedicated one if not provided",
+        "anyOf": [
+          {
+            "$ref": "#/$defs/AnalyzerRef"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "apply_gitignore": {
+        "description": "Whether gitignore rules must be applied",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "background": {
+        "description": "Whether to wait for the computation to finish before\nto display it on screen\n\nThis is true by default. Set it to false if you want\nthe previous computation result to be replaced with\nthe new one as soon as it starts.",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "command": {
+        "description": "The tokens making the command to execute (first one\nis the executable).",
+        "type": "array",
+        "default": [],
+        "items": {
+          "type": "string"
+        }
+      },
+      "default_job": {
+        "description": "Name of the job to run when no job was requested explicitly.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "default_watch": {
+        "description": "Whether to apply the default watch list, which is\n`[\"src\", \"tests\", \"benches\", \"examples\", \"build.rs\"]`\n\nThis is true by default. Set it to false if you want\nto watch nothing, or only the directories you set in\n`watch`.",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "env": {
+        "description": "Env vars to set for this job execution",
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "default": {}
+      },
+      "expand_env_vars": {
+        "description": "Whether to expand environment variables in the command",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "export": {
+        "description": "Deprecated single export configuration; use `exports.locations` instead.",
+        "anyOf": [
+          {
+            "$ref": "#/$defs/ExportConfig"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "deprecated": true
+      },
+      "export_locations": {
+        "description": "Deprecated toggle for the legacy locations export; use `exports.locations.auto`",
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "deprecated": true
+      },
+      "exports": {
+        "description": "Export configurations keyed by their name.",
+        "type": "object",
+        "additionalProperties": {
+          "$ref": "#/$defs/ExportConfig"
+        }
+      },
+      "extraneous_args": {
+        "description": "Whether to insert extraneous arguments provided by bacon or end users\n\nEg: --all-features or anything after -- in bacon incantation",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "grace_period": {
+        "description": "Minimum delay to wait before restarting the job after a change is detected.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "help_line": {
+        "description": "Whether to display the contextual help line",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "hide_scrollbar": {
+        "description": "Whether to hide the scrollbar",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "ignore": {
+        "description": "A list of glob patterns to ignore",
+        "type": "array",
+        "default": [],
+        "items": {
+          "type": "string"
+        }
+      },
+      "ignored_lines": {
+        "description": "Patterns of lines which should be ignored. Patterns of\nthe prefs or bacon.toml can be overridden at the job",
+        "type": [
+          "array",
+          "null"
+        ],
+        "items": {
+          "type": "string"
+        }
+      },
+      "jobs": {
+        "description": "Job definitions keyed by their identifier",
+        "type": "object",
+        "additionalProperties": {
+          "$ref": "#/$defs/Job"
+        }
+      },
+      "keybindings": {
+        "description": "Custom keybindings layered on top of the defaults",
+        "anyOf": [
+          {
+            "$ref": "#/$defs/KeyBindings"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "kill": {
+        "description": "A kill command. If not provided, SIGKILL is used.",
+        "type": [
+          "array",
+          "null"
+        ],
+        "items": {
+          "type": "string"
+        }
+      },
+      "listen": {
+        "description": "Whether to listen for actions on a unix socket (if on unix)",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "need_stdout": {
+        "description": "Whether we need to capture stdout too (stderr is\nalways captured)",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "on_change_strategy": {
+        "description": "How to handle changes: either immediately kill the current job\nthen restart it, or wait for the current job to finish before\nrestarting it.",
+        "anyOf": [
+          {
+            "$ref": "#/$defs/OnChangeStrategy"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "on_failure": {
+        "description": "The optional action to run when it's not a success",
+        "type": [
+          "string",
+          "null"
+        ],
+        "default": null
+      },
+      "on_success": {
+        "description": "The optional action to run when there's no\nerror, warning or test failures\n(depending on whether `allow_warnings` is `true` or `false`)\n\nCould be made a vec in the future but that would involve\nexplaining subtleties like the fact that those actions stop\nafter the first one ending the mission or doing a refresh",
+        "type": [
+          "string",
+          "null"
+        ],
+        "default": null
+      },
+      "reverse": {
+        "description": "Whether to display the mission output in reverse order.",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "show_changes_count": {
+        "description": "Whether to display how many files triggered the current run.",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "skin": {
+        "description": "Color overrides applied to the UI while the job runs.",
+        "$ref": "#/$defs/BaconSkin"
+      },
+      "sound": {
+        "description": "Notification sounds",
+        "$ref": "#/$defs/SoundConfig"
+      },
+      "summary": {
+        "description": "Whether to show diagnostics summarized instead of full",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "vim_keys": {
+        "description": "Deprecated toggle that enables a built-in set of Vim-style keybindings. Use `keybindings` instead",
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "deprecated": true
+      },
+      "watch": {
+        "description": "A list of directories that will be watched if the job\nis run on a package.\nsrc, examples, tests, and benches are implicitly included\nunless you `set default_watch` to false.",
+        "type": [
+          "array",
+          "null"
+        ],
+        "items": {
+          "type": "string"
+        }
+      },
+      "workdir": {
+        "description": "An optional working directory for the job command, which\nwould override the package directory.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "wrap": {
+        "description": "Whether to wrap long lines",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      }
+    },
+    "$defs": {
+      "AnalyzerRef": {
+        "description": "A stateless operator building a report from a list of command output lines.\n\nImplementation routing will probably change at some point",
+        "type": "string",
+        "enum": [
+          "standard",
+          "cargo_json",
+          "nextest",
+          "eslint",
+          "biome",
+          "python_pytest",
+          "python_ruff",
+          "python_unittest",
+          "cpp",
+          "cpp_doctest",
+          "swift_build",
+          "swift_lint"
+        ]
+      },
+      "BaconSkin": {
+        "description": "Collection of optional color overrides for the Bacon UI.",
+        "type": "object",
+        "properties": {
+          "change_badge_bg": {
+            "description": "Background color of the change badge",
+            "$ref": "#/$defs/DefaultingChangeBadgeBg"
+          },
+          "change_badge_fg": {
+            "description": "Foreground color of the change badge",
+            "$ref": "#/$defs/DefaultingChangeBadgeFg"
+          },
+          "command_error_badge_bg": {
+            "description": "Background color of the command-error badge",
+            "$ref": "#/$defs/DefaultingCommandErrorBadgeBg"
+          },
+          "command_error_badge_fg": {
+            "description": "Foreground color of the command-error badge",
+            "$ref": "#/$defs/DefaultingCommandErrorBadgeFg"
+          },
+          "computing_bg": {
+            "description": "Background color of the \"computing...\" indicator",
+            "$ref": "#/$defs/DefaultingComputingBg"
+          },
+          "computing_fg": {
+            "description": "Foreground color of the \"computing...\" indicator",
+            "$ref": "#/$defs/DefaultingComputingFg"
+          },
+          "dismissed_badge_bg": {
+            "description": "Background color of the dismissed badge",
+            "$ref": "#/$defs/DefaultingDismissedBadgeBg"
+          },
+          "dismissed_badge_fg": {
+            "description": "Foreground color of the dismissed badge",
+            "$ref": "#/$defs/DefaultingDismissedBadgeFg"
+          },
+          "errors_badge_bg": {
+            "description": "Background color of the errors badge",
+            "$ref": "#/$defs/DefaultingErrorsBadgeBg"
+          },
+          "errors_badge_fg": {
+            "description": "Foreground color of the errors badge",
+            "$ref": "#/$defs/DefaultingErrorsBadgeFg"
+          },
+          "found_fg": {
+            "description": "Foreground color of search matches",
+            "$ref": "#/$defs/DefaultingFoundFg"
+          },
+          "found_selected_bg": {
+            "description": "Background color of the selected search match",
+            "$ref": "#/$defs/DefaultingFoundSelectedBg"
+          },
+          "job_label_badge_bg": {
+            "description": "Background color of the job label badge",
+            "$ref": "#/$defs/DefaultingJobLabelBadgeBg"
+          },
+          "job_label_badge_fg": {
+            "description": "Foreground color of the job label badge",
+            "$ref": "#/$defs/DefaultingJobLabelBadgeFg"
+          },
+          "key_fg": {
+            "description": "Foreground color used for key shortcuts in the UI",
+            "$ref": "#/$defs/DefaultingKeyFg"
+          },
+          "menu_bg": {
+            "description": "Background color used for menus",
+            "$ref": "#/$defs/DefaultingMenuBg"
+          },
+          "menu_border": {
+            "description": "Border color used for menus",
+            "$ref": "#/$defs/DefaultingMenuBorder"
+          },
+          "menu_item_bg": {
+            "description": "Background color of individual menu items",
+            "$ref": "#/$defs/DefaultingMenuItemBg"
+          },
+          "menu_item_fg": {
+            "description": "Foreground color of menu items",
+            "$ref": "#/$defs/DefaultingMenuItemFg"
+          },
+          "menu_item_selected_bg": {
+            "description": "Background color of the selected menu item",
+            "$ref": "#/$defs/DefaultingMenuItemSelectedBg"
+          },
+          "menu_item_selected_fg": {
+            "description": "Foreground color of the selected menu item",
+            "$ref": "#/$defs/DefaultingMenuItemSelectedFg"
+          },
+          "project_name_badge_bg": {
+            "description": "Background color of the project name badge",
+            "$ref": "#/$defs/DefaultingProjectNameBadgeBg"
+          },
+          "project_name_badge_fg": {
+            "description": "Foreground color of the project name badge",
+            "$ref": "#/$defs/DefaultingProjectNameBadgeFg"
+          },
+          "search_input_prefix_fg": {
+            "description": "Foreground color of the '/' search prefix",
+            "$ref": "#/$defs/DefaultingSearchInputPrefixFg"
+          },
+          "search_summary_fg": {
+            "description": "Foreground color of the search summary",
+            "$ref": "#/$defs/DefaultingSearchSummaryFg"
+          },
+          "status_bg": {
+            "description": "Background color of the status line",
+            "$ref": "#/$defs/DefaultingStatusBg"
+          },
+          "status_fg": {
+            "description": "Foreground color of the status line",
+            "$ref": "#/$defs/DefaultingStatusFg"
+          },
+          "status_key_fg": {
+            "description": "Foreground color for key shortcuts displayed in the status line",
+            "$ref": "#/$defs/DefaultingStatusKeyFg"
+          },
+          "test_fails_badge_bg": {
+            "description": "Background color of the failing-tests badge",
+            "$ref": "#/$defs/DefaultingTestFailsBadgeBg"
+          },
+          "test_fails_badge_fg": {
+            "description": "Foreground color of the failing-tests badge",
+            "$ref": "#/$defs/DefaultingTestFailsBadgeFg"
+          },
+          "test_pass_badge_bg": {
+            "description": "Background color of the passing-tests badge",
+            "$ref": "#/$defs/DefaultingTestPassBadgeBg"
+          },
+          "test_pass_badge_fg": {
+            "description": "Foreground color of the passing-tests badge",
+            "$ref": "#/$defs/DefaultingTestPassBadgeFg"
+          },
+          "warnings_badge_bg": {
+            "description": "Background color of the warnings badge",
+            "$ref": "#/$defs/DefaultingWarningsBadgeBg"
+          },
+          "warnings_badge_fg": {
+            "description": "Foreground color of the warnings badge",
+            "$ref": "#/$defs/DefaultingWarningsBadgeFg"
+          }
+        }
+      },
+      "DefaultingChangeBadgeBg": {
+        "description": "Background color of the change badge\n - default value: 6",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingChangeBadgeFg": {
+        "description": "Foreground color of the change badge\n - default value: 235",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingCommandErrorBadgeBg": {
+        "description": "Background color of the command-error badge\n - default value: 9",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingCommandErrorBadgeFg": {
+        "description": "Foreground color of the command-error badge\n - default value: 235",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingComputingBg": {
+        "description": "Background color of the \"computing...\" indicator\n - default value: 204",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingComputingFg": {
+        "description": "Foreground color of the \"computing...\" indicator\n - default value: 235",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingDismissedBadgeBg": {
+        "description": "Background color of the dismissed badge\n - default value: 6",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingDismissedBadgeFg": {
+        "description": "Foreground color of the dismissed badge\n - default value: 235",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingErrorsBadgeBg": {
+        "description": "Background color of the errors badge\n - default value: 9",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingErrorsBadgeFg": {
+        "description": "Foreground color of the errors badge\n - default value: 235",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingFoundFg": {
+        "description": "Foreground color of search matches\n - default value: 208",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingFoundSelectedBg": {
+        "description": "Background color of the selected search match\n - default value: 208",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingJobLabelBadgeBg": {
+        "description": "Background color of the job label badge\n - default value: 204",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingJobLabelBadgeFg": {
+        "description": "Foreground color of the job label badge\n - default value: 235",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingKeyFg": {
+        "description": "Foreground color used for key shortcuts in the UI\n - default value: 204",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingMenuBg": {
+        "description": "Background color used for menus\n - default value: 235",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingMenuBorder": {
+        "description": "Border color used for menus\n - default value: 234",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingMenuItemBg": {
+        "description": "Background color of individual menu items\n - default value: 235",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingMenuItemFg": {
+        "description": "Foreground color of menu items\n - default value: 250",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingMenuItemSelectedBg": {
+        "description": "Background color of the selected menu item\n - default value: 239",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingMenuItemSelectedFg": {
+        "description": "Foreground color of the selected menu item\n - default value: 255",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingProjectNameBadgeBg": {
+        "description": "Background color of the project name badge\n - default value: 240",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingProjectNameBadgeFg": {
+        "description": "Foreground color of the project name badge\n - default value: 255",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingSearchInputPrefixFg": {
+        "description": "Foreground color of the '/' search prefix\n - default value: 208",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingSearchSummaryFg": {
+        "description": "Foreground color of the search summary\n - default value: 208",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingStatusBg": {
+        "description": "Background color of the status line\n - default value: 239",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingStatusFg": {
+        "description": "Foreground color of the status line\n - default value: 252",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingStatusKeyFg": {
+        "description": "Foreground color for key shortcuts displayed in the status line\n - default value: 204",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingTestFailsBadgeBg": {
+        "description": "Background color of the failing-tests badge\n - default value: 208",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingTestFailsBadgeFg": {
+        "description": "Foreground color of the failing-tests badge\n - default value: 235",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingTestPassBadgeBg": {
+        "description": "Background color of the passing-tests badge\n - default value: 2",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingTestPassBadgeFg": {
+        "description": "Foreground color of the passing-tests badge\n - default value: 254",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingWarningsBadgeBg": {
+        "description": "Background color of the warnings badge\n - default value: 11",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DefaultingWarningsBadgeFg": {
+        "description": "Foreground color of the warnings badge\n - default value: 235",
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "ExportConfig": {
+        "description": "A generic configuration for all exports, whatever the exporter.",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "description": "Whether the export should run automatically after each mission.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "exporter": {
+            "description": "Exporter backend that should produce the output.",
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Exporter"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "line_format": {
+            "description": "Optional format string used by exporters that write line-based data.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "path": {
+            "description": "Destination path where the exporter writes its output.",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "Exporter": {
+        "description": "Export backend.",
+        "oneOf": [
+          {
+            "description": "The analyzer is tasked with doing an export while analyzing the\ncommand output",
+            "type": "string",
+            "const": "analyser"
+          },
+          {
+            "description": "This exporter doesn't exist at the moment",
+            "type": "string",
+            "const": "analysis"
+          },
+          {
+            "description": "Emit a machine-readable JSON report for the mission.",
+            "type": "string",
+            "const": "json_report"
+          },
+          {
+            "description": "Produce a list of file locations for editors or other tools.",
+            "type": "string",
+            "const": "locations"
+          }
+        ]
+      },
+      "Job": {
+        "description": "One of the possible jobs that bacon can run",
+        "type": "object",
+        "properties": {
+          "allow_failures": {
+            "description": "Whether to consider that we can have a success\nwhen we have test failures",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "allow_warnings": {
+            "description": "Whether to consider that we can have a success\nwhen we have warnings. This is especially useful\nfor \"cargo run\" jobs",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "analyzer": {
+            "description": "The analyzer interpreting the output of the command, the\nstandard cargo dedicated one if not provided",
+            "anyOf": [
+              {
+                "$ref": "#/$defs/AnalyzerRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "apply_gitignore": {
+            "description": "Whether gitignore rules must be applied",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "background": {
+            "description": "Whether to wait for the computation to finish before\nto display it on screen\n\nThis is true by default. Set it to false if you want\nthe previous computation result to be replaced with\nthe new one as soon as it starts.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "command": {
+            "description": "The tokens making the command to execute (first one\nis the executable).",
+            "type": "array",
+            "default": [],
+            "items": {
+              "type": "string"
+            }
+          },
+          "default_watch": {
+            "description": "Whether to apply the default watch list, which is\n`[\"src\", \"tests\", \"benches\", \"examples\", \"build.rs\"]`\n\nThis is true by default. Set it to false if you want\nto watch nothing, or only the directories you set in\n`watch`.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "env": {
+            "description": "Env vars to set for this job execution",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "default": {}
+          },
+          "expand_env_vars": {
+            "description": "Whether to expand environment variables in the command",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "extraneous_args": {
+            "description": "Whether to insert extraneous arguments provided by bacon or end users\n\nEg: --all-features or anything after -- in bacon incantation",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "grace_period": {
+            "description": "Minimum delay to wait before restarting the job after a change is detected.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "hide_scrollbar": {
+            "description": "Whether to hide the scrollbar",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "ignore": {
+            "description": "A list of glob patterns to ignore",
+            "type": "array",
+            "default": [],
+            "items": {
+              "type": "string"
+            }
+          },
+          "ignored_lines": {
+            "description": "Patterns of lines which should be ignored. Patterns of\nthe prefs or bacon.toml can be overridden at the job",
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "kill": {
+            "description": "A kill command. If not provided, SIGKILL is used.",
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "need_stdout": {
+            "description": "Whether we need to capture stdout too (stderr is\nalways captured)",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "on_change_strategy": {
+            "description": "How to handle changes: either immediately kill the current job\nthen restart it, or wait for the current job to finish before\nrestarting it.",
+            "anyOf": [
+              {
+                "$ref": "#/$defs/OnChangeStrategy"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "on_failure": {
+            "description": "The optional action to run when it's not a success",
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": null
+          },
+          "on_success": {
+            "description": "The optional action to run when there's no\nerror, warning or test failures\n(depending on whether `allow_warnings` is `true` or `false`)\n\nCould be made a vec in the future but that would involve\nexplaining subtleties like the fact that those actions stop\nafter the first one ending the mission or doing a refresh",
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": null
+          },
+          "show_changes_count": {
+            "description": "Whether to display how many files triggered the current run.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "skin": {
+            "description": "Color overrides applied to the UI while the job runs.",
+            "$ref": "#/$defs/BaconSkin"
+          },
+          "sound": {
+            "description": "Notification sounds",
+            "$ref": "#/$defs/SoundConfig"
+          },
+          "watch": {
+            "description": "A list of directories that will be watched if the job\nis run on a package.\nsrc, examples, tests, and benches are implicitly included\nunless you `set default_watch` to false.",
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "workdir": {
+            "description": "An optional working directory for the job command, which\nwould override the package directory.",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "KeyBindings": {
+        "description": "Mapping from key combinations to actions.",
+        "type": "object"
+      },
+      "OnChangeStrategy": {
+        "description": "Strategy to apply when changes are detected while a job is running.",
+        "oneOf": [
+          {
+            "description": "Stop the running job immediately before starting a new one.",
+            "type": "string",
+            "const": "kill_then_restart"
+          },
+          {
+            "description": "Let the running job finish before starting again.",
+            "type": "string",
+            "const": "wait_then_restart"
+          }
+        ]
+      },
+      "SoundConfig": {
+        "description": "Sound configuration.",
+        "type": "object",
+        "properties": {
+          "base_volume": {
+            "description": "Base volume, acting as a multiplier for the volume of specific sounds.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "enabled": {
+            "description": "Whether sound notifications should be played.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "allow_failures": null,
+      "allow_warnings": true,
+      "background": null,
+      "command": [],
+      "default_job": "ossklhwtekhftcjji",
+      "default_watch": false,
+      "env": {
+        "ZM1JR": "uz"
+      },
+      "export_locations": null,
+      "extraneous_args": null,
+      "grace_period": null,
+      "ignore": [],
+      "jobs": {},
+      "keybindings": false,
+      "need_stdout": null,
+      "on_success": "e4JSnE2NiiU",
+      "reverse": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "vim_keys": true,
+      "workdir": "xKDpI6Qh2UVvsj",
+      "wrap": null
+    },
+    {
+      "additional_alias_args": [],
+      "allow_warnings": false,
+      "analyzer": null,
+      "apply_gitignore": null,
+      "background": null,
+      "command": [],
+      "default_job": "fFEV",
+      "default_watch": null,
+      "env": {
+        "lorem": "adipis"
+      },
+      "expand_env_vars": true,
+      "export_locations": null,
+      "exports": {
+        "het2qTPe9P": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        },
+        "W7Sc7Lf": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "extraneous_args": true,
+      "grace_period": null,
+      "help_line": null,
+      "hide_scrollbar": true,
+      "ignore": [],
+      "keybindings": 98,
+      "need_stdout": null,
+      "on_change_strategy": false,
+      "on_success": "wrf",
+      "show_changes_count": null,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": true,
+      "watch": []
+    },
+    {
+      "additional_alias_args": [],
+      "allow_failures": false,
+      "allow_warnings": true,
+      "analyzer": null,
+      "background": null,
+      "command": [],
+      "env": {
+        "cbcycqz": "fD"
+      },
+      "expand_env_vars": false,
+      "exports": {
+        "tsvvjmlu": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        },
+        "sit co": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "grace_period": "ipsum lor",
+      "ignore": [],
+      "jobs": {},
+      "keybindings": "ipsum cons",
+      "need_stdout": true,
+      "on_success": null,
+      "show_changes_count": true,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": true,
+      "vim_keys": null
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": null,
+      "allow_warnings": false,
+      "analyzer": "wqxbhx",
+      "apply_gitignore": null,
+      "background": null,
+      "command": [],
+      "default_job": "wStzbu",
+      "export": null,
+      "help_line": false,
+      "ignored_lines": [],
+      "jobs": {
+        "nxxKIIdF3": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "rnhheqbyc": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "kill": null,
+      "need_stdout": false,
+      "on_change_strategy": 64.5,
+      "on_failure": "adipiscing amet ",
+      "on_success": "bdk",
+      "show_changes_count": null,
+      "vim_keys": null,
+      "workdir": "N8z",
+      "wrap": null
+    },
+    {
+      "allow_failures": true,
+      "allow_warnings": true,
+      "analyzer": "vdxnzyczmembtoc",
+      "apply_gitignore": null,
+      "command": [],
+      "default_job": null,
+      "expand_env_vars": null,
+      "export": "fcgpsrbhdo",
+      "export_locations": true,
+      "exports": {},
+      "grace_period": "krynsf",
+      "help_line": true,
+      "hide_scrollbar": true,
+      "ignored_lines": null,
+      "keybindings": 79.01,
+      "listen": null,
+      "need_stdout": true,
+      "on_failure": null,
+      "on_success": null,
+      "reverse": false,
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": null,
+      "wrap": false
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": null,
+      "allow_warnings": null,
+      "analyzer": 53,
+      "command": [],
+      "expand_env_vars": null,
+      "export": 23.77,
+      "export_locations": null,
+      "extraneous_args": null,
+      "help_line": null,
+      "hide_scrollbar": true,
+      "keybindings": 46,
+      "kill": null,
+      "listen": false,
+      "need_stdout": false,
+      "on_success": "jomokynfcvjgpydaeq",
+      "show_changes_count": null,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "vim_keys": null
+    },
+    {
+      "additional_alias_args": [],
+      "allow_failures": null,
+      "analyzer": true,
+      "apply_gitignore": false,
+      "command": [],
+      "default_job": "lorem lorem sit ",
+      "default_watch": null,
+      "export": 27.19,
+      "extraneous_args": null,
+      "help_line": null,
+      "hide_scrollbar": null,
+      "keybindings": 36,
+      "kill": null,
+      "on_change_strategy": "tAVWA2aKQzAq",
+      "on_success": "eehvptlnzklrwxnbcaaqj",
+      "reverse": null,
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": null,
+      "vim_keys": true,
+      "workdir": null
+    },
+    {
+      "additional_alias_args": null,
+      "allow_warnings": true,
+      "apply_gitignore": null,
+      "default_job": null,
+      "default_watch": null,
+      "env": {
+        "consec": "dolor adipis",
+        "HMO4IHHi6u": "LQEx7WHHjmf6ZdQxPBu"
+      },
+      "expand_env_vars": false,
+      "export": true,
+      "export_locations": null,
+      "extraneous_args": null,
+      "grace_period": null,
+      "jobs": {
+        "2Px2MSk": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": null,
+      "listen": null,
+      "reverse": false,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "summary": false,
+      "vim_keys": null,
+      "watch": null
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": false,
+      "analyzer": null,
+      "apply_gitignore": true,
+      "background": false,
+      "command": [],
+      "default_job": null,
+      "expand_env_vars": true,
+      "grace_period": "adipiscing ",
+      "hide_scrollbar": null,
+      "ignore": [],
+      "jobs": {},
+      "keybindings": null,
+      "need_stdout": null,
+      "on_change_strategy": null,
+      "reverse": null,
+      "show_changes_count": null,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": null,
+      "vim_keys": true,
+      "workdir": "pcG7eo5GC",
+      "wrap": null
+    },
+    {
+      "additional_alias_args": [],
+      "allow_failures": false,
+      "analyzer": false,
+      "apply_gitignore": null,
+      "background": null,
+      "command": [],
+      "env": {
+        "YlMwW": "consectetur sit conse"
+      },
+      "extraneous_args": false,
+      "jobs": {
+        "pzmnlalob": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": null,
+      "listen": null,
+      "on_success": null,
+      "reverse": null,
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "summary": true,
+      "vim_keys": null,
+      "watch": null,
+      "wrap": null
+    },
+    {
+      "allow_failures": null,
+      "analyzer": 17,
+      "apply_gitignore": null,
+      "default_job": "Bo",
+      "default_watch": null,
+      "env": {
+        "kwxxyorw": "dolor amet amet ip"
+      },
+      "expand_env_vars": null,
+      "exports": {},
+      "extraneous_args": false,
+      "grace_period": "cqff",
+      "help_line": true,
+      "ignored_lines": [],
+      "keybindings": 81.25,
+      "kill": null,
+      "listen": true,
+      "on_failure": "dolor lorem ",
+      "on_success": null,
+      "reverse": true,
+      "show_changes_count": true,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "summary": false,
+      "watch": [],
+      "wrap": null
+    },
+    {
+      "allow_warnings": null,
+      "apply_gitignore": null,
+      "default_job": "gtejlfdnqirz",
+      "default_watch": null,
+      "env": {
+        "BpWVBZov7": "ctcyuxog",
+        "i5mHN": "G6kmsTA"
+      },
+      "expand_env_vars": false,
+      "export": true,
+      "exports": {
+        "adipis": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "extraneous_args": true,
+      "help_line": true,
+      "hide_scrollbar": null,
+      "ignore": [],
+      "ignored_lines": [],
+      "keybindings": null,
+      "kill": null,
+      "listen": false,
+      "need_stdout": null,
+      "reverse": true,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": null,
+      "vim_keys": false,
+      "workdir": "0LwpzUF9bq1RKOcbyVTb8"
+    },
+    {
+      "allow_failures": null,
+      "allow_warnings": null,
+      "analyzer": false,
+      "apply_gitignore": null,
+      "default_job": "XC",
+      "default_watch": null,
+      "env": {
+        "fO69KcP": "ipsum lorem "
+      },
+      "export": 94.35,
+      "export_locations": false,
+      "exports": {},
+      "grace_period": "ovyA3wbZ50svVfdFoCj7E",
+      "help_line": null,
+      "hide_scrollbar": true,
+      "ignored_lines": null,
+      "jobs": {
+        "BUWiIC6": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": 41.99,
+      "kill": [],
+      "need_stdout": null,
+      "on_failure": "j3pqlNu",
+      "on_success": "lorem sit cons",
+      "reverse": false,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": true,
+      "vim_keys": null,
+      "watch": [],
+      "workdir": null,
+      "wrap": false
+    },
+    {
+      "additional_alias_args": [],
+      "allow_failures": null,
+      "apply_gitignore": null,
+      "default_watch": null,
+      "env": {
+        "lnqqbfs": "nxfNAomkuaZzuMokktk"
+      },
+      "expand_env_vars": false,
+      "export_locations": false,
+      "grace_period": null,
+      "help_line": null,
+      "hide_scrollbar": null,
+      "ignored_lines": [],
+      "jobs": {
+        "ipsum s": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "NdoN9Zuv": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "kill": null,
+      "need_stdout": null,
+      "on_change_strategy": "Om6pHQRBOa9IK",
+      "on_failure": null,
+      "on_success": null,
+      "show_changes_count": null,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": false,
+      "watch": [],
+      "wrap": null
+    },
+    {
+      "allow_failures": null,
+      "analyzer": null,
+      "background": true,
+      "command": [],
+      "default_job": null,
+      "env": {
+        "amet l": "k",
+        "amet s": "dolor adipiscin"
+      },
+      "expand_env_vars": true,
+      "export": null,
+      "export_locations": null,
+      "exports": {
+        "aJaIL": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        },
+        "mjnorrfi": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "grace_period": "ipsum lore",
+      "hide_scrollbar": true,
+      "ignore": [],
+      "ignored_lines": null,
+      "keybindings": 65,
+      "kill": null,
+      "need_stdout": null,
+      "on_change_strategy": 66.55,
+      "on_failure": "rbrmcdgsdpworcyyw",
+      "on_success": "lorem adipi",
+      "show_changes_count": null,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": null,
+      "vim_keys": true,
+      "watch": null,
+      "workdir": null
+    },
+    {
+      "additional_alias_args": [],
+      "allow_failures": null,
+      "analyzer": false,
+      "apply_gitignore": false,
+      "background": false,
+      "command": [],
+      "env": {},
+      "expand_env_vars": false,
+      "export": 58.95,
+      "export_locations": true,
+      "grace_period": "NB6dvGcCJs9vwK",
+      "help_line": null,
+      "ignore": [],
+      "jobs": {
+        "amet i": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "szbirvgwb": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": 13,
+      "kill": null,
+      "listen": true,
+      "need_stdout": null,
+      "on_success": null,
+      "reverse": null,
+      "show_changes_count": true,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "wrap": null
+    },
+    {
+      "additional_alias_args": [],
+      "analyzer": 44.94,
+      "apply_gitignore": null,
+      "command": [],
+      "default_job": null,
+      "default_watch": true,
+      "env": {
+        "OOdWW": "adipiscing"
+      },
+      "exports": {
+        "consec": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "extraneous_args": null,
+      "help_line": null,
+      "hide_scrollbar": null,
+      "ignore": [],
+      "ignored_lines": null,
+      "jobs": {},
+      "kill": [],
+      "listen": false,
+      "on_change_strategy": false,
+      "on_failure": null,
+      "on_success": "ipsum",
+      "reverse": true,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "vim_keys": null,
+      "wrap": false
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": null,
+      "apply_gitignore": null,
+      "background": null,
+      "default_watch": true,
+      "env": {
+        "hbtoz": "amet adip",
+        "cidkulnfnz": "pdtyzkljstjnm"
+      },
+      "expand_env_vars": null,
+      "export": null,
+      "export_locations": null,
+      "exports": {},
+      "extraneous_args": false,
+      "help_line": null,
+      "ignore": [],
+      "ignored_lines": [],
+      "jobs": {
+        "mhixi": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "kill": null,
+      "listen": null,
+      "on_change_strategy": true,
+      "on_success": null,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "vim_keys": true,
+      "workdir": "giaotvfgadq",
+      "wrap": true
+    },
+    {
+      "additional_alias_args": [],
+      "allow_failures": null,
+      "allow_warnings": null,
+      "apply_gitignore": true,
+      "background": true,
+      "default_watch": true,
+      "env": {
+        "amet conse": "dolor lorem sit dol",
+        "enRpZT": "8FYwfGf"
+      },
+      "expand_env_vars": true,
+      "export": false,
+      "export_locations": null,
+      "grace_period": "zynpjlzdwfo",
+      "help_line": false,
+      "ignore": [],
+      "ignored_lines": [],
+      "jobs": {
+        "lorem dolo": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "amet ips": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "kill": [],
+      "listen": null,
+      "need_stdout": null,
+      "on_change_strategy": 28.95,
+      "on_failure": "79jy5GYlhQpbC7No9",
+      "on_success": null,
+      "reverse": null,
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": null,
+      "vim_keys": null,
+      "watch": [],
+      "workdir": null,
+      "wrap": null
+    },
+    {
+      "additional_alias_args": [],
+      "allow_warnings": null,
+      "apply_gitignore": null,
+      "background": null,
+      "command": [],
+      "default_watch": true,
+      "expand_env_vars": null,
+      "export_locations": null,
+      "exports": {
+        "izqtqesgkd": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "extraneous_args": null,
+      "grace_period": null,
+      "help_line": null,
+      "ignore": [],
+      "ignored_lines": null,
+      "keybindings": 79,
+      "kill": null,
+      "listen": null,
+      "need_stdout": null,
+      "on_change_strategy": 50,
+      "on_failure": null,
+      "show_changes_count": null
+    },
+    {
+      "allow_failures": false,
+      "allow_warnings": null,
+      "analyzer": 16.15,
+      "command": [],
+      "default_job": null,
+      "default_watch": false,
+      "exports": {
+        "dolor adi": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "grace_period": "pgpfpaofdd",
+      "hide_scrollbar": null,
+      "jobs": {
+        "ySvDwZ": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "adipiscin": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": 63.9,
+      "kill": [],
+      "need_stdout": null,
+      "on_change_strategy": false,
+      "show_changes_count": false,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "watch": [],
+      "workdir": "SNvzvc",
+      "wrap": null
+    },
+    {
+      "additional_alias_args": null,
+      "allow_warnings": false,
+      "apply_gitignore": false,
+      "background": null,
+      "default_watch": false,
+      "env": {
+        "lorem adip": "amet d",
+        "Rgb9MU5b5k": "k"
+      },
+      "expand_env_vars": null,
+      "export": 44,
+      "export_locations": null,
+      "help_line": true,
+      "hide_scrollbar": null,
+      "ignored_lines": [],
+      "keybindings": "sh1AXitEczlysWF",
+      "kill": null,
+      "listen": null,
+      "on_change_strategy": 96,
+      "on_failure": null,
+      "on_success": "xjzgxgjjnxqhelogbvwj",
+      "reverse": null,
+      "show_changes_count": false,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "summary": null,
+      "vim_keys": true,
+      "wrap": null
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": true,
+      "command": [],
+      "env": {
+        "lorem do": "e"
+      },
+      "expand_env_vars": null,
+      "export": 8.88,
+      "export_locations": null,
+      "exports": {},
+      "extraneous_args": false,
+      "grace_period": null,
+      "ignore": [],
+      "ignored_lines": [],
+      "jobs": {},
+      "keybindings": "vauhwxhq",
+      "kill": [],
+      "on_change_strategy": 61.63,
+      "on_failure": null,
+      "on_success": null,
+      "reverse": true,
+      "show_changes_count": true,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "summary": false,
+      "watch": null,
+      "wrap": null
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": false,
+      "allow_warnings": null,
+      "analyzer": "n2CmDRpjTiQhQwO",
+      "default_job": null,
+      "default_watch": true,
+      "expand_env_vars": null,
+      "export_locations": false,
+      "exports": {
+        "conse": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        },
+        "i9z8toImJ": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "help_line": false,
+      "hide_scrollbar": true,
+      "ignore": [],
+      "ignored_lines": null,
+      "jobs": {
+        "HfWOOj921M": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": null,
+      "on_failure": "con",
+      "on_success": "amet i",
+      "reverse": null,
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "workdir": "snzffqwtgfihhkksnrb"
+    },
+    {
+      "additional_alias_args": null,
+      "analyzer": null,
+      "apply_gitignore": null,
+      "background": true,
+      "default_watch": null,
+      "expand_env_vars": false,
+      "export_locations": true,
+      "grace_period": null,
+      "ignore": [],
+      "ignored_lines": null,
+      "listen": null,
+      "need_stdout": null,
+      "on_change_strategy": 44,
+      "on_failure": null,
+      "on_success": null,
+      "reverse": false,
+      "show_changes_count": null,
+      "vim_keys": false,
+      "wrap": null
+    },
+    {
+      "additional_alias_args": null,
+      "allow_warnings": null,
+      "analyzer": "rheermgt",
+      "apply_gitignore": null,
+      "default_watch": false,
+      "env": {
+        "vqzkbjlv": "B",
+        "amet a": "amet lorem adipiscin"
+      },
+      "expand_env_vars": true,
+      "exports": {
+        "byjzw": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        },
+        "0pfYtF": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "extraneous_args": null,
+      "grace_period": "amet sit",
+      "help_line": null,
+      "ignore": [],
+      "ignored_lines": [],
+      "kill": null,
+      "listen": null,
+      "need_stdout": true,
+      "on_change_strategy": 58,
+      "on_success": "vvbqprjyfvfc",
+      "reverse": false,
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "summary": null
+    },
+    {
+      "apply_gitignore": false,
+      "background": null,
+      "command": [],
+      "default_job": "udomwbueuavljdroaz",
+      "default_watch": null,
+      "env": {},
+      "expand_env_vars": null,
+      "export": null,
+      "exports": {
+        "hTzOc6zZ": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "grace_period": null,
+      "ignored_lines": [],
+      "jobs": {
+        "nmwharul": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": "fjwrubhuyjhpln",
+      "need_stdout": null,
+      "on_failure": "kxgwxso",
+      "reverse": false,
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": null,
+      "vim_keys": true,
+      "watch": null
+    },
+    {
+      "allow_failures": true,
+      "analyzer": null,
+      "apply_gitignore": null,
+      "background": null,
+      "command": [],
+      "default_watch": null,
+      "env": {
+        "adipis": "ckqbwsjbcaggdmusq"
+      },
+      "export": 32,
+      "export_locations": false,
+      "exports": {
+        "sit ame": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        },
+        "sit adip": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "grace_period": null,
+      "help_line": null,
+      "hide_scrollbar": false,
+      "ignored_lines": null,
+      "jobs": {
+        "hw8bYVyRpq": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": "4EB55S",
+      "listen": null,
+      "reverse": false,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": null,
+      "vim_keys": null,
+      "watch": null,
+      "workdir": "dolor ",
+      "wrap": false
+    },
+    {
+      "allow_failures": null,
+      "allow_warnings": null,
+      "apply_gitignore": false,
+      "command": [],
+      "default_watch": null,
+      "env": {
+        "sit i": "sit c"
+      },
+      "expand_env_vars": true,
+      "export": null,
+      "export_locations": true,
+      "exports": {},
+      "help_line": null,
+      "ignore": [],
+      "ignored_lines": [],
+      "keybindings": 49.92,
+      "kill": null,
+      "listen": true,
+      "show_changes_count": false,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "vim_keys": false
+    },
+    {
+      "additional_alias_args": [],
+      "allow_failures": true,
+      "allow_warnings": true,
+      "analyzer": null,
+      "apply_gitignore": null,
+      "command": [],
+      "default_job": "bO",
+      "default_watch": false,
+      "expand_env_vars": true,
+      "export": 15.6,
+      "extraneous_args": false,
+      "grace_period": null,
+      "help_line": true,
+      "hide_scrollbar": false,
+      "ignore": [],
+      "jobs": {
+        "fqelogr": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "listen": true,
+      "on_change_strategy": "wyhdbngxczlvl",
+      "on_failure": null,
+      "on_success": null,
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "summary": null,
+      "watch": null,
+      "wrap": null
+    },
+    {
+      "additional_alias_args": [],
+      "allow_failures": null,
+      "allow_warnings": false,
+      "analyzer": 63.36,
+      "background": false,
+      "command": [],
+      "default_job": null,
+      "export": "EpKRsz0u",
+      "export_locations": true,
+      "exports": {
+        "0jdBc": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "grace_period": null,
+      "help_line": null,
+      "hide_scrollbar": false,
+      "ignore": [],
+      "jobs": {
+        "w9lZq2jg9a": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "kill": [],
+      "listen": true,
+      "need_stdout": null,
+      "on_change_strategy": null,
+      "on_success": "xjcwqiszowavmxnks",
+      "reverse": true,
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "watch": []
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": null,
+      "allow_warnings": false,
+      "analyzer": null,
+      "apply_gitignore": true,
+      "background": false,
+      "command": [],
+      "default_job": null,
+      "default_watch": false,
+      "env": {},
+      "export_locations": null,
+      "grace_period": "sywnxlcrq",
+      "help_line": false,
+      "hide_scrollbar": null,
+      "ignored_lines": null,
+      "keybindings": true,
+      "listen": true,
+      "need_stdout": false,
+      "on_failure": "ohkg",
+      "on_success": null,
+      "reverse": true,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": true,
+      "vim_keys": true,
+      "watch": null,
+      "workdir": "amet consectet"
+    },
+    {
+      "allow_failures": false,
+      "allow_warnings": null,
+      "analyzer": 35.14,
+      "apply_gitignore": null,
+      "background": null,
+      "command": [],
+      "default_job": "adipiscing ipsum ",
+      "default_watch": null,
+      "export": 86.01,
+      "exports": {
+        "iarycs": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        },
+        "deexmjce": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "grace_period": null,
+      "help_line": true,
+      "ignored_lines": null,
+      "jobs": {
+        "consect": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "listen": false,
+      "need_stdout": false,
+      "on_change_strategy": null,
+      "on_success": "vq",
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": true,
+      "vim_keys": null,
+      "watch": [],
+      "workdir": "sit sit consectet"
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": null,
+      "command": [
+        "thsrpmkjory",
+        "adipisc",
+        "sit dolor amet lorem",
+        "lorem dolor",
+        "h7sJnpMRX75B"
+      ],
+      "default_job": "aqTlqARUywFC8gxuF0",
+      "expand_env_vars": false,
+      "export": null,
+      "export_locations": null,
+      "extraneous_args": true,
+      "grace_period": "XO",
+      "ignore": [
+        "cegglozjkdxg",
+        "wjrnmmf",
+        "qisrw",
+        "lorem lorem c",
+        "enatnxti"
+      ],
+      "ignored_lines": [
+        "fe",
+        "adipis",
+        "sR9m",
+        "5ZC",
+        "amet sit"
+      ],
+      "kill": [
+        "bbbe",
+        "sib",
+        "gdqyvaffwmcctyqw",
+        "lorem ipsum s",
+        "besecaefsrhbzgsur"
+      ],
+      "listen": null,
+      "on_change_strategy": true,
+      "on_failure": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "workdir": "consectetur amet lo",
+      "wrap": false
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": null,
+      "allow_warnings": false,
+      "analyzer": false,
+      "apply_gitignore": null,
+      "command": [
+        "amet amet amet adi",
+        "CdNygNVf",
+        "cscauxmzpw",
+        "laOxmCKAjLL9bHL",
+        "f"
+      ],
+      "default_job": null,
+      "default_watch": true,
+      "env": {
+        "ScSOW": "cncbyiclxrblzkl",
+        "XcyYctTEz": "enzvlaosptlmrfksl"
+      },
+      "expand_env_vars": true,
+      "export_locations": null,
+      "exports": {
+        "G8TCkXSYXo": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "grace_period": null,
+      "hide_scrollbar": null,
+      "ignore": [
+        "ipsum adipisc",
+        "lorem",
+        "r",
+        "PUxFzNhHFoHPpKCJ",
+        "mmasr"
+      ],
+      "ignored_lines": [
+        "9ONqCRqA88q",
+        "qpdwlybpcbt",
+        "abi",
+        "RDj5DS2j",
+        "adipiscing consecte"
+      ],
+      "jobs": {
+        "vtgwvpp": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "on_change_strategy": 39,
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "vim_keys": null,
+      "watch": [
+        "OveGuFMHrZBX01YX5sR1",
+        "epirbigkmtoimrlplnk",
+        "ijijevyeavcm",
+        "enwsgbnmpn",
+        "adipiscing sit ip"
+      ],
+      "wrap": false
+    },
+    {
+      "allow_failures": true,
+      "analyzer": true,
+      "apply_gitignore": false,
+      "background": null,
+      "command": [
+        "ZltfWHm",
+        "consect",
+        "HgXRnufJZ4W8qM5",
+        "GZVz",
+        "nfmttjyambjzdzxrbmr"
+      ],
+      "default_job": null,
+      "default_watch": false,
+      "export_locations": false,
+      "exports": {},
+      "grace_period": null,
+      "help_line": null,
+      "ignore": [
+        "ipsum",
+        "lorem ",
+        "uzotknpx",
+        "hhlepbadcwnrueyj",
+        "nvkwqvhxcnifhjs"
+      ],
+      "listen": null,
+      "on_change_strategy": null,
+      "show_changes_count": true,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "vim_keys": true,
+      "wrap": false
+    },
+    {
+      "allow_failures": null,
+      "command": [
+        "mzaxsji",
+        "0kU1wmgisK2p5kFU347f1",
+        "a",
+        "fzQPaXtH",
+        "sit consec"
+      ],
+      "default_job": "l",
+      "expand_env_vars": false,
+      "export_locations": null,
+      "exports": {},
+      "help_line": null,
+      "hide_scrollbar": true,
+      "ignore": [
+        "xwywfceo",
+        "z",
+        "u",
+        "lorem lorem c",
+        "sit lorem amet dol"
+      ],
+      "ignored_lines": [
+        "GdiNeHHuCtjwie",
+        "cNEIFF3KL",
+        "nb9180hkzORPCn",
+        "SGl3r1Ms4b17tB1b8IK3",
+        "consectetur "
+      ],
+      "jobs": {
+        "pgieji": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "ipsum dol": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": false,
+      "kill": [
+        "Kir1Ru7EIQ3sizY2I",
+        "H1Q3ee0WoUsEtmVG",
+        "ihkcmxesmrqfjzchzkql",
+        "ipsum amet ",
+        "do"
+      ],
+      "on_failure": null,
+      "on_success": "adipisc",
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "vim_keys": null,
+      "watch": null
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": true,
+      "analyzer": 44,
+      "apply_gitignore": false,
+      "command": [
+        "jvjgxbxitlcbcceh",
+        "igbpsjbi",
+        "VbXN8F9NL",
+        "avylqxatfrmfuwofxd",
+        "dwI"
+      ],
+      "default_job": "rsddll",
+      "env": {
+        "ipsum l": "W9ayRt3wx",
+        "dolor con": "xigdswnyjp"
+      },
+      "export": null,
+      "exports": {
+        "tbsmsqzk": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        },
+        "dbdfgvr": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "extraneous_args": false,
+      "grace_period": "ueUnCtFYZDw",
+      "help_line": null,
+      "ignore": [
+        "gQMxzHJu",
+        "aimtvezsfe",
+        "I682OWu48ey",
+        "bk3oK",
+        "sit adipiscin"
+      ],
+      "ignored_lines": [
+        "hdzfrjxhk",
+        "Oqh2tulCcJFP",
+        "I1OAuuqM51T4xf8KFC",
+        "qxseq",
+        "ipsum "
+      ],
+      "keybindings": "SgqpSYFNLKKNXPA",
+      "kill": [
+        "sit amet ipsum ",
+        "qfrnauvdjfbjfndm",
+        "lorem ipsum conse",
+        "0ClmQ",
+        "paajumuiz"
+      ],
+      "listen": null,
+      "need_stdout": null,
+      "on_change_strategy": 12.69,
+      "on_success": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "summary": true,
+      "watch": [
+        "dolor amet ",
+        "chkizagsqipkgweyifft",
+        "kxwtxp",
+        "consectetur dolor con",
+        "mkiinggekpprlatescgm"
+      ],
+      "workdir": null,
+      "wrap": true
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": null,
+      "allow_warnings": null,
+      "background": true,
+      "default_job": "ygjezfgccaanhjp",
+      "default_watch": true,
+      "expand_env_vars": false,
+      "export": "jrnbfrabgmaz",
+      "hide_scrollbar": true,
+      "ignore": [
+        "adipiscing lorem cons",
+        "WHO9CK9JYVArJsxa8",
+        "IqM",
+        "wzfdyvqwugza",
+        "consectetur adip"
+      ],
+      "kill": null,
+      "listen": true,
+      "on_change_strategy": false,
+      "on_failure": null,
+      "reverse": true,
+      "show_changes_count": null,
+      "watch": null,
+      "workdir": null
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": null,
+      "allow_warnings": true,
+      "analyzer": null,
+      "apply_gitignore": null,
+      "background": null,
+      "command": [
+        "ftwoe",
+        "adipiscing ",
+        "sit sit adipisc",
+        "v1KSgdAtqY5ngl",
+        "hwaked"
+      ],
+      "default_watch": false,
+      "expand_env_vars": false,
+      "export_locations": false,
+      "grace_period": "cons",
+      "ignored_lines": null,
+      "keybindings": 60,
+      "need_stdout": null,
+      "on_failure": null,
+      "reverse": true,
+      "show_changes_count": true,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "summary": null,
+      "vim_keys": false,
+      "watch": [
+        "kjufugst",
+        "Utfh",
+        "adipiscing adipiscing",
+        "swgsmhe",
+        "ip"
+      ],
+      "workdir": null
+    },
+    {
+      "additional_alias_args": null,
+      "allow_warnings": true,
+      "apply_gitignore": false,
+      "background": true,
+      "command": [
+        "lorem",
+        "czvgsajuvkhk",
+        "dolor adi",
+        "ipsum lo",
+        "psyz"
+      ],
+      "default_job": null,
+      "env": {
+        "rslyck": "evPYyvcNOD75",
+        "cksell": "jyrfl"
+      },
+      "export_locations": true,
+      "exports": {},
+      "hide_scrollbar": false,
+      "ignore": [
+        "EroYem8wKMQ0Xrv",
+        "ryYocgm2j",
+        "fZM4d",
+        "gob9VSbqG8h3FUEj",
+        "cons"
+      ],
+      "ignored_lines": null,
+      "jobs": {},
+      "kill": null,
+      "listen": false,
+      "on_success": "ipsu",
+      "show_changes_count": null,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "wrap": false
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": null,
+      "allow_warnings": true,
+      "analyzer": 6,
+      "apply_gitignore": null,
+      "background": false,
+      "export": 2,
+      "exports": {
+        "owmuwwldt": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "extraneous_args": true,
+      "grace_period": null,
+      "jobs": {
+        "ipsum ad": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "jMJep": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "kill": null,
+      "listen": null,
+      "on_change_strategy": null,
+      "on_success": "NTgdCKCdqRG6dMKBd",
+      "reverse": null,
+      "show_changes_count": true,
+      "summary": false,
+      "vim_keys": null,
+      "watch": [
+        "5Az7gerIWDFpBAngT80",
+        "5w1SG8P39SBr6w6",
+        "YpiYvzd82e",
+        "t9GTimr",
+        "adipiscing dol"
+      ],
+      "workdir": "fibevb"
+    },
+    {
+      "allow_warnings": false,
+      "apply_gitignore": null,
+      "command": [
+        "y3unODFcc",
+        "nafkhcdtomatzsmsq",
+        "pyeew",
+        "72Ek50bYa0K5NiG3yM",
+        "rvcuhjxopofs"
+      ],
+      "default_watch": null,
+      "expand_env_vars": null,
+      "export": true,
+      "export_locations": null,
+      "extraneous_args": null,
+      "help_line": null,
+      "ignore": [
+        "lorem adi",
+        "ipsum ",
+        "cb61gw",
+        "b6Ir3v9",
+        "jpuopqzxliunhiggmjdx"
+      ],
+      "ignored_lines": null,
+      "need_stdout": null,
+      "on_change_strategy": 97,
+      "on_failure": "zncm",
+      "on_success": null,
+      "reverse": false,
+      "show_changes_count": null,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "vim_keys": null,
+      "workdir": "oixtkvaucpsy",
+      "wrap": true
+    },
+    {
+      "additional_alias_args": [
+        "eluxprnwfrp",
+        "drbmrumfwdrcyao",
+        "rfylixegkwjoegjsv",
+        "sit ipsum",
+        "8Z2v7Vi7h"
+      ],
+      "allow_warnings": null,
+      "analyzer": "OW7Kj",
+      "apply_gitignore": null,
+      "background": null,
+      "expand_env_vars": null,
+      "export_locations": false,
+      "exports": {
+        "Dpnmuv1LK": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "extraneous_args": true,
+      "help_line": true,
+      "hide_scrollbar": null,
+      "ignore": [
+        "SXj82qd54jtigQeVn9",
+        "sit lorem s",
+        "uscg",
+        "tmebmfabp",
+        "oKLFI4hHyVpnp0wE"
+      ],
+      "keybindings": 27.03,
+      "kill": null,
+      "listen": false,
+      "need_stdout": true,
+      "on_change_strategy": 60.75,
+      "on_failure": null,
+      "on_success": null,
+      "show_changes_count": true,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "vim_keys": false,
+      "watch": null
+    },
+    {
+      "allow_failures": null,
+      "command": [
+        "adipiscing lo",
+        "consectetur ips",
+        "3Df9iY",
+        "VQm0XpGOwPMA",
+        "amet cons"
+      ],
+      "expand_env_vars": true,
+      "exports": {
+        "xovqzbui": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "extraneous_args": false,
+      "help_line": null,
+      "hide_scrollbar": false,
+      "keybindings": "itgjfhhlilxebz",
+      "kill": null,
+      "need_stdout": null,
+      "on_change_strategy": "vhumnhdfjeubvo",
+      "on_failure": "ugqedicizapsofn",
+      "on_success": "sit ipsum consect",
+      "show_changes_count": false,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "vim_keys": false,
+      "watch": [
+        "HFJ318",
+        "y0qo",
+        "consecte",
+        "mwjhu",
+        "c"
+      ],
+      "workdir": null
+    },
+    {
+      "additional_alias_args": [
+        "consectetur amet a",
+        "akcm",
+        "brgeocahpqviqzyfjfpm",
+        "csr7vaKqKYd41WXtEMr",
+        "13xsZJ1pu9hpOwn2Wj"
+      ],
+      "allow_failures": null,
+      "command": [
+        "dxamjiojblbpqqktqwqy",
+        "hwrpmt",
+        "lorem ",
+        "1SW4EC2UljVlTwPBVMM",
+        "I"
+      ],
+      "default_job": "kutozageargcek",
+      "expand_env_vars": true,
+      "export": null,
+      "export_locations": null,
+      "exports": {},
+      "extraneous_args": null,
+      "grace_period": null,
+      "help_line": null,
+      "hide_scrollbar": false,
+      "ignore": [
+        "amet amet ame",
+        "qzahyhsndiecahuqeezfo",
+        "jory",
+        "kSrDH",
+        "wapfjihuhieashd"
+      ],
+      "ignored_lines": null,
+      "jobs": {
+        "GXMgfAzPM": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "rkfyfnxc": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": "amet ",
+      "kill": null,
+      "need_stdout": null,
+      "on_change_strategy": null,
+      "on_failure": "oesF1xMXUrsojnrf4s",
+      "vim_keys": true,
+      "watch": [
+        "CSNp8DMTig71WY",
+        "adipiscing l",
+        "jfByhuqIX6uoym7U4qb",
+        "npninogdhzavvwcxlk",
+        "sapxstkbucrgekpakkm"
+      ],
+      "workdir": "lguqjdodnvmn",
+      "wrap": null
+    },
+    {
+      "additional_alias_args": [
+        "qnswrdzddek",
+        "ipsum sit adip",
+        "ad",
+        "fxzzqyuamjknmjd",
+        "sqxcnkiflnwsop"
+      ],
+      "allow_warnings": null,
+      "apply_gitignore": null,
+      "background": false,
+      "expand_env_vars": null,
+      "export_locations": null,
+      "exports": {},
+      "grace_period": null,
+      "help_line": true,
+      "ignore": [
+        "qbzynrtumrqcsnol",
+        "bifkpenkr",
+        "adipiscing lo",
+        "zkjkqwopefws",
+        "8TV2mZhlfTBPm9Ci"
+      ],
+      "jobs": {},
+      "kill": null,
+      "need_stdout": false,
+      "on_change_strategy": 33.73,
+      "on_failure": null,
+      "on_success": null,
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": true,
+      "watch": [
+        "mWzUT",
+        "ddistzjthwzcjnp",
+        "txnRlboA5bWssH9b1lav",
+        "HWsvBK4YHRPqfNcIhGA4",
+        "sfgimqfxgggp"
+      ],
+      "workdir": null
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": true,
+      "analyzer": 29.97,
+      "background": false,
+      "default_job": null,
+      "env": {
+        "dolor lore": "axdfciujosv"
+      },
+      "expand_env_vars": null,
+      "export": false,
+      "extraneous_args": false,
+      "ignored_lines": null,
+      "jobs": {},
+      "kill": [
+        "citK2e3AlLSQ",
+        "sy",
+        "mawlyxqiqg",
+        "lorem adipiscing adi",
+        "lorem ipsum a"
+      ],
+      "on_change_strategy": 20.83,
+      "on_failure": "hk",
+      "on_success": null,
+      "reverse": false,
+      "show_changes_count": null,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "watch": [
+        "edgekaw",
+        "wyigwhwbki",
+        "1Rdmmg6NQmFpHjZIOmLZ",
+        "QWl48qzwxmZWtP0Qbq",
+        "rgffqcnxmkpjzkux"
+      ]
+    },
+    {
+      "additional_alias_args": [
+        "pqjlxvghbtbrywjv",
+        "Gdehr",
+        "amet lo",
+        "a",
+        "l"
+      ],
+      "apply_gitignore": null,
+      "background": false,
+      "command": [
+        "yomnymomyoe",
+        "lorem dol",
+        "ipsum ",
+        "forfe",
+        "dolor dolor "
+      ],
+      "expand_env_vars": false,
+      "exports": {},
+      "extraneous_args": null,
+      "ignore": [
+        "xcotcsboczm",
+        "dolor ipsum dolor sit",
+        "Lo",
+        "gmyqmipqmgkdisxjjrwgy",
+        "ga"
+      ],
+      "ignored_lines": [
+        "wlhhfk",
+        "amet lorem s",
+        "NIGXMAlKauxZRK8hZ",
+        "hzJ8YIPV0M",
+        "Z"
+      ],
+      "jobs": {
+        "uqehxkfpfq": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "tqchah": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": 92,
+      "need_stdout": null,
+      "on_failure": "bL6OXGa0xpe",
+      "on_success": "yccalmsxgwtgr",
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "summary": null,
+      "workdir": "row",
+      "wrap": null
+    },
+    {
+      "additional_alias_args": [
+        "CWBCpl",
+        "fukcvursqkuv",
+        "uwrlijjxvfgby",
+        "ln",
+        "lqv"
+      ],
+      "allow_failures": null,
+      "apply_gitignore": null,
+      "command": [
+        "yrljqesswfpopkayxex",
+        "4FnxzOVpFK5yrGsX8dhL",
+        "kgz1NDGmoqTOdJ7ej8G3",
+        "9qtnUgBVStj",
+        "qpcihnhpmzgaderoo"
+      ],
+      "env": {},
+      "expand_env_vars": true,
+      "export": 70.07,
+      "export_locations": null,
+      "exports": {
+        "AgLGSJrj7n": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "help_line": true,
+      "hide_scrollbar": false,
+      "ignored_lines": null,
+      "keybindings": 77,
+      "kill": [
+        "consectetur",
+        "adipi",
+        "1eVpy",
+        "cQhSF3e3eLwIo6GODV",
+        "QmF"
+      ],
+      "need_stdout": null,
+      "reverse": null,
+      "show_changes_count": false,
+      "watch": null,
+      "workdir": "qLVJqAn0yo4JH8MXuF",
+      "wrap": null
+    },
+    {
+      "additional_alias_args": null,
+      "background": null,
+      "command": [
+        "Nd1",
+        "uwepsmredwemlkheepzwd",
+        "1",
+        "adipiscing",
+        "dxL5ue7S0EstiwI77En7a"
+      ],
+      "default_job": null,
+      "extraneous_args": true,
+      "help_line": null,
+      "ignore": [
+        "sit sit dolor consect",
+        "skopboiienkuqk",
+        "vuoimbv",
+        "SQ7yYhF",
+        "FaXwNoqrt2"
+      ],
+      "ignored_lines": [
+        "fyrwlmullcq",
+        "lorem adi",
+        "txvfmvkchvayapgb",
+        "ejftxwehpygthhoc",
+        "sit sit ipsum d"
+      ],
+      "jobs": {
+        "dpkqosajm": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "5O2PYZ": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": "amet sit amet",
+      "on_change_strategy": 51,
+      "reverse": null,
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": null,
+      "wrap": true
+    },
+    {
+      "allow_failures": null,
+      "analyzer": 17.28,
+      "apply_gitignore": true,
+      "env": {},
+      "help_line": null,
+      "hide_scrollbar": null,
+      "ignore": [
+        "bexccxhaoekivyym",
+        "oqrxgx",
+        "nhykbzqlakyy",
+        "0Z07q",
+        "lorem am"
+      ],
+      "ignored_lines": null,
+      "jobs": {},
+      "keybindings": null,
+      "kill": [
+        "pkdhwjwetjanoa",
+        "pxhzbhdlvmmqezdlsudmm",
+        "hkelubvblpqydc",
+        "mJlOnQp",
+        "cydyxfrdzhrjgd"
+      ],
+      "listen": null,
+      "on_change_strategy": false,
+      "on_failure": null,
+      "reverse": false,
+      "show_changes_count": null,
+      "vim_keys": true,
+      "workdir": "bsSk"
+    },
+    {
+      "additional_alias_args": [
+        "0QwsKqHAU",
+        "lurbmqedrhrh",
+        "lqb",
+        "a",
+        "ig"
+      ],
+      "allow_failures": false,
+      "allow_warnings": false,
+      "analyzer": 55.9,
+      "background": null,
+      "command": [
+        "NmlzL9RQkoVPFA9uOjPKh",
+        "ldvoiinqiqa",
+        "fqpdmfa",
+        "cdyqjkbccbscl",
+        "sit"
+      ],
+      "default_job": null,
+      "default_watch": true,
+      "extraneous_args": true,
+      "ignore": [
+        "sit sit consectet",
+        "lhattgxfzojfypxd",
+        "hORDnVEO3odn",
+        "hxdxytclousawx",
+        "bxcuqpkkuokyommnewrcs"
+      ],
+      "ignored_lines": null,
+      "jobs": {},
+      "kill": [
+        "eysffalujqvkrpowinrg",
+        "lorem sit sit",
+        "ad",
+        "sit",
+        "consectetur dolor a"
+      ],
+      "listen": null,
+      "need_stdout": false,
+      "on_change_strategy": 76,
+      "on_failure": "dpadveuouz",
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": true,
+      "vim_keys": null
+    },
+    {
+      "allow_failures": false,
+      "allow_warnings": true,
+      "background": true,
+      "command": [
+        "lyvlypOggwNsb",
+        "v5mLx3Wfb3OoDTJQy",
+        "lpzllxohynhfcogxftqwj",
+        "ezkgajudqh",
+        "Q3FWSCRv7dni"
+      ],
+      "default_watch": false,
+      "env": {},
+      "export": true,
+      "exports": {
+        "lorem con": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "extraneous_args": true,
+      "ignore": [
+        "mlgtqipbiamcq",
+        "gymmqyhdewn",
+        "rzcusfesqzuhfymyfn",
+        "co",
+        "yJmf7LSopbnToC"
+      ],
+      "jobs": {
+        "ipsum lor": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": true,
+      "listen": null,
+      "need_stdout": null,
+      "on_change_strategy": "eXVnms",
+      "reverse": true,
+      "show_changes_count": false,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "summary": true,
+      "vim_keys": null,
+      "watch": [
+        "adipi",
+        "adipiscing",
+        "nddoqkfedmvquo",
+        "g3TtXRQKg1j8UxLUbnpn",
+        "hnudos"
+      ],
+      "workdir": "trfaaKpaF"
+    },
+    {
+      "additional_alias_args": null,
+      "allow_warnings": null,
+      "background": null,
+      "default_job": null,
+      "default_watch": true,
+      "expand_env_vars": null,
+      "export": 68.87,
+      "export_locations": null,
+      "exports": {},
+      "extraneous_args": false,
+      "grace_period": "ywuzogryukphnvplzcp",
+      "jobs": {},
+      "keybindings": "ipsum d",
+      "kill": [
+        "sit",
+        "u",
+        "Te",
+        "dafhxxoiv",
+        "ame"
+      ],
+      "listen": null,
+      "need_stdout": null,
+      "on_success": null,
+      "reverse": true,
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "workdir": "rplvdbeogjjdvhyiobmxc",
+      "wrap": true
+    },
+    {
+      "additional_alias_args": null,
+      "analyzer": 71,
+      "background": null,
+      "command": [
+        "mci",
+        "consectetu",
+        "sit",
+        "dxo",
+        "qtlzgapnf"
+      ],
+      "default_job": "a",
+      "env": {},
+      "expand_env_vars": null,
+      "export": 71,
+      "grace_period": "LI",
+      "help_line": null,
+      "hide_scrollbar": false,
+      "ignore": [
+        "hxzgehnnzsof",
+        "lorem sit sit si",
+        "50b1q5",
+        "cpkaefqadeeb",
+        "sexaswysxcpgc"
+      ],
+      "jobs": {
+        "consec": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "vddguw": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": 15.26,
+      "listen": null,
+      "need_stdout": null,
+      "reverse": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": true,
+      "vim_keys": false,
+      "watch": null,
+      "workdir": "llfsnjo",
+      "wrap": true
+    },
+    {
+      "additional_alias_args": [
+        "8rYIW4yOYVaW",
+        "u",
+        "consectetur",
+        "ipsum sit ipsum am",
+        "ipsum"
+      ],
+      "allow_failures": false,
+      "allow_warnings": null,
+      "analyzer": 69.99,
+      "apply_gitignore": true,
+      "default_job": null,
+      "env": {
+        "fhfgd": "AD",
+        "xSrqOaJ": "r"
+      },
+      "expand_env_vars": null,
+      "extraneous_args": true,
+      "grace_period": null,
+      "help_line": null,
+      "ignored_lines": null,
+      "jobs": {
+        "0WxBMb3Y": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": null,
+      "kill": null,
+      "need_stdout": false,
+      "on_change_strategy": null,
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "summary": false,
+      "vim_keys": false,
+      "wrap": false
+    },
+    {
+      "additional_alias_args": [
+        "ipsum consectetur ip",
+        "amet ipsum consect",
+        "wfleocsrcibo",
+        "adipiscing sit",
+        "zjfxeup"
+      ],
+      "apply_gitignore": true,
+      "background": null,
+      "command": [
+        "dqjdkxzqlovdym",
+        "ad",
+        "dyddhzkywimggwjrnavi",
+        "Yyzxf25SyBtOO",
+        "amet dolor"
+      ],
+      "env": {
+        "kxbhr": "nygwkrphrpz"
+      },
+      "export": false,
+      "exports": {
+        "zfreqrt": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        },
+        "adipiscing": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "extraneous_args": true,
+      "grace_period": "lfttmnqqttfachpyk",
+      "help_line": null,
+      "hide_scrollbar": false,
+      "ignore": [
+        "dolor ",
+        "skosjfmvsexzoqx",
+        "nzncub",
+        "onqpkepbaiftelskudehj",
+        "uejyntcddoanjjugpz"
+      ],
+      "ignored_lines": [
+        "lhtdqnygxuu",
+        "TL32k3kB",
+        "cysj62Ysh",
+        "berwruzjhfdrty",
+        "SWkzdoq0fa6Zi"
+      ],
+      "kill": null,
+      "listen": null,
+      "need_stdout": false,
+      "on_success": "DLwjTESgL4k",
+      "reverse": true,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "vim_keys": true,
+      "watch": [
+        "IouJEgM6Bt5Pl3",
+        "sit ipsum",
+        "dolor lorem ",
+        "lorem adi",
+        "amet consect"
+      ],
+      "workdir": null
+    },
+    {
+      "additional_alias_args": null,
+      "allow_warnings": null,
+      "apply_gitignore": true,
+      "background": null,
+      "command": [
+        "iitfeejqzfyoxveqdakuo",
+        "lorem a",
+        "xkqtbgqysriroyz",
+        "vxqgwxstnmpdr",
+        "consectetur"
+      ],
+      "default_job": "nXTwCQDYhK",
+      "default_watch": false,
+      "expand_env_vars": null,
+      "export_locations": null,
+      "exports": {
+        "yebfc": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "extraneous_args": null,
+      "grace_period": null,
+      "help_line": null,
+      "ignore": [
+        "pjmz5L8yqSl9yqqs69Io",
+        "f",
+        "qwvjrlsezaqjudxatsnej",
+        "adipiscing amet",
+        "qdp"
+      ],
+      "ignored_lines": [
+        "1JnyCR1fcBbjgfMfJ7iVK",
+        "jossqm",
+        "adipiscing ",
+        "consectetu",
+        "l"
+      ],
+      "jobs": {
+        "tjmmyrngpn": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "kill": [
+        "sm",
+        "d",
+        "dolor dolor",
+        "ecitqyscifgrlta",
+        "consectetur conse"
+      ],
+      "need_stdout": null,
+      "on_change_strategy": true,
+      "on_failure": "ipsum d",
+      "show_changes_count": false,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": null,
+      "vim_keys": null,
+      "watch": null,
+      "workdir": "migpbbbrulqvn",
+      "wrap": true
+    },
+    {
+      "additional_alias_args": [
+        "mrffhsfzbfcujmiqkf",
+        "nOMu1qWoeUz2nf",
+        "w",
+        "jclejQTwO",
+        "consectetur sit "
+      ],
+      "allow_failures": true,
+      "allow_warnings": null,
+      "analyzer": true,
+      "default_job": "fyozzc",
+      "default_watch": null,
+      "env": {},
+      "expand_env_vars": null,
+      "export": 27.87,
+      "exports": {},
+      "extraneous_args": false,
+      "grace_period": null,
+      "help_line": null,
+      "ignored_lines": null,
+      "keybindings": null,
+      "kill": null,
+      "listen": null,
+      "need_stdout": false,
+      "on_change_strategy": 28.82,
+      "reverse": true,
+      "show_changes_count": true,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": false,
+      "watch": null,
+      "workdir": "Issp2",
+      "wrap": null
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": false,
+      "allow_warnings": null,
+      "analyzer": 92,
+      "apply_gitignore": false,
+      "background": true,
+      "env": {
+        "nmkmbp": "mAL0iXweosh",
+        "P3ZND6BM1": "UL4MH8G"
+      },
+      "expand_env_vars": null,
+      "export_locations": false,
+      "extraneous_args": true,
+      "grace_period": "dolor ",
+      "help_line": true,
+      "hide_scrollbar": null,
+      "ignore": [
+        "ipsu",
+        "ipsum sit cons",
+        "dolor consecte",
+        "consectetur con",
+        "adipisci"
+      ],
+      "need_stdout": null,
+      "on_change_strategy": 18.48,
+      "on_failure": "qmvhus",
+      "reverse": true,
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "vim_keys": false,
+      "workdir": "gzxdz"
+    },
+    {
+      "allow_failures": true,
+      "background": null,
+      "default_job": "conse",
+      "default_watch": true,
+      "expand_env_vars": null,
+      "export_locations": null,
+      "exports": {
+        "qcffsnvsx": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        },
+        "xnshmdkgc": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "grace_period": "99IVRsILyY",
+      "help_line": true,
+      "hide_scrollbar": false,
+      "jobs": {
+        "fkpqjm": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "ipsum l": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": 53.64,
+      "listen": true,
+      "need_stdout": false,
+      "on_change_strategy": "bawqelhwhstignk",
+      "on_failure": null,
+      "show_changes_count": null,
+      "vim_keys": true,
+      "watch": [
+        "amet amet d",
+        "lore",
+        "ocbynwutuggltutpmfrq",
+        "KouwP9FfDySOEilVg",
+        "wxmgOtCR"
+      ],
+      "workdir": null
+    },
+    {
+      "analyzer": "uaexd",
+      "background": true,
+      "command": [
+        "yehblgywbaude",
+        "5v9m0cPXHN49lGcxij",
+        "deiRhDIzZDlAbVb2SENS",
+        "b",
+        "s"
+      ],
+      "default_job": "KYLtJ7N",
+      "env": {
+        "kogeww": "cfbnfngfmbwokoymkfj",
+        "eFFcJj8kq": "s"
+      },
+      "expand_env_vars": true,
+      "export": 39,
+      "exports": {
+        "dolor": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "extraneous_args": false,
+      "grace_period": "dolor dol",
+      "help_line": null,
+      "ignore": [
+        "goepdyh",
+        "ywcnjvdt",
+        "consectetur",
+        "nI4k5sVMjhHfxpOYkmY8",
+        "mlxmblhrvbi"
+      ],
+      "kill": null,
+      "on_change_strategy": 62.06,
+      "on_failure": null,
+      "on_success": "WU6rE5uRz",
+      "reverse": false,
+      "show_changes_count": false,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "vim_keys": false,
+      "watch": null,
+      "workdir": "ipsu",
+      "wrap": false
+    },
+    {
+      "allow_failures": true,
+      "allow_warnings": null,
+      "analyzer": "drjelkl",
+      "command": [
+        "yvngyz",
+        "jsrevvyywoqmqjhwvnxo",
+        "ipsum lorem ",
+        "kjwtofpetluneasb",
+        "ggxkcuxmewigbwgdjsz"
+      ],
+      "default_job": null,
+      "default_watch": false,
+      "export": true,
+      "extraneous_args": true,
+      "help_line": null,
+      "ignored_lines": null,
+      "jobs": {
+        "Ogp4YeOn79": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": 44,
+      "listen": null,
+      "on_failure": null,
+      "on_success": "d",
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "vim_keys": null
+    },
+    {
+      "allow_warnings": null,
+      "analyzer": "adipis",
+      "apply_gitignore": null,
+      "default_job": null,
+      "env": {
+        "ru1ifftS": "ILEAjimpt3ni"
+      },
+      "expand_env_vars": false,
+      "export": false,
+      "export_locations": null,
+      "exports": {
+        "P2OiKTH": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        },
+        "tsmnf": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "grace_period": "ipsum dolor co",
+      "hide_scrollbar": null,
+      "listen": true,
+      "need_stdout": false,
+      "on_failure": null,
+      "reverse": null,
+      "show_changes_count": false,
+      "summary": false,
+      "vim_keys": true,
+      "watch": null,
+      "wrap": false
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": null,
+      "analyzer": null,
+      "background": false,
+      "default_job": "djbem",
+      "default_watch": null,
+      "env": {
+        "Yet4X5cy": "ipsum lore"
+      },
+      "expand_env_vars": true,
+      "exports": {
+        "a35c3YhFv": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        },
+        "dolor c": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "extraneous_args": null,
+      "grace_period": null,
+      "ignore": [
+        "wxxykkltzrlcdbdakhy",
+        "bQ4J4",
+        "rg811jNd",
+        "amet",
+        "lssaqe"
+      ],
+      "jobs": {
+        "ayyedenqqd": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "kill": null,
+      "need_stdout": null,
+      "on_failure": "dolor l",
+      "on_success": "am",
+      "reverse": null,
+      "summary": null,
+      "vim_keys": false,
+      "watch": [
+        "lorem l",
+        "suqFJez2SFyu",
+        "dolor",
+        "adi",
+        "sm"
+      ],
+      "wrap": null
+    },
+    {
+      "additional_alias_args": [
+        "jzhesiccoknrw",
+        "rqbsvli",
+        "yftmzzmxxck",
+        "sit amet do",
+        "dolor "
+      ],
+      "allow_failures": null,
+      "analyzer": null,
+      "background": true,
+      "command": [],
+      "default_job": null,
+      "default_watch": false,
+      "expand_env_vars": null,
+      "export_locations": null,
+      "exports": {},
+      "extraneous_args": true,
+      "grace_period": "consectetur c",
+      "ignore": [
+        "jNc",
+        "ncbjzlzjicpeyqaqmr",
+        "oycrmxqknpokkyvlxzej"
+      ],
+      "ignored_lines": [
+        "jerhwt",
+        "9x",
+        "lorem amet adipisci",
+        "consectetur adi"
+      ],
+      "jobs": {
+        "qcWLih94a": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "y8IFku": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": 16,
+      "listen": true,
+      "need_stdout": null,
+      "on_change_strategy": "ywvkqwitlxjold",
+      "on_failure": null,
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "vim_keys": null,
+      "workdir": "GJo",
+      "wrap": false
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": true,
+      "allow_warnings": null,
+      "apply_gitignore": true,
+      "background": null,
+      "command": [
+        "iswinq",
+        "q",
+        "lzP1i",
+        "lorem adipis",
+        "dvgflovcwgjtm"
+      ],
+      "default_job": "dolor adipisci",
+      "env": {
+        "sit sit": "mYRLufpqVJ"
+      },
+      "export_locations": false,
+      "extraneous_args": null,
+      "grace_period": "sywbcbtms",
+      "help_line": true,
+      "ignore": [],
+      "ignored_lines": [],
+      "keybindings": false,
+      "listen": null,
+      "on_change_strategy": "lorem am",
+      "on_failure": null,
+      "on_success": "hgxgtssftmbwubpqvrccy",
+      "show_changes_count": true,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": false,
+      "vim_keys": true
+    },
+    {
+      "allow_failures": false,
+      "allow_warnings": null,
+      "background": null,
+      "default_job": "a36Xo",
+      "default_watch": null,
+      "env": {
+        "lxzwfkflw": "psmWqlKUaynFtT6w"
+      },
+      "expand_env_vars": null,
+      "export": 41,
+      "export_locations": true,
+      "exports": {},
+      "grace_period": "dd",
+      "help_line": false,
+      "ignore": [
+        "ecmadihu0PaeuCCHS"
+      ],
+      "jobs": {
+        "45YMTr": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": true,
+      "kill": [],
+      "listen": false,
+      "need_stdout": null,
+      "on_change_strategy": "sit amet",
+      "reverse": true,
+      "show_changes_count": false,
+      "summary": null,
+      "watch": [
+        "wqruwodyzkseey"
+      ],
+      "workdir": null
+    },
+    {
+      "allow_failures": null,
+      "allow_warnings": null,
+      "analyzer": 62.97,
+      "background": false,
+      "command": [
+        "XSVEcQQ3C",
+        "tcc",
+        "iwnusknryhmwyos"
+      ],
+      "expand_env_vars": null,
+      "exports": {
+        "mQ3jV": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        },
+        "Ja0LQnVV": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "grace_period": null,
+      "help_line": null,
+      "hide_scrollbar": null,
+      "keybindings": false,
+      "kill": [
+        "mzkfdgdydvumbfykudbj",
+        "xwuhejqenoqv",
+        "consectetur si",
+        "OYRGQg4IqL80U3ZsPr"
+      ],
+      "listen": false,
+      "need_stdout": null,
+      "on_change_strategy": "lorem lore",
+      "on_success": null,
+      "reverse": false,
+      "show_changes_count": true,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "vim_keys": null,
+      "workdir": null,
+      "wrap": null
+    },
+    {
+      "additional_alias_args": null,
+      "apply_gitignore": false,
+      "background": false,
+      "command": [
+        "amet ad",
+        "nkkabf"
+      ],
+      "default_job": "vaygoyxguvxhlnqcqgs",
+      "default_watch": null,
+      "env": {
+        "lorem cons": "dolor consectetur l",
+        "lorem sit": "y"
+      },
+      "expand_env_vars": null,
+      "export": null,
+      "export_locations": null,
+      "extraneous_args": false,
+      "grace_period": "KWnuw",
+      "help_line": null,
+      "ignore": [
+        "Zb0E6rV0c",
+        "vrxlptldvn",
+        "ipsum consectet",
+        "miclkoq"
+      ],
+      "ignored_lines": [
+        "gv"
+      ],
+      "jobs": {
+        "jsqrkv": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "amet ame": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": 39,
+      "kill": null,
+      "on_change_strategy": 87,
+      "on_success": "cifibviobxbsqfyle",
+      "reverse": null,
+      "summary": null,
+      "vim_keys": null,
+      "watch": [
+        "amet amet amet dolo",
+        "lorem lorem conse"
+      ]
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": null,
+      "allow_warnings": true,
+      "analyzer": null,
+      "apply_gitignore": null,
+      "background": null,
+      "command": [
+        "sajztpqrekher",
+        "cJ",
+        "Mib0UXGGLW"
+      ],
+      "default_job": null,
+      "default_watch": null,
+      "env": {
+        "ygfqxyupj": "wtm",
+        "twpazKzlnc": "L3JBpCWjmDmlE"
+      },
+      "export": "jbypuqxvt",
+      "extraneous_args": false,
+      "help_line": true,
+      "hide_scrollbar": null,
+      "ignore": [
+        "S2vZ3r8pNsVKnmzY",
+        "jcxedkhhe",
+        "am",
+        "Cpax",
+        "nenuhokorjpalddauryh"
+      ],
+      "jobs": {
+        "elnhw": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "khlklhkgtp": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": "b7n9BMVhxf",
+      "listen": null,
+      "on_change_strategy": null,
+      "on_failure": "fifthussmhjcf",
+      "on_success": "dolor",
+      "reverse": true,
+      "show_changes_count": false,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "summary": true
+    },
+    {
+      "additional_alias_args": [
+        "bnnnpnuj",
+        "cukp"
+      ],
+      "allow_warnings": null,
+      "analyzer": false,
+      "apply_gitignore": false,
+      "background": true,
+      "default_job": null,
+      "default_watch": false,
+      "env": {
+        "consec": "dolor ipsum ip",
+        "sit d": "dolor lorem "
+      },
+      "expand_env_vars": false,
+      "export": "amet lorem",
+      "exports": {
+        "iduzdhyv": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "grace_period": null,
+      "ignore": [
+        "tnyeypcvwvlppsk"
+      ],
+      "ignored_lines": null,
+      "jobs": {},
+      "keybindings": 1.72,
+      "kill": null,
+      "listen": true,
+      "need_stdout": null,
+      "on_failure": null,
+      "on_success": "npzdlcn",
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": false,
+      "watch": null,
+      "wrap": true
+    },
+    {
+      "allow_failures": true,
+      "allow_warnings": null,
+      "command": [
+        "lorem adipiscing c",
+        "ipsum ipsum ipsum a",
+        "qulsn",
+        "consectetur amet ips"
+      ],
+      "env": {},
+      "expand_env_vars": null,
+      "export": null,
+      "grace_period": null,
+      "hide_scrollbar": false,
+      "ignore": [
+        "erkgazbynkrhyjkrnd",
+        "3ar",
+        "nngopmxuhxincrbewx",
+        "adipiscing sit ad"
+      ],
+      "jobs": {},
+      "listen": false,
+      "on_change_strategy": null,
+      "reverse": null,
+      "vim_keys": null,
+      "watch": [
+        "dolo"
+      ],
+      "workdir": null
+    },
+    {
+      "allow_failures": null,
+      "allow_warnings": true,
+      "analyzer": true,
+      "apply_gitignore": null,
+      "command": [
+        "Vtd",
+        "ckeodonqoozvwbuarr",
+        "JNbzrwz7"
+      ],
+      "default_watch": false,
+      "env": {},
+      "export": "adipiscin",
+      "export_locations": null,
+      "exports": {
+        "I5zI2P": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        },
+        "dolor lor": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "grace_period": null,
+      "help_line": null,
+      "hide_scrollbar": null,
+      "ignore": [
+        "ipsum consectetur d",
+        "lorem lorem sit ame"
+      ],
+      "ignored_lines": null,
+      "jobs": {
+        "AIIkcxwBd1": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": 89,
+      "kill": [],
+      "need_stdout": null,
+      "on_change_strategy": 51,
+      "on_success": "consectetur adipiscin",
+      "reverse": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": false
+    },
+    {
+      "additional_alias_args": [
+        "ossyilrdjblqk"
+      ],
+      "allow_failures": null,
+      "analyzer": 48.34,
+      "apply_gitignore": null,
+      "command": [],
+      "default_job": "bwjqijigdjgoblalbxwl",
+      "default_watch": false,
+      "env": {
+        "osznaxfphv": "adipiscing lorem ipsu"
+      },
+      "expand_env_vars": null,
+      "export": null,
+      "extraneous_args": null,
+      "grace_period": null,
+      "ignored_lines": null,
+      "keybindings": 34,
+      "kill": [],
+      "listen": null,
+      "need_stdout": null,
+      "on_failure": null,
+      "on_success": "ame",
+      "reverse": true,
+      "show_changes_count": false,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "summary": true,
+      "vim_keys": null,
+      "watch": [
+        "4IysMTDLTFeL",
+        "si",
+        "0qEU",
+        "cXLbWG97GDAGbF867BV"
+      ],
+      "workdir": "uxatvkjdhe"
+    },
+    {
+      "allow_failures": false,
+      "allow_warnings": false,
+      "analyzer": 77,
+      "apply_gitignore": null,
+      "background": true,
+      "default_job": null,
+      "default_watch": true,
+      "env": {
+        "tlcewra": "lorem adipiscing",
+        "consec": "adipi"
+      },
+      "exports": {},
+      "extraneous_args": false,
+      "grace_period": null,
+      "hide_scrollbar": null,
+      "kill": [],
+      "on_failure": null,
+      "on_success": null,
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "vim_keys": true,
+      "watch": null,
+      "wrap": null
+    },
+    {
+      "allow_failures": null,
+      "allow_warnings": null,
+      "apply_gitignore": false,
+      "command": [
+        "amet adipiscing con",
+        "sit consect",
+        "xbfmmypouaszpvti"
+      ],
+      "default_watch": true,
+      "env": {},
+      "expand_env_vars": true,
+      "exports": {
+        "tovdtehyj": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "extraneous_args": null,
+      "help_line": null,
+      "hide_scrollbar": null,
+      "ignore": [
+        "wrkeeyzn",
+        "lor",
+        "qaSS30SBoPnq0aEc",
+        "phhxjnhwqobuaewm"
+      ],
+      "kill": [],
+      "need_stdout": null,
+      "on_change_strategy": 53,
+      "on_failure": null,
+      "on_success": "keoglbkblo",
+      "reverse": null,
+      "summary": null,
+      "wrap": false
+    },
+    {
+      "additional_alias_args": [
+        "mifwsjecrhhhextlyfa",
+        "l",
+        "3L307YxayTSSn",
+        "JDqQr9xFXv3IH",
+        "9WsHLXau"
+      ],
+      "allow_failures": true,
+      "allow_warnings": true,
+      "background": true,
+      "command": [
+        "consectetur",
+        "Li04yb3Du0QQCyvbas"
+      ],
+      "default_job": null,
+      "default_watch": false,
+      "expand_env_vars": true,
+      "export": 17,
+      "export_locations": false,
+      "exports": {
+        "erxYErLsYu": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "extraneous_args": null,
+      "grace_period": null,
+      "hide_scrollbar": null,
+      "ignore": [
+        "Xiq3",
+        "YVlQaSp3q6ApEyq2P"
+      ],
+      "ignored_lines": [
+        "c",
+        "dqyesqkocphstckdfdyx",
+        "ezjnzbt"
+      ],
+      "jobs": {
+        "msxtuftr": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": true,
+      "kill": null,
+      "need_stdout": null,
+      "on_success": "yABrBx",
+      "reverse": false,
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": false,
+      "vim_keys": true,
+      "workdir": null,
+      "wrap": true
+    },
+    {
+      "additional_alias_args": null,
+      "allow_warnings": false,
+      "analyzer": true,
+      "env": {
+        "ovAh6OG": "cawljp"
+      },
+      "export": 88,
+      "export_locations": true,
+      "exports": {
+        "amet d": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        },
+        "pdagpqaw": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "grace_period": null,
+      "ignored_lines": null,
+      "jobs": {
+        "ykujspe": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "dolor co": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": 9,
+      "listen": null,
+      "need_stdout": null,
+      "on_success": "fwqbtksjisjyufgbzxj",
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": true,
+      "watch": null,
+      "wrap": true
+    },
+    {
+      "additional_alias_args": null,
+      "allow_warnings": null,
+      "apply_gitignore": true,
+      "background": false,
+      "command": [
+        "hubud",
+        "fKEr5MH1y8QxC8La0zsEm",
+        "lmisvbqu",
+        "yqwt",
+        "xwwwkppfs"
+      ],
+      "default_watch": null,
+      "expand_env_vars": null,
+      "export": true,
+      "export_locations": null,
+      "extraneous_args": false,
+      "help_line": true,
+      "ignore": [],
+      "ignored_lines": null,
+      "on_change_strategy": null,
+      "on_failure": "goxbnjassjodyul",
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "summary": true,
+      "vim_keys": false,
+      "watch": [
+        "rsrPxwz",
+        "pqsizdxmfjoecgztjs"
+      ],
+      "workdir": "v8fVg6U7Oh"
+    },
+    {
+      "additional_alias_args": [
+        "adipiscin",
+        "vdiIRk4V2xaTgcPh4s",
+        "qZVvXmLGYtyVFQ"
+      ],
+      "apply_gitignore": null,
+      "background": true,
+      "default_job": null,
+      "env": {
+        "eCJulfMav": "FZdrEVSH"
+      },
+      "export": null,
+      "export_locations": null,
+      "exports": {},
+      "extraneous_args": false,
+      "ignored_lines": [
+        "cxujoqaiyaok",
+        "z",
+        "adipiscing ips",
+        "qtk"
+      ],
+      "jobs": {
+        "kdznquk": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "lalts": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "kill": null,
+      "need_stdout": null,
+      "on_failure": "Hw3vqFmty6e",
+      "on_success": "s",
+      "reverse": null,
+      "show_changes_count": true,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "watch": null,
+      "workdir": "paupziprjlywiflvf"
+    },
+    {
+      "allow_failures": true,
+      "allow_warnings": null,
+      "analyzer": 39.74,
+      "apply_gitignore": null,
+      "background": null,
+      "default_job": "myVO",
+      "default_watch": null,
+      "env": {
+        "P9gJDVLBiH": "lnulktwu"
+      },
+      "export": null,
+      "extraneous_args": false,
+      "hide_scrollbar": null,
+      "jobs": {
+        "lorem dolo": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": 81.39,
+      "listen": null,
+      "need_stdout": false,
+      "on_change_strategy": 50,
+      "on_failure": "fbaesoxfewmmta",
+      "on_success": "fHzwpBV78bNT5Io",
+      "reverse": false,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": null,
+      "vim_keys": null,
+      "watch": [
+        "LkffB5UPZZ8SChd",
+        "consectetur dol",
+        "kmpylspeqywzsr",
+        "CVpRpLgF",
+        "032aO"
+      ],
+      "workdir": null,
+      "wrap": true
+    },
+    {
+      "allow_failures": null,
+      "allow_warnings": false,
+      "analyzer": "bqmrkcgexwyxbs",
+      "command": [
+        "swblxujqafdsokgaugimz",
+        "PqZG0PGe",
+        "lM",
+        "NkRgpw"
+      ],
+      "default_job": null,
+      "default_watch": true,
+      "env": {},
+      "expand_env_vars": false,
+      "export": "nulkrkofm",
+      "export_locations": null,
+      "extraneous_args": false,
+      "grace_period": "amet ipsum consectet",
+      "help_line": null,
+      "hide_scrollbar": null,
+      "ignore": [
+        "lorem consectetur",
+        "adipiscing dolor ip",
+        "do"
+      ],
+      "jobs": {
+        "ipsum con": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "dolor ": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "listen": null,
+      "on_change_strategy": 2.18,
+      "on_success": "jg3dJ1B5Bq7ave",
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": true,
+      "watch": [
+        "adipiscing adipi",
+        "ipsum co",
+        "pyrafqv"
+      ],
+      "wrap": null
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": false,
+      "analyzer": 91.53,
+      "apply_gitignore": null,
+      "background": null,
+      "command": [
+        "dolor ipsum s",
+        "b",
+        "ipsum "
+      ],
+      "default_watch": null,
+      "env": {},
+      "expand_env_vars": true,
+      "export": 72,
+      "grace_period": null,
+      "help_line": null,
+      "ignore": [
+        "RE",
+        "jl6bK",
+        "XF61gTuR0Q",
+        "x2SK8L0pvE99HPTHTA",
+        "amet ipsum amet dol"
+      ],
+      "ignored_lines": null,
+      "jobs": {
+        "lorem ipsu": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": 25.84,
+      "kill": [
+        "hasasnvkskxflbajsayj",
+        "ipsum amet lorem do",
+        "consectetur conse",
+        "gbhgphpb",
+        "bgvhxSN9539"
+      ],
+      "need_stdout": true,
+      "on_change_strategy": false,
+      "on_failure": null,
+      "on_success": null,
+      "reverse": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "vim_keys": null,
+      "watch": [
+        "adipiscing c",
+        "abpjkaaieirshsgyc",
+        "as",
+        "nmoztykdsx"
+      ],
+      "workdir": "akddi4NZBl8LGDrmvlcIT"
+    },
+    {
+      "additional_alias_args": [],
+      "allow_failures": false,
+      "allow_warnings": null,
+      "analyzer": 40,
+      "apply_gitignore": false,
+      "background": false,
+      "default_job": "jjhngcjbsfhlsvvgvyoy",
+      "env": {},
+      "export": true,
+      "exports": {
+        "amet c": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        },
+        "AJIMxa": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "extraneous_args": true,
+      "grace_period": null,
+      "help_line": false,
+      "hide_scrollbar": false,
+      "ignored_lines": null,
+      "jobs": {
+        "Cjdopcau": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "kill": null,
+      "listen": null,
+      "need_stdout": true,
+      "on_change_strategy": null,
+      "on_failure": null,
+      "on_success": null,
+      "reverse": false,
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "summary": false,
+      "vim_keys": null,
+      "watch": null,
+      "workdir": null
+    },
+    {
+      "allow_failures": null,
+      "allow_warnings": true,
+      "analyzer": null,
+      "apply_gitignore": null,
+      "background": true,
+      "command": [
+        "slek",
+        "iijrvfoaobog"
+      ],
+      "default_watch": null,
+      "env": {
+        "lorem sit ": "yWInnkb9hJc"
+      },
+      "expand_env_vars": true,
+      "extraneous_args": true,
+      "grace_period": "hjbawpfe",
+      "ignored_lines": null,
+      "kill": [],
+      "need_stdout": true,
+      "on_success": "smssuwrenpbyjtgseefjf",
+      "reverse": false,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "vim_keys": null,
+      "watch": null,
+      "workdir": null,
+      "wrap": false
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": null,
+      "analyzer": 11.19,
+      "apply_gitignore": false,
+      "background": false,
+      "default_watch": false,
+      "env": {
+        "cykgecmbqi": "FW6SR"
+      },
+      "expand_env_vars": false,
+      "export": null,
+      "export_locations": null,
+      "extraneous_args": null,
+      "grace_period": "yfffyfnrkrabk",
+      "help_line": false,
+      "hide_scrollbar": null,
+      "ignore": [
+        "FDMySGTY8W",
+        "consectetu",
+        "sit sit sit sit"
+      ],
+      "ignored_lines": [
+        "okwivqjp",
+        "eyyrynzr",
+        "consectetur sit am",
+        "w",
+        "lorem sit dol"
+      ],
+      "jobs": {},
+      "keybindings": 42,
+      "on_change_strategy": 6,
+      "on_failure": null,
+      "on_success": null,
+      "reverse": true,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "summary": false,
+      "workdir": "sbuLMlHzKb5o9",
+      "wrap": false
+    },
+    {
+      "additional_alias_args": null,
+      "analyzer": true,
+      "apply_gitignore": null,
+      "background": null,
+      "default_job": "qfjkyjavwiszkroonv",
+      "expand_env_vars": null,
+      "export": 84.35,
+      "extraneous_args": null,
+      "grace_period": null,
+      "hide_scrollbar": true,
+      "ignore": [
+        "5lBqN3nivHBLoG",
+        "wbjbz"
+      ],
+      "ignored_lines": null,
+      "jobs": {},
+      "keybindings": 34,
+      "listen": null,
+      "need_stdout": null,
+      "on_failure": null,
+      "on_success": "ejoeehwwqbfs",
+      "reverse": false,
+      "show_changes_count": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "summary": true,
+      "vim_keys": null,
+      "wrap": false
+    },
+    {
+      "additional_alias_args": [
+        "consectetu",
+        "frrz",
+        "yosxsufltbttgqvu"
+      ],
+      "allow_failures": null,
+      "allow_warnings": null,
+      "analyzer": 61.91,
+      "command": [
+        "rajUeH",
+        "qvvbdkk",
+        "adipiscing cons",
+        "whu",
+        "WCjzFFd"
+      ],
+      "default_job": null,
+      "default_watch": true,
+      "env": {
+        "fjtssiyuu": "uikfaspsxcsnvjwvomgph",
+        "pkfbb": "L"
+      },
+      "expand_env_vars": null,
+      "export": null,
+      "export_locations": true,
+      "hide_scrollbar": null,
+      "ignore": [
+        "oZW",
+        "consectetur c"
+      ],
+      "ignored_lines": null,
+      "keybindings": 14,
+      "kill": null,
+      "listen": true,
+      "on_change_strategy": "tqagsdfbnfvcsy",
+      "on_failure": null,
+      "on_success": null,
+      "reverse": true,
+      "show_changes_count": false,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": null,
+      "watch": [
+        "pNwQIO7UYYWAv9tBseIrk",
+        "sit adipi",
+        "wXAYqP5CbtmQwzwXFbjlO",
+        "ytW3f8wR"
+      ],
+      "wrap": null
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": true,
+      "allow_warnings": true,
+      "apply_gitignore": null,
+      "background": null,
+      "command": [
+        "wqnuqujyxfuopurr",
+        "lorem dolor dolor l",
+        "xg",
+        "2KJd",
+        "eSPQ8DiNOZi"
+      ],
+      "default_job": "uttujpgotwtrcx",
+      "default_watch": null,
+      "env": {
+        "7VFTC6k54s": "sxnmznqv",
+        "PiyFG": "xjgusicfcwcogkcw"
+      },
+      "export": null,
+      "export_locations": true,
+      "exports": {
+        "bedwbbyfa": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        },
+        "jvxapvyvst": {
+          "_ref": "#/$defs/ExportConfig",
+          "_placeholder": true
+        }
+      },
+      "extraneous_args": false,
+      "grace_period": null,
+      "hide_scrollbar": null,
+      "ignore": [],
+      "jobs": {
+        "NwaoIF97j": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "kill": [
+        "uycpdbveosypzafs",
+        "QwOeE7FVGV4wUdYb",
+        "d"
+      ],
+      "need_stdout": false,
+      "on_change_strategy": false,
+      "on_failure": "piz",
+      "on_success": null,
+      "reverse": null,
+      "show_changes_count": false,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "wrap": null
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": null,
+      "command": [],
+      "env": {
+        "sit ip": "zxkyoebyqz"
+      },
+      "expand_env_vars": null,
+      "export": 9,
+      "export_locations": null,
+      "extraneous_args": false,
+      "grace_period": null,
+      "help_line": false,
+      "hide_scrollbar": false,
+      "ignore": [
+        "5CwZY70JZigaP",
+        "dolor s",
+        "ictryl",
+        "bckwrseyxovnvkogrnuyx"
+      ],
+      "keybindings": 51,
+      "kill": null,
+      "listen": null,
+      "need_stdout": true,
+      "on_change_strategy": true,
+      "on_failure": "adipiscing",
+      "reverse": null,
+      "show_changes_count": null,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": false,
+      "vim_keys": null,
+      "watch": [
+        "rvvxag",
+        "wS2Q",
+        "ndjtila",
+        "dolor "
+      ],
+      "workdir": "h"
+    },
+    {
+      "additional_alias_args": [
+        "tvatckmgolahnushxt",
+        "adipiscing adipiscing",
+        "dvsnwvysn",
+        "bfsszexggkfsetaveqp",
+        "vescffyunnqtjjyfa"
+      ],
+      "analyzer": null,
+      "apply_gitignore": false,
+      "background": false,
+      "command": [],
+      "default_watch": false,
+      "env": {
+        "sit c": "f0Ygu3B8AM11wCTJWC",
+        "dolor ip": "pcnetaewxagbd"
+      },
+      "expand_env_vars": null,
+      "export": 99.17,
+      "export_locations": true,
+      "help_line": false,
+      "hide_scrollbar": null,
+      "ignore": [],
+      "keybindings": true,
+      "listen": null,
+      "on_change_strategy": true,
+      "on_failure": "consectetur ",
+      "show_changes_count": false,
+      "watch": null,
+      "workdir": "edswddcoxrqmshoop",
+      "wrap": null
+    },
+    {
+      "allow_warnings": null,
+      "analyzer": 57,
+      "apply_gitignore": false,
+      "command": [
+        "01Zrla96e",
+        "jifvzfsss"
+      ],
+      "default_job": "ml",
+      "env": {},
+      "export": 48.25,
+      "export_locations": null,
+      "exports": {},
+      "extraneous_args": true,
+      "hide_scrollbar": false,
+      "ignore": [],
+      "jobs": {},
+      "keybindings": false,
+      "kill": [
+        "ywVLoiZ",
+        "sit amet sit ad",
+        "PzpZK1K0nLf",
+        "wiffqxgndgl"
+      ],
+      "listen": true,
+      "on_success": null,
+      "reverse": false,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "vim_keys": null,
+      "workdir": null,
+      "wrap": true
+    },
+    {
+      "additional_alias_args": [
+        "kdqbzsbfzuqkvubt",
+        "VUcQ8utpA",
+        "tvgq"
+      ],
+      "allow_failures": true,
+      "allow_warnings": null,
+      "analyzer": null,
+      "background": false,
+      "command": [],
+      "default_job": null,
+      "default_watch": null,
+      "env": {
+        "lmeikmwg": "mj"
+      },
+      "export": 85,
+      "help_line": false,
+      "hide_scrollbar": true,
+      "ignore": [],
+      "jobs": {
+        "dz2r5oZO": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "leayncz": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": "5WBK4o",
+      "kill": [],
+      "on_failure": null,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "watch": null,
+      "workdir": "gizlklufcywlbkfyvy",
+      "wrap": true
+    },
+    {
+      "additional_alias_args": null,
+      "allow_failures": true,
+      "allow_warnings": false,
+      "apply_gitignore": null,
+      "command": [
+        "uLPQDwvpExuSRv"
+      ],
+      "env": {},
+      "expand_env_vars": null,
+      "export": null,
+      "export_locations": true,
+      "extraneous_args": null,
+      "grace_period": null,
+      "hide_scrollbar": null,
+      "ignore": [
+        "rskpotrxclwbcied",
+        "adipiscing adipiscin",
+        "jheJKTLVvcwW6DuuyDX",
+        "J"
+      ],
+      "ignored_lines": null,
+      "jobs": {
+        "wzeihsqso": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "lorem co": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "kill": null,
+      "listen": null,
+      "need_stdout": null,
+      "on_failure": null,
+      "on_success": "OQ9p7Yogqsco",
+      "reverse": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "summary": true,
+      "watch": null,
+      "wrap": null
+    },
+    {
+      "additional_alias_args": null,
+      "allow_warnings": null,
+      "analyzer": 81.3,
+      "apply_gitignore": true,
+      "command": [
+        "ips",
+        "amet dolor ",
+        "prrhr",
+        "npv"
+      ],
+      "export": 3,
+      "exports": {},
+      "extraneous_args": null,
+      "grace_period": "0cUwjf3v",
+      "ignored_lines": null,
+      "jobs": {
+        "dolor si": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "mvhklvskht": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "need_stdout": null,
+      "on_failure": "udlifm",
+      "on_success": null,
+      "reverse": false,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "vim_keys": null,
+      "workdir": null,
+      "wrap": null
+    },
+    {
+      "additional_alias_args": null,
+      "allow_warnings": null,
+      "apply_gitignore": false,
+      "command": [
+        "sit sit adipisci",
+        "lorem ipsum ",
+        "s",
+        "amet lorem amet am",
+        "xKrGPqU3syNh5E"
+      ],
+      "expand_env_vars": false,
+      "export": 87.35,
+      "export_locations": true,
+      "extraneous_args": false,
+      "ignore": [
+        "af",
+        "adipisci",
+        "fbgwtyckpkh",
+        "fymqcofpqlcstfsc",
+        "dolor dolor dolor l"
+      ],
+      "ignored_lines": [
+        "kpuggxpfedyvqzucnp",
+        "csb3wY",
+        "jafc"
+      ],
+      "jobs": {
+        "5OoRcFY": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": "dolor con",
+      "kill": null,
+      "listen": null,
+      "reverse": true,
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": null,
+      "vim_keys": null,
+      "watch": null
+    },
+    {
+      "allow_failures": null,
+      "allow_warnings": true,
+      "analyzer": 99.9,
+      "apply_gitignore": null,
+      "background": true,
+      "command": [
+        "xbokmsrdwrtpry"
+      ],
+      "default_watch": false,
+      "env": {},
+      "export": "fenzmjxpmjpp",
+      "export_locations": null,
+      "grace_period": null,
+      "help_line": null,
+      "ignore": [
+        "kimdzeeorgcaqrgjio"
+      ],
+      "ignored_lines": null,
+      "jobs": {
+        "yvldohzr": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "dolor s": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": 12,
+      "listen": false,
+      "on_change_strategy": null,
+      "on_failure": "dolor si",
+      "reverse": false,
+      "show_changes_count": true,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": true,
+      "vim_keys": null,
+      "watch": []
+    },
+    {
+      "additional_alias_args": [
+        "amet lorem ipsum",
+        "qvUYlTwnUpH",
+        "zGnwcLE6J",
+        "i"
+      ],
+      "allow_failures": null,
+      "analyzer": 57.64,
+      "background": null,
+      "command": [
+        "eY",
+        "agfaapbdonjqhezxftpw",
+        "s7xqQt"
+      ],
+      "env": {
+        "coubzwk": "lorem amet ",
+        "consectet": "sit ipsum lore"
+      },
+      "export": null,
+      "exports": {},
+      "extraneous_args": false,
+      "grace_period": "ttqigrogzjjkpbkd",
+      "help_line": true,
+      "ignore": [
+        "sofcudghvakf"
+      ],
+      "ignored_lines": [],
+      "jobs": {
+        "o4rjC": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        },
+        "rrflknl": {
+          "_ref": "#/$defs/Job",
+          "_placeholder": true
+        }
+      },
+      "keybindings": false,
+      "kill": [
+        "F21h",
+        "Rcxynt"
+      ],
+      "listen": true,
+      "on_failure": null,
+      "on_success": null,
+      "reverse": null,
+      "skin": {
+        "_ref": "#/$defs/BaconSkin",
+        "_placeholder": true
+      },
+      "sound": {
+        "_ref": "#/$defs/SoundConfig",
+        "_placeholder": true
+      },
+      "summary": null,
+      "watch": []
+    }
+  ]
+}

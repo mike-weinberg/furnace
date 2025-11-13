@@ -1,0 +1,2520 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://json.schemastore.org/azure-deviceupdate-import-manifest-5.0.json",
+    "definitions": {
+      "instructions": {
+        "type": "object",
+        "title": "Installation instructions",
+        "description": "Update installation instructions.",
+        "properties": {
+          "steps": {
+            "type": "array",
+            "title": "Installation steps",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/inlineStep"
+                },
+                {
+                  "$ref": "#/definitions/referenceStep"
+                }
+              ]
+            },
+            "minItems": 1,
+            "maxItems": 10
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "steps"
+        ]
+      },
+      "stepDescription": {
+        "type": "string",
+        "title": "Step description",
+        "description": "Optional instruction step description.",
+        "minLength": 1,
+        "maxLength": 64
+      },
+      "inlineStep": {
+        "type": "object",
+        "title": "Inline installation step",
+        "description": "Installation instruction step that performs code execution.",
+        "properties": {
+          "type": {
+            "$ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/inlineStepType"
+          },
+          "description": {
+            "$ref": "#/definitions/stepDescription"
+          },
+          "handler": {
+            "$ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/inlineStepHandler"
+          },
+          "files": {
+            "type": "array",
+            "title": "Step update files",
+            "description": "Names of update files that agent will pass to handler.",
+            "items": {
+              "$ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/filename"
+            },
+            "minItems": 1,
+            "maxItems": 10
+          },
+          "handlerProperties": {
+            "$ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/inlineStepHandlerProperties"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "handler",
+          "files"
+        ]
+      },
+      "referenceStep": {
+        "type": "object",
+        "title": "Reference installation step",
+        "description": "Installation instruction step that installs another update.",
+        "properties": {
+          "type": {
+            "$ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/referenceStepType"
+          },
+          "description": {
+            "$ref": "#/definitions/stepDescription"
+          },
+          "updateId": {
+            "$ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "updateId"
+        ]
+      }
+    },
+    "description": "Schema for import manifest used for importing an update to Device Update for IoT Hub.",
+    "examples": [
+      {
+        "updateId": {
+          "provider": "Microsoft",
+          "name": "Toaster",
+          "version": "1.0"
+        },
+        "description": "Example update",
+        "compatibility": [
+          {
+            "deviceManufacturer": "Microsoft",
+            "deviceModel": "Toaster"
+          }
+        ],
+        "instructions": {
+          "steps": [
+            {
+              "description": "pre-install script",
+              "handler": "microsoft/script:1",
+              "handlerProperties": {
+                "arguments": "--pre-install"
+              },
+              "files": [
+                "configure.sh"
+              ]
+            },
+            {
+              "type": "reference",
+              "updateId": {
+                "provider": "Microsoft",
+                "name": "Sensor",
+                "version": "1.0"
+              }
+            }
+          ]
+        },
+        "files": [
+          {
+            "filename": "configure.sh",
+            "sizeInBytes": 718,
+            "hashes": {
+              "sha256": "mcB5SexMU4JOOzqmlJqKbue9qMskWY3EI/iVjJxCtAs="
+            },
+            "relatedFiles": [
+              {
+                "filename": "in1_in2_deltaupdate.dat",
+                "sizeInBytes": 102910752,
+                "hashes": {
+                  "sha256": "2MIldV8LkdKenjJasgTHuYi+apgtNQ9FeL2xsV3ikHY="
+                },
+                "properties": {
+                  "microsoft.sourceFileHashAlgorithm": "sha256",
+                  "microsoft.sourceFileHash": "YmFYwnEUddq2nZsBAn5v7gCRKdHx+TUntMz5tLwU+24="
+                }
+              }
+            ],
+            "downloadHandler": {
+              "id": "microsoft/delta:1"
+            }
+          }
+        ],
+        "manifestVersion": "5.0",
+        "createdDateTime": "2020-10-02T22:18:04.9446744Z"
+      }
+    ],
+    "properties": {
+      "$schema": {
+        "type": "string",
+        "description": "JSON schema reference."
+      },
+      "updateId": {
+        "$ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId"
+      },
+      "description": {
+        "type": "string",
+        "title": "Update description",
+        "description": "Optional update description.",
+        "minLength": 1,
+        "maxLength": 512
+      },
+      "compatibility": {
+        "$ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility"
+      },
+      "instructions": {
+        "$ref": "#/definitions/instructions"
+      },
+      "files": {
+        "type": "array",
+        "title": "Update files",
+        "description": "List of update payload files. Sum of all file sizes may not exceed 2 GB. May be empty or null if all instruction steps are reference steps.",
+        "items": {
+          "$ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file"
+        },
+        "minItems": 0,
+        "maxItems": 10
+      },
+      "manifestVersion": {
+        "type": "string",
+        "title": "Import manifest schema version",
+        "description": "Import manifest schema version. Must be 5.0.",
+        "const": "5.0"
+      },
+      "createdDateTime": {
+        "type": "string",
+        "title": "Created date & time",
+        "description": "Date & time import manifest was created in ISO 8601 format.",
+        "examples": [
+          "2020-10-02T22:18:04.9446744Z"
+        ]
+      }
+    },
+    "required": [
+      "updateId",
+      "compatibility",
+      "instructions",
+      "manifestVersion",
+      "createdDateTime"
+    ],
+    "title": "JSON Schema for Azure Device Update for IoT Hub 'Import Manifest' version 5.0",
+    "type": "object"
+  },
+  "examples": [
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "consectetur ipsum lor",
+      "$schema": "bnFbmOHnKYaXRvj7uff"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "co",
+      "description": "EbAx"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "RhxrnJgWQsNKVP",
+      "$schema": "qcbcycqzakm",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "psbEhY71O",
+      "description": "tfwsbksxe",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "K1o",
+      "$schema": "XbWNdbIsuSVyRwDZCRM",
+      "description": "Wrgveu2lsVm",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "sit sit ipsu",
+      "$schema": "dolor lorem lorem ip",
+      "description": "consectetur dolor ",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "IHXFSBjYOEnVIFDbAi",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "5uI"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "jxstiofoyjcjfbwz",
+      "description": "zsv"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "ogzvgwom",
+      "description": "w9z80bqDYlM",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "consectet",
+      "description": "adipi",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "fnmsjlayxzidwbbffdjt",
+      "description": "bhcrklgutlvgi"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "s3Enu"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "fzh",
+      "$schema": "vS7PHy",
+      "description": "ubgynamfjcqlff",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "amet dolor sit adi",
+      "description": "amet adipiscing ipsu"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "Ln",
+      "$schema": "adipiscing amet ",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "consectetur adipisc",
+      "$schema": "glphpaftlr",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "amet sit",
+      "$schema": "ravjuntsir"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "ipsum ipsu",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "ipsum adipiscing",
+      "$schema": "zukN3QNuAiTs",
+      "description": "txYMWMAolHD",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "adipiscing ipsum si",
+      "$schema": "lorem ipsum amet ",
+      "description": "WvKjneHIM6svC6ts",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "5pOxeOsZtUdP6ho",
+      "$schema": "x"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "amet sit amet ip",
+      "$schema": "fvqdwlscrabcbpffvukft",
+      "description": "UQGdojnNnpXS"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "sit ipsum sit",
+      "$schema": "lfxmfmsgetd",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "5Ws",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "dol",
+      "$schema": "lqxfbeald",
+      "description": "consectetu",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "txcplgwizjouubt",
+      "$schema": "consectetur",
+      "description": "xhQIb9jJiYa6xL",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "ip",
+      "description": "ZJZtHBzyzjitROUSYg",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "sit",
+      "$schema": "amet",
+      "description": "gqnujxwcmhdgtv",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "XqjUmfFKFYG",
+      "description": "kvbOl",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "tes",
+      "description": "adipiscing amet ipsu"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "sit ipsum",
+      "$schema": "Gmg",
+      "description": "I",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "hht25vBC5BtFaFhYB7Aq",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "CTF054Q0YgQ5UrS",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "y4d0rUBousuH",
+      "$schema": "L8UuCdNygNVfSQ",
+      "description": "lorem consectetur"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "oYhDILjNF",
+      "description": "consectetur sit ",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "adipisc",
+      "$schema": "rxkrxmzaxsjiqs",
+      "description": "mgisK2p5kFU3"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "KoSEe",
+      "$schema": "mikv",
+      "description": "q3c"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "31AwybV7x",
+      "$schema": "ipsum adipiscing sit",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "inmadrvaisfrpftwo",
+      "$schema": "adipiscing ",
+      "description": "adipiscing cons",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "zhvee",
+      "$schema": "Kg",
+      "description": "lorem",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "ldayfeczkjofusyv",
+      "description": "c",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "aazifmotpo",
+      "description": "3unODFccGsgo4iR",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "viyfuwj",
+      "$schema": "0nQLCAaIAMC5Q",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "9"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "wvctq"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "ieataimfyrpli",
+      "$schema": "sit adipis",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "sgi",
+      "$schema": "nRuJkMnK0duTeD",
+      "description": "zaxdfciuj",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "moixuoz",
+      "$schema": "lorem consectetu"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "7Qy",
+      "$schema": "ZpLwE7nUVf9BHsI",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "IXqX2VfGjZePuc",
+      "$schema": "wepsmredwemlkheepzwdu",
+      "description": "amet conse"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "swcdkupqxrvkdbyf",
+      "$schema": "ehhftxbexccxhaoekivyy",
+      "description": "oqrxgx"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "consectetur dolor ",
+      "$schema": "Z7baB7CXPc",
+      "description": "gczmzwvlqbzarfwigbvrt",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "9H6hEiafrmJGmOwUxj",
+      "$schema": "ppnetrwmajn",
+      "description": "fpjxucaxrg",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "P5fvc2kNf9wi",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "94YdbVb",
+      "description": "s"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "cz8rYIW4yOYV",
+      "$schema": "u",
+      "description": "wmvokovgndorkcwuvezme",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "LoifTGRfMmSKX"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "7kyvF",
+      "$schema": "sit",
+      "description": "iitfeejqzfyoxveqdakuo",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "xojbnpxmuilgelneugu",
+      "$schema": "sgZ"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "joreh",
+      "$schema": "sit amet sit adipis",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "svrxtrlirmdpzbz",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "t",
+      "$schema": "lorem conse",
+      "description": "amet "
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "X6tVukvUjOvkAxC25o9"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "adipiscing conse",
+      "description": "BOQUrEirEevYlAcT",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "tsltylod",
+      "$schema": "xh",
+      "description": "fdngcy",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "crsjz",
+      "$schema": "consec",
+      "description": "cizkqrqbsvliszyftm"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "sit lorem",
+      "$schema": "onulhvexwonbeusq",
+      "description": "wrlldb"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "pksqrontdncla"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "ifkvqso",
+      "$schema": "xrnS3vXtVoJz1Vg",
+      "description": "iwnusknryhmwyos"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "phmkrjnapglgftrr",
+      "description": "gbrhqxpxubgrma"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "v",
+      "$schema": "o20sLErAyC7Tcv8V"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "u7McGGGK",
+      "$schema": "g83CgU8sw1U4",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "lorem lore"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "sUhi77q2A5ed7GE7Ygzk",
+      "$schema": "eCmzq",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "ipsum co",
+      "$schema": "yilr",
+      "description": "kxAaRNKN4DI6"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "lorem dolor consectet",
+      "description": "XjKS04IY21rXM3IYwuJA",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "consectetu",
+      "$schema": "adipiscing ame",
+      "description": "amet dolo",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "adipiscing adipis",
+      "$schema": "fgitysidhfn",
+      "description": "7mba"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "adi",
+      "description": "dolor ipsum amet "
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "adipiscing adipis",
+      "$schema": "dolor consectetur i"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "co",
+      "$schema": "Iv",
+      "description": "upaBf",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "k7zWbk8Yb",
+      "$schema": "ipsum dolor ip",
+      "description": "syg3FP9gJDVLBiHX6CFXB",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "consecte",
+      "description": "NeNDPzgpj3154dRN0bKS"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "amet ipsum ipsum ad",
+      "$schema": "mthdf",
+      "description": "XD",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "pv",
+      "$schema": "khryiyiys",
+      "description": "lorem amet ad",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "wD9tHNJ3",
+      "$schema": "cons",
+      "description": "ky40utvQ0mJaIeJqVxTJv"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "nbxskfwgsdrhgymplyg"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "WOBCwKnv62SI69Ybb",
+      "description": "wiszkroonvxydwdedclcl"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "FybWhJ7SnQQ"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "lorem ipsum lo",
+      "$schema": "adipiscing ipsum c",
+      "description": "amet adipisci"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "tMV2RU2cfr58nxAf"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "SISNhOE7n7L97gT7",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "pmvdhpdqjvhv",
+      "description": "ipsum lor"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "dEmRkEkdLm3LrwERbZS",
+      "$schema": "b"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "dol",
+      "$schema": "Y3F70GiAGab8i3lX"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "6sGqlYk",
+      "files": []
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "q"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "lore",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "compatibility": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility",
+        "_placeholder": true
+      },
+      "instructions": {
+        "_ref": "#/definitions/instructions",
+        "_placeholder": true
+      },
+      "manifestVersion": "5.0",
+      "createdDateTime": "pmomyqazignqmoeio",
+      "description": "qqk0XUPIHNBgruM0",
+      "files": [
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        },
+        {
+          "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file",
+          "_placeholder": true
+        }
+      ]
+    }
+  ]
+}

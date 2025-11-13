@@ -1,0 +1,1011 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://json.schemastore.org/azure-deviceupdate-update-manifest-5.json",
+    "definitions": {
+      "miniUpdateManifest": {
+        "type": "object",
+        "title": "Mini update manifest",
+        "description": "Manifest containing metadata of the detached, downloadable, complete update manifest.",
+        "properties": {
+          "detachedManifestFileId": {
+            "$ref": "#/definitions/fileId"
+          },
+          "files": {
+            "type": "object",
+            "title": "Update manifest file",
+            "description": "Map of '#/definitions/fileId' to file metadata.",
+            "additionalProperties": {
+              "$ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file"
+            },
+            "minProperties": 1,
+            "maxProperties": 1
+          }
+        },
+        "required": [
+          "detachedManifestFileId",
+          "files"
+        ]
+      },
+      "fullUpdateManifest": {
+        "type": "object",
+        "title": "Complete update manifest.",
+        "description": "Full update manifest containing metadata of the update being deployed.",
+        "properties": {
+          "compatibility": {
+            "$ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/compatibility"
+          },
+          "instructions": {
+            "type": "object",
+            "title": "Installation instructions",
+            "properties": {
+              "steps": {
+                "type": "array",
+                "title": "Installation steps",
+                "items": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/definitions/inlineStep"
+                    },
+                    {
+                      "$ref": "#/definitions/referenceStep"
+                    }
+                  ]
+                },
+                "minItems": 1,
+                "maxItems": 10
+              }
+            },
+            "required": [
+              "steps"
+            ]
+          },
+          "files": {
+            "type": "object",
+            "title": "Update files",
+            "description": "Map of '#/definitions/fileId' to file metadata.",
+            "additionalProperties": {
+              "$ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/file"
+            },
+            "minProperties": 1,
+            "maxProperties": 20
+          },
+          "createdDateTime": {
+            "type": "string",
+            "title": "Created date & time",
+            "description": "Date & time update was created in ISO 8601 format.",
+            "examples": [
+              "2020-10-02T22:18:04.9446744Z"
+            ]
+          }
+        },
+        "required": [
+          "compatibility",
+          "instructions",
+          "files",
+          "createdDateTime"
+        ]
+      },
+      "fileId": {
+        "type": "string",
+        "title": "Update file id",
+        "description": "Server generated file identifier to be used for retrieving file metadata and download URL.",
+        "minLength": 1
+      },
+      "inlineStep": {
+        "type": "object",
+        "title": "Inline installation step",
+        "description": "Installation instruction step that performs code execution.",
+        "properties": {
+          "type": {
+            "$ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/inlineStepType"
+          },
+          "handler": {
+            "$ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/inlineStepHandler"
+          },
+          "files": {
+            "type": "array",
+            "title": "Step update files",
+            "description": "'fileId' of update files that agent will pass to handler.",
+            "items": {
+              "$ref": "#/definitions/fileId"
+            },
+            "minItems": 1,
+            "maxItems": 10
+          },
+          "handlerProperties": {
+            "$ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/inlineStepHandlerProperties"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "handler",
+          "files"
+        ]
+      },
+      "referenceStep": {
+        "type": "object",
+        "title": "Reference installation step",
+        "description": "Installation instruction step that installs another update.",
+        "properties": {
+          "type": {
+            "$ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/referenceStepType"
+          },
+          "detachedManifestFileId": {
+            "$ref": "#/definitions/fileId"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "detachedManifestFileId"
+        ]
+      }
+    },
+    "description": "JSON schema of update manifest sent by Device Update for IoT Hub to device agent during deployment.",
+    "examples": [
+      {
+        "manifestVersion": "4",
+        "updateId": {
+          "provider": "Microsoft",
+          "name": "Toaster",
+          "version": "1.0"
+        },
+        "compatibility": [
+          {
+            "deviceManufacturer": "Microsoft",
+            "deviceModel": "Toaster"
+          }
+        ],
+        "instructions": {
+          "steps": [
+            {
+              "handler": "microsoft/script:1",
+              "handlerProperties": {
+                "arguments": "--pre-install"
+              },
+              "files": [
+                "fileId0"
+              ]
+            },
+            {
+              "type": "reference",
+              "detachedManifestFileId": "fileId1"
+            }
+          ]
+        },
+        "files": {
+          "fileId0": {
+            "filename": "configure.sh",
+            "sizeInBytes": 718,
+            "hashes": {
+              "sha256": "mcB5SexMU4JOOzqmlJqKbue9qMskWY3EI/iVjJxCtAs="
+            },
+            "relatedFiles": [
+              {
+                "filename": "in1_in2_deltaupdate.dat",
+                "sizeInBytes": 102910752,
+                "hashes": {
+                  "sha256": "2MIldV8LkdKenjJasgTHuYi+apgtNQ9FeL2xsV3ikHY="
+                },
+                "properties": {
+                  "microsoft.sourceFileHashAlgorithm": "sha256",
+                  "microsoft.sourceFileHash": "YmFYwnEUddq2nZsBAn5v7gCRKdHx+TUntMz5tLwU+24="
+                }
+              }
+            ],
+            "downloadHandler": {
+              "id": "microsoft/delta:1"
+            }
+          },
+          "fileId1": {
+            "filename": "microsoft.sensor.1.0.updatemanifest.json",
+            "sizeInBytes": 2048,
+            "hashes": {
+              "sha256": "789s9PDfX4uA9wFUubyC30BWkLFbgmpkpmz1fEdqo2U="
+            }
+          }
+        },
+        "createdDateTime": "2021-09-28T18:32:01.8404544Z"
+      }
+    ],
+    "oneOf": [
+      {
+        "$ref": "#/definitions/miniUpdateManifest"
+      },
+      {
+        "$ref": "#/definitions/fullUpdateManifest"
+      }
+    ],
+    "properties": {
+      "$schema": {
+        "type": "string",
+        "description": "JSON schema reference"
+      },
+      "updateId": {
+        "$ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId"
+      },
+      "manifestVersion": {
+        "type": "string",
+        "title": "Update manifest schema version",
+        "const": "4"
+      }
+    },
+    "required": [
+      "updateId",
+      "manifestVersion"
+    ],
+    "title": "JSON Schema for Azure Device Update for IoT Hub 'Update Manifest' version 4.0",
+    "type": "object"
+  },
+  "examples": [
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "jscpp"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "djhfocurhqptrjihen"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "dolor lorem sit "
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "JpxMXO7a6XSaYt"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "HXFSB"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "iovrthlbofxhja"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "3QVuHnI5v"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "p9Zp1HCRGvOxrRahH"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "consect"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "fimzlvjwexjkcwpmgqd"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "zffkyug"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "awsravjuntsirzxxcqwhb"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "ipsum sit adipiscin"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "adipiscing dolor c"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "grkcrhvhtb"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "nrfgxqtsuzckfakxyepyg"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "nCB5ZBn2Cm"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "uhzucwvenxsssk"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "kylqxfbealdcik"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "getfcnpnvnyldqapkpzi"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "esqhszdzsgdaulabhnsw"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "lsezFBbz0zIE9ldqK"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "TF054Q0YgQ5UrS"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "dolor dolor i"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "oSEebgSSkDQM"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "wkjkatyjfqkenaldej"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "GDbjP0atSnQLnU2"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "hveegtamvfodmqvu"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "dolor lorem ame"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "iyfuwjfjwnupopdrbmru"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "vctqswx"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "laVavCn"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "gibwifsioeqfpwbisbmk"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "Jt2"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "rklull"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "XqX2VfGjZePucb2X1jM"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "hwrj"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "cibxeqczjdvvm"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "vbauathaqmci"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "dD"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "oifTGRf"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "ekjncdtgrqffvzy"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "ojbnpxm"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "IOlsAKSHU2lXBFfdlJ3Z"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "sltylodharyvexfdngc"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "khf"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "doEs4eoFAP4tT2t"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "sxteflkzsmjfpyelipg"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "sit ipsum"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "7McG"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "consec"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "xtrmifw"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "qeueieqbswwldmzxipd"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "xbjfzrzehsgksyuhubud"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "gvw"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "pk2oP4EUsimEczrE7Xe"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "YbqmoP15xdsHZ6xXTwvD"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "adipiscing adipis"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "rlljpfiyw"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "dolor dolor adipi"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "ipsum lorem lo"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "MV2RU2cfr58nxAf1"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "osqdrmz"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "sit ipsum amet ip"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "lEaz1tyZD9GuLP"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "hnhevetufcvwwcr"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "36OUHG3Vv5jZ0qosEtal"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4"
+    },
+    {
+      "updateId": {
+        "_ref": "azure-deviceupdate-manifest-definitions-5.0.json#/definitions/updateId",
+        "_placeholder": true
+      },
+      "manifestVersion": "4",
+      "$schema": "D"
+    }
+  ]
+}

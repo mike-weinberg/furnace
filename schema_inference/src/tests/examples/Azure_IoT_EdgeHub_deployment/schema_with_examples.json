@@ -1,0 +1,3296 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "definitions": {
+      "policy": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "operations": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^mqtt:connect$|^mqtt:subscribe$|^mqtt:publish$"
+              }
+            },
+            "resources": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^.+$",
+                "examples": [
+                  "$iothub/clients/+/twin/res/#",
+                  "events/alerts"
+                ]
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "id": "https://json.schemastore.org/azure-iot-edgehub-deployment-1.2.json",
+    "properties": {
+      "$edgeHub": {
+        "type": "object",
+        "title": "Configuration for the edgeHub module",
+        "required": [
+          "properties.desired"
+        ],
+        "properties": {
+          "properties.desired": {
+            "type": "object",
+            "required": [
+              "schemaVersion",
+              "routes"
+            ],
+            "properties": {
+              "schemaVersion": {
+                "type": "string",
+                "pattern": "1.2"
+              },
+              "routes": {
+                "type": "object",
+                "patternProperties": {
+                  "^[^\\.\\$# ]+$": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "required": [
+                          "route"
+                        ],
+                        "properties": {
+                          "route": {
+                            "type": "string",
+                            "examples": [
+                              "FROM /* INTO $upstream"
+                            ],
+                            "pattern": "^.+$"
+                          },
+                          "priority": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 9
+                          },
+                          "timeToLiveSecs": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 4294967295
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "string",
+                        "examples": [
+                          "FROM /* INTO $upstream"
+                        ],
+                        "pattern": "^.+$"
+                      }
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              },
+              "storeAndForwardConfiguration": {
+                "type": "object",
+                "required": [
+                  "timeToLiveSecs"
+                ],
+                "properties": {
+                  "timeToLiveSecs": {
+                    "type": "integer",
+                    "examples": [
+                      7200
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              },
+              "mqttBroker": {
+                "type": "object",
+                "properties": {
+                  "bridges": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "endpoint": {
+                          "type": "string",
+                          "pattern": "\\$upstream"
+                        },
+                        "settings": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "direction": {
+                                "type": "string",
+                                "pattern": "^in$|^out$"
+                              },
+                              "topic": {
+                                "type": "string",
+                                "pattern": "^.*$"
+                              },
+                              "inPrefix": {
+                                "type": "string",
+                                "pattern": "^.*$"
+                              },
+                              "outPrefix": {
+                                "type": "string",
+                                "pattern": "^.*$"
+                              }
+                            },
+                            "additionalProperties": false
+                          }
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "authorizations": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "identities": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "pattern": "^.+$",
+                            "examples": [
+                              "{{iot:identity}}",
+                              "contoso.azure-devices.net/MyLeafDevice1",
+                              "contoso.azure-devices.net/MyEdgeDevice/MyModule"
+                            ]
+                          }
+                        },
+                        "allow": {
+                          "$ref": "#/definitions/policy"
+                        },
+                        "deny": {
+                          "$ref": "#/definitions/policy"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "$edgeHub"
+    ],
+    "title": "JSON schema for Azure IoT EdgeHub Deployment version 1.2",
+    "type": "object"
+  },
+  "examples": [
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "consectetur ips",
+          "routes": {},
+          "mqttBroker": {
+            "bridges": [],
+            "authorizations": []
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "conse",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 430
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "RhxrnJgWQsN",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 568
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "psbEhY71O",
+          "routes": {},
+          "mqttBroker": {
+            "bridges": []
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "K1oFK6",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -859
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "sit sit ip",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 260
+          },
+          "mqttBroker": {
+            "bridges": [],
+            "authorizations": []
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "IHXFSBjYOEnVI",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -34
+          },
+          "mqttBroker": {
+            "bridges": [],
+            "authorizations": []
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "5uIYQV",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -69
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "jxstiofoyjcj",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -860
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "ogzvgwom",
+          "routes": {},
+          "mqttBroker": {
+            "bridges": []
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "consectet",
+          "routes": {},
+          "mqttBroker": {
+            "authorizations": []
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "fnmsjlayxzidwb",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -531
+          },
+          "mqttBroker": {
+            "bridges": [],
+            "authorizations": []
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "s3EnuT2",
+          "routes": {},
+          "mqttBroker": {
+            "bridges": [],
+            "authorizations": []
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "fzhcec",
+          "routes": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "amet dolor si",
+          "routes": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "LntD9",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 706
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "consectetur ad",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -170
+          },
+          "mqttBroker": {
+            "bridges": []
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "amet sit",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -386
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "ipsum ips",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 813
+          },
+          "mqttBroker": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "ipsum adipis",
+          "routes": {},
+          "mqttBroker": {
+            "bridges": [],
+            "authorizations": []
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "adipiscing ips",
+          "routes": {},
+          "mqttBroker": {
+            "bridges": [],
+            "authorizations": []
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "5pOxeOsZtUdP",
+          "routes": {},
+          "mqttBroker": {
+            "bridges": [],
+            "authorizations": []
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "amet sit ame",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -450
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "sit ipsum s",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 898
+          },
+          "mqttBroker": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "5Ws8Wf",
+          "routes": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "dolor ",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 221
+          },
+          "mqttBroker": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "txcplgwizjou",
+          "routes": {},
+          "mqttBroker": {
+            "authorizations": []
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "consectetur lor",
+          "routes": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "sit lo",
+          "routes": {},
+          "mqttBroker": {
+            "authorizations": []
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "XqjUmfFKFY",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 906
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "tesqhs",
+          "routes": {},
+          "mqttBroker": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "sit ipsum",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -850
+          },
+          "mqttBroker": {
+            "bridges": [],
+            "authorizations": []
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "hht25vBC5BtFaF",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 684
+          },
+          "mqttBroker": {
+            "bridges": [],
+            "authorizations": []
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "CTF054Q0YgQ5",
+          "routes": {},
+          "mqttBroker": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "y4d0rUBous",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 90
+          },
+          "mqttBroker": {
+            "authorizations": [
+              {},
+              {
+                "identities": [
+                  "amet adipisc",
+                  "tcsrcsca",
+                  "8L2BB5JD2UWw",
+                  "lKJihLL",
+                  "yxhj71"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "htcncbyiclxrblz",
+                  "uxXcyYctTEz",
+                  "enzvlaosptlmr",
+                  "dolor am",
+                  "h5sTFVRE61QMle1"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "ugyamrltha",
+                  "fpedce",
+                  "rmeax",
+                  "zNhHFoHPp",
+                  "consectetur si"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "oYhDILjNF",
+          "routes": {},
+          "mqttBroker": {
+            "authorizations": [
+              {
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "sit ipsum ",
+                  "lorem ip",
+                  "pocusficovxuz",
+                  "WIh6d08U6",
+                  "amet dolor lo"
+                ],
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "rbmrchcvxytob",
+                  "consectetur ",
+                  "adipisci",
+                  "cwgfvedbwru",
+                  "pmgvcqhhlepbad"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "adipisci",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -125
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "KoSEebg",
+          "routes": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "31AwybV7x",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 265
+          },
+          "mqttBroker": {
+            "bridges": [
+              {
+                "settings": [
+                  {
+                    "direction": "ipsum dolor am",
+                    "outPrefix": "OUjs5M"
+                  },
+                  {
+                    "direction": "gmjtlhyujrnb",
+                    "topic": "ipsum amet dolo",
+                    "inPrefix": "uwxwke",
+                    "outPrefix": "adipiscing lore"
+                  },
+                  {
+                    "topic": "nqzmpzovt",
+                    "inPrefix": "lorem dol",
+                    "outPrefix": "ybfhihjp"
+                  },
+                  {
+                    "direction": "ipsum "
+                  },
+                  {
+                    "topic": "syewy",
+                    "inPrefix": "qbfitbxeykkkbm",
+                    "outPrefix": "bOauBmO8Ms37uT"
+                  }
+                ]
+              },
+              {},
+              {
+                "endpoint": "ndjrugklhnkj"
+              },
+              {
+                "endpoint": "ipsum lore",
+                "settings": [
+                  {
+                    "topic": "xwabbtkkhdcrcgp",
+                    "outPrefix": "eoyxrzhnbdamwf"
+                  },
+                  {
+                    "inPrefix": "zawjurtjbfiwtjs",
+                    "outPrefix": "UjIAkKhSi"
+                  },
+                  {
+                    "direction": "lorem lorem ",
+                    "topic": "Cuv5vojNCgmVI",
+                    "inPrefix": "gtjjiwt"
+                  },
+                  {
+                    "topic": "0OLvEJhhhj6Y",
+                    "outPrefix": "miazbkqizie"
+                  },
+                  {
+                    "direction": "iolfdoi",
+                    "topic": "UvAxi1Pl1uX9",
+                    "outPrefix": "bqfqvlbmhxajth"
+                  }
+                ]
+              },
+              {
+                "settings": [
+                  {
+                    "direction": "knhiwxlizkhonv",
+                    "topic": "6IZwZC9NL"
+                  },
+                  {
+                    "direction": "wagnakiiypocc",
+                    "outPrefix": "bdxkordlhwuolmd"
+                  },
+                  {
+                    "direction": "lorem lorem lor",
+                    "inPrefix": "GsTa9UIdqgfe"
+                  },
+                  {
+                    "outPrefix": "ohwqklbzndam"
+                  },
+                  {
+                    "direction": "qgnmgtc",
+                    "topic": "amet amet s",
+                    "inPrefix": "consecte"
+                  }
+                ]
+              }
+            ],
+            "authorizations": [
+              {
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "bgmugxsudjuyhqb",
+                  "zuFkkAN0kMr7262",
+                  "adipiscing sit",
+                  "qcsangmawev",
+                  "sit dolor am"
+                ]
+              },
+              {
+                "identities": [
+                  "qzcjtkmkgzja",
+                  "adipiscing ips",
+                  "5PVYXuyvUIk",
+                  "Gx0xSrNy",
+                  "zBZaS01KzDWG"
+                ],
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "kpslkfxqrqlwhyi",
+                  "yrclmyqpojjdbv",
+                  "h62mG6n",
+                  "bruaqwx",
+                  "ZcsBI9uj2z"
+                ],
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "inmadrvaisfrp",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 536
+          },
+          "mqttBroker": {
+            "bridges": [
+              {},
+              {
+                "settings": [
+                  {
+                    "direction": "lsaxsylh",
+                    "inPrefix": "cblhgvxfce",
+                    "outPrefix": "8bHi0xoK2"
+                  },
+                  {
+                    "direction": "CszScYgG",
+                    "outPrefix": "rJXDFyY7"
+                  },
+                  {
+                    "direction": "lutdwpbbsgy",
+                    "topic": "kBToJtQ39",
+                    "inPrefix": "tcjwmlbeyz",
+                    "outPrefix": "LmcMzB6gQEco2B3"
+                  },
+                  {
+                    "topic": "ltgioj",
+                    "inPrefix": "eyjdytmonncqjej",
+                    "outPrefix": "uE3Oe"
+                  },
+                  {
+                    "inPrefix": "ddrjeh",
+                    "outPrefix": "0xd19dHB"
+                  }
+                ]
+              },
+              {
+                "endpoint": "ahpkjpllevsitvw"
+              },
+              {},
+              {
+                "settings": [
+                  {
+                    "inPrefix": "sit cons"
+                  },
+                  {
+                    "direction": "amet sit adi",
+                    "topic": "altstztiodukvf",
+                    "inPrefix": "ibigaqavyutsvo",
+                    "outPrefix": "qjl8h"
+                  },
+                  {
+                    "direction": "w6x1R8KU",
+                    "topic": "rxoqhplwbazvkmw",
+                    "inPrefix": "lorem ipsum lo",
+                    "outPrefix": "amet ipsum sit "
+                  },
+                  {
+                    "direction": "Au8UCNrSU",
+                    "topic": "dolor dolor do",
+                    "inPrefix": "xJaqxJJq4bR"
+                  },
+                  {
+                    "topic": "sxkllmkppzkuw",
+                    "inPrefix": "bgihogauevmpyw",
+                    "outPrefix": "fvklch"
+                  }
+                ]
+              }
+            ],
+            "authorizations": [
+              {
+                "identities": [
+                  "HvSYq",
+                  "O4SKnVhOLH",
+                  "dolor",
+                  "yhgjpbbsq",
+                  "dolor lorem sit"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "lorem lorem lo",
+                  "tXuisxMHKmzUwzD",
+                  "dolor lorem do",
+                  "EkgRT9v",
+                  "hapkeapf"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "3CZh28eFSd",
+                  "oS1pxWSiqcAkevX",
+                  "sit co",
+                  "zyxxl1yV2",
+                  "amet adipiscing"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "zhveegt",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -35
+          },
+          "mqttBroker": {
+            "bridges": [
+              {
+                "endpoint": "lorem d",
+                "settings": [
+                  {
+                    "direction": "vgsajuvkhkzg",
+                    "topic": "zhfadb"
+                  },
+                  {
+                    "direction": "PzawI",
+                    "topic": "adipiscing dolo",
+                    "outPrefix": "bkljps"
+                  },
+                  {
+                    "topic": "ygnbliernq",
+                    "inPrefix": "fltvkdgcu",
+                    "outPrefix": "lorem adipis"
+                  },
+                  {
+                    "inPrefix": "ycsssgnbweud",
+                    "outPrefix": "ryYocgm2j"
+                  },
+                  {
+                    "direction": "zxyvym",
+                    "inPrefix": "adipiscin"
+                  }
+                ]
+              },
+              {
+                "endpoint": "consectet"
+              },
+              {
+                "endpoint": "mdcdxvnfbzeka"
+              },
+              {},
+              {
+                "endpoint": "tchknyhxuahczg",
+                "settings": [
+                  {
+                    "direction": "dolor dolor si",
+                    "topic": "YEPQCule",
+                    "inPrefix": "Fd4FJVUb"
+                  },
+                  {},
+                  {
+                    "direction": "2NPRmrok",
+                    "topic": "ipsum amet ",
+                    "inPrefix": "ncneqwhcoubu"
+                  },
+                  {
+                    "topic": "TQT8N",
+                    "inPrefix": "oN6O1azdTN7o8"
+                  },
+                  {
+                    "outPrefix": "ukoxdkfhgrrp"
+                  }
+                ]
+              }
+            ],
+            "authorizations": [
+              {
+                "identities": [
+                  "ipsum",
+                  "njlxbt",
+                  "0sA1sOZUjsT4O",
+                  "ipsum cons",
+                  "gxjLDLHiTxPk8BH"
+                ],
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "kMeOfl",
+                  "bcqouwx",
+                  "mqljthijk",
+                  "jcrepkmmd",
+                  "amet "
+                ],
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "ldayfeczkjof",
+          "routes": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "aazifmotp",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 548
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "viyfuwjf",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 739
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "9UVRT",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 477
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "wvctqsw",
+          "routes": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "ieataimfyrp",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -338
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "sgibwi",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 420
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "moixuozh",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -243
+          },
+          "mqttBroker": {
+            "authorizations": [
+              {},
+              {
+                "identities": [
+                  "consec",
+                  "lorem dolor con",
+                  "afO98YAWTVDUurk",
+                  "4P6JEH6EIE",
+                  "yrfbkeotosdzz"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "sit amet a",
+                  "lorem sit cons",
+                  "lorem conse",
+                  "scijahyltfecjw",
+                  "dolor ipsum dol"
+                ],
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "amet lorem ",
+                  "qmipqm",
+                  "yoewykewp",
+                  "consectetur i",
+                  "brwlhhfk"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "7QyCWB",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -477
+          },
+          "mqttBroker": {
+            "authorizations": [
+              {
+                "identities": [
+                  "fZXQRNxW",
+                  "8OVHklPTIY",
+                  "nxxlnboks",
+                  "YVLI2Pv3Y",
+                  "ljqesswf"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "consectetur",
+                  "paqhj",
+                  "OVpFK5",
+                  "uxgwedqxkec",
+                  "Cu8A7NLlRRO"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "9qtnUgBVSt",
+                  "nxwznnd",
+                  "amet sit a",
+                  "uQc1Zm5gj",
+                  "sksscluvriw"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "IXqX2VfGjZe",
+          "routes": {},
+          "mqttBroker": {
+            "bridges": [
+              {
+                "endpoint": "wepsmredwemlkhe",
+                "settings": [
+                  {
+                    "direction": "dujwhruc",
+                    "outPrefix": "L5ue7S0Est"
+                  },
+                  {
+                    "direction": "sit adipis",
+                    "inPrefix": "lorem amet"
+                  },
+                  {},
+                  {
+                    "topic": "gQgzIPNwz7kmN69",
+                    "outPrefix": "sit consectet"
+                  },
+                  {
+                    "direction": "sit dolor cons",
+                    "inPrefix": "vuoimbvf"
+                  }
+                ]
+              },
+              {
+                "endpoint": "kvdnhqo",
+                "settings": [
+                  {
+                    "topic": "QXJRuviM",
+                    "outPrefix": "CWBCgNq2o"
+                  },
+                  {},
+                  {
+                    "topic": "dLJepdAWbn0E",
+                    "inPrefix": "mT41lrK6pU",
+                    "outPrefix": "aeaFElAbO"
+                  },
+                  {
+                    "topic": "rtmprlpnyrxrvv",
+                    "inPrefix": "oajwfyfjnxyskku",
+                    "outPrefix": "ipsum dolor"
+                  },
+                  {
+                    "outPrefix": "zjaosvidurdlf"
+                  }
+                ]
+              },
+              {
+                "endpoint": "vlCF5CYiq0ZCv",
+                "settings": [
+                  {
+                    "topic": "xakdqm",
+                    "outPrefix": "dolor con"
+                  },
+                  {
+                    "direction": "KB4YebE4rXYe",
+                    "topic": "conse",
+                    "inPrefix": "vjxioNpnC9nnluU",
+                    "outPrefix": "kmgtwswuvfjev"
+                  },
+                  {
+                    "direction": "DIJXhhGryz3hbDA",
+                    "inPrefix": "GB7pf5RW"
+                  },
+                  {
+                    "inPrefix": "tIxSpK"
+                  },
+                  {
+                    "direction": "cmhpcozomrdume",
+                    "topic": "tdwgnwemmvgze"
+                  }
+                ]
+              },
+              {},
+              {
+                "endpoint": "QqKMkX2tE",
+                "settings": [
+                  {
+                    "direction": "errzgqrkrvytp",
+                    "topic": "vswpwkxtkjzbgt",
+                    "outPrefix": "bwfxgs"
+                  },
+                  {
+                    "topic": "lIsxHUZsNTGCO",
+                    "outPrefix": "consectetur s"
+                  },
+                  {
+                    "inPrefix": "cWmxYgvz"
+                  },
+                  {
+                    "direction": "rgtniiavbcfd",
+                    "inPrefix": "adipis",
+                    "outPrefix": "bvSGmvJjvzGt"
+                  },
+                  {
+                    "direction": "conse",
+                    "topic": "fujzwwoc",
+                    "inPrefix": "fxxog"
+                  }
+                ]
+              }
+            ],
+            "authorizations": [
+              {
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "vycouvlmkx",
+                  "aoigforroW4P",
+                  "jzaybzmf",
+                  "ac0rEI2YbBad",
+                  "nfbwccqc"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {},
+              {
+                "identities": [
+                  "kognbi",
+                  "mrsceblwfgai",
+                  "ipsum sit adi",
+                  "dolor consec",
+                  "adipisc"
+                ],
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "swcdkupqxrvk",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -856
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "consectetur d",
+          "routes": {},
+          "mqttBroker": {
+            "bridges": [
+              {
+                "endpoint": "aalylurbm"
+              },
+              {
+                "endpoint": "adipisc"
+              },
+              {},
+              {
+                "endpoint": "HVr1cBok3kWD62b"
+              },
+              {
+                "endpoint": "consectetur c",
+                "settings": [
+                  {
+                    "direction": "NmlzL9RQkoVPFA9",
+                    "topic": "F50MtM2CjW9sdul",
+                    "outPrefix": "amet am"
+                  },
+                  {
+                    "direction": "QBSfi6Mvydgf",
+                    "topic": "gholql",
+                    "inPrefix": "2UDruJfUf7poFDU",
+                    "outPrefix": "lhattgxfzojf"
+                  },
+                  {
+                    "topic": "adipiscing",
+                    "outPrefix": "nVEO3odnA7Pkt2g"
+                  },
+                  {
+                    "topic": "WSa13NEzYEg3C"
+                  },
+                  {
+                    "outPrefix": "consectetur "
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "9H6hEiafrmJGm",
+          "routes": {},
+          "mqttBroker": {
+            "authorizations": [
+              {
+                "identities": [
+                  "vlypOgg",
+                  "majnphjlxd",
+                  "caxrgmt",
+                  "amet amet amet",
+                  "amet lorem c"
+                ],
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "nhfcogxftqw",
+                  "wezkgajudq",
+                  "AQ3FWSCRv",
+                  "ipsum lor",
+                  "ipsum "
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "consectetur ",
+                  "lorem consect",
+                  "sit sit",
+                  "dolor adipisc",
+                  "consectetur ame"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "bmYp7CCN7sil",
+                  "sit sit conse",
+                  "B8Xg7c",
+                  "ipsum",
+                  "rltftukzsohi"
+                ]
+              },
+              {
+                "identities": [
+                  "lorem i",
+                  "UhIYfkdg",
+                  "qecuopjijkc",
+                  "ipsum dolo",
+                  "dmgtOB5j"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "P5fvc2kNf9",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -731
+          },
+          "mqttBroker": {
+            "bridges": [
+              {
+                "endpoint": "tQv42XFbdBZx8",
+                "settings": [
+                  {
+                    "direction": "uzogryukphnvp",
+                    "topic": "amet adipis"
+                  },
+                  {
+                    "direction": "tokAE",
+                    "topic": "sit am"
+                  },
+                  {
+                    "topic": "ipsum ipsum ips",
+                    "inPrefix": "oivcpexeidtcvum",
+                    "outPrefix": "dolor"
+                  },
+                  {
+                    "direction": "taavrplvdbeog",
+                    "topic": "hF398CizYkR",
+                    "inPrefix": "xrkfpxneod"
+                  },
+                  {
+                    "direction": "tdfzyqqyncgakv",
+                    "inPrefix": "lorem ipsum",
+                    "outPrefix": "mTjn0EF7xKPb"
+                  }
+                ]
+              },
+              {
+                "endpoint": "XZEDvZQ9UoS8On5"
+              },
+              {
+                "endpoint": "RuK1AA6Z",
+                "settings": [
+                  {
+                    "direction": "mghskyry",
+                    "topic": "ipsum lorem a",
+                    "outPrefix": "pchadj"
+                  },
+                  {
+                    "direction": "qrBK7IL20d",
+                    "topic": "ngxxqgahzednr",
+                    "outPrefix": "sit sit ame"
+                  },
+                  {
+                    "direction": "DIGpb3",
+                    "topic": "dolor ipsum do"
+                  },
+                  {
+                    "topic": "wktsyckqvfqmp"
+                  },
+                  {
+                    "direction": "adipis",
+                    "topic": "uC7nFw6",
+                    "inPrefix": "sit si",
+                    "outPrefix": "ipsum lorem c"
+                  }
+                ]
+              },
+              {
+                "endpoint": "LPljkioA"
+              },
+              {
+                "settings": [
+                  {
+                    "topic": "oQLcsyyyX3Yzd",
+                    "inPrefix": "hegfcprrs",
+                    "outPrefix": "goqpornoaa"
+                  },
+                  {
+                    "direction": "Vf72ghH",
+                    "inPrefix": "lhokt",
+                    "outPrefix": "adipis"
+                  },
+                  {
+                    "direction": "xqxoa",
+                    "inPrefix": "y330RuUuPQlApQ",
+                    "outPrefix": "le1VqEJMDtoF5"
+                  },
+                  {
+                    "direction": "qwonl",
+                    "outPrefix": "consectet"
+                  },
+                  {
+                    "topic": "3yVWe",
+                    "outPrefix": "fxfpluemfeep"
+                  }
+                ]
+              }
+            ],
+            "authorizations": [
+              {
+                "identities": [
+                  "vygcsldkmdnm",
+                  "brdiiyfpwcj",
+                  "kPgeP7FtW",
+                  "sit dolor do",
+                  "jjcpouemvxjjmuj"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "hsuro",
+                  "lgVg6h4",
+                  "MBhKB6II2AyMnfV",
+                  "dolor s",
+                  "rqkjqkhob"
+                ]
+              },
+              {
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "HjeH0YtkMwOF",
+                  "amet ipsu",
+                  "RvK7oyAQdzbTk",
+                  "consec",
+                  "oQJOuTniG"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "94YdbVbU",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -947
+          },
+          "mqttBroker": {
+            "bridges": [
+              {},
+              {
+                "endpoint": "consectet",
+                "settings": [
+                  {
+                    "direction": "eUgdG4MUC8obKF",
+                    "topic": "yarawm",
+                    "inPrefix": "Uc5T2cGZcPHIH",
+                    "outPrefix": "MWLr38o"
+                  },
+                  {
+                    "direction": "sit amet",
+                    "inPrefix": "callnehn"
+                  },
+                  {
+                    "direction": "adipiscing do",
+                    "topic": "ajmOaik",
+                    "inPrefix": "jhwexx",
+                    "outPrefix": "sxcpgcyoq"
+                  },
+                  {
+                    "direction": "ipsum consecte",
+                    "outPrefix": "efkakonysykptzw"
+                  },
+                  {
+                    "topic": "6onsmTJC0jl",
+                    "outPrefix": "amet amet lo"
+                  }
+                ]
+              },
+              {
+                "settings": [
+                  {
+                    "outPrefix": "lorem adipi"
+                  },
+                  {
+                    "direction": "wzrqgzzlogpn",
+                    "topic": "3EARNOuZ",
+                    "inPrefix": "ipsum co",
+                    "outPrefix": "nhhdherenrlnps"
+                  },
+                  {
+                    "inPrefix": "2AVztX",
+                    "outPrefix": "lorem ipsum si"
+                  },
+                  {
+                    "topic": "ueyvfyotdeq",
+                    "inPrefix": "eakdgb"
+                  },
+                  {
+                    "direction": "uybalcxwxjxiero",
+                    "topic": "z4diNhdSTZA5HnG",
+                    "inPrefix": "adipiscing l"
+                  }
+                ]
+              },
+              {
+                "endpoint": "faqxhvu"
+              },
+              {
+                "endpoint": "amet dolor c",
+                "settings": [
+                  {
+                    "direction": "13ksKzp19G1zz",
+                    "topic": "orlitdgxctpchrn",
+                    "inPrefix": "ipsum ",
+                    "outPrefix": "2ghVrXMotG"
+                  },
+                  {
+                    "direction": "adipiscing ",
+                    "topic": "ssnzklvgfde"
+                  },
+                  {
+                    "direction": "TE7RdLxToKNDVN",
+                    "topic": "ipsum dolor do"
+                  },
+                  {
+                    "direction": "7VGUceS3",
+                    "topic": "02RiH21nIs4wBd",
+                    "outPrefix": "dyubsrmnx"
+                  },
+                  {
+                    "direction": "kylrfmlchl"
+                  }
+                ]
+              }
+            ],
+            "authorizations": [
+              {
+                "identities": [
+                  "dolor con",
+                  "ipsum amet ",
+                  "dolor lorem",
+                  "jegduj",
+                  "lffvcv"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "zhoZsJf",
+                  "dGn9FSEewNa0",
+                  "Cf1fRvPN7lr",
+                  "NX7COaaIuyE5M",
+                  "ipsum lorem "
+                ],
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "kbfhrtmavici",
+                  "amet si",
+                  "adipiscing",
+                  "ojnlfirdesffxf",
+                  "vjrmjhsknhbht"
+                ],
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "cz8rYIW4yO",
+          "routes": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "LoifTGRfMmS",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 623
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "7kyvFgh",
+          "routes": {},
+          "mqttBroker": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "xojbnpxmuilgel",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -608
+          },
+          "mqttBroker": {
+            "bridges": [
+              {
+                "settings": [
+                  {
+                    "direction": "nOMu1qWoeUz",
+                    "inPrefix": "bRaIjc",
+                    "outPrefix": "kzvxoe"
+                  },
+                  {
+                    "topic": "racaiyw",
+                    "outPrefix": "vudeutxlxdywib"
+                  },
+                  {
+                    "direction": "lQurjCAGX7",
+                    "topic": "xaqwlough",
+                    "outPrefix": "bivwzNUGnPjhb"
+                  },
+                  {
+                    "topic": "jrodoirtgllhbbz",
+                    "outPrefix": "sit ipsum lorem"
+                  },
+                  {
+                    "outPrefix": "uymuqawpdcql"
+                  }
+                ]
+              },
+              {
+                "endpoint": "amet d",
+                "settings": [
+                  {
+                    "direction": "nztqexut",
+                    "topic": "ipsum s"
+                  },
+                  {
+                    "direction": "sit lore",
+                    "inPrefix": "DhgcLS9"
+                  },
+                  {
+                    "topic": "drbchev",
+                    "outPrefix": "cs3DmjkB52UUlWn"
+                  },
+                  {
+                    "direction": "jgvsy"
+                  },
+                  {
+                    "direction": "brcrjwbyb",
+                    "topic": "EygTA"
+                  }
+                ]
+              },
+              {
+                "endpoint": "srhktnmxkw",
+                "settings": [
+                  {
+                    "direction": "mljhj",
+                    "topic": "tkqmzbr",
+                    "inPrefix": "ebuwwsnytt"
+                  },
+                  {
+                    "direction": "ipsum consecte",
+                    "topic": "KPpIQldlD",
+                    "outPrefix": "ipsum sit"
+                  },
+                  {
+                    "direction": "conse",
+                    "topic": "adipiscing lore"
+                  },
+                  {
+                    "topic": "iupjxsiohhyzexs",
+                    "inPrefix": "ZWlnEJ",
+                    "outPrefix": "Q22akh"
+                  },
+                  {
+                    "direction": "amet dolor ",
+                    "topic": "vuebjsfwwsmdv",
+                    "inPrefix": "3PtBePv4Rvce",
+                    "outPrefix": "bumhhfvfzn"
+                  }
+                ]
+              },
+              {
+                "endpoint": "amet dolor ame"
+              },
+              {}
+            ],
+            "authorizations": [
+              {
+                "identities": [
+                  "knufzajvgi",
+                  "amet do",
+                  "jbnRGrJfv",
+                  "3y6Teg",
+                  "VembEgGjG"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "jorehlp",
+          "routes": {},
+          "mqttBroker": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "svrxtrlirmdp",
+          "routes": {},
+          "mqttBroker": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "tfisu",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -659
+          },
+          "mqttBroker": {
+            "bridges": [
+              {
+                "endpoint": "dmp96kscBp"
+              },
+              {
+                "settings": [
+                  {
+                    "direction": "gkyjzf",
+                    "inPrefix": "WDinj1lHbCnBdei"
+                  },
+                  {
+                    "direction": "sqonsivswxvn",
+                    "topic": "b4mEC",
+                    "inPrefix": "lorem adipisci",
+                    "outPrefix": "varfeie"
+                  },
+                  {
+                    "direction": "wprtqksn",
+                    "inPrefix": "adipiscing d",
+                    "outPrefix": "mkfjup"
+                  },
+                  {
+                    "direction": "dolor consect",
+                    "topic": "ipsum",
+                    "inPrefix": "aeeuhrraldumj"
+                  },
+                  {
+                    "topic": "umwsnv",
+                    "inPrefix": "dolor lo",
+                    "outPrefix": "hxffgvvtodgayds"
+                  }
+                ]
+              },
+              {
+                "endpoint": "mfoxeyhtq",
+                "settings": [
+                  {
+                    "direction": "dolor consect",
+                    "outPrefix": "xiwgri"
+                  },
+                  {},
+                  {
+                    "direction": "PFPkg",
+                    "topic": "oqdaabnyo"
+                  },
+                  {
+                    "topic": "lorem amet a",
+                    "inPrefix": "J2whqYfh",
+                    "outPrefix": "Gg6MeFZR4nL"
+                  },
+                  {
+                    "direction": "OtOXQh7",
+                    "topic": "mmcfsgnxemttvx",
+                    "inPrefix": "dawjdspw",
+                    "outPrefix": "URyeQM7R"
+                  }
+                ]
+              },
+              {
+                "endpoint": "sit lore",
+                "settings": [
+                  {
+                    "inPrefix": "wcozkdqvb",
+                    "outPrefix": "JLHDEXvCc"
+                  },
+                  {
+                    "topic": "8HewvjeQ25",
+                    "inPrefix": "moauuhsqglwybf",
+                    "outPrefix": "wi3P77"
+                  },
+                  {},
+                  {
+                    "direction": "amet consectetu",
+                    "inPrefix": "orbogh"
+                  },
+                  {
+                    "direction": "ximrt",
+                    "topic": "EPhDgSmQDo",
+                    "inPrefix": "vvZbkB",
+                    "outPrefix": "zddvomizxrn"
+                  }
+                ]
+              },
+              {
+                "endpoint": "HOKHi8T"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "X6tVukvUjOvkAx",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 804
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "adipiscing c",
+          "routes": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "tsltylod",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -929
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "crsjzhe",
+          "routes": {},
+          "mqttBroker": {
+            "bridges": []
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "sit lorem",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 19
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "pksqrontdnc",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -974
+          },
+          "mqttBroker": {
+            "bridges": [
+              {
+                "settings": [
+                  {
+                    "direction": "dolor sit adi",
+                    "topic": "fkflwmiedvyxagd",
+                    "inPrefix": "sit dolo"
+                  },
+                  {
+                    "topic": "lwiczmezy",
+                    "inPrefix": "lorem"
+                  }
+                ]
+              },
+              {
+                "settings": [
+                  {
+                    "inPrefix": "XaTSPtIf"
+                  },
+                  {
+                    "direction": "lorem ",
+                    "topic": "1qB8YkoMLEIE",
+                    "outPrefix": "ipsum lorem i"
+                  },
+                  {
+                    "direction": "AsqpymW",
+                    "topic": "lorem ipsum"
+                  },
+                  {
+                    "direction": "fngltfnqwz",
+                    "inPrefix": "kseeyixowg",
+                    "outPrefix": "sglojsggj"
+                  },
+                  {
+                    "inPrefix": "vxmaocjg",
+                    "outPrefix": "bcNKSRknEOOl"
+                  }
+                ]
+              },
+              {
+                "settings": [
+                  {
+                    "direction": "2hdDJZJGNY",
+                    "inPrefix": "adipi",
+                    "outPrefix": "khhizp"
+                  }
+                ]
+              },
+              {
+                "endpoint": "kSnalDTJeRY"
+              }
+            ],
+            "authorizations": [
+              {
+                "identities": [
+                  "lorem sit l",
+                  "amet do",
+                  "vpuaib"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "ifkvqsoe",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 682
+          },
+          "mqttBroker": {
+            "bridges": [
+              {}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "phmkrjnapglg",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 502
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "vhmjl",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -861
+          },
+          "mqttBroker": {
+            "bridges": [
+              {
+                "settings": [
+                  {
+                    "direction": "t0GkMnqECrPQ",
+                    "topic": "ipsum",
+                    "outPrefix": "dxemccrvcippds"
+                  },
+                  {
+                    "direction": "oMDgYUjrtoeikoj",
+                    "topic": "consectet",
+                    "inPrefix": "zlnc1CL3",
+                    "outPrefix": "consectetur "
+                  }
+                ]
+              },
+              {
+                "settings": [
+                  {
+                    "direction": "OHNr6xd6L"
+                  }
+                ]
+              },
+              {}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "u7McGGGK",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 608
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "lorem lor",
+          "routes": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "sUhi77q2A5ed7G",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 976
+          },
+          "mqttBroker": {
+            "bridges": [
+              {
+                "endpoint": "jIFMIH9Y2cXaQQo"
+              },
+              {
+                "settings": [
+                  {
+                    "direction": "sit ipsum"
+                  },
+                  {
+                    "topic": "dolor ",
+                    "outPrefix": "dglqyefwmsyl"
+                  },
+                  {
+                    "direction": "MVTmsHhVq",
+                    "topic": "elhcyobju",
+                    "outPrefix": "eiklooebjjlbwc"
+                  },
+                  {
+                    "direction": "cvjqnkaufedv",
+                    "inPrefix": "owU5gqCiY8VYr",
+                    "outPrefix": "uawzsw"
+                  },
+                  {
+                    "inPrefix": "imefgbqaos"
+                  }
+                ]
+              },
+              {
+                "settings": [
+                  {
+                    "inPrefix": "consec",
+                    "outPrefix": "sit sit"
+                  },
+                  {
+                    "direction": "sit dolor ipsum",
+                    "topic": "qJrN8"
+                  },
+                  {
+                    "direction": "1ViWbWYdNkXP4pv",
+                    "topic": "conse",
+                    "inPrefix": "xfdmzhqwj",
+                    "outPrefix": "sit sit do"
+                  }
+                ]
+              }
+            ],
+            "authorizations": [
+              {
+                "identities": [
+                  "kcmthvqqr",
+                  "consectetu",
+                  "conse",
+                  "consectetu"
+                ],
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "ipsum co",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 437
+          },
+          "mqttBroker": {
+            "bridges": [
+              {
+                "endpoint": "azlekkasqpqx",
+                "settings": [
+                  {
+                    "direction": "ecxqafikgio"
+                  },
+                  {
+                    "direction": "cCaBc52Al",
+                    "topic": "qxxhnkdhzjclq",
+                    "outPrefix": "sit amet ipsum "
+                  },
+                  {
+                    "inPrefix": "rnkaqqpfipthso",
+                    "outPrefix": "pkhjwtjgcfrlyvb"
+                  },
+                  {
+                    "topic": "kysftdtnpxok",
+                    "inPrefix": "tgermlzamdwzby",
+                    "outPrefix": "Z4M77xcl6R"
+                  }
+                ]
+              },
+              {
+                "endpoint": "tuvfq",
+                "settings": [
+                  {
+                    "direction": "uxatvkjdh",
+                    "topic": "sit sit amet am",
+                    "outPrefix": "fhdouzuhj"
+                  },
+                  {
+                    "direction": "iowchgp",
+                    "topic": "ldjyx",
+                    "outPrefix": "sq1GCVbUx"
+                  },
+                  {
+                    "direction": "nMWa3oe",
+                    "inPrefix": "consecte",
+                    "outPrefix": "nstflsrqoqiwpm"
+                  },
+                  {
+                    "direction": "adipiscing",
+                    "inPrefix": "adipisci",
+                    "outPrefix": "amet sit adipi"
+                  },
+                  {
+                    "topic": "zcnkeuz"
+                  }
+                ]
+              },
+              {
+                "endpoint": "qoqqrzt"
+              },
+              {
+                "endpoint": "yvpwfcqhlvpnqf",
+                "settings": [
+                  {
+                    "outPrefix": "eekll"
+                  },
+                  {
+                    "topic": "gpWA6Jdqx",
+                    "inPrefix": "adipisci",
+                    "outPrefix": "consecte"
+                  },
+                  {
+                    "outPrefix": "qacbg"
+                  },
+                  {
+                    "topic": "qgsrwqqnip",
+                    "inPrefix": "lorem ipsum ame",
+                    "outPrefix": "igtfmnak"
+                  }
+                ]
+              }
+            ],
+            "authorizations": [
+              {
+                "identities": [
+                  "lorem ",
+                  "fgmiatusfyyx",
+                  "lorem ipsum "
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "8d2LfMRUNwg",
+                  "nRn25ofSY"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "lorem dolor con",
+          "routes": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "consectet",
+          "routes": {},
+          "mqttBroker": {
+            "bridges": []
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "adipiscing ad",
+          "routes": {},
+          "mqttBroker": {
+            "bridges": [
+              {
+                "endpoint": "jecrhhhex"
+              }
+            ],
+            "authorizations": [
+              {
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "adipis",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 636
+          },
+          "mqttBroker": {
+            "authorizations": [
+              {
+                "identities": [
+                  "iD83vKjlWtoAEO",
+                  "juwT4a",
+                  "vslbdzu",
+                  "amet do",
+                  "pdagpqawtjkc"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "adipiscing",
+                  "aBE4RjyUf1c",
+                  "XDD1PinQo2OeUzR"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "sit consec"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "adipiscing ad",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -550
+          },
+          "mqttBroker": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "conse",
+          "routes": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "k7zWbk8Yb",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -129
+          },
+          "mqttBroker": {
+            "bridges": [
+              {
+                "endpoint": "VOHUkCR"
+              },
+              {},
+              {
+                "endpoint": "VLBiHX6CFXBzT"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "consecte",
+          "routes": {},
+          "mqttBroker": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "amet ipsum ips",
+          "routes": {},
+          "mqttBroker": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "pvagf",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 381
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "wD9tHNJ3",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 588
+          },
+          "mqttBroker": {
+            "bridges": [
+              {
+                "endpoint": "ky40utvQ0mJaIeJ",
+                "settings": [
+                  {
+                    "direction": "cZTCAG8EyWInnk",
+                    "topic": "grxoeu"
+                  },
+                  {
+                    "direction": "GeoNym"
+                  },
+                  {
+                    "direction": "amet adipi",
+                    "topic": "273dEWbgOkB0X2"
+                  },
+                  {
+                    "direction": "suwrenpbyjt",
+                    "topic": "ipsum ipsum",
+                    "inPrefix": "b6Sc0l9"
+                  }
+                ]
+              },
+              {
+                "settings": []
+              }
+            ],
+            "authorizations": [
+              {
+                "identities": [
+                  "Qq2MS",
+                  "ipsum",
+                  "dolor a",
+                  "ozmihjm",
+                  "EqHdklUhzX0r9"
+                ]
+              },
+              {
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "rizyciimryzl",
+                  "krixzoaqhhdju",
+                  "mfkle",
+                  "amet sit adip"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "nbxskfwgsdrhgy",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 219
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "WOBCwKnv62SI6",
+          "routes": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "FybWhJ7SnQ",
+          "routes": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "lorem ipsum",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 590
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "tMV2RU2cfr58",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -229
+          },
+          "mqttBroker": {
+            "bridges": [
+              {},
+              {
+                "settings": [
+                  {
+                    "direction": "amet lo",
+                    "topic": "adipiscing",
+                    "outPrefix": "wecmskwvsyp"
+                  },
+                  {
+                    "direction": "ipsum amet do",
+                    "inPrefix": "46bpowckbf"
+                  },
+                  {
+                    "direction": "consectetu",
+                    "topic": "rylrdobhacyt",
+                    "outPrefix": "nvkogrnuyxqsdae"
+                  },
+                  {
+                    "direction": "amet sit l",
+                    "topic": "adipiscing ",
+                    "inPrefix": "amet lorem dolo"
+                  },
+                  {
+                    "direction": "dapmgevnnl",
+                    "inPrefix": "amet ipsum"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "SISNhOE7n7L9",
+          "routes": {},
+          "mqttBroker": {}
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "NrsRCaZxqvtK01Z",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -606
+          },
+          "mqttBroker": {
+            "bridges": [
+              {
+                "settings": [
+                  {
+                    "topic": "consectetu",
+                    "outPrefix": "d4NTscTio3j"
+                  },
+                  {
+                    "topic": "lorem c",
+                    "outPrefix": "3Oqo1"
+                  }
+                ]
+              },
+              {
+                "endpoint": "ipsum amet amet",
+                "settings": [
+                  {
+                    "direction": "sit amet sit",
+                    "outPrefix": "cqtpvccznhtwiff"
+                  }
+                ]
+              },
+              {},
+              {
+                "endpoint": "cAPuKoYtSLqfV",
+                "settings": [
+                  {
+                    "topic": "kqjueyiuxb",
+                    "inPrefix": "dolor dolor ",
+                    "outPrefix": "jollEOWzl"
+                  },
+                  {
+                    "direction": "adipisci",
+                    "inPrefix": "lorem lorem",
+                    "outPrefix": "jwzlm"
+                  },
+                  {
+                    "topic": "lorem dolo",
+                    "inPrefix": "ugtgnfvxwaxcz",
+                    "outPrefix": "mjqcyerufju"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "dEmRkEkdLm3Lrw",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 445
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "dolor ",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -980
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "6sGqlYkU",
+          "routes": {},
+          "mqttBroker": {
+            "bridges": [
+              {},
+              {
+                "endpoint": "adipiscing lore",
+                "settings": [
+                  {}
+                ]
+              },
+              {
+                "endpoint": "SGKZS2WOFaQFohN",
+                "settings": []
+              }
+            ],
+            "authorizations": [
+              {
+                "identities": [],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "qpwwh",
+          "routes": {},
+          "mqttBroker": {
+            "authorizations": [
+              {
+                "identities": [
+                  "whfhmiaewnbcgy"
+                ],
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              },
+              {
+                "identities": [
+                  "sit a",
+                  "TzxKrG",
+                  "6of7sCR9vgxUe5E",
+                  "sit s"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "lorem ",
+          "routes": {},
+          "mqttBroker": {
+            "bridges": [
+              {
+                "endpoint": "83ol0R5dIyEROi1"
+              },
+              {
+                "settings": [
+                  {
+                    "direction": "mfgdncmdvjvwwzm"
+                  },
+                  {
+                    "direction": "ywNZAV0CU1VHkgj",
+                    "topic": "eeorgcaqr",
+                    "inPrefix": "fshitloaqz"
+                  },
+                  {
+                    "direction": "rgpzxrruxckdg",
+                    "topic": "CVjntHQDjQd95",
+                    "inPrefix": "F5HVp2df",
+                    "outPrefix": "tpgotb"
+                  },
+                  {
+                    "direction": "ursktjdtzcs",
+                    "topic": "0xMCHCUyjO",
+                    "inPrefix": "inmaupwpghhmec"
+                  },
+                  {
+                    "direction": "lorem s"
+                  }
+                ]
+              },
+              {
+                "endpoint": "bwqdloj"
+              },
+              {
+                "endpoint": "ggwbrinhojlxxs",
+                "settings": [
+                  {
+                    "direction": "xnzorcmnbcygfrs",
+                    "topic": "rgptfanrz",
+                    "inPrefix": "adipiscing a",
+                    "outPrefix": "lorem "
+                  },
+                  {
+                    "topic": "GNCaBUZJiXOLI",
+                    "inPrefix": "bvaiclafviaveo",
+                    "outPrefix": "LfeLex9CrC"
+                  },
+                  {
+                    "topic": "lorem d",
+                    "inPrefix": "PwcHaGmpM8GewKu",
+                    "outPrefix": "UvgDNJz3GG"
+                  }
+                ]
+              },
+              {
+                "endpoint": "adipis",
+                "settings": [
+                  {
+                    "direction": "gbsltwpaoq",
+                    "topic": "lorem amet sit ",
+                    "inPrefix": "ipsum lorem d",
+                    "outPrefix": "lorem ipsum"
+                  },
+                  {
+                    "direction": "lorem adi",
+                    "inPrefix": "VFZokWTdNziUA",
+                    "outPrefix": "wd7Sb"
+                  }
+                ]
+              }
+            ],
+            "authorizations": [
+              {
+                "identities": [
+                  "vfysbtHY2hp3",
+                  "consectetur ips",
+                  "mrgiwyyhezcurpk",
+                  "x9pXUOcOSk7"
+                ],
+                "allow": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                },
+                "deny": {
+                  "_ref": "#/definitions/policy",
+                  "_placeholder": true
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "pmomyqazignqm",
+          "routes": {},
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": -678
+          }
+        }
+      }
+    }
+  ]
+}

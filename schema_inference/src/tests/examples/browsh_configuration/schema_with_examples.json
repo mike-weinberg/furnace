@@ -1,0 +1,1214 @@
+{
+  "schema": {
+    "$id": "https://json.schemastore.org/browsh-schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$comment": "https://www.brow.sh/docs/config/",
+    "properties": {
+      "browsh_supporter": {
+        "default": "\u2665",
+        "enum": [
+          "I have shown my support for Browsh",
+          "\u2665"
+        ],
+        "description": "By showing your support you can disable the app's branding and nags to donate",
+        "type": "string"
+      },
+      "startup-url": {
+        "description": "The page to show at startup. Browsh will fail to boot if this URL is not accessible",
+        "type": "string"
+      },
+      "default_search_engine_base": {
+        "default": "https://www.google.com/search?q=",
+        "description": "The base query when a non-URL is entered into the URL bar",
+        "type": "string"
+      },
+      "mobile_user_agent": {
+        "default": "Mozilla/5.0 (Android 7.0; Mobile; rv:54.0) Gecko/58.0 Firefox/58.0",
+        "description": "The mobile user agent for forcing web pages to use their mobile layout",
+        "type": "string"
+      },
+      "browsh": {
+        "description": "Browsh internals",
+        "properties": {
+          "websocket-port": {
+            "default": 3334,
+            "type": "integer"
+          },
+          "use_experimental_text_visibility": {
+            "description": "Possibly better handling of overlapping text in web pages. If a page seems to have text that shouldn't be visible, if it should be behind another element for example, then this experimental feature should help. It can also be toggled in-browser with F6",
+            "default": false,
+            "type": "boolean"
+          },
+          "custom_css": {
+            "description": "Custom CSS to apply to all loaded tabs",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "firefox": {
+        "properties": {
+          "path": {
+            "default": "firefox",
+            "description": "The path to your Firefox binary",
+            "type": "string"
+          },
+          "profile": {
+            "default": "browsh-default",
+            "description": "Browsh has its own profile, separate from the normal user's. But you can change that",
+            "type": "string"
+          },
+          "use-existing": {
+            "default": false,
+            "description": "Don't let Browsh launch Firefox, but make it try to connect to an existing one. Note it will need to have been launched with the '--marionette' flag",
+            "type": "boolean"
+          },
+          "with-gui": {
+            "default": "with-gui",
+            "description": "Launch Firefox in with its visible GUI window. Useful for setting up the Browsh profile.",
+            "type": "string"
+          },
+          "preferences": {
+            "items": {
+              "type": "string"
+            },
+            "description": "Config that you might usually set through Firefox's 'about:config' page Note that string must be wrapped in quotes",
+            "type": "array"
+          }
+        },
+        "tty": {
+          "properties": {
+            "small_pixel_frame_rate": {
+              "default": "250",
+              "description": "The time in milliseconds between requesting a new TTY-sized pixel frame. This is essentially the frame rate for graphics. Lower values make for smoother animations and feedback, but also increases the CPU load",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "http-server": {
+          "properties": {
+            "port": {
+              "default": 4333,
+              "type": "integer"
+            },
+            "bind": {
+              "default": "0.0.0.0",
+              "type": "string"
+            },
+            "render_delay": {
+              "default": 100,
+              "description": "The time to wait in milliseconds after the DOM is ready before trying to parse and render the page's text. Too soon and text risks not being parsed, too long and you wait unnecessarily",
+              "type": "integer"
+            },
+            "timeout": {
+              "default": 30,
+              "description": "The length of time in seconds to wait before aborting the page load",
+              "type": "integer"
+            },
+            "columns": {
+              "default": 100,
+              "description": "The dimensions of a char-based window onto a webpage. The columns are ultimately the width of the final text",
+              "type": "string"
+            },
+            "rows": {
+              "default": 30,
+              "description": "Whereas the rows represent the height of the original web page made visible to the original browser window. So the number of rows can effect things like how far down a web page images are lazy-loaded",
+              "type": "string"
+            },
+            "jpeg_compression": {
+              "default": 0.9,
+              "description": "The amount of lossy JPG compression to apply to the background image of HTML pages",
+              "type": "string"
+            },
+            "rate-limit": {
+              "default": "100000000-M",
+              "description": "Rate limit. For syntax, see: https://github.com/ulule/limiter",
+              "type": "string"
+            },
+            "blocked-domains": {
+              "items": {
+                "type": "string"
+              },
+              "description": "Blocking is useful if the HTTP server is made public. All values are evaluated as regular expressions",
+              "type": "array"
+            },
+            "blocked-user-agents": {
+              "items": {
+                "type": "string"
+              },
+              "description": "Blocking is useful if the HTTP server is made public. All values are evaluated as regular expressions",
+              "type": "array"
+            },
+            "header": {
+              "description": "HTML snippets to show at top and bottom of final page",
+              "type": "string"
+            },
+            "footer": {
+              "description": "HTML snippets to show at top and bottom of final page",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      }
+    },
+    "title": "JSON schema for browsh",
+    "type": "object"
+  },
+  "examples": [
+    {
+      "startup-url": "lorem lor",
+      "mobile_user_agent": "bnFbmOHnKYaXRvj7uff"
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "default_search_engine_base": "EbAx",
+      "browsh": {
+        "use_experimental_text_visibility": true,
+        "custom_css": "jcnm"
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "startup-url": "ipsum si",
+      "default_search_engine_base": "hqptrjihenphiyvhi",
+      "mobile_user_agent": "eggbrvlastqivqpo",
+      "browsh": {
+        "websocket-port": 626
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "earhtUcMiX",
+      "mobile_user_agent": "dolor amet adi",
+      "browsh": {
+        "websocket-port": 587,
+        "custom_css": "consectetur do"
+      }
+    },
+    {
+      "startup-url": "3NjHXbWNdbIsuSVyRwD",
+      "mobile_user_agent": "lilsdpwplkjjuvpzss",
+      "browsh": {
+        "custom_css": "UJKkHe"
+      },
+      "firefox": {
+        "profile": "x",
+        "with-gui": "T",
+        "preferences": []
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "Fyczbgq7DH43JoGw7cx",
+      "browsh": {
+        "use_experimental_text_visibility": true,
+        "custom_css": "xHpO"
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "startup-url": "6lVk72gOnF0jnedEkh",
+      "mobile_user_agent": "cggawxqjlfu"
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "default_search_engine_base": "dcTjTNF1LJypiAxVqy"
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "tiofoyjc",
+      "default_search_engine_base": "adipisci"
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "startup-url": "gwomsnir",
+      "default_search_engine_base": "80bqDYlMw"
+    },
+    {
+      "startup-url": "6z4j9zlvNcyaekorW",
+      "default_search_engine_base": "xy",
+      "mobile_user_agent": "iGGlflRYOAba",
+      "firefox": {
+        "path": "tcqffo",
+        "profile": "udywvl",
+        "preferences": []
+      }
+    },
+    {
+      "default_search_engine_base": "ntswaeztgtejlfdn",
+      "browsh": {
+        "custom_css": "consectet"
+      },
+      "firefox": {
+        "use-existing": true,
+        "with-gui": "dolor adipiscing",
+        "preferences": []
+      }
+    },
+    {
+      "startup-url": "adipiscing sit ips",
+      "firefox": {
+        "path": "oponyhdzghlxjagf",
+        "profile": "6bmxk",
+        "use-existing": true,
+        "preferences": []
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "startup-url": "thjszrokks",
+      "default_search_engine_base": "bgynamfjcqlffeiavk",
+      "mobile_user_agent": "sit consectetur ipsu",
+      "browsh": {
+        "websocket-port": 429
+      },
+      "firefox": {
+        "profile": "con",
+        "with-gui": "amet cons",
+        "preferences": []
+      }
+    },
+    {
+      "startup-url": "hoyscqigoaobpdry",
+      "default_search_engine_base": "amet sit",
+      "mobile_user_agent": "amet lorem ip",
+      "firefox": {
+        "path": "jrajwrncmrmjnorr",
+        "profile": "mahplxavwen",
+        "use-existing": false,
+        "preferences": []
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "startup-url": "hzqwatnpjzr",
+      "browsh": {
+        "custom_css": "9Y5Fk"
+      },
+      "firefox": {
+        "path": "adipiscing consec",
+        "profile": "byMBVRHbaswNRbPiPBRaR",
+        "use-existing": true
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "mobile_user_agent": "vr27Xz2",
+      "browsh": {
+        "websocket-port": -38,
+        "custom_css": "buuhehepgrbfd"
+      },
+      "firefox": {
+        "profile": "cnrgyzpdg",
+        "use-existing": true,
+        "preferences": []
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "ravjuntsir",
+      "firefox": {
+        "use-existing": true,
+        "with-gui": "7pf",
+        "preferences": []
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "startup-url": "u3X1PlyoXaXksMPF",
+      "default_search_engine_base": "sit adipiscing ipsu",
+      "mobile_user_agent": "enRpZT1J",
+      "firefox": {
+        "profile": "qao",
+        "use-existing": true
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "default_search_engine_base": "ajblziancea",
+      "browsh": {
+        "websocket-port": 854,
+        "use_experimental_text_visibility": false,
+        "custom_css": "tqesgkdbjak"
+      }
+    },
+    {
+      "startup-url": "ireeagqw",
+      "default_search_engine_base": "WvKjneHIM6svC6ts",
+      "mobile_user_agent": "ipsum consectetur am",
+      "browsh": {
+        "websocket-port": -252,
+        "use_experimental_text_visibility": false
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "default_search_engine_base": "eOs",
+      "browsh": {
+        "use_experimental_text_visibility": true,
+        "custom_css": "bc4KkVIAw"
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "i"
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "GIvN3eIq",
+      "browsh": {
+        "websocket-port": 82,
+        "custom_css": "dolo"
+      },
+      "firefox": {
+        "path": "wflbdawg",
+        "profile": "consectet",
+        "with-gui": "evldzk"
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "mobile_user_agent": "adipiscing consect"
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "default_search_engine_base": "M5mckcBhfty2aO4Tjjwa"
+    },
+    {
+      "browsh": {
+        "websocket-port": -116,
+        "use_experimental_text_visibility": false,
+        "custom_css": "IWWcTgvfLmlGAHGR38"
+      },
+      "firefox": {
+        "profile": "consectetur ",
+        "use-existing": false,
+        "with-gui": "z3pkXc9xjo1wv8"
+      }
+    },
+    {
+      "startup-url": "dolor ",
+      "browsh": {
+        "websocket-port": -123,
+        "use_experimental_text_visibility": false,
+        "custom_css": "adipiscing lore"
+      }
+    },
+    {
+      "startup-url": "tgYPnPXoOFVx31f",
+      "default_search_engine_base": "altduwvdyf",
+      "firefox": {
+        "with-gui": "yfepobhcmlhpnsutsvtp",
+        "preferences": []
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "startup-url": "zgfbf",
+      "default_search_engine_base": "YVvkvbOlj3B68Ppjp",
+      "browsh": {
+        "websocket-port": -965,
+        "use_experimental_text_visibility": true,
+        "custom_css": "lor"
+      },
+      "firefox": {
+        "path": "w7mMjBHqPUVpUb0nu0Y",
+        "with-gui": "mmdpf"
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "startup-url": "hszdzsgdaulabhnsww",
+      "default_search_engine_base": "consectetur ",
+      "mobile_user_agent": "z0uC2c",
+      "browsh": {
+        "websocket-port": -851,
+        "custom_css": "mw"
+      },
+      "firefox": {
+        "path": "consectetur s",
+        "profile": "DfORoZWF37WAOdE",
+        "with-gui": "rtdvgpv"
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "lorem dolor sit",
+      "default_search_engine_base": "ajkolwyofwwmuw",
+      "browsh": {
+        "websocket-port": 644
+      }
+    },
+    {
+      "startup-url": "Xl1n",
+      "default_search_engine_base": "rkrMQc6ojLopPBI",
+      "mobile_user_agent": "TSubQ7",
+      "browsh": {
+        "use_experimental_text_visibility": false,
+        "custom_css": "WACMo4"
+      },
+      "firefox": {
+        "profile": "dolor",
+        "with-gui": "ijcoenksftcwdmdvh",
+        "preferences": []
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "rmrwrixicgmwjrgaz",
+      "default_search_engine_base": "ffdmpvazsbhfcku",
+      "mobile_user_agent": "mhrw",
+      "browsh": {
+        "use_experimental_text_visibility": true
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "consectetu",
+      "default_search_engine_base": "consecte",
+      "browsh": {
+        "use_experimental_text_visibility": false
+      },
+      "firefox": {
+        "path": "xdg",
+        "preferences": [
+          "consectetur lorem l",
+          "8L2BB5JD2UWw6IlK",
+          "sit amet lorem ipsu",
+          "xTRcIden3WMsVfFfd",
+          "consectetur"
+        ]
+      }
+    },
+    {
+      "startup-url": "adipisci",
+      "browsh": {
+        "websocket-port": 353,
+        "use_experimental_text_visibility": false,
+        "custom_css": "consectetur sit "
+      },
+      "firefox": {
+        "path": "mlfmIBRe0"
+      }
+    },
+    {
+      "startup-url": "xrxkrxmza",
+      "browsh": {
+        "websocket-port": 294,
+        "use_experimental_text_visibility": true,
+        "custom_css": "mgisK2p5kFU3"
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "amet ips",
+      "default_search_engine_base": "consect",
+      "mobile_user_agent": "jvjgxbxitlcbcceh",
+      "browsh": {
+        "use_experimental_text_visibility": true,
+        "custom_css": "oydfyhyznsevqnarojx"
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "bV7xnMykGaBijxKN8q",
+      "mobile_user_agent": "d",
+      "browsh": {
+        "custom_css": "gmjtlhyujrnbfrab"
+      },
+      "firefox": {
+        "path": "f",
+        "profile": "xwkelqvtbdkgiun",
+        "preferences": [
+          "eoiwodajkgsviogqxww",
+          "ipsu",
+          "wugzaz",
+          "consectetur adip",
+          "zhsiixgivqouzkpaqailf"
+        ]
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "ZjBVL4rwsieFsJ79Wu",
+      "default_search_engine_base": "lsaxsylh",
+      "browsh": {
+        "websocket-port": 594,
+        "use_experimental_text_visibility": true
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "default_search_engine_base": "rexlpc",
+      "mobile_user_agent": "lorem",
+      "browsh": {
+        "websocket-port": -8
+      },
+      "firefox": {
+        "profile": "SBxO4Pbs77sn",
+        "use-existing": true
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "adipiscing ip",
+      "default_search_engine_base": "vI",
+      "mobile_user_agent": "yvzbazmksowmuwwldtkne",
+      "browsh": {
+        "websocket-port": -95
+      }
+    },
+    {
+      "default_search_engine_base": "P",
+      "browsh": {
+        "custom_css": "UqC3S"
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "startup-url": "consect",
+      "default_search_engine_base": "nwfrpmla",
+      "mobile_user_agent": "QWDo1hQg6aJF5I",
+      "browsh": {}
+    },
+    {
+      "startup-url": "tsthsjwnzka",
+      "mobile_user_agent": "adipiscing i",
+      "browsh": {
+        "websocket-port": -399,
+        "custom_css": "AxmScytTxUyzKpL2"
+      },
+      "firefox": {
+        "path": "6T5fxE1nSUaHVcC",
+        "profile": "Vu",
+        "use-existing": true,
+        "with-gui": "kneisspcgagumpolw",
+        "preferences": [
+          "lor",
+          "ipsum lorem co",
+          "04OYqVEGrjmwkW",
+          "5c",
+          "cons"
+        ]
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "mobile_user_agent": "swxxakcmqst",
+      "browsh": {},
+      "firefox": {
+        "profile": "lztrlrvvrvpahhyiapgpv",
+        "use-existing": true
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "startup-url": "nswrdz",
+      "default_search_engine_base": "lilhd",
+      "browsh": {
+        "websocket-port": 940,
+        "use_experimental_text_visibility": true,
+        "custom_css": "z"
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "dol",
+      "mobile_user_agent": "adipiscing ",
+      "browsh": {
+        "websocket-port": 608,
+        "use_experimental_text_visibility": false
+      },
+      "firefox": {
+        "path": "rui",
+        "profile": "RjaNL",
+        "use-existing": false,
+        "with-gui": "9PvIGPm02F3OYNJLBk",
+        "preferences": [
+          "IB4sKsIR",
+          "1BONS79",
+          "nbfgjwbtvdaxyxs",
+          "lorem ipsum a",
+          "consectetur ipsum ip"
+        ]
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "startup-url": "NwB3YqqeTcQ70xYiVlQ",
+      "default_search_engine_base": "consectetur lorem",
+      "mobile_user_agent": "zzvluttm",
+      "firefox": {
+        "path": "ixryom",
+        "profile": "IE",
+        "with-gui": "rfbkeo"
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "mobile_user_agent": "tmvgpjmzfttczlo",
+      "browsh": {
+        "websocket-port": 966,
+        "custom_css": "rlijjxvfgbybkefylqvnv"
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "firefox": {
+        "path": "Nd1",
+        "with-gui": "amet consectetur si",
+        "preferences": [
+          "yubj",
+          "ip",
+          "ipsum ",
+          "consectetur dolor ad",
+          "xobj"
+        ]
+      }
+    },
+    {
+      "startup-url": "wcdkupqxrvkdbyffrmp",
+      "default_search_engine_base": "consectetur",
+      "mobile_user_agent": "ctvf",
+      "firefox": {
+        "path": "yymyroqrxgxwpnh",
+        "use-existing": true,
+        "with-gui": "anyzwnvvvygfjerrimnp"
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "default_search_engine_base": "j",
+      "mobile_user_agent": "yaalylurbmqedrhrhbju",
+      "browsh": {
+        "websocket-port": 585,
+        "use_experimental_text_visibility": true,
+        "custom_css": "qdYQUJmDSm3FNPL"
+      }
+    },
+    {
+      "startup-url": "wyaupqubspqchujeki",
+      "default_search_engine_base": "FjTQ2DawGKsxA",
+      "browsh": {
+        "websocket-port": 913,
+        "use_experimental_text_visibility": true,
+        "custom_css": "gmtorkq"
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "default_search_engine_base": "sakigihnaoz",
+      "mobile_user_agent": "consectetur"
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "mobile_user_agent": "c"
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "startup-url": "hv",
+      "default_search_engine_base": "krutauxtuiqszfve",
+      "mobile_user_agent": "gndorkcwuvezmehcv"
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "startup-url": "consecte",
+      "default_search_engine_base": "amet ipsum consect"
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "default_search_engine_base": "lunclbyyiitfe",
+      "mobile_user_agent": "zZyCrXx1NlLj",
+      "firefox": {
+        "path": "g",
+        "profile": "kqtbgqysriroyzkbchlgv",
+        "with-gui": "xgbpibhssuxxnfusj",
+        "preferences": [
+          "YhKc",
+          "SMOD",
+          "sit lorem sit cons",
+          "ebfcgrt",
+          "Dv"
+        ]
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "default_search_engine_base": "PnnrQn8elfVw",
+      "mobile_user_agent": "consectetur",
+      "browsh": {
+        "websocket-port": 335
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "dolor sit amet conse",
+      "browsh": {
+        "use_experimental_text_visibility": true,
+        "custom_css": "pl"
+      },
+      "firefox": {
+        "path": "EzDeLZxmAL0iXweos",
+        "profile": "P3ZND6BM1QyUL4MH8Gy6",
+        "with-gui": "nxs",
+        "preferences": [
+          "sit am",
+          "iLGaorhW",
+          "t",
+          "plsUmCYZC0NofkW",
+          "tyrdgkelygebd"
+        ]
+      }
+    },
+    {
+      "startup-url": "xtrlirm",
+      "default_search_engine_base": "afcdnektskuovgjpyqm",
+      "mobile_user_agent": "tnulfnbvdn",
+      "firefox": {
+        "path": "Ph4",
+        "use-existing": false,
+        "with-gui": "MxTq3kWusaoon5jfPb",
+        "preferences": [
+          "PuQ",
+          "8t5lwYcM",
+          "uNeb2MkAr1rSUtpG",
+          "luudllzortpdx",
+          "amet amet d"
+        ]
+      }
+    },
+    {
+      "mobile_user_agent": "lorem conse",
+      "browsh": {
+        "websocket-port": -844,
+        "custom_css": "ipsum ipsum adipiscin"
+      },
+      "firefox": {
+        "path": "qlJgLXZpz5v9m0c",
+        "with-gui": "ipsum ipsum adipiscin",
+        "preferences": [
+          "amet lorem ipsu",
+          "sit sit",
+          "onsivswxvnntpa",
+          "s",
+          "ipsum ipsum lor"
+        ]
+      }
+    },
+    {
+      "startup-url": "itie",
+      "default_search_engine_base": "dolor"
+    },
+    {
+      "default_search_engine_base": "buuezjlqrthmdhmbj",
+      "browsh": {
+        "websocket-port": -924,
+        "use_experimental_text_visibility": false,
+        "custom_css": "jriglg"
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "lodharyvex",
+      "default_search_engine_base": "djbem",
+      "mobile_user_agent": "ipsum sit",
+      "firefox": {
+        "path": "xbkzzyefcz",
+        "profile": "zrrumuw",
+        "use-existing": false,
+        "with-gui": "axvcniggysxhjqyjrong"
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "default_search_engine_base": "8slStgfIA",
+      "mobile_user_agent": "adipiscing am",
+      "firefox": {
+        "profile": "yftmzzmxxck",
+        "with-gui": "auufjefpmmcqbye",
+        "preferences": [
+          "consectet",
+          "consectetur"
+        ]
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "si",
+      "mobile_user_agent": "ipsum sit dolor a",
+      "firefox": {
+        "use-existing": true,
+        "preferences": [
+          "amet ipsum dolor ame",
+          "jc8yy"
+        ]
+      }
+    },
+    {
+      "startup-url": "sit ipsum sit lorem ",
+      "default_search_engine_base": "si",
+      "mobile_user_agent": "nlprhjnzyulxzwf",
+      "browsh": {
+        "websocket-port": -76,
+        "use_experimental_text_visibility": true,
+        "custom_css": "dolor ipsum"
+      },
+      "firefox": {
+        "path": "lorem sit ipsum sit ",
+        "use-existing": false,
+        "with-gui": "1uf9Ek75g6iij"
+      }
+    },
+    {
+      "startup-url": "yMkmAoPzxrn",
+      "browsh": {
+        "use_experimental_text_visibility": true
+      },
+      "firefox": {
+        "path": "cclfgyyaaqyxst",
+        "profile": "ostqzamrwnyasldy",
+        "use-existing": false,
+        "with-gui": "6J77h6ViJqcdw2eK2wS",
+        "preferences": [
+          "kfdg",
+          "8lfD",
+          "ipsum adi"
+        ]
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "browsh": {
+        "websocket-port": -69,
+        "use_experimental_text_visibility": true
+      },
+      "firefox": {
+        "path": "rrtnkkab",
+        "profile": "xpxubgrmavqln",
+        "use-existing": false,
+        "with-gui": "fgowekpebtqpocmmnebn"
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "Bbehs7svmxt0GkMnqE",
+      "default_search_engine_base": "rlQclS3s0",
+      "browsh": {
+        "use_experimental_text_visibility": false
+      },
+      "firefox": {
+        "path": "cippdscyrrygfqxyupju",
+        "preferences": [
+          "ipsum consectetur am",
+          "lnc1CL3JBpCWjm",
+          "mhzmozhlxjwqypxm",
+          "xgbwczxd",
+          "ipsum a"
+        ]
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "startup-url": "bnnnpnuj",
+      "browsh": {
+        "use_experimental_text_visibility": false
+      },
+      "firefox": {
+        "use-existing": false,
+        "with-gui": "wihzyccdrgenzmcdhifci",
+        "preferences": [
+          "sit consectetur"
+        ]
+      }
+    },
+    {
+      "startup-url": "u2Is",
+      "mobile_user_agent": "Hic1X7TKk1G"
+    },
+    {
+      "startup-url": "amet conse",
+      "default_search_engine_base": "adipisci",
+      "browsh": {
+        "websocket-port": 952,
+        "custom_css": "vc"
+      },
+      "firefox": {
+        "path": "EeCmzqRxzANyVRuJNb",
+        "profile": "sit ipsum "
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "startup-url": "RS6uCO",
+      "default_search_engine_base": "kxAaRNKN4DI6",
+      "browsh": {
+        "websocket-port": 850,
+        "use_experimental_text_visibility": true,
+        "custom_css": "OuxupjwqHcC"
+      },
+      "firefox": {
+        "path": "qt",
+        "with-gui": "xxhnkdhzjclqviq",
+        "preferences": [
+          "amet consectetu",
+          "rnkaqqpfipthsocxtpk",
+          "amet amet",
+          "GezdJjVmjwYy",
+          "ftdtnpxokhqtmpsnb"
+        ]
+      }
+    },
+    {
+      "startup-url": "haia",
+      "default_search_engine_base": "XjKS04IY21rXM3IYwuJA",
+      "mobile_user_agent": "raucaxxju",
+      "browsh": {
+        "websocket-port": 599,
+        "use_experimental_text_visibility": true,
+        "custom_css": "V1Ohl1GmU"
+      }
+    },
+    {
+      "startup-url": "ttcxqgeyhmaswtbrfm",
+      "mobile_user_agent": "xbfmmypouaszpvti",
+      "firefox": {
+        "path": "jsNbBzcM"
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "firefox": {
+        "path": "ipsum d",
+        "preferences": [
+          "ipsum sit "
+        ]
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "default_search_engine_base": "dolor ipsum amet "
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "default_search_engine_base": "lvtpclzojqdi",
+      "browsh": {
+        "websocket-port": 993,
+        "use_experimental_text_visibility": false
+      },
+      "firefox": {
+        "use-existing": true,
+        "with-gui": "8QxC8La0zsE",
+        "preferences": [
+          "lmisvbqu",
+          "yqwt",
+          "xwwwkppfs",
+          "DkVu39gJXzT1E",
+          "GgFvkQ"
+        ]
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "default_search_engine_base": "Iv",
+      "mobile_user_agent": "upaBf",
+      "browsh": {
+        "websocket-port": -354,
+        "custom_css": "lo"
+      }
+    },
+    {
+      "startup-url": "bhjiki",
+      "default_search_engine_base": "Aogtil1wsyg3FP9gJD",
+      "firefox": {
+        "path": "plScONNvKCed4XdHgM",
+        "with-gui": "smkeaiymemtvjpbv",
+        "preferences": []
+      }
+    },
+    {
+      "startup-url": "TvLMaRjFZNUsElEi5rLH",
+      "default_search_engine_base": "ueebupcmnmqzjqtvlot",
+      "firefox": {
+        "path": "hvnvrnbbglwlqescgjix",
+        "profile": "ipsu",
+        "preferences": [
+          "amet ip",
+          "L46UnJCGX9oG8DCkeL",
+          "dolor ip",
+          "adipiscing sit "
+        ]
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "DjiMfP",
+      "default_search_engine_base": "sit lorem do",
+      "mobile_user_agent": "aNskNypApzTb2ONj",
+      "firefox": {
+        "path": "texviksgvaua",
+        "use-existing": true
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "startup-url": "khryiyiys",
+      "default_search_engine_base": "lorem amet ad",
+      "mobile_user_agent": "sjjhng",
+      "browsh": {
+        "websocket-port": -878,
+        "use_experimental_text_visibility": true,
+        "custom_css": "amet lorem con"
+      },
+      "firefox": {}
+    },
+    {
+      "startup-url": "D9tHNJ3sWbVhZN48G",
+      "default_search_engine_base": "tvQ0mJaIeJqVxTJv",
+      "browsh": {
+        "websocket-port": -985,
+        "use_experimental_text_visibility": false
+      },
+      "firefox": {
+        "path": "YAPEV4pO4HlXLOjgeI",
+        "with-gui": "consectetur ",
+        "preferences": [
+          "sit co",
+          "L4Sqc7fIL2Wy1fR92"
+        ]
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "ivcoduoudsudc",
+      "default_search_engine_base": "uzxbpygug",
+      "mobile_user_agent": "FW6SR",
+      "browsh": {
+        "use_experimental_text_visibility": true
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "mobile_user_agent": "ipsum dolor adi",
+      "browsh": {
+        "use_experimental_text_visibility": true
+      },
+      "firefox": {
+        "path": "amet sit dol",
+        "profile": "kroonvxydwded",
+        "use-existing": false,
+        "with-gui": "3zeUGlvpI5",
+        "preferences": [
+          "VoiFVYTTY",
+          "wbjbz",
+          "CfPqdCkDlnil1j"
+        ]
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "startup-url": "3",
+      "default_search_engine_base": "sfrrzztyosxsufltbttg"
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "hwyvaz",
+      "default_search_engine_base": "amet dolor amet"
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "ioqsytwrghanehdatiqx",
+      "default_search_engine_base": "qziximbwnvwecmskwvs",
+      "browsh": {
+        "websocket-port": 126,
+        "use_experimental_text_visibility": false,
+        "custom_css": "5CwZY70JZigaP"
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "default_search_engine_base": "atckmgolahnushxtrgwxj"
+    },
+    {
+      "default_search_engine_base": "amet sit lorem c",
+      "mobile_user_agent": "0qZ5rpbrp",
+      "browsh": {
+        "use_experimental_text_visibility": false
+      },
+      "firefox": {
+        "use-existing": true
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "startup-url": "iNc9Rdm",
+      "firefox": {
+        "use-existing": false,
+        "with-gui": "b"
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "startup-url": "dolor c",
+      "mobile_user_agent": "ndlnaazdxeuwy",
+      "firefox": {
+        "path": "SRhcu4IKvoJxP",
+        "with-gui": "adipiscing "
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "default_search_engine_base": "gdlisyzsmxodfwaqj",
+      "mobile_user_agent": "prrhr",
+      "browsh": {
+        "websocket-port": -954,
+        "use_experimental_text_visibility": false
+      }
+    },
+    {
+      "browsh_supporter": "\u2665",
+      "default_search_engine_base": "ihptpuxvordnnyijt",
+      "mobile_user_agent": "alubpbqptkkphnrgt",
+      "firefox": {
+        "path": "R9vgxUe5Ea2wgRzHi5WUs",
+        "use-existing": true,
+        "with-gui": "gzeijcg",
+        "preferences": [
+          "ckpkhmbsv"
+        ]
+      }
+    },
+    {
+      "startup-url": "consectet",
+      "default_search_engine_base": "amet consectetur ",
+      "browsh": {
+        "websocket-port": 719,
+        "use_experimental_text_visibility": false
+      },
+      "firefox": {
+        "path": "lorem sit sit",
+        "profile": "tpryum",
+        "use-existing": true,
+        "with-gui": "tSolG9Dv5KDvKLsyw"
+      }
+    },
+    {
+      "browsh_supporter": "I have shown my support for Browsh",
+      "startup-url": "amet lorem ipsum",
+      "browsh": {
+        "websocket-port": -287,
+        "custom_css": "consectetur dolor "
+      },
+      "firefox": {
+        "path": "zGnwcLE6J",
+        "profile": "d",
+        "preferences": [
+          "JQGqZctaqMOtu",
+          "lorem amet lorem lor",
+          "sit lorem amet ad"
+        ]
+      }
+    }
+  ]
+}

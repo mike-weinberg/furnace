@@ -1,0 +1,98 @@
+{
+  "$id": "https://github.com/cloudcannon/configuration-types/releases/latest/download/cloudcannon-config.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Delegates to other schemas based on version.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "enum": [
+        "legacy-hugo",
+        "legacy-jekyll",
+        "legacy-eleventy",
+        "legacy-reader",
+        "latest"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "version": {
+            "not": {
+              "enum": [
+                "legacy-hugo",
+                "legacy-jekyll",
+                "legacy-eleventy",
+                "legacy-reader"
+              ]
+            }
+          }
+        }
+      },
+      "then": {
+        "$ref": "cloudcannon-config.latest.schema.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "version": {
+            "const": "legacy-hugo"
+          }
+        },
+        "required": [
+          "version"
+        ]
+      },
+      "then": {
+        "$ref": "cloudcannon-config.legacy-hugo.schema.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "version": {
+            "const": "legacy-jekyll"
+          }
+        },
+        "required": [
+          "version"
+        ]
+      },
+      "then": {
+        "$ref": "cloudcannon-config.legacy-jekyll.schema.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "version": {
+            "const": "legacy-eleventy"
+          }
+        },
+        "required": [
+          "version"
+        ]
+      },
+      "then": {
+        "$ref": "cloudcannon-config.legacy-eleventy.schema.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "version": {
+            "const": "legacy-reader"
+          }
+        },
+        "required": [
+          "version"
+        ]
+      },
+      "then": {
+        "$ref": "cloudcannon-config.legacy-reader.schema.json"
+      }
+    }
+  ]
+}

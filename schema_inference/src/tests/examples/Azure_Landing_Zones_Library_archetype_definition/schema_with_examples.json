@@ -1,0 +1,1317 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "policy_assignments": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "policy_definitions": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "policy_set_definitions": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "role_definitions": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      }
+    },
+    "required": [
+      "name"
+    ],
+    "type": "object"
+  },
+  "examples": [
+    {
+      "name": "consectetur ipsum lor",
+      "policy_assignments": [],
+      "policy_definitions": [],
+      "policy_set_definitions": [],
+      "role_definitions": []
+    },
+    {
+      "name": "co",
+      "policy_definitions": [],
+      "role_definitions": []
+    },
+    {
+      "name": "RhxrnJgWQsNKVP",
+      "policy_assignments": [],
+      "policy_definitions": [],
+      "policy_set_definitions": [],
+      "role_definitions": []
+    },
+    {
+      "name": "psbEhY71O",
+      "policy_definitions": [],
+      "policy_set_definitions": []
+    },
+    {
+      "name": "K1o",
+      "policy_assignments": [],
+      "policy_definitions": [],
+      "role_definitions": []
+    },
+    {
+      "name": "sit sit ipsu",
+      "policy_assignments": []
+    },
+    {
+      "name": "IHXFSBjYOEnVIFDbAi",
+      "policy_set_definitions": [],
+      "role_definitions": []
+    },
+    {
+      "name": "5uI",
+      "role_definitions": []
+    },
+    {
+      "name": "jxstiofoyjcjfbwz",
+      "policy_definitions": [],
+      "policy_set_definitions": []
+    },
+    {
+      "name": "ogzvgwom",
+      "policy_definitions": [],
+      "policy_set_definitions": []
+    },
+    {
+      "name": "consectet",
+      "policy_definitions": [],
+      "role_definitions": []
+    },
+    {
+      "name": "fnmsjlayxzidwbbffdjt",
+      "policy_definitions": [],
+      "policy_set_definitions": []
+    },
+    {
+      "name": "s3Enu",
+      "role_definitions": []
+    },
+    {
+      "name": "fzh",
+      "policy_assignments": [],
+      "policy_definitions": [],
+      "policy_set_definitions": []
+    },
+    {
+      "name": "amet dolor sit adi",
+      "policy_definitions": [],
+      "role_definitions": []
+    },
+    {
+      "name": "Ln",
+      "policy_assignments": [],
+      "policy_definitions": [],
+      "role_definitions": []
+    },
+    {
+      "name": "consectetur adipisc",
+      "policy_assignments": [],
+      "role_definitions": []
+    },
+    {
+      "name": "amet sit",
+      "policy_assignments": [],
+      "policy_definitions": [],
+      "policy_set_definitions": []
+    },
+    {
+      "name": "ipsum ipsu",
+      "policy_set_definitions": []
+    },
+    {
+      "name": "ipsum adipiscing",
+      "policy_assignments": [],
+      "policy_definitions": [],
+      "policy_set_definitions": [],
+      "role_definitions": []
+    },
+    {
+      "name": "adipiscing ipsum si",
+      "policy_assignments": [],
+      "policy_definitions": [],
+      "policy_set_definitions": []
+    },
+    {
+      "name": "5pOxeOsZtUdP6ho",
+      "policy_assignments": [],
+      "policy_definitions": [],
+      "policy_set_definitions": []
+    },
+    {
+      "name": "amet sit amet ip",
+      "policy_assignments": []
+    },
+    {
+      "name": "sit ipsum sit",
+      "policy_assignments": [],
+      "role_definitions": []
+    },
+    {
+      "name": "5Ws",
+      "policy_set_definitions": []
+    },
+    {
+      "name": "dol",
+      "policy_assignments": [],
+      "policy_definitions": [],
+      "policy_set_definitions": [],
+      "role_definitions": []
+    },
+    {
+      "name": "txcplgwizjouubt",
+      "policy_assignments": [],
+      "policy_definitions": [],
+      "policy_set_definitions": []
+    },
+    {
+      "name": "ip",
+      "policy_definitions": []
+    },
+    {
+      "name": "sit",
+      "policy_assignments": [],
+      "policy_set_definitions": []
+    },
+    {
+      "name": "XqjUmfFKFYG",
+      "policy_definitions": [],
+      "policy_set_definitions": []
+    },
+    {
+      "name": "tes",
+      "policy_definitions": []
+    },
+    {
+      "name": "sit ipsum",
+      "policy_assignments": [],
+      "policy_definitions": [],
+      "policy_set_definitions": [],
+      "role_definitions": []
+    },
+    {
+      "name": "hht25vBC5BtFaFhYB7Aq",
+      "policy_set_definitions": []
+    },
+    {
+      "name": "CTF054Q0YgQ5UrS",
+      "policy_set_definitions": [
+        "adipiscing ame",
+        "adipisc",
+        "sit dolor amet lorem",
+        "lorem dolor",
+        "h7sJnpMRX75B"
+      ],
+      "role_definitions": [
+        "xolzoi",
+        "sit amet con",
+        "adipiscing si",
+        "dolor dolor ",
+        "qjpvoxanxoujzent"
+      ]
+    },
+    {
+      "name": "y4d0rUBousuH",
+      "policy_assignments": [
+        "L8UuCdNygNVfSQ",
+        "nafv",
+        "8L2BB5JD2UWw6IlK",
+        "sit amet lorem ipsu",
+        "xTRcIden3WMsVfFfd"
+      ],
+      "policy_set_definitions": [
+        "xydj",
+        "uxXcyYctTEzGs",
+        "U0FnR01ESGUgsONgj",
+        "TFVRE61Q",
+        "8TCkXSYXo7aEPAVsbfr5"
+      ],
+      "role_definitions": [
+        "lorem",
+        "r",
+        "PUxFzNhHFoHPpKCJ",
+        "mmasr",
+        "ypzrq"
+      ]
+    },
+    {
+      "name": "oYhDILjNF",
+      "policy_definitions": [
+        "consectetur sit ",
+        "sit ipsum s",
+        "lorem ip",
+        "pocusficovxuzhqxzj",
+        "consectetur adipi"
+      ],
+      "policy_set_definitions": [
+        "yiXa9dNU",
+        "adipiscing adi",
+        "vr",
+        "lorem",
+        "tobmttaacyck"
+      ],
+      "role_definitions": [
+        "ipsum",
+        "lorem ",
+        "uzotknpx",
+        "hhlepbadcwnrueyj",
+        "nvkwqvhxcnifhjs"
+      ]
+    },
+    {
+      "name": "adipisc",
+      "policy_assignments": [
+        "rxkrxmzaxsjiqs",
+        "consec",
+        "consectetur ",
+        "2p5kF",
+        "ycwaljlckrrau"
+      ],
+      "policy_definitions": [
+        "hIXNmja3BzisBCyAeX",
+        "2gnbu03161ngjJ",
+        "z",
+        "u",
+        "lorem lorem c"
+      ],
+      "policy_set_definitions": [
+        "mjieykmkowqmrup",
+        "jwieZwcNEIFF3KLzTs",
+        "wzvdekrsr",
+        "qlsnexhwqhxawyi",
+        "qvuagpjdtylmotp"
+      ],
+      "role_definitions": [
+        "lorem lorem ",
+        "ipsum dolor sit cons",
+        "tnnykgbmohwki",
+        "izY2ID6uNi",
+        "pay"
+      ]
+    },
+    {
+      "name": "KoSEe",
+      "policy_assignments": [
+        "mikv",
+        "ccumsssztxlq",
+        "ipsum ip",
+        "kcOI5jm6q59",
+        "qznzqpuxavylqxatf"
+      ],
+      "policy_set_definitions": [
+        "pTIUSDH",
+        "ud",
+        "eomfvhgtgyggcpmuzak",
+        "sivhithdzt",
+        "adipi"
+      ],
+      "role_definitions": [
+        "wyjwovlovmzdm",
+        "kicyljwhzmsifbk",
+        "nN4muQC17Ng",
+        "pfejfygdbbywai",
+        "phnkxirloyzwquix"
+      ]
+    },
+    {
+      "name": "31AwybV7x",
+      "policy_assignments": [
+        "ipsum adipiscing sit",
+        "dolor ",
+        "adipisc",
+        "d",
+        "dolor amet"
+      ],
+      "policy_set_definitions": [
+        "FdmtDPQa2xhgkLvR",
+        "zuwxwkelqvtbdkgiun",
+        "5l9kIv1IhbwzpSYvIqM42",
+        "fdyvqw",
+        "adipiscing lore"
+      ],
+      "role_definitions": [
+        "cpww",
+        "amet do",
+        "eykkkbmmpzz",
+        "dol",
+        "twdxhhtlqodyvzn"
+      ]
+    },
+    {
+      "name": "inmadrvaisfrpftwo",
+      "policy_assignments": [
+        "adipiscing ",
+        "sit sit adipisc",
+        "v1KSgdAtqY5ngl",
+        "hwaked",
+        "cv5QwCszScYgG"
+      ],
+      "role_definitions": [
+        "rJXDFyY",
+        "adipisc",
+        "lutdwpbbsgybt",
+        "amet ipsum lorem ",
+        "Q39ouvFtUtfhO"
+      ]
+    },
+    {
+      "name": "zhvee",
+      "policy_assignments": [
+        "Kg",
+        "iDMYVf8ZpR",
+        "I",
+        "ry7pvgQpcXwQLR7",
+        "P"
+      ],
+      "policy_definitions": [
+        "1",
+        "rslyckj",
+        "dolor amet conse",
+        "sqnjzvrcksel",
+        "Nv7QmCU0yjpfYu"
+      ],
+      "policy_set_definitions": [
+        "adipiscing ipsum adip",
+        "ycsssgnbweudbszh",
+        "zlkaxlwahc",
+        "yvymwbgylnskbvfxonzj",
+        "cons"
+      ],
+      "role_definitions": [
+        "17mu8BfpAzLQhdn7n",
+        "jxvvzmbxa",
+        "adipis",
+        "sit",
+        "PQCuley"
+      ]
+    },
+    {
+      "name": "ldayfeczkjofusyv",
+      "policy_definitions": [
+        "c",
+        "SI2DX10BiUzF",
+        "djvrqr",
+        "4jn8gegzLlXCtOEJ",
+        "gphualqtcbl"
+      ],
+      "policy_set_definitions": [
+        "sit sit lorem d",
+        "iR",
+        "dolor dolor i",
+        "qcn",
+        "yxbltboxkkycbhoum"
+      ],
+      "role_definitions": [
+        "vnzifjrl",
+        "aepurjommmdp",
+        "ipsum",
+        "sit i",
+        "adipiscing adi"
+      ]
+    },
+    {
+      "name": "aazifmotpo",
+      "policy_definitions": [
+        "3unODFccGsgo4iR",
+        "consectet",
+        "jWWRbLO2K5jl2Hj",
+        "ION2eDnpfZBOxOq9",
+        "qa5L3Qte844xKUuqqEz1Y"
+      ],
+      "policy_set_definitions": [
+        "emgqgczodg",
+        "vcb61gwPwb6",
+        "consectetur lorem ",
+        "jpuopqzxliunhiggmjdx",
+        "vywDMQNs9da"
+      ],
+      "role_definitions": [
+        "zncm",
+        "jzqnkouhoxcysjkzm",
+        "kvaucpsyctt",
+        "adipiscing adipisci",
+        "sit dolor s"
+      ]
+    },
+    {
+      "name": "viyfuwj",
+      "policy_assignments": [
+        "0nQLCAaIAMC5Q",
+        "drcyaonxobwsyubceelty",
+        "SYWjBjTt",
+        "wiyudz",
+        "pjegk"
+      ]
+    },
+    {
+      "name": "9"
+    },
+    {
+      "name": "wvctq"
+    },
+    {
+      "name": "ieataimfyrpli",
+      "policy_assignments": [
+        "sit adipis",
+        "mkao6GCG",
+        "nmbdadwsqxcnkifl",
+        "sit dolor dolor a",
+        "dolor sit con"
+      ],
+      "policy_set_definitions": [
+        "yu",
+        "aigluscbiaofzr",
+        "D",
+        "bzynr",
+        "Mr3r24lUcumyLlGy"
+      ]
+    },
+    {
+      "name": "sgi",
+      "policy_assignments": [
+        "nRuJkMnK0duTeD",
+        "tzaxdfciujosv",
+        "sit adipiscing ame",
+        "hzyoxinpgutjguhgob",
+        "hphos"
+      ],
+      "policy_set_definitions": [
+        "bwdgiyvnbfgjwbt",
+        "lorem adipiscing adi",
+        "lorem ipsum a",
+        "consectetur ipsum ip",
+        "brhkhyldkrwnsxmnywe"
+      ],
+      "role_definitions": [
+        "nfkprwyig",
+        "adi",
+        "RK",
+        "1Rdmmg6NQmFpHjZIOmLZ",
+        "QWl48qzwxmZWtP0Qbq"
+      ]
+    },
+    {
+      "name": "moixuoz",
+      "policy_assignments": [
+        "lorem consectetu",
+        "YiVlQbF5ngAaf",
+        "consectetur lorem sit",
+        "Uur",
+        "ixryom"
+      ],
+      "policy_definitions": [
+        "IE",
+        "yrfbkeotosdzzhrrqh",
+        "lorem sit ame",
+        "korzdaukoqnjpxcotcsbo",
+        "0Tk"
+      ],
+      "policy_set_definitions": [
+        "ipsum s",
+        "Lo",
+        "gmyqmipqmgkdisxjjrwgy",
+        "ga",
+        "consectetu"
+      ],
+      "role_definitions": [
+        "snxwiLfp",
+        "igbtwgmmiwmi",
+        "twbkdkozvortvqatsro",
+        "qehxk",
+        "wtgvtqc"
+      ]
+    },
+    {
+      "name": "7Qy",
+      "policy_assignments": [
+        "ZpLwE7nUVf9BHsI",
+        "8OVHklPTIY4W",
+        "bkefylqvnvupoxrix",
+        "ljqessw",
+        "5jgcZuH"
+      ],
+      "policy_definitions": [
+        "4FnxzOVpFK5yrGsX8dhL",
+        "kgz1NDGmoqTOdJ7ej8G3",
+        "9qtnUgBVStj",
+        "qpcihnhpmzgaderoo",
+        "ipsu"
+      ]
+    },
+    {
+      "name": "IXqX2VfGjZePuc",
+      "policy_assignments": [
+        "wepsmredwemlkheepzwdu",
+        "hhzxwxobjpyib",
+        "stiwI77En7aePL8Q",
+        "yxn",
+        "gQgzIPNwz7kmN69RyHKeH"
+      ],
+      "policy_definitions": [
+        "V0cfsa1YWIt",
+        "5YASQ7yYhFsMIKS",
+        "gghiweayfyrwlmullc",
+        "cdxmimgryjbpocgbluafw",
+        "ejftxwehpygthhoc"
+      ],
+      "policy_set_definitions": [
+        "ElAbO",
+        "VOTD",
+        "dolor sit ipsum amet",
+        "rvvaqg",
+        "dolor "
+      ],
+      "role_definitions": [
+        "iakhwek",
+        "kntH818wH3iC1L9ip",
+        "rdlffoxqjlwfsnmrpj",
+        "J",
+        "fyzO"
+      ]
+    },
+    {
+      "name": "swcdkupqxrvkdbyf",
+      "policy_assignments": [
+        "ehhftxbexccxhaoekivyy",
+        "kQiHfSRZvfaIbFbQ",
+        "sit adipiscing ",
+        "9RHiNccSe9ndvq6Au",
+        "iq1x0jUwbFJcNOKeg"
+      ],
+      "policy_definitions": [
+        "amet sit l",
+        "lfqzxsnfbvxhkelu",
+        "zVo",
+        "y",
+        "amet"
+      ],
+      "policy_set_definitions": [
+        "figinnl",
+        "adipis",
+        "fr",
+        "conse",
+        "hsozrhzxqawrn"
+      ],
+      "role_definitions": [
+        "jngw",
+        "ydega",
+        "cmptwtowplmqjipabpapu",
+        "ipsum ipsum amet i",
+        "xvneaiqomyqjnbgklpyjz"
+      ]
+    },
+    {
+      "name": "consectetur dolor ",
+      "policy_assignments": [
+        "Z7baB7CXPc",
+        "vgczmzwvlqbzarf",
+        "qdYQUJmDSm3FNPL",
+        "lorem sit amet ipsum",
+        "M6knPD4jOn5wzF"
+      ]
+    },
+    {
+      "name": "9H6hEiafrmJGmOwUxj",
+      "policy_assignments": [
+        "ppnetrwmajn",
+        "5mLx3Wfb3OoDTJQyN0i",
+        "llxohynhfcogxftqwjhu",
+        "sit amet cons",
+        "amet dolor dolor a"
+      ],
+      "policy_definitions": [
+        "WS",
+        "sit ipsum ipsum",
+        "adipiscing lore",
+        "ame",
+        "fvmjnehlvcnmobymlgtq"
+      ],
+      "policy_set_definitions": [
+        "RDfHbmYp7CCN7sil1F6",
+        "zcusfesqzuhfym",
+        "VlUXz7SJ",
+        "adipiscin",
+        "ipsum lo"
+      ],
+      "role_definitions": [
+        "UhIYfkdg",
+        "qecuopjijkcuuf",
+        "kOlVmfs",
+        "znexdufcxzhtvywljohvk",
+        "okhDZNWJ5Hg3T"
+      ]
+    },
+    {
+      "name": "P5fvc2kNf9wi",
+      "policy_set_definitions": [
+        "tQv42XFbdBZx8KhI8s",
+        "guflubwjqqzktpfmzxf",
+        "dphadxbvhaesbeqnsda",
+        "VPfSs9o",
+        "adipiscing ipsum do"
+      ]
+    },
+    {
+      "name": "94YdbVb",
+      "policy_definitions": [
+        "s",
+        "ghgk",
+        "lorem s",
+        "conse",
+        "rXf"
+      ],
+      "policy_set_definitions": [
+        "gap",
+        "jsyarawmpnasollcs",
+        "b",
+        "IHzWBMWLr38olsFF9RJm",
+        "lorem sit sit si"
+      ],
+      "role_definitions": [
+        "wawhxjtnen",
+        "GA6lD",
+        "jhw",
+        "aswysxc",
+        "idqtiiKAOZhhpX0jnza"
+      ]
+    },
+    {
+      "name": "cz8rYIW4yOYV",
+      "policy_assignments": [
+        "u",
+        "consectetur",
+        "ipsum sit ipsum am",
+        "ipsum",
+        "adipiscing consect"
+      ],
+      "policy_set_definitions": [
+        "nweblm",
+        "oowfhfgdvmlm",
+        "xSrqOaJatR2A",
+        "ccucwfl",
+        "mlktkvuj"
+      ],
+      "role_definitions": [
+        "erbzgtjpozmvnjvdeinp",
+        "iksjurb",
+        "XMysjN",
+        "tlmaevuc",
+        "conse"
+      ]
+    },
+    {
+      "name": "LoifTGRfMmSKX",
+      "role_definitions": [
+        "wiynumkhafznmxp",
+        "n5",
+        "lyenec",
+        "YfAfta",
+        "dolor adipi"
+      ]
+    },
+    {
+      "name": "7kyvF",
+      "policy_assignments": [
+        "sit",
+        "qf",
+        "VmllvM7n",
+        "3YjOhayVJl04oBN",
+        "sit adipiscin"
+      ],
+      "role_definitions": [
+        "iroyzkbchl",
+        "xstnmpdr",
+        "consectetur",
+        "xx",
+        "qtoiacfnsfkyksqrm"
+      ]
+    },
+    {
+      "name": "xojbnpxmuilgelneugu",
+      "policy_assignments": [
+        "sgZ",
+        "wkjkkramnia",
+        "sit ipsum lo",
+        "consec",
+        "oevnwenwybon"
+      ],
+      "policy_set_definitions": [
+        "pplq",
+        "fyozzc",
+        "iborj",
+        "am",
+        "adipiscing "
+      ],
+      "role_definitions": [
+        "ipsum adipi",
+        "w",
+        "biumfpiadijkqtn",
+        "lorem d",
+        "adipiscing i"
+      ]
+    },
+    {
+      "name": "joreh",
+      "policy_assignments": [
+        "sit amet sit adipis",
+        "FfdlJ3ZSGEzDe",
+        "dolor amet sit conse",
+        "consectetur d",
+        "lolrxvqm"
+      ],
+      "policy_set_definitions": [
+        "nfgfpoevjbdmwhunxskxe",
+        "PnziDofyjhj",
+        "ipsum sit cons",
+        "dolor consecte",
+        "consectetur con"
+      ]
+    },
+    {
+      "name": "svrxtrlirmdpzbz",
+      "policy_set_definitions": [
+        "prfruqcffsnvsx",
+        "xnshmdkgcxcvscmzz",
+        "cjamqjsgxeuihaggfye",
+        "jmi",
+        "lorem ipsum amet i"
+      ],
+      "role_definitions": [
+        "5lwYcM26QvuNeb2",
+        "kvuvpxokgavluudllzort",
+        "sit lorem dolor ips",
+        "jdrqpropddjubwo",
+        "adipisci"
+      ]
+    },
+    {
+      "name": "t",
+      "policy_assignments": [
+        "lorem conse",
+        "driq",
+        "ytMMzCH",
+        "wbaudeoib",
+        "fvbruoqxzenbjdeqceav"
+      ],
+      "policy_definitions": [
+        "IzZ",
+        "St0R130GGTJb4mEC",
+        "ips",
+        "pho",
+        "varfei"
+      ],
+      "policy_set_definitions": [
+        "con",
+        "QTMxRF4D",
+        "adipiscing dolor",
+        "mkf",
+        "xlbnnbpezehxg"
+      ],
+      "role_definitions": [
+        "ipsum ipsum con",
+        "al",
+        "sit",
+        "YYef",
+        "mwsnvftdjci"
+      ]
+    },
+    {
+      "name": "X6tVukvUjOvkAxC25o9",
+      "role_definitions": [
+        "dolor con",
+        "SPl0",
+        "woqmqjhwvnxoj",
+        "5I0yw0VHm",
+        "islpwrbqjzggxkcuxmew"
+      ]
+    },
+    {
+      "name": "adipiscing conse",
+      "policy_definitions": [
+        "BOQUrEirEevYlAcT",
+        "ujri",
+        "Ajimpt3ni",
+        "pyvqjznfk",
+        "yP2OiKTHefHSETIZnZUhn"
+      ],
+      "policy_set_definitions": [
+        "bthwh",
+        "vanf",
+        "lorem adip",
+        "ainruiwxdz",
+        "nt"
+      ],
+      "role_definitions": [
+        "yjnuizu",
+        "consectetur sit",
+        "d1r3Dz0h1rW7Zu",
+        "swfNBI2Bb",
+        "pypmcpkvxxaqgpkbhmas"
+      ]
+    },
+    {
+      "name": "tsltylod",
+      "policy_assignments": [
+        "xh",
+        "adipiscing ",
+        "dolor lorem ipsum ",
+        "fqAYe",
+        "ssW0T3TsoJ"
+      ]
+    },
+    {
+      "name": "crsjz",
+      "policy_assignments": [
+        "iccoknr"
+      ],
+      "policy_set_definitions": [
+        "bsvliszyftmzzmxxckyg",
+        "auufjefpmmcqbye",
+        "ipsum lorem adipisc",
+        "cStrH",
+        "dol"
+      ],
+      "role_definitions": [
+        "sit ad"
+      ]
+    },
+    {
+      "name": "sit lorem",
+      "policy_assignments": [
+        "GWBr0k32HG",
+        "Mau",
+        "consect"
+      ],
+      "role_definitions": [
+        "lorem adipis",
+        "dvgflovcwgjtm",
+        "k"
+      ]
+    },
+    {
+      "name": "pksqrontdncla",
+      "role_definitions": [
+        "gzI2r3QhqDkn",
+        "uki"
+      ]
+    },
+    {
+      "name": "ifkvqso",
+      "policy_assignments": [
+        "sjusumarrxlbln",
+        "sit ipsum ",
+        "aaqyxstmmwcrseuez"
+      ],
+      "policy_set_definitions": [
+        "m",
+        "etkrm",
+        "rfttvnrjlwtqwdkffpu",
+        "kfdg"
+      ],
+      "role_definitions": [
+        "umbfyku"
+      ]
+    },
+    {
+      "name": "phmkrjnapglgftrr",
+      "policy_definitions": [
+        "benyWf7Za6pI63qXZ3rB",
+        "yfgowekpebtqpocmm",
+        "qaRau4rDYmtfXi4zV"
+      ],
+      "policy_set_definitions": [
+        "1zyjAHWcHWtZb0E6rV0c",
+        "vrxlptldvn",
+        "ipsum consectet"
+      ],
+      "role_definitions": [
+        "dolor sit ipsum "
+      ]
+    },
+    {
+      "name": "v",
+      "policy_assignments": [
+        "Bbehs7svmxt0GkMnqE",
+        "dolor ipsum ips",
+        "cJ"
+      ],
+      "policy_set_definitions": [
+        "adipi",
+        "nnpufowibmrypgqm",
+        "xyup",
+        "lorem lorem "
+      ],
+      "role_definitions": [
+        "twpazKzlnc1CL3JBpCWjm"
+      ]
+    },
+    {
+      "name": "u7McGGGK",
+      "policy_assignments": [
+        "vcukpynwnzr",
+        "gyvwihzyccdrge"
+      ],
+      "policy_definitions": [
+        "Gg0dAqfoBjDzwvJV"
+      ],
+      "policy_set_definitions": [
+        "sit lorem dolor ad",
+        "qq",
+        "2vhV9jq60OF9BVAzCL",
+        "uetktwbiqrlxqijcc"
+      ],
+      "role_definitions": [
+        "8is4RWCuveiVMFL8i",
+        "ss5Z2UOcYmNOmSe",
+        "efgw"
+      ]
+    },
+    {
+      "name": "lorem lore"
+    },
+    {
+      "name": "sUhi77q2A5ed7GE7Ygzk",
+      "policy_assignments": [
+        "FMIH9Y2cXaQQoU5g"
+      ],
+      "policy_set_definitions": [
+        "lXYUQxg2dt1c"
+      ]
+    },
+    {
+      "name": "ipsum co",
+      "policy_assignments": [
+        "yilr",
+        "lekka",
+        "pqxmoyxecxqafi",
+        "ijigdjgoblalbx",
+        "tlvqxxhnkdhzjc"
+      ],
+      "policy_definitions": [
+        "iqgzluxsm",
+        "rnkaqqpfipthsocxtpk",
+        "amet amet",
+        "GezdJjVmjwYy",
+        "ftdtnpxokhqtmpsnb"
+      ],
+      "role_definitions": [
+        "A0qEUJsZ4M77xcl6",
+        "consectetur ad"
+      ]
+    },
+    {
+      "name": "lorem dolor consectet",
+      "policy_definitions": [
+        "GYQFami27xU",
+        "xov",
+        "tlcewraucaxx",
+        "0k0ri7pl5n37"
+      ],
+      "policy_set_definitions": [
+        "ohdilxu",
+        "wddu",
+        "ratf",
+        "hjieksbahmdbauq"
+      ],
+      "role_definitions": [
+        "consectetur dolor l"
+      ]
+    },
+    {
+      "name": "consectetu",
+      "policy_assignments": [
+        "dolo",
+        "gvfpkglt",
+        "sit consect"
+      ]
+    },
+    {
+      "name": "adipiscing adipis",
+      "policy_assignments": [
+        "ipsum d",
+        "sidhfn"
+      ],
+      "policy_definitions": [],
+      "policy_set_definitions": [
+        "a"
+      ],
+      "role_definitions": [
+        "rljovscajhupd",
+        "iujlhrhwnbifwi",
+        "hopuaipuwdqbdmcap"
+      ]
+    },
+    {
+      "name": "adi",
+      "policy_definitions": [
+        "hwkrzu",
+        "iD83vKjlWtoAEOgb2CxL",
+        "lorem consectetur lo",
+        "adipiscing consect"
+      ],
+      "role_definitions": [
+        "ueefeuwjruwupuiphkjm",
+        "S",
+        "sdktcwbroyjiehiphew",
+        "con"
+      ]
+    },
+    {
+      "name": "adipiscing adipis",
+      "policy_assignments": [
+        "dolor consectetur i",
+        "uhubudqqnxxjybwildjbc",
+        "ipsum sit consectetu",
+        "q",
+        "adipiscing amet"
+      ],
+      "policy_definitions": []
+    },
+    {
+      "name": "co",
+      "policy_assignments": [],
+      "policy_definitions": [
+        "diIRk4V2xaT",
+        "cdua",
+        "qZVvXmLGYtyVFQ",
+        "pvnknwqscmgiowskuapvj"
+      ]
+    },
+    {
+      "name": "k7zWbk8Yb",
+      "policy_assignments": [
+        "l",
+        "dolor conse",
+        "dolor lorem adipis"
+      ],
+      "role_definitions": [
+        "VLBiHX6CFXBzT2V5kG",
+        "bn",
+        "mmmp",
+        "agrfunjlvtnibvvgcknpz"
+      ]
+    },
+    {
+      "name": "consecte",
+      "policy_definitions": [
+        "asenvqthme",
+        "xbsqwapsswblxujq",
+        "M8",
+        "AoaXpuE77zPq"
+      ],
+      "role_definitions": [
+        "ecqC0BNkRg",
+        "Q5KbokT7",
+        "lwqZHVCzPzJmCGq",
+        "sit adipisc",
+        "pnjbkelapkknybc"
+      ]
+    },
+    {
+      "name": "amet ipsum ipsum ad",
+      "policy_assignments": [
+        "mthdf",
+        "zXDFaNskNypApzTb",
+        "ipsum dolor adipiscin",
+        "adi",
+        "zGWSwRESEjl"
+      ],
+      "policy_set_definitions": [
+        "kun",
+        "csisvrvkjwspzpwg",
+        "atisizphwdqe",
+        "JTuM9YfbkcgS9qh5RLtt"
+      ]
+    },
+    {
+      "name": "pv",
+      "policy_assignments": [
+        "sP5t6t7",
+        "jutj"
+      ],
+      "policy_definitions": [
+        "sjjhng",
+        "sit",
+        "fhlsvvgvy"
+      ],
+      "policy_set_definitions": [
+        "xxlkvvsulocsufpduzszm",
+        "sit ipsum ipsum adipi",
+        "ypwuhxphzkxaznzfyeig",
+        "iy",
+        "sit ipsum"
+      ],
+      "role_definitions": [
+        "awjfgmumyhawl",
+        "ohkzikylutqpstyokxvgy",
+        "fMA12G3FbssqSHn9ufaBG",
+        "BQkdkT6xXRHSnpPB"
+      ]
+    },
+    {
+      "name": "wD9tHNJ3",
+      "policy_assignments": [],
+      "policy_definitions": [
+        "slek",
+        "iijrvfoaobog"
+      ],
+      "role_definitions": [
+        "cZTCAG8EyWInnkb9hJc",
+        "oeupqecbox",
+        "dolor lorem lorem adi",
+        "aCVGQB2",
+        "bmuacrelv"
+      ]
+    },
+    {
+      "name": "nbxskfwgsdrhgymplyg"
+    },
+    {
+      "name": "WOBCwKnv62SI69Ybb",
+      "policy_definitions": [
+        "iszkroonvxydwded",
+        "khu",
+        "jwuedlqkszlufd",
+        "HBLoGiKsYFdMtCfPq",
+        "rw"
+      ],
+      "role_definitions": [
+        "jxubk",
+        "dolor ",
+        "lZzACOqWPmaNesBy0SXRn"
+      ]
+    },
+    {
+      "name": "FybWhJ7SnQQ"
+    },
+    {
+      "name": "lorem ipsum lo",
+      "policy_assignments": [
+        "s",
+        "eokrtvv",
+        "wvojxpirbbvjncpjwguq",
+        "gcdfvxvibsrrzmdq"
+      ],
+      "role_definitions": [
+        "amet consectetur con"
+      ]
+    },
+    {
+      "name": "tMV2RU2cfr58nxAf",
+      "role_definitions": [
+        "hpddsczgwzbkmggkmgp",
+        "sypkolgkgkxnxyaggj",
+        "lo",
+        "ftgw",
+        "ictryl"
+      ]
+    },
+    {
+      "name": "SISNhOE7n7L97gT7",
+      "policy_set_definitions": []
+    },
+    {
+      "name": "pmvdhpdqjvhv",
+      "policy_definitions": [
+        "ipsum ips",
+        "cgtrctzcveuvobxqs"
+      ],
+      "policy_set_definitions": [],
+      "role_definitions": [
+        "mnuic",
+        "eqezmxrggw"
+      ]
+    },
+    {
+      "name": "dEmRkEkdLm3LrwERbZS",
+      "policy_assignments": [],
+      "policy_set_definitions": [
+        "mp2PUYqNdHH",
+        "v",
+        "dolor co",
+        "4DPhw",
+        "zCQAElvyE2pdBSx9FPvxb"
+      ],
+      "role_definitions": [
+        "gucxply",
+        "dz2r5oZOw63HYH",
+        "adipiscing lore",
+        "wmjnyntuuztcgnpksr",
+        "opmvfxqgizlk"
+      ]
+    },
+    {
+      "name": "dol",
+      "policy_assignments": [
+        "dolor adipis",
+        "ndlnaazdxeuwy",
+        "ayewFmL6HIR"
+      ],
+      "policy_definitions": [
+        "PTQn",
+        "adipiscing ",
+        "fuhrmdvssxkxny",
+        "0dfvl"
+      ],
+      "policy_set_definitions": [
+        "mlecskedbp",
+        "jssbuuxchytasiabfwom",
+        "xwzeihsqsozhdvviwjihh",
+        "hriuakqrzg"
+      ]
+    },
+    {
+      "name": "6sGqlYk",
+      "policy_set_definitions": []
+    },
+    {
+      "name": "q",
+      "role_definitions": [
+        "3",
+        "5jZ0qosEt",
+        "7",
+        "dgp79aBWcJe"
+      ]
+    },
+    {
+      "name": "lore",
+      "policy_set_definitions": [
+        "jqibepr",
+        "xbokmsrdwrtpry",
+        "iorjhsfenzmjxpmj",
+        "OVP5vqmxKxZk2YytDj8"
+      ],
+      "role_definitions": [
+        "amet consectetur a"
+      ]
+    },
+    {
+      "name": "pmomyqazignqmoeio",
+      "policy_definitions": [
+        "DzGnwcLE6JbbbJIL4z",
+        "QGqZct",
+        "r"
+      ],
+      "role_definitions": [
+        "lorem lorem",
+        "AGl"
+      ]
+    }
+  ]
+}

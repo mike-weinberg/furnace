@@ -1,0 +1,2793 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": true,
+    "id": "https://json.schemastore.org/bowerrc.json",
+    "properties": {
+      "analytics": {
+        "type": "boolean",
+        "default": true
+      },
+      "cwd": {
+        "type": "string",
+        "description": "The directory from which bower should run. All relative paths will be calculated according to this setting."
+      },
+      "directory": {
+        "type": "string",
+        "description": "The directory from which bower should run. All relative paths will be calculated according to this setting.",
+        "default": "bower_components"
+      },
+      "json": {
+        "type": "string",
+        "description": "A file path to the Bower configuration file",
+        "default": "bower.json"
+      },
+      "registry": {
+        "type": [
+          "string",
+          "object"
+        ],
+        "description": "The registry config",
+        "format": "uri",
+        "properties": {
+          "search": {
+            "type": [
+              "array",
+              "string"
+            ],
+            "description": "An array of URLs pointing to read-only Bower registries. A string means only one. When looking into the registry for an endpoint, Bower will query these registries by the specified order.",
+            "format": "uri"
+          },
+          "register": {
+            "type": "string",
+            "description": "The URL to use when registering packages.",
+            "format": "uri"
+          },
+          "publish": {
+            "type": "string",
+            "description": "The URL to use when publishing packages.",
+            "format": "uri"
+          }
+        }
+      },
+      "proxy": {
+        "type": "string",
+        "description": "The proxy to use for http requests.",
+        "format": "uri"
+      },
+      "https-proxy": {
+        "type": "string",
+        "description": "The proxy to use for https requests.",
+        "format": "uri"
+      },
+      "user-agent": {
+        "type": "string",
+        "description": "Sets the User-Agent for each request made."
+      },
+      "timeout": {
+        "type": "number",
+        "description": "The timeout to be used when making requests in milliseconds.",
+        "default": 60000
+      },
+      "strict-ssl": {
+        "type": "boolean",
+        "description": "Whether or not to do SSL key validation when making requests via https."
+      },
+      "ca": {
+        "type": [
+          "object",
+          "string"
+        ],
+        "description": "The CA certificates to be used, defaults to null. This is similar to the registry key, specifying each CA to use for each registry endpoint."
+      },
+      "color": {
+        "type": "boolean",
+        "description": "Enable or disable use of colors in the CLI output.",
+        "default": true
+      },
+      "storage": {
+        "type": "object",
+        "description": "Where to store persistent data, such as cache, needed by bower.",
+        "properties": {
+          "packages": {
+            "type": "string"
+          },
+          "registry": {
+            "type": "string"
+          },
+          "links": {
+            "type": "string"
+          }
+        }
+      },
+      "tmp": {
+        "type": "string",
+        "description": "Where to store temporary files and folders"
+      },
+      "interactive": {
+        "type": "boolean",
+        "description": "Makes bower interactive, prompting whenever necessary"
+      },
+      "resolvers": {
+        "type": "array",
+        "description": "Identifies pluggable resolvers to be used for locating and fetching packages",
+        "items": {
+          "type": "string"
+        }
+      },
+      "shallowCloneHosts": {
+        "type": "array",
+        "description": "Whitelists hosts which are known to support shallow cloning",
+        "items": {
+          "type": "string"
+        }
+      },
+      "scripts": {
+        "description": "Contains custom hooks used to trigger other automated tools",
+        "type": "object",
+        "properties": {
+          "preinstall": {
+            "type": "string",
+            "description": "A script to run before install"
+          },
+          "postinstall": {
+            "type": "string",
+            "description": "A script to run after install"
+          },
+          "preuninstall": {
+            "type": "string",
+            "description": "A script to run before uninstall"
+          }
+        }
+      },
+      "ignoredDependencies": {
+        "type": "array",
+        "description": "Bower will ignore these dependencies when resolving packages",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "title": "JSON schema for .bowerrc files",
+    "type": "object"
+  },
+  "examples": [
+    {
+      "cwd": "lorem lor",
+      "json": "bnFbmOHnKYaXRvj7uff",
+      "timeout": 946.23,
+      "strict-ssl": false,
+      "tmp": "ips",
+      "interactive": true,
+      "scripts": {
+        "preinstall": "dolor amet a",
+        "preuninstall": "consectetur ipsum dol"
+      },
+      "ignoredDependencies": [],
+      "lorem": "adipis",
+      "sit adi": true
+    },
+    {
+      "analytics": true,
+      "directory": "EbAx",
+      "registry": {
+        "search": []
+      },
+      "proxy": "http://example.com/resource/api",
+      "user-agent": "ipsum lorem amet ",
+      "timeout": -668.55,
+      "strict-ssl": true,
+      "ca": {},
+      "resolvers": [],
+      "scripts": {
+        "preuninstall": "consectetur con"
+      },
+      "ignoredDependencies": [],
+      "zocmuysbzp": 45
+    },
+    {
+      "analytics": true,
+      "cwd": "ipsum si",
+      "directory": "hqptrjihenphiyvhi",
+      "json": "eggbrvlastqivqpo",
+      "registry": {},
+      "timeout": -981.42,
+      "ca": "zwgnS9VPDi5T",
+      "color": false,
+      "tmp": "ips",
+      "shallowCloneHosts": [],
+      "gbnwpomh": "H6ep6OeBO4f",
+      "hnvgsobhk": 98.92
+    },
+    {
+      "analytics": false,
+      "cwd": "earhtUcMiX",
+      "json": "dolor amet adi",
+      "registry": {
+        "search": "http://test.org/api/resource",
+        "publish": "https://demo.net/data/resource"
+      },
+      "https-proxy": "https://example.com/data/api",
+      "timeout": -0.06,
+      "ca": "dlcjwpawrnhhe",
+      "storage": {
+        "registry": "sqlfhgqyfazpgmefbcsz"
+      },
+      "tmp": "xqhtwenaiqzkilo",
+      "scripts": {
+        "preinstall": "1N4OKd4ondMwOY"
+      },
+      "consectet": false,
+      "ipsum dol": 46,
+      "consectetu": 52
+    },
+    {
+      "cwd": "3NjHXbWNdbIsuSVyRwD",
+      "json": "lilsdpwplkjjuvpzss",
+      "registry": {
+        "register": "http://test.org/v1/data",
+        "publish": "http://test.org/api/data"
+      },
+      "https-proxy": "http://demo.net/v1/resource",
+      "user-agent": "T",
+      "timeout": -530.71,
+      "ca": "consectetur sit conse",
+      "color": true,
+      "interactive": false,
+      "resolvers": [],
+      "shallowCloneHosts": [],
+      "ignoredDependencies": [],
+      "sxxbgkh": null,
+      "adipi": false
+    },
+    {
+      "analytics": false,
+      "cwd": "Fyczbgq7DH43JoGw7cx",
+      "registry": "http://demo.net/api/resource",
+      "proxy": "https://demo.net/resource/data",
+      "https-proxy": "https://example.com/v1/data",
+      "timeout": 488.36,
+      "storage": {
+        "registry": "jomokynfcvjgpydaeq"
+      },
+      "tmp": "oulxagqnrmsuiagiz",
+      "shallowCloneHosts": [],
+      "ignoredDependencies": [],
+      "ikgadbaben": true
+    },
+    {
+      "analytics": true,
+      "cwd": "6lVk72gOnF0jnedEkh",
+      "json": "cggawxqjlfu",
+      "https-proxy": "http://test.org/data/resource",
+      "user-agent": "fzmr",
+      "strict-ssl": true,
+      "color": false,
+      "storage": {
+        "packages": "AqVlISZ5kjrZKTAG8yAO1",
+        "links": "at"
+      },
+      "interactive": true,
+      "scripts": {
+        "postinstall": "cezbxrswjknaptx",
+        "preuninstall": "ipsum adipisci"
+      }
+    },
+    {
+      "analytics": false,
+      "directory": "dcTjTNF1LJypiAxVqy",
+      "timeout": 540.71,
+      "strict-ssl": false,
+      "ca": "npBLQ",
+      "color": false,
+      "storage": {
+        "links": "adipi"
+      },
+      "interactive": true,
+      "shallowCloneHosts": [],
+      "ignoredDependencies": [],
+      "VsDqv": 13,
+      "1O6LOozG2P": "psegplgxyr"
+    },
+    {
+      "analytics": false,
+      "cwd": "tiofoyjc",
+      "directory": "adipisci",
+      "storage": {
+        "packages": "lzflxpdqn",
+        "registry": "zdzuolnnrmvhwtdjxrmu"
+      },
+      "tmp": "amet con",
+      "interactive": true,
+      "resolvers": [],
+      "scripts": {},
+      "ignoredDependencies": [],
+      "VyfhdWeP": null,
+      "1HQ3f": 42.98,
+      "adzar": "lorem"
+    },
+    {
+      "analytics": true,
+      "cwd": "gwomsnir",
+      "directory": "80bqDYlMw",
+      "https-proxy": "http://test.org/v1/resource",
+      "user-agent": "vv",
+      "strict-ssl": true,
+      "ca": "y",
+      "tmp": "oejldtqzvuzyqonv",
+      "scripts": {
+        "preinstall": "wkx",
+        "postinstall": "n8dCHK8I2sDjNAWg",
+        "preuninstall": "e"
+      },
+      "ignoredDependencies": []
+    },
+    {
+      "cwd": "6z4j9zlvNcyaekorW",
+      "directory": "xy",
+      "json": "iGGlflRYOAba",
+      "proxy": "https://example.com/v1/data",
+      "https-proxy": "http://example.com/v1/data",
+      "user-agent": "sit lorem ",
+      "strict-ssl": true,
+      "color": true,
+      "tmp": "PePjS3xecGjTL",
+      "interactive": true,
+      "resolvers": [],
+      "shallowCloneHosts": [],
+      "scripts": {
+        "preinstall": "amet ",
+        "postinstall": "miU6dfQ"
+      },
+      "ignoredDependencies": [],
+      "waQqDYc": 71.68,
+      "consect": null
+    },
+    {
+      "directory": "ntswaeztgtejlfdn",
+      "registry": {
+        "register": "https://example.com/api/data",
+        "publish": "https://test.org/v1/data"
+      },
+      "user-agent": "dolor adipiscing",
+      "timeout": 344.64,
+      "ca": "pdzYl8uwlnDvE",
+      "storage": {
+        "registry": "lorem amet ip",
+        "links": "gtwmlefi"
+      },
+      "interactive": false,
+      "resolvers": [],
+      "shallowCloneHosts": [],
+      "scripts": {
+        "postinstall": "amet consectetur do"
+      },
+      "ignoredDependencies": [],
+      "8lIUfNxWbP": null,
+      "PNOnXdqI": 64,
+      "agwspqaak": 85
+    },
+    {
+      "cwd": "adipiscing sit ips",
+      "proxy": "http://example.com/resource/data",
+      "https-proxy": "http://demo.net/data/resource",
+      "user-agent": "lorem adipisci",
+      "timeout": -124.48,
+      "ca": {},
+      "color": true,
+      "storage": {
+        "packages": "6bmxk",
+        "registry": "amgiklxj",
+        "links": "vhjtcbnfmeymjhhu"
+      },
+      "scripts": {
+        "preinstall": "tBUWi",
+        "postinstall": "vprkhuuoyvscycf",
+        "preuninstall": "gheqii"
+      },
+      "ignoredDependencies": [],
+      "7ZcbXsC": "ecFEjhB5dP5s",
+      "amet do": true,
+      "lwetfjtz": 80.53
+    },
+    {
+      "analytics": true,
+      "cwd": "thjszrokks",
+      "directory": "bgynamfjcqlffeiavk",
+      "json": "sit consectetur ipsu",
+      "registry": "ftp://demo.net/resource/v1",
+      "proxy": "ftp://example.com/resource/data",
+      "user-agent": "ipsum lor",
+      "timeout": -97.61,
+      "strict-ssl": false,
+      "ca": "dolo",
+      "color": true,
+      "tmp": "sjksoqas",
+      "interactive": false,
+      "resolvers": [],
+      "shallowCloneHosts": [],
+      "scripts": {
+        "preinstall": "adipiscing ipsum",
+        "preuninstall": "RcgFlnP6Ar1XbMDJMVWbB"
+      },
+      "ignoredDependencies": [],
+      "9ZeZijfH": 83,
+      "consectetu": null
+    },
+    {
+      "cwd": "hoyscqigoaobpdry",
+      "directory": "amet sit",
+      "json": "amet lorem ip",
+      "proxy": "http://demo.net/resource/data",
+      "user-agent": "aJ",
+      "timeout": 108.91,
+      "ca": "fmmbxeumahplxavw",
+      "color": true,
+      "storage": {
+        "packages": "ksnqnpbsky",
+        "links": "amet amet lorem ame"
+      },
+      "tmp": "cX7V",
+      "gptddxoxky": 24,
+      "hwpcyd": false,
+      "voyowusul": true
+    },
+    {
+      "analytics": true,
+      "cwd": "hzqwatnpjzr",
+      "registry": "ftp://example.com/v1/resource",
+      "proxy": "http://demo.net/resource/data",
+      "user-agent": "Fo3rPzaCbyMB",
+      "ca": {},
+      "color": false,
+      "storage": {
+        "packages": "ardrlsasgoacthfeorvo",
+        "registry": "cons",
+        "links": "lnjeku"
+      },
+      "tmp": "lorem adipisc",
+      "interactive": true,
+      "ignoredDependencies": [],
+      "jikoetjkko": false,
+      "OyfRc": 84
+    },
+    {
+      "analytics": true,
+      "json": "vr27Xz2",
+      "registry": {
+        "search": [],
+        "register": "ftp://test.org/data/api",
+        "publish": "ftp://example.com/data/api"
+      },
+      "proxy": "https://test.org/v1/data",
+      "user-agent": "sit",
+      "timeout": 437.96,
+      "strict-ssl": false,
+      "storage": {
+        "packages": "adipiscing adipisci",
+        "registry": "plqewmhsmsdywdn",
+        "links": "am"
+      },
+      "tmp": "IS",
+      "interactive": false,
+      "scripts": {
+        "preinstall": "zdffvkttmfzo",
+        "preuninstall": "bujvctxxkztlukioqfj"
+      },
+      "ignoredDependencies": []
+    },
+    {
+      "analytics": false,
+      "cwd": "ravjuntsir",
+      "proxy": "ftp://example.com/data/v1",
+      "https-proxy": "http://demo.net/api/data",
+      "timeout": -403.22,
+      "interactive": false,
+      "resolvers": [],
+      "shallowCloneHosts": [],
+      "scripts": {
+        "preinstall": "9ysQ2dNLLFQ",
+        "preuninstall": "DnMoK"
+      },
+      "ignoredDependencies": [],
+      "bvirpralw": 56.42,
+      "mhixi": 37
+    },
+    {
+      "analytics": true,
+      "cwd": "u3X1PlyoXaXksMPF",
+      "directory": "sit adipiscing ipsu",
+      "json": "enRpZT1J",
+      "proxy": "https://test.org/resource/api",
+      "timeout": 116.25,
+      "strict-ssl": true,
+      "storage": {
+        "packages": "0kS86FKxB9i1n",
+        "registry": "F8AgcNZQ3lPZiRo5E1"
+      },
+      "tmp": "miwhgoqengu",
+      "interactive": false,
+      "resolvers": [],
+      "shallowCloneHosts": [],
+      "scripts": {
+        "postinstall": "galy"
+      },
+      "ignoredDependencies": [],
+      "sit adip": false
+    },
+    {
+      "analytics": true,
+      "directory": "ajblziancea",
+      "registry": {
+        "search": "ftp://test.org/resource/v1"
+      },
+      "https-proxy": "ftp://demo.net/data/v1",
+      "user-agent": "sit s",
+      "timeout": -828.49,
+      "strict-ssl": true,
+      "ca": {},
+      "color": true,
+      "storage": {
+        "packages": "amkkdkcrqqky",
+        "registry": "vxvzzny",
+        "links": "uept"
+      },
+      "tmp": "consect",
+      "interactive": true,
+      "resolvers": [],
+      "shallowCloneHosts": [],
+      "scripts": {
+        "preinstall": "5jr0O",
+        "postinstall": "sit",
+        "preuninstall": "BNQx58WUX"
+      },
+      "lorem am": null,
+      "dolor": "6DriZOM8NtR5l6z"
+    },
+    {
+      "cwd": "ireeagqw",
+      "directory": "WvKjneHIM6svC6ts",
+      "json": "ipsum consectetur am",
+      "registry": "ftp://test.org/resource/v1",
+      "user-agent": "edokkaoxbztlsyqirxy",
+      "timeout": -446.29,
+      "strict-ssl": false,
+      "interactive": true,
+      "resolvers": [],
+      "shallowCloneHosts": [],
+      "oSkYcyWE": 3.38,
+      "bhpiau": null
+    },
+    {
+      "analytics": false,
+      "directory": "eOs",
+      "registry": "http://demo.net/v1/resource",
+      "proxy": "ftp://demo.net/api/resource",
+      "strict-ssl": false,
+      "ca": "cazqtyaxeawwbbbk",
+      "color": true,
+      "storage": {
+        "packages": "ltybjkiohdwlud",
+        "registry": "lorem amet conse"
+      },
+      "tmp": "amet sit ipsum con",
+      "interactive": true,
+      "scripts": {
+        "preinstall": "xjzgxgjjnxqhelogbvwj",
+        "postinstall": "iaLo0A7eZhpzrBF"
+      },
+      "ignoredDependencies": []
+    },
+    {
+      "analytics": false,
+      "cwd": "i",
+      "timeout": -166.53,
+      "strict-ssl": true,
+      "ca": {},
+      "storage": {
+        "packages": "sit lorem lorem sit",
+        "links": "wtwEl"
+      },
+      "tmp": "ipsum amet ipsu",
+      "ignoredDependencies": [],
+      "adipisc": 94.87
+    },
+    {
+      "analytics": false,
+      "cwd": "GIvN3eIq",
+      "registry": "http://demo.net/v1/data",
+      "https-proxy": "https://test.org/data/resource",
+      "user-agent": "sit lorem ipsum lorem",
+      "timeout": -361.06,
+      "ca": "adi",
+      "color": true,
+      "storage": {
+        "packages": "adipiscing dol",
+        "registry": "dolor do"
+      },
+      "resolvers": [],
+      "shallowCloneHosts": [],
+      "scripts": {
+        "postinstall": "ipsum",
+        "preuninstall": "zwzxokevmmhin"
+      },
+      "msacni": 22,
+      "vdrxgve": 61.77
+    },
+    {
+      "analytics": false,
+      "json": "adipiscing consect",
+      "timeout": 409.77,
+      "ca": {},
+      "tmp": "s",
+      "resolvers": [],
+      "shallowCloneHosts": [],
+      "scripts": {
+        "preinstall": "consectetu",
+        "postinstall": "lorem ipsum a",
+        "preuninstall": "OIg0ADxw57l4YZr3KCcG"
+      },
+      "ignoredDependencies": [],
+      "ivjcked": 76.65,
+      "ggR4Z": null
+    },
+    {
+      "analytics": false,
+      "directory": "M5mckcBhfty2aO4Tjjwa",
+      "timeout": -918.32,
+      "strict-ssl": false,
+      "ca": {},
+      "color": false,
+      "storage": {
+        "packages": "ipsum ipsum amet lor",
+        "registry": "TGbNOshxsBVoa6F0pfY",
+        "links": "ruujqubrldhurnxpa"
+      },
+      "interactive": false,
+      "resolvers": [],
+      "scripts": {
+        "preinstall": "y",
+        "postinstall": "rvvb"
+      },
+      "ignoredDependencies": []
+    },
+    {
+      "registry": "https://test.org/data/resource",
+      "https-proxy": "ftp://test.org/v1/data",
+      "strict-ssl": false,
+      "ca": "am",
+      "color": true,
+      "storage": {
+        "registry": "R38KMKvWh6DUQ",
+        "links": "z3pkXc9xjo1wv8"
+      },
+      "shallowCloneHosts": [],
+      "scripts": {
+        "preinstall": "D2saPWBnZK81DsghJK",
+        "postinstall": "lorem sit ad"
+      },
+      "ignoredDependencies": [],
+      "qizes": false,
+      "adipiscing": null
+    },
+    {
+      "cwd": "dolor ",
+      "registry": {
+        "register": "ftp://test.org/resource/api",
+        "publish": "https://example.com/resource/v1"
+      },
+      "proxy": "http://test.org/v1/data",
+      "strict-ssl": true,
+      "ca": "gupxbfdxhxqcignkgthx",
+      "storage": {},
+      "tmp": "consectetur adipis",
+      "interactive": false,
+      "resolvers": [],
+      "shallowCloneHosts": [],
+      "scripts": {
+        "postinstall": "consectetur c"
+      },
+      "ignoredDependencies": [],
+      "vyjxq": true
+    },
+    {
+      "cwd": "tgYPnPXoOFVx31f",
+      "directory": "altduwvdyf",
+      "proxy": "http://demo.net/data/api",
+      "timeout": -756.44,
+      "interactive": true,
+      "resolvers": [],
+      "shallowCloneHosts": [],
+      "scripts": {
+        "postinstall": "tsvt",
+        "preuninstall": "zbr"
+      },
+      "ignoredDependencies": []
+    },
+    {
+      "analytics": true,
+      "cwd": "zgfbf",
+      "directory": "YVvkvbOlj3B68Ppjp",
+      "registry": {
+        "search": "https://example.com/resource/api",
+        "register": "http://example.com/data/api",
+        "publish": "https://demo.net/data/v1"
+      },
+      "https-proxy": "ftp://example.com/v1/data",
+      "user-agent": "fUMMR1clDRFFtp28EC",
+      "timeout": 202.43,
+      "strict-ssl": false,
+      "ca": "inimwmzklqnrha",
+      "color": true,
+      "storage": {
+        "packages": "roimh",
+        "registry": "hwotsqvjkwjoopbxmm"
+      },
+      "resolvers": [],
+      "shallowCloneHosts": [],
+      "ignoredDependencies": [],
+      "HToOk": true
+    },
+    {
+      "analytics": true,
+      "cwd": "hszdzsgdaulabhnsww",
+      "directory": "consectetur ",
+      "json": "z0uC2c",
+      "registry": "https://example.com/v1/resource",
+      "proxy": "https://test.org/api/data",
+      "https-proxy": "ftp://test.org/v1/api",
+      "timeout": 900.9,
+      "strict-ssl": false,
+      "ca": "am",
+      "storage": {
+        "links": "krbmz"
+      },
+      "tmp": "rtdvgpv",
+      "resolvers": [],
+      "shallowCloneHosts": [],
+      "scripts": {
+        "postinstall": "shmehwrenkvvjceojatpi",
+        "preuninstall": "tdkdixnswsob"
+      }
+    },
+    {
+      "analytics": false,
+      "cwd": "lorem dolor sit",
+      "directory": "ajkolwyofwwmuw",
+      "registry": "https://test.org/api/resource",
+      "proxy": "ftp://test.org/api/resource",
+      "user-agent": "lorem s",
+      "strict-ssl": true,
+      "ca": "lorem d",
+      "interactive": true,
+      "resolvers": [],
+      "shallowCloneHosts": [],
+      "scripts": {
+        "preuninstall": "kscatcqgmz"
+      },
+      "lorem": 41.52,
+      "wkqrawtnzr": true
+    },
+    {
+      "cwd": "Xl1n",
+      "directory": "rkrMQc6ojLopPBI",
+      "json": "TSubQ7",
+      "registry": {
+        "register": "http://demo.net/v1/resource",
+        "publish": "https://demo.net/api/resource"
+      },
+      "proxy": "http://test.org/resource/api",
+      "https-proxy": "http://test.org/api/v1",
+      "timeout": 21.46,
+      "strict-ssl": true,
+      "ca": {},
+      "color": true,
+      "tmp": "iwtpfpho",
+      "interactive": false,
+      "ignoredDependencies": []
+    },
+    {
+      "analytics": false,
+      "cwd": "rmrwrixicgmwjrgaz",
+      "directory": "ffdmpvazsbhfcku",
+      "json": "mhrw",
+      "registry": "http://test.org/data/v1",
+      "proxy": "ftp://example.com/resource/api",
+      "user-agent": "ipsum sit a",
+      "strict-ssl": false,
+      "color": false,
+      "storage": {
+        "packages": "sit sit dol",
+        "links": "oxa"
+      },
+      "tmp": "Xv9lGV8AXOT1BvWwjnEE",
+      "interactive": false,
+      "resolvers": [
+        "12na",
+        "PFDDni6HBc9mqceYou",
+        "bTF3UuGdUlkjRlxGsR9",
+        "lorem l",
+        "mvhanaspwddn"
+      ],
+      "shallowCloneHosts": [
+        "adipisc",
+        "dDzZbAV",
+        "ipsum ipsum con",
+        "sc8I",
+        "UNWOQdjR"
+      ],
+      "scripts": {
+        "preinstall": "c",
+        "preuninstall": "opuxwcdukl"
+      },
+      "ignoredDependencies": [
+        "wvbgqruaxqox",
+        "amet lorem con",
+        "amihzqp",
+        "utd",
+        "dolor "
+      ],
+      "sit dol": "adipiscing",
+      "lorem am": 63
+    },
+    {
+      "analytics": false,
+      "cwd": "consectetu",
+      "directory": "consecte",
+      "registry": {
+        "search": "ftp://example.com/data/resource",
+        "register": "http://demo.net/resource/api",
+        "publish": "ftp://demo.net/api/data"
+      },
+      "user-agent": "lorem consectetur",
+      "strict-ssl": false,
+      "ca": "omwtuj",
+      "storage": {
+        "packages": "aopadnkjddzwmsbsrul",
+        "registry": "vircuxydjzwmijubk"
+      },
+      "tmp": "ipsum ipsum",
+      "resolvers": [
+        "U0FnR01ESGUgsONgj",
+        "TFVRE61Q",
+        "8TCkXSYXo7aEPAVsbfr5",
+        "lorem lorem ",
+        "r"
+      ],
+      "shallowCloneHosts": [
+        "tjnkqd",
+        "8Q3sscWGij3XNGpR6J",
+        "adipiscing dolor dolo",
+        "giclhvgubutb",
+        "con"
+      ],
+      "scripts": {
+        "preinstall": "RDj5DS2j",
+        "preuninstall": "yiiisiunpeov"
+      },
+      "consectet": null
+    },
+    {
+      "cwd": "adipisci",
+      "registry": "https://example.com/resource/api",
+      "https-proxy": "https://example.com/data/v1",
+      "user-agent": "nfecfolsbvzttwclcu",
+      "timeout": -787.05,
+      "strict-ssl": true,
+      "ca": {},
+      "tmp": "nfmttjyambjzdzxrbmr",
+      "interactive": false,
+      "resolvers": [
+        "x",
+        "dDVUbaf5hyD2iq",
+        "ips",
+        "gn",
+        "otknpxmkohwam"
+      ],
+      "shallowCloneHosts": [
+        "amet ",
+        "ueyjlms",
+        "consectetur d",
+        "ixu",
+        "zmtunnkwjtos"
+      ],
+      "scripts": {
+        "preinstall": "dolo",
+        "preuninstall": "ppnwydrduqirtpjwhjq"
+      }
+    },
+    {
+      "cwd": "xrxkrxmza",
+      "registry": {
+        "register": "http://example.com/data/v1",
+        "publish": "http://example.com/v1/resource"
+      },
+      "proxy": "ftp://demo.net/data/resource",
+      "user-agent": "skyssncrfukewdoju",
+      "timeout": -756.94,
+      "strict-ssl": true,
+      "ca": {},
+      "storage": {
+        "packages": "cesnyddflgmcpi",
+        "registry": "wywfc",
+        "links": "tzaaugabuoxumjieykm"
+      },
+      "tmp": "amet lorem sit sit",
+      "interactive": false,
+      "resolvers": [
+        "dolor l",
+        "gka",
+        "IFF3KLzTsqC1t1FuMAr",
+        "qlsnexhwqhxawyi",
+        "qvuagpjdtylmotp"
+      ],
+      "shallowCloneHosts": [
+        "lorem lorem ",
+        "ipsum dolor sit cons",
+        "tnnykgbmohwki",
+        "izY2ID6uNi",
+        "pay"
+      ],
+      "sit dolo": 66,
+      "jolsia": 71.71,
+      "POnw9fs8zM": false
+    },
+    {
+      "analytics": false,
+      "cwd": "amet ips",
+      "directory": "consect",
+      "json": "jvjgxbxitlcbcceh",
+      "registry": {
+        "search": [
+          4,
+          null,
+          null,
+          "ipsum",
+          "znsevqnaro"
+        ],
+        "register": "https://example.com/api/resource"
+      },
+      "https-proxy": "https://test.org/v1/api",
+      "user-agent": "ofxdcvyu",
+      "timeout": 161.19,
+      "strict-ssl": false,
+      "color": true,
+      "storage": {
+        "packages": "amet ips",
+        "registry": "EW"
+      },
+      "tmp": "rssivhithdztt",
+      "interactive": true,
+      "resolvers": [
+        "wyjwovlovmzdm",
+        "kicyljwhzmsifbk",
+        "nN4muQC17Ng",
+        "pfejfygdbbywai",
+        "phnkxirloyzwquix"
+      ],
+      "scripts": {
+        "preinstall": "bk3oK"
+      }
+    },
+    {
+      "analytics": false,
+      "cwd": "bV7xnMykGaBijxKN8q",
+      "json": "d",
+      "registry": {
+        "register": "https://demo.net/api/resource"
+      },
+      "proxy": "ftp://demo.net/api/v1",
+      "https-proxy": "https://test.org/data/resource",
+      "timeout": -918.36,
+      "strict-ssl": true,
+      "ca": {},
+      "storage": {
+        "registry": "uwx"
+      },
+      "tmp": "dolor ",
+      "resolvers": [
+        "tnhvu",
+        "mpzovtlhohkazybfhi",
+        "wwzfdyvqwu",
+        "vusyewycp",
+        "zhsiixgivqouzkpaqailf"
+      ],
+      "yitzyor": true,
+      "consectet": null
+    },
+    {
+      "analytics": false,
+      "cwd": "ZjBVL4rwsieFsJ79Wu",
+      "directory": "lsaxsylh",
+      "registry": {
+        "register": "http://test.org/data/v1"
+      },
+      "proxy": "http://test.org/api/resource",
+      "https-proxy": "http://demo.net/data/v1",
+      "timeout": -217.66,
+      "strict-ssl": true,
+      "color": true,
+      "storage": {
+        "packages": "j",
+        "registry": "adipiscing",
+        "links": "P"
+      },
+      "interactive": true,
+      "resolvers": [
+        "oawxniewxx",
+        "VUi2KccSp",
+        "consectet",
+        "ebzkju",
+        "fiinith"
+      ],
+      "shallowCloneHosts": [
+        "ipsu",
+        "nrdyqsw",
+        "6gQEco2B",
+        "dxtltgiojjrgfba",
+        "tmonncqjejk"
+      ],
+      "scripts": {
+        "preinstall": "3OeUWefGvg",
+        "postinstall": "ipsum ipsum ipsum",
+        "preuninstall": "lo"
+      },
+      "ignoredDependencies": [
+        "BJ7SbrJyvLBClZQtUY",
+        "hngvzanvzklhbfzuzpal",
+        "tztiodukvfdqhuebmr",
+        "consectetur adipiscin",
+        "KbC8dy4"
+      ],
+      "w6x1R8": null
+    },
+    {
+      "analytics": false,
+      "directory": "rexlpc",
+      "json": "lorem",
+      "registry": {
+        "search": [
+          30,
+          "dolor con",
+          false,
+          false,
+          false
+        ],
+        "register": "https://example.com/v1/resource",
+        "publish": "http://test.org/api/data"
+      },
+      "proxy": "ftp://test.org/api/v1",
+      "strict-ssl": true,
+      "tmp": "d",
+      "interactive": false,
+      "resolvers": [
+        "dolor sit d",
+        "amet amet sit adipis",
+        "ckselldv",
+        "fltvkdgcu",
+        "hdxexukmhfu"
+      ],
+      "shallowCloneHosts": [
+        "gnbweud",
+        "94",
+        "szlkaxlwahcvpx",
+        "ym",
+        "ipsu"
+      ],
+      "ignoredDependencies": [
+        "agnzdxntmdcdxvnfb",
+        "dolor l",
+        "qmx",
+        "ipsu",
+        "ftsjxvvzmbxaei"
+      ],
+      "doPnsRH": "lorem ad",
+      "lW6T5Bdc": "wzivk",
+      "rsfhfeivhg": "tncneqwhcoub"
+    },
+    {
+      "analytics": false,
+      "cwd": "adipiscing ip",
+      "directory": "vI",
+      "json": "yvzbazmksowmuwwldtkne",
+      "registry": "https://test.org/v1/data",
+      "proxy": "http://demo.net/api/v1",
+      "https-proxy": "https://example.com/v1/resource",
+      "timeout": -848.81,
+      "strict-ssl": false,
+      "ca": {},
+      "color": false,
+      "storage": {
+        "registry": "vKINL0",
+        "links": "tcblpmbgsnybqpl"
+      },
+      "tmp": "jfxyqcnsyyxbl",
+      "resolvers": [
+        "amet consectetur a",
+        "42r",
+        "pBAngT8",
+        "5w1SG8P39SBr6w6",
+        "YpiYvzd82e"
+      ],
+      "shallowCloneHosts": [
+        "9GTimrAB1",
+        "bkL81Ctdbj0v7QUrI",
+        "xpvwnrrfskunvkug",
+        "oguqgifvxams",
+        "emenngrrtenwcks"
+      ],
+      "ignoredDependencies": [
+        "0e5u9BKqKzObL1JPCk",
+        "ipsum consectetu",
+        "ksftcdnhsvmdakwpxutt",
+        "o5g",
+        "QMq"
+      ]
+    },
+    {
+      "directory": "P",
+      "registry": {
+        "register": "ftp://test.org/resource/v1"
+      },
+      "user-agent": "consectetur ipsu",
+      "timeout": -976.43,
+      "strict-ssl": false,
+      "ca": {},
+      "color": true,
+      "storage": {
+        "packages": "c"
+      },
+      "tmp": "doqegijiywmexwavawpy",
+      "resolvers": [
+        "kqhzrvcuhjxopofsv",
+        "UuqqEz1YirC7ZBZhe4l",
+        "libaywcj",
+        "b6Ir3v9",
+        "jpuopqzxliunhiggmjdx"
+      ],
+      "shallowCloneHosts": [
+        "zsymsqbytcsq",
+        "4pNw9NHyJXsJ3f5Sw",
+        "t4UyZaVgLS5fT",
+        "i5cNk6jJ",
+        "rqmatulgjc"
+      ],
+      "scripts": {
+        "preinstall": "consectetur lo"
+      },
+      "zqpvnyq": true,
+      "dbnnya": 52,
+      "wdvxocge": "aJIjmkfRGXH4z"
+    },
+    {
+      "analytics": true,
+      "cwd": "consect",
+      "directory": "nwfrpmla",
+      "json": "QWDo1hQg6aJF5I",
+      "registry": {},
+      "proxy": "http://test.org/v1/api",
+      "https-proxy": "ftp://example.com/v1/api",
+      "user-agent": "dletiz",
+      "ca": {},
+      "color": true,
+      "storage": {
+        "registry": "ipsum dol"
+      },
+      "resolvers": [
+        "HT9Lo",
+        "ypqfsqmgmwxmmg",
+        "sit ips",
+        "ppd",
+        "vrukcakymsuezwhbyxei"
+      ],
+      "shallowCloneHosts": [
+        "hixc",
+        "wen",
+        "ip",
+        "ipsum ip",
+        "mebmfabpmjrlmxnrrkzii"
+      ],
+      "scripts": {
+        "preinstall": "pMy8jIn7TIup",
+        "postinstall": "lorem lorem cons",
+        "preuninstall": "ipsum cons"
+      },
+      "ignoredDependencies": [
+        "vhqzalpdhjkukjmks",
+        "adi",
+        "amet consec",
+        "f",
+        "eviowtjvkmouoessd"
+      ],
+      "dolor ad": null
+    },
+    {
+      "cwd": "tsthsjwnzka",
+      "json": "adipiscing i",
+      "registry": {
+        "search": "http://test.org/data/v1",
+        "register": "https://demo.net/v1/api"
+      },
+      "proxy": "https://test.org/data/resource",
+      "user-agent": "luesurxulbcae",
+      "storage": {},
+      "tmp": "oX",
+      "interactive": true,
+      "resolvers": [
+        "4nLNzGlvSSKfq",
+        "d",
+        "KIC2cel6",
+        "ipsum lorem co",
+        "04OYqVEGrjmwkW"
+      ],
+      "shallowCloneHosts": [
+        "lorem sit adipisci",
+        "edicizapsofnisngv",
+        "dzgnskpdmkityeejks",
+        "cxy",
+        "ipsum ipsum sit "
+      ],
+      "scripts": {
+        "preinstall": "1xrX0aBdL8HJYHi5hk"
+      },
+      "ignoredDependencies": [
+        "ukruwyzsvdwil",
+        "7",
+        "adipiscing ",
+        "do",
+        "cbhhktwkto"
+      ],
+      "laqmr": 61
+    },
+    {
+      "analytics": true,
+      "json": "swxxakcmqst",
+      "registry": "ftp://demo.net/api/v1",
+      "proxy": "https://test.org/resource/v1",
+      "strict-ssl": false,
+      "interactive": true,
+      "shallowCloneHosts": [
+        "qymyybndsby",
+        "huiwxjh",
+        "1pu9hpOw",
+        "AszpLucV",
+        "dyqdxam"
+      ],
+      "scripts": {
+        "preinstall": "ojievieflhjtmthwrp",
+        "postinstall": "ipsum sit lorem amet ",
+        "preuninstall": "xmmwtedtf"
+      },
+      "dolor ipsu": 55,
+      "v1QQzWVH9b": "3VxZeet"
+    },
+    {
+      "analytics": true,
+      "cwd": "nswrdz",
+      "directory": "lilhd",
+      "registry": "http://test.org/v1/api",
+      "proxy": "http://example.com/resource/data",
+      "https-proxy": "https://demo.net/resource/data",
+      "user-agent": "ipsum lorem lorem",
+      "color": true,
+      "storage": {
+        "packages": "jamjiqk",
+        "registry": "JuDN7X5YctoBVR",
+        "links": "dj"
+      },
+      "shallowCloneHosts": [
+        "D",
+        "bzynr",
+        "Mr3r24lUcumyLlGy",
+        "adipiscing lo",
+        "zkjkqwopefws"
+      ],
+      "scripts": {
+        "preinstall": "uwfvdectlrfzldqfu",
+        "postinstall": "dolor cons",
+        "preuninstall": "ios"
+      },
+      "ignoredDependencies": [
+        "fjuyigdbbb",
+        "mWzUT",
+        "ddistzjthwzcjnp",
+        "txnRlboA5bWssH9b1lav",
+        "HWsvBK4YHRPqfNcIhGA4"
+      ],
+      "fgimqf": false,
+      "enkQL6x": 65
+    },
+    {
+      "analytics": false,
+      "cwd": "dol",
+      "json": "adipiscing ",
+      "registry": {
+        "register": "https://demo.net/api/resource",
+        "publish": "http://test.org/data/resource"
+      },
+      "proxy": "http://example.com/api/resource",
+      "https-proxy": "ftp://example.com/v1/resource",
+      "user-agent": "ISZIHyUD85r95I3tFLoXV",
+      "timeout": -469.44,
+      "ca": {},
+      "color": true,
+      "storage": {
+        "registry": "bxlepsrbwdgiyvnbfgj"
+      },
+      "tmp": "daxyxsjcd",
+      "shallowCloneHosts": [
+        "ipsum amet adi",
+        "brhkhyldkrwnsxmnywe",
+        "vnfkp",
+        "yigwhwbkism",
+        "le"
+      ],
+      "scripts": {
+        "postinstall": "ysfzxwe",
+        "preuninstall": "TTYL"
+      },
+      "ignoredDependencies": [
+        "dolor ",
+        "ipsum lorem a",
+        "wrahmnkwrojrmepyhwq",
+        "xqxww",
+        "GcZgfyh2KcUMzI2vWt"
+      ],
+      "consect": null
+    },
+    {
+      "analytics": true,
+      "cwd": "NwB3YqqeTcQ70xYiVlQ",
+      "directory": "consectetur lorem",
+      "json": "zzvluttm",
+      "proxy": "https://example.com/data/v1",
+      "https-proxy": "https://demo.net/resource/v1",
+      "strict-ssl": false,
+      "ca": "oevghpmdeoxxuf",
+      "color": true,
+      "interactive": false,
+      "resolvers": [
+        "2Q",
+        "korzdaukoqnjpxcotcsbo",
+        "0Tk",
+        "dkBYCLoNfzgow",
+        "KODqyhvR4vwO0q"
+      ],
+      "scripts": {
+        "postinstall": "9eQ2BtsnxwiLfpvNI",
+        "preuninstall": "gmmiwmisttwbkdkozvor"
+      }
+    },
+    {
+      "analytics": true,
+      "json": "tmvgpjmzfttczlo",
+      "registry": {
+        "search": "http://test.org/v1/resource"
+      },
+      "proxy": "http://test.org/api/data",
+      "user-agent": "HeHzSrYvj21B7",
+      "timeout": 131.52,
+      "ca": "bktsnhnydcbvioa",
+      "storage": {
+        "registry": "gZOoJA8",
+        "links": "xgwedqxkec"
+      },
+      "tmp": "mnfggtqboybeznx",
+      "resolvers": [
+        "dolo",
+        "dofdwaun",
+        "znndiiqucjirawvfycekc",
+        "R",
+        "sit consecte"
+      ],
+      "scripts": {
+        "postinstall": "xfygfnrhzbvsulxim"
+      }
+    },
+    {
+      "analytics": false,
+      "proxy": "https://example.com/api/data",
+      "user-agent": "qq",
+      "timeout": 162.6,
+      "ca": "usryubjaxrfefpma",
+      "storage": {
+        "packages": "xobj"
+      },
+      "tmp": "con",
+      "resolvers": [
+        "dolor",
+        "sit adipisci",
+        "dolor l",
+        "pzrvw",
+        "HgQgzIPNwz7kmN69R"
+      ],
+      "shallowCloneHosts": [
+        "sit consectetur am",
+        "sit dolor consectet",
+        "adipiscing co",
+        "amet amet adipisci",
+        "iejiyajlnaujqg"
+      ],
+      "scripts": {
+        "preinstall": "RuviM6AtCnY",
+        "preuninstall": "g"
+      },
+      "txvfmvkc": "ayapgb"
+    },
+    {
+      "cwd": "wcdkupqxrvkdbyffrmp",
+      "directory": "consectetur",
+      "json": "ctvf",
+      "proxy": "http://test.org/resource/data",
+      "user-agent": "oqrxgx",
+      "ca": "kbzqlakyydhzsodqba",
+      "storage": {
+        "registry": "KR",
+        "links": "yiq1x0jUwbF"
+      },
+      "tmp": "ad",
+      "interactive": true,
+      "resolvers": [
+        "ipsum ipsum sit co",
+        "ylfqzxsnfbvxhkel",
+        "consectetur lo",
+        "dolor dolor lorem am",
+        "figinnl"
+      ],
+      "shallowCloneHosts": [
+        "adipiscing a",
+        "adi",
+        "vqhsozrhz",
+        "awrndcrrvuouyde",
+        "consecte"
+      ],
+      "scripts": {
+        "preinstall": "consectetur ipsum c",
+        "postinstall": "ENxvLbcK",
+        "preuninstall": "XaljRjWS4YFkavOHC5N"
+      },
+      "ignoredDependencies": [
+        "uhldyyajvajnqvhia",
+        "pmvfmiwyibucqdzmjtq",
+        "qrq2Z1NwqbwkCsbQ",
+        "zmPFm",
+        "juyjlsxfcvatb"
+      ],
+      "hsentziazc": 99.65,
+      "ipsum amet": 7,
+      "bcabtdxfs": "znsamtfmuq"
+    },
+    {
+      "analytics": true,
+      "directory": "j",
+      "json": "yaalylurbmqedrhrhbju",
+      "registry": "https://demo.net/v1/api",
+      "https-proxy": "https://example.com/api/resource",
+      "strict-ssl": true,
+      "color": true,
+      "storage": {
+        "registry": "pbrrdvapqyefrmxerfyj",
+        "links": "pdsyldvoiinqiqafe"
+      },
+      "resolvers": [
+        "nbyxaY0jpf",
+        "ulup",
+        "adipiscin",
+        "WlL2UDruJfUf7poFDUuDf",
+        "lore"
+      ],
+      "ignoredDependencies": [
+        "adi",
+        "gtjpihzndqsmftmqxf",
+        "dv",
+        "eiwcpfnesh",
+        "qmkvmcxlwrzuuesdvjcuz"
+      ],
+      "sit sit lo": "adipiscing co",
+      "ffalu": "vkrpowin",
+      "ipsum dolo": 56.15
+    },
+    {
+      "cwd": "wyaupqubspqchujeki",
+      "directory": "FjTQ2DawGKsxA",
+      "registry": "http://demo.net/api/resource",
+      "user-agent": "rersqlpzllxohynh",
+      "timeout": -773.56,
+      "strict-ssl": true,
+      "ca": {},
+      "color": false,
+      "interactive": false,
+      "shallowCloneHosts": [
+        "sit amet cons",
+        "amet dolor dolor a",
+        "nuslsjybfdwdegcq",
+        "lvitthcundyxu",
+        "adip"
+      ],
+      "scripts": {
+        "preinstall": "Tp9KRDfHb",
+        "postinstall": "a",
+        "preuninstall": "sViBM1aHBUWAB8X"
+      },
+      "ignoredDependencies": [
+        "consectetur lorem con",
+        "VlUXz7SJ",
+        "adipiscin",
+        "ipsum lo",
+        "xntcovc"
+      ],
+      "lorem dolo": null
+    },
+    {
+      "analytics": false,
+      "directory": "sakigihnaoz",
+      "json": "consectetur",
+      "https-proxy": "http://example.com/api/v1",
+      "user-agent": "8KhI8sZ",
+      "strict-ssl": true,
+      "color": true,
+      "storage": {
+        "packages": "A9fK9R6Wtc7iJsbi2eYra",
+        "registry": "Te",
+        "links": "lorem i"
+      },
+      "tmp": "t0f",
+      "resolvers": [
+        "dolor lore",
+        "X5ui",
+        "dolor l",
+        "taavrplvdbeogjjdvh",
+        "ldkveseimhr"
+      ],
+      "shallowCloneHosts": [
+        "4FjIi0p25Vin96ON6",
+        "dolor consectetur",
+        "dakxkE1f",
+        "ipsum consec",
+        "vP3GWpOsA2SIJFqUB"
+      ],
+      "scripts": {
+        "preinstall": "fyybfdncpe",
+        "preuninstall": "jef"
+      },
+      "jtrpjgu": 36.51,
+      "amet amet ": 70
+    },
+    {
+      "analytics": false,
+      "json": "c",
+      "https-proxy": "http://demo.net/resource/v1",
+      "strict-ssl": false,
+      "ca": "adipiscing ipsum s",
+      "storage": {
+        "packages": "consectetur lorem ",
+        "links": "adipiscing dolor am"
+      },
+      "tmp": "e",
+      "interactive": false,
+      "resolvers": [
+        "BA",
+        "sit",
+        "LI",
+        "zWBMWLr3",
+        "ipsum d"
+      ],
+      "shallowCloneHosts": [
+        "Og7VfbBCGlsF9gHzl",
+        "jF1",
+        "amet lorem lore",
+        "vjhwex",
+        "y"
+      ]
+    },
+    {
+      "analytics": true,
+      "cwd": "hv",
+      "directory": "krutauxtuiqszfve",
+      "json": "gndorkcwuvezmehcv",
+      "user-agent": "oowfhfgdvmlm",
+      "strict-ssl": false,
+      "storage": {
+        "packages": "Q"
+      },
+      "tmp": "wrccucwflfrrhm",
+      "interactive": false,
+      "resolvers": [
+        "serbzgtjpozmvnj",
+        "PtRo",
+        "z",
+        "XPdk10cgdaKYVBEclZ",
+        "l"
+      ],
+      "shallowCloneHosts": [
+        "tnabkydezlrsxuxj",
+        "m",
+        "uxWgq",
+        "cbqr",
+        "xrdiemomohqwjsxnnnvg"
+      ],
+      "scripts": {
+        "preinstall": "amet lorem adipis",
+        "postinstall": "xnEz0Fm0U",
+        "preuninstall": "i"
+      }
+    },
+    {
+      "analytics": true,
+      "cwd": "consecte",
+      "directory": "amet ipsum consect",
+      "user-agent": "wiynumkhafznmxp",
+      "strict-ssl": true,
+      "tmp": "raamvc",
+      "interactive": true,
+      "resolvers": [
+        "dolor sit ipsum cons",
+        "HZh6DdT",
+        "dyddhzkywimggwjrnavi",
+        "Yyzxf25SyBtOO",
+        "amet dolor"
+      ],
+      "ignoredDependencies": [
+        "clzgnxwunygwkrp",
+        "Q1MSmumaws",
+        "rugktsk",
+        "anfnyzznuygw",
+        "GMNVVmbgtJ7zwI"
+      ],
+      "zukeld": 90.18,
+      "kyeghoxjvy": false
+    },
+    {
+      "analytics": false,
+      "directory": "lunclbyyiitfe",
+      "json": "zZyCrXx1NlLj",
+      "proxy": "http://example.com/v1/resource",
+      "timeout": 247.74,
+      "ca": {},
+      "tmp": "iroyzkbchl",
+      "interactive": false,
+      "shallowCloneHosts": [
+        "gbpibhssuxxnfusj",
+        "lorem ipsum sit",
+        "consect",
+        "rmose",
+        "bfgcdqdbykomilfp"
+      ],
+      "scripts": {
+        "preinstall": "czgzwvc",
+        "postinstall": "qq",
+        "preuninstall": "o"
+      },
+      "ignoredDependencies": [
+        "f",
+        "qwvjrlsezaqjudxatsnej",
+        "adipiscing amet",
+        "qdp",
+        "OhgMcXAv7e4zJDQsPIZ"
+      ],
+      "odyjos": 82
+    },
+    {
+      "analytics": true,
+      "directory": "PnnrQn8elfVw",
+      "json": "consectetur",
+      "registry": "http://demo.net/data/resource",
+      "https-proxy": "https://example.com/resource/api",
+      "user-agent": "sit sit dolor",
+      "timeout": 409.19,
+      "strict-ssl": true,
+      "color": false,
+      "storage": {
+        "packages": "oevnwenwybon",
+        "links": "pplq"
+      },
+      "resolvers": [
+        "3i72ueIQvdrZf6pmg8",
+        "ipsum adipi",
+        "w",
+        "biumfpiadijkqtn",
+        "lorem d"
+      ],
+      "shallowCloneHosts": [
+        "frvnqflohhgwfzt",
+        "adipisci",
+        "dImc38M0a5PV7EX",
+        "amet ipsum amet amet ",
+        "TjSzqonXfoljTKP"
+      ],
+      "ignoredDependencies": [
+        "xy",
+        "cnaxndrxczlowpcht",
+        "am",
+        "hg",
+        "juwssqsgkggkp"
+      ],
+      "mqb4uctq": true,
+      "PNQwX6M": "skbD8",
+      "lorem lo": 48.89
+    },
+    {
+      "analytics": false,
+      "cwd": "dolor sit amet conse",
+      "registry": {
+        "search": [
+          6,
+          60.93,
+          true,
+          null,
+          null
+        ],
+        "register": "ftp://test.org/resource/data",
+        "publish": "ftp://example.com/data/v1"
+      },
+      "https-proxy": "ftp://demo.net/resource/v1",
+      "user-agent": "eoshM7",
+      "strict-ssl": false,
+      "color": false,
+      "interactive": true,
+      "resolvers": [
+        "xqnznky",
+        "WG4Tz3",
+        "sit am",
+        "iLGaorhW",
+        "t"
+      ],
+      "scripts": {
+        "preinstall": "vraeuuo",
+        "postinstall": "adipisci"
+      },
+      "ipsum ": true,
+      "lorem lore": 27.4,
+      "wbeydl": null
+    },
+    {
+      "cwd": "xtrlirm",
+      "directory": "afcdnektskuovgjpyqm",
+      "json": "tnulfnbvdn",
+      "proxy": "https://example.com/api/v1",
+      "https-proxy": "http://demo.net/api/data",
+      "user-agent": "L",
+      "timeout": 638.0,
+      "strict-ssl": true,
+      "ca": {},
+      "color": false,
+      "tmp": "ipsum adipiscing ip",
+      "resolvers": [
+        "IPuQ0H8t5lwYcM2",
+        "uNeb2MkAr1rSUtpG",
+        "luudllzortpdx",
+        "amet amet d",
+        "lore"
+      ],
+      "ignoredDependencies": [
+        "ddju",
+        "ug",
+        "adipisci",
+        "pmfrqnszyc",
+        "zncmksrmde"
+      ]
+    },
+    {
+      "json": "lorem conse",
+      "registry": "http://example.com/data/v1",
+      "user-agent": "yehblgywbaude",
+      "timeout": -316.26,
+      "strict-ssl": true,
+      "color": false,
+      "tmp": "ipsum ipsum adipiscin",
+      "interactive": false,
+      "resolvers": [
+        "deiRhDIzZDlAbVb2SENS",
+        "b",
+        "s",
+        "ipsum ipsum lor",
+        "J7N0aQnkulfnopXfmdFoG"
+      ],
+      "shallowCloneHosts": [
+        "awhcfba",
+        "nx",
+        "eFFcJj8kq2qGCRkEhTdt",
+        "hXE",
+        "amet adipisc"
+      ],
+      "snvftdjc": "kpxvywc",
+      "odgaydsah": null,
+      "lorem ad": "amet ad"
+    },
+    {
+      "cwd": "itie",
+      "directory": "dolor",
+      "https-proxy": "ftp://example.com/v1/data",
+      "user-agent": "bivyjsrevvyywoqmq",
+      "timeout": -422.77,
+      "color": true,
+      "storage": {
+        "packages": "5I0yw0VHm",
+        "links": "K0OeNw8qp5zfX4"
+      },
+      "tmp": "MfVrnU",
+      "resolvers": [
+        "amet ipsum adipis",
+        "DakQVJdU01UPvwlNv",
+        "ipsu",
+        "brf",
+        "ac"
+      ],
+      "scripts": {},
+      "ignoredDependencies": [
+        "DbYsBkJebn2QSfBTUBex6",
+        "psrunqxeayoobamngoim",
+        "rzgfji",
+        "sit adipisc",
+        "nwbpghuzjwustqt"
+      ]
+    },
+    {
+      "directory": "buuezjlqrthmdhmbj",
+      "registry": {
+        "search": [
+          "ujrigl",
+          15.35,
+          49.1,
+          24.47,
+          "fdgdvytyolkqgn"
+        ],
+        "register": "ftp://test.org/v1/api",
+        "publish": "ftp://test.org/api/data"
+      },
+      "proxy": "ftp://demo.net/resource/v1",
+      "https-proxy": "http://demo.net/api/resource",
+      "timeout": -163.76,
+      "strict-ssl": false,
+      "ca": {},
+      "storage": {
+        "registry": "zvanfhvha",
+        "links": "dolor "
+      },
+      "resolvers": [
+        "adipiscing ",
+        "co",
+        "GVv7WCLtw3azy4FjG5",
+        "cwhuyvizn",
+        "ipsum sit "
+      ],
+      "shallowCloneHosts": [
+        "lapcpol",
+        "dol",
+        "xxaqgpk",
+        "S4",
+        "bw"
+      ],
+      "ignoredDependencies": [
+        "kKMVnFm647ilYD0Nch",
+        "dolor amet ",
+        "piwp",
+        "consectetur amet sit",
+        "dolor consectet"
+      ],
+      "dcrgn": 42.3,
+      "xdywrcpkrf": "dolor amet ad",
+      "Xo4EY": "qbsysdlr"
+    },
+    {
+      "analytics": false,
+      "cwd": "lodharyvex",
+      "directory": "djbem",
+      "json": "ipsum sit",
+      "proxy": "https://test.org/data/v1",
+      "user-agent": "xshgopuxuzrru",
+      "timeout": 596.06,
+      "ca": "L",
+      "color": false,
+      "interactive": false,
+      "shallowCloneHosts": [
+        "sxhjqyjrongzk",
+        "zBV8PAfiejays6",
+        "bQ4J4",
+        "rg811jNd",
+        "amet"
+      ],
+      "scripts": {
+        "preuninstall": "e"
+      },
+      "1a55kjl": null,
+      "qdtbnrrl": "3myoxM5cKn"
+    },
+    {
+      "analytics": true,
+      "directory": "8slStgfIA",
+      "json": "adipiscing am",
+      "proxy": "https://example.com/data/resource",
+      "https-proxy": "ftp://example.com/v1/data",
+      "timeout": 974.1,
+      "ca": {},
+      "storage": {
+        "packages": "auufjefpmmcqbye",
+        "registry": "lorem adipi",
+        "links": "yW"
+      },
+      "interactive": false,
+      "resolvers": [],
+      "shallowCloneHosts": [
+        "sit ad"
+      ],
+      "scripts": {
+        "preinstall": "u",
+        "postinstall": "lorem ipsum a",
+        "preuninstall": "X1YZ"
+      },
+      "6N3XRYIA": null,
+      "dolor ad": null,
+      "crmxqknp": null
+    },
+    {
+      "analytics": false,
+      "cwd": "si",
+      "json": "ipsum sit dolor a",
+      "proxy": "ftp://demo.net/data/api",
+      "https-proxy": "ftp://example.com/data/resource",
+      "user-agent": "zwrlldbzkkmzxrunqurb",
+      "timeout": 172.18,
+      "storage": {
+        "packages": "yLEP0zJ",
+        "registry": "picggtowygdslvlfytu"
+      },
+      "resolvers": [],
+      "scripts": {
+        "preinstall": "cewqeduvczdkqvw",
+        "postinstall": "lorem dol",
+        "preuninstall": "amet adipiscin"
+      },
+      "adipisc": 89
+    },
+    {
+      "cwd": "sit ipsum sit lorem ",
+      "directory": "si",
+      "json": "nlprhjnzyulxzwf",
+      "registry": "http://test.org/v1/api",
+      "proxy": "https://example.com/v1/resource",
+      "https-proxy": "https://example.com/api/data",
+      "user-agent": "dolor",
+      "timeout": -359.05,
+      "color": false,
+      "tmp": "f9",
+      "interactive": true,
+      "shallowCloneHosts": [
+        "lore",
+        "qdrzz",
+        "0F",
+        "con"
+      ],
+      "f7agEZ": 45.94,
+      "1qB8YkoM": null
+    },
+    {
+      "cwd": "yMkmAoPzxrn",
+      "registry": "https://demo.net/v1/data",
+      "proxy": "http://test.org/api/v1",
+      "https-proxy": "https://example.com/data/api",
+      "timeout": 607.56,
+      "ca": "E1gQSjVk8VCK8wmQ",
+      "storage": {
+        "registry": "6J77h6ViJqcdw2eK2wS",
+        "links": "sit dolor amet d"
+      },
+      "interactive": true,
+      "resolvers": [],
+      "scripts": {
+        "preinstall": "gtpbnhy"
+      },
+      "dolor a": 38.85,
+      "OZAyUl5sOY": 52.45
+    },
+    {
+      "analytics": false,
+      "registry": "ftp://test.org/api/v1",
+      "proxy": "http://demo.net/resource/v1",
+      "https-proxy": "http://example.com/v1/data",
+      "user-agent": "ybenyWf7Za6p",
+      "timeout": 896.4,
+      "ca": "hlnqcqgsplgstircc",
+      "color": false,
+      "storage": {
+        "registry": "sit amet"
+      },
+      "interactive": false,
+      "resolvers": [
+        "wcottlb",
+        "I1zyjAHWcHW",
+        "volwxriwry",
+        "lptldvnlnh"
+      ],
+      "scripts": {
+        "preinstall": "ipsum dolor sit ipsum",
+        "postinstall": "ipsum con",
+        "preuninstall": "dfskkvcyepr"
+      },
+      "ignoredDependencies": [
+        "oO6",
+        "ame",
+        "lorem sit do",
+        "XgnlX9xnel8",
+        "lorem adipisci"
+      ],
+      "adipis": true,
+      "gsrRRNyF": "oxpqfu",
+      "viVSAJLJLN": 30.11
+    },
+    {
+      "analytics": false,
+      "cwd": "Bbehs7svmxt0GkMnqE",
+      "directory": "rlQclS3s0",
+      "registry": "https://example.com/api/data",
+      "user-agent": "2tdCQ6KoMDg",
+      "ca": "oeikojLtwpazKzlnc1CL",
+      "storage": {
+        "packages": "vgqgvmhzm",
+        "registry": "sit adipi",
+        "links": "ypxmfimpljgnrqagrmhp"
+      },
+      "tmp": "xhzgqhtpffkvgozuf",
+      "interactive": false,
+      "resolvers": [
+        "ipsum lorem",
+        "Cpax"
+      ],
+      "ignoredDependencies": [
+        "WsJzIQwLbCii"
+      ]
+    },
+    {
+      "analytics": true,
+      "cwd": "bnnnpnuj",
+      "registry": {
+        "search": "https://demo.net/resource/data",
+        "register": "https://demo.net/v1/resource",
+        "publish": "ftp://example.com/api/resource"
+      },
+      "proxy": "ftp://test.org/data/api",
+      "timeout": -313.79,
+      "strict-ssl": true,
+      "ca": "lo",
+      "color": true,
+      "storage": {
+        "packages": "UvgAe",
+        "registry": "HMctqRciZ",
+        "links": "qcW97Fyh9Be8OUH"
+      },
+      "tmp": "nyeypcvwvlppskdijber",
+      "interactive": true,
+      "shallowCloneHosts": [
+        "s",
+        "lgyrfwtzjlohhyv"
+      ]
+    },
+    {
+      "cwd": "u2Is",
+      "json": "Hic1X7TKk1G",
+      "strict-ssl": true,
+      "ca": {},
+      "interactive": true,
+      "resolvers": [
+        "lPv2K7yTPU6l",
+        "yigopbcpadyyxhzjv",
+        "zQFh9u3arI"
+      ],
+      "shallowCloneHosts": [
+        "sit am",
+        "qennmxdqxycygxnx",
+        "umy",
+        "lorem a"
+      ],
+      "ignoredDependencies": [
+        "lZtkZ3JbuxfVYovvplMt",
+        "jaaqzernmqki",
+        "IayYrnZxZxD2uLm",
+        "sit sit am"
+      ],
+      "dbgsdibtuv": null,
+      "aghzhdr": true,
+      "WWFuL6tQ": 68
+    },
+    {
+      "cwd": "amet conse",
+      "directory": "adipisci",
+      "registry": "https://demo.net/data/v1",
+      "proxy": "ftp://demo.net/api/v1",
+      "https-proxy": "ftp://demo.net/data/api",
+      "user-agent": "MIH",
+      "color": true,
+      "storage": {
+        "links": "csifmeuvtrjcxbiwbyd"
+      },
+      "tmp": "amet consectetu",
+      "resolvers": [
+        "niqttfhncughhfv",
+        "lorem adipis",
+        "lo",
+        "fogtqhnavnsmykhuv"
+      ],
+      "ignoredDependencies": [
+        "nkaufedvyfoafohy",
+        "sit lorem consectetu"
+      ],
+      "consec": 12,
+      "swzwhiqbme": "ipsum"
+    },
+    {
+      "analytics": true,
+      "cwd": "RS6uCO",
+      "directory": "kxAaRNKN4DI6",
+      "registry": "ftp://example.com/api/resource",
+      "proxy": "https://test.org/resource/data",
+      "https-proxy": "https://test.org/data/api",
+      "strict-ssl": false,
+      "ca": {},
+      "color": false,
+      "storage": {
+        "packages": "qt"
+      },
+      "tmp": "xxhnkdhzjclqviq",
+      "interactive": false,
+      "resolvers": [
+        "adipiscing amet",
+        "rCZuG9pgdTevP",
+        "xrw2VvpgmPA5YcSA",
+        "kysftdtnpxokhqtm",
+        "amet sit sit adipisc"
+      ],
+      "shallowCloneHosts": [],
+      "scripts": {
+        "postinstall": "liaupaunzznmlnan"
+      },
+      "brruuxat": 52
+    },
+    {
+      "cwd": "haia",
+      "directory": "XjKS04IY21rXM3IYwuJA",
+      "json": "raucaxxju",
+      "registry": "https://test.org/v1/api",
+      "https-proxy": "http://example.com/api/resource",
+      "user-agent": "qohdilxuuvuwddutt",
+      "strict-ssl": false,
+      "ca": "amet dolor consectetu",
+      "color": true,
+      "storage": {
+        "packages": "sit dolor adipi",
+        "registry": "ipsum consecte",
+        "links": "TwULvxeHtvM8a7jH"
+      },
+      "interactive": true,
+      "shallowCloneHosts": [
+        "sit lorem lorem dol"
+      ],
+      "scripts": {
+        "preuninstall": "a"
+      },
+      "llujvwbsy": "consectetur",
+      "sit consec": null,
+      "lorem ame": 42
+    },
+    {
+      "cwd": "ttcxqgeyhmaswtbrfm",
+      "json": "xbfmmypouaszpvti",
+      "proxy": "ftp://example.com/v1/resource",
+      "user-agent": "alkaqwqytgnijewexq",
+      "timeout": 989.26,
+      "ca": "adipis",
+      "color": true,
+      "storage": {
+        "packages": "conse",
+        "registry": "ipsum",
+        "links": "v"
+      },
+      "tmp": "slfrfgwamauuphhxjnhw",
+      "resolvers": [],
+      "shallowCloneHosts": [
+        "md",
+        "dnzcuwlwwoxjmapkeogl",
+        "ve"
+      ],
+      "scripts": {
+        "preinstall": "wvqtkmjdqeogscwhwdu"
+      }
+    },
+    {
+      "analytics": true,
+      "proxy": "https://example.com/v1/resource",
+      "user-agent": "sidhfn",
+      "timeout": -768.79,
+      "strict-ssl": true,
+      "color": false,
+      "tmp": "xHZRfbwrWLiAJDqQr9xF",
+      "resolvers": [
+        "adipiscing dolor a",
+        "consectetu"
+      ],
+      "scripts": {
+        "preinstall": "amet lor",
+        "postinstall": "mcvdjfvfvoptjet"
+      },
+      "ignoredDependencies": [
+        "sit amet dolor l"
+      ],
+      "consecte": null,
+      "amet si": 51.31,
+      "gkSdpi4SUY": 12.24
+    },
+    {
+      "analytics": false,
+      "directory": "dolor ipsum amet ",
+      "https-proxy": "http://example.com/resource/v1",
+      "strict-ssl": true,
+      "ca": {},
+      "color": true,
+      "storage": {
+        "packages": "ltzjuwT4ai1aqI",
+        "registry": "uefyfyp",
+        "links": "i"
+      },
+      "tmp": "adipis",
+      "interactive": false,
+      "ignoredDependencies": [
+        "adipiscing ",
+        "aBE4RjyUf1cPJ",
+        "tlrtJrl1e7qVT7Va"
+      ],
+      "lorem adi": "qwghsdz"
+    },
+    {
+      "analytics": false,
+      "directory": "lvtpclzojqdi",
+      "registry": {
+        "register": "ftp://test.org/api/data",
+        "publish": "https://test.org/data/resource"
+      },
+      "proxy": "https://test.org/resource/api",
+      "user-agent": "adipiscing lore",
+      "strict-ssl": true,
+      "ca": {},
+      "storage": {
+        "packages": "cglzucjuxch"
+      },
+      "shallowCloneHosts": [
+        "ipsum ipsum dolor do",
+        "ixzcouktwmeed",
+        "vkQQLZ80eGP3HBroZbT8",
+        "am"
+      ],
+      "ignoredDependencies": [
+        "nmot",
+        "dolor cons",
+        "am",
+        "ca"
+      ],
+      "rsrPxw": true,
+      "ixzhhaw": "fzdjas"
+    },
+    {
+      "analytics": true,
+      "directory": "Iv",
+      "json": "upaBf",
+      "registry": "http://test.org/resource/api",
+      "https-proxy": "http://example.com/api/v1",
+      "timeout": -469.36,
+      "color": false,
+      "storage": {
+        "registry": "adipiscing ",
+        "links": "mrjatevxreikbloiecqa"
+      },
+      "tmp": "FZdrEVSH",
+      "resolvers": [
+        "CaCbXQ7NaMFRf3X",
+        "amet dolor ad",
+        "aokaqezbw",
+        "oe2dG"
+      ],
+      "shallowCloneHosts": [
+        "hvjnidepltlaltsslluei"
+      ],
+      "scripts": {
+        "preinstall": "Hw3vqFmty6e",
+        "postinstall": "xaggpco",
+        "preuninstall": "adipiscing sit dol"
+      },
+      "nFhN3XL": false,
+      "QwC71tnBYl": 38.24,
+      "jgywj": 37
+    },
+    {
+      "cwd": "bhjiki",
+      "directory": "Aogtil1wsyg3FP9gJD",
+      "proxy": "http://demo.net/resource/api",
+      "user-agent": "amet amet amet do",
+      "timeout": -75.76,
+      "strict-ssl": true,
+      "ca": {},
+      "storage": {
+        "packages": "mmmp"
+      },
+      "tmp": "funjlvtnibvvg",
+      "interactive": false,
+      "resolvers": [
+        "NVfcTgk",
+        "ips",
+        "DVadfwfHzwpBV7",
+        "G"
+      ],
+      "scripts": {
+        "preinstall": "6iFwueCKX7t",
+        "postinstall": "adipi"
+      },
+      "ignoredDependencies": [
+        "isbqgn",
+        "sldblvgscr",
+        "DJ6",
+        "sqvrcecnygcepww"
+      ]
+    },
+    {
+      "cwd": "TvLMaRjFZNUsElEi5rLH",
+      "directory": "ueebupcmnmqzjqtvlot",
+      "proxy": "http://test.org/data/resource",
+      "user-agent": "ecqC0BNkRg",
+      "timeout": -278.6,
+      "strict-ssl": false,
+      "ca": {},
+      "color": true,
+      "interactive": true,
+      "resolvers": [
+        "amet dolo",
+        "zPzJmCGqv7cFzWLFveyk",
+        "adipiscing sit ",
+        "bcuazprumaorch",
+        "O6fmVoW"
+      ],
+      "scripts": {
+        "preinstall": "D2znEC6z",
+        "postinstall": "adipiscing "
+      },
+      "ignoredDependencies": [],
+      "adipi": "adipis",
+      "feryfoma": null,
+      "dtfgt": 91.47
+    },
+    {
+      "analytics": false,
+      "cwd": "DjiMfP",
+      "directory": "sit lorem do",
+      "json": "aNskNypApzTb2ONj",
+      "proxy": "ftp://demo.net/data/resource",
+      "user-agent": "viksgvauardswuyn",
+      "timeout": -389.79,
+      "strict-ssl": true,
+      "ca": "consec",
+      "resolvers": [
+        "pzpwgjmzzortntkowve",
+        "vNI2xStKH1c2kCyn2",
+        "lorem amet "
+      ],
+      "scripts": {
+        "postinstall": "3mAcavRa5vJ1lzu",
+        "preuninstall": "consectetu"
+      },
+      "ignoredDependencies": [
+        "lorem ipsum ipsum a",
+        "dolor amet",
+        "t",
+        "dolor consecte",
+        "xzsbnxdcmni"
+      ],
+      "DCpX3y": 41,
+      "nfwvw": null,
+      "lorem amet": false
+    },
+    {
+      "analytics": true,
+      "cwd": "khryiyiys",
+      "directory": "lorem amet ad",
+      "json": "sjjhng",
+      "registry": {
+        "search": "ftp://demo.net/v1/resource",
+        "register": "https://example.com/api/v1",
+        "publish": "ftp://demo.net/v1/api"
+      },
+      "https-proxy": "https://demo.net/v1/api",
+      "user-agent": "dolor sit amet dol",
+      "timeout": 152.0,
+      "strict-ssl": false,
+      "color": true,
+      "storage": {
+        "packages": "adipisc",
+        "links": "pwuhxphzkxaznzfyeigb"
+      },
+      "interactive": false,
+      "resolvers": [
+        "consect",
+        "qDtCp6F5lokUFgUQHqA",
+        "y6AXTNL",
+        "yokxvgyricqlww"
+      ],
+      "shallowCloneHosts": [
+        "jkcmvrzzdjdfcmlre",
+        "by"
+      ],
+      "scripts": {
+        "preinstall": "nsfgrlb",
+        "postinstall": "El"
+      },
+      "ignoredDependencies": [],
+      "6Ws88ta": 8,
+      "zccjaoaje": "ptvzhlwsfb",
+      "dolor lore": "amet "
+    },
+    {
+      "cwd": "D9tHNJ3sWbVhZN48G",
+      "directory": "tvQ0mJaIeJqVxTJv",
+      "registry": "https://example.com/resource/v1",
+      "proxy": "https://test.org/resource/data",
+      "https-proxy": "http://test.org/v1/data",
+      "user-agent": "grxo",
+      "timeout": 580.97,
+      "color": true,
+      "storage": {
+        "packages": "thj",
+        "registry": "u",
+        "links": "amet adipisc"
+      },
+      "tmp": "273dEWbgOkB0X2N2CAgy",
+      "interactive": false,
+      "resolvers": [
+        "d7vVoRjk",
+        "Mqtb6Sc0",
+        "rwonhrj",
+        "Q"
+      ],
+      "shallowCloneHosts": [
+        "aespa",
+        "uezcdkbcuh",
+        "dolor dolor sit",
+        "consectetur"
+      ],
+      "rqtpcw": 31,
+      "adipisci": 42
+    },
+    {
+      "analytics": false,
+      "cwd": "ivcoduoudsudc",
+      "directory": "uzxbpygug",
+      "json": "FW6SR",
+      "registry": "ftp://test.org/v1/data",
+      "https-proxy": "https://demo.net/data/resource",
+      "timeout": -294.69,
+      "ca": "ipsum i",
+      "storage": {
+        "packages": "PacyaSlsQzXxJFDMySGT"
+      },
+      "interactive": false,
+      "shallowCloneHosts": [
+        "sit sit sit sit",
+        "sxo",
+        "qsxojgqeyyrynz",
+        "aXFLb492yEDW5Ax0uFscp",
+        "i"
+      ],
+      "scripts": {
+        "preinstall": "bfuuhepijk",
+        "preuninstall": "buL"
+      },
+      "zKb5o9Gcy": "dhvtbvgqc"
+    },
+    {
+      "analytics": false,
+      "json": "ipsum dolor adi",
+      "registry": "ftp://demo.net/v1/resource",
+      "proxy": "http://test.org/v1/api",
+      "user-agent": "S8yPHHH055i1hj",
+      "timeout": -827.36,
+      "strict-ssl": true,
+      "ca": "1Wj",
+      "color": false,
+      "storage": {
+        "registry": "lufdnuvttvuuwb",
+        "links": "am"
+      },
+      "tmp": "Kh3wrw3JyZw3Wey",
+      "resolvers": [
+        "qbfshci",
+        "consectet"
+      ],
+      "ignoredDependencies": [
+        "ypfjhqftrl",
+        "ppxugzuugpzj",
+        "mdyiaseyjatjd"
+      ]
+    },
+    {
+      "analytics": true,
+      "cwd": "3",
+      "directory": "sfrrzztyosxsufltbttg",
+      "https-proxy": "ftp://test.org/api/data",
+      "strict-ssl": true,
+      "tmp": "rajUeH",
+      "interactive": false,
+      "ignoredDependencies": [
+        "xCr8whVeRdcgxW"
+      ],
+      "dolor s": null,
+      "sit ipsum ": 5,
+      "xfjtssiy": null
+    },
+    {
+      "analytics": false,
+      "cwd": "hwyvaz",
+      "directory": "amet dolor amet",
+      "user-agent": "x4KuQdcZvGfKw2pWNU4o",
+      "timeout": -749.93,
+      "strict-ssl": true,
+      "color": true,
+      "storage": {
+        "packages": "zmdqrvddpkgamqoevldd",
+        "registry": "adipisci"
+      },
+      "tmp": "mfustcjedssgyxebyibs",
+      "interactive": false,
+      "shallowCloneHosts": [
+        "5EnPgSwsjDRT0CRHb",
+        "zhyzpurrfxnbcua",
+        "lorem a"
+      ],
+      "scripts": {
+        "preinstall": "Z4bL05YRVG5",
+        "postinstall": "Vw6oY9HcmWLByT4"
+      },
+      "ignoredDependencies": [],
+      "consec": 57
+    },
+    {
+      "analytics": false,
+      "cwd": "ioqsytwrghanehdatiqx",
+      "directory": "qziximbwnvwecmskwvs",
+      "registry": {
+        "search": [
+          "A5CwZY70",
+          null,
+          82.99
+        ],
+        "register": "http://example.com/api/resource"
+      },
+      "https-proxy": "https://example.com/resource/api",
+      "timeout": -810.99,
+      "storage": {
+        "registry": "dolor adipiscing a",
+        "links": "YGYzJqOHW72ORha"
+      },
+      "tmp": "bomdikcebyifsdkrqki",
+      "resolvers": [
+        "JKWOYY3cpgRqRPY6HjwT",
+        "mefihgveapr",
+        "HGzlK5YoJrz2"
+      ],
+      "ignoredDependencies": [
+        "D",
+        "mheanoawrlgnhgb"
+      ],
+      "dolor": 25.43,
+      "kOssxUpZ": 71.82,
+      "fesdltq": "htcul"
+    },
+    {
+      "analytics": true,
+      "directory": "atckmgolahnushxtrgwxj",
+      "timeout": 671.42,
+      "ca": "JcypigXfwM",
+      "color": true,
+      "storage": {},
+      "tmp": "amet a",
+      "resolvers": [
+        "ame",
+        "lLkM",
+        "ipsum dolor sit a",
+        "e2kEG5v5"
+      ],
+      "shallowCloneHosts": [
+        "g"
+      ],
+      "bzzmncvv": 64,
+      "qxV0UsO": 45.54
+    },
+    {
+      "directory": "amet sit lorem c",
+      "json": "0qZ5rpbrp",
+      "registry": "https://test.org/data/resource",
+      "proxy": "http://example.com/v1/data",
+      "https-proxy": "ftp://test.org/api/resource",
+      "timeout": -150.87,
+      "ca": {},
+      "storage": {
+        "packages": "adipiscing ipsum ",
+        "registry": "kacdenaljefrrfmwnuyld",
+        "links": "83BPzpZK1K0nLfu8zwQD"
+      },
+      "interactive": false,
+      "resolvers": [
+        "Ed22U8IqnDtIyC",
+        "GpGkZ5jMXp"
+      ],
+      "scripts": {
+        "preinstall": "consectetur d",
+        "postinstall": "lNdZw",
+        "preuninstall": "sit ipsum sit sit ips"
+      },
+      "dolor ": null,
+      "yjwzlm": false,
+      "IJczlSXq": false
+    },
+    {
+      "analytics": true,
+      "cwd": "iNc9Rdm",
+      "proxy": "ftp://example.com/api/data",
+      "https-proxy": "http://demo.net/api/resource",
+      "strict-ssl": false,
+      "ca": "rtvgqbnoanqgit",
+      "storage": {
+        "packages": "f7nNm7CoYsiy6jXD",
+        "links": "9FPvxbtNMqXf"
+      },
+      "resolvers": [
+        "dz2r5oZOw63HYH",
+        "adipiscing lore",
+        "wmjnyntuuztcgnpksr",
+        "opmvfxqgizlk",
+        "consectetur ips"
+      ],
+      "shallowCloneHosts": [],
+      "scripts": {
+        "preinstall": "6FE7aa5"
+      }
+    },
+    {
+      "analytics": false,
+      "cwd": "dolor c",
+      "json": "ndlnaazdxeuwy",
+      "proxy": "http://demo.net/resource/v1",
+      "https-proxy": "https://demo.net/api/resource",
+      "user-agent": "oosbucnvasw",
+      "timeout": 808.91,
+      "ca": "8qIWQSyK",
+      "color": true,
+      "storage": {
+        "packages": "co",
+        "links": "adipiscing adipiscin"
+      },
+      "tmp": "Wxr9xR",
+      "resolvers": [
+        "uuyD",
+        "lojtxarxwze"
+      ],
+      "shallowCloneHosts": [
+        "qso",
+        "lorem consecte"
+      ],
+      "scripts": {
+        "postinstall": "nthjjjzqjhi",
+        "preuninstall": "JON6ftgjZ"
+      },
+      "consectet": 31,
+      "lorem ipsu": null,
+      "ipsum sit": null
+    },
+    {
+      "analytics": false,
+      "directory": "gdlisyzsmxodfwaqj",
+      "json": "prrhr",
+      "registry": {
+        "search": "http://demo.net/api/resource",
+        "publish": "http://example.com/api/data"
+      },
+      "https-proxy": "https://demo.net/v1/api",
+      "user-agent": "co",
+      "timeout": -600.32,
+      "strict-ssl": false,
+      "ca": "yUs",
+      "color": false,
+      "storage": {
+        "packages": "BZSysUXL0nBBqY",
+        "registry": "dlifm",
+        "links": "naokyocjnwgkukpcqeswv"
+      },
+      "tmp": "lorem dol",
+      "shallowCloneHosts": [
+        "dolor adipiscing",
+        "Qeg40CuO",
+        "1NM5nz"
+      ],
+      "ignoredDependencies": [
+        "dlnudqffhypcluzbccmtm",
+        "consectetur consect"
+      ],
+      "C488frOgZ": 65
+    },
+    {
+      "analytics": false,
+      "directory": "ihptpuxvordnnyijt",
+      "json": "alubpbqptkkphnrgt",
+      "proxy": "https://test.org/resource/api",
+      "timeout": -798.71,
+      "strict-ssl": true,
+      "ca": "adipiscing d",
+      "storage": {
+        "packages": "qWIPT",
+        "links": "gzeijcg"
+      },
+      "tmp": "yckpkhm",
+      "interactive": false,
+      "resolvers": [
+        "ips"
+      ],
+      "scripts": {
+        "preinstall": "amet ",
+        "postinstall": "amet ",
+        "preuninstall": "jPhAHI8YWEz"
+      },
+      "ignoredDependencies": [
+        "consecte",
+        "z",
+        "sit ame",
+        "csb3wY",
+        "jafc"
+      ],
+      "wgoehamex": 7,
+      "wgcol": true,
+      "ipsum dolo": true
+    },
+    {
+      "cwd": "consectet",
+      "directory": "amet consectetur ",
+      "registry": "ftp://test.org/resource/v1",
+      "proxy": "ftp://test.org/resource/api",
+      "https-proxy": "ftp://test.org/v1/api",
+      "ca": "IQxtSol",
+      "color": false,
+      "interactive": false,
+      "scripts": {},
+      "V0CU1VH": 39.79,
+      "lorem d": 78.43
+    },
+    {
+      "analytics": true,
+      "cwd": "amet lorem ipsum",
+      "registry": {
+        "search": "ftp://example.com/v1/data",
+        "register": "ftp://example.com/data/v1",
+        "publish": "https://test.org/data/v1"
+      },
+      "proxy": "http://test.org/api/data",
+      "user-agent": "bbbJIL4zlDxmeDveYQObq",
+      "timeout": -986.42,
+      "strict-ssl": true,
+      "ca": "lIiQ7MxY4YNvs7xqQt",
+      "tmp": "coubzwkzya",
+      "interactive": false,
+      "resolvers": [
+        "d",
+        "t4tyA",
+        "gambobyttqigrogzjj",
+        "ipsum dolor ip"
+      ],
+      "scripts": {
+        "preinstall": "rjvvfs",
+        "postinstall": "ipsum dolor co",
+        "preuninstall": "adipiscing con"
+      },
+      "ignoredDependencies": [
+        "o4",
+        "mnhajeduj",
+        "amet sit sit ip",
+        "ipsum lorem dolor i"
+      ],
+      "msbjkf": "ipsum adipisci",
+      "nijuajdhg": true
+    }
+  ]
+}

@@ -1,0 +1,1840 @@
+{
+  "schema": {
+    "title": "Platform.sh services configuration file",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "additionalProperties": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "title": "The service type."
+        },
+        "size": {
+          "type": "string",
+          "title": "The service size.",
+          "default": "AUTO"
+        },
+        "disk": {
+          "type": "integer",
+          "title": "The size of the disk.",
+          "default": null
+        },
+        "access": {
+          "type": "object",
+          "title": "The configuration of the service.",
+          "default": {}
+        },
+        "configuration": {
+          "type": "object",
+          "title": "The configuration of the service.",
+          "default": {}
+        },
+        "relationships": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "The relationships of the service to other services.",
+          "default": {}
+        },
+        "firewall": {
+          "type": "object",
+          "properties": {
+            "outbound": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "protocol": {
+                    "type": "string",
+                    "title": "The IP protocol to apply the restriction on.",
+                    "default": "tcp"
+                  },
+                  "ips": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "title": "The IP range in CIDR notation to apply the restriction on.",
+                    "default": []
+                  },
+                  "domains": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "title": "Domains of the restriction.",
+                    "default": []
+                  },
+                  "ports": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "title": "The port to apply the restriction on.",
+                    "default": []
+                  }
+                },
+                "additionalProperties": false
+              },
+              "title": "Outbound firewall restrictions",
+              "default": []
+            }
+          },
+          "additionalProperties": false,
+          "nullable": true,
+          "title": "Firewall",
+          "default": null
+        },
+        "resources": {
+          "type": "object",
+          "properties": {
+            "base_memory": {
+              "type": "integer",
+              "title": "The base memory for the container",
+              "default": 64
+            },
+            "memory_ratio": {
+              "type": "integer",
+              "title": "The amount of memory to allocate per units of CPU",
+              "default": 128
+            }
+          },
+          "additionalProperties": false,
+          "nullable": true,
+          "title": "Resources",
+          "default": null
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "examples": [
+    {
+      "ipsum": {
+        "type": "xcka",
+        "size": "ossklhwtekhftcjji",
+        "disk": -912,
+        "configuration": {},
+        "firewall": {
+          "outbound": []
+        }
+      },
+      "jebruzwwj": {
+        "type": "jjfgyqpesejzqor",
+        "access": {},
+        "configuration": {},
+        "relationships": {
+          "adipi": "sit adipisc"
+        },
+        "firewall": {
+          "outbound": []
+        }
+      }
+    },
+    {},
+    {
+      "1knbhajF9": {
+        "type": "zQue0Mgef7gM8cxD4lqpd",
+        "access": {},
+        "configuration": {}
+      }
+    },
+    {
+      "fvearhtU": {
+        "type": "bh",
+        "disk": 736,
+        "configuration": {},
+        "firewall": {
+          "outbound": []
+        },
+        "resources": {
+          "base_memory": -270
+        }
+      }
+    },
+    {},
+    {
+      "CvFyc": {
+        "type": "yayusavilgnlgo",
+        "disk": -300,
+        "access": {},
+        "relationships": {
+          "lorem": "pO250nUVLPrVoIqHc",
+          "y6Gnh0x": "zolzoucgv"
+        },
+        "firewall": {},
+        "resources": {
+          "memory_ratio": -458
+        }
+      }
+    },
+    {
+      "amet do": {
+        "type": "consectetur ipsum",
+        "size": "consectetur sit sit s",
+        "disk": -729,
+        "access": {},
+        "configuration": {},
+        "relationships": {
+          "dolor dol": "amet adi",
+          "qjlfuwpac": "sit lorem lorem ips"
+        },
+        "firewall": {
+          "outbound": []
+        },
+        "resources": {
+          "base_memory": 584,
+          "memory_ratio": -248
+        }
+      },
+      "tX4NDLjw": {
+        "type": "SZ5kjrZKTAG8yAO",
+        "access": {},
+        "configuration": {},
+        "relationships": {}
+      }
+    },
+    {},
+    {
+      "3QVuHnI": {
+        "type": "gvne1",
+        "access": {},
+        "configuration": {},
+        "firewall": {},
+        "resources": {}
+      }
+    },
+    {},
+    {
+      "nwjad": {
+        "type": "zlaolgemqmmdaq",
+        "size": "P2H",
+        "disk": 65,
+        "relationships": {
+          "lospff": "iSVfNnmJekSnFZoIL"
+        },
+        "firewall": {},
+        "resources": {}
+      }
+    },
+    {
+      "S6GTT1": {
+        "type": "zi",
+        "size": "do",
+        "disk": -532,
+        "access": {},
+        "configuration": {},
+        "resources": {
+          "base_memory": 927,
+          "memory_ratio": -430
+        }
+      },
+      "amet d": {
+        "type": "rebqmxpvxctcyux",
+        "size": "dolor lor",
+        "access": {},
+        "configuration": {},
+        "resources": {
+          "base_memory": 917,
+          "memory_ratio": -7
+        }
+      }
+    },
+    {},
+    {},
+    {
+      "GV9Ao": {
+        "type": "igoaobpdrykg",
+        "size": "BShPdnP",
+        "disk": -724,
+        "access": {},
+        "relationships": {
+          "dolor adip": "LxwXmCEc3lXCasKC4",
+          "hnucy": "ksnqnpbsky"
+        },
+        "resources": {
+          "base_memory": 70
+        }
+      },
+      "lorem amet": {
+        "type": "ipsum amet ipsum ",
+        "disk": 417,
+        "relationships": {
+          "lorem ": "adipiscing sit adi",
+          "fgyczqye": "lv"
+        }
+      }
+    },
+    {},
+    {
+      "amet a": {
+        "type": "do",
+        "access": {},
+        "configuration": {},
+        "firewall": {
+          "outbound": []
+        },
+        "resources": {
+          "base_memory": 544,
+          "memory_ratio": 133
+        }
+      },
+      "wgPic1tLTV": {
+        "type": "sit",
+        "size": "consecte",
+        "disk": 25,
+        "configuration": {},
+        "relationships": {
+          "hpCmoMf": "sRE",
+          "WRdcorcJhc": "Sr"
+        },
+        "firewall": {},
+        "resources": {
+          "base_memory": -878
+        }
+      }
+    },
+    {},
+    {
+      "qYCu3X1": {
+        "type": "lorem ",
+        "disk": 487,
+        "access": {},
+        "configuration": {},
+        "resources": {
+          "base_memory": 206,
+          "memory_ratio": 153
+        }
+      }
+    },
+    {
+      "YttQEw": {
+        "type": "8uaFfkbYhy4T0",
+        "size": "tqesgkdbjak",
+        "configuration": {},
+        "relationships": {
+          "ipsum amet": "gx"
+        },
+        "firewall": {
+          "outbound": []
+        },
+        "resources": {
+          "memory_ratio": 0
+        }
+      }
+    },
+    {
+      "consec": {
+        "type": "jneyzedmnu",
+        "size": "rsilakyxjxawpgpfpao",
+        "disk": -698,
+        "access": {},
+        "configuration": {},
+        "relationships": {
+          "joxiksi": "sit adipiscing l"
+        },
+        "resources": {}
+      },
+      "vOizOq9985": {
+        "type": "d6C9NyQIkISNvzvcktW",
+        "disk": 552,
+        "access": {},
+        "resources": {
+          "base_memory": 974
+        }
+      }
+    },
+    {
+      "adipisci": {
+        "type": "eOs",
+        "disk": 528,
+        "configuration": {},
+        "resources": {
+          "base_memory": 379,
+          "memory_ratio": -932
+        }
+      }
+    },
+    {
+      "kxazs": {
+        "type": "fvqdwlscrabcbpffvukft",
+        "size": "UQGdojnNnpXS",
+        "configuration": {},
+        "relationships": {},
+        "resources": {
+          "base_memory": 970
+        }
+      }
+    },
+    {
+      "consect": {
+        "type": "5ZBn2CmDRpjTiQhQw",
+        "relationships": {
+          "ipsum lo": "dolor adipi"
+        },
+        "resources": {
+          "memory_ratio": -627
+        }
+      }
+    },
+    {},
+    {},
+    {
+      "txcplgwi": {
+        "type": "IWWcTgvfLmlGAHGR38",
+        "size": "sit ipsum consectetur",
+        "disk": 243,
+        "configuration": {},
+        "relationships": {
+          "consecte": "ad"
+        },
+        "firewall": {
+          "outbound": []
+        },
+        "resources": {
+          "memory_ratio": -279
+        }
+      },
+      "wommvnm": {
+        "type": "lorem amet consectetu",
+        "disk": 997,
+        "access": {},
+        "configuration": {}
+      }
+    },
+    {
+      "ipsum": {
+        "type": "wuomllnovdz",
+        "size": "lorem dolo",
+        "firewall": {
+          "outbound": []
+        }
+      },
+      "conse": {
+        "type": "ip",
+        "size": "adipisci",
+        "disk": -328,
+        "relationships": {},
+        "firewall": {},
+        "resources": {}
+      }
+    },
+    {},
+    {
+      "azvzgfbfa": {
+        "type": "YVvkvbOlj3B68Ppjp",
+        "disk": -390,
+        "access": {},
+        "configuration": {},
+        "relationships": {},
+        "firewall": {
+          "outbound": []
+        },
+        "resources": {
+          "base_memory": 11
+        }
+      }
+    },
+    {},
+    {
+      "ICKEG": {
+        "type": "bz0zIE9",
+        "size": "of",
+        "configuration": {}
+      }
+    },
+    {
+      "iuewfdunh": {
+        "type": "FaFhYB",
+        "disk": -449,
+        "access": {},
+        "relationships": {
+          "yotsia": "JSjk",
+          "lmqfxb": "ipsum adipiscing"
+        },
+        "resources": {
+          "memory_ratio": -233
+        }
+      },
+      "adipi": {
+        "type": "SoTf2hDhZriR",
+        "firewall": {
+          "outbound": []
+        }
+      }
+    },
+    {
+      "cVPPDP2Qv": {
+        "type": "thsrpmkjory",
+        "size": "hyemhqb",
+        "disk": -337,
+        "access": {},
+        "configuration": {},
+        "relationships": {
+          "h7sJnpM": "y"
+        },
+        "resources": {
+          "base_memory": -679
+        }
+      }
+    },
+    {
+      "fhkghvmc": {
+        "type": "consectetu",
+        "size": "jgoarxdgyqthpwnafvme",
+        "configuration": {},
+        "relationships": {},
+        "resources": {
+          "base_memory": 809,
+          "memory_ratio": -67
+        }
+      }
+    },
+    {
+      "ipsum a": {
+        "type": "ILjNF0b7kY",
+        "size": "dolor lorem c",
+        "disk": -581,
+        "access": {},
+        "configuration": {}
+      }
+    },
+    {},
+    {},
+    {
+      "R7wHxI09": {
+        "type": "bgyodqyg",
+        "size": "zhzirt",
+        "disk": -404,
+        "access": {},
+        "configuration": {},
+        "relationships": {
+          "gmjtlhyu": "awkdcepjsoci"
+        },
+        "firewall": {},
+        "resources": {
+          "base_memory": -733,
+          "memory_ratio": -106
+        }
+      }
+    },
+    {
+      "GDbjP0at": {
+        "type": "amet amet ip",
+        "access": {},
+        "configuration": {},
+        "resources": {}
+      },
+      "gloytvjjwp": {
+        "type": "adip",
+        "configuration": {},
+        "firewall": {
+          "outbound": [
+            {
+              "protocol": "jzandwjgpwafxkcyylfa"
+            },
+            {
+              "ips": [
+                "oawxniewxx",
+                "VUi2KccSp",
+                "consectet",
+                "ebzkju",
+                "fiinith"
+              ],
+              "domains": [
+                "ipsu",
+                "nrdyqsw",
+                "6gQEco2B",
+                "dxtltgiojjrgfba",
+                "tmonncqjejk"
+              ],
+              "ports": [
+                -422,
+                -333,
+                -369,
+                17,
+                -700
+              ]
+            },
+            {
+              "domains": [
+                "bcnicdnqqnk",
+                "d19dHBJ7Sbr",
+                "dolor adipiscing am",
+                "consec",
+                "vwuv"
+              ]
+            },
+            {
+              "ips": [
+                "afihibcd",
+                "4n",
+                "altstztiodukvfdqhueb",
+                "amet lorem conse",
+                "vopamzbkxnxojyj"
+              ]
+            },
+            {
+              "ips": [
+                "amet lorem i",
+                "ipsum amet adipisci",
+                "lorem",
+                "D1h4lenglSrQjAUtsbdJ5",
+                "NrSUqLHNay"
+              ],
+              "domains": [
+                "iwxwgissgpezspssxkl",
+                "bvjhbzunlwzybg",
+                "lorem sit a",
+                "evmpywdcoqwjwpteh",
+                "5G0LRyO4SKnVh"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {},
+    {
+      "dolor lo": {
+        "type": "ipsum lorem adipiscin",
+        "size": "M3oBkWb",
+        "access": {},
+        "configuration": {},
+        "relationships": {
+          "6Kto4SMI": "dolor consectetur a"
+        },
+        "resources": {
+          "base_memory": -122,
+          "memory_ratio": -568
+        }
+      }
+    },
+    {
+      "aazifmo": {
+        "type": "otgmxspdybvd",
+        "size": "amAsghTHCb",
+        "relationships": {
+          "doqegijiy": "ION2eDnpfZBOxOq9",
+          "qa5L3Qte84": "qVQF2aargnSkD"
+        },
+        "firewall": {},
+        "resources": {
+          "base_memory": 859,
+          "memory_ratio": -729
+        }
+      },
+      "libayw": {
+        "type": "nlv5",
+        "size": "a",
+        "disk": -999,
+        "relationships": {
+          "opqzxli": "tvpqDxh3t",
+          "zsymsqb": "cs"
+        }
+      }
+    },
+    {},
+    {},
+    {},
+    {
+      "laVavC": {
+        "type": "ddekrdem",
+        "disk": 848,
+        "configuration": {},
+        "relationships": {}
+      }
+    },
+    {},
+    {},
+    {},
+    {
+      "IKX7PYJDZ": {
+        "type": "Nd1",
+        "access": {},
+        "configuration": {},
+        "firewall": {
+          "outbound": [
+            {},
+            {
+              "domains": [
+                "qklK72iWx1rP",
+                "xobj",
+                "hscuxmdzwtfoyvveibdo",
+                "rvwyxnqtanku",
+                "qjkzefq"
+              ]
+            },
+            {
+              "domains": [
+                "sit consectetur am",
+                "sit dolor consectet",
+                "adipiscing co",
+                "amet amet adipisci",
+                "iejiyajlnaujqg"
+              ],
+              "ports": [
+                -415,
+                651,
+                -344,
+                175,
+                807
+              ]
+            },
+            {
+              "ips": [
+                "fyrwlmullcq",
+                "lorem adi",
+                "txvfmvkchvayapgb",
+                "ejftxwehpygthhoc",
+                "sit sit ipsum d"
+              ],
+              "domains": [
+                "0uVOTDLPBKG5O2PYZbOpj",
+                "QM84ubzs1ly1y",
+                "p0XLHV",
+                "zjaosvidurdlffoxqj",
+                "5CYiq0ZCvJRBfyz"
+              ]
+            },
+            {
+              "protocol": "ehqgkvhmmnxthtzruajip",
+              "ips": [
+                "a9cQuqSX0",
+                "N7R2Fc1yiS7AEoV2R2VYl",
+                "QSnHDIJXhhGr",
+                "dolor consect",
+                "AVDoto8Xr"
+              ],
+              "domains": [
+                "uwwvgcuwtixi",
+                "eozaofng",
+                "omrdumeoyytdwgn",
+                "jRNzQB",
+                "vrkhncf"
+              ],
+              "ports": [
+                -37,
+                -665,
+                418,
+                622,
+                889
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "wcdkupqxr": {
+        "type": "he6mnODKKv3D",
+        "size": "ad",
+        "disk": -834,
+        "access": {},
+        "firewall": {},
+        "resources": {
+          "base_memory": -97
+        }
+      }
+    },
+    {
+      "ipsum ": {
+        "type": "j",
+        "size": "yaalylurbmqedrhrhbju",
+        "disk": 118,
+        "configuration": {},
+        "firewall": {},
+        "resources": {
+          "base_memory": -898
+        }
+      },
+      "tofmsf": {
+        "type": "consectetur conse",
+        "size": "NmlzL9RQkoVPFA9uOjPKh",
+        "configuration": {},
+        "relationships": {},
+        "firewall": {
+          "outbound": [
+            {
+              "protocol": "dolor ipsum amet ",
+              "domains": [
+                "dilrlscdyqjkbccbsclcx",
+                "juepwtmhioctcy",
+                "s0E7WUCs",
+                "c",
+                "fRkXpTxLu"
+              ],
+              "ports": [
+                977,
+                -248,
+                86,
+                -527,
+                -739
+              ]
+            },
+            {
+              "ips": [
+                "yIwF5OLiZr5j36Vg",
+                "lTs9NxRc4fXNLyA",
+                "uesdvjcuzkdmmbigzv",
+                "czrlyk",
+                "MYxOLJ"
+              ],
+              "ports": [
+                100,
+                -20,
+                397,
+                -594,
+                -477
+              ]
+            },
+            {
+              "protocol": "lorem sit sit",
+              "ips": [
+                "xcovfvhqfbz",
+                "42fvJL9o0hLb",
+                "sit a",
+                "W8W2",
+                "ubdbptyblu"
+              ],
+              "domains": [
+                "vy",
+                "z",
+                "xjjr",
+                "conse",
+                "bfara"
+              ],
+              "ports": [
+                425,
+                -213,
+                749,
+                -849,
+                -63
+              ]
+            },
+            {
+              "ips": [
+                "WnbJ",
+                "sit consecte",
+                "98bor8iSnVx",
+                "amet ipsum",
+                "sxqjinyvgouuyhs"
+              ],
+              "domains": [
+                "PwAaYHLYru171aYsqB",
+                "yfnpi",
+                "sit ipsum do",
+                "gepqssfbjtaqurhizi",
+                "BtGilu4X75y59nrCMB"
+              ]
+            },
+            {
+              "domains": [
+                "jagyxemsgs",
+                "lorem ",
+                "lorem dolor co",
+                "QvMC",
+                "lor"
+              ],
+              "ports": [
+                132,
+                215,
+                452,
+                880,
+                358
+              ]
+            }
+          ]
+        },
+        "resources": {
+          "base_memory": 828,
+          "memory_ratio": -45
+        }
+      }
+    },
+    {
+      "tuwyaupqu": {
+        "type": "Gm",
+        "disk": 522,
+        "configuration": {},
+        "relationships": {
+          "ppnetrw": "bQGv5mLx3Wfb3OoD"
+        },
+        "resources": {
+          "memory_ratio": 320
+        }
+      },
+      "dpctweikxf": {
+        "type": "lorem",
+        "size": "c",
+        "configuration": {},
+        "relationships": {}
+      }
+    },
+    {
+      "kfvtsak": {
+        "type": "adipiscing ",
+        "access": {},
+        "configuration": {},
+        "relationships": {},
+        "resources": {}
+      }
+    },
+    {},
+    {
+      "jbmsrbmfa": {
+        "type": "consectetur ",
+        "disk": 314,
+        "relationships": {
+          "JYqFhH": "5GjxZt9RG2lcBE",
+          "oowfhfg": "aysu"
+        },
+        "firewall": {
+          "outbound": [
+            {
+              "domains": [
+                "aoaiswl",
+                "ccucwfl",
+                "mlktkvuj",
+                "serbzgtjpozmvnj",
+                "PtRo"
+              ]
+            },
+            {
+              "protocol": "sit adipiscing",
+              "ips": [
+                "adipiscing consectet",
+                "g",
+                "PRG9bBjZRVGaeA6",
+                "amet",
+                "ditNze0bTmCuxWg"
+              ],
+              "domains": [
+                "cbqr",
+                "xrdiemomohqwjsxnnnvg",
+                "lorem sit lorem do",
+                "lgheoahojxgwlfaixb",
+                "amet "
+              ]
+            },
+            {
+              "domains": [
+                "rlfvpsa",
+                "xyWMJxJE0LdYhZ5a4G0L",
+                "Aw2fZzWTUF8mRPquJU7mF",
+                "amet ipsum consec",
+                "vadhnfvvklqddbsqexctu"
+              ],
+              "ports": [
+                307,
+                -88,
+                -905,
+                230,
+                -969
+              ]
+            },
+            {
+              "domains": [
+                "qcghcikmkxqu",
+                "dYVlUhE",
+                "zlnegydeu",
+                "quoftfcdccimyf",
+                "lorem"
+              ],
+              "ports": [
+                288,
+                -90,
+                -515,
+                869,
+                -65
+              ]
+            },
+            {
+              "protocol": "zog",
+              "ips": [
+                "u",
+                "H8XFCa6",
+                "jxspcpA6wqawLTsE",
+                "mq",
+                "nnuglerzmoaauxohqheyy"
+              ],
+              "ports": [
+                -552,
+                683,
+                218,
+                518,
+                -885
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ipsum ip": {
+        "type": "dol",
+        "disk": 921,
+        "configuration": {},
+        "firewall": {}
+      }
+    },
+    {},
+    {
+      "ojbnpx": {
+        "type": "fzbfcujmiqkflhcv",
+        "configuration": {},
+        "relationships": {
+          "PaCHv": "w"
+        },
+        "firewall": {}
+      },
+      "lorem ip": {
+        "type": "oevnwenwybon",
+        "disk": 673,
+        "access": {}
+      }
+    },
+    {},
+    {
+      "svrxtrli": {
+        "type": "iK8c",
+        "configuration": {},
+        "resources": {
+          "memory_ratio": 346
+        }
+      },
+      "qcffsnvsx": {
+        "type": "xnshmdkgcxcvscmzz",
+        "size": "hopk",
+        "access": {},
+        "relationships": {
+          "saoon": "lorem amet lo"
+        },
+        "firewall": {
+          "outbound": [
+            {
+              "protocol": "Q0",
+              "ips": [
+                "5lwYcM26QvuNeb2",
+                "kvuvpxokgavluudllzort",
+                "sit lorem dolor ips",
+                "jdrqpropddjubwo",
+                "adipisci"
+              ],
+              "domains": [
+                "DmPOFT86grMQr",
+                "VdrbXG7LuwxmgOtC",
+                "adipiscin",
+                "dolor lor",
+                "consectetu"
+              ],
+              "ports": [
+                -89,
+                435,
+                128,
+                312,
+                -446
+              ]
+            },
+            {
+              "protocol": "jaq3W",
+              "ports": [
+                967,
+                -129,
+                -791,
+                -453,
+                -277
+              ]
+            },
+            {
+              "protocol": "ozrvzfhic",
+              "ips": [
+                "h",
+                "dolor",
+                "ptztvui",
+                "hgn",
+                "uwiutszehpqquuo"
+              ],
+              "domains": [
+                "lorem d",
+                "Sl9154Bi",
+                "swf",
+                "amet dol",
+                "ibx5OJdAwNyXrTajX0sm"
+              ]
+            },
+            {
+              "protocol": "rma",
+              "ips": [
+                "zx",
+                "dolor sit ",
+                "exnefzugxasqw",
+                "vmyl",
+                "ylbwripxxzipp"
+              ],
+              "ports": [
+                800,
+                803,
+                700,
+                -665,
+                473
+              ]
+            },
+            {
+              "protocol": "xjwsvqjyxvqsw",
+              "domains": [
+                "ad",
+                "mwbgezbanpjqdygdj",
+                "ydnoawriums",
+                "sit consectetur ip",
+                "5Se07CpCGc0NyY"
+              ],
+              "ports": [
+                822,
+                -687,
+                759,
+                -239,
+                -28
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {},
+    {
+      "gaGJs0k": {
+        "type": "dolor",
+        "configuration": {}
+      },
+      "yvngyz": {
+        "type": "jsrevvyywoqmqjhwvnxo",
+        "size": "5I0yw0VHm",
+        "access": {},
+        "relationships": {
+          "rbqjzggxk": "ccu",
+          "igbwgdjs": "amet ipsum adipis"
+        }
+      }
+    },
+    {
+      "adipisci": {
+        "type": "gb",
+        "disk": -106,
+        "access": {},
+        "resources": {
+          "base_memory": -719,
+          "memory_ratio": -253
+        }
+      },
+      "ru1ifftS": {
+        "type": "ILEAjimpt3ni",
+        "size": "5YMw9",
+        "disk": -564,
+        "configuration": {},
+        "relationships": {
+          "8SkcvGSVSD": "ovfvtcfhuqbthwhci"
+        },
+        "firewall": {
+          "outbound": [
+            {
+              "protocol": "Zsan",
+              "domains": [
+                "ipsum amet ",
+                "adipiscing ",
+                "co",
+                "GVv7WCLtw3azy4FjG5",
+                "cwhuyvizn"
+              ],
+              "ports": [
+                -252,
+                -685,
+                -827,
+                88,
+                291
+              ]
+            },
+            {
+              "protocol": "2BbLfLHBOfwmnhn"
+            },
+            {
+              "ips": [
+                "sit lorem c",
+                "ckx",
+                "CVs4WXFOJaNI",
+                "0NchTqyMdgEb",
+                "pqzptlredltj"
+              ]
+            },
+            {
+              "protocol": "tvzm",
+              "ips": [
+                "dywrcpkr",
+                "dolor i",
+                "sit ipsum sit",
+                "adipiscing sit conse",
+                "KhQMZueoouOq9k2p5oIp"
+              ]
+            },
+            {
+              "ips": [
+                "hgzjjo",
+                "sit dolor ipsum a",
+                "consectetur ",
+                "9XROOYRvKAmf4zGjH3RO",
+                "adipiscing dolor si"
+              ],
+              "domains": [
+                "sebtgqxbuiokvr",
+                "vum",
+                "pUJplQTmJnUfsxuqS",
+                "ipsum ",
+                "adipi"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {},
+    {},
+    {
+      "HgF7IG": {
+        "type": "r0k32HGe",
+        "size": "q",
+        "disk": 483,
+        "access": {},
+        "configuration": {},
+        "resources": {
+          "base_memory": -623,
+          "memory_ratio": 982
+        }
+      }
+    },
+    {
+      "sit ipsum": {
+        "type": "ontdnclaxyughjckow",
+        "size": "dolor",
+        "disk": 749,
+        "access": {},
+        "configuration": {},
+        "relationships": {
+          "consec": "ipsum "
+        },
+        "firewall": {
+          "outbound": [
+            {
+              "protocol": "nnbylwiczme",
+              "ports": []
+            },
+            {
+              "protocol": "qdrzz",
+              "domains": [
+                "ecmadihu0PaeuCCHS"
+              ]
+            },
+            {
+              "protocol": "egqpmomyg",
+              "ips": [
+                "bdkolh",
+                "empypdbed",
+                "cux"
+              ],
+              "domains": [
+                "dolor consectetur i",
+                "wodyzkseeyixowgkttsgl",
+                "1L6udB4H0Z3EbJgxow",
+                "bcNKSRknEOOlTii8"
+              ],
+              "ports": [
+                -768,
+                -475
+              ]
+            }
+          ]
+        },
+        "resources": {
+          "base_memory": 184,
+          "memory_ratio": 85
+        }
+      }
+    },
+    {},
+    {
+      "sCAPwGbKoC": {
+        "type": "oL5kCvLpe",
+        "disk": 325,
+        "configuration": {},
+        "resources": {
+          "memory_ratio": 151
+        }
+      }
+    },
+    {},
+    {},
+    {
+      "niwohx": {
+        "type": "modbwuztpe",
+        "disk": 777,
+        "configuration": {}
+      }
+    },
+    {
+      "sUhi77q2A": {
+        "type": "lorem adipiscing si",
+        "access": {},
+        "configuration": {},
+        "relationships": {
+          "sit sit": "dolor ipsum amet dol",
+          "arrgtxcs": "dolor dolor"
+        },
+        "resources": {
+          "base_memory": 519,
+          "memory_ratio": -783
+        }
+      },
+      "biwby": {
+        "type": "napwm",
+        "size": "I2PFuMVTmsHhVqsq",
+        "disk": 714,
+        "access": {},
+        "configuration": {},
+        "relationships": {
+          "dolor": "sit ipsum consectetur",
+          "IkcxwBd1f": "wcvj"
+        },
+        "resources": {
+          "base_memory": -948,
+          "memory_ratio": -213
+        }
+      }
+    },
+    {},
+    {
+      "lorem dolo": {
+        "type": "bE8vXjKS04",
+        "size": "consectetur a",
+        "disk": 670,
+        "firewall": {
+          "outbound": [
+            {
+              "protocol": "consectetur lorem lor",
+              "ips": [
+                "consec"
+              ],
+              "domains": [
+                "adipiscing ipsum ",
+                "nftweoydtktcnfdvbcwe"
+              ]
+            }
+          ]
+        },
+        "resources": {}
+      },
+      "iutdogp": {
+        "type": "sit dolor adipi",
+        "size": "ipsum consecte",
+        "disk": 9,
+        "access": {},
+        "relationships": {
+          "ikboiiqz": "a",
+          "YK7NhZq0pF": "sit"
+        },
+        "resources": {
+          "base_memory": 522,
+          "memory_ratio": 939
+        }
+      }
+    },
+    {
+      "yrttcx": {
+        "type": "zgvfpkgltridaxnmkcgzj",
+        "size": "ldkgljuDxwGo7oNyHa92",
+        "disk": -450
+      }
+    },
+    {
+      "adipis": {
+        "type": "mifwsjecrhhhextlyfa",
+        "size": "kxpxvyvjaktssfj",
+        "access": {},
+        "relationships": {
+          "amet ip": "3IHouGYj05eNog8pz"
+        }
+      },
+      "mcvdjfvf": {
+        "type": "LUvlTNzlkBPsaCoUR",
+        "size": "sQS",
+        "access": {},
+        "relationships": {}
+      }
+    },
+    {},
+    {
+      "s5TVCZ": {
+        "type": "dolor consectetur i",
+        "configuration": {},
+        "firewall": {},
+        "resources": {}
+      },
+      "Er5MH1y8Q": {
+        "type": "lorem adipisc",
+        "size": "sEmPMCDuQZdNX9W7",
+        "relationships": {
+          "wwkppfssj": "kzbkwnrwqebzkncn",
+          "lorem s": "VvQsf7Nf9pJ5dFvaRSwH"
+        },
+        "firewall": {}
+      }
+    },
+    {},
+    {
+      "adipiscin": {
+        "type": "aezvamlfc",
+        "size": "VOHUk",
+        "disk": 446,
+        "access": {},
+        "firewall": {
+          "outbound": [
+            {
+              "ips": [
+                "sit",
+                "lnulktwu",
+                "sit"
+              ],
+              "domains": [],
+              "ports": [
+                -794,
+                419,
+                260,
+                -38
+              ]
+            },
+            {
+              "domains": [
+                "agrfunjlvtnibvvgcknpz",
+                "fbaesoxfewmmta",
+                "mt"
+              ],
+              "ports": [
+                -142,
+                -636,
+                -262
+              ]
+            },
+            {
+              "protocol": "V78bNT5IoB6iFwueCK",
+              "ports": [
+                13,
+                -708
+              ]
+            }
+          ]
+        },
+        "resources": {
+          "memory_ratio": 532
+        }
+      }
+    },
+    {},
+    {
+      "CNDDj": {
+        "type": "mthdf",
+        "size": "XD",
+        "disk": -997,
+        "configuration": {},
+        "firewall": {
+          "outbound": [
+            {
+              "protocol": "consectetur ip",
+              "ips": [
+                "ipsum dolor adipiscin",
+                "adi",
+                "zGWSwRESEjl",
+                "e",
+                "XF61gTuR0Q"
+              ],
+              "ports": [
+                662,
+                810,
+                173
+              ]
+            },
+            {
+              "ips": [
+                "satisizp",
+                "J1YlGJTuM9",
+                "KH1",
+                "zg"
+              ],
+              "domains": [
+                "hasasnvkskxflbajsayj"
+              ],
+              "ports": [
+                -618
+              ]
+            },
+            {
+              "protocol": "D",
+              "ips": [
+                "kqgbh"
+              ],
+              "domains": [
+                "amet lo",
+                "bgvhxSN9539",
+                "sit ad",
+                "OYMB0"
+              ],
+              "ports": [
+                -14,
+                -994,
+                -71
+              ]
+            }
+          ]
+        }
+      },
+      "xkccdj": {
+        "type": "vwuvabpjkaaie",
+        "size": "hsgyc",
+        "relationships": {
+          "vsnmozt": "iT3rSSEakddi4NZBl",
+          "RTIVTKjZS": "hpiplirnalfg"
+        },
+        "firewall": {
+          "outbound": [
+            {
+              "protocol": "dolor amet",
+              "ips": [
+                "consectetur lorem",
+                "DMaV6o9xCm"
+              ],
+              "domains": [
+                "yMq",
+                "pirqrgccoppon",
+                "adipiscing ipsum l",
+                "ipsum dolor consec",
+                "w7T6hiL88MM6c"
+              ],
+              "ports": [
+                68,
+                415
+              ]
+            },
+            {
+              "protocol": "ixnyduulber"
+            },
+            {
+              "protocol": "Kh6Whk8nl2eb",
+              "domains": [
+                "hLitp5MZp0iSBMbfYyG9",
+                "amet amet s",
+                "taszuxukeydrc"
+              ],
+              "ports": []
+            },
+            {
+              "ports": []
+            }
+          ]
+        },
+        "resources": {
+          "memory_ratio": -449
+        }
+      }
+    },
+    {},
+    {},
+    {
+      "adipiscin": {
+        "type": "ivcoduoudsudc",
+        "size": "uzxbpygug",
+        "disk": 883,
+        "access": {},
+        "configuration": {},
+        "resources": {
+          "base_memory": -702,
+          "memory_ratio": 546
+        }
+      },
+      "l2LrLL": {
+        "type": "vPGxPUajq4HfMjm",
+        "disk": -639,
+        "access": {},
+        "relationships": {
+          "kukonmqk": "sit adipiscing si"
+        },
+        "firewall": {}
+      }
+    },
+    {
+      "consecte": {
+        "type": "wKnv62SI69YbbUjOEAExX",
+        "size": "HH",
+        "relationships": {
+          "vuvkh": "jwuedlqkszlufd"
+        },
+        "firewall": {}
+      },
+      "fndphvnbqi": {
+        "type": "Kh3wrw3JyZw3Wey",
+        "disk": -389,
+        "firewall": {
+          "outbound": [
+            {
+              "protocol": "dolor adipisci",
+              "domains": [
+                "a",
+                "By0SXRnhm0XLKM3",
+                "ad",
+                "gpzjjmtiu",
+                "c"
+              ],
+              "ports": [
+                -244,
+                -156,
+                -971
+              ]
+            },
+            {
+              "ips": [],
+              "domains": []
+            },
+            {
+              "protocol": "dolor s",
+              "ips": [
+                "x",
+                "sit sit do",
+                "mozkbiermnutexzfdf",
+                "RUhLv7Dm4EhObDvDNd982",
+                "oxdvvjxptwfgv"
+              ],
+              "domains": [
+                "jgqep"
+              ],
+              "ports": [
+                -167,
+                40,
+                333,
+                129
+              ]
+            },
+            {
+              "protocol": "dolor ipsum",
+              "ips": [],
+              "domains": [
+                "SW9L7iHd",
+                "zcuwzpxvphcwlpeussfxq",
+                "ame",
+                "viwzrghdqily",
+                "ocunpjlfpiced"
+              ]
+            },
+            {
+              "protocol": "bhtv",
+              "ips": [
+                "0U1",
+                "ogj",
+                "2lrogdW",
+                "a",
+                "sit amet adipiscin"
+              ],
+              "domains": [],
+              "ports": []
+            }
+          ]
+        },
+        "resources": {
+          "memory_ratio": 309
+        }
+      }
+    },
+    {
+      "chkxjpc": {
+        "type": "amet a",
+        "relationships": {
+          "sufltb": "amet consectetur",
+          "W9Mmj7Eu7": "rajUeH"
+        },
+        "firewall": {
+          "outbound": []
+        }
+      }
+    },
+    {
+      "33t07Z": {
+        "type": "s",
+        "size": "amet dolor amet",
+        "firewall": {}
+      }
+    },
+    {
+      "VYuHMR6": {
+        "type": "rgh",
+        "size": "f194z5Jle7M9u4uEe",
+        "access": {},
+        "firewall": {
+          "outbound": [
+            {
+              "protocol": "2ZT5JAIBo",
+              "ips": [
+                "wZY70JZigaPXm",
+                "consectetur"
+              ],
+              "domains": [
+                "lrdobhacytrlqxvkt",
+                "ferrpclvk",
+                "vvpLnra2sUoNJvJJpD"
+              ],
+              "ports": []
+            },
+            {
+              "protocol": "DpkZFGA6fvuwS",
+              "ports": [
+                102
+              ]
+            },
+            {
+              "protocol": "AODlmvsoZkaL",
+              "domains": [
+                "xn9ILt2hhpEJxj4BDV",
+                "mheanoawrlgnhgb",
+                "ipsum dolor sit"
+              ],
+              "ports": [
+                -669,
+                -905,
+                335,
+                181,
+                -386
+              ]
+            }
+          ]
+        },
+        "resources": {
+          "base_memory": -783
+        }
+      }
+    },
+    {
+      "adipiscin": {
+        "type": "atckmgolahnushxtrgwxj",
+        "firewall": {}
+      }
+    },
+    {
+      "pmvdhpd": {
+        "type": "dolor dolor amet cons",
+        "disk": -606,
+        "access": {},
+        "configuration": {},
+        "relationships": {},
+        "firewall": {},
+        "resources": {
+          "base_memory": -530
+        }
+      },
+      "conse": {
+        "type": "d4NTscTio3j6r",
+        "size": "ame",
+        "disk": -933,
+        "access": {},
+        "firewall": {
+          "outbound": [
+            {
+              "protocol": "DywVL",
+              "ips": [
+                "sit amet sit ad"
+              ],
+              "ports": [
+                565,
+                -146,
+                -818,
+                -488,
+                287
+              ]
+            },
+            {
+              "ips": [
+                "fpc",
+                "wiffqxgndgl",
+                "KoYtSLqfVA88stGp",
+                "Wk7vW3eiDSmZsBKjo"
+              ],
+              "domains": [
+                "OW"
+              ],
+              "ports": [
+                -110
+              ]
+            },
+            {
+              "protocol": "adipisci",
+              "domains": [
+                "dolor",
+                "lorem dolor sit am",
+                "E1EvIJczlSX"
+              ],
+              "ports": [
+                -482,
+                -114,
+                49
+              ]
+            }
+          ]
+        },
+        "resources": {
+          "base_memory": 951
+        }
+      }
+    },
+    {
+      "AVAiNc9R": {
+        "type": "ad",
+        "disk": -267,
+        "access": {},
+        "firewall": {},
+        "resources": {
+          "memory_ratio": 616
+        }
+      },
+      "adipi": {
+        "type": "pAgUNXJySXK4YoHKJ",
+        "disk": 874,
+        "configuration": {},
+        "relationships": {
+          "lklslm": "dolor a"
+        },
+        "firewall": {},
+        "resources": {
+          "memory_ratio": -268
+        }
+      }
+    },
+    {},
+    {},
+    {},
+    {},
+    {
+      "DJC5O": {
+        "type": "x",
+        "size": "MDHjvJLHD",
+        "disk": -20,
+        "access": {},
+        "configuration": {}
+      },
+      "myoaaaoopx": {
+        "type": "JQGqZctaqMOtu",
+        "access": {},
+        "relationships": {
+          "lIiQ7MxY4": "consectetur adipiscin"
+        }
+      }
+    }
+  ]
+}

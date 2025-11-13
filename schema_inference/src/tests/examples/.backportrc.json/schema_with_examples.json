@@ -1,0 +1,1491 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://json.schemastore.org/backportrc.json",
+    "additionalProperties": false,
+    "description": "A Backport config schema",
+    "properties": {
+      "repoName": {
+        "description": "A repo name for the current project\nhttps://github.com/sqren/backport/blob/main/docs/config-file-options.md#reponame-required",
+        "type": "string",
+        "minLength": 1,
+        "examples": [
+          "kibana"
+        ]
+      },
+      "repoOwner": {
+        "description": "A repo owner for the current project\nhttps://github.com/sqren/backport/blob/main/docs/config-file-options.md#repoowner-required",
+        "type": "string",
+        "minLength": 1,
+        "examples": [
+          "elastic"
+        ]
+      },
+      "targetBranchChoices": {
+        "description": "Target branches for the current project\nhttps://github.com/sqren/backport/blob/main/docs/config-file-options.md#targetbranchchoices-required",
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+          "description": "A target branch for the current project\nhttps://github.com/sqren/backport/blob/main/docs/config-file-options.md#targetbranchchoices-required",
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "examples": [
+                "6.2"
+              ]
+            },
+            {
+              "title": "target branch",
+              "type": "object",
+              "required": [
+                "name",
+                "checked"
+              ],
+              "properties": {
+                "name": {
+                  "description": "A target branch for the current project\nhttps://github.com/sqren/backport/blob/main/docs/config-file-options.md#targetbranchchoices-required",
+                  "type": "string",
+                  "minLength": 1,
+                  "examples": [
+                    "6.3"
+                  ]
+                },
+                "checked": {
+                  "description": "Whether to pre-select a target branch for the current project\nhttps://github.com/sqren/backport/blob/main/docs/config-file-options.md#targetbranchchoices-required",
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "upstream": {
+        "description": "Identifier for the GitHub project as `{owner}/{repoName}` (deprecated)",
+        "type": "string"
+      },
+      "branches": {
+        "description": "Branches to backport to",
+        "type": "array",
+        "items": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "checked": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "name",
+                "checked"
+              ]
+            }
+          ]
+        }
+      },
+      "labels": {
+        "description": "Labels that will be added to the pull request",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "all": {
+        "description": "Whether to only show the current user's commits or commits from anyone",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "repoName",
+      "repoOwner",
+      "targetBranchChoices"
+    ],
+    "type": "object"
+  },
+  "examples": [
+    {
+      "repoName": "consectetur ipsum lor",
+      "repoOwner": "dolor lorem ipsum ",
+      "targetBranchChoices": [],
+      "upstream": "sklhwte",
+      "branches": [],
+      "labels": [],
+      "all": false
+    },
+    {
+      "repoName": "co",
+      "repoOwner": "RfLLFJM626ydghj",
+      "targetBranchChoices": [],
+      "upstream": "dolor adipiscing",
+      "branches": [],
+      "labels": [],
+      "all": true
+    },
+    {
+      "repoName": "RhxrnJgWQsNKVP",
+      "repoOwner": "consectetur ",
+      "targetBranchChoices": [],
+      "upstream": "dolo",
+      "all": false
+    },
+    {
+      "repoName": "psbEhY71O",
+      "repoOwner": "ipsum adipiscing ips",
+      "targetBranchChoices": [],
+      "upstream": "R5kpW7ffUtx2UO1TYNKd",
+      "all": true
+    },
+    {
+      "repoName": "K1o",
+      "repoOwner": "sit consectetur l",
+      "targetBranchChoices": [],
+      "branches": [],
+      "labels": [],
+      "all": false
+    },
+    {
+      "repoName": "sit sit ipsu",
+      "repoOwner": "czbgq7DH43JoG",
+      "targetBranchChoices": [],
+      "upstream": "dolor am",
+      "labels": []
+    },
+    {
+      "repoName": "IHXFSBjYOEnVIFDbAi",
+      "repoOwner": "boyscg",
+      "targetBranchChoices": [],
+      "upstream": "o",
+      "branches": [],
+      "labels": []
+    },
+    {
+      "repoName": "5uI",
+      "repoOwner": "th",
+      "targetBranchChoices": [],
+      "upstream": "nw",
+      "labels": [],
+      "all": true
+    },
+    {
+      "repoName": "jxstiofoyjcjfbwz",
+      "repoOwner": "f5dLuQZauXA9mB4KhMHh",
+      "targetBranchChoices": [],
+      "all": false
+    },
+    {
+      "repoName": "ogzvgwom",
+      "repoOwner": "vOxrRahHcP6vsBX1OV",
+      "targetBranchChoices": [],
+      "upstream": "49ZZYK",
+      "branches": [],
+      "all": true
+    },
+    {
+      "repoName": "consectet",
+      "repoOwner": "4j9zlvNcyaek",
+      "targetBranchChoices": [],
+      "upstream": "EhcMxfy3w",
+      "branches": [],
+      "labels": []
+    },
+    {
+      "repoName": "fnmsjlayxzidwbbffdjt",
+      "repoOwner": "z6ujWIy9Ojd",
+      "targetBranchChoices": [],
+      "branches": [],
+      "all": true
+    },
+    {
+      "repoName": "s3Enu",
+      "repoOwner": "zffmulcihkocq",
+      "targetBranchChoices": [],
+      "labels": [],
+      "all": true
+    },
+    {
+      "repoName": "fzh",
+      "repoOwner": "hjs",
+      "targetBranchChoices": [],
+      "labels": [],
+      "all": false
+    },
+    {
+      "repoName": "amet dolor sit adi",
+      "repoOwner": "amet dol",
+      "targetBranchChoices": [],
+      "upstream": "consectetur ipsum a",
+      "branches": [],
+      "labels": [],
+      "all": true
+    },
+    {
+      "repoName": "Ln",
+      "repoOwner": "hzqwatnpjzr",
+      "targetBranchChoices": [],
+      "labels": []
+    },
+    {
+      "repoName": "consectetur adipisc",
+      "repoOwner": "r27Xz2gEDeIxw",
+      "targetBranchChoices": [],
+      "upstream": "lskLp",
+      "labels": [],
+      "all": true
+    },
+    {
+      "repoName": "amet sit",
+      "repoOwner": "sravj",
+      "targetBranchChoices": [],
+      "branches": []
+    },
+    {
+      "repoName": "ipsum ipsu",
+      "repoOwner": "bxcwebqxksd",
+      "targetBranchChoices": [],
+      "labels": [],
+      "all": true
+    },
+    {
+      "repoName": "ipsum adipiscing",
+      "repoOwner": "w",
+      "targetBranchChoices": [],
+      "upstream": "ianceaudkxt",
+      "labels": [],
+      "all": false
+    },
+    {
+      "repoName": "adipiscing ipsum si",
+      "repoOwner": "ipsum lorem ",
+      "targetBranchChoices": [],
+      "labels": [],
+      "all": true
+    },
+    {
+      "repoName": "5pOxeOsZtUdP6ho",
+      "repoOwner": "zxwsfplqmfxaiizdpypy",
+      "targetBranchChoices": [],
+      "upstream": "lorem lorem dol",
+      "labels": []
+    },
+    {
+      "repoName": "amet sit amet ip",
+      "repoOwner": "uufvqdwls",
+      "targetBranchChoices": [],
+      "upstream": "e",
+      "branches": [],
+      "all": true
+    },
+    {
+      "repoName": "sit ipsum sit",
+      "repoOwner": "vN3eIqOMcgG1XZi",
+      "targetBranchChoices": [],
+      "upstream": "qzwflbdawgixatbzoeu",
+      "branches": [],
+      "labels": [],
+      "all": false
+    },
+    {
+      "repoName": "5Ws",
+      "repoOwner": "adipiscing consect",
+      "targetBranchChoices": []
+    },
+    {
+      "repoName": "dol",
+      "repoOwner": "6AM5mckcBhfty2a",
+      "targetBranchChoices": [],
+      "all": true
+    },
+    {
+      "repoName": "txcplgwizjouubt",
+      "repoOwner": "bueu",
+      "targetBranchChoices": [],
+      "upstream": "xhQIb9jJiYa6xL",
+      "branches": [],
+      "labels": [],
+      "all": false
+    },
+    {
+      "repoName": "ip",
+      "repoOwner": "52XICABGIYi9drm9n565",
+      "targetBranchChoices": [],
+      "upstream": "dolor a",
+      "branches": []
+    },
+    {
+      "repoName": "sit",
+      "repoOwner": "gYPnP",
+      "targetBranchChoices": [],
+      "branches": [],
+      "all": false
+    },
+    {
+      "repoName": "XqjUmfFKFYG",
+      "repoOwner": "jejaqedxlyzrgdg",
+      "targetBranchChoices": [],
+      "branches": [],
+      "labels": [],
+      "all": false
+    },
+    {
+      "repoName": "tes",
+      "repoOwner": "TQL8RvxNQnYBVftbzpvn",
+      "targetBranchChoices": [],
+      "labels": [],
+      "all": true
+    },
+    {
+      "repoName": "sit ipsum",
+      "repoOwner": "EGmgpWbvAI",
+      "targetBranchChoices": [],
+      "upstream": "of",
+      "all": false
+    },
+    {
+      "repoName": "hht25vBC5BtFaFhYB7Aq",
+      "repoOwner": "adipiscing adi",
+      "targetBranchChoices": [],
+      "upstream": "iarycsm",
+      "branches": [],
+      "all": false
+    },
+    {
+      "repoName": "CTF054Q0YgQ5UrS",
+      "repoOwner": "mkjoryffdmpv",
+      "targetBranchChoices": [
+        39,
+        null,
+        8,
+        34,
+        "consecte"
+      ],
+      "upstream": "qmhrwjsaahihnuxol",
+      "labels": [
+        "ipsum sit a",
+        "wFC8",
+        "dolo",
+        "0",
+        "jpvoxanxouj"
+      ]
+    },
+    {
+      "repoName": "y4d0rUBousuH",
+      "repoOwner": "p",
+      "targetBranchChoices": [
+        null,
+        true,
+        "dNygNVfSQgTgb",
+        false,
+        96.8
+      ],
+      "upstream": "B5JD2UWw6IlKJi",
+      "branches": [
+        null,
+        76,
+        9.27,
+        null,
+        false
+      ],
+      "labels": [
+        "bobb",
+        "amet ame",
+        "KZ6YtPgW35",
+        "dolo",
+        "uxXcyYctTEzGs"
+      ]
+    },
+    {
+      "repoName": "oYhDILjNF",
+      "repoOwner": "adipiscin",
+      "targetBranchChoices": [
+        50.73,
+        true,
+        "sit ipsum ",
+        19.17,
+        25
+      ],
+      "labels": [
+        "consectetur adipis",
+        "sit",
+        "uzh",
+        "odybvztynfmttjyambjzd",
+        "rbmrchcvxytobmtta"
+      ],
+      "all": true
+    },
+    {
+      "repoName": "adipisc",
+      "repoOwner": "xrxkrxmza",
+      "targetBranchChoices": [
+        72.31,
+        "NRlW7wdVmCj",
+        null,
+        "rskyssn",
+        58
+      ],
+      "branches": [
+        52,
+        true,
+        0.63,
+        "odouqfeaxl",
+        true
+      ],
+      "labels": [
+        "CyAeXYD",
+        "ipsum lorem dolo",
+        "ywfceoakymi",
+        "lorem lorem c",
+        "sit lorem amet dol"
+      ],
+      "all": true
+    },
+    {
+      "repoName": "KoSEe",
+      "repoOwner": "a",
+      "targetBranchChoices": [
+        false,
+        41.0,
+        "jgxbxitlcbcceh",
+        99.47,
+        "lorem amet a"
+      ],
+      "upstream": "ip",
+      "labels": [
+        "S",
+        "nzqpux",
+        "z",
+        "adipiscing lor",
+        "BowpTIUS"
+      ],
+      "all": true
+    },
+    {
+      "repoName": "31AwybV7x",
+      "repoOwner": "bgyodqyg",
+      "targetBranchChoices": [
+        "adipiscing ips",
+        40,
+        84,
+        95,
+        19
+      ],
+      "upstream": "qamcqonbfi",
+      "branches": [
+        "adipiscing dolo",
+        3.89,
+        "a89W140AjB",
+        84.16,
+        9
+      ]
+    },
+    {
+      "repoName": "inmadrvaisfrpftwo",
+      "repoOwner": "uijxgv",
+      "targetBranchChoices": [
+        69.69,
+        71,
+        false,
+        "hjuezrwwew",
+        true
+      ],
+      "upstream": "cons",
+      "branches": [
+        2,
+        true,
+        12.19,
+        false,
+        3.59
+      ],
+      "labels": [
+        "j",
+        "f56AmbUVTQvrJXD",
+        "niewxxylutdwpbbsg",
+        "consectet",
+        "ebzkju"
+      ],
+      "all": true
+    },
+    {
+      "repoName": "zhvee",
+      "repoOwner": "adipiscin",
+      "targetBranchChoices": [
+        null,
+        25,
+        "dcijmmeajhoos",
+        false,
+        false
+      ],
+      "all": false
+    },
+    {
+      "repoName": "ldayfeczkjofusyv",
+      "repoOwner": "lorem ",
+      "targetBranchChoices": [
+        false,
+        true,
+        null,
+        "6Kto4SMI5hwY",
+        true
+      ],
+      "branches": [
+        null,
+        true,
+        27.24,
+        "jMJep2",
+        "kezqgphual"
+      ]
+    },
+    {
+      "repoName": "aazifmotpo",
+      "repoOwner": "y3unODFcc",
+      "targetBranchChoices": [
+        null,
+        "ipsum adipisc",
+        34,
+        93,
+        69
+      ],
+      "upstream": "consectetur adipis",
+      "all": true
+    },
+    {
+      "repoName": "viyfuwj",
+      "repoOwner": "nwfrpmla",
+      "targetBranchChoices": [
+        null,
+        55,
+        false,
+        true,
+        12.7
+      ],
+      "branches": [
+        1.13,
+        null,
+        50.14,
+        null,
+        4.08
+      ]
+    },
+    {
+      "repoName": "9",
+      "repoOwner": "s",
+      "targetBranchChoices": [
+        "adipiscing ",
+        true,
+        null,
+        20.85,
+        100
+      ],
+      "branches": [
+        "f9iYxA",
+        true,
+        71.35,
+        50,
+        "OwPMAWkRWP"
+      ]
+    },
+    {
+      "repoName": "wvctq",
+      "repoOwner": "xxakcmqstfy",
+      "targetBranchChoices": [
+        null,
+        39,
+        89,
+        "OYuO87mvmKD",
+        null
+      ],
+      "upstream": "cz"
+    },
+    {
+      "repoName": "ieataimfyrpli",
+      "repoOwner": "ipsum sit adip",
+      "targetBranchChoices": [
+        19,
+        44.32,
+        21.94,
+        30,
+        null
+      ],
+      "labels": [
+        "nmbdadwsqxcnkifl",
+        "sit dolor dolor a",
+        "dolor sit con",
+        "csAnzvd8FRW",
+        "lorem dolo"
+      ],
+      "all": true
+    },
+    {
+      "repoName": "sgi",
+      "repoOwner": "dol",
+      "targetBranchChoices": [
+        29.97,
+        "kMnK0d",
+        "sit do",
+        "axdfciujos",
+        "sit adipiscin"
+      ],
+      "upstream": "hzyoxinpgutjguhgob",
+      "branches": [
+        "2e3AlLSQc",
+        95.7,
+        "nbfgjwbtvdax",
+        65,
+        null
+      ],
+      "labels": [
+        "ips",
+        "consectetur ipsum ip",
+        "brhkhyldkrwnsxmnywe",
+        "vnfkp",
+        "yigwhwbkism"
+      ]
+    },
+    {
+      "repoName": "moixuoz",
+      "repoOwner": "ipsum lore",
+      "targetBranchChoices": [
+        86,
+        false,
+        true,
+        54.58,
+        null
+      ],
+      "upstream": "sit",
+      "labels": [
+        "bage",
+        "l",
+        "Uur",
+        "ixryom",
+        "birlysyrfbkeotosdz"
+      ]
+    },
+    {
+      "repoName": "7Qy",
+      "repoOwner": "tmvgpjmzfttczlo",
+      "targetBranchChoices": [
+        "7vTW1QAvxx2",
+        90.72,
+        66,
+        50,
+        true
+      ],
+      "upstream": "lqv",
+      "branches": [
+        "oxrixvy",
+        "bktsnhnydcbv",
+        "adipiscing am",
+        null,
+        "gZOoJA8m"
+      ]
+    },
+    {
+      "repoName": "IXqX2VfGjZePuc",
+      "repoOwner": "q",
+      "targetBranchChoices": [
+        86.26,
+        60.59,
+        72.75,
+        true,
+        86
+      ],
+      "branches": [
+        true,
+        false,
+        true,
+        "fefpmaq",
+        "adipiscin"
+      ]
+    },
+    {
+      "repoName": "swcdkupqxrvkdbyf",
+      "repoOwner": "zehhftxb",
+      "targetBranchChoices": [
+        59.93,
+        10,
+        96,
+        "conse",
+        32.68
+      ],
+      "all": true
+    },
+    {
+      "repoName": "consectetur dolor ",
+      "repoOwner": "lvyaalylurbm",
+      "targetBranchChoices": [
+        26.18,
+        85,
+        "hbjujouhwblg",
+        5.01,
+        68.54
+      ],
+      "branches": [
+        88.57,
+        91,
+        55.9,
+        null,
+        82
+      ]
+    },
+    {
+      "repoName": "9H6hEiafrmJGmOwUxj",
+      "repoOwner": "vlypOg",
+      "targetBranchChoices": [
+        87,
+        "awGKsxA3hi5Iany",
+        null,
+        true,
+        false
+      ],
+      "upstream": "llxohynhfcogxftqwjhu",
+      "all": true
+    },
+    {
+      "repoName": "P5fvc2kNf9wi",
+      "repoOwner": "m",
+      "targetBranchChoices": [
+        null,
+        false,
+        "jxwunabl",
+        37.24,
+        58.89
+      ],
+      "upstream": "uzogryukphnvplzcpz"
+    },
+    {
+      "repoName": "94YdbVb",
+      "repoOwner": "eBPYpspzl",
+      "targetBranchChoices": [
+        30,
+        null,
+        null,
+        6.54,
+        10.93
+      ],
+      "upstream": "consectetur lorem ",
+      "labels": [
+        "adipiscing dolor am",
+        "a",
+        "KFbSI",
+        "xbnvbroookulqup",
+        "cmZufHJOg7"
+      ]
+    },
+    {
+      "repoName": "cz8rYIW4yOYV",
+      "repoOwner": "u",
+      "targetBranchChoices": [
+        96,
+        false,
+        "szfve",
+        56.96,
+        26.86
+      ],
+      "upstream": "ipsum",
+      "branches": [
+        null,
+        82.66,
+        83.19,
+        "snweblmuroow",
+        32.77
+      ]
+    },
+    {
+      "repoName": "LoifTGRfMmSKX",
+      "repoOwner": "wfleocsrcibo",
+      "targetBranchChoices": [
+        true,
+        "sit ipsum sit",
+        45,
+        21.58,
+        74.75
+      ],
+      "upstream": "raamvc",
+      "branches": [
+        18,
+        "dolor sit ipsu",
+        81,
+        44.3,
+        null
+      ],
+      "labels": [
+        "R5i1L",
+        "kcdee",
+        "wimgg",
+        "lorem dolor ",
+        "xu"
+      ]
+    },
+    {
+      "repoName": "7kyvF",
+      "repoOwner": "eCc5",
+      "targetBranchChoices": [
+        33.54,
+        "dxjkvklh",
+        true,
+        23,
+        77
+      ],
+      "upstream": "ipsum lorem amet ad",
+      "all": true
+    },
+    {
+      "repoName": "xojbnpxmuilgelneugu",
+      "repoOwner": "sit dolor lore",
+      "targetBranchChoices": [
+        null,
+        "gufbtkwfcujjgvz",
+        true,
+        "kzvxoe",
+        null
+      ],
+      "upstream": "racaiy",
+      "all": false
+    },
+    {
+      "repoName": "joreh",
+      "repoOwner": "cGMG2TxohYQLBF",
+      "targetBranchChoices": [
+        71.43,
+        null,
+        49.08,
+        false,
+        31
+      ],
+      "labels": [
+        "UAy4kmK",
+        "lorem amet adipiscing",
+        "mylqwrktpxq",
+        "jbdmwhunxskxeieend",
+        "ofyjhjztTzplsUmCYZC0"
+      ]
+    },
+    {
+      "repoName": "svrxtrlirmdpzbz",
+      "repoOwner": "htwpr",
+      "targetBranchChoices": [
+        78.61,
+        null,
+        null,
+        8.61,
+        58.03
+      ],
+      "labels": [
+        "xtnulfnbv",
+        "pg5fY",
+        "Ph4",
+        "hopk",
+        "adipiscing ipsu"
+      ],
+      "all": true
+    },
+    {
+      "repoName": "t",
+      "repoOwner": "ahY4gjeU",
+      "targetBranchChoices": [
+        "ipsum ipsum adi",
+        62.83,
+        true,
+        false,
+        null
+      ],
+      "upstream": "baudeo",
+      "branches": [
+        44,
+        null,
+        null,
+        81.34,
+        5
+      ],
+      "all": false
+    },
+    {
+      "repoName": "X6tVukvUjOvkAxC25o9",
+      "repoOwner": "494duZ6wSPl0Z572JNEM",
+      "targetBranchChoices": [
+        false,
+        null,
+        72,
+        false,
+        "5I0yw0VHm"
+      ],
+      "branches": [
+        false,
+        null,
+        null,
+        65.71,
+        89
+      ],
+      "all": false
+    },
+    {
+      "repoName": "adipiscing conse",
+      "repoOwner": "adi",
+      "targetBranchChoices": [
+        "OQUrEirEevY",
+        14.0,
+        4,
+        94,
+        "ujrigl"
+      ],
+      "upstream": "jlJI9",
+      "branches": [
+        59.08,
+        "nfkqjtkzseajn",
+        98,
+        null,
+        false
+      ],
+      "labels": [
+        "ZnZUhnsW",
+        "sit adipiscing amet a",
+        "anfhvhafrai",
+        "amet sit amet con",
+        "adipiscing "
+      ]
+    },
+    {
+      "repoName": "tsltylod",
+      "repoOwner": "R4rtlK5Tix",
+      "targetBranchChoices": [
+        20,
+        63,
+        15.34,
+        "dolor ",
+        7.13
+      ],
+      "upstream": "xbkzzyefcz",
+      "branches": [
+        79.78,
+        68.25,
+        false,
+        null,
+        null
+      ],
+      "labels": [
+        "L",
+        "adipiscing consecte",
+        "aktnqgkwrwx",
+        "xxykkltzrlcdbdakh",
+        "bQ4J4"
+      ],
+      "all": false
+    },
+    {
+      "repoName": "crsjz",
+      "repoOwner": "ipsum cons",
+      "targetBranchChoices": [
+        71
+      ],
+      "branches": [
+        true,
+        null
+      ],
+      "all": false
+    },
+    {
+      "repoName": "sit lorem",
+      "repoOwner": "7IGWBr0k",
+      "targetBranchChoices": [
+        null,
+        null
+      ],
+      "upstream": "consectetur conse"
+    },
+    {
+      "repoName": "pksqrontdncla",
+      "repoOwner": "ughjckowhxrdgm",
+      "targetBranchChoices": [
+        true
+      ],
+      "branches": [
+        16.47,
+        20.26
+      ],
+      "all": true
+    },
+    {
+      "repoName": "ifkvqso",
+      "repoOwner": "kjhfsx",
+      "targetBranchChoices": [
+        true,
+        "gokwtcclfgyyaaq"
+      ]
+    },
+    {
+      "repoName": "phmkrjnapglgftrr",
+      "repoOwner": "zybenyWf7Za6pI6",
+      "targetBranchChoices": [
+        true,
+        "GMgMoRKAoRUtQ"
+      ],
+      "upstream": "gDEF",
+      "branches": [],
+      "labels": [
+        "y",
+        "sit consecte",
+        "cottlbipuf",
+        "jAHWcHWtZb0",
+        "xriwryvrxlptldvn"
+      ],
+      "all": false
+    },
+    {
+      "repoName": "v",
+      "repoOwner": "sit ipsum",
+      "targetBranchChoices": [],
+      "branches": [
+        "hifjiwneqfgm",
+        true,
+        "rfalaotnqda",
+        75.68
+      ],
+      "all": true
+    },
+    {
+      "repoName": "u7McGGGK",
+      "repoOwner": "xiczxmctzhjwtxqgyv",
+      "targetBranchChoices": [
+        null,
+        "ccdrgenzmcdhifc"
+      ],
+      "upstream": "sit ips",
+      "branches": [
+        "dolor lore",
+        "bmajzvmggolga",
+        50.74
+      ],
+      "labels": []
+    },
+    {
+      "repoName": "lorem lore",
+      "repoOwner": "rqrmodbwuztpewnwuu",
+      "targetBranchChoices": [
+        true,
+        52.51,
+        null,
+        97.38,
+        "gzwoeriwpyktrt"
+      ],
+      "branches": [
+        92.52,
+        "sit amet lore",
+        53,
+        null
+      ],
+      "labels": [],
+      "all": true
+    },
+    {
+      "repoName": "sUhi77q2A5ed7GE7Ygzk",
+      "repoOwner": "EeCmzqRxzANyVRuJNb",
+      "targetBranchChoices": [
+        "sit ipsum",
+        "jcxbi",
+        "c1FbL"
+      ],
+      "branches": [
+        false,
+        null,
+        false,
+        null
+      ],
+      "labels": [
+        "adipiscing lorem ame",
+        "ghhfvjcuubdb",
+        "fogtqhnavnsmykhuv"
+      ]
+    },
+    {
+      "repoName": "ipsum co",
+      "repoOwner": "hGJvYb8AkxAaRNKN4D",
+      "targetBranchChoices": [
+        false,
+        17.27,
+        75,
+        79
+      ],
+      "branches": [
+        "ijigdjgobla",
+        true
+      ]
+    },
+    {
+      "repoName": "lorem dolor consectet",
+      "repoOwner": "8vXjKS04IY21rXM3IYwu",
+      "targetBranchChoices": [
+        false,
+        57,
+        25.51,
+        98
+      ],
+      "upstream": "adipiscing adip",
+      "branches": [
+        "adipiscin"
+      ],
+      "labels": [
+        "zpyxqohdilxuuvuwddutt"
+      ]
+    },
+    {
+      "repoName": "consectetu",
+      "repoOwner": "cxqgeyhmaswtbrfmvn",
+      "targetBranchChoices": [
+        false,
+        5,
+        21.23,
+        false,
+        true
+      ],
+      "branches": [
+        22,
+        null,
+        83.9,
+        false,
+        false
+      ],
+      "labels": [
+        "zkdhqalk",
+        "ad",
+        "ZhUkr6vIOBY7JwYqc2pdQ",
+        "k"
+      ],
+      "all": true
+    },
+    {
+      "repoName": "adipiscing adipis",
+      "repoOwner": "consectetur ips",
+      "targetBranchChoices": [
+        94.13,
+        "dolor ips",
+        null,
+        null,
+        54
+      ],
+      "upstream": "cwljurl",
+      "branches": [
+        true,
+        3,
+        false,
+        "dolor adipisci"
+      ],
+      "all": false
+    },
+    {
+      "repoName": "adi",
+      "repoOwner": "pnyhwkrzupualwtlfjldy",
+      "targetBranchChoices": [
+        false,
+        65.21,
+        52,
+        18,
+        "T4ai1aqIHnUS"
+      ],
+      "upstream": "adipiscing am",
+      "branches": [
+        58.54
+      ],
+      "all": false
+    },
+    {
+      "repoName": "adipiscing adipis",
+      "repoOwner": "ZTKgB8Ix",
+      "targetBranchChoices": [
+        77.16,
+        "consectetur ",
+        null,
+        67,
+        null
+      ],
+      "labels": [
+        "1y",
+        "jlzpa",
+        "sEmPMCDuQZdNX9W7",
+        "chuxwwwkppfssjmetixzc"
+      ],
+      "all": false
+    },
+    {
+      "repoName": "co",
+      "repoOwner": "adipiscin",
+      "targetBranchChoices": [
+        null,
+        "eiigalcpbi",
+        true,
+        11
+      ],
+      "branches": [],
+      "labels": [
+        "DcsGDYNJ7a3OAHXKZGA",
+        "consectetur ipsum",
+        "dolor dol"
+      ],
+      "all": false
+    },
+    {
+      "repoName": "k7zWbk8Yb",
+      "repoOwner": "afkfktqntelspysk",
+      "targetBranchChoices": [
+        true,
+        null,
+        true,
+        74.93
+      ],
+      "upstream": "lnulktwu",
+      "labels": [
+        "bn",
+        "mmmp",
+        "agrfunjlvtnibvvgcknpz",
+        "fbaesoxfewmmta"
+      ],
+      "all": true
+    },
+    {
+      "repoName": "consecte",
+      "repoOwner": "LMaRjF",
+      "targetBranchChoices": [
+        96,
+        "adipiscin",
+        90.34
+      ],
+      "upstream": "wapsswblxujqafdsokga",
+      "labels": [
+        "77zPqZG0PGecqC0BNkRgp",
+        "ypagetymohrg"
+      ]
+    },
+    {
+      "repoName": "amet ipsum ipsum ad",
+      "repoOwner": "lorem am",
+      "targetBranchChoices": [],
+      "branches": [
+        "kkumnaqh"
+      ],
+      "labels": [
+        "pApzTb2",
+        "ipsum dolor adipiscin",
+        "adi",
+        "zGWSwRESEjl",
+        "e"
+      ],
+      "all": false
+    },
+    {
+      "repoName": "pv",
+      "repoOwner": "a",
+      "targetBranchChoices": [
+        29.92,
+        "iysdxccpzay",
+        null
+      ],
+      "branches": [
+        "pfwdSm",
+        "amet lorem ",
+        81.74
+      ],
+      "all": true
+    },
+    {
+      "repoName": "wD9tHNJ3",
+      "repoOwner": "lorem dolo",
+      "targetBranchChoices": [
+        true,
+        false,
+        false,
+        false,
+        null
+      ],
+      "upstream": "foaobogtjt",
+      "branches": [
+        51,
+        45.3
+      ],
+      "labels": [
+        "mkuoffeaz",
+        "grxo",
+        "wwntnn",
+        "thj"
+      ],
+      "all": true
+    },
+    {
+      "repoName": "nbxskfwgsdrhgymplyg",
+      "repoOwner": "uzxbpygug",
+      "targetBranchChoices": [
+        "FW6SRlU",
+        null
+      ],
+      "upstream": "phppludqewyfffyfnrkra",
+      "branches": [
+        1.19,
+        null,
+        56.5
+      ],
+      "labels": [
+        "1tombxKQlB5Dn",
+        "kfum"
+      ]
+    },
+    {
+      "repoName": "WOBCwKnv62SI69Ybb",
+      "repoOwner": "amet sit dol",
+      "targetBranchChoices": [
+        false,
+        84,
+        70
+      ],
+      "branches": [
+        92.05,
+        62.03,
+        "vuvkhu",
+        true,
+        "edlqkszlufdnu"
+      ]
+    },
+    {
+      "repoName": "FybWhJ7SnQQ",
+      "repoOwner": "tyosxsufltbttgq",
+      "targetBranchChoices": [
+        21
+      ],
+      "upstream": "W9Mmj7Eu7k2aBu8CJYMZ",
+      "labels": [
+        "xCr8whVeRdcgxW"
+      ],
+      "all": true
+    },
+    {
+      "repoName": "lorem ipsum lo",
+      "repoOwner": "yvaz",
+      "targetBranchChoices": [
+        79.91,
+        65.82
+      ],
+      "branches": [
+        false,
+        false,
+        68.89,
+        70,
+        77
+      ],
+      "all": true
+    },
+    {
+      "repoName": "tMV2RU2cfr58nxAf",
+      "repoOwner": "xkyoe",
+      "targetBranchChoices": [],
+      "upstream": "zixim",
+      "branches": [],
+      "labels": [
+        "lorem si",
+        "2ZT5JAIBo",
+        "5CwZY70JZigaP"
+      ]
+    },
+    {
+      "repoName": "SISNhOE7n7L97gT7",
+      "repoOwner": "eKNNPSRw6",
+      "targetBranchChoices": [
+        "994ySMrsu5enRR8",
+        9.68,
+        "iqgsruke",
+        "cyuvescffyunnq",
+        "61te2kEG5v"
+      ],
+      "branches": [
+        84
+      ],
+      "labels": [
+        "UbIZITdpV"
+      ],
+      "all": false
+    },
+    {
+      "repoName": "pmvdhpdqjvhv",
+      "repoOwner": "hfazycgtr",
+      "targetBranchChoices": [],
+      "upstream": "con",
+      "all": true
+    },
+    {
+      "repoName": "dEmRkEkdLm3LrwERbZS",
+      "repoOwner": "auexynfgwrtvgqbnoa",
+      "targetBranchChoices": [
+        24.52,
+        "xdarmczfqfymgv",
+        "dolor ad",
+        88.07
+      ],
+      "upstream": "mj",
+      "labels": []
+    },
+    {
+      "repoName": "dol",
+      "repoOwner": "dolor c",
+      "targetBranchChoices": [
+        "ndlnaazdxeu",
+        false,
+        "sissdbixop",
+        "sit d"
+      ],
+      "all": false
+    },
+    {
+      "repoName": "6sGqlYk",
+      "repoOwner": "smxodfw",
+      "targetBranchChoices": [],
+      "all": false
+    },
+    {
+      "repoName": "q",
+      "repoOwner": "yrtonxtjxdvwhfhmiaew",
+      "targetBranchChoices": [
+        "oznaoh",
+        null,
+        28,
+        null
+      ],
+      "upstream": "dolor sit amet amet l",
+      "branches": [
+        null,
+        "hkqdymwu",
+        7.3,
+        false,
+        25
+      ],
+      "all": true
+    },
+    {
+      "repoName": "lore",
+      "repoOwner": "fn",
+      "targetBranchChoices": [
+        false,
+        "fevsx",
+        69,
+        null,
+        false
+      ],
+      "upstream": "rd"
+    },
+    {
+      "repoName": "pmomyqazignqmoeio",
+      "repoOwner": "goghevutronqlchiqvmk",
+      "targetBranchChoices": [
+        57.64,
+        true
+      ],
+      "upstream": "dolor lorem ipsu",
+      "labels": [
+        "rbsmlneo",
+        "ipsum"
+      ]
+    }
+  ]
+}

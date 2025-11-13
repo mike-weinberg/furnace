@@ -1,0 +1,5256 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "description": "Settings for project analysis by the Application Inspector",
+    "id": "https://json.schemastore.org/aiproj-1.8.json",
+    "properties": {
+      "$schema": {
+        "type": "string"
+      },
+      "Version": {
+        "type": "string",
+        "enum": [
+          "1.0",
+          "1.1",
+          "1.2",
+          "1.3",
+          "1.4",
+          "1.5",
+          "1.6",
+          "1.7",
+          "1.8"
+        ]
+      },
+      "BlackBoxSettings": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "title": "Black box and autocheck options",
+        "additionalProperties": false,
+        "properties": {
+          "AdditionalHttpHeaders": {
+            "title": "Additional HTTP headers",
+            "description": "Dictionary of additional HTTP headers",
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "object",
+              "properties": {
+                "Key": {
+                  "title": "Header",
+                  "type": "string"
+                },
+                "Value": {
+                  "type": "string",
+                  "title": "value"
+                }
+              }
+            }
+          },
+          "WhiteListedAddresses": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "title": "Whitelisted addresses",
+            "description": "Addresses, that was added in white list",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Address": {
+                  "title": "Address",
+                  "description": "Address value",
+                  "type": "string"
+                },
+                "Format": {
+                  "type": "string",
+                  "title": "Address format",
+                  "description": "Type of address",
+                  "enum": [
+                    "Wildcard",
+                    "ExactMatch",
+                    "RegExp"
+                  ]
+                }
+              }
+            }
+          },
+          "BlackListedAddresses": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "title": "Blacklisted addresses",
+            "description": "Addresses, that was added in black list",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Address": {
+                  "title": "Address",
+                  "description": "Address value",
+                  "type": "string"
+                },
+                "Format": {
+                  "type": "string",
+                  "title": "Address format",
+                  "description": "Type of address",
+                  "enum": [
+                    "Wildcard",
+                    "ExactMatch",
+                    "RegExp"
+                  ]
+                }
+              }
+            }
+          },
+          "Authentication": {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "Cookie",
+                  "Type"
+                ],
+                "properties": {
+                  "Type": {
+                    "enum": [
+                      "RawCookie"
+                    ]
+                  },
+                  "Cookie": {
+                    "type": "object"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "required": [
+                  "Form",
+                  "Type"
+                ],
+                "properties": {
+                  "Type": {
+                    "enum": [
+                      "Form"
+                    ]
+                  },
+                  "Form": {
+                    "type": "object"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "required": [
+                  "Http",
+                  "Type"
+                ],
+                "properties": {
+                  "Type": {
+                    "enum": [
+                      "Http"
+                    ]
+                  },
+                  "Http": {
+                    "type": "object"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "required": [
+                  "Type"
+                ],
+                "properties": {
+                  "Type": {
+                    "enum": [
+                      "None"
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "type": [
+              "object",
+              "null"
+            ],
+            "title": "Authentication options",
+            "additionalProperties": false,
+            "properties": {
+              "Cookie": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "title": "Cookie options",
+                "description": "Cookie authentication options",
+                "required": [
+                  "Cookie",
+                  "ValidationAddress",
+                  "ValidationTemplate"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "Cookie": {
+                    "title": "Cookie",
+                    "type": "string"
+                  },
+                  "ValidationAddress": {
+                    "title": "Validation address",
+                    "description": "Verification address",
+                    "type": "string"
+                  },
+                  "ValidationTemplate": {
+                    "title": "Validation template",
+                    "description": "String to search for",
+                    "type": "string"
+                  }
+                }
+              },
+              "Form": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "title": "Form",
+                "description": "Form-based authentication options",
+                "additionalProperties": false,
+                "properties": {
+                  "FormDetection": {
+                    "type": "string",
+                    "title": "Detection",
+                    "description": "Type of form authentication detection",
+                    "enum": [
+                      "Auto",
+                      "Manual"
+                    ]
+                  },
+                  "FormAddress": {
+                    "title": "Sign-in form URL"
+                  },
+                  "FormXPath": {
+                    "title": "Sign-in form XPath"
+                  },
+                  "Login": {
+                    "title": "User"
+                  },
+                  "LoginKey": {
+                    "title": "User identifier"
+                  },
+                  "Password": {
+                    "title": "Password"
+                  },
+                  "PasswordKey": {
+                    "title": "Password identifier"
+                  },
+                  "ValidationTemplate": {
+                    "title": "Validation template",
+                    "description": "String to search for"
+                  }
+                },
+                "anyOf": [
+                  {
+                    "properties": {
+                      "FormDetection": {
+                        "enum": [
+                          "Auto"
+                        ]
+                      },
+                      "FormAddress": {
+                        "type": [
+                          "string"
+                        ]
+                      },
+                      "FormXPath": {
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      "Login": {
+                        "type": "string"
+                      },
+                      "LoginKey": {
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      "Password": {
+                        "type": "string"
+                      },
+                      "PasswordKey": {
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      "ValidationTemplate": {
+                        "type": [
+                          "string"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "FormDetection",
+                      "Login",
+                      "Password",
+                      "FormAddress",
+                      "ValidationTemplate"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "FormDetection": {
+                        "enum": [
+                          "Manual"
+                        ]
+                      },
+                      "FormAddress": {
+                        "type": [
+                          "string"
+                        ]
+                      },
+                      "FormXPath": {
+                        "type": [
+                          "string"
+                        ]
+                      },
+                      "Login": {
+                        "type": "string"
+                      },
+                      "LoginKey": {
+                        "type": [
+                          "string"
+                        ]
+                      },
+                      "Password": {
+                        "type": "string"
+                      },
+                      "PasswordKey": {
+                        "type": [
+                          "string"
+                        ]
+                      },
+                      "ValidationTemplate": {
+                        "type": [
+                          "string"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "FormDetection",
+                      "Login",
+                      "Password",
+                      "FormAddress",
+                      "ValidationTemplate",
+                      "LoginKey",
+                      "PasswordKey",
+                      "FormXPath"
+                    ]
+                  }
+                ]
+              },
+              "Http": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "title": "Http",
+                "description": "HTTP Basic authentication options",
+                "additionalProperties": false,
+                "required": [
+                  "Login",
+                  "Password",
+                  "ValidationAddress"
+                ],
+                "properties": {
+                  "Login": {
+                    "title": "User",
+                    "type": "string"
+                  },
+                  "Password": {
+                    "title": "Password",
+                    "type": "string"
+                  },
+                  "ValidationAddress": {
+                    "title": "Validation address",
+                    "type": "string"
+                  }
+                }
+              },
+              "Type": {
+                "title": "Type of authentication",
+                "type": "string",
+                "enum": [
+                  "Form",
+                  "Http",
+                  "RawCookie",
+                  "None"
+                ]
+              }
+            }
+          },
+          "Level": {
+            "title": "Search mode",
+            "type": "string",
+            "enum": [
+              "None",
+              "Fast",
+              "Full",
+              "Normal"
+            ]
+          },
+          "ProxySettings": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "title": "Proxy settings",
+            "description": "Proxy server settings",
+            "additionalProperties": false,
+            "properties": {
+              "Enabled": {
+                "title": "Enabled",
+                "type": "boolean"
+              },
+              "Host": {
+                "title": "Address",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "Login": {
+                "title": "User",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "Password": {
+                "title": "Password",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "Port": {
+                "title": "Port",
+                "type": "integer"
+              },
+              "Type": {
+                "title": "Type of proxy",
+                "type": "string",
+                "enum": [
+                  "Http",
+                  "Socks4",
+                  "Socks5"
+                ]
+              }
+            }
+          },
+          "RunAutocheckAfterScan": {
+            "title": "Run autocheck",
+            "description": "Autocheck vulnerabilities after scanning",
+            "type": "boolean"
+          },
+          "ScanScope": {
+            "title": "Scan scope",
+            "type": "string",
+            "enum": [
+              "Domain",
+              "Folder",
+              "Path"
+            ]
+          },
+          "Site": {
+            "title": "Website address",
+            "type": "string"
+          },
+          "SslCheck": {
+            "title": "Check ssl connection",
+            "type": "boolean"
+          }
+        }
+      },
+      "DotNetSettings": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "title": ".NET scan options",
+        "additionalProperties": false,
+        "properties": {
+          "ProjectType": {
+            "title": "Type of application",
+            "type": "string",
+            "enum": [
+              "None",
+              "Solution",
+              "WebSite"
+            ]
+          },
+          "SolutionFile": {
+            "title": "Solution file",
+            "description": "Path to a solution or project",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "UsePublicAnalysisMethod": {
+            "title": "Use public analysis method",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "DownloadDependencies": {
+            "title": "Download dependencies",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "CustomParameters": {
+            "title": "Custom parameters",
+            "description": "Custom DotNet kernel startup parameters",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "DslRulesRelativePath": {
+            "title": "Dsl rules",
+            "description": "Path to the dsl rules directory",
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "GoSettings": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "title": "Go scan options",
+        "additionalProperties": false,
+        "properties": {
+          "UsePublicAnalysisMethod": {
+            "title": "Use public analysis method",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "CustomParameters": {
+            "title": "Custom parameters",
+            "description": "Custom Go kernel startup parameters",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "DslRulesRelativePath": {
+            "title": "Dsl rules",
+            "description": "Path to the dsl rules directory",
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "JavaSettings": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "title": "Java scan options",
+        "additionalProperties": false,
+        "properties": {
+          "Parameters": {
+            "title": "JVM start options",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "UnpackUserPackages": {
+            "title": "Unpack custom JAR files",
+            "type": "boolean"
+          },
+          "UserPackagePrefixes": {
+            "title": "Prefixes of custom packages",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "Version": {
+            "title": "JDK version",
+            "type": "string",
+            "enum": [
+              "8",
+              "11",
+              "17",
+              "21"
+            ]
+          },
+          "UsePublicAnalysisMethod": {
+            "title": "Use public analysis method",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "DownloadDependencies": {
+            "title": "Download dependencies",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "DependenciesPath": {
+            "title": "Dependencies path",
+            "description": "Path that the Java kernel will use as a classPath",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "CustomParameters": {
+            "title": "Custom parameters",
+            "description": "Custom Java kernel startup parameters",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "DslRulesRelativePath": {
+            "title": "Dsl rules",
+            "description": "Path to the dsl rules directory",
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "JavaScriptSettings": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "title": "JavaScript scan options",
+        "additionalProperties": false,
+        "properties": {
+          "UsePublicAnalysisMethod": {
+            "title": "Use public analysis method",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "UseTaintAnalysis": {
+            "title": "Use taint analysis method",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "UseJsaAnalysis": {
+            "title": "Use jsa core for analysis",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "DownloadDependencies": {
+            "title": "Download dependencies",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "CustomParameters": {
+            "title": "Custom parameters",
+            "description": "Custom JavaScript kernel startup parameters",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "DslRulesRelativePath": {
+            "title": "Dsl rules",
+            "description": "Path to the dsl rules directory",
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "PhpSettings": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "title": "Php scan options",
+        "additionalProperties": false,
+        "properties": {
+          "UsePublicAnalysisMethod": {
+            "title": "Use public analysis method",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "DownloadDependencies": {
+            "title": "Download dependencies",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "CustomParameters": {
+            "title": "Custom parameters",
+            "description": "Custom Php kernel startup parameters",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "DslRulesRelativePath": {
+            "title": "Dsl rules",
+            "description": "Path to the dsl rules directory",
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "PmTaintSettings": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "title": "PmTaint scan options",
+        "additionalProperties": false,
+        "properties": {
+          "UsePublicAnalysisMethod": {
+            "title": "Use public analysis method",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "PMGroups": {
+            "title": "List of enabled PM group names",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "CustomParameters": {
+            "title": "Custom parameters",
+            "description": "Custom PmTaint kernel startup parameters",
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "PygrepSettings": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "title": "Pygrep scan options",
+        "additionalProperties": false,
+        "properties": {
+          "CustomParameters": {
+            "title": "Custom parameters",
+            "description": "Custom Pygrep kernel startup parameters",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "RulesDirPath": {
+            "title": "Custom rules",
+            "description": "Path to the custom rules directory",
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "PythonSettings": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "title": "Python scan options",
+        "additionalProperties": false,
+        "properties": {
+          "UsePublicAnalysisMethod": {
+            "title": "Use public analysis method",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "DownloadDependencies": {
+            "title": "Download dependencies",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "DependenciesPath": {
+            "title": "Dependencies path",
+            "description": "Path to venv or path to directory with dependencies if venv was not used to restore them",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "CustomParameters": {
+            "title": "Custom parameters",
+            "description": "Custom Python kernel startup parameters",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "DslRulesRelativePath": {
+            "title": "Dsl rules",
+            "description": "Path to the dsl rules directory",
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "MailingProjectSettings": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "title": "Mail settings",
+        "description": "Report mailing options",
+        "additionalProperties": false,
+        "properties": {
+          "Enabled": {
+            "title": "Send a report by email after scanning",
+            "type": "boolean"
+          },
+          "MailProfileName": {
+            "title": "Email profile name",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "EmailRecipients": {
+            "title": "List of recipients",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "email"
+            }
+          }
+        },
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "Enabled": {
+                "enum": [
+                  true
+                ]
+              },
+              "MailProfileName": {
+                "type": "string",
+                "minLength": 1
+              },
+              "EmailRecipients": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 10
+              }
+            },
+            "required": [
+              "Enabled",
+              "MailProfileName",
+              "EmailRecipients"
+            ]
+          },
+          {
+            "properties": {
+              "Enabled": {
+                "enum": [
+                  false
+                ]
+              },
+              "MailProfileName": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "EmailRecipients": {
+                "type": "array",
+                "minItems": 0,
+                "maxItems": 10
+              }
+            },
+            "required": [
+              "Enabled"
+            ]
+          }
+        ]
+      },
+      "RubySettings": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "title": "Ruby scan options",
+        "additionalProperties": false,
+        "properties": {
+          "UsePublicAnalysisMethod": {
+            "title": "Use public analysis method",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "CustomParameters": {
+            "title": "Custom parameters",
+            "description": "Custom Ruby kernel startup parameters",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "DslRulesRelativePath": {
+            "title": "Dsl rules",
+            "description": "Path to the dsl rules directory",
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ScaSettings": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "title": "SCA scan options",
+        "additionalProperties": false,
+        "properties": {
+          "CustomParameters": {
+            "title": "Custom parameters",
+            "description": "Custom SCA kernel startup parameters",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "BuildDependenciesGraph": {
+            "title": "Build bependencies graph",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          }
+        }
+      },
+      "ProgrammingLanguages": {
+        "title": "Active scanning languages",
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+          "type": "string",
+          "enum": [
+            "Java",
+            "CSharp (Windows, Linux)",
+            "CSharp (Windows)",
+            "Php",
+            "JavaScript",
+            "Python",
+            "ObjectiveC",
+            "Swift",
+            "CAndCPlusPlus",
+            "Go",
+            "Kotlin",
+            "Sql",
+            "Ruby",
+            "Solidity",
+            "Scala"
+          ]
+        }
+      },
+      "ProjectName": {
+        "title": "Project name",
+        "type": "string"
+      },
+      "BranchName": {
+        "title": "Branch name",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "ScanModules": {
+        "title": "Enabled modules",
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+          "type": "string",
+          "enum": [
+            "Configuration",
+            "Components",
+            "BlackBox",
+            "PatternMatching",
+            "StaticCodeAnalysis",
+            "SoftwareCompositionAnalysis"
+          ]
+        }
+      },
+      "SkipGitIgnoreFiles": {
+        "title": "Skip .gitignore files",
+        "description": "Exclude from scanning the files from the .gitignore file",
+        "type": "boolean"
+      },
+      "ApplyAllPMRules": {
+        "title": "Apply all PM rules",
+        "description": "Apply all PM rules",
+        "type": "boolean"
+      },
+      "UseSecurityPolicies": {
+        "title": "Use security policies",
+        "description": "Check for compliance with the security policy",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "ProjectName",
+      "ProgrammingLanguages",
+      "ScanModules"
+    ],
+    "title": "aiproj",
+    "type": "object"
+  },
+  "examples": [
+    {
+      "ProjectName": "consectetur ipsum lor",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "$schema": "bnFbmOHnKYaXRvj7uff",
+      "JavaSettings": null,
+      "JavaScriptSettings": null,
+      "PythonSettings": {
+        "UsePublicAnalysisMethod": null
+      },
+      "MailingProjectSettings": null,
+      "ScaSettings": null,
+      "BranchName": null,
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "co",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "Version": "1.1",
+      "BlackBoxSettings": null,
+      "GoSettings": null,
+      "PygrepSettings": {},
+      "PythonSettings": {
+        "UsePublicAnalysisMethod": true,
+        "DependenciesPath": "lorem amet ipsum lo",
+        "CustomParameters": "g1K"
+      },
+      "RubySettings": null,
+      "SkipGitIgnoreFiles": false,
+      "ApplyAllPMRules": true
+    },
+    {
+      "ProjectName": "RhxrnJgWQsNKVP",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "$schema": "qcbcycqzakm",
+      "BlackBoxSettings": null,
+      "JavaSettings": null,
+      "MailingProjectSettings": null,
+      "ScaSettings": {
+        "CustomParameters": "zthawppohyok",
+        "BuildDependenciesGraph": null
+      },
+      "ApplyAllPMRules": false
+    },
+    {
+      "ProjectName": "psbEhY71O",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "Version": "1.4",
+      "GoSettings": null,
+      "JavaSettings": null,
+      "JavaScriptSettings": {
+        "UseTaintAnalysis": false,
+        "CustomParameters": null,
+        "DslRulesRelativePath": "synnqqsgrmj"
+      },
+      "PhpSettings": {
+        "DownloadDependencies": false,
+        "CustomParameters": "dlcjwpawrnhhe"
+      },
+      "PmTaintSettings": {
+        "UsePublicAnalysisMethod": false,
+        "PMGroups": [],
+        "CustomParameters": "nrmdazvc"
+      },
+      "RubySettings": {
+        "DslRulesRelativePath": "htwenaiqzkilo"
+      },
+      "ApplyAllPMRules": true
+    },
+    {
+      "ProjectName": "K1o",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "$schema": "XbWNdbIsuSVyRwDZCRM",
+      "Version": "1.5",
+      "BlackBoxSettings": null,
+      "DotNetSettings": null,
+      "JavaScriptSettings": null,
+      "PhpSettings": null,
+      "PmTaintSettings": {
+        "PMGroups": []
+      },
+      "MailingProjectSettings": null,
+      "ScaSettings": {
+        "CustomParameters": null
+      },
+      "BranchName": null,
+      "SkipGitIgnoreFiles": false,
+      "ApplyAllPMRules": true
+    },
+    {
+      "ProjectName": "sit sit ipsu",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "$schema": "dolor lorem lorem ip",
+      "Version": "1.8",
+      "BlackBoxSettings": null,
+      "DotNetSettings": {
+        "ProjectType": "WebSite",
+        "SolutionFile": null,
+        "UsePublicAnalysisMethod": false,
+        "CustomParameters": null,
+        "DslRulesRelativePath": null
+      },
+      "GoSettings": {
+        "UsePublicAnalysisMethod": false,
+        "CustomParameters": null
+      },
+      "JavaScriptSettings": {
+        "DownloadDependencies": null
+      },
+      "PhpSettings": {
+        "UsePublicAnalysisMethod": false,
+        "CustomParameters": null
+      },
+      "PygrepSettings": null,
+      "PythonSettings": {
+        "UsePublicAnalysisMethod": null,
+        "DownloadDependencies": null,
+        "DependenciesPath": "VL3L644N7ZJnA8",
+        "DslRulesRelativePath": "lorem c"
+      },
+      "MailingProjectSettings": null,
+      "RubySettings": null,
+      "ScaSettings": {
+        "CustomParameters": "l"
+      },
+      "SkipGitIgnoreFiles": false,
+      "ApplyAllPMRules": true
+    },
+    {
+      "ProjectName": "IHXFSBjYOEnVIFDbAi",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "BlackBoxSettings": null,
+      "JavaSettings": {
+        "Parameters": null,
+        "UserPackagePrefixes": "amet ipsum dolor cons",
+        "Version": "17",
+        "UsePublicAnalysisMethod": false,
+        "CustomParameters": "tAVWA2aKQzAqVlIS"
+      },
+      "PhpSettings": {
+        "UsePublicAnalysisMethod": false,
+        "DownloadDependencies": null,
+        "DslRulesRelativePath": null
+      },
+      "PygrepSettings": {
+        "RulesDirPath": null
+      },
+      "RubySettings": null,
+      "ScaSettings": null,
+      "SkipGitIgnoreFiles": true,
+      "ApplyAllPMRules": true
+    },
+    {
+      "ProjectName": "5uI",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "DotNetSettings": null,
+      "JavaScriptSettings": null,
+      "PhpSettings": null,
+      "PmTaintSettings": {
+        "UsePublicAnalysisMethod": false,
+        "CustomParameters": "rrxfubgpimfglpsmjzuo"
+      },
+      "PygrepSettings": {
+        "CustomParameters": null
+      },
+      "MailingProjectSettings": {
+        "MailProfileName": null,
+        "EmailRecipients": []
+      },
+      "RubySettings": {
+        "UsePublicAnalysisMethod": false,
+        "DslRulesRelativePath": "ckwqypqgknw"
+      },
+      "BranchName": "dptzcujsrndrtmwdrpgc",
+      "SkipGitIgnoreFiles": false
+    },
+    {
+      "ProjectName": "jxstiofoyjcjfbwz",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "Version": "1.1",
+      "PmTaintSettings": {
+        "UsePublicAnalysisMethod": true,
+        "PMGroups": [],
+        "CustomParameters": "ipsum"
+      },
+      "PygrepSettings": {},
+      "MailingProjectSettings": {
+        "Enabled": false,
+        "MailProfileName": "dolor adipiscing "
+      },
+      "ScaSettings": {
+        "CustomParameters": null
+      },
+      "BranchName": "sit adipisc",
+      "SkipGitIgnoreFiles": false,
+      "ApplyAllPMRules": false,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "ogzvgwom",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "Version": "1.5",
+      "BlackBoxSettings": null,
+      "DotNetSettings": null,
+      "GoSettings": {
+        "CustomParameters": "Yl"
+      },
+      "JavaSettings": {
+        "UnpackUserPackages": true,
+        "UserPackagePrefixes": null,
+        "CustomParameters": null,
+        "DslRulesRelativePath": "y"
+      },
+      "PmTaintSettings": null,
+      "PythonSettings": {
+        "UsePublicAnalysisMethod": false,
+        "DownloadDependencies": true
+      },
+      "BranchName": null
+    },
+    {
+      "ProjectName": "consectet",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "Version": "1.2",
+      "BlackBoxSettings": null,
+      "JavaSettings": {
+        "Parameters": "lorem ipsum ips",
+        "UserPackagePrefixes": null,
+        "DependenciesPath": "dolor amet amet ip",
+        "CustomParameters": "laarnlededpholotudy"
+      },
+      "PhpSettings": {
+        "DownloadDependencies": true,
+        "CustomParameters": null,
+        "DslRulesRelativePath": null
+      },
+      "PmTaintSettings": {
+        "UsePublicAnalysisMethod": null,
+        "PMGroups": [],
+        "CustomParameters": "ahzeddctgqjfdtybc"
+      },
+      "MailingProjectSettings": null,
+      "RubySettings": null,
+      "ScaSettings": {
+        "BuildDependenciesGraph": true
+      },
+      "SkipGitIgnoreFiles": true,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "fnmsjlayxzidwbbffdjt",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "Version": "1.6",
+      "DotNetSettings": null,
+      "GoSettings": null,
+      "JavaSettings": {
+        "UnpackUserPackages": true,
+        "UserPackagePrefixes": "pvxctcyu",
+        "UsePublicAnalysisMethod": true,
+        "DownloadDependencies": true,
+        "CustomParameters": "lnDvELfOexs5yYL5oV1DA",
+        "DslRulesRelativePath": null
+      },
+      "JavaScriptSettings": {
+        "UseTaintAnalysis": false,
+        "DslRulesRelativePath": null
+      },
+      "PmTaintSettings": null,
+      "PygrepSettings": {
+        "RulesDirPath": "jY4vdGA0UAG"
+      },
+      "PythonSettings": null,
+      "RubySettings": null,
+      "ScaSettings": null,
+      "BranchName": "iicjpbvznovqrmnjc",
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "s3Enu",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "DotNetSettings": {
+        "ProjectType": "WebSite",
+        "SolutionFile": null,
+        "UsePublicAnalysisMethod": false,
+        "DownloadDependencies": null,
+        "CustomParameters": "parjasexw",
+        "DslRulesRelativePath": null
+      },
+      "JavaSettings": {
+        "UnpackUserPackages": true,
+        "Version": "17",
+        "DownloadDependencies": false,
+        "DependenciesPath": "dolor consectet",
+        "CustomParameters": null,
+        "DslRulesRelativePath": null
+      },
+      "PmTaintSettings": null,
+      "PygrepSettings": {},
+      "PythonSettings": null,
+      "MailingProjectSettings": null,
+      "RubySettings": null,
+      "ScaSettings": {
+        "CustomParameters": "vprkhuuoyvscycf",
+        "BuildDependenciesGraph": null
+      },
+      "SkipGitIgnoreFiles": false,
+      "ApplyAllPMRules": true
+    },
+    {
+      "ProjectName": "fzh",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "$schema": "vS7PHy",
+      "Version": "1.6",
+      "GoSettings": null,
+      "JavaSettings": {
+        "Parameters": null,
+        "UnpackUserPackages": true,
+        "UserPackagePrefixes": null,
+        "Version": "21",
+        "UsePublicAnalysisMethod": null,
+        "DownloadDependencies": false,
+        "CustomParameters": "MokktkmNZS"
+      },
+      "JavaScriptSettings": {
+        "UsePublicAnalysisMethod": null,
+        "UseTaintAnalysis": false,
+        "UseJsaAnalysis": null,
+        "DownloadDependencies": false,
+        "CustomParameters": null,
+        "DslRulesRelativePath": "dolo"
+      },
+      "PhpSettings": {
+        "DownloadDependencies": null
+      },
+      "PmTaintSettings": null,
+      "PygrepSettings": null,
+      "PythonSettings": {
+        "UsePublicAnalysisMethod": null,
+        "DownloadDependencies": false,
+        "CustomParameters": "wefzipm"
+      },
+      "MailingProjectSettings": {
+        "Enabled": false,
+        "MailProfileName": null
+      },
+      "RubySettings": {
+        "UsePublicAnalysisMethod": true,
+        "DslRulesRelativePath": null
+      },
+      "ScaSettings": null,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "amet dolor sit adi",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "Version": "1.1",
+      "BlackBoxSettings": null,
+      "GoSettings": {
+        "UsePublicAnalysisMethod": null,
+        "CustomParameters": null
+      },
+      "JavaSettings": {
+        "Parameters": null,
+        "UnpackUserPackages": false,
+        "UserPackagePrefixes": "zunee",
+        "Version": "17",
+        "UsePublicAnalysisMethod": null,
+        "DownloadDependencies": null,
+        "DslRulesRelativePath": null
+      },
+      "PhpSettings": null,
+      "PmTaintSettings": null,
+      "PygrepSettings": null,
+      "PythonSettings": {
+        "DownloadDependencies": false,
+        "DependenciesPath": null,
+        "CustomParameters": "lorem amet dolo"
+      },
+      "MailingProjectSettings": null,
+      "ScaSettings": {
+        "CustomParameters": "amet amet lorem ipsu"
+      },
+      "BranchName": "am",
+      "SkipGitIgnoreFiles": true,
+      "ApplyAllPMRules": true
+    },
+    {
+      "ProjectName": "Ln",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "$schema": "adipiscing amet ",
+      "BlackBoxSettings": null,
+      "DotNetSettings": {
+        "DownloadDependencies": null,
+        "CustomParameters": null,
+        "DslRulesRelativePath": null
+      },
+      "JavaScriptSettings": {
+        "UsePublicAnalysisMethod": true,
+        "UseTaintAnalysis": false,
+        "DownloadDependencies": null,
+        "DslRulesRelativePath": "lt"
+      },
+      "PmTaintSettings": {
+        "UsePublicAnalysisMethod": false,
+        "PMGroups": []
+      },
+      "PythonSettings": {
+        "UsePublicAnalysisMethod": false,
+        "DependenciesPath": "amet con",
+        "DslRulesRelativePath": "vgwboae"
+      },
+      "RubySettings": {
+        "CustomParameters": "nvgksu",
+        "DslRulesRelativePath": null
+      },
+      "ScaSettings": {},
+      "SkipGitIgnoreFiles": false,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "consectetur adipisc",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "$schema": "glphpaftlr",
+      "BlackBoxSettings": {
+        "AdditionalHttpHeaders": [],
+        "BlackListedAddresses": [],
+        "ProxySettings": null,
+        "RunAutocheckAfterScan": true,
+        "Site": "rcnrgyzpd",
+        "SslCheck": false
+      },
+      "JavaSettings": {
+        "Parameters": null,
+        "UnpackUserPackages": false,
+        "UserPackagePrefixes": "sit consectetur ",
+        "Version": "11",
+        "UsePublicAnalysisMethod": null,
+        "DownloadDependencies": null,
+        "DependenciesPath": null,
+        "CustomParameters": "zinvibvdrrjcyydt"
+      },
+      "JavaScriptSettings": {
+        "UsePublicAnalysisMethod": null,
+        "UseTaintAnalysis": false,
+        "DownloadDependencies": true,
+        "DslRulesRelativePath": "vcduvudydeqsasc"
+      },
+      "PhpSettings": {
+        "UsePublicAnalysisMethod": true,
+        "DslRulesRelativePath": null
+      },
+      "PmTaintSettings": {
+        "UsePublicAnalysisMethod": null,
+        "PMGroups": [],
+        "CustomParameters": null
+      },
+      "PythonSettings": null,
+      "MailingProjectSettings": {
+        "Enabled": true,
+        "EmailRecipients": []
+      },
+      "RubySettings": null,
+      "ScaSettings": null,
+      "BranchName": "ojwryzayecrwien",
+      "SkipGitIgnoreFiles": true,
+      "ApplyAllPMRules": true,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "amet sit",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "$schema": "ravjuntsir",
+      "GoSettings": {
+        "CustomParameters": null,
+        "DslRulesRelativePath": null
+      },
+      "JavaSettings": {
+        "Parameters": null,
+        "DependenciesPath": "l",
+        "CustomParameters": null,
+        "DslRulesRelativePath": "iV57xBwRTw"
+      },
+      "JavaScriptSettings": null,
+      "PhpSettings": {
+        "DownloadDependencies": true,
+        "DslRulesRelativePath": null
+      },
+      "PmTaintSettings": {
+        "UsePublicAnalysisMethod": false,
+        "CustomParameters": "dol"
+      },
+      "PythonSettings": null,
+      "ScaSettings": null,
+      "SkipGitIgnoreFiles": false,
+      "ApplyAllPMRules": false
+    },
+    {
+      "ProjectName": "ipsum ipsu",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "BlackBoxSettings": {
+        "WhiteListedAddresses": null,
+        "BlackListedAddresses": [],
+        "Authentication": {
+          "Cookie": {
+            "Cookie": "YcI9j7nWHenRpZT1J",
+            "ValidationAddress": "YwfG",
+            "ValidationTemplate": "sit"
+          },
+          "Form": {
+            "FormXPath": false,
+            "Login": 33.74,
+            "LoginKey": true,
+            "Password": null,
+            "ValidationTemplate": "consectetur i"
+          },
+          "Http": {
+            "Login": "a66JVTmexAEPVIauM",
+            "Password": "consecte",
+            "ValidationAddress": "ipsum dolor"
+          },
+          "Type": "Http"
+        },
+        "ProxySettings": {
+          "Enabled": false,
+          "Host": null,
+          "Login": null,
+          "Password": null,
+          "Type": "Http"
+        },
+        "RunAutocheckAfterScan": true,
+        "Site": "ipsum sit adipisci",
+        "SslCheck": false
+      },
+      "DotNetSettings": {
+        "ProjectType": "Solution",
+        "UsePublicAnalysisMethod": true,
+        "DownloadDependencies": null,
+        "CustomParameters": "lcbor"
+      },
+      "GoSettings": {},
+      "JavaSettings": {
+        "Version": "21",
+        "UsePublicAnalysisMethod": null,
+        "DownloadDependencies": null,
+        "DependenciesPath": null,
+        "CustomParameters": "gupcbedonsnoob",
+        "DslRulesRelativePath": null
+      },
+      "JavaScriptSettings": {
+        "UsePublicAnalysisMethod": null,
+        "UseTaintAnalysis": null,
+        "UseJsaAnalysis": null,
+        "DownloadDependencies": true,
+        "CustomParameters": "amet s",
+        "DslRulesRelativePath": "VvNQnOdZyaOScHx"
+      },
+      "PmTaintSettings": null,
+      "PythonSettings": null,
+      "RubySettings": {
+        "UsePublicAnalysisMethod": false,
+        "CustomParameters": null
+      },
+      "ScaSettings": {
+        "CustomParameters": null
+      },
+      "BranchName": "consect",
+      "ApplyAllPMRules": true,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "ipsum adipiscing",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "$schema": "zukN3QNuAiTs",
+      "Version": "1.5",
+      "BlackBoxSettings": null,
+      "JavaScriptSettings": null,
+      "PhpSettings": {
+        "UsePublicAnalysisMethod": null,
+        "DownloadDependencies": true,
+        "CustomParameters": null
+      },
+      "PygrepSettings": {
+        "CustomParameters": null,
+        "RulesDirPath": null
+      },
+      "RubySettings": null,
+      "ScaSettings": null,
+      "BranchName": "6tE8b1TSZ3Z78",
+      "SkipGitIgnoreFiles": false,
+      "ApplyAllPMRules": true
+    },
+    {
+      "ProjectName": "adipiscing ipsum si",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "$schema": "lorem ipsum amet ",
+      "Version": "1.7",
+      "BlackBoxSettings": null,
+      "PhpSettings": null,
+      "PmTaintSettings": null,
+      "PythonSettings": null,
+      "MailingProjectSettings": {
+        "Enabled": false,
+        "EmailRecipients": []
+      },
+      "ScaSettings": {
+        "CustomParameters": null,
+        "BuildDependenciesGraph": null
+      },
+      "BranchName": null,
+      "SkipGitIgnoreFiles": false
+    },
+    {
+      "ProjectName": "5pOxeOsZtUdP6ho",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "$schema": "x",
+      "DotNetSettings": null,
+      "GoSettings": null,
+      "JavaSettings": {
+        "Parameters": null,
+        "UnpackUserPackages": false,
+        "DownloadDependencies": null,
+        "DslRulesRelativePath": "wv"
+      },
+      "JavaScriptSettings": {
+        "UsePublicAnalysisMethod": null,
+        "UseTaintAnalysis": false,
+        "UseJsaAnalysis": null,
+        "CustomParameters": "sit adipiscing adi",
+        "DslRulesRelativePath": null
+      },
+      "PhpSettings": null,
+      "PmTaintSettings": {
+        "UsePublicAnalysisMethod": null
+      },
+      "PythonSettings": null,
+      "MailingProjectSettings": null,
+      "RubySettings": null,
+      "BranchName": "mbspxjzgxgjjnxqhel",
+      "SkipGitIgnoreFiles": false,
+      "ApplyAllPMRules": false
+    },
+    {
+      "ProjectName": "amet sit amet ip",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "$schema": "fvqdwlscrabcbpffvukft",
+      "Version": "1.5",
+      "BlackBoxSettings": null,
+      "GoSettings": {
+        "UsePublicAnalysisMethod": true,
+        "CustomParameters": null
+      },
+      "JavaSettings": {
+        "UnpackUserPackages": false,
+        "Version": "11",
+        "UsePublicAnalysisMethod": null,
+        "CustomParameters": null
+      },
+      "JavaScriptSettings": null,
+      "PhpSettings": null,
+      "PmTaintSettings": {
+        "PMGroups": [],
+        "CustomParameters": null
+      },
+      "PygrepSettings": {},
+      "MailingProjectSettings": null,
+      "ScaSettings": null,
+      "BranchName": "nr"
+    },
+    {
+      "ProjectName": "sit ipsum sit",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "$schema": "lfxmfmsgetd",
+      "BlackBoxSettings": null,
+      "DotNetSettings": null,
+      "PhpSettings": null,
+      "PmTaintSettings": {
+        "CustomParameters": "consectet"
+      },
+      "PythonSettings": {
+        "DownloadDependencies": false,
+        "DependenciesPath": "dolor dolor"
+      },
+      "RubySettings": {
+        "UsePublicAnalysisMethod": true,
+        "DslRulesRelativePath": null
+      },
+      "ScaSettings": null,
+      "BranchName": null
+    },
+    {
+      "ProjectName": "5Ws",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "BlackBoxSettings": null,
+      "DotNetSettings": {
+        "CustomParameters": "G08w2SR8mtDssm582Xztz",
+        "DslRulesRelativePath": null
+      },
+      "GoSettings": null,
+      "JavaSettings": null,
+      "JavaScriptSettings": {
+        "UseJsaAnalysis": false,
+        "DslRulesRelativePath": null
+      },
+      "PythonSettings": null,
+      "MailingProjectSettings": null,
+      "RubySettings": {
+        "CustomParameters": null,
+        "DslRulesRelativePath": "lore"
+      },
+      "BranchName": "ggR4",
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "dol",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "$schema": "lqxfbeald",
+      "Version": "1.4",
+      "BlackBoxSettings": {
+        "AdditionalHttpHeaders": [],
+        "Authentication": null,
+        "Site": "eo"
+      },
+      "DotNetSettings": null,
+      "GoSettings": {
+        "UsePublicAnalysisMethod": null
+      },
+      "JavaScriptSettings": null,
+      "PmTaintSettings": null,
+      "PygrepSettings": {
+        "CustomParameters": null
+      },
+      "MailingProjectSettings": {
+        "MailProfileName": "gaynwgcuhnknt"
+      },
+      "RubySettings": {
+        "CustomParameters": null,
+        "DslRulesRelativePath": null
+      },
+      "SkipGitIgnoreFiles": true,
+      "ApplyAllPMRules": false
+    },
+    {
+      "ProjectName": "txcplgwizjouubt",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "$schema": "consectetur",
+      "Version": "1.6",
+      "BlackBoxSettings": null,
+      "DotNetSettings": {
+        "ProjectType": "WebSite",
+        "SolutionFile": "dymts",
+        "UsePublicAnalysisMethod": false,
+        "DownloadDependencies": null,
+        "DslRulesRelativePath": null
+      },
+      "JavaSettings": null,
+      "JavaScriptSettings": {
+        "UseTaintAnalysis": false,
+        "CustomParameters": null,
+        "DslRulesRelativePath": "nmwharulfvpzwmh"
+      },
+      "PhpSettings": {
+        "UsePublicAnalysisMethod": true,
+        "CustomParameters": "AHU1g",
+        "DslRulesRelativePath": "consectetur"
+      },
+      "PmTaintSettings": {
+        "PMGroups": [],
+        "CustomParameters": "ygtaggizcarmpn"
+      },
+      "PygrepSettings": null,
+      "RubySettings": null,
+      "BranchName": null,
+      "SkipGitIgnoreFiles": false
+    },
+    {
+      "ProjectName": "ip",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "Version": "1.8",
+      "BlackBoxSettings": null,
+      "DotNetSettings": null,
+      "GoSettings": null,
+      "JavaSettings": null,
+      "JavaScriptSettings": null,
+      "PhpSettings": {
+        "DownloadDependencies": null,
+        "CustomParameters": "gupxbfdxhxqcignkgthx"
+      },
+      "PmTaintSettings": null,
+      "MailingProjectSettings": {
+        "EmailRecipients": []
+      },
+      "ScaSettings": null,
+      "BranchName": "XJdXShQEm2Z7x5MBdh",
+      "SkipGitIgnoreFiles": true,
+      "ApplyAllPMRules": false,
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "sit",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "$schema": "amet",
+      "Version": "1.6",
+      "DotNetSettings": {
+        "ProjectType": "Solution",
+        "SolutionFile": "sit",
+        "UsePublicAnalysisMethod": null,
+        "DownloadDependencies": true,
+        "CustomParameters": null,
+        "DslRulesRelativePath": null
+      },
+      "GoSettings": {
+        "CustomParameters": null
+      },
+      "JavaScriptSettings": null,
+      "PmTaintSettings": {},
+      "PythonSettings": {
+        "UsePublicAnalysisMethod": false,
+        "DownloadDependencies": null
+      },
+      "BranchName": "brfwgtboldxmtei",
+      "ApplyAllPMRules": false
+    },
+    {
+      "ProjectName": "XqjUmfFKFYG",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "Version": "1.2",
+      "BlackBoxSettings": {
+        "AdditionalHttpHeaders": [],
+        "WhiteListedAddresses": [],
+        "Authentication": null,
+        "Level": "None",
+        "ScanScope": "Domain",
+        "Site": "JpmbggiDVKw7mMjBH",
+        "SslCheck": false
+      },
+      "JavaSettings": {
+        "Parameters": "wyhdbngxczlvlgjsq",
+        "UnpackUserPackages": false,
+        "UserPackagePrefixes": "NFPsaAd",
+        "Version": "11",
+        "DependenciesPath": "rgHNtTGt0bqtPp8gBDU",
+        "CustomParameters": null,
+        "DslRulesRelativePath": "amet sit amet"
+      },
+      "JavaScriptSettings": {
+        "UsePublicAnalysisMethod": true,
+        "UseTaintAnalysis": null,
+        "UseJsaAnalysis": true,
+        "DownloadDependencies": null,
+        "CustomParameters": null,
+        "DslRulesRelativePath": null
+      },
+      "PythonSettings": {
+        "UsePublicAnalysisMethod": false,
+        "DownloadDependencies": false,
+        "DependenciesPath": "j",
+        "CustomParameters": "bhutqrhpov",
+        "DslRulesRelativePath": "mTEe3GZUytI6X7"
+      },
+      "MailingProjectSettings": null,
+      "RubySettings": null,
+      "BranchName": "amet l",
+      "ApplyAllPMRules": true,
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "tes",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "Version": "1.2",
+      "GoSettings": null,
+      "JavaSettings": {
+        "UnpackUserPackages": true,
+        "UserPackagePrefixes": "T22",
+        "Version": "17",
+        "UsePublicAnalysisMethod": true,
+        "DownloadDependencies": true,
+        "DependenciesPath": "C2cude4s7E1HI4yhZIR",
+        "CustomParameters": "dolor dolor dolo",
+        "DslRulesRelativePath": "krbmz"
+      },
+      "JavaScriptSettings": {
+        "DownloadDependencies": true,
+        "CustomParameters": null
+      },
+      "PhpSettings": null,
+      "PygrepSettings": {
+        "CustomParameters": "owavmxnksa"
+      },
+      "MailingProjectSettings": null,
+      "RubySettings": {
+        "UsePublicAnalysisMethod": null,
+        "DslRulesRelativePath": null
+      },
+      "ApplyAllPMRules": false,
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "sit ipsum",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "$schema": "Gmg",
+      "Version": "1.0",
+      "BlackBoxSettings": null,
+      "DotNetSettings": null,
+      "GoSettings": {
+        "CustomParameters": null
+      },
+      "JavaScriptSettings": null,
+      "PygrepSettings": {},
+      "BranchName": null,
+      "SkipGitIgnoreFiles": true,
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "hht25vBC5BtFaFhYB7Aq",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "BlackBoxSettings": {
+        "BlackListedAddresses": [],
+        "Level": "None",
+        "ProxySettings": {
+          "Enabled": false,
+          "Login": null,
+          "Password": "Mo4dZhj9OrRtStx",
+          "Port": 161
+        },
+        "ScanScope": "Path"
+      },
+      "DotNetSettings": {
+        "ProjectType": "None",
+        "SolutionFile": "d7IDTf5Dy1",
+        "UsePublicAnalysisMethod": null,
+        "DownloadDependencies": false,
+        "DslRulesRelativePath": null
+      },
+      "GoSettings": {
+        "UsePublicAnalysisMethod": false,
+        "CustomParameters": "Z5XQ2Tx",
+        "DslRulesRelativePath": null
+      },
+      "JavaSettings": null,
+      "JavaScriptSettings": {
+        "UseTaintAnalysis": true,
+        "UseJsaAnalysis": null,
+        "DownloadDependencies": null,
+        "CustomParameters": null,
+        "DslRulesRelativePath": null
+      },
+      "PhpSettings": {
+        "UsePublicAnalysisMethod": true
+      },
+      "PmTaintSettings": null,
+      "PygrepSettings": null,
+      "RubySettings": null,
+      "SkipGitIgnoreFiles": true,
+      "ApplyAllPMRules": true,
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "CTF054Q0YgQ5UrS",
+      "ProgrammingLanguages": [
+        "Kotlin",
+        "Python",
+        "Go",
+        "Kotlin",
+        "Swift"
+      ],
+      "ScanModules": [
+        "BlackBox",
+        "PatternMatching",
+        "Configuration",
+        "PatternMatching",
+        "StaticCodeAnalysis"
+      ],
+      "$schema": "ffdmpvazsbhfcku",
+      "Version": "1.1",
+      "DotNetSettings": null,
+      "GoSettings": {
+        "CustomParameters": null
+      },
+      "PhpSettings": {
+        "UsePublicAnalysisMethod": true,
+        "CustomParameters": "YEEhq5",
+        "DslRulesRelativePath": "dolo"
+      },
+      "PmTaintSettings": null,
+      "MailingProjectSettings": {
+        "MailProfileName": null,
+        "EmailRecipients": [
+          "eve576@demo.net",
+          "bob364@sample.io",
+          "bob147@test.org",
+          "alice437@sample.io",
+          "charlie667@sample.io"
+        ]
+      },
+      "BranchName": null,
+      "ApplyAllPMRules": true,
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "y4d0rUBousuH",
+      "ProgrammingLanguages": [
+        "Java",
+        "Kotlin",
+        "ObjectiveC",
+        "Go",
+        "Scala"
+      ],
+      "ScanModules": [
+        "StaticCodeAnalysis",
+        "PatternMatching",
+        "SoftwareCompositionAnalysis",
+        "Components",
+        "BlackBox"
+      ],
+      "$schema": "a",
+      "Version": "1.1",
+      "BlackBoxSettings": {
+        "WhiteListedAddresses": [
+          {
+            "Format": "Wildcard"
+          },
+          {
+            "Address": "8L2BB5JD2UWw6IlK",
+            "Format": "Wildcard"
+          },
+          {
+            "Address": "pcnjtsbobbfxuqhtcncb"
+          },
+          {
+            "Address": "xydj"
+          },
+          {
+            "Format": "ExactMatch"
+          }
+        ],
+        "ProxySettings": {
+          "Enabled": true,
+          "Login": "s5sU0FnR01",
+          "Password": "fkslmdyhtntsmywrq",
+          "Port": -840
+        },
+        "RunAutocheckAfterScan": true,
+        "ScanScope": "Folder"
+      },
+      "GoSettings": {
+        "UsePublicAnalysisMethod": null,
+        "CustomParameters": "lorem ipsum adipisc",
+        "DslRulesRelativePath": null
+      },
+      "JavaSettings": {
+        "UserPackagePrefixes": null,
+        "DownloadDependencies": null,
+        "DependenciesPath": null,
+        "DslRulesRelativePath": null
+      },
+      "PmTaintSettings": null,
+      "PygrepSettings": null,
+      "MailingProjectSettings": {
+        "MailProfileName": "n",
+        "EmailRecipients": [
+          "frank97@demo.net",
+          "eve311@test.org",
+          "frank980@demo.net",
+          "charlie467@sample.io",
+          "frank997@demo.net"
+        ]
+      },
+      "BranchName": null,
+      "SkipGitIgnoreFiles": false
+    },
+    {
+      "ProjectName": "oYhDILjNF",
+      "ProgrammingLanguages": [
+        "Solidity",
+        "JavaScript",
+        "Java",
+        "Solidity",
+        "Swift"
+      ],
+      "ScanModules": [
+        "Components",
+        "Components",
+        "StaticCodeAnalysis",
+        "PatternMatching",
+        "Components"
+      ],
+      "$schema": "cons",
+      "Version": "1.3",
+      "BlackBoxSettings": {
+        "AdditionalHttpHeaders": [
+          {},
+          {
+            "Key": "consectetur adipis"
+          },
+          {
+            "Key": "xuzhqxzjnvukppg",
+            "Value": "tjyambjzdzxrb"
+          },
+          {
+            "Key": "dolor lorem consectet"
+          },
+          {
+            "Key": "dv"
+          }
+        ],
+        "BlackListedAddresses": null,
+        "Authentication": null,
+        "ProxySettings": {
+          "Enabled": true,
+          "Login": null,
+          "Password": null,
+          "Type": "Socks5"
+        },
+        "Site": "FL2DzHr2bEcTaOgmfAgP",
+        "SslCheck": false
+      },
+      "DotNetSettings": null,
+      "GoSettings": null,
+      "JavaScriptSettings": {
+        "UseTaintAnalysis": null
+      },
+      "PhpSettings": null,
+      "PmTaintSettings": null,
+      "PythonSettings": null,
+      "RubySettings": {
+        "UsePublicAnalysisMethod": true,
+        "CustomParameters": null,
+        "DslRulesRelativePath": null
+      },
+      "SkipGitIgnoreFiles": true,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "adipisc",
+      "ProgrammingLanguages": [
+        "JavaScript",
+        "Sql",
+        "ObjectiveC",
+        "Scala",
+        "Java"
+      ],
+      "ScanModules": [
+        "SoftwareCompositionAnalysis",
+        "Components",
+        "SoftwareCompositionAnalysis",
+        "PatternMatching",
+        "SoftwareCompositionAnalysis"
+      ],
+      "$schema": "HZokA8z0kU1wmgis",
+      "Version": "1.8",
+      "BlackBoxSettings": {
+        "Authentication": {
+          "Form": {
+            "FormDetection": "Manual",
+            "FormAddress": 52,
+            "FormXPath": 0.63,
+            "LoginKey": null,
+            "Password": 85,
+            "PasswordKey": 26,
+            "ValidationTemplate": 2
+          },
+          "Type": "None"
+        },
+        "ProxySettings": {
+          "Enabled": false,
+          "Host": "conse",
+          "Login": "amet",
+          "Password": null
+        },
+        "SslCheck": true
+      },
+      "DotNetSettings": {
+        "ProjectType": "None",
+        "DownloadDependencies": null,
+        "CustomParameters": "yDksBdJw",
+        "DslRulesRelativePath": null
+      },
+      "GoSettings": null,
+      "JavaSettings": {
+        "Parameters": null,
+        "UnpackUserPackages": false,
+        "Version": "11",
+        "UsePublicAnalysisMethod": true,
+        "CustomParameters": "am",
+        "DslRulesRelativePath": "xlqpofazwzvdekrsr"
+      },
+      "JavaScriptSettings": {
+        "UseTaintAnalysis": null,
+        "UseJsaAnalysis": null,
+        "DownloadDependencies": true,
+        "CustomParameters": "B1b8IK37qSUUB9iFcBhe",
+        "DslRulesRelativePath": null
+      },
+      "PhpSettings": null,
+      "PmTaintSettings": null,
+      "PythonSettings": null,
+      "ScaSettings": {
+        "CustomParameters": "iy",
+        "BuildDependenciesGraph": false
+      },
+      "SkipGitIgnoreFiles": true,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "KoSEe",
+      "ProgrammingLanguages": [
+        "Java",
+        "Php",
+        "CSharp (Windows, Linux)",
+        "Sql",
+        "Swift"
+      ],
+      "ScanModules": [
+        "SoftwareCompositionAnalysis",
+        "BlackBox",
+        "Components",
+        "PatternMatching",
+        "PatternMatching"
+      ],
+      "Version": "1.1",
+      "BlackBoxSettings": null,
+      "GoSettings": null,
+      "PygrepSettings": {
+        "CustomParameters": "9tqdKRwct"
+      },
+      "MailingProjectSettings": {
+        "Enabled": true,
+        "EmailRecipients": [
+          "eve646@example.com",
+          "eve703@demo.net",
+          "alice942@sample.io",
+          "alice668@example.com",
+          "alice734@test.org"
+        ]
+      },
+      "RubySettings": null,
+      "ScaSettings": {
+        "CustomParameters": null
+      },
+      "BranchName": "HdwIE",
+      "ApplyAllPMRules": false
+    },
+    {
+      "ProjectName": "31AwybV7x",
+      "ProgrammingLanguages": [
+        "Php",
+        "Go",
+        "Java",
+        "ObjectiveC",
+        "Php"
+      ],
+      "ScanModules": [
+        "Components",
+        "StaticCodeAnalysis",
+        "StaticCodeAnalysis",
+        "Configuration",
+        "Components"
+      ],
+      "$schema": "gjezf",
+      "Version": "1.1",
+      "BlackBoxSettings": {
+        "WhiteListedAddresses": null,
+        "BlackListedAddresses": null,
+        "Level": "Normal",
+        "RunAutocheckAfterScan": false,
+        "ScanScope": "Path",
+        "SslCheck": false
+      },
+      "DotNetSettings": null,
+      "JavaSettings": {
+        "Parameters": null,
+        "UnpackUserPackages": true,
+        "Version": "8",
+        "DownloadDependencies": null,
+        "DependenciesPath": null
+      },
+      "PygrepSettings": {
+        "CustomParameters": "adipiscing lorem cons",
+        "RulesDirPath": "oyezeoiwodajkgsvio"
+      },
+      "PythonSettings": null,
+      "SkipGitIgnoreFiles": true,
+      "ApplyAllPMRules": true
+    },
+    {
+      "ProjectName": "inmadrvaisfrpftwo",
+      "ProgrammingLanguages": [
+        "CSharp (Windows)",
+        "Solidity",
+        "Ruby",
+        "Sql",
+        "Python"
+      ],
+      "ScanModules": [
+        "Components",
+        "PatternMatching",
+        "Components",
+        "SoftwareCompositionAnalysis",
+        "PatternMatching"
+      ],
+      "$schema": "adipiscing cons",
+      "Version": "1.4",
+      "BlackBoxSettings": {
+        "AdditionalHttpHeaders": null,
+        "Level": "Fast",
+        "ProxySettings": {
+          "Enabled": true,
+          "Login": null,
+          "Password": null,
+          "Port": 738
+        },
+        "RunAutocheckAfterScan": true,
+        "ScanScope": "Domain",
+        "SslCheck": false
+      },
+      "DotNetSettings": {
+        "ProjectType": "WebSite",
+        "UsePublicAnalysisMethod": null,
+        "DownloadDependencies": true,
+        "CustomParameters": "b04Ful1345AVUi2KccS",
+        "DslRulesRelativePath": "hf"
+      },
+      "JavaSettings": {
+        "Parameters": "WnXoTUgx0E",
+        "UnpackUserPackages": true,
+        "Version": "11",
+        "DownloadDependencies": true,
+        "CustomParameters": null
+      },
+      "PhpSettings": null,
+      "PmTaintSettings": {
+        "UsePublicAnalysisMethod": null,
+        "PMGroups": [
+          "lxudxt",
+          "lhvtgwqeyjdytmo",
+          "7Nr0avqHuE3OeUWef",
+          "lorem amet dolor ",
+          "nkvjbwzbn"
+        ],
+        "CustomParameters": "z"
+      },
+      "PygrepSettings": null,
+      "PythonSettings": null,
+      "MailingProjectSettings": {
+        "Enabled": true,
+        "MailProfileName": "hngvzanvzklhbfzuzpal"
+      },
+      "RubySettings": {
+        "DslRulesRelativePath": "uvkc"
+      },
+      "ScaSettings": null,
+      "BranchName": "qaObY5"
+    },
+    {
+      "ProjectName": "zhvee",
+      "ProgrammingLanguages": [
+        "JavaScript",
+        "CSharp (Windows)",
+        "Ruby",
+        "Scala",
+        "Java"
+      ],
+      "ScanModules": [
+        "PatternMatching",
+        "PatternMatching",
+        "StaticCodeAnalysis",
+        "Configuration",
+        "Components"
+      ],
+      "$schema": "lorem",
+      "Version": "1.7",
+      "BlackBoxSettings": {
+        "WhiteListedAddresses": null,
+        "BlackListedAddresses": null,
+        "Authentication": null,
+        "Level": "Full",
+        "Site": "amet ipsum"
+      },
+      "DotNetSettings": {
+        "CustomParameters": "1"
+      },
+      "PhpSettings": {
+        "UsePublicAnalysisMethod": false,
+        "DownloadDependencies": null,
+        "DslRulesRelativePath": "vcNOD75pFcBvkQF"
+      },
+      "PygrepSettings": null,
+      "MailingProjectSettings": null,
+      "ScaSettings": null,
+      "SkipGitIgnoreFiles": true
+    },
+    {
+      "ProjectName": "ldayfeczkjofusyv",
+      "ProgrammingLanguages": [
+        "CSharp (Windows)",
+        "Java",
+        "Ruby",
+        "Java",
+        "Java"
+      ],
+      "ScanModules": [
+        "PatternMatching",
+        "BlackBox",
+        "PatternMatching",
+        "StaticCodeAnalysis",
+        "SoftwareCompositionAnalysis"
+      ],
+      "$schema": "X10BiUzFlJa",
+      "Version": "1.3",
+      "JavaSettings": null,
+      "JavaScriptSettings": {
+        "UsePublicAnalysisMethod": true,
+        "UseTaintAnalysis": null,
+        "UseJsaAnalysis": true,
+        "DownloadDependencies": false,
+        "CustomParameters": "adipiscing amet ",
+        "DslRulesRelativePath": null
+      },
+      "PhpSettings": null,
+      "PythonSettings": {
+        "DownloadDependencies": true,
+        "DependenciesPath": "nybqplbjievcaxyq",
+        "CustomParameters": null
+      },
+      "MailingProjectSettings": null,
+      "RubySettings": {
+        "UsePublicAnalysisMethod": null,
+        "DslRulesRelativePath": "cbhoumngllfctzwlpswae"
+      },
+      "ScaSettings": null,
+      "ApplyAllPMRules": false,
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "aazifmotpo",
+      "ProgrammingLanguages": [
+        "Ruby",
+        "Sql",
+        "JavaScript",
+        "CAndCPlusPlus",
+        "Swift"
+      ],
+      "ScanModules": [
+        "PatternMatching",
+        "SoftwareCompositionAnalysis",
+        "BlackBox",
+        "StaticCodeAnalysis",
+        "Components"
+      ],
+      "$schema": "consectetur ipsu",
+      "Version": "1.0",
+      "BlackBoxSettings": null,
+      "DotNetSettings": {
+        "ProjectType": "WebSite",
+        "SolutionFile": null,
+        "UsePublicAnalysisMethod": null,
+        "DownloadDependencies": true
+      },
+      "GoSettings": {
+        "UsePublicAnalysisMethod": null,
+        "CustomParameters": "72Ek50bYa0K5NiG3yM",
+        "DslRulesRelativePath": "consectet"
+      },
+      "JavaSettings": null,
+      "JavaScriptSettings": {
+        "UseJsaAnalysis": false,
+        "CustomParameters": "1"
+      },
+      "PhpSettings": null,
+      "PygrepSettings": null,
+      "MailingProjectSettings": null,
+      "RubySettings": {
+        "CustomParameters": null
+      },
+      "BranchName": null
+    },
+    {
+      "ProjectName": "viyfuwj",
+      "ProgrammingLanguages": [
+        "Php",
+        "Kotlin",
+        "ObjectiveC",
+        "CAndCPlusPlus",
+        "Solidity"
+      ],
+      "ScanModules": [
+        "StaticCodeAnalysis",
+        "Components",
+        "SoftwareCompositionAnalysis",
+        "StaticCodeAnalysis",
+        "StaticCodeAnalysis"
+      ],
+      "$schema": "aIAMC5QOnz6vkxiZPo6C",
+      "Version": "1.2",
+      "BlackBoxSettings": {
+        "AdditionalHttpHeaders": [
+          {
+            "Key": "ygryehmcbgfeqajooe",
+            "Value": "ipsum sit lorem cons"
+          },
+          {
+            "Key": "FHT9LoSABvNpYAPstQv",
+            "Value": "pnmuv"
+          },
+          {},
+          {
+            "Key": "adip"
+          },
+          {}
+        ],
+        "WhiteListedAddresses": [
+          {
+            "Address": "5ESXj8"
+          },
+          {
+            "Address": "ip",
+            "Format": "Wildcard"
+          },
+          {
+            "Address": "Sst3e",
+            "Format": "RegExp"
+          },
+          {
+            "Format": "RegExp"
+          },
+          {
+            "Format": "ExactMatch"
+          }
+        ],
+        "BlackListedAddresses": [
+          {
+            "Address": "utmebmfa",
+            "Format": "RegExp"
+          },
+          {
+            "Format": "Wildcard"
+          },
+          {
+            "Format": "ExactMatch"
+          },
+          {
+            "Address": "QQA9vuqwZxpMy8jIn7"
+          },
+          {
+            "Address": "lorem amet ",
+            "Format": "Wildcard"
+          }
+        ],
+        "Authentication": {
+          "Form": null,
+          "Http": null
+        },
+        "Level": "None",
+        "ProxySettings": null,
+        "ScanScope": "Path",
+        "Site": "sit amet",
+        "SslCheck": false
+      },
+      "DotNetSettings": null,
+      "GoSettings": null,
+      "PhpSettings": {
+        "DownloadDependencies": true
+      },
+      "PmTaintSettings": {
+        "PMGroups": [
+          "eviowtjvkmouoessd",
+          "gioGPrRG",
+          "ipsum ipsum ad",
+          "hgill",
+          "rifugwknjfgchy"
+        ],
+        "CustomParameters": "qkogtnklkprfhwhfouy"
+      },
+      "PygrepSettings": null,
+      "PythonSettings": {
+        "UsePublicAnalysisMethod": false,
+        "DependenciesPath": "axjbpufjenqlyiusl",
+        "CustomParameters": "dbmmyajxpmgdopni"
+      },
+      "MailingProjectSettings": {
+        "Enabled": false,
+        "EmailRecipients": [
+          "alice478@demo.net",
+          "bob759@test.org",
+          "frank19@sample.io",
+          "frank321@example.com",
+          "frank975@test.org"
+        ]
+      },
+      "ScaSettings": {
+        "CustomParameters": "jkpfsvcpsjxirkir",
+        "BuildDependenciesGraph": null
+      },
+      "BranchName": null,
+      "ApplyAllPMRules": false,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "9",
+      "ProgrammingLanguages": [
+        "Sql",
+        "Java",
+        "Ruby",
+        "CSharp (Windows, Linux)",
+        "Sql"
+      ],
+      "ScanModules": [
+        "StaticCodeAnalysis",
+        "SoftwareCompositionAnalysis",
+        "SoftwareCompositionAnalysis",
+        "BlackBox",
+        "SoftwareCompositionAnalysis"
+      ],
+      "Version": "1.8",
+      "BlackBoxSettings": null,
+      "DotNetSettings": {
+        "ProjectType": "None",
+        "DownloadDependencies": null,
+        "CustomParameters": null,
+        "DslRulesRelativePath": "mltrf"
+      },
+      "JavaScriptSettings": null,
+      "PhpSettings": null,
+      "PygrepSettings": null,
+      "PythonSettings": null,
+      "BranchName": "xcjm",
+      "ApplyAllPMRules": true
+    },
+    {
+      "ProjectName": "wvctq",
+      "ProgrammingLanguages": [
+        "Sql",
+        "Python",
+        "Scala",
+        "Sql",
+        "Scala"
+      ],
+      "ScanModules": [
+        "Configuration",
+        "BlackBox",
+        "Configuration",
+        "BlackBox",
+        "PatternMatching"
+      ],
+      "BlackBoxSettings": {
+        "WhiteListedAddresses": [
+          {},
+          {
+            "Address": "S4A9UOBQ0"
+          },
+          {},
+          {
+            "Address": "cz"
+          },
+          {}
+        ],
+        "Authentication": {
+          "Cookie": {
+            "Cookie": "EM",
+            "ValidationAddress": "sit conse",
+            "ValidationTemplate": "sZJ1p"
+          },
+          "Form": {
+            "FormDetection": "Manual",
+            "FormXPath": 54.12,
+            "Login": "pLucVmv",
+            "LoginKey": null,
+            "PasswordKey": 4,
+            "ValidationTemplate": "adipiscin"
+          },
+          "Http": null,
+          "Type": "RawCookie"
+        },
+        "ProxySettings": null
+      },
+      "DotNetSettings": {
+        "ProjectType": "Solution",
+        "UsePublicAnalysisMethod": false,
+        "CustomParameters": "dKAg",
+        "DslRulesRelativePath": null
+      },
+      "JavaSettings": null,
+      "JavaScriptSettings": {
+        "UseTaintAnalysis": null,
+        "CustomParameters": "V"
+      },
+      "PmTaintSettings": {
+        "UsePublicAnalysisMethod": null
+      },
+      "PygrepSettings": null,
+      "PythonSettings": {
+        "DependenciesPath": null,
+        "CustomParameters": null,
+        "DslRulesRelativePath": null
+      },
+      "ScaSettings": {
+        "BuildDependenciesGraph": null
+      },
+      "BranchName": null,
+      "SkipGitIgnoreFiles": true,
+      "ApplyAllPMRules": false,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "ieataimfyrpli",
+      "ProgrammingLanguages": [
+        "ObjectiveC",
+        "CSharp (Windows)",
+        "JavaScript",
+        "CSharp (Windows)",
+        "CSharp (Windows, Linux)"
+      ],
+      "ScanModules": [
+        "PatternMatching",
+        "BlackBox",
+        "Configuration",
+        "Components",
+        "Components"
+      ],
+      "$schema": "adipisc",
+      "JavaSettings": null,
+      "PhpSettings": null,
+      "PmTaintSettings": null,
+      "PygrepSettings": {
+        "CustomParameters": "qxcnkiflnw"
+      },
+      "PythonSettings": null,
+      "MailingProjectSettings": null,
+      "ScaSettings": null,
+      "BranchName": "sit ipsum dolor dolor",
+      "ApplyAllPMRules": false,
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "sgi",
+      "ProgrammingLanguages": [
+        "CSharp (Windows, Linux)",
+        "CSharp (Windows)",
+        "Solidity",
+        "ObjectiveC",
+        "Python"
+      ],
+      "ScanModules": [
+        "Components",
+        "BlackBox",
+        "SoftwareCompositionAnalysis",
+        "SoftwareCompositionAnalysis",
+        "BlackBox"
+      ],
+      "$schema": "ajCWI8",
+      "Version": "1.6",
+      "BlackBoxSettings": null,
+      "JavaScriptSettings": {
+        "UsePublicAnalysisMethod": null,
+        "UseTaintAnalysis": null,
+        "DownloadDependencies": null
+      },
+      "PhpSettings": null,
+      "PmTaintSettings": null,
+      "PygrepSettings": null,
+      "MailingProjectSettings": null,
+      "ApplyAllPMRules": false,
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "moixuoz",
+      "ProgrammingLanguages": [
+        "JavaScript",
+        "JavaScript",
+        "Swift",
+        "JavaScript",
+        "Python"
+      ],
+      "ScanModules": [
+        "Configuration",
+        "StaticCodeAnalysis",
+        "SoftwareCompositionAnalysis",
+        "Components",
+        "Configuration"
+      ],
+      "DotNetSettings": null,
+      "JavaSettings": {
+        "Parameters": null,
+        "UnpackUserPackages": false,
+        "Version": "8",
+        "DownloadDependencies": null,
+        "DependenciesPath": null
+      },
+      "PhpSettings": {
+        "UsePublicAnalysisMethod": false,
+        "DslRulesRelativePath": "EH6EIE5Hl0qsKDhjI3"
+      },
+      "PythonSettings": null,
+      "RubySettings": {
+        "CustomParameters": "s2QN",
+        "DslRulesRelativePath": null
+      },
+      "ScaSettings": null,
+      "BranchName": "koqnj",
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "7Qy",
+      "ProgrammingLanguages": [
+        "Swift",
+        "Solidity",
+        "Ruby",
+        "Sql",
+        "Swift"
+      ],
+      "ScanModules": [
+        "PatternMatching",
+        "PatternMatching",
+        "BlackBox",
+        "Components",
+        "Components"
+      ],
+      "Version": "1.7",
+      "BlackBoxSettings": {
+        "AdditionalHttpHeaders": [
+          {
+            "Value": "qkuvjzqtoeertov"
+          },
+          {},
+          {
+            "Key": "ln",
+            "Value": "NZGYVLI2Pv3Y6PBvMl"
+          },
+          {},
+          {
+            "Value": "dcbvioarkxnfjkrtgnp"
+          }
+        ],
+        "BlackListedAddresses": null,
+        "ProxySettings": {
+          "Enabled": true,
+          "Password": null,
+          "Type": "Socks4"
+        },
+        "Site": "7NLlRROyQ2mAvtIhr",
+        "SslCheck": true
+      },
+      "DotNetSettings": null,
+      "GoSettings": {
+        "CustomParameters": null
+      },
+      "JavaSettings": {
+        "Parameters": "rLC8",
+        "UnpackUserPackages": true,
+        "UserPackagePrefixes": null,
+        "Version": "11",
+        "DependenciesPath": null,
+        "CustomParameters": null
+      },
+      "JavaScriptSettings": {
+        "UseTaintAnalysis": false,
+        "DslRulesRelativePath": null
+      },
+      "PhpSettings": {
+        "UsePublicAnalysisMethod": null,
+        "DownloadDependencies": null,
+        "CustomParameters": "bvsulximvwbpxidpv",
+        "DslRulesRelativePath": null
+      },
+      "PmTaintSettings": {
+        "UsePublicAnalysisMethod": false,
+        "PMGroups": [
+          "dolor sit",
+          "amet lorem conse",
+          "adipiscing lore",
+          "GAttf6TxQmF3Jr1egC",
+          "PziOwMS8g"
+        ],
+        "CustomParameters": null
+      },
+      "PygrepSettings": {
+        "CustomParameters": "n0",
+        "RulesDirPath": null
+      },
+      "MailingProjectSettings": {},
+      "RubySettings": null,
+      "ScaSettings": null,
+      "BranchName": "jwneswlyr",
+      "SkipGitIgnoreFiles": false,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "IXqX2VfGjZePuc",
+      "ProgrammingLanguages": [
+        "Java",
+        "Kotlin",
+        "Scala",
+        "Kotlin",
+        "Ruby"
+      ],
+      "ScanModules": [
+        "Components",
+        "StaticCodeAnalysis",
+        "Components",
+        "StaticCodeAnalysis",
+        "StaticCodeAnalysis"
+      ],
+      "$schema": "Pkh1jCAzqklK72",
+      "Version": "1.0",
+      "BlackBoxSettings": null,
+      "DotNetSettings": {
+        "UsePublicAnalysisMethod": null,
+        "DownloadDependencies": null
+      },
+      "GoSettings": {
+        "UsePublicAnalysisMethod": false,
+        "CustomParameters": "foyvv",
+        "DslRulesRelativePath": "l"
+      },
+      "JavaSettings": null,
+      "RubySettings": {
+        "UsePublicAnalysisMethod": null,
+        "CustomParameters": null
+      },
+      "BranchName": null,
+      "SkipGitIgnoreFiles": false,
+      "ApplyAllPMRules": true
+    },
+    {
+      "ProjectName": "swcdkupqxrvkdbyf",
+      "ProgrammingLanguages": [
+        "Php",
+        "Kotlin",
+        "Swift",
+        "CSharp (Windows)",
+        "Go"
+      ],
+      "ScanModules": [
+        "BlackBox",
+        "StaticCodeAnalysis",
+        "BlackBox",
+        "BlackBox",
+        "Components"
+      ],
+      "Version": "1.1",
+      "BlackBoxSettings": {
+        "AdditionalHttpHeaders": [
+          {
+            "Value": "fuoelxtcke"
+          },
+          {
+            "Value": "xgxwpnhykbzqlakyyd"
+          },
+          {
+            "Key": "gfjerrimnpseypkdhw",
+            "Value": "c"
+          },
+          {
+            "Key": "7",
+            "Value": "q"
+          },
+          {
+            "Key": "9cr",
+            "Value": "e26AmM84SGndZ4s"
+          }
+        ],
+        "WhiteListedAddresses": [
+          {
+            "Address": "consectetur lo"
+          },
+          {},
+          {
+            "Address": "GmJl"
+          },
+          {
+            "Address": "adipiscing adipis",
+            "Format": "Wildcard"
+          },
+          {
+            "Format": "RegExp"
+          }
+        ],
+        "BlackListedAddresses": [
+          {
+            "Format": "RegExp"
+          },
+          {},
+          {
+            "Address": "8Or94Na"
+          },
+          {
+            "Format": "Wildcard"
+          },
+          {
+            "Address": "Fo1iZUZWe19gDKT0TJ1LA",
+            "Format": "RegExp"
+          }
+        ],
+        "ProxySettings": {
+          "Enabled": true,
+          "Login": null,
+          "Port": -541
+        },
+        "RunAutocheckAfterScan": false,
+        "SslCheck": true
+      },
+      "GoSettings": null,
+      "JavaScriptSettings": null,
+      "PhpSettings": null,
+      "PygrepSettings": {
+        "RulesDirPath": "adipiscing adip"
+      },
+      "MailingProjectSettings": null,
+      "RubySettings": {
+        "CustomParameters": "2K",
+        "DslRulesRelativePath": null
+      },
+      "ScaSettings": null,
+      "SkipGitIgnoreFiles": true,
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "consectetur dolor ",
+      "ProgrammingLanguages": [
+        "Python",
+        "JavaScript",
+        "ObjectiveC",
+        "Go",
+        "Solidity"
+      ],
+      "ScanModules": [
+        "BlackBox",
+        "StaticCodeAnalysis",
+        "Configuration",
+        "PatternMatching",
+        "Configuration"
+      ],
+      "Version": "1.7",
+      "BlackBoxSettings": {
+        "WhiteListedAddresses": null,
+        "Level": "None",
+        "RunAutocheckAfterScan": false,
+        "SslCheck": false
+      },
+      "DotNetSettings": {
+        "ProjectType": "None",
+        "SolutionFile": "ipsum adipi",
+        "DownloadDependencies": null,
+        "DslRulesRelativePath": null
+      },
+      "GoSettings": {},
+      "JavaScriptSettings": {
+        "UseJsaAnalysis": null,
+        "DownloadDependencies": null,
+        "DslRulesRelativePath": null
+      },
+      "PhpSettings": {
+        "UsePublicAnalysisMethod": true,
+        "CustomParameters": "50MtM"
+      },
+      "PmTaintSettings": {
+        "UsePublicAnalysisMethod": false,
+        "PMGroups": [
+          "iq",
+          "0",
+          "sdilrls",
+          "cons",
+          "ipsum lorem adipisci"
+        ],
+        "CustomParameters": null
+      },
+      "PythonSettings": null,
+      "BranchName": "puuuka",
+      "SkipGitIgnoreFiles": true,
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "9H6hEiafrmJGmOwUxj",
+      "ProgrammingLanguages": [
+        "CSharp (Windows)",
+        "ObjectiveC",
+        "Python",
+        "Go",
+        "CSharp (Windows)"
+      ],
+      "ScanModules": [
+        "StaticCodeAnalysis",
+        "PatternMatching",
+        "StaticCodeAnalysis",
+        "BlackBox",
+        "StaticCodeAnalysis"
+      ],
+      "Version": "1.1",
+      "GoSettings": {
+        "UsePublicAnalysisMethod": false,
+        "DslRulesRelativePath": "ucax"
+      },
+      "JavaScriptSettings": null,
+      "PygrepSettings": null,
+      "RubySettings": {
+        "UsePublicAnalysisMethod": true,
+        "CustomParameters": "nhfcogxftqwjh"
+      },
+      "SkipGitIgnoreFiles": true,
+      "ApplyAllPMRules": true,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "P5fvc2kNf9wi",
+      "ProgrammingLanguages": [
+        "Ruby",
+        "Java",
+        "Solidity",
+        "Go",
+        "Swift"
+      ],
+      "ScanModules": [
+        "StaticCodeAnalysis",
+        "PatternMatching",
+        "PatternMatching",
+        "BlackBox",
+        "Components"
+      ],
+      "Version": "1.8",
+      "BlackBoxSettings": {
+        "AdditionalHttpHeaders": null,
+        "WhiteListedAddresses": [
+          {
+            "Address": "hI8sZ"
+          },
+          {
+            "Address": "kphnvpl"
+          },
+          {
+            "Address": "mC84nJtokAEk8aCOVXQv"
+          },
+          {
+            "Address": "dafhxxoiv",
+            "Format": "RegExp"
+          },
+          {
+            "Address": "eidtcvumkbalctz"
+          }
+        ],
+        "BlackListedAddresses": [
+          {
+            "Format": "Wildcard"
+          },
+          {
+            "Format": "ExactMatch"
+          },
+          {
+            "Address": "lV"
+          },
+          {
+            "Address": "consectetur dol",
+            "Format": "Wildcard"
+          },
+          {
+            "Address": "cmgcqxrkfpxneo",
+            "Format": "ExactMatch"
+          }
+        ],
+        "Authentication": {
+          "Form": {
+            "FormDetection": "Manual",
+            "Password": 48,
+            "PasswordKey": 52,
+            "ValidationTemplate": 34.51
+          },
+          "Http": {
+            "Login": "dolor ips",
+            "Password": "mTjn0EF7xKPbm7IX",
+            "ValidationAddress": "opnhtlimhcgjryps"
+          },
+          "Type": "Http"
+        },
+        "Level": "Normal",
+        "ProxySettings": {
+          "Host": null,
+          "Login": "dolor cons"
+        },
+        "RunAutocheckAfterScan": true,
+        "ScanScope": "Path",
+        "Site": "fvypchadjasoghlpyop"
+      },
+      "GoSettings": {
+        "UsePublicAnalysisMethod": false,
+        "CustomParameters": null
+      },
+      "JavaSettings": {
+        "Parameters": "lorem sit amet amet ",
+        "UserPackagePrefixes": null,
+        "Version": "21",
+        "UsePublicAnalysisMethod": null,
+        "DownloadDependencies": true,
+        "DependenciesPath": "57Ypxoy6"
+      },
+      "JavaScriptSettings": {
+        "UseTaintAnalysis": true,
+        "UseJsaAnalysis": null,
+        "DownloadDependencies": false,
+        "CustomParameters": "jxc"
+      },
+      "PhpSettings": null,
+      "PmTaintSettings": {
+        "UsePublicAnalysisMethod": true,
+        "PMGroups": [
+          "bhuqenm",
+          "lorem ipsum lorem ",
+          "ips",
+          "rededgkzrcwfnjlsrx",
+          "yyX3YzdCYYslpmgKQQR"
+        ],
+        "CustomParameters": "ormrafvzbhbntcywcdou"
+      },
+      "PygrepSettings": {
+        "RulesDirPath": "ATd1c2byTX5M3Jb"
+      },
+      "MailingProjectSettings": {
+        "Enabled": true
+      },
+      "ScaSettings": null,
+      "SkipGitIgnoreFiles": true,
+      "ApplyAllPMRules": false,
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "94YdbVb",
+      "ProgrammingLanguages": [
+        "Sql",
+        "Solidity",
+        "JavaScript",
+        "Python",
+        "Java"
+      ],
+      "ScanModules": [
+        "Configuration",
+        "SoftwareCompositionAnalysis",
+        "PatternMatching",
+        "PatternMatching",
+        "SoftwareCompositionAnalysis"
+      ],
+      "$schema": "dolor ipsum",
+      "Version": "1.1",
+      "BlackBoxSettings": {
+        "AdditionalHttpHeaders": [
+          {
+            "Key": "rXf",
+            "Value": "gap"
+          },
+          {
+            "Key": "R5aQa1E",
+            "Value": "Uc5T2cGZcPHIHzWBM"
+          },
+          {},
+          {
+            "Key": "ge",
+            "Value": "JOg7VfbBCGlsF9gHz"
+          },
+          {
+            "Key": "jF1",
+            "Value": "adeebytsexaswysxc"
+          }
+        ],
+        "WhiteListedAddresses": null,
+        "BlackListedAddresses": [
+          {
+            "Format": "RegExp"
+          },
+          {
+            "Address": "devip"
+          },
+          {
+            "Address": "ipsu",
+            "Format": "Wildcard"
+          },
+          {
+            "Address": "G7S5yLU714rxG"
+          },
+          {
+            "Format": "Wildcard"
+          }
+        ],
+        "RunAutocheckAfterScan": false,
+        "ScanScope": "Domain",
+        "Site": "ipsum amet amet"
+      },
+      "DotNetSettings": {
+        "UsePublicAnalysisMethod": true,
+        "DownloadDependencies": false
+      },
+      "PmTaintSettings": null,
+      "PythonSettings": {
+        "UsePublicAnalysisMethod": true,
+        "DependenciesPath": "uTmarjvdmUqJno5Z",
+        "CustomParameters": null
+      },
+      "ScaSettings": null,
+      "BranchName": "kchxffzdjbfadlro",
+      "SkipGitIgnoreFiles": true,
+      "ApplyAllPMRules": false,
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "cz8rYIW4yOYV",
+      "ProgrammingLanguages": [
+        "Java",
+        "Ruby",
+        "Ruby",
+        "Ruby",
+        "Scala"
+      ],
+      "ScanModules": [
+        "Configuration",
+        "PatternMatching",
+        "BlackBox",
+        "BlackBox",
+        "Configuration"
+      ],
+      "DotNetSettings": {
+        "ProjectType": "WebSite",
+        "SolutionFile": null,
+        "UsePublicAnalysisMethod": null,
+        "DownloadDependencies": null,
+        "DslRulesRelativePath": null
+      },
+      "JavaSettings": {
+        "UnpackUserPackages": false,
+        "UserPackagePrefixes": null,
+        "UsePublicAnalysisMethod": null,
+        "DslRulesRelativePath": "lorem sit dolor ad"
+      },
+      "PhpSettings": {
+        "UsePublicAnalysisMethod": false,
+        "CustomParameters": null,
+        "DslRulesRelativePath": "amet lorem "
+      },
+      "PmTaintSettings": null,
+      "PythonSettings": null,
+      "BranchName": "adipiscing ipsum sit",
+      "ApplyAllPMRules": false
+    },
+    {
+      "ProjectName": "LoifTGRfMmSKX",
+      "ProgrammingLanguages": [
+        "Ruby",
+        "Python",
+        "Solidity",
+        "ObjectiveC",
+        "Solidity"
+      ],
+      "ScanModules": [
+        "SoftwareCompositionAnalysis",
+        "Components",
+        "Components",
+        "PatternMatching",
+        "SoftwareCompositionAnalysis"
+      ],
+      "$schema": "6GWDyqam9HC3L8wn5jX",
+      "Version": "1.2",
+      "GoSettings": {
+        "UsePublicAnalysisMethod": true
+      },
+      "JavaSettings": {
+        "Parameters": null,
+        "UnpackUserPackages": true,
+        "DownloadDependencies": true,
+        "DependenciesPath": "ad",
+        "CustomParameters": null
+      },
+      "JavaScriptSettings": {
+        "UsePublicAnalysisMethod": true,
+        "UseJsaAnalysis": null,
+        "CustomParameters": "dvebhpbf",
+        "DslRulesRelativePath": "xf25SyBtOOt2S"
+      },
+      "PhpSettings": {
+        "UsePublicAnalysisMethod": true,
+        "CustomParameters": "42W",
+        "DslRulesRelativePath": "krphrpzrljxirs"
+      },
+      "PygrepSettings": {
+        "RulesDirPath": "1OaFmG68"
+      },
+      "MailingProjectSettings": null,
+      "ScaSettings": null,
+      "BranchName": null,
+      "SkipGitIgnoreFiles": true
+    },
+    {
+      "ProjectName": "7kyvF",
+      "ProgrammingLanguages": [
+        "CSharp (Windows, Linux)",
+        "CAndCPlusPlus",
+        "CSharp (Windows, Linux)",
+        "CSharp (Windows, Linux)",
+        "Sql"
+      ],
+      "ScanModules": [
+        "PatternMatching",
+        "BlackBox",
+        "Configuration",
+        "SoftwareCompositionAnalysis",
+        "SoftwareCompositionAnalysis"
+      ],
+      "Version": "1.4",
+      "JavaSettings": null,
+      "JavaScriptSettings": null,
+      "PmTaintSettings": null,
+      "PygrepSettings": null,
+      "PythonSettings": {
+        "UsePublicAnalysisMethod": true,
+        "DependenciesPath": null,
+        "CustomParameters": null
+      },
+      "MailingProjectSettings": null,
+      "BranchName": "amet adipiscing amet",
+      "ApplyAllPMRules": false
+    },
+    {
+      "ProjectName": "xojbnpxmuilgelneugu",
+      "ProgrammingLanguages": [
+        "ObjectiveC",
+        "Php",
+        "CSharp (Windows, Linux)",
+        "ObjectiveC",
+        "Swift"
+      ],
+      "ScanModules": [
+        "BlackBox",
+        "Components",
+        "Configuration",
+        "SoftwareCompositionAnalysis",
+        "StaticCodeAnalysis"
+      ],
+      "DotNetSettings": null,
+      "GoSettings": {
+        "UsePublicAnalysisMethod": true,
+        "DslRulesRelativePath": null
+      },
+      "JavaSettings": {
+        "Parameters": "c",
+        "UserPackagePrefixes": "kzv",
+        "UsePublicAnalysisMethod": null,
+        "DownloadDependencies": true,
+        "DslRulesRelativePath": null
+      },
+      "JavaScriptSettings": null,
+      "PhpSettings": null,
+      "PygrepSettings": null,
+      "MailingProjectSettings": {
+        "MailProfileName": "ipsum",
+        "EmailRecipients": [
+          "alice562@demo.net",
+          "diana59@test.org",
+          "charlie696@demo.net",
+          "alice287@test.org",
+          "charlie478@test.org"
+        ]
+      },
+      "RubySettings": null,
+      "ScaSettings": null,
+      "ApplyAllPMRules": false
+    },
+    {
+      "ProjectName": "joreh",
+      "ProgrammingLanguages": [
+        "ObjectiveC",
+        "Go",
+        "Go",
+        "Java",
+        "Sql"
+      ],
+      "ScanModules": [
+        "StaticCodeAnalysis",
+        "StaticCodeAnalysis",
+        "StaticCodeAnalysis",
+        "SoftwareCompositionAnalysis",
+        "StaticCodeAnalysis"
+      ],
+      "Version": "1.6",
+      "BlackBoxSettings": {
+        "AdditionalHttpHeaders": [
+          {},
+          {
+            "Key": "snmkmbpvjflpvdujb",
+            "Value": "IBP3ZND6BM"
+          },
+          {},
+          {
+            "Key": "xqnznky"
+          },
+          {
+            "Key": "nxs",
+            "Value": "sit am"
+          }
+        ],
+        "WhiteListedAddresses": null,
+        "BlackListedAddresses": null,
+        "Authentication": {
+          "Cookie": null,
+          "Form": {
+            "FormDetection": "Auto",
+            "FormAddress": "sit consec",
+            "Password": 80.67,
+            "ValidationTemplate": 64.24
+          },
+          "Http": {
+            "Login": "srtyrd",
+            "Password": "ipsum ame",
+            "ValidationAddress": "yqmvhusw"
+          },
+          "Type": "Http"
+        },
+        "RunAutocheckAfterScan": false,
+        "ScanScope": "Domain",
+        "SslCheck": true
+      },
+      "DotNetSettings": null,
+      "PhpSettings": null,
+      "PygrepSettings": null,
+      "MailingProjectSettings": {},
+      "RubySettings": null,
+      "ScaSettings": {
+        "CustomParameters": "wsyo",
+        "BuildDependenciesGraph": null
+      },
+      "BranchName": "swkqk",
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "svrxtrlirmdpzbz",
+      "ProgrammingLanguages": [
+        "Sql",
+        "CSharp (Windows)",
+        "Go",
+        "CAndCPlusPlus",
+        "JavaScript"
+      ],
+      "ScanModules": [
+        "Components",
+        "SoftwareCompositionAnalysis",
+        "PatternMatching",
+        "SoftwareCompositionAnalysis",
+        "StaticCodeAnalysis"
+      ],
+      "Version": "1.3",
+      "BlackBoxSettings": {
+        "AdditionalHttpHeaders": null,
+        "ProxySettings": null,
+        "RunAutocheckAfterScan": false,
+        "ScanScope": "Domain",
+        "Site": "lorem adipiscing "
+      },
+      "DotNetSettings": null,
+      "JavaSettings": {
+        "UnpackUserPackages": false,
+        "UserPackagePrefixes": "ltblbqwooqfkp",
+        "UsePublicAnalysisMethod": false,
+        "DownloadDependencies": null,
+        "CustomParameters": null,
+        "DslRulesRelativePath": "lqGLRNPOEi"
+      },
+      "PythonSettings": {
+        "UsePublicAnalysisMethod": false,
+        "DownloadDependencies": false,
+        "DependenciesPath": null,
+        "CustomParameters": "udllzortpdx"
+      },
+      "MailingProjectSettings": null,
+      "ScaSettings": {
+        "CustomParameters": null
+      },
+      "BranchName": "adipiscing sit adipi",
+      "ApplyAllPMRules": true,
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "t",
+      "ProgrammingLanguages": [
+        "Php",
+        "ObjectiveC",
+        "Python",
+        "Java",
+        "Sql"
+      ],
+      "ScanModules": [
+        "Components",
+        "Configuration",
+        "Components",
+        "Configuration",
+        "Components"
+      ],
+      "$schema": "jbfgzyehblgywbaudeoib",
+      "BlackBoxSettings": {
+        "AdditionalHttpHeaders": null,
+        "BlackListedAddresses": [
+          {},
+          {
+            "Address": "sit lorem sit ips",
+            "Format": "Wildcard"
+          },
+          {
+            "Address": "a",
+            "Format": "ExactMatch"
+          },
+          {},
+          {
+            "Format": "RegExp"
+          }
+        ],
+        "Authentication": null,
+        "Level": "None",
+        "Site": "augauwdfgcxqcuebr",
+        "SslCheck": true
+      },
+      "GoSettings": {
+        "UsePublicAnalysisMethod": null,
+        "CustomParameters": null
+      },
+      "JavaSettings": {
+        "UserPackagePrefixes": null,
+        "Version": "11",
+        "UsePublicAnalysisMethod": true,
+        "DownloadDependencies": true,
+        "DependenciesPath": null,
+        "DslRulesRelativePath": "pxlbnnb"
+      },
+      "JavaScriptSettings": {
+        "UsePublicAnalysisMethod": null,
+        "UseTaintAnalysis": false,
+        "DownloadDependencies": true,
+        "DslRulesRelativePath": "QPaB"
+      },
+      "PhpSettings": null,
+      "PmTaintSettings": {
+        "CustomParameters": null
+      },
+      "MailingProjectSettings": null,
+      "ScaSettings": {
+        "BuildDependenciesGraph": true
+      },
+      "BranchName": null,
+      "SkipGitIgnoreFiles": false,
+      "ApplyAllPMRules": true
+    },
+    {
+      "ProjectName": "X6tVukvUjOvkAxC25o9",
+      "ProgrammingLanguages": [
+        "Go",
+        "JavaScript",
+        "Scala",
+        "Solidity",
+        "CAndCPlusPlus"
+      ],
+      "ScanModules": [
+        "BlackBox",
+        "Configuration",
+        "BlackBox",
+        "StaticCodeAnalysis",
+        "Configuration"
+      ],
+      "$schema": "ztknnt",
+      "DotNetSettings": null,
+      "PmTaintSettings": null,
+      "PygrepSettings": null,
+      "PythonSettings": {
+        "UsePublicAnalysisMethod": false,
+        "DependenciesPath": null,
+        "CustomParameters": null,
+        "DslRulesRelativePath": null
+      },
+      "MailingProjectSettings": null,
+      "RubySettings": {
+        "CustomParameters": null,
+        "DslRulesRelativePath": "qjhwcculq"
+      },
+      "ScaSettings": {
+        "CustomParameters": null,
+        "BuildDependenciesGraph": null
+      },
+      "SkipGitIgnoreFiles": true
+    },
+    {
+      "ProjectName": "adipiscing conse",
+      "ProgrammingLanguages": [
+        "Ruby",
+        "CSharp (Windows, Linux)",
+        "Php",
+        "Ruby",
+        "Swift"
+      ],
+      "ScanModules": [
+        "BlackBox",
+        "PatternMatching",
+        "PatternMatching",
+        "SoftwareCompositionAnalysis",
+        "SoftwareCompositionAnalysis"
+      ],
+      "$schema": "hmdhmbjv",
+      "Version": "1.6",
+      "BlackBoxSettings": {
+        "WhiteListedAddresses": [
+          {
+            "Format": "RegExp"
+          },
+          {
+            "Address": "sit ipsum adipiscing",
+            "Format": "RegExp"
+          },
+          {
+            "Format": "Wildcard"
+          },
+          {
+            "Address": "5YMw9",
+            "Format": "Wildcard"
+          },
+          {
+            "Format": "RegExp"
+          }
+        ],
+        "BlackListedAddresses": null,
+        "ProxySettings": {
+          "Host": null,
+          "Type": "Socks5"
+        },
+        "ScanScope": "Domain",
+        "Site": "cfhu"
+      },
+      "DotNetSettings": null,
+      "PygrepSettings": {
+        "CustomParameters": "lo",
+        "RulesDirPath": null
+      },
+      "PythonSettings": null,
+      "MailingProjectSettings": {
+        "EmailRecipients": [
+          "charlie125@example.com",
+          "charlie549@example.com",
+          "alice196@demo.net",
+          "eve539@sample.io",
+          "alice354@demo.net"
+        ]
+      },
+      "BranchName": null,
+      "SkipGitIgnoreFiles": false,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "tsltylod",
+      "ProgrammingLanguages": [
+        "JavaScript",
+        "Go",
+        "Java",
+        "Sql",
+        "Kotlin"
+      ],
+      "ScanModules": [
+        "BlackBox",
+        "BlackBox",
+        "Components",
+        "Components",
+        "StaticCodeAnalysis"
+      ],
+      "$schema": "djbem",
+      "Version": "1.4",
+      "BlackBoxSettings": null,
+      "DotNetSettings": {
+        "ProjectType": "Solution",
+        "SolutionFile": "bkzzyefczl",
+        "UsePublicAnalysisMethod": null,
+        "DslRulesRelativePath": "adipiscing "
+      },
+      "JavaScriptSettings": null,
+      "PmTaintSettings": null,
+      "RubySettings": null,
+      "ScaSettings": null
+    },
+    {
+      "ProjectName": "crsjz",
+      "ProgrammingLanguages": [
+        "Php",
+        "CSharp (Windows)"
+      ],
+      "ScanModules": [
+        "SoftwareCompositionAnalysis"
+      ],
+      "Version": "1.3",
+      "BlackBoxSettings": null,
+      "DotNetSettings": null,
+      "JavaScriptSettings": {
+        "UseTaintAnalysis": true,
+        "UseJsaAnalysis": true,
+        "DownloadDependencies": true
+      },
+      "PhpSettings": {
+        "DownloadDependencies": true
+      },
+      "PmTaintSettings": {
+        "UsePublicAnalysisMethod": true,
+        "PMGroups": [
+          "endtpxdgbyqdtlku",
+          "syylkI8Kzb5tsS2gen",
+          "gOFgex8A9xugLk6MbMDOL",
+          "7fPE"
+        ]
+      },
+      "PythonSettings": {
+        "UsePublicAnalysisMethod": true,
+        "DependenciesPath": null,
+        "CustomParameters": "o"
+      },
+      "MailingProjectSettings": {
+        "Enabled": true,
+        "MailProfileName": null,
+        "EmailRecipients": [
+          "alice606@test.org",
+          "diana38@demo.net",
+          "diana203@demo.net"
+        ]
+      },
+      "SkipGitIgnoreFiles": false
+    },
+    {
+      "ProjectName": "sit lorem",
+      "ProgrammingLanguages": [
+        "CAndCPlusPlus"
+      ],
+      "ScanModules": [
+        "BlackBox",
+        "StaticCodeAnalysis",
+        "StaticCodeAnalysis"
+      ],
+      "$schema": "r0k32HGe",
+      "Version": "1.0",
+      "GoSettings": {},
+      "JavaSettings": null,
+      "JavaScriptSettings": {
+        "UsePublicAnalysisMethod": null,
+        "UseTaintAnalysis": false,
+        "UseJsaAnalysis": true,
+        "CustomParameters": null
+      },
+      "PhpSettings": null,
+      "PmTaintSettings": null,
+      "MailingProjectSettings": null,
+      "RubySettings": {
+        "UsePublicAnalysisMethod": true,
+        "DslRulesRelativePath": "JmYRLufpqVJ05qjSA"
+      },
+      "BranchName": "usyw",
+      "SkipGitIgnoreFiles": true,
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "pksqrontdncla",
+      "ProgrammingLanguages": [
+        "Go",
+        "Ruby",
+        "Kotlin"
+      ],
+      "ScanModules": [
+        "BlackBox"
+      ],
+      "$schema": "95WC482mzoB0",
+      "Version": "1.5",
+      "BlackBoxSettings": null,
+      "DotNetSettings": null,
+      "JavaSettings": null,
+      "PhpSettings": null,
+      "PmTaintSettings": null,
+      "PygrepSettings": null,
+      "MailingProjectSettings": null,
+      "RubySettings": null,
+      "ScaSettings": {
+        "CustomParameters": null,
+        "BuildDependenciesGraph": null
+      },
+      "BranchName": "cydddw",
+      "ApplyAllPMRules": false
+    },
+    {
+      "ProjectName": "ifkvqso",
+      "ProgrammingLanguages": [
+        "Kotlin"
+      ],
+      "ScanModules": [
+        "PatternMatching",
+        "PatternMatching",
+        "SoftwareCompositionAnalysis"
+      ],
+      "$schema": "sumarrxl",
+      "Version": "1.6",
+      "DotNetSettings": {
+        "ProjectType": "None",
+        "SolutionFile": null,
+        "DownloadDependencies": false,
+        "CustomParameters": "amet consectetur i",
+        "DslRulesRelativePath": "8wmQ3jVyQD6J77h6Vi"
+      },
+      "GoSettings": null,
+      "JavaSettings": null,
+      "JavaScriptSettings": null,
+      "PythonSettings": null,
+      "MailingProjectSettings": {
+        "Enabled": false,
+        "MailProfileName": "lorem ipsum l"
+      },
+      "RubySettings": {
+        "CustomParameters": null,
+        "DslRulesRelativePath": null
+      },
+      "ScaSettings": {
+        "CustomParameters": "mNJItzqIy"
+      },
+      "SkipGitIgnoreFiles": false,
+      "ApplyAllPMRules": true,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "phmkrjnapglgftrr",
+      "ProgrammingLanguages": [
+        "Swift",
+        "CAndCPlusPlus",
+        "Python",
+        "ObjectiveC",
+        "Go"
+      ],
+      "ScanModules": [
+        "BlackBox",
+        "Configuration",
+        "Configuration"
+      ],
+      "$schema": "O4K4XdpP",
+      "Version": "1.0",
+      "DotNetSettings": null,
+      "JavaScriptSettings": null,
+      "PhpSettings": {
+        "UsePublicAnalysisMethod": true,
+        "DownloadDependencies": null,
+        "CustomParameters": null
+      },
+      "PmTaintSettings": {
+        "UsePublicAnalysisMethod": null,
+        "PMGroups": [
+          "sit sit sit",
+          "lorem ",
+          "y",
+          "sit consecte"
+        ],
+        "CustomParameters": null
+      },
+      "PygrepSettings": {},
+      "PythonSettings": {
+        "UsePublicAnalysisMethod": true,
+        "DownloadDependencies": false,
+        "DependenciesPath": "B8Wr6ZJB05Pt2O5YQ3",
+        "CustomParameters": "iZHCHs0rpMEtfBz",
+        "DslRulesRelativePath": "l"
+      },
+      "MailingProjectSettings": null,
+      "ScaSettings": {
+        "CustomParameters": "Zf6lKOIRsoO6dg9diFtR",
+        "BuildDependenciesGraph": true
+      },
+      "BranchName": "zjfbezyyebz"
+    },
+    {
+      "ProjectName": "v",
+      "ProgrammingLanguages": [
+        "Java",
+        "Swift"
+      ],
+      "ScanModules": [
+        "BlackBox",
+        "Components",
+        "PatternMatching",
+        "Configuration"
+      ],
+      "Version": "1.4",
+      "BlackBoxSettings": null,
+      "DotNetSettings": null,
+      "GoSettings": null,
+      "JavaSettings": null,
+      "PhpSettings": null,
+      "PmTaintSettings": {},
+      "PygrepSettings": null,
+      "RubySettings": {
+        "UsePublicAnalysisMethod": null,
+        "CustomParameters": "vdxemccrvcippdscy"
+      },
+      "SkipGitIgnoreFiles": true,
+      "ApplyAllPMRules": true
+    },
+    {
+      "ProjectName": "u7McGGGK",
+      "ProgrammingLanguages": [
+        "Solidity",
+        "Ruby",
+        "Scala",
+        "Python"
+      ],
+      "ScanModules": [
+        "SoftwareCompositionAnalysis",
+        "Configuration"
+      ],
+      "Version": "1.7",
+      "BlackBoxSettings": null,
+      "GoSettings": null,
+      "JavaScriptSettings": {
+        "UseTaintAnalysis": true,
+        "CustomParameters": "sit adipisci",
+        "DslRulesRelativePath": null
+      },
+      "PhpSettings": null,
+      "PmTaintSettings": null,
+      "PygrepSettings": null,
+      "PythonSettings": {
+        "UsePublicAnalysisMethod": null,
+        "DownloadDependencies": false,
+        "DependenciesPath": null,
+        "CustomParameters": null
+      },
+      "MailingProjectSettings": {
+        "MailProfileName": "amet lorem l"
+      },
+      "RubySettings": null,
+      "ScaSettings": null,
+      "BranchName": "yh9Be"
+    },
+    {
+      "ProjectName": "lorem lore",
+      "ProgrammingLanguages": [
+        "JavaScript",
+        "Kotlin",
+        "Scala",
+        "Kotlin"
+      ],
+      "ScanModules": [
+        "SoftwareCompositionAnalysis",
+        "BlackBox"
+      ],
+      "$schema": "jrYkE4pljn8i6ZQamu",
+      "Version": "1.4",
+      "BlackBoxSettings": {
+        "AdditionalHttpHeaders": null,
+        "BlackListedAddresses": [
+          {
+            "Format": "RegExp"
+          },
+          {},
+          {
+            "Format": "RegExp"
+          }
+        ],
+        "ProxySettings": {
+          "Host": "KdeLbi673s8xYs6kdm",
+          "Password": null
+        },
+        "ScanScope": "Path",
+        "Site": "KE3Wt3uFgQdj25",
+        "SslCheck": false
+      },
+      "DotNetSettings": {
+        "ProjectType": "Solution",
+        "SolutionFile": null,
+        "UsePublicAnalysisMethod": null,
+        "CustomParameters": null
+      },
+      "JavaScriptSettings": null,
+      "MailingProjectSettings": null,
+      "RubySettings": {
+        "CustomParameters": null,
+        "DslRulesRelativePath": "consectetur"
+      },
+      "SkipGitIgnoreFiles": true,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "sUhi77q2A5ed7GE7Ygzk",
+      "ProgrammingLanguages": [
+        "Python",
+        "CSharp (Windows)",
+        "Swift",
+        "CAndCPlusPlus"
+      ],
+      "ScanModules": [],
+      "$schema": "dolor ipsum amet dol",
+      "Version": "1.0",
+      "BlackBoxSettings": {
+        "AdditionalHttpHeaders": [],
+        "BlackListedAddresses": [
+          {
+            "Address": "thbtja",
+            "Format": "Wildcard"
+          },
+          {
+            "Address": "adipiscin",
+            "Format": "ExactMatch"
+          }
+        ],
+        "Authentication": {
+          "Cookie": null,
+          "Form": null,
+          "Type": "RawCookie"
+        },
+        "Level": "None",
+        "ScanScope": "Folder",
+        "Site": "consectetur ",
+        "SslCheck": true
+      },
+      "DotNetSettings": null,
+      "GoSettings": {
+        "UsePublicAnalysisMethod": null,
+        "CustomParameters": "wf",
+        "DslRulesRelativePath": "qhnavn"
+      },
+      "JavaScriptSettings": null,
+      "PhpSettings": null,
+      "PygrepSettings": {},
+      "PythonSettings": null,
+      "MailingProjectSettings": null,
+      "RubySettings": {
+        "UsePublicAnalysisMethod": true,
+        "CustomParameters": null
+      },
+      "ScaSettings": {
+        "CustomParameters": null,
+        "BuildDependenciesGraph": false
+      },
+      "SkipGitIgnoreFiles": false,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "ipsum co",
+      "ProgrammingLanguages": [
+        "ObjectiveC",
+        "Sql",
+        "CSharp (Windows, Linux)",
+        "Sql"
+      ],
+      "ScanModules": [
+        "StaticCodeAnalysis",
+        "BlackBox",
+        "BlackBox",
+        "PatternMatching"
+      ],
+      "Version": "1.5",
+      "BlackBoxSettings": {
+        "AdditionalHttpHeaders": null,
+        "WhiteListedAddresses": [
+          {
+            "Address": "N4DI62",
+            "Format": "Wildcard"
+          },
+          {
+            "Address": "afi",
+            "Format": "ExactMatch"
+          },
+          {
+            "Address": "4R6ar3Kuq09OU"
+          },
+          {
+            "Format": "ExactMatch"
+          },
+          {}
+        ],
+        "Authentication": null,
+        "Level": "Full",
+        "ProxySettings": null,
+        "RunAutocheckAfterScan": false,
+        "Site": "ipsum sit a",
+        "SslCheck": false
+      },
+      "DotNetSettings": null,
+      "GoSettings": {
+        "UsePublicAnalysisMethod": false,
+        "CustomParameters": "lorem lorem consecte"
+      },
+      "JavaSettings": null,
+      "PhpSettings": null,
+      "PmTaintSettings": {
+        "UsePublicAnalysisMethod": true,
+        "PMGroups": [
+          "ip"
+        ],
+        "CustomParameters": "sftdtnpxokhqtmpsnbpb"
+      },
+      "PygrepSettings": {
+        "CustomParameters": "UJ",
+        "RulesDirPath": null
+      },
+      "RubySettings": {
+        "CustomParameters": "consectetur ad"
+      },
+      "BranchName": "ruuxatvkjdherifzcqb",
+      "ApplyAllPMRules": true,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "lorem dolor consectet",
+      "ProgrammingLanguages": [
+        "Swift",
+        "CAndCPlusPlus",
+        "Go",
+        "Python"
+      ],
+      "ScanModules": [
+        "StaticCodeAnalysis",
+        "Components",
+        "StaticCodeAnalysis",
+        "SoftwareCompositionAnalysis"
+      ],
+      "DotNetSettings": null,
+      "GoSettings": {
+        "DslRulesRelativePath": "lcewraucaxx"
+      },
+      "JavaSettings": {
+        "Parameters": "adipiscin",
+        "UnpackUserPackages": true,
+        "Version": "11",
+        "UsePublicAnalysisMethod": null,
+        "DependenciesPath": "dolor "
+      },
+      "PythonSettings": {
+        "DownloadDependencies": null,
+        "DslRulesRelativePath": "qhjieks"
+      },
+      "MailingProjectSettings": {
+        "Enabled": false,
+        "MailProfileName": "34",
+        "EmailRecipients": [
+          "bob593@test.org",
+          "frank735@sample.io",
+          "charlie70@demo.net"
+        ]
+      },
+      "RubySettings": null,
+      "BranchName": null,
+      "SkipGitIgnoreFiles": true,
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "consectetu",
+      "ProgrammingLanguages": [
+        "Ruby",
+        "ObjectiveC",
+        "CSharp (Windows, Linux)",
+        "CSharp (Windows, Linux)"
+      ],
+      "ScanModules": [
+        "SoftwareCompositionAnalysis",
+        "Components",
+        "Components"
+      ],
+      "$schema": "amet dolo",
+      "Version": "1.6",
+      "DotNetSettings": null,
+      "GoSettings": null,
+      "JavaSettings": null,
+      "PmTaintSettings": {
+        "PMGroups": [
+          "ldkgljuDxwGo7oNyHa92",
+          "a",
+          "ZhUkr6vIOBY7JwYqc2pdQ",
+          "k"
+        ],
+        "CustomParameters": null
+      },
+      "PygrepSettings": {
+        "CustomParameters": "llipqgebspcwsaram"
+      },
+      "MailingProjectSettings": {
+        "MailProfileName": "dolor dol"
+      },
+      "RubySettings": null,
+      "ScaSettings": {
+        "CustomParameters": null,
+        "BuildDependenciesGraph": null
+      },
+      "SkipGitIgnoreFiles": true,
+      "ApplyAllPMRules": false
+    },
+    {
+      "ProjectName": "adipiscing adipis",
+      "ProgrammingLanguages": [
+        "CSharp (Windows, Linux)",
+        "Python",
+        "Ruby"
+      ],
+      "ScanModules": [
+        "Components"
+      ],
+      "BlackBoxSettings": {
+        "BlackListedAddresses": [
+          {
+            "Address": "adipisc",
+            "Format": "Wildcard"
+          },
+          {
+            "Format": "ExactMatch"
+          }
+        ],
+        "Level": "Normal",
+        "SslCheck": true
+      },
+      "DotNetSettings": null,
+      "PhpSettings": null,
+      "PmTaintSettings": null,
+      "PygrepSettings": null,
+      "PythonSettings": null,
+      "MailingProjectSettings": null,
+      "RubySettings": null,
+      "ScaSettings": null,
+      "BranchName": "GYj05eNog8p",
+      "SkipGitIgnoreFiles": true
+    },
+    {
+      "ProjectName": "adi",
+      "ProgrammingLanguages": [
+        "Scala",
+        "CSharp (Windows)",
+        "Go",
+        "Ruby",
+        "CAndCPlusPlus"
+      ],
+      "ScanModules": [
+        "BlackBox"
+      ],
+      "$schema": "P8YLXbA1UBovAh6OGltzj",
+      "Version": "1.5",
+      "BlackBoxSettings": {
+        "AdditionalHttpHeaders": [
+          {
+            "Key": "ipsum adipiscing co",
+            "Value": "adipiscing am"
+          },
+          {
+            "Key": "ipsum ip"
+          },
+          {
+            "Value": "wupuiphkjmalm"
+          },
+          {},
+          {
+            "Key": "hN4eGXDD1PinQ",
+            "Value": "adipiscing ipsum cons"
+          }
+        ],
+        "BlackListedAddresses": [
+          {
+            "Address": "ip"
+          },
+          {
+            "Address": "wghsdzokmbftnemefp",
+            "Format": "ExactMatch"
+          },
+          {
+            "Format": "RegExp"
+          },
+          {}
+        ],
+        "ProxySettings": {
+          "Host": null,
+          "Login": "b0bySajbiK",
+          "Type": "Socks4"
+        },
+        "Site": "B6B5Pj8bQt7plpSyL4S"
+      },
+      "DotNetSettings": {
+        "ProjectType": "None",
+        "SolutionFile": null,
+        "UsePublicAnalysisMethod": null,
+        "DownloadDependencies": true
+      },
+      "GoSettings": {
+        "CustomParameters": null,
+        "DslRulesRelativePath": null
+      },
+      "JavaSettings": {
+        "Parameters": null,
+        "UserPackagePrefixes": "jFtaQSkkXRPG2rIwD",
+        "Version": "21",
+        "UsePublicAnalysisMethod": null,
+        "DownloadDependencies": null,
+        "DependenciesPath": null,
+        "DslRulesRelativePath": null
+      },
+      "PhpSettings": {
+        "UsePublicAnalysisMethod": null,
+        "DownloadDependencies": false,
+        "DslRulesRelativePath": null
+      },
+      "PythonSettings": null,
+      "RubySettings": null,
+      "ScaSettings": {
+        "BuildDependenciesGraph": null
+      },
+      "BranchName": "dol",
+      "SkipGitIgnoreFiles": true,
+      "ApplyAllPMRules": false,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "adipiscing adipis",
+      "ProgrammingLanguages": [
+        "Swift"
+      ],
+      "ScanModules": [
+        "SoftwareCompositionAnalysis",
+        "StaticCodeAnalysis",
+        "Components",
+        "Configuration",
+        "BlackBox"
+      ],
+      "$schema": "xMiuWDy8",
+      "Version": "1.7",
+      "DotNetSettings": null,
+      "JavaSettings": {
+        "Parameters": "jwef8bmDWwMan",
+        "UnpackUserPackages": true,
+        "UserPackagePrefixes": "vbquzuyqwtgsqngyvuge",
+        "Version": "21",
+        "UsePublicAnalysisMethod": true,
+        "DownloadDependencies": true,
+        "DslRulesRelativePath": "wmeedpccbluktjrhczqcz"
+      },
+      "JavaScriptSettings": {
+        "UsePublicAnalysisMethod": true,
+        "UseTaintAnalysis": false,
+        "DslRulesRelativePath": "Ts4l8DcgP4fbuWm"
+      },
+      "PhpSettings": null,
+      "PmTaintSettings": null,
+      "PygrepSettings": null,
+      "PythonSettings": null,
+      "BranchName": "ixzhhawivfz",
+      "SkipGitIgnoreFiles": false,
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "co",
+      "ProgrammingLanguages": [
+        "CSharp (Windows, Linux)",
+        "Solidity"
+      ],
+      "ScanModules": [],
+      "$schema": "0juupaBfLetB4fiWb4",
+      "Version": "1.4",
+      "BlackBoxSettings": {
+        "WhiteListedAddresses": null,
+        "BlackListedAddresses": null,
+        "Authentication": null,
+        "Site": "bUlY4OkuyeCJul",
+        "SslCheck": false
+      },
+      "DotNetSettings": null,
+      "JavaSettings": {
+        "UsePublicAnalysisMethod": true,
+        "DownloadDependencies": false,
+        "CustomParameters": null,
+        "DslRulesRelativePath": null
+      },
+      "JavaScriptSettings": null,
+      "PythonSettings": {
+        "UsePublicAnalysisMethod": null,
+        "DownloadDependencies": null,
+        "CustomParameters": "g",
+        "DslRulesRelativePath": "N82zSQxoe2dGHj"
+      },
+      "BranchName": "nqukbdrjwtzrhuanwn",
+      "SkipGitIgnoreFiles": true,
+      "ApplyAllPMRules": false,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "k7zWbk8Yb",
+      "ProgrammingLanguages": [
+        "Go",
+        "ObjectiveC",
+        "Java"
+      ],
+      "ScanModules": [
+        "Components"
+      ],
+      "$schema": "dolor conse",
+      "Version": "1.6",
+      "BlackBoxSettings": null,
+      "GoSettings": {
+        "UsePublicAnalysisMethod": true,
+        "DslRulesRelativePath": null
+      },
+      "JavaScriptSettings": {
+        "UseTaintAnalysis": null,
+        "DownloadDependencies": false
+      },
+      "PmTaintSettings": {
+        "PMGroups": [
+          "amet consectetur ",
+          "smkeaiymemtvjpbv",
+          "dolor sit ame",
+          "NVfcTgk"
+        ],
+        "CustomParameters": null
+      },
+      "PygrepSettings": null,
+      "PythonSettings": null,
+      "SkipGitIgnoreFiles": true,
+      "ApplyAllPMRules": false,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "consecte",
+      "ProgrammingLanguages": [
+        "CSharp (Windows)",
+        "Python",
+        "CSharp (Windows)",
+        "Go",
+        "JavaScript"
+      ],
+      "ScanModules": [
+        "SoftwareCompositionAnalysis",
+        "Configuration",
+        "Configuration",
+        "SoftwareCompositionAnalysis"
+      ],
+      "Version": "1.6",
+      "GoSettings": null,
+      "PygrepSettings": null,
+      "PythonSettings": {
+        "DownloadDependencies": true,
+        "DependenciesPath": null,
+        "CustomParameters": null
+      },
+      "MailingProjectSettings": null,
+      "BranchName": "togpnslothj",
+      "SkipGitIgnoreFiles": false,
+      "ApplyAllPMRules": false
+    },
+    {
+      "ProjectName": "amet ipsum ipsum ad",
+      "ProgrammingLanguages": [
+        "CSharp (Windows)"
+      ],
+      "ScanModules": [
+        "Components",
+        "SoftwareCompositionAnalysis",
+        "PatternMatching",
+        "Configuration",
+        "SoftwareCompositionAnalysis"
+      ],
+      "Version": "1.5",
+      "BlackBoxSettings": null,
+      "DotNetSettings": null,
+      "GoSettings": null,
+      "JavaSettings": {
+        "UnpackUserPackages": true,
+        "UserPackagePrefixes": null,
+        "Version": "11",
+        "DownloadDependencies": true,
+        "CustomParameters": null
+      },
+      "JavaScriptSettings": {
+        "CustomParameters": "SqZcXbQjS0W6Ges",
+        "DslRulesRelativePath": null
+      },
+      "PhpSettings": null,
+      "PygrepSettings": null,
+      "PythonSettings": {
+        "DependenciesPath": "pzpwgjmzzortntkowve",
+        "CustomParameters": "M9YfbkcgS9qh5RLttX1km",
+        "DslRulesRelativePath": null
+      },
+      "MailingProjectSettings": null,
+      "RubySettings": {
+        "UsePublicAnalysisMethod": null,
+        "CustomParameters": "ayjowe",
+        "DslRulesRelativePath": "sXXiYoKPRo"
+      },
+      "ScaSettings": {
+        "CustomParameters": "pac",
+        "BuildDependenciesGraph": null
+      },
+      "ApplyAllPMRules": false
+    },
+    {
+      "ProjectName": "pv",
+      "ProgrammingLanguages": [],
+      "ScanModules": [],
+      "$schema": "sP5t6t7",
+      "BlackBoxSettings": null,
+      "DotNetSettings": {
+        "SolutionFile": "k"
+      },
+      "GoSettings": {
+        "UsePublicAnalysisMethod": null,
+        "CustomParameters": null,
+        "DslRulesRelativePath": null
+      },
+      "JavaSettings": null,
+      "JavaScriptSettings": {
+        "UseTaintAnalysis": null,
+        "CustomParameters": "locsu",
+        "DslRulesRelativePath": "IMxa"
+      },
+      "PhpSettings": {
+        "UsePublicAnalysisMethod": false,
+        "DownloadDependencies": null,
+        "DslRulesRelativePath": null
+      },
+      "PythonSettings": null,
+      "MailingProjectSettings": null,
+      "RubySettings": null,
+      "ScaSettings": null,
+      "BranchName": "ipsum lorem lorem",
+      "ApplyAllPMRules": false,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "wD9tHNJ3",
+      "ProgrammingLanguages": [
+        "CSharp (Windows, Linux)",
+        "Ruby"
+      ],
+      "ScanModules": [],
+      "$schema": "consectetur ",
+      "BlackBoxSettings": null,
+      "GoSettings": null,
+      "JavaSettings": null,
+      "PmTaintSettings": {
+        "UsePublicAnalysisMethod": null,
+        "PMGroups": [
+          "consectetur dol",
+          "consectetur",
+          "qtYV6zYAPEV4pO",
+          "lXL"
+        ]
+      },
+      "PygrepSettings": {
+        "CustomParameters": null
+      },
+      "MailingProjectSettings": null,
+      "RubySettings": {
+        "DslRulesRelativePath": "sit co"
+      },
+      "ScaSettings": null,
+      "ApplyAllPMRules": true,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "nbxskfwgsdrhgymplyg",
+      "ProgrammingLanguages": [
+        "Sql",
+        "Sql"
+      ],
+      "ScanModules": [],
+      "BlackBoxSettings": {
+        "WhiteListedAddresses": [
+          {
+            "Format": "Wildcard"
+          },
+          {
+            "Address": "wcndxelqtixjxijrn",
+            "Format": "RegExp"
+          }
+        ],
+        "Authentication": {
+          "Cookie": null,
+          "Http": {
+            "Login": "PacyaSlsQzXxJFDMySGT",
+            "Password": "hqkfumqwwgqusxok",
+            "ValidationAddress": "ZMvKpCwqGII9iDaXFLb49"
+          }
+        },
+        "Level": "Normal",
+        "ProxySettings": null,
+        "Site": "aswwprxijohc"
+      },
+      "DotNetSettings": null,
+      "GoSettings": {},
+      "JavaScriptSettings": {
+        "UsePublicAnalysisMethod": null,
+        "UseTaintAnalysis": null,
+        "UseJsaAnalysis": true,
+        "CustomParameters": "lorem consectetur co"
+      },
+      "PmTaintSettings": {
+        "UsePublicAnalysisMethod": false
+      },
+      "PygrepSettings": {
+        "CustomParameters": null
+      },
+      "MailingProjectSettings": null,
+      "ScaSettings": {
+        "BuildDependenciesGraph": null
+      },
+      "BranchName": "rm",
+      "SkipGitIgnoreFiles": true,
+      "ApplyAllPMRules": true,
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "WOBCwKnv62SI69Ybb",
+      "ProgrammingLanguages": [
+        "CSharp (Windows)",
+        "Java"
+      ],
+      "ScanModules": [
+        "PatternMatching",
+        "PatternMatching",
+        "BlackBox",
+        "PatternMatching",
+        "SoftwareCompositionAnalysis"
+      ],
+      "$schema": "lorem consect",
+      "BlackBoxSettings": {
+        "WhiteListedAddresses": [
+          {}
+        ],
+        "BlackListedAddresses": null,
+        "Authentication": null,
+        "ProxySettings": {
+          "Enabled": true,
+          "Host": "zlufdn"
+        }
+      },
+      "DotNetSettings": null,
+      "GoSettings": {
+        "CustomParameters": "Kh3wrw3JyZw3Wey"
+      },
+      "JavaSettings": null,
+      "PygrepSettings": {
+        "RulesDirPath": "OqWP"
+      },
+      "PythonSettings": {
+        "DownloadDependencies": false,
+        "DslRulesRelativePath": null
+      },
+      "BranchName": "ljvfobb",
+      "SkipGitIgnoreFiles": true
+    },
+    {
+      "ProjectName": "FybWhJ7SnQQ",
+      "ProgrammingLanguages": [
+        "Swift",
+        "Sql",
+        "Php"
+      ],
+      "ScanModules": [
+        "StaticCodeAnalysis"
+      ],
+      "$schema": "sufltb",
+      "DotNetSettings": {
+        "UsePublicAnalysisMethod": true
+      },
+      "GoSettings": {},
+      "JavaSettings": {
+        "Parameters": "i",
+        "UserPackagePrefixes": null,
+        "CustomParameters": null
+      },
+      "JavaScriptSettings": null,
+      "PmTaintSettings": null,
+      "PythonSettings": {
+        "DependenciesPath": null,
+        "CustomParameters": "jzFFd",
+        "DslRulesRelativePath": "lorem dolor ame"
+      },
+      "MailingProjectSettings": {
+        "EmailRecipients": [
+          "frank826@test.org",
+          "charlie607@sample.io",
+          "diana235@example.com",
+          "frank163@test.org"
+        ]
+      },
+      "BranchName": "qtunexqnwvpkfbbar",
+      "SkipGitIgnoreFiles": false,
+      "ApplyAllPMRules": false
+    },
+    {
+      "ProjectName": "lorem ipsum lo",
+      "ProgrammingLanguages": [],
+      "ScanModules": [
+        "Configuration",
+        "Components",
+        "PatternMatching",
+        "BlackBox"
+      ],
+      "$schema": "amet dolor amet",
+      "JavaSettings": null,
+      "JavaScriptSettings": null,
+      "PhpSettings": {
+        "UsePublicAnalysisMethod": true,
+        "CustomParameters": null
+      },
+      "PmTaintSettings": {},
+      "PygrepSettings": {
+        "CustomParameters": null,
+        "RulesDirPath": null
+      },
+      "MailingProjectSettings": {
+        "Enabled": false
+      },
+      "ScaSettings": {
+        "CustomParameters": null
+      },
+      "BranchName": "amet consectetur con",
+      "SkipGitIgnoreFiles": false,
+      "ApplyAllPMRules": true
+    },
+    {
+      "ProjectName": "tMV2RU2cfr58nxAf",
+      "ProgrammingLanguages": [
+        "Java"
+      ],
+      "ScanModules": [
+        "BlackBox",
+        "SoftwareCompositionAnalysis",
+        "StaticCodeAnalysis"
+      ],
+      "Version": "1.2",
+      "GoSettings": null,
+      "JavaSettings": {
+        "UnpackUserPackages": false,
+        "UsePublicAnalysisMethod": null,
+        "DownloadDependencies": false,
+        "DependenciesPath": null,
+        "DslRulesRelativePath": "Boyqy3G46bpow"
+      },
+      "JavaScriptSettings": {
+        "UsePublicAnalysisMethod": null,
+        "UseJsaAnalysis": true,
+        "DownloadDependencies": null,
+        "DslRulesRelativePath": null
+      },
+      "PhpSettings": null,
+      "PmTaintSettings": {
+        "UsePublicAnalysisMethod": null,
+        "PMGroups": [
+          "s",
+          "rlqxvk"
+        ]
+      },
+      "MailingProjectSettings": {},
+      "BranchName": "sit dolor dol",
+      "SkipGitIgnoreFiles": true,
+      "ApplyAllPMRules": false,
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "SISNhOE7n7L97gT7",
+      "ProgrammingLanguages": [
+        "Ruby",
+        "JavaScript",
+        "JavaScript",
+        "Scala",
+        "CSharp (Windows, Linux)"
+      ],
+      "ScanModules": [
+        "StaticCodeAnalysis",
+        "SoftwareCompositionAnalysis",
+        "SoftwareCompositionAnalysis",
+        "BlackBox",
+        "SoftwareCompositionAnalysis"
+      ],
+      "BlackBoxSettings": null,
+      "PhpSettings": null,
+      "RubySettings": {
+        "UsePublicAnalysisMethod": null,
+        "CustomParameters": null
+      },
+      "BranchName": null,
+      "SkipGitIgnoreFiles": false,
+      "ApplyAllPMRules": true,
+      "UseSecurityPolicies": true
+    },
+    {
+      "ProjectName": "pmvdhpdqjvhv",
+      "ProgrammingLanguages": [
+        "Solidity",
+        "JavaScript"
+      ],
+      "ScanModules": [
+        "Configuration",
+        "Components"
+      ],
+      "$schema": "ycgtrctzc",
+      "BlackBoxSettings": null,
+      "DotNetSettings": {
+        "SolutionFile": "ipsum dolo",
+        "UsePublicAnalysisMethod": null,
+        "CustomParameters": null,
+        "DslRulesRelativePath": null
+      },
+      "GoSettings": {
+        "UsePublicAnalysisMethod": null,
+        "CustomParameters": null
+      },
+      "JavaSettings": {
+        "Parameters": "jnPQnE1GX5CibL7",
+        "UserPackagePrefixes": null,
+        "UsePublicAnalysisMethod": true,
+        "DependenciesPath": null,
+        "CustomParameters": "QD5kQxcAPuK",
+        "DslRulesRelativePath": "gcukzzhingnevyepug"
+      },
+      "PhpSettings": {
+        "DownloadDependencies": false,
+        "CustomParameters": "neqbvjhqlpdzttalfks",
+        "DslRulesRelativePath": null
+      },
+      "PygrepSettings": null,
+      "PythonSettings": null,
+      "RubySettings": null,
+      "ScaSettings": {
+        "CustomParameters": null
+      },
+      "BranchName": "mljlyhhnr",
+      "SkipGitIgnoreFiles": false
+    },
+    {
+      "ProjectName": "dEmRkEkdLm3LrwERbZS",
+      "ProgrammingLanguages": [
+        "Ruby",
+        "Ruby",
+        "Java",
+        "Sql"
+      ],
+      "ScanModules": [],
+      "$schema": "mp2PUYqNdHH",
+      "Version": "1.8",
+      "DotNetSettings": null,
+      "GoSettings": {
+        "UsePublicAnalysisMethod": false,
+        "DslRulesRelativePath": "lklslmei"
+      },
+      "JavaSettings": null,
+      "JavaScriptSettings": {
+        "UsePublicAnalysisMethod": false,
+        "UseJsaAnalysis": null,
+        "CustomParameters": "m",
+        "DslRulesRelativePath": "cxplykxsjodzlcvvlea"
+      },
+      "PmTaintSettings": {
+        "UsePublicAnalysisMethod": null,
+        "PMGroups": [
+          "5WB",
+          "6GUXW7UgqGLzSPwtj5m",
+          "adipiscing amet ips",
+          "zBVnf61BcAn7Z",
+          "PnMLPkmcTnKEOk8f"
+        ],
+        "CustomParameters": "kirymvvraseylqouirz"
+      },
+      "PygrepSettings": {
+        "CustomParameters": null
+      },
+      "ScaSettings": null,
+      "BranchName": null,
+      "SkipGitIgnoreFiles": false,
+      "ApplyAllPMRules": true
+    },
+    {
+      "ProjectName": "dol",
+      "ProgrammingLanguages": [
+        "Php"
+      ],
+      "ScanModules": [
+        "BlackBox",
+        "Configuration",
+        "PatternMatching"
+      ],
+      "Version": "1.6",
+      "DotNetSettings": {
+        "SolutionFile": "r",
+        "DownloadDependencies": true,
+        "CustomParameters": null
+      },
+      "JavaScriptSettings": {
+        "UseTaintAnalysis": true,
+        "UseJsaAnalysis": false,
+        "DownloadDependencies": null,
+        "CustomParameters": null
+      },
+      "PhpSettings": null,
+      "PmTaintSettings": null,
+      "PygrepSettings": null,
+      "MailingProjectSettings": null,
+      "RubySettings": null,
+      "ApplyAllPMRules": false
+    },
+    {
+      "ProjectName": "6sGqlYk",
+      "ProgrammingLanguages": [
+        "Sql",
+        "Ruby",
+        "Php",
+        "CSharp (Windows, Linux)",
+        "Sql"
+      ],
+      "ScanModules": [
+        "StaticCodeAnalysis",
+        "Configuration",
+        "Components"
+      ],
+      "Version": "1.5",
+      "BlackBoxSettings": null,
+      "GoSettings": null,
+      "PmTaintSettings": {
+        "PMGroups": [
+          "uqnarngcqpanf",
+          "xcvdfcjhuy",
+          "ipsum amet ",
+          "GOTxBAHS"
+        ],
+        "CustomParameters": null
+      },
+      "PygrepSettings": null,
+      "PythonSettings": {
+        "DependenciesPath": "sit lorem adipi",
+        "CustomParameters": "nExNun46Rzh6DzF"
+      },
+      "MailingProjectSettings": null,
+      "RubySettings": null,
+      "ScaSettings": null,
+      "BranchName": null,
+      "UseSecurityPolicies": false
+    },
+    {
+      "ProjectName": "q",
+      "ProgrammingLanguages": [
+        "Scala",
+        "Scala",
+        "Solidity",
+        "Kotlin"
+      ],
+      "ScanModules": [
+        "SoftwareCompositionAnalysis",
+        "StaticCodeAnalysis"
+      ],
+      "$schema": "jxdvwhfhmia",
+      "Version": "1.5",
+      "BlackBoxSettings": {
+        "WhiteListedAddresses": [],
+        "BlackListedAddresses": null,
+        "Level": "None",
+        "RunAutocheckAfterScan": false,
+        "Site": "ajsnygcyhmszj",
+        "SslCheck": false
+      },
+      "GoSettings": {
+        "CustomParameters": null,
+        "DslRulesRelativePath": "owN5tqWIPTWa"
+      },
+      "JavaSettings": {
+        "Parameters": null,
+        "UnpackUserPackages": false,
+        "UserPackagePrefixes": null,
+        "Version": "21",
+        "CustomParameters": "wmsfymqcofpqlcstfscp",
+        "DslRulesRelativePath": "oerdloozvumk"
+      },
+      "JavaScriptSettings": {
+        "UsePublicAnalysisMethod": null,
+        "UseTaintAnalysis": null,
+        "DslRulesRelativePath": null
+      },
+      "PhpSettings": {
+        "DownloadDependencies": false,
+        "CustomParameters": null
+      },
+      "PmTaintSettings": {
+        "UsePublicAnalysisMethod": null,
+        "PMGroups": [
+          "goehamexdbyiaku",
+          "dggh",
+          "dwdqyaciuplbxxkf",
+          "qaquhnbntbigatjdz"
+        ]
+      },
+      "PygrepSettings": null,
+      "PythonSettings": {
+        "UsePublicAnalysisMethod": false,
+        "DownloadDependencies": null,
+        "CustomParameters": "l",
+        "DslRulesRelativePath": null
+      },
+      "MailingProjectSettings": {
+        "Enabled": true
+      },
+      "SkipGitIgnoreFiles": false,
+      "ApplyAllPMRules": false
+    },
+    {
+      "ProjectName": "lore",
+      "ProgrammingLanguages": [
+        "Java",
+        "Kotlin",
+        "Sql",
+        "Php",
+        "Java"
+      ],
+      "ScanModules": [
+        "Components",
+        "SoftwareCompositionAnalysis",
+        "PatternMatching",
+        "SoftwareCompositionAnalysis"
+      ],
+      "$schema": "fe",
+      "GoSettings": null,
+      "JavaSettings": null,
+      "JavaScriptSettings": null,
+      "PmTaintSettings": {
+        "CustomParameters": "IQxtSol"
+      },
+      "PygrepSettings": null,
+      "RubySettings": null,
+      "SkipGitIgnoreFiles": false
+    },
+    {
+      "ProjectName": "pmomyqazignqmoeio",
+      "ProgrammingLanguages": [
+        "Sql",
+        "CAndCPlusPlus",
+        "JavaScript",
+        "Swift"
+      ],
+      "ScanModules": [
+        "PatternMatching",
+        "BlackBox",
+        "PatternMatching",
+        "BlackBox"
+      ],
+      "$schema": "utronqlchiqvmkjor",
+      "Version": "1.4",
+      "BlackBoxSettings": null,
+      "DotNetSettings": null,
+      "GoSettings": null,
+      "PhpSettings": null,
+      "PmTaintSettings": {
+        "PMGroups": [
+          "AGl",
+          "hezxftpwesxseewtep",
+          "pco",
+          "adipis",
+          "VuR5x5aZazt4t"
+        ],
+        "CustomParameters": "tugambobyttqigro"
+      },
+      "PygrepSettings": null,
+      "PythonSettings": null,
+      "MailingProjectSettings": {
+        "Enabled": false,
+        "MailProfileName": "c"
+      },
+      "ScaSettings": {
+        "CustomParameters": null,
+        "BuildDependenciesGraph": true
+      },
+      "ApplyAllPMRules": true,
+      "UseSecurityPolicies": false
+    }
+  ]
+}

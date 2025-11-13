@@ -1,0 +1,2047 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "build-changelog",
+    "description": "Schema for changelog files.",
+    "type": "object",
+    "properties": {
+      "added": {
+        "$ref": "#/definitions/change_entry",
+        "description": "Changes where you add to the project."
+      },
+      "changed": {
+        "$ref": "#/definitions/change_entry",
+        "description": "Changes where you changed functionality."
+      },
+      "removed": {
+        "$ref": "#/definitions/change_entry",
+        "description": "Changes where you removed a feature or something else."
+      },
+      "fixed": {
+        "$ref": "#/definitions/change_entry",
+        "description": "Changes where you fixed a bug."
+      },
+      "security": {
+        "$ref": "#/definitions/change_entry",
+        "description": "Changes where you made an update for security reasons."
+      },
+      "deprecated": {
+        "$ref": "#/definitions/change_entry",
+        "description": "Changes where you plan on removing something, but are waiting to do so."
+      },
+      "version": {
+        "type": "string",
+        "description": "The current version of the project. If left off this will fallback to being `Unreleased`."
+      },
+      "release_date": {
+        "type": "string",
+        "description": "The release date of the current version. If this is property is not defined this will fall back to `TBD`."
+      },
+      "notice": {
+        "type": "string",
+        "description": "A notice for the current release."
+      },
+      "change": {
+        "type": "string",
+        "enum": [
+          "major",
+          "minor",
+          "patch"
+        ],
+        "description": "The type of change you are creating. Valid values are `major` | `minor` | `patch`"
+      }
+    },
+    "definitions": {
+      "simple_change_entry": {
+        "type": "array",
+        "description": "This is a simple change entry.",
+        "items": {
+          "type": "string",
+          "description": "Simple change entry."
+        }
+      },
+      "breaking_change_entry": {
+        "type": "object",
+        "description": "The main release object",
+        "properties": {
+          "breaking": {
+            "type": "array",
+            "description": "The change entry messages.",
+            "items": {
+              "type": "string",
+              "description": "The change entry message."
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "complex_change_entry": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "description": "The change entry message.",
+              "type": "string"
+            },
+            "flag": {
+              "description": "The flag to add a prefix to the changes.",
+              "type": "string"
+            },
+            "references": {
+              "type": "array",
+              "description": "List of references to this current change.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "description": "The type of reference, can be `pull_request`,`pr`, or `issue`",
+                    "type": "string",
+                    "enum": [
+                      "pull_request",
+                      "issue"
+                    ]
+                  },
+                  "number": {
+                    "description": "The pull request or issue number",
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "change_entry": {
+        "anyOf": [
+          {
+            "$ref": "#/definitions/simple_change_entry"
+          },
+          {
+            "$ref": "#/definitions/complex_change_entry"
+          },
+          {
+            "$ref": "#/definitions/breaking_change_entry"
+          }
+        ]
+      }
+    }
+  },
+  "examples": [
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "release_date": "lorem ipsum am",
+      "notice": "klhwtekhftcjjigbldxch"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "noqyxykbcddevdkz",
+      "release_date": "dd60s3",
+      "notice": "vrqb"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "c",
+      "notice": "zQue0Mgef7gM8cxD4lqpd"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "wqxb",
+      "release_date": "conse",
+      "notice": "lorem lorem do",
+      "change": "patch"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "co",
+      "notice": "a",
+      "change": "patch"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "yayusavilgnlgo",
+      "notice": "Vo04cuwxHpO"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "release_date": "nVIF",
+      "notice": "l",
+      "change": "major"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "consectet",
+      "release_date": "dolor lorem consecte",
+      "notice": "dolor adipis"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "sit adipisc",
+      "release_date": "l8uLLN47QZXN",
+      "notice": "XA9mB4Kh"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "release_date": "oqpjzkzwagmveqj"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "release_date": "zlaolgemqmmdaq",
+      "notice": "P2H",
+      "change": "patch"
+    },
+    {
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "change": "major"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "wzffmulcihkocqyzpar",
+      "release_date": "l"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "xwmkniyzubgy",
+      "release_date": "Z",
+      "notice": "amet dol",
+      "change": "major"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "amet dol",
+      "release_date": "consectetur ipsum a",
+      "notice": "k",
+      "change": "major"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "change": "patch"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "glphpaftlr",
+      "notice": "lskLp"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "release_date": "YHVTvP834gN0scUI",
+      "change": "major"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      }
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "sit adipisci",
+      "release_date": "qildshhzizqtqesgk",
+      "notice": "DH",
+      "change": "minor"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "lorem ipsum amet ",
+      "release_date": "WvKjneHIM6svC6ts",
+      "notice": "ipsum consectetur am",
+      "change": "major"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "consect",
+      "notice": "qP842"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "change": "patch"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "n2CmDRpjTiQhQwOM82oBd",
+      "release_date": "i"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "sit adipiscing c",
+      "notice": "acjdaafmprpyfbt",
+      "change": "patch"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "notice": "he",
+      "change": "patch"
+    },
+    {
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "rloequdom",
+      "notice": "consectetur lorem co",
+      "change": "patch"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "notice": "ZtHBzyzjitROUS"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "release_date": "gqnujxwcmhdgtv",
+      "notice": "adi",
+      "change": "major"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "KFYG5Ci",
+      "notice": "amet ipsum ipsum adi"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "notice": "ipsum lorem",
+      "change": "major"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "bz0zIE9",
+      "release_date": "of"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "release_date": "nhehqrbyfepggrl",
+      "notice": "yotsiar"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "amet adipisc",
+      "release_date": "mkjoryffdmpv",
+      "notice": "bhfckujrqmhrwjsaahih",
+      "change": "patch"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "f0oWdOKL8UuCdNy",
+      "release_date": "qthpwnafvmepykoeaqjfl",
+      "notice": "oepoddppcnjtsb",
+      "change": "major"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "sit amet lorem ipsum",
+      "release_date": "ZltfWHm",
+      "notice": "sxp",
+      "change": "major"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "krxmz",
+      "release_date": "jiqseuyj",
+      "notice": "sit",
+      "change": "patch"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "consect",
+      "release_date": "jvjgxbxitlcbcceh",
+      "notice": "kcOI5jm6q59",
+      "change": "patch"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "yjfqkenaldejpqzhzi",
+      "change": "minor"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "dolor consectetur ip",
+      "release_date": "oewsexuqls",
+      "notice": "v1KSgdAtqY5ngl",
+      "change": "patch"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "release_date": "Kg",
+      "notice": "lorem",
+      "change": "minor"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "adipiscing",
+      "release_date": "M3oBkWb",
+      "change": "patch"
+    },
+    {
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "tjdysnkxifrmnbbn",
+      "release_date": "ipsu",
+      "notice": "hxcboduusa"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "notice": "0nQLCAaIAMC5Q"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "Sx2F9zaVnwW2y3Df9iYxA",
+      "release_date": "consect",
+      "notice": "jtkkpgpwmnszkytxc",
+      "change": "minor"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "xxakcmqstfy",
+      "change": "patch"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "notice": "plil",
+      "change": "major"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "amet lo",
+      "notice": "a"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "ipsum lore",
+      "release_date": "wjvdueranyfclacqzzvlu"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "release_date": "amet dolo",
+      "notice": "fZXQRNx"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "notice": "consectetur lore",
+      "change": "major"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "pqxr",
+      "notice": "uqty"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "release_date": "aalylurbm",
+      "change": "major"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "pqubs",
+      "change": "minor"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "release_date": "czjdvvmolgvnyx",
+      "change": "major"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "co",
+      "release_date": "s"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "release_date": "krutauxtuiqszfve",
+      "notice": "gndorkcwuvezmehcv"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "amet ipsum consect"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "release_date": "grq",
+      "notice": "VmllvM7n"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "muilgeln",
+      "release_date": "consectetur",
+      "notice": "consect"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "release_date": "ot",
+      "change": "minor"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "release_date": "uPEiK8c7QLsU1",
+      "notice": "amet consectet",
+      "change": "major"
+    },
+    {
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "release_date": "ipsum ",
+      "change": "major"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "exckyw",
+      "change": "patch"
+    },
+    {
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "notice": "BOQUrEirEevYlAcT",
+      "change": "major"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "gpsxhiepxtdjbemdhg",
+      "release_date": "dolor ad"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "amet do",
+      "release_date": "xci",
+      "change": "patch"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "ipsum sit dolor a",
+      "notice": "inqaifpekrwdjerawq",
+      "change": "minor"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "FUh",
+      "release_date": "ame",
+      "notice": "ughjckowhxrdgm",
+      "change": "major"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "oemvsju",
+      "change": "major"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "bKoCqmTP",
+      "change": "minor"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "notice": "adipiscing dolor dol",
+      "change": "major"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "notice": "WxR"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      }
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "hwlybbynmzvckeod",
+      "release_date": "mzqRxzANyVRuJNbzr",
+      "notice": "consectetur co"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "COhxeBNzjAlT4iTByov",
+      "release_date": "afi",
+      "notice": "xupjwqHcC",
+      "change": "minor"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "notice": "XjKS04IY21rXM3IYwuJA",
+      "change": "minor"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "qge",
+      "notice": "zpATQvia5GEzgo8x",
+      "change": "patch"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "ipsum d"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "release_date": "P8YLXbA1UBovAh6OGltzj",
+      "notice": "LLI1YRAcj9Xl",
+      "change": "minor"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "dolor consectetur i"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "diIRk4V2xaT",
+      "release_date": "lo",
+      "change": "minor"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "tAHMbn",
+      "release_date": "ipsum a",
+      "notice": "elspysknyc"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "notice": "sit consectetur amet ",
+      "change": "major"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "mthdf",
+      "release_date": "XD",
+      "notice": "b"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "wxjbhnvyju",
+      "notice": "adipiscing c",
+      "change": "minor"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "release_date": "obchjxslekxviijrvfo",
+      "notice": "lorem sit sit sit",
+      "change": "patch"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "release_date": "sit lore",
+      "change": "major"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "dolor adipi",
+      "notice": "vaatdrmlmjucbunqdnsqh"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "sfrrzztyosxsufltbttg"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "notice": "consectetur ips"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      }
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "dolor sit ipsum ",
+      "release_date": "c"
+    },
+    {
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "jgiipvwvhfazycgtrct",
+      "notice": "skdsml"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "release_date": "bf"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "release_date": "ndlnaazdxeuwy",
+      "change": "major"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "consectetur con"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "release_date": "ihptpuxvordnnyijt",
+      "notice": "alubpbqptkkphnrgt"
+    },
+    {
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "removed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "security": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "jqibepr",
+      "release_date": "bokmsrdwrtpryum",
+      "notice": "QxtSolG9",
+      "change": "minor"
+    },
+    {
+      "added": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "changed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "fixed": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "deprecated": {
+        "_ref": "#/definitions/change_entry",
+        "_placeholder": true
+      },
+      "version": "adipiscing dolor i",
+      "notice": "consectetur dolor ",
+      "change": "patch"
+    }
+  ]
+}

@@ -1,0 +1,8186 @@
+{
+  "schema": {
+    "definitions": {
+      "strictName": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9\\-]+$"
+      },
+      "looseName": {
+        "type": "string",
+        "pattern": "^[a-z][a-zA-Z0-9\\-_]+$"
+      },
+      "macros": {
+        "type": "string",
+        "pattern": "^[a-z][a-zA-Z0-9\\-_/.]+$"
+      },
+      "region": {
+        "type": "string",
+        "enum": [
+          "us-east-1",
+          "us-east-2",
+          "us-west-1",
+          "us-west-2",
+          "ca-central-1",
+          "eu-west-1",
+          "eu-central-1",
+          "eu-west-2",
+          "eu-west-3",
+          "eu-north-1",
+          "ap-northeast-1",
+          "ap-northeast-2",
+          "ap-southeast-1",
+          "ap-southeast-2",
+          "ap-south-1",
+          "sa-east-1",
+          "us-gov-west-1",
+          "us-gov-east-1"
+        ]
+      },
+      "table": {
+        "type": "object",
+        "title": "DynamoDB table",
+        "propertyNames": {
+          "pattern": "^[a-z][a-z|0-9|\\-]+$"
+        },
+        "minProperties": 1,
+        "maxProperties": 1
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://arc.codes/schema.json",
+    "type": "object",
+    "title": "OpenJS Architect JSON Schema",
+    "required": [
+      "app"
+    ],
+    "additionalProperties": {
+      "type": [
+        "array",
+        "object"
+      ],
+      "items": {
+        "type": [
+          "string",
+          "number",
+          "boolean",
+          "array",
+          "object"
+        ]
+      }
+    },
+    "properties": {
+      "app": {
+        "$id": "#/properties/app",
+        "title": "@app",
+        "description": "Application namespace",
+        "type": [
+          "string",
+          "array"
+        ],
+        "maxItems": 1,
+        "items": {
+          "$ref": "#/definitions/looseName"
+        }
+      },
+      "aws": {
+        "$id": "#/properties/aws",
+        "title": "@aws",
+        "description": "AWS specific configuration",
+        "type": [
+          "array",
+          "object"
+        ],
+        "maxItems": 12,
+        "uniqueItems": true,
+        "items": {
+          "type": [
+            "array",
+            "object"
+          ],
+          "maxItems": 2,
+          "items": [
+            {
+              "type": "string",
+              "enum": [
+                "apigateway",
+                "bucket",
+                "concurrency",
+                "layer",
+                "layers",
+                "memory",
+                "policy",
+                "policies",
+                "profile",
+                "region",
+                "runtime",
+                "timeout"
+              ]
+            },
+            {
+              "type": [
+                "string",
+                "number"
+              ]
+            }
+          ]
+        },
+        "properties": {
+          "apigateway": {
+            "type": "string"
+          },
+          "bucket": {
+            "type": "string"
+          },
+          "concurrency": {
+            "type": "number"
+          },
+          "layer": {
+            "type": [
+              "string",
+              "object",
+              "array"
+            ]
+          },
+          "layers": {
+            "type": [
+              "string",
+              "object",
+              "array"
+            ]
+          },
+          "memory": {
+            "type": "number"
+          },
+          "policy": {
+            "type": [
+              "string",
+              "object",
+              "array"
+            ]
+          },
+          "policies": {
+            "type": [
+              "string",
+              "object",
+              "array"
+            ]
+          },
+          "profile": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "string"
+          },
+          "timeout": {
+            "type": "number"
+          }
+        }
+      },
+      "static": {
+        "$id": "#/properties/static",
+        "title": "@static",
+        "description": "Static asset & S3 configuration",
+        "uniqueItems": true,
+        "type": "array",
+        "maxItems": 6,
+        "items": {
+          "type": [
+            "array",
+            "object"
+          ],
+          "items": [
+            {
+              "type": "string",
+              "enum": [
+                "fingerprint",
+                "folder",
+                "ignore",
+                "prefix",
+                "production",
+                "prune",
+                "spa",
+                "staging"
+              ]
+            },
+            {
+              "type": [
+                "string",
+                "boolean",
+                "array",
+                "object"
+              ]
+            }
+          ],
+          "properties": {
+            "fingerprint": {
+              "type": [
+                "boolean",
+                "string"
+              ]
+            },
+            "folder": {
+              "type": "string"
+            },
+            "ignore": {
+              "type": [
+                "string",
+                "object",
+                "array"
+              ]
+            },
+            "prefix": {
+              "type": "string"
+            },
+            "production": {
+              "type": "string"
+            },
+            "prune": {
+              "type": "boolean"
+            },
+            "spa": {
+              "type": "boolean"
+            },
+            "staging": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ws": {
+        "$id": "#/properties/ws",
+        "type": "array",
+        "title": "@ws",
+        "description": "API Gateway WebSocket configuration",
+        "uniqueItems": true,
+        "items": {
+          "$ref": "#/definitions/strictName"
+        }
+      },
+      "http": {
+        "$id": "#/properties/http",
+        "title": "@http",
+        "description": "API Gateway configuration",
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+          "type": [
+            "array",
+            "object"
+          ],
+          "maxItems": 2,
+          "maxProperties": 1,
+          "properties": {
+            "any": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9\\/\\-:\\._\\*]+$"
+            },
+            "get": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9\\/\\-:\\._\\*]+$"
+            },
+            "post": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9\\/\\-:\\._\\*]+$"
+            },
+            "put": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9\\/\\-:\\._\\*]+$"
+            },
+            "patch": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9\\/\\-:\\._\\*]+$"
+            },
+            "delete": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9\\/\\-:\\._\\*]+$"
+            },
+            "head": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9\\/\\-:\\._\\*]+$"
+            },
+            "options": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9\\/\\-:\\._\\*]+$"
+            }
+          },
+          "items": [
+            {
+              "type": "string",
+              "enum": [
+                "any",
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options"
+              ]
+            },
+            {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9\\/\\-:\\._\\*]+$"
+            }
+          ]
+        }
+      },
+      "proxy": {
+        "$id": "#/properties/http",
+        "title": "@proxy",
+        "description": "Proxy",
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+          "type": [
+            "array",
+            "object"
+          ],
+          "maxItems": 3,
+          "maxProperties": 1,
+          "properties": {
+            "testing": {
+              "type": "string",
+              "pattern": "^https?:\\/\\/.+$"
+            },
+            "staging": {
+              "type": "string",
+              "pattern": "^https?:\\/\\/.+$"
+            },
+            "production": {
+              "type": "string",
+              "pattern": "^https?:\\/\\/.+$"
+            }
+          },
+          "items": [
+            {
+              "type": "string",
+              "enum": [
+                "testing",
+                "staging",
+                "production"
+              ]
+            },
+            {
+              "type": "string",
+              "pattern": "^https?:\\/\\/.+$"
+            }
+          ]
+        }
+      },
+      "events": {
+        "$id": "#/properties/events",
+        "type": "array",
+        "title": "@events",
+        "description": "Events configuration",
+        "uniqueItems": true,
+        "items": {
+          "$ref": "#/definitions/strictName"
+        }
+      },
+      "queues": {
+        "$id": "#/properties/queues",
+        "type": "array",
+        "title": "@queues",
+        "description": "Queues configuration",
+        "uniqueItems": true,
+        "items": {
+          "$ref": "#/definitions/strictName"
+        }
+      },
+      "macros": {
+        "$id": "#/properties/macros",
+        "type": "array",
+        "title": "@macros",
+        "description": "Deployment macros configuration",
+        "uniqueItems": true,
+        "items": {
+          "$ref": "#/definitions/macros"
+        }
+      },
+      "scheduled": {
+        "$id": "#/properties/scheduled",
+        "type": [
+          "array",
+          "object"
+        ],
+        "title": "@scheduled",
+        "description": "Scheduled event configuration",
+        "uniqueItems": true,
+        "items": {
+          "$id": "#/properties/scheduled/items",
+          "type": [
+            "array",
+            "object"
+          ],
+          "title": "scheduled handlers",
+          "items": [
+            {
+              "type": "string",
+              "pattern": "^[a-z][a-z|\\-|0-9]+$"
+            },
+            {
+              "type": "string",
+              "pattern": "^(rate|cron)"
+            }
+          ]
+        }
+      },
+      "tables": {
+        "$id": "#/properties/tables",
+        "type": "array",
+        "title": "@tables",
+        "description": "DynamoDB database tables configuration",
+        "uniqueItems": true,
+        "items": {
+          "$ref": "#/definitions/table"
+        }
+      },
+      "indexes": {
+        "$id": "#/properties/indexes",
+        "type": "array",
+        "title": "@indexes",
+        "description": "DynamoDB global secondary indexes configuration",
+        "uniqueItems": true,
+        "items": {
+          "$ref": "#/definitions/table"
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "app": "g",
+      "aws": [],
+      "http": [],
+      "proxy": [],
+      "events": [],
+      "queues": [],
+      "macros": [],
+      "scheduled": [],
+      "r1VjAr": []
+    },
+    {
+      "app": "dmrulmaljw",
+      "aws": {
+        "apigateway": "vj",
+        "bucket": "dkzhebpebehcqzvrq",
+        "concurrency": 689.59,
+        "layer": [],
+        "memory": 57.78,
+        "policies": "amet dolor ",
+        "runtime": "adip"
+      },
+      "static": [],
+      "ws": [],
+      "http": [],
+      "proxy": [],
+      "queues": [],
+      "indexes": [],
+      "lpdcu": []
+    },
+    {
+      "app": [],
+      "aws": [],
+      "static": [],
+      "ws": [],
+      "http": [],
+      "proxy": [],
+      "events": [],
+      "queues": [],
+      "macros": [],
+      "indexes": [],
+      "jihenphiyv": {}
+    },
+    {
+      "app": [],
+      "aws": {
+        "apigateway": "sit lorem c",
+        "memory": -456.83,
+        "policies": [],
+        "profile": "R5kpW7ffUtx2UO1TYNKd",
+        "timeout": 252.69
+      },
+      "static": [],
+      "ws": [],
+      "proxy": [],
+      "events": [],
+      "macros": [],
+      "scheduled": [],
+      "tables": [],
+      "indexes": [],
+      "qoquieahk": [],
+      "ojhli": []
+    },
+    {
+      "app": "amet adipisci",
+      "aws": [],
+      "static": [],
+      "proxy": [],
+      "events": [],
+      "queues": [],
+      "macros": [],
+      "scheduled": [],
+      "tables": [],
+      "ZCRMAu": {}
+    },
+    {
+      "app": [],
+      "aws": {
+        "apigateway": "yczbgq7DH",
+        "layer": "w7cxQLIV",
+        "layers": [],
+        "policy": {},
+        "policies": [],
+        "profile": "cwfsimckjwwvvxjomo",
+        "region": "pqfmzzolzoucgvoul",
+        "timeout": -469.97
+      },
+      "ws": [],
+      "proxy": [],
+      "macros": [],
+      "scheduled": [],
+      "tables": [],
+      "indexes": [],
+      "adipis": [],
+      "ikgadbaben": {}
+    },
+    {
+      "app": [],
+      "aws": {
+        "bucket": "adipiscing adi",
+        "layer": [],
+        "layers": [],
+        "memory": -565.79,
+        "policy": "khRsv",
+        "policies": "lorem adi",
+        "runtime": "dolor consecte",
+        "timeout": -267.3
+      },
+      "static": [],
+      "ws": [],
+      "http": [],
+      "proxy": [],
+      "events": [],
+      "queues": [],
+      "macros": [],
+      "scheduled": {},
+      "indexes": []
+    },
+    {
+      "app": "gUFdcTjTNF1L",
+      "aws": {
+        "apigateway": "conse",
+        "bucket": "6MOQ4mVepKtEnpBLQEx7W",
+        "concurrency": 84.58,
+        "layer": "yhb",
+        "policy": {},
+        "profile": "sit ipsum dolo",
+        "region": "CfPe5pvIalwg0h",
+        "runtime": "cujsrndrtmwdrpgcpily"
+      },
+      "static": [],
+      "proxy": [],
+      "events": [],
+      "queues": [],
+      "macros": [],
+      "scheduled": [],
+      "lwamyge": [],
+      "pijfcb": []
+    },
+    {
+      "app": [],
+      "static": [],
+      "events": [],
+      "queues": [],
+      "macros": [],
+      "scheduled": [],
+      "tables": [],
+      "indexes": [],
+      "lorem a": {}
+    },
+    {
+      "app": "p9Zp1HCRGvOxrRahH",
+      "aws": [],
+      "static": [],
+      "ws": [],
+      "http": [],
+      "scheduled": [],
+      "tables": []
+    },
+    {
+      "app": [],
+      "aws": {
+        "bucket": "ez",
+        "concurrency": -633.7,
+        "layer": [],
+        "layers": [],
+        "memory": -977.79,
+        "policy": "ipsum consectetu",
+        "runtime": "iGGlflRYOAba"
+      },
+      "static": [],
+      "ws": [],
+      "http": [],
+      "proxy": [],
+      "events": [],
+      "queues": [],
+      "macros": [],
+      "scheduled": {},
+      "tables": [],
+      "indexes": [],
+      "adipis": {},
+      "vgrwtxnrb": []
+    },
+    {
+      "app": "DSwCb548vi2dcom",
+      "aws": {
+        "apigateway": "nkyiduokzrebqmxpvxctc",
+        "layers": {},
+        "memory": -231.28,
+        "policy": "ijefmjm",
+        "profile": "yehOoCotl4MEoZIil6tzf",
+        "runtime": "amet consectetur do"
+      },
+      "static": [],
+      "ws": [],
+      "events": [],
+      "macros": [],
+      "scheduled": {},
+      "tables": [],
+      "arymdrkw": {}
+    },
+    {
+      "app": "D7xBJx42Sd9ILHF",
+      "static": [],
+      "ws": [],
+      "proxy": [],
+      "events": [],
+      "queues": [],
+      "scheduled": [],
+      "tables": [],
+      "indexes": [],
+      "adipi": {},
+      "afjelg": []
+    },
+    {
+      "app": "consect",
+      "static": [],
+      "ws": [],
+      "queues": [],
+      "macros": [],
+      "scheduled": {}
+    },
+    {
+      "app": "hoyscqigoaobpdry",
+      "aws": [],
+      "static": [],
+      "http": [],
+      "proxy": [],
+      "queues": [],
+      "scheduled": [],
+      "tables": [],
+      "indexes": []
+    },
+    {
+      "app": "bF8r8N2bTGLx",
+      "proxy": [],
+      "macros": [],
+      "scheduled": [],
+      "wGn81y": [],
+      "NB6dvGcC": []
+    },
+    {
+      "app": "zffkyug",
+      "aws": {
+        "apigateway": "sit sit lorem sit",
+        "bucket": "consectetur ",
+        "concurrency": -412.86,
+        "layer": [],
+        "policies": {},
+        "profile": "fggsm",
+        "runtime": "zpdgmffqcycsilgmusb",
+        "timeout": -532.22
+      },
+      "static": [],
+      "ws": [],
+      "http": [],
+      "proxy": [],
+      "events": [],
+      "queues": [],
+      "d398imm": {},
+      "adipisci": []
+    },
+    {
+      "app": "yaw",
+      "ws": [],
+      "proxy": [],
+      "queues": [],
+      "tables": [],
+      "amet ": {},
+      "conse": []
+    },
+    {
+      "app": [],
+      "aws": [],
+      "static": [],
+      "http": [],
+      "proxy": [],
+      "tables": [],
+      "indexes": []
+    },
+    {
+      "app": [],
+      "aws": [],
+      "ws": [],
+      "http": [],
+      "events": [],
+      "queues": [],
+      "macros": [],
+      "scheduled": [],
+      "tables": [],
+      "indexes": [],
+      "ipsum lore": [],
+      "4T0BtxYMWM": {}
+    },
+    {
+      "app": "gmx",
+      "aws": [],
+      "static": [],
+      "proxy": [],
+      "events": [],
+      "queues": [],
+      "macros": [],
+      "tables": [],
+      "indexes": []
+    },
+    {
+      "app": [],
+      "aws": {
+        "apigateway": "eOs",
+        "concurrency": 492.5,
+        "layer": [],
+        "policy": {},
+        "policies": "ws",
+        "profile": "AwRgb9MU5b5ka10dddAp",
+        "runtime": "sit amet dolor ame",
+        "timeout": 671.16
+      },
+      "http": [],
+      "queues": [],
+      "macros": [],
+      "indexes": [],
+      "lorem ": []
+    },
+    {
+      "app": [],
+      "aws": {
+        "apigateway": "i",
+        "policies": {},
+        "profile": "a",
+        "region": "ame",
+        "timeout": 78.46
+      },
+      "static": [],
+      "ws": [],
+      "http": [],
+      "events": [],
+      "queues": [],
+      "macros": [],
+      "scheduled": {},
+      "indexes": []
+    },
+    {
+      "app": [],
+      "aws": [],
+      "static": [],
+      "ws": [],
+      "http": [],
+      "proxy": [],
+      "macros": [],
+      "scheduled": {},
+      "tables": [],
+      "indexes": [],
+      "ipsum": [],
+      "djojfxqkms": []
+    },
+    {
+      "app": "pBp1IU5EDh",
+      "static": [],
+      "ws": [],
+      "http": [],
+      "events": [],
+      "queues": [],
+      "macros": [],
+      "indexes": []
+    },
+    {
+      "app": "zkyl",
+      "ws": [],
+      "http": [],
+      "proxy": [],
+      "events": [],
+      "queues": [],
+      "macros": [],
+      "scheduled": {},
+      "tables": [],
+      "G2R88": [],
+      "tvqzkbjlva": {}
+    },
+    {
+      "app": [],
+      "http": [],
+      "proxy": [],
+      "events": [],
+      "queues": [],
+      "scheduled": {},
+      "tables": []
+    },
+    {
+      "app": "bixw",
+      "static": [],
+      "ws": [],
+      "http": [],
+      "proxy": [],
+      "events": [],
+      "queues": [],
+      "scheduled": {},
+      "tables": [],
+      "indexes": []
+    },
+    {
+      "app": "licvrfrugq",
+      "aws": {
+        "apigateway": "cmhdgtvmvsbjnpc",
+        "bucket": "uuizqjdvzwrsk",
+        "concurrency": 854.8,
+        "layers": [],
+        "memory": -798.48,
+        "policy": [],
+        "policies": "eCWd6p",
+        "profile": "vs",
+        "region": "lorem dolor sit",
+        "timeout": 270.54
+      },
+      "ws": [],
+      "http": [],
+      "proxy": [],
+      "events": [],
+      "queues": [],
+      "macros": [],
+      "scheduled": [],
+      "tables": [],
+      "pisauonpd": {},
+      "admkfhdpw": {}
+    },
+    {
+      "app": [],
+      "aws": [],
+      "static": [],
+      "ws": [],
+      "proxy": [],
+      "events": [],
+      "queues": [],
+      "macros": [],
+      "scheduled": {},
+      "indexes": []
+    },
+    {
+      "app": "esqhszdzsgdaulabhnsw",
+      "static": [],
+      "ws": [],
+      "http": [],
+      "proxy": [],
+      "events": [],
+      "queues": [],
+      "scheduled": {},
+      "indexes": []
+    },
+    {
+      "app": [],
+      "aws": {
+        "apigateway": "lorem dolor sit",
+        "bucket": "ajkolwyofwwmuw",
+        "layer": "sywnxlcrq",
+        "layers": [],
+        "memory": -75.49,
+        "policies": [],
+        "profile": "fkukbsckimdy",
+        "runtime": "kscatcqgmz"
+      },
+      "static": [],
+      "ws": [],
+      "http": [],
+      "proxy": [],
+      "macros": [],
+      "scheduled": {},
+      "tables": []
+    },
+    {
+      "app": "dolor adipi",
+      "aws": {
+        "bucket": "tFaFhYB7A",
+        "concurrency": 990.13,
+        "layers": "TSubQ7",
+        "memory": 385.83,
+        "policy": {},
+        "policies": "adipiscing sit dolor",
+        "region": "ipsum adipiscing",
+        "timeout": 436.62
+      },
+      "static": [],
+      "ws": [],
+      "http": [],
+      "proxy": [],
+      "events": [],
+      "queues": [],
+      "macros": [],
+      "tables": []
+    },
+    {
+      "app": [],
+      "aws": {
+        "apigateway": "rmrwrixicgmwjrgaz",
+        "bucket": "ffdmpvazsbhfcku",
+        "concurrency": 352.86,
+        "layers": {},
+        "memory": -577.48,
+        "policy": [
+          3,
+          "bj28HaqTlq",
+          false,
+          true,
+          false
+        ],
+        "policies": [
+          null,
+          false,
+          36,
+          false,
+          "0XMwL"
+        ],
+        "region": "sit adipiscing sit ",
+        "runtime": "consect",
+        "timeout": -117.83
+      },
+      "static": [
+        {
+          "ignore": {},
+          "production": "ipsum",
+          "prune": true,
+          "staging": "iwwfanwvrhzjr"
+        },
+        {
+          "fingerprint": true,
+          "folder": "lorem cons",
+          "ignore": [
+            null,
+            24,
+            false,
+            "GdUlkjR",
+            86.13
+          ],
+          "prefix": "APjehwinRm",
+          "prune": false,
+          "staging": "lorem"
+        },
+        [
+          "ignore",
+          "ibmkvaltlilonfn"
+        ]
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "http": [
+        [
+          "head"
+        ],
+        [
+          "get"
+        ],
+        [
+          "get"
+        ],
+        [
+          "any"
+        ],
+        {
+          "any": "adipis",
+          "post": "d8pSVPluPf2r732",
+          "patch": "cmpbwebwr",
+          "delete": "consectetur i",
+          "head": "t9NKTEutdkeaZ",
+          "options": "tto4GtAE"
+        }
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": [
+        [
+          "jo77Ij8Y3KOFLQ",
+          "wmzxcsh"
+        ],
+        [
+          "ipsum ipsum am",
+          "tzglxpidjktciio"
+        ],
+        [
+          "bslvmezrgmmn",
+          "amet lorem ipsu"
+        ],
+        [
+          "sit adipiscing",
+          "dolor"
+        ],
+        {}
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "dqbhhpu": {},
+      "jjmurrw": {}
+    },
+    {
+      "app": [],
+      "aws": {
+        "apigateway": "consectetu",
+        "bucket": "consecte",
+        "layer": [
+          false,
+          33.2,
+          true,
+          84,
+          true
+        ],
+        "layers": [
+          94,
+          "1FamZEkL6zHlaOx",
+          75.05,
+          null,
+          "oepoddppcnj"
+        ],
+        "policies": [
+          62,
+          92,
+          4.23,
+          null,
+          "cncbyiclxrbl"
+        ],
+        "region": "xXcyYctTEzGs5sU",
+        "timeout": -570.7
+      },
+      "proxy": [
+        {
+          "testing": "dolor am",
+          "production": "htntsmy"
+        },
+        {
+          "production": "meusvu"
+        },
+        [
+          "testing"
+        ],
+        [
+          "testing"
+        ],
+        {
+          "staging": "z3oKkifla",
+          "production": "kc4qjv3"
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "consectet": [
+        -50.48,
+        [
+          81,
+          null,
+          12.74,
+          42,
+          null
+        ],
+        true,
+        false,
+        [
+          false,
+          false,
+          "POKh0A5dK",
+          7,
+          94
+        ]
+      ]
+    },
+    {
+      "app": [],
+      "aws": [
+        [
+          "bucket"
+        ],
+        {},
+        {},
+        [
+          "concurrency"
+        ],
+        [
+          "layers"
+        ],
+        [
+          "policies"
+        ]
+      ],
+      "static": [
+        [
+          "spa",
+          false
+        ],
+        {
+          "fingerprint": "ne0R3KHgXRnufJZ4W8",
+          "folder": "odybvztynfmttjyambjzd",
+          "prune": false
+        },
+        [
+          "production",
+          "x"
+        ]
+      ],
+      "proxy": [
+        [
+          "staging"
+        ],
+        [
+          "testing"
+        ],
+        [
+          "testing"
+        ],
+        [
+          "production"
+        ],
+        {
+          "testing": "cwgfvedbwru",
+          "production": "FL2DzHr2bEcTaO"
+        }
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": [
+        {},
+        {},
+        {},
+        {},
+        {}
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "adipisc": {}
+    },
+    {
+      "app": "P2U3",
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "0kU1wmgisK": {}
+    },
+    {
+      "app": "kpQjvm8EtzZwYxq",
+      "static": [
+        {
+          "production": "ipsum ipsum ipsum ame",
+          "prune": true,
+          "spa": false
+        },
+        [
+          "prune",
+          false
+        ],
+        {
+          "ignore": [
+            97.31,
+            null,
+            null,
+            null,
+            78
+          ],
+          "production": "consectetur ",
+          "staging": "BowpTIUS"
+        }
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "http": [
+        [
+          "delete"
+        ],
+        [
+          "options"
+        ],
+        [
+          "post"
+        ],
+        {
+          "get": "ipsum c",
+          "post": "ipsum lorem ame",
+          "delete": "rssivhithdz"
+        },
+        [
+          "put"
+        ]
+      ],
+      "proxy": [
+        {},
+        {
+          "testing": "YCHZD9j",
+          "staging": "kicyljwhzmsi",
+          "production": "tHnN4"
+        },
+        [
+          "staging"
+        ],
+        {
+          "testing": "mjnwqpfejfyg",
+          "staging": "ur0fP"
+        },
+        {
+          "testing": "feiszqvillg",
+          "staging": "dolor ip",
+          "production": "adipiscing i"
+        }
+      ],
+      "scheduled": {},
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "app": [],
+      "aws": {
+        "apigateway": "bV7xnMykGaBijxKN8q",
+        "concurrency": 315.27,
+        "layers": {},
+        "memory": -264.53,
+        "policy": {},
+        "policies": "onbfimrr",
+        "profile": "hg",
+        "region": "sit lorem adipiscing"
+      },
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "http": [
+        {
+          "any": "tbdkgiu",
+          "get": "5l9kIv1IhbwzpSY",
+          "post": "dolor dolor d",
+          "put": "fdyvqwu",
+          "patch": "syewy",
+          "delete": "qbfitbxeykkkbm",
+          "head": "bOauBmO8Ms37uT"
+        },
+        [
+          "options"
+        ],
+        [
+          "post"
+        ],
+        [
+          "delete"
+        ],
+        [
+          "patch"
+        ]
+      ],
+      "proxy": [
+        {
+          "testing": "lorem lor",
+          "production": "5XEjrSh"
+        },
+        [
+          "testing"
+        ],
+        [
+          "staging"
+        ],
+        [
+          "staging"
+        ],
+        [
+          "production"
+        ]
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": [
+        [
+          "amet d",
+          "adipiscing dol"
+        ],
+        [
+          "rscpwwaqkcejwc",
+          "tehzpxehcx"
+        ],
+        {},
+        [
+          "jsdtotdokepdsd",
+          "hcbhhthli"
+        ],
+        {}
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "app": [],
+      "aws": {
+        "apigateway": "s",
+        "layers": {},
+        "memory": 365.1,
+        "policies": {},
+        "region": "uijxgv",
+        "runtime": "adipiscing cons",
+        "timeout": 481.03
+      },
+      "static": [
+        {
+          "folder": "rw",
+          "prefix": "ohMs0cyk",
+          "production": "cv5QwCszScYgG",
+          "staging": "rJXDFyY"
+        },
+        [
+          "production",
+          {}
+        ],
+        {
+          "fingerprint": true,
+          "folder": "gybtne",
+          "ignore": [
+            30,
+            null,
+            false,
+            "fiinithc",
+            8
+          ],
+          "production": "nrdyqsw",
+          "prune": false,
+          "spa": true,
+          "staging": "ip"
+        }
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "http": [
+        {
+          "get": "ltgioj",
+          "post": "eyjdytmonncqjej",
+          "put": "uE3Oe",
+          "head": "ddrjeh",
+          "options": "0xd19dHB"
+        },
+        {
+          "any": "dkwqkshwc",
+          "get": "uvpygzrafih",
+          "post": "Bsdn8",
+          "head": "URU9UuIhXA0",
+          "options": "ZtduqaO"
+        },
+        [
+          "delete"
+        ],
+        {
+          "post": "wqjl8hloaEmbFk",
+          "patch": "amet lorem",
+          "head": "amet sit"
+        },
+        [
+          "any"
+        ]
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": [
+        [
+          "fbfceshrdl",
+          "sbdJ5s"
+        ],
+        {},
+        {},
+        {},
+        [
+          "ipsum dol",
+          "dolor lor"
+        ]
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "wgiss": {},
+      "ezsps": [
+        {},
+        [
+          false,
+          true,
+          false,
+          null,
+          "W1h57"
+        ],
+        {},
+        {},
+        "lgE8G7c3n"
+      ]
+    },
+    {
+      "app": "hveegtamvfodmqvu",
+      "aws": [
+        [
+          "layer"
+        ],
+        {},
+        {},
+        [
+          "profile"
+        ],
+        {},
+        {}
+      ],
+      "static": [
+        {
+          "prefix": "amet ipsum",
+          "prune": true
+        },
+        {
+          "folder": "awImWf2AbGTFevPYyvcN",
+          "prefix": "ckselldv",
+          "prune": true,
+          "spa": false
+        },
+        [
+          "spa",
+          true
+        ]
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "http": [
+        {
+          "get": "u7ZBK66",
+          "post": "sgnbwe",
+          "patch": "94Ary",
+          "head": "adipi"
+        },
+        [
+          "post"
+        ],
+        {
+          "options": "ipsum "
+        },
+        {
+          "post": "consectet",
+          "patch": "mdcdxvnfbzeka"
+        },
+        {
+          "any": "tchknyhxuahczg",
+          "get": "ipsum dol",
+          "post": "bovmrrliebkfk",
+          "put": "ylbajakjomfiq",
+          "patch": "fhfeivh",
+          "delete": "mmjvglqmhmdzjss",
+          "options": "amet dolor a"
+        }
+      ],
+      "proxy": [
+        [
+          "production"
+        ],
+        [
+          "testing"
+        ],
+        [
+          "production"
+        ],
+        [
+          "testing"
+        ],
+        [
+          "production"
+        ]
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "app": [],
+      "static": [
+        [
+          "spa",
+          "fe"
+        ],
+        [
+          "fingerprint",
+          {}
+        ],
+        [
+          "prune",
+          [
+            null,
+            47.54,
+            82.13,
+            4.44,
+            2
+          ]
+        ]
+      ],
+      "http": [
+        {
+          "any": "2DX10Bi",
+          "post": "5hwYOMODIA6qp",
+          "put": "dolor a",
+          "patch": "amet dolor i",
+          "options": "pwnlkrxwcsemmb"
+        },
+        {
+          "get": "amet dolor dol",
+          "put": "caxyqnsb",
+          "patch": "TdI5Az7gerIW",
+          "delete": "consectetur c",
+          "options": "wlpswaep"
+        },
+        {
+          "post": "iLjHYpiYv",
+          "put": "rxzii",
+          "delete": "ipsum ipsum do",
+          "head": "nyzyfibev",
+          "options": "consectetur dol"
+        },
+        {
+          "any": "wxpvwnrrfskun",
+          "post": "amet dolor",
+          "put": "qgifvxamsytemen",
+          "patch": "XPS609gg",
+          "delete": "IZIS4Nus",
+          "options": "dolor ipsum"
+        },
+        {
+          "any": "sit ips",
+          "post": "PQzTnU",
+          "put": "adipisc",
+          "delete": "pnysnu",
+          "head": "sit d",
+          "options": "QMqFyx"
+        }
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "amet ": {},
+      "sit ipsum": {}
+    },
+    {
+      "app": [],
+      "static": [
+        [
+          "prune",
+          false
+        ],
+        {
+          "ignore": "snkxifrmnbbnhcgxds",
+          "prefix": "CbV9",
+          "prune": true,
+          "staging": "ipsum a"
+        },
+        {
+          "fingerprint": "adipiscing con",
+          "ignore": "lorem consectetur si",
+          "production": "qa5L3Qte844xKUuqqEz1Y",
+          "prune": false,
+          "staging": "lvdbxevxlibaywcj"
+        }
+      ],
+      "http": [
+        [
+          "options"
+        ],
+        [
+          "patch"
+        ],
+        [
+          "delete"
+        ],
+        [
+          "any"
+        ],
+        {
+          "any": "opqzxliunh",
+          "get": "njDCUHvy",
+          "post": "msqbytcsqznc",
+          "put": "jzqnkouhoxcys",
+          "patch": "t4UyZaVgLS5",
+          "delete": "odyaqeye",
+          "head": "rqmatulgj",
+          "options": "adipiscing i"
+        }
+      ],
+      "proxy": [
+        {
+          "testing": "qpvnyqmflpilh",
+          "staging": "dolor sit co"
+        },
+        {
+          "production": "OiTHkP"
+        },
+        [
+          "production"
+        ],
+        [
+          "production"
+        ],
+        [
+          "testing"
+        ]
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": {},
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "JHCmQGaU": [
+        true,
+        false,
+        true,
+        777.22,
+        "2K3rIXzqnk3V9"
+      ]
+    },
+    {
+      "app": "iyfuwjfjwnupopdrbmru",
+      "aws": [
+        [
+          "concurrency"
+        ],
+        {},
+        [
+          "memory"
+        ],
+        [
+          "apigateway"
+        ],
+        {},
+        [
+          "profile"
+        ]
+      ],
+      "http": [
+        {
+          "put": "1wIkpw",
+          "options": "lorem ipsum "
+        },
+        [
+          "any"
+        ],
+        {
+          "any": "dzdzhgnbttbtn",
+          "get": "8RqJQT5MOnRMD",
+          "post": "jndrmemfbgfi",
+          "put": "ukcak",
+          "delete": "ezwhb"
+        },
+        [
+          "post"
+        ],
+        {
+          "get": "consectet",
+          "delete": "dhtuscggqzqck",
+          "head": "LLAoK"
+        }
+      ],
+      "proxy": [
+        [
+          "production"
+        ],
+        {
+          "testing": "ipsum ipsu",
+          "staging": "amet dolor a",
+          "production": "amet adipiscin"
+        },
+        {
+          "testing": "6kee1",
+          "production": "ipsum con"
+        },
+        [
+          "testing"
+        ],
+        {
+          "testing": "hqzalpdhj",
+          "staging": "vExTTm7uM0v4Q",
+          "production": "eviowtjvkmouo"
+        }
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": [
+        {},
+        [
+          "9ZOjWP",
+          "ipsum ipsum"
+        ],
+        [
+          "adipiscin",
+          "adipiscing c"
+        ],
+        {},
+        [
+          "gwknjfgc",
+          "adipiscin"
+        ]
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "fguklopx": {}
+    },
+    {
+      "app": "iabnqvvcwcvlptfbxe",
+      "aws": [
+        {},
+        {},
+        [
+          "layers"
+        ],
+        {},
+        [
+          "policies"
+        ],
+        {}
+      ],
+      "static": [
+        {
+          "folder": "gn",
+          "prefix": "luesurxulbcae"
+        },
+        [
+          "fingerprint",
+          "BdtlTD4nLNz"
+        ],
+        [
+          "prune",
+          "fqapWCKIC2"
+        ]
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "http": [
+        [
+          "get"
+        ],
+        {
+          "any": "kqkwxrvhu",
+          "get": "ynJVUwy5cgB9U",
+          "post": "lorem dolo",
+          "put": "amet a",
+          "patch": "amet sit",
+          "delete": "consectet"
+        },
+        [
+          "post"
+        ],
+        {
+          "get": "ppp0uHFJ318g",
+          "patch": "ipsum s",
+          "head": "mwjhuwa",
+          "options": "sit a"
+        },
+        {
+          "any": "i5hkW5FyokmvJ",
+          "patch": "sit lor",
+          "delete": "Cj46Vdg9rj",
+          "options": "xU2yUJp1BaMEOc"
+        }
+      ],
+      "proxy": [
+        {
+          "testing": "P0yxu0cqYkI",
+          "production": "eHpvq1czpLuG"
+        },
+        {
+          "testing": "amet co",
+          "staging": "VmoTFdJN"
+        },
+        [
+          "staging"
+        ],
+        {
+          "testing": "kxfpek",
+          "staging": "tqcbepi"
+        },
+        [
+          "testing"
+        ]
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": {},
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "mfdio": [
+        false,
+        false,
+        false,
+        false,
+        [
+          false,
+          13.86,
+          "mpxSkQN",
+          true,
+          true
+        ]
+      ],
+      "iojjzzgglb": [
+        152.43,
+        false,
+        {},
+        [
+          80,
+          true,
+          67.12,
+          36.54,
+          null
+        ],
+        [
+          41.67,
+          55,
+          null,
+          null,
+          "sdhpixuyzm"
+        ]
+      ]
+    },
+    {
+      "app": "vctqswx",
+      "static": [
+        {
+          "ignore": [
+            97,
+            25.04,
+            69.98,
+            39,
+            89
+          ],
+          "prefix": "xlztrlrvvrvpahhyiapg",
+          "production": "si",
+          "prune": true,
+          "spa": false,
+          "staging": "consectetur do"
+        },
+        [
+          "spa",
+          [
+            "owgizcgrjfw",
+            "pLucVmv",
+            76,
+            null,
+            16
+          ]
+        ],
+        [
+          "fingerprint",
+          {}
+        ]
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "proxy": [
+        {
+          "testing": "dLONzTN2O6",
+          "staging": "adipisc",
+          "production": "amet lorem l"
+        },
+        {
+          "testing": "1SW4EC2UljVlTw",
+          "production": "qardsfk"
+        },
+        {
+          "testing": "ozageargcekquf"
+        },
+        {
+          "testing": "ipsum ",
+          "staging": "sit consect"
+        },
+        {
+          "testing": "gQpOQQ"
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": {},
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "ndiec": [
+        {},
+        true,
+        -565.47,
+        "DVwIQ6j",
+        -541.46
+      ]
+    },
+    {
+      "app": [],
+      "static": [
+        [
+          "fingerprint",
+          "dzddekrdemw"
+        ],
+        [
+          "ignore",
+          false
+        ],
+        [
+          "prefix",
+          true
+        ]
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": {},
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "app": "gibwifsioeqfpwbisbmk",
+      "aws": {
+        "bucket": "RjaNL",
+        "concurrency": 353.66,
+        "layer": "9PvIGPm02F3OYNJLBk",
+        "layers": [
+          36.75,
+          null,
+          57,
+          90.59,
+          "sIR7A1BONS79VC"
+        ],
+        "memory": 762.71,
+        "policy": {},
+        "region": "vdaxyxsjcduzaugfpypwb",
+        "runtime": "s6BiAP1GQ3D",
+        "timeout": 880.42
+      },
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "http": [
+        {
+          "get": "consecte",
+          "post": "igwhwbk",
+          "put": "1Rdmmg6NQmFpHj",
+          "delete": "dolor consectet"
+        },
+        [
+          "patch"
+        ],
+        [
+          "patch"
+        ],
+        {
+          "any": "febqptskop",
+          "put": "ojrmepyh",
+          "head": "qxwwxnlaptxow",
+          "options": "nvoetzkvjijfqi"
+        },
+        {
+          "any": "ikjilhatpr",
+          "post": "9y2nWaBfJi",
+          "put": "Ylq0phyB4UiU3MT",
+          "patch": "lefqtftqvsfdvik"
+        }
+      ],
+      "proxy": [
+        {
+          "testing": "qtdbsvfjquq",
+          "staging": "gVni1TU",
+          "production": "zmehsrfofjixwz"
+        },
+        [
+          "testing"
+        ],
+        {},
+        [
+          "production"
+        ],
+        {
+          "testing": "qzdlnudrb",
+          "production": "sit i"
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": [
+        {},
+        {},
+        [
+          "xceod",
+          "aoalcx"
+        ],
+        [
+          "htmwrtq",
+          "ubjhyidfx"
+        ],
+        {}
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "app": "Jt2",
+      "static": [
+        {
+          "fingerprint": "consectetur ",
+          "prefix": "cons",
+          "production": "sit",
+          "spa": true
+        },
+        [
+          "fingerprint",
+          "ips"
+        ],
+        [
+          "spa",
+          "9J0Lt4P6JEH6EIE5"
+        ]
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "http": [
+        {
+          "any": "DhjI3",
+          "put": "QQNrxws2QNahE",
+          "delete": "conse"
+        },
+        [
+          "head"
+        ],
+        {
+          "post": "ltfecjwtejfkm",
+          "patch": "fqckcgjkpdcqxy",
+          "delete": "xjjrwgy",
+          "head": "sit ipsu"
+        },
+        [
+          "post"
+        ],
+        {
+          "any": "ipsum dolo",
+          "get": "sit sit consec",
+          "post": "XMAlKaux",
+          "delete": "bkdkozv",
+          "head": "hbzjvnysdgftfmj"
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "dolor": [
+        {},
+        true,
+        "fgjapyqun",
+        "p",
+        "hP6ffbBDS"
+      ]
+    },
+    {
+      "app": "amet ipsum adipisci",
+      "static": [
+        {
+          "fingerprint": "consectetur dolo",
+          "prune": false,
+          "spa": false,
+          "staging": "x2Znqc"
+        },
+        [
+          "spa",
+          {}
+        ],
+        [
+          "prefix",
+          "NZGYVLI2Pv3Y6PBvMl"
+        ]
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": {},
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "adipiscin": [
+        {},
+        true,
+        false,
+        "qgokzfruxgwedq",
+        {}
+      ]
+    },
+    {
+      "app": [],
+      "aws": {
+        "layers": {},
+        "memory": 660.38,
+        "policy": [
+          "lorem",
+          86.26,
+          60.59,
+          72.75,
+          true
+        ],
+        "timeout": -275.27
+      },
+      "static": [
+        [
+          "ignore",
+          true
+        ],
+        [
+          "ignore",
+          {}
+        ],
+        [
+          "spa",
+          [
+            "ucvqnidph",
+            11,
+            false,
+            29.69,
+            "foyvvei"
+          ]
+        ]
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "http": [
+        {
+          "head": "gQgzIPNwz7kmN69"
+        },
+        {
+          "get": "sit dolor do",
+          "post": "achawvuoimbvf",
+          "patch": "kvdnhqo",
+          "delete": "2tQXJRuviM",
+          "options": "CWBCgNq2o"
+        },
+        {
+          "patch": "dLJepdAWbn0E",
+          "delete": "mT41lrK6pU",
+          "head": "aeaFElAbO"
+        },
+        [
+          "delete"
+        ],
+        {
+          "post": "dolor sit ipsu",
+          "patch": "rvvaqge",
+          "head": "adipiscing ipsu"
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "consec": {}
+    },
+    {
+      "app": [],
+      "http": [
+        [
+          "post"
+        ],
+        {
+          "any": "M3QZyhe",
+          "post": "zehhftxb",
+          "put": "ctvfuo",
+          "patch": "yymyroqrxgxw",
+          "head": "bFbQ6aF59"
+        },
+        {
+          "patch": "lorem am",
+          "delete": "lorem dolo",
+          "options": "yiq1x0jUwb"
+        },
+        {
+          "any": "pxhzbhdlvmmqezd",
+          "get": "sit sit dolor",
+          "post": "lBWeZdAMN6hgmuU",
+          "put": "frgwxcydyx",
+          "patch": "ipsum consectet",
+          "head": "8Or94Na1"
+        },
+        [
+          "delete"
+        ]
+      ],
+      "proxy": [
+        {},
+        [
+          "production"
+        ],
+        [
+          "testing"
+        ],
+        [
+          "testing"
+        ],
+        [
+          "production"
+        ]
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": [
+        [
+          "AENxvLb",
+          "nxjua"
+        ],
+        [
+          "amet ipsum c",
+          "vneaiqomy"
+        ],
+        {},
+        {},
+        {}
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "CK6x77a": {}
+    },
+    {
+      "app": "hwrj",
+      "aws": {
+        "bucket": "j",
+        "layer": "0Z",
+        "layers": "91YANc7bPn",
+        "policy": {},
+        "policies": "mDSm3FNPL3rhINml",
+        "profile": "yefrmxerfyjknyvqiqwm",
+        "region": "hbieqnvfqpd",
+        "runtime": "lscdyqj",
+        "timeout": -897.92
+      },
+      "static": [
+        [
+          "fingerprint",
+          {}
+        ],
+        [
+          "staging",
+          [
+            38,
+            null,
+            false,
+            true,
+            65.41
+          ]
+        ],
+        {
+          "folder": "f",
+          "prefix": "ipsum sit sit cons",
+          "production": "lhattgxfzojfypxd",
+          "spa": true,
+          "staging": "amet amet dolor sit d"
+        }
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": [
+        [
+          "ytclousawx",
+          "bxcuqpkkuokyomm"
+        ],
+        {},
+        [
+          "rcsgmk",
+          "dL69g8OC5z"
+        ],
+        [
+          "consectetu",
+          "UVbDmjxVnkwf44"
+        ],
+        [
+          "Kx07A79FK42fvJ",
+          "consectetur do"
+        ]
+      ],
+      "sit ad": [
+        {},
+        [
+          null,
+          true,
+          "ipsum lorem",
+          null,
+          29
+        ],
+        [
+          "cBs7AzQgzuhCSj",
+          null,
+          3.4,
+          81.87,
+          76
+        ],
+        -253.27,
+        {}
+      ]
+    },
+    {
+      "app": "consectetur amet",
+      "aws": [
+        [
+          "memory"
+        ],
+        {},
+        {},
+        {},
+        [
+          "concurrency"
+        ],
+        [
+          "policy"
+        ]
+      ],
+      "proxy": [
+        [
+          "testing"
+        ],
+        [
+          "production"
+        ],
+        {
+          "staging": "amet ",
+          "production": "amet dolor"
+        },
+        [
+          "production"
+        ],
+        [
+          "testing"
+        ]
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": [
+        {},
+        {},
+        [
+          "ctweikxfdtepca",
+          "wjhusvfnptoa"
+        ],
+        {},
+        {}
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "WSCRv": {}
+    },
+    {
+      "app": [],
+      "aws": {
+        "bucket": "sakigihnaoz",
+        "concurrency": -364.33,
+        "layers": [
+          "lorem",
+          37.24,
+          58.89,
+          70,
+          "guflubwjqqzktp"
+        ],
+        "memory": -68.01,
+        "profile": "dphadxbvhaesbeqnsda",
+        "region": "rcshzfplhv"
+      },
+      "static": [
+        {
+          "fingerprint": true,
+          "folder": "fU7VabZQLAYjcl",
+          "ignore": {},
+          "production": "consectetur dol",
+          "prune": true,
+          "spa": false
+        },
+        [
+          "ignore",
+          {}
+        ],
+        [
+          "ignore",
+          "xrkfpxneodv"
+        ]
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "ncgakvyf": {},
+      "gvhuo": [
+        "ipsum consec",
+        {},
+        false,
+        [
+          null,
+          null,
+          99,
+          24.61,
+          null
+        ],
+        false
+      ]
+    },
+    {
+      "app": "jvuoobxvjblrvg",
+      "aws": {
+        "bucket": "gobtcb",
+        "concurrency": 814.07,
+        "memory": 955.56,
+        "policy": "adipiscing dolor am",
+        "policies": [
+          19,
+          true,
+          null,
+          null,
+          true
+        ],
+        "region": "xbnvbroookulqup",
+        "runtime": "ge",
+        "timeout": 6.93
+      },
+      "static": [
+        [
+          "prefix",
+          {}
+        ],
+        [
+          "fingerprint",
+          {}
+        ],
+        [
+          "staging",
+          [
+            null,
+            22,
+            null,
+            "awhxjtnenwlnl",
+            19.12
+          ]
+        ]
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": [
+        [
+          "sxcpgcyoq",
+          "amet s"
+        ],
+        {},
+        [
+          "ipsum consecte",
+          "dxmkemr"
+        ],
+        {},
+        {}
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "LXB6815E": {}
+    },
+    {
+      "app": [],
+      "aws": [
+        {},
+        {},
+        [
+          "policies"
+        ],
+        {},
+        [
+          "policies"
+        ],
+        [
+          "policy"
+        ]
+      ],
+      "static": [
+        {
+          "fingerprint": false,
+          "ignore": [
+            true,
+            null,
+            40.29,
+            null,
+            null
+          ],
+          "production": "ffuoxnekvizsnwebl",
+          "prune": false,
+          "staging": "sit dolor adipisci"
+        },
+        [
+          "folder",
+          "sujatrifwirxrdw"
+        ],
+        [
+          "spa",
+          "consectetur lorem "
+        ]
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "http": [
+        {
+          "get": "kvujlqaxvdom",
+          "post": "lorem dolor ad",
+          "options": "FJlaCeH7YhMuXMy"
+        },
+        {
+          "any": "gryir",
+          "post": "lorem",
+          "put": "nabkydez",
+          "patch": "lorem dolor ame",
+          "delete": "mijtl",
+          "head": "lorem amet "
+        },
+        [
+          "post"
+        ],
+        {
+          "any": "HCIsN1xS",
+          "post": "adipiscing si",
+          "put": "frayl",
+          "patch": "xnEz0Fm0U",
+          "delete": "iwdep"
+        },
+        {
+          "get": "rlfvpsap",
+          "put": "qpjomvpbvdvya",
+          "delete": "rpkjxcvkuttnzf"
+        }
+      ],
+      "proxy": [
+        {
+          "staging": "fntbrfumq"
+        },
+        [
+          "production"
+        ],
+        [
+          "staging"
+        ],
+        [
+          "production"
+        ],
+        {
+          "testing": "klqddbsqe",
+          "production": "bqbadwhjmnur"
+        }
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": {},
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "app": [],
+      "aws": [
+        [
+          "layer"
+        ],
+        [
+          "bucket"
+        ],
+        {},
+        {},
+        [
+          "region"
+        ],
+        {}
+      ],
+      "static": [
+        [
+          "prune",
+          {}
+        ],
+        [
+          "ignore",
+          {}
+        ],
+        [
+          "prune",
+          "ciboljycnfmbdystl"
+        ]
+      ],
+      "http": [
+        [
+          "any"
+        ],
+        [
+          "any"
+        ],
+        [
+          "options"
+        ],
+        {
+          "any": "dqjdkxzqlov",
+          "get": "dwptpkcdeedf",
+          "post": "vdvebhpbfkvk",
+          "put": "lcx1Vo0oSg",
+          "delete": "jlywkxbhrimdxlh"
+        },
+        [
+          "patch"
+        ]
+      ],
+      "proxy": [
+        {
+          "testing": "irszfreqrt",
+          "production": "anfnyzznuy"
+        },
+        {
+          "production": "tvphtzubabhzq"
+        },
+        {
+          "testing": "ukeldd",
+          "staging": "7lpqJ3xZ6D3"
+        },
+        {
+          "production": "hXeOaQratqi5"
+        },
+        {
+          "testing": "IsZdWolEqO",
+          "staging": "ejyntcdd",
+          "production": "qewsp"
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": {},
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "dqnygx": [
+        133.5,
+        {},
+        "vujibk",
+        true,
+        887.29
+      ]
+    },
+    {
+      "app": "VRTAXHeCc56utVm",
+      "aws": [
+        {},
+        {},
+        {},
+        [
+          "policy"
+        ],
+        {},
+        {}
+      ],
+      "http": [
+        [
+          "post"
+        ],
+        [
+          "head"
+        ],
+        [
+          "post"
+        ],
+        [
+          "post"
+        ],
+        [
+          "put"
+        ]
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "app": "mrffhsfzbfcujmiqkf",
+      "aws": {
+        "apigateway": "rrwkjkkramniasaodaebd",
+        "layer": [
+          null,
+          true,
+          false,
+          69.11,
+          10
+        ],
+        "layers": [
+          "wvdsuvudeutxl",
+          8.12,
+          88.45,
+          "sit amet do",
+          24
+        ],
+        "memory": 649.0,
+        "policy": "AGX7pr8ka",
+        "policies": [
+          true,
+          "mfpiadij",
+          false,
+          95,
+          51.64
+        ],
+        "profile": "lore",
+        "region": "rjrodoi"
+      },
+      "static": [
+        {
+          "fingerprint": "am",
+          "folder": "dImc38M0a5PV7EX",
+          "prefix": "dcqlnbmzc",
+          "production": "consectetur ",
+          "prune": true,
+          "spa": true,
+          "staging": "xy"
+        },
+        [
+          "folder",
+          "ndrxczlowpc"
+        ],
+        {
+          "fingerprint": true,
+          "folder": "lorem dolor ipsum",
+          "prefix": "cs3DmjkB52UUlWnGc3hKP",
+          "spa": false
+        }
+      ],
+      "proxy": [
+        {
+          "testing": "sit adipiscing ",
+          "staging": "lorem ad"
+        },
+        [
+          "staging"
+        ],
+        {
+          "testing": "hktnmxkw",
+          "staging": "amet consecte",
+          "production": "dygdlbctco"
+        },
+        {
+          "testing": "ebuwwsnytt",
+          "production": "ipsum consecte"
+        },
+        [
+          "production"
+        ]
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "lorem": {},
+      "mzeem": {}
+    },
+    {
+      "app": "IOlsAKSHU2lXBFfdlJ3Z",
+      "static": [
+        {
+          "prefix": "jfl",
+          "spa": true,
+          "staging": "NAI"
+        },
+        {
+          "ignore": {},
+          "production": "M1QyUL4MH8Gy66ke12",
+          "prune": false,
+          "spa": true,
+          "staging": "ipsum sit lorem"
+        },
+        [
+          "fingerprint",
+          "jhjztTzp"
+        ]
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "http": [
+        [
+          "any"
+        ],
+        {
+          "any": "mTq63SPV5Qip",
+          "get": "sxsyqmv",
+          "post": "wbeydlp",
+          "put": "idxlgd",
+          "patch": "xdzzfcoflgmpeg",
+          "delete": "ocsctqf",
+          "head": "wkqkut",
+          "options": "gmfcrimsc"
+        },
+        [
+          "options"
+        ],
+        [
+          "any"
+        ],
+        {
+          "any": "znzbmw",
+          "get": "consectetur ",
+          "put": "tvrxvqh",
+          "patch": "xgtyfaefrvvrz",
+          "head": "gpekvanlhbn",
+          "options": "xyltmg"
+        }
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": {},
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "dolor ": {},
+      "eanhpubmj": [
+        "MHwrO3owjwyfNvYp",
+        true,
+        false,
+        {},
+        [
+          false,
+          51.04,
+          41,
+          null,
+          "lorem a"
+        ]
+      ]
+    },
+    {
+      "app": [],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": [
+        {},
+        [
+          "consect",
+          "rphtwprf"
+        ],
+        [
+          "J6MDpr",
+          "nulfnbvd"
+        ],
+        {},
+        [
+          "cvscmzzousho",
+          "jsgxeuihaggfye"
+        ]
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "app": "fisuaex",
+      "aws": {
+        "apigateway": "pk",
+        "bucket": "dolor lorem sit ipsu",
+        "layer": "deoibqovcslumdfdwena",
+        "layers": "deiRhDIzZDlAbVb2SENS",
+        "memory": 569.82,
+        "policy": "wdfgcxq",
+        "policies": "amet dolor consectetu",
+        "profile": "ipsum ip",
+        "region": "qks",
+        "runtime": "Ra1sfnec",
+        "timeout": 560.65
+      },
+      "proxy": [
+        [
+          "production"
+        ],
+        [
+          "production"
+        ],
+        {
+          "testing": "laolajwaeeuhrr",
+          "staging": "pHgoR1qUXD2S",
+          "production": "goepdyhx"
+        },
+        [
+          "testing"
+        ],
+        [
+          "testing"
+        ]
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": [
+        [
+          "consectetu",
+          "nI4k5sVMjhHfxp"
+        ],
+        [
+          "consectetur a",
+          "mlxmblhrvb"
+        ],
+        {},
+        [
+          "dolor ipsum",
+          "qhmofhdwwacccrp"
+        ],
+        [
+          "J2whqYfh",
+          "dolor ad"
+        ]
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "app": [],
+      "aws": [
+        [
+          "layers"
+        ],
+        {},
+        {},
+        [
+          "memory"
+        ],
+        [
+          "concurrency"
+        ],
+        [
+          "runtime"
+        ]
+      ],
+      "static": [
+        [
+          "spa",
+          {}
+        ],
+        {
+          "fingerprint": true,
+          "production": "dolor con",
+          "spa": true
+        },
+        {
+          "ignore": [
+            false,
+            null,
+            "dkhgdcmuwzpae",
+            78,
+            31.99
+          ],
+          "production": "kcReJtOOws1ggXBMfVr",
+          "prune": true,
+          "staging": "amet ipsum adipis"
+        }
+      ],
+      "proxy": [
+        {},
+        [
+          "testing"
+        ],
+        [
+          "production"
+        ],
+        {},
+        {
+          "testing": "amet ",
+          "production": "vbrfyzact"
+        }
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "app": [],
+      "aws": {
+        "apigateway": "ezjlqrthm",
+        "bucket": "vru1ifftS",
+        "layer": [
+          null,
+          "sit ipsum adip",
+          true,
+          24.47,
+          "fdgdvytyolkqgn"
+        ],
+        "layers": [
+          true,
+          59.35,
+          "SVSDGn4a2fzxY",
+          78.6,
+          8
+        ],
+        "memory": 779.14,
+        "timeout": 30.96
+      },
+      "static": [
+        {
+          "fingerprint": false,
+          "ignore": {},
+          "production": "ipsum amet ",
+          "staging": "nt"
+        },
+        [
+          "folder",
+          false
+        ],
+        {
+          "folder": "mpijxak",
+          "ignore": [
+            "mkvcwhu",
+            33.72,
+            "ipsum ipsum s",
+            false,
+            true
+          ],
+          "production": "s",
+          "prune": false,
+          "spa": true,
+          "staging": "Y33bNpKzdrEc"
+        }
+      ],
+      "http": [
+        [
+          "head"
+        ],
+        {
+          "get": "Vs4WXFO",
+          "post": "ipsum",
+          "put": "ipsum amet dolo",
+          "delete": "sit l",
+          "head": "M9LTBPjiAUw"
+        },
+        {
+          "any": "lorem amet ipsu",
+          "get": "dywrcpkr",
+          "post": "oaCjBXo4EY",
+          "put": "bsysd",
+          "patch": "ipsum ipsum dol",
+          "delete": "clbnjft",
+          "options": "dolor consec"
+        },
+        [
+          "delete"
+        ],
+        [
+          "head"
+        ]
+      ],
+      "proxy": [
+        [
+          "staging"
+        ],
+        {
+          "staging": "9mZCA9XROOYRvKA",
+          "production": "fbyksf"
+        },
+        [
+          "production"
+        ],
+        [
+          "testing"
+        ],
+        [
+          "staging"
+        ]
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "app": "8ODti9UpKR4rtlK5Tixe",
+      "aws": {
+        "apigateway": "ipsum dolor con",
+        "concurrency": -416.98,
+        "layer": "xshgopuxuzrru",
+        "layers": [
+          null,
+          false,
+          48,
+          null,
+          null
+        ],
+        "memory": 791.37,
+        "policies": [
+          "dolor con",
+          null,
+          null,
+          "N6wQJFo9z",
+          false
+        ],
+        "profile": "kovthdqzwgiymas",
+        "runtime": "adipiscing ",
+        "timeout": -114.99
+      },
+      "static": [
+        {
+          "folder": "amet",
+          "ignore": {},
+          "production": "e",
+          "staging": "adipiscing"
+        },
+        [
+          "ignore",
+          false
+        ],
+        [
+          "prune",
+          true
+        ]
+      ],
+      "proxy": [
+        {
+          "testing": "3myoxM5cKn"
+        },
+        [
+          "production"
+        ],
+        [
+          "staging"
+        ],
+        [
+          "production"
+        ],
+        {
+          "testing": "mofjib",
+          "staging": "uqFJez2"
+        }
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": {},
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "app": "khf",
+      "aws": [
+        [
+          "memory",
+          "adip"
+        ]
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "ftmzzmxxck": {}
+    },
+    {
+      "app": [
+        {
+          "_ref": "#/definitions/looseName",
+          "_placeholder": true
+        }
+      ],
+      "aws": [],
+      "static": [
+        {
+          "fingerprint": true,
+          "folder": "P4tT2tGMa",
+          "ignore": "lzP1i",
+          "prefix": "adipis",
+          "production": "consectetur ipsu",
+          "prune": true,
+          "staging": "VDbdet9lYopbEFt"
+        },
+        [
+          "folder",
+          []
+        ],
+        [
+          "prefix",
+          "idjepgxmn"
+        ]
+      ],
+      "ws": [],
+      "scheduled": [],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "app": [
+        {
+          "_ref": "#/definitions/looseName",
+          "_placeholder": true
+        }
+      ],
+      "aws": {
+        "layer": [
+          14,
+          null
+        ],
+        "memory": 264.58,
+        "policy": {},
+        "region": "F95WC482mz",
+        "runtime": "lorem dolor ips",
+        "timeout": 573.6
+      },
+      "static": [
+        [
+          "production",
+          true
+        ]
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "http": [
+        {
+          "any": "jiknalccnyeoa",
+          "get": "qdrzzvn",
+          "put": "consec",
+          "delete": "dolor consect",
+          "head": "ezkwhl"
+        },
+        [
+          "put",
+          "vqthfkeeceadtbs"
+        ],
+        [
+          "head"
+        ],
+        {
+          "any": "dbedvwcu",
+          "post": "pQ2MQV1Ii58zR",
+          "put": "dethqpq",
+          "patch": "sit sit dolor",
+          "head": "dB4H0Z3Eb",
+          "options": "hbgxbc"
+        }
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": {}
+    },
+    {
+      "app": "yMkmAoPzxrn",
+      "ws": [],
+      "http": [
+        [
+          "options",
+          "dolor sit d"
+        ],
+        {
+          "any": "2FXRAFP6",
+          "get": "E1gQSjVk8VCK",
+          "put": "j6KHKJa0",
+          "head": "QwC1UN1",
+          "options": "SKVD8ynhph6"
+        },
+        [
+          "get"
+        ],
+        {
+          "any": "adipi",
+          "put": "vmNJItzqIyO7u",
+          "patch": "Ul5sOY",
+          "head": "sxiopgcicaewpto",
+          "options": "qrebqNmDrUoB"
+        },
+        [
+          "any",
+          "l3pXGVX13zP"
+        ]
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": {}
+    },
+    {
+      "app": [
+        {
+          "_ref": "#/definitions/looseName",
+          "_placeholder": true
+        }
+      ],
+      "aws": {
+        "layer": "y7TDvoL5kCvLpePtO",
+        "memory": 824.61,
+        "policies": "mavqlneod",
+        "runtime": "amet amet",
+        "timeout": -534.9
+      },
+      "http": [
+        [
+          "get",
+          "Wg6FqaRau4rDY"
+        ],
+        [
+          "patch",
+          "amet c"
+        ],
+        {
+          "any": "dolor ",
+          "post": "d8vB8Wr6ZJB",
+          "head": "yvrxl"
+        },
+        {
+          "any": "oJjrVYR",
+          "get": "tfBzIOr",
+          "post": "gvipq",
+          "put": "rkvlzldocbk",
+          "patch": "lorem adipisci",
+          "delete": "cifibviobxbsq",
+          "head": "lorem adipi"
+        },
+        {
+          "get": "8myhVK1IWwdeeb",
+          "head": "impsbfc"
+        }
+      ],
+      "proxy": [
+        [
+          "testing",
+          "amet sit a"
+        ],
+        {
+          "production": "consecte"
+        },
+        [
+          "production",
+          "lorem amet do"
+        ],
+        {
+          "testing": "lorem"
+        }
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "keandtwitr": {}
+    },
+    {
+      "app": "saogwwhpmhlkmysajztpq",
+      "static": [
+        {
+          "folder": "i",
+          "production": "dxemccrvcippdscyrryg",
+          "prune": true
+        },
+        {
+          "fingerprint": true,
+          "prefix": "twpazKzlnc1CL3JBpCWjm",
+          "production": "r8DI7sC",
+          "spa": false
+        },
+        {
+          "folder": "wq",
+          "ignore": [
+            3.52
+          ],
+          "prefix": "sKcF6vjQLupagXz08Twh4",
+          "production": "Cuamf",
+          "staging": "owyplqjemngljcz"
+        }
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "http": [
+        {
+          "any": "qnsln",
+          "post": "sit sit ipsum c",
+          "patch": "AzBszqUKw",
+          "delete": "b7n9BMVhxf",
+          "options": "pookoapfrboh"
+        }
+      ],
+      "proxy": [
+        {
+          "staging": "wfdiofznz",
+          "production": "uZCJf"
+        },
+        [
+          "testing",
+          "edT2c"
+        ]
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": [
+        [],
+        [
+          "owzbrhttyng",
+          "sqorsrgmmgqqxmr"
+        ],
+        [],
+        {},
+        {}
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [],
+      "q7gqwML": [
+        "yfbyfjlaw"
+      ]
+    },
+    {
+      "app": "amet ipsum amet ips",
+      "ws": [],
+      "http": [
+        {
+          "post": "L5G2G9PACDNn",
+          "patch": "ccdrgenzmcdhifc",
+          "delete": "sit ipsu",
+          "head": "gAeiq3dEaw8"
+        },
+        {
+          "any": "B2vhV9jq6",
+          "put": "tnfutnyeypcv",
+          "head": "lxqijccajjzdhx"
+        }
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "Jss5Z2": {}
+    },
+    {
+      "app": [
+        {
+          "_ref": "#/definitions/looseName",
+          "_placeholder": true
+        }
+      ],
+      "static": [
+        {
+          "prefix": "jrYkE4pljn8i6ZQamu",
+          "production": "pgvkjwmsetypvosliyqyi",
+          "prune": true,
+          "spa": true,
+          "staging": "lorem adi"
+        },
+        {
+          "fingerprint": "hyebfpbrv",
+          "production": "sit adipiscing si",
+          "spa": false,
+          "staging": "amet"
+        }
+      ],
+      "proxy": [
+        [
+          "production",
+          "cvkgt"
+        ],
+        [],
+        {
+          "testing": "XfJGlZtkZ3Jbuxf"
+        },
+        [
+          "staging",
+          "ipsum am"
+        ]
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "app": [],
+      "static": [
+        {
+          "ignore": [
+            null,
+            57,
+            40
+          ],
+          "production": "sit sit consecte",
+          "spa": false,
+          "staging": "mzqRxzANyVRuJNbzr"
+        }
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "http": [
+        {
+          "post": "dolor ",
+          "patch": "dglqyefwmsyl",
+          "delete": "MVTmsHhVq",
+          "head": "elhcyobju"
+        },
+        [
+          "patch",
+          "qhnavns"
+        ],
+        {
+          "any": "rW0R0gYwMFAb",
+          "post": "sodenfj",
+          "delete": "hmxzrnzat",
+          "options": "wzwhiqbmew"
+        },
+        [],
+        {
+          "any": "nsszqqbudtwhxd",
+          "get": "7mEsqdabzBIz",
+          "post": "yczqrqtmbycmbpv",
+          "patch": "dolor sit lorem",
+          "delete": "adipiscing",
+          "head": "consect",
+          "options": "jaizarc"
+        }
+      ],
+      "proxy": [
+        [
+          "staging",
+          "fDUrZONQumoRF0g"
+        ],
+        [
+          "testing",
+          "consectetu"
+        ],
+        {
+          "testing": "hUP0Dya",
+          "staging": "ipsum lor",
+          "production": "YwAwSLMmFYH"
+        },
+        [
+          "testing",
+          "fyjhrhmqvgu"
+        ]
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": {},
+      "tables": [],
+      "gmcjoeakwb": {}
+    },
+    {
+      "app": "dolor ",
+      "aws": [
+        {},
+        {},
+        {},
+        [
+          "memory"
+        ],
+        {}
+      ],
+      "static": [
+        {
+          "folder": "qpqxmo",
+          "production": "eMc2",
+          "prune": false,
+          "spa": false,
+          "staging": "yahxpigw"
+        },
+        {
+          "ignore": {},
+          "spa": false,
+          "staging": "amet ipsum"
+        },
+        {
+          "folder": "sit amet ipsum amet c",
+          "prefix": "rnkaqqpfipthsocxtpk",
+          "production": "rzlnbkbodtfe",
+          "prune": false,
+          "staging": "c"
+        }
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "http": [
+        [
+          "post",
+          "gytgermlzam"
+        ],
+        [
+          "patch",
+          "UJsZ4"
+        ]
+      ],
+      "macros": [],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "app": "dolor cons",
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "http": [
+        [
+          "any",
+          "Y21rXM3I"
+        ],
+        {
+          "post": "pZO8DC",
+          "put": "jufeuhc",
+          "delete": "dewnftwe",
+          "head": "consectetur ",
+          "options": "dduttratflfsi"
+        },
+        [
+          "head",
+          "bahmdba"
+        ],
+        {
+          "any": "SZtvATw",
+          "put": "wjcnnkxarrk"
+        }
+      ],
+      "proxy": [
+        []
+      ],
+      "events": [],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [],
+      "scheduled": [
+        {},
+        [
+          "adipi",
+          "lrllujvwbsyrgj"
+        ],
+        [
+          "jpgfrodaqbfofos",
+          "consect"
+        ],
+        [
+          "ahyhyzdimwchl",
+          "w9Zpg6vp5"
+        ],
+        {}
+      ],
+      "hwvbrcukk": {},
+      "iedmlmc": [
+        [
+          false,
+          false,
+          "xvqsger"
+        ],
+        [
+          false,
+          39.77
+        ],
+        "wthuwjxmpmwezqwkxupxy",
+        [],
+        false
+      ]
+    },
+    {
+      "app": [
+        {
+          "_ref": "#/definitions/looseName",
+          "_placeholder": true
+        }
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": {},
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "brfmvnsy": []
+    },
+    {
+      "app": "xtrmifw",
+      "static": [
+        [
+          "prune",
+          [
+            "ipsum adi"
+          ]
+        ]
+      ],
+      "http": [
+        []
+      ],
+      "proxy": [
+        {
+          "testing": "xHZRfbwrWLiAJD",
+          "staging": "adipiscing "
+        },
+        {
+          "testing": "HouGYj05eN",
+          "staging": "wdqbdm",
+          "production": "conse"
+        },
+        {
+          "testing": "fvoptjetqkee",
+          "staging": "rlkiaahjhrsznqd"
+        }
+      ],
+      "macros": [],
+      "scheduled": [
+        {},
+        [],
+        {},
+        {}
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "rLsYunyK": {}
+    },
+    {
+      "app": "y4MG6r0",
+      "aws": {
+        "bucket": "xipdeuiglmqcaw",
+        "concurrency": -255.28,
+        "memory": 733.28,
+        "profile": "nU",
+        "runtime": "adipiscing am",
+        "timeout": -528.85
+      },
+      "static": [
+        [],
+        {
+          "fingerprint": "upu",
+          "folder": "rykujspemqkdqxbnummw",
+          "prefix": "rl1e7qV",
+          "staging": "cbpSjIU"
+        },
+        [
+          "production",
+          "o"
+        ],
+        {
+          "folder": "conse",
+          "ignore": {},
+          "prefix": "amet dolor ip",
+          "prune": true,
+          "staging": "jgwh"
+        },
+        {
+          "fingerprint": true,
+          "folder": "c",
+          "ignore": [
+            95,
+            "consectetur a",
+            3,
+            null
+          ],
+          "prefix": "Mk3WADJNpy89Pee",
+          "production": "vhcnetopfkvqi",
+          "prune": true,
+          "staging": "aNBo"
+        }
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "http": [
+        [
+          "delete"
+        ],
+        {
+          "post": "ipsum co",
+          "delete": "sit dolor s",
+          "head": "lorem amet l"
+        },
+        [
+          "put",
+          "consec"
+        ]
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": {},
+      "tables": [],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "wckmp": [
+        "s",
+        {},
+        -309.96,
+        873.3,
+        490.69
+      ],
+      "sit lorem ": {}
+    },
+    {
+      "app": "xbjfzrzehsgksyuhubud",
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "proxy": [
+        [
+          "staging",
+          "jwef8bmDWwM"
+        ],
+        [
+          "testing",
+          "g3LgpB7YgwW5fs"
+        ],
+        [
+          "production",
+          "ipsum ipsum do"
+        ],
+        {
+          "testing": "9dy2FP0",
+          "production": "lljMf"
+        }
+      ],
+      "events": [],
+      "f7Nf9": [
+        {}
+      ],
+      "sit d": [
+        false
+      ]
+    },
+    {
+      "app": "dolor lor",
+      "static": [
+        {
+          "fingerprint": true,
+          "folder": "paBfLetB4fiWb4JqZV",
+          "ignore": {},
+          "prefix": "oyaxqloupvnknwqscmgi",
+          "production": "kua",
+          "prune": false,
+          "spa": false
+        },
+        {
+          "fingerprint": false,
+          "production": "dnjlalauryqaqnsc",
+          "staging": "kzgmtijqzwksrjgcwb"
+        },
+        {
+          "fingerprint": false,
+          "ignore": "nqukbdrjwtzrhuanwn",
+          "prefix": "consectetur ipsum",
+          "prune": false,
+          "spa": true
+        },
+        [
+          "prefix"
+        ]
+      ],
+      "proxy": [
+        [],
+        {
+          "testing": "5YHWETWpZJEyn",
+          "staging": "aupzipr",
+          "production": "PAwVvUYl8dzF"
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "bkcoz": {}
+    },
+    {
+      "app": [
+        {
+          "_ref": "#/definitions/looseName",
+          "_placeholder": true
+        }
+      ],
+      "aws": [
+        {},
+        {},
+        [
+          "concurrency",
+          936.09
+        ]
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "proxy": [
+        [
+          "staging",
+          "ipsum ad"
+        ]
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "H5g2f": {},
+      "lnulkt": {}
+    },
+    {
+      "app": "poedhqbq",
+      "aws": {
+        "concurrency": -20.18,
+        "layer": {},
+        "policy": [
+          null,
+          true,
+          null,
+          85.34
+        ],
+        "policies": {},
+        "region": "Ncm",
+        "runtime": "AoaXpuE77zPq"
+      },
+      "static": [
+        {
+          "fingerprint": true,
+          "folder": "amet ipsu",
+          "ignore": {},
+          "prefix": "ipsum dolo",
+          "prune": true,
+          "spa": true,
+          "staging": "JqQ"
+        },
+        {
+          "folder": "zPzJmCGqv7cFzWLFveyk",
+          "ignore": "GvAGWzI2bi8ul46d2Bm",
+          "prefix": "ipsum consectetur",
+          "prune": true,
+          "staging": "owaynaoecxbowlxl"
+        },
+        {
+          "fingerprint": false,
+          "folder": "knigbipfmxocargjtdx",
+          "prune": true
+        },
+        {
+          "fingerprint": "sit amet lor",
+          "production": "consectetur ipsum c",
+          "prune": false,
+          "spa": false
+        },
+        []
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "queues": [],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "YzMCTo1b": {}
+    },
+    {
+      "app": "pk2oP4EUsimEczrE7Xe",
+      "static": [
+        {
+          "fingerprint": "do",
+          "ignore": [
+            63.95,
+            41.4,
+            72,
+            "adipis",
+            "SqZcXbQjS0W6"
+          ],
+          "prefix": "kun",
+          "spa": false,
+          "staging": "vkjwspz"
+        }
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": {},
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "app": "YbqmoP15xdsHZ6xXTwvD",
+      "aws": {
+        "concurrency": -756.38,
+        "layers": [],
+        "memory": 451.73,
+        "policy": [
+          72.06,
+          32,
+          81.74
+        ],
+        "profile": "xxlkvvsulocsufpduzszm",
+        "runtime": "ipsum adipisci"
+      },
+      "static": [
+        [
+          "production",
+          {}
+        ],
+        {
+          "fingerprint": "Cjdopcau1GPu7",
+          "ignore": [
+            9
+          ],
+          "spa": false,
+          "staging": "oqCWC6ra0BT"
+        },
+        {
+          "fingerprint": "ipsum ipsum lo",
+          "folder": "qpsty",
+          "ignore": {},
+          "prefix": "gyricqlwwnxnahhgsof",
+          "prune": true,
+          "spa": true,
+          "staging": "sit sit amet ipsu"
+        },
+        [
+          "ignore",
+          "XRHSnpPBcGTyEl1Fg"
+        ]
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "proxy": [
+        {
+          "staging": "lorem"
+        },
+        [
+          "testing",
+          "bJbwlqRLU07rA1"
+        ]
+      ],
+      "queues": [],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "amet ": [
+        [
+          true,
+          87,
+          87,
+          84.53
+        ]
+      ]
+    },
+    {
+      "app": "ibjNpPSIegsx4",
+      "static": [
+        {
+          "fingerprint": "tvQ0mJaIeJqVxTJv",
+          "ignore": "sit ipsum dolor",
+          "prune": true,
+          "spa": true,
+          "staging": "grxo"
+        }
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "proxy": [],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": {},
+      "tables": [],
+      "ipsum ame": {},
+      "xbmuacrelv": {}
+    },
+    {
+      "app": [],
+      "proxy": [
+        [
+          "production",
+          "consect"
+        ]
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": [
+        [
+          "xbpygu",
+          "idmqwcndx"
+        ],
+        [
+          "adipiscing a",
+          "4uvPGxPUajq4Hf"
+        ]
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "app": [
+        {
+          "_ref": "#/definitions/looseName",
+          "_placeholder": true
+        }
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "http": [
+        {
+          "any": "nrcrqfjkyj",
+          "get": "iszkroonvxyd",
+          "put": "uvkhuwv",
+          "patch": "edlqkszlufdnu"
+        }
+      ],
+      "scheduled": {},
+      "tables": [],
+      "IKh3wrw": [
+        -205.22,
+        -289.56,
+        563.87,
+        "8ssnPHlZzACOqWPmaNe"
+      ]
+    },
+    {
+      "app": [
+        {
+          "_ref": "#/definitions/looseName",
+          "_placeholder": true
+        }
+      ],
+      "static": [
+        [
+          "folder",
+          [
+            null,
+            90,
+            22.21,
+            null
+          ]
+        ],
+        {
+          "prefix": "sufltb",
+          "spa": true
+        }
+      ],
+      "http": [
+        {
+          "any": "qfezmiyewaliz",
+          "get": "sit lorem sit",
+          "post": "nklhzjd",
+          "patch": "WmCiq",
+          "options": "sit ipsum ipsum"
+        },
+        {
+          "post": "dhmpnrpwui",
+          "put": "ueejdsdq",
+          "options": "pLsfUgG"
+        },
+        [],
+        {
+          "any": "crcypsaopreuksc",
+          "get": "ujvkegdsh",
+          "post": "H8Pe5t",
+          "put": "agsdfbn",
+          "patch": "amet adipisci",
+          "delete": "sit ipsum do",
+          "head": "ivqjw",
+          "options": "sit sit ipsum"
+        }
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": {},
+      "v9tBseIr": [
+        false,
+        [
+          null,
+          "dolor amet",
+          58
+        ],
+        true,
+        true,
+        {}
+      ]
+    },
+    {
+      "app": [
+        {
+          "_ref": "#/definitions/looseName",
+          "_placeholder": true
+        }
+      ],
+      "aws": [],
+      "static": [
+        [
+          "staging"
+        ],
+        {
+          "fingerprint": "zgrymx",
+          "prune": false,
+          "spa": false,
+          "staging": "LXP"
+        },
+        [
+          "ignore",
+          []
+        ],
+        {
+          "fingerprint": true,
+          "prefix": "2KJd",
+          "production": "amet amet ame",
+          "spa": true,
+          "staging": "vddpkgamqoevlddaufamo"
+        }
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "proxy": [
+        {
+          "testing": "adipiscing"
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "tables": []
+    },
+    {
+      "app": [
+        {
+          "_ref": "#/definitions/looseName",
+          "_placeholder": true
+        }
+      ],
+      "aws": {
+        "layers": "ghanehdati",
+        "policies": [
+          null
+        ],
+        "profile": "adipiscing ",
+        "runtime": "wecmskwvsypko",
+        "timeout": -533.54
+      },
+      "static": [
+        {
+          "fingerprint": "vzwovdcaruftgwehhm",
+          "ignore": {},
+          "prefix": "sit lorem dolor lorem",
+          "staging": "nvkogrnuyxqsdaeoijgpf"
+        },
+        {
+          "fingerprint": true,
+          "folder": "mRhyOOzu",
+          "prefix": "DpkZFGA6fvuwS",
+          "spa": true,
+          "staging": "olqme"
+        }
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "proxy": [
+        [],
+        {
+          "staging": "GzlK5YoJrz2"
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": {},
+      "rlcFHb": [
+        {},
+        [
+          "ipsum lorem a",
+          true,
+          "UjrKkOss"
+        ],
+        true,
+        [
+          82.48,
+          71.82
+        ],
+        true
+      ],
+      "amet lo": {}
+    },
+    {
+      "app": [
+        {
+          "_ref": "#/definitions/looseName",
+          "_placeholder": true
+        }
+      ],
+      "aws": [],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "http": [
+        {
+          "get": "tuhbpqqrssjyw",
+          "post": "consectetu",
+          "options": "bfsszexggkfset"
+        }
+      ],
+      "proxy": [
+        [
+          "production",
+          "adipiscing con"
+        ]
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": [
+        [
+          "jjyfawyl",
+          "lorem lorem l"
+        ],
+        {},
+        [],
+        [
+          "gubzzmnc",
+          "cixlzlpww"
+        ]
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "adipiscin": {}
+    },
+    {
+      "app": [
+        {
+          "_ref": "#/definitions/looseName",
+          "_placeholder": true
+        }
+      ],
+      "static": [
+        [
+          "production",
+          "jgiipvwvhfazycgtrct"
+        ],
+        [
+          "ignore"
+        ]
+      ],
+      "proxy": [],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": [
+        {}
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "app": [
+        {
+          "_ref": "#/definitions/looseName",
+          "_placeholder": true
+        }
+      ],
+      "aws": {
+        "bucket": "sit i",
+        "concurrency": 204.23,
+        "layer": [
+          null,
+          "RbZSHVUcQ8u"
+        ],
+        "layers": {},
+        "memory": 749.7,
+        "region": "SXK4YoHKJ9F4DPhwTAzCQ",
+        "runtime": "iy6jXD6EwUHeXY24",
+        "timeout": -600.47
+      },
+      "ws": [],
+      "http": [],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "queues": [],
+      "scheduled": {},
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [],
+      "leayncz": [
+        true
+      ],
+      "wmjnyntuu": {}
+    },
+    {
+      "app": "9ovY3F",
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "proxy": [
+        [
+          "testing",
+          "dxeuwyuiakbjnfp"
+        ],
+        {
+          "testing": "sit consectetu"
+        }
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": [
+        {},
+        {},
+        {}
+      ],
+      "KIVQ5fB0df": {},
+      "lorem amet": {}
+    },
+    {
+      "app": "Rm1pjBvS67RE4",
+      "aws": [
+        [
+          "memory"
+        ],
+        [
+          "runtime",
+          759.46
+        ],
+        [
+          "layers"
+        ],
+        {},
+        [
+          "layers",
+          327.84
+        ]
+      ],
+      "static": [
+        [
+          "spa",
+          "tazmavukiugvxcvdfcjhu"
+        ],
+        {
+          "fingerprint": "jgunumvhklvsk",
+          "folder": "pwfllhvedhnlkonkrnaok",
+          "prefix": "mknq",
+          "production": "KgOjR2ZeqPV8evt",
+          "prune": false,
+          "spa": false,
+          "staging": "Qeg40CuO"
+        },
+        [
+          "staging",
+          "48u04iB"
+        ]
+      ],
+      "ws": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "http": [
+        [
+          "put",
+          "adipiscing "
+        ],
+        {
+          "any": "bccmtmpwwe",
+          "get": "dolor sit adip",
+          "patch": "cBWfCRrPm",
+          "delete": "lorem lorem ",
+          "head": "hahkhniidenbqi"
+        },
+        {
+          "any": "UmzWGoHD6K",
+          "get": "64NQfX05",
+          "post": "bmmazyunmc",
+          "put": "ceurlu",
+          "patch": "ucjcn",
+          "delete": "taPcf8G",
+          "options": "lJ9iVdhs"
+        },
+        {
+          "any": "amet sit",
+          "get": "wnukfoezgxtyj",
+          "put": "vbeaz",
+          "options": "ipsum"
+        },
+        [
+          "put",
+          "sit lorem "
+        ]
+      ],
+      "proxy": [
+        {
+          "testing": "sqelttbioas",
+          "staging": "oiqizhnzcecfcv"
+        }
+      ],
+      "queues": [],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "8GxC2lGje": [
+        false,
+        {}
+      ]
+    },
+    {
+      "app": "36OUHG3Vv5jZ0qosEtal",
+      "static": [],
+      "http": [
+        [],
+        {
+          "any": "amet lorem am",
+          "get": "xKrGPqU3syN",
+          "post": "gxUe5Ea2wgRz",
+          "put": "qWIPTWa",
+          "patch": "adipisci",
+          "delete": "lorem ipsum"
+        },
+        [
+          "head"
+        ],
+        {
+          "get": "adipi",
+          "put": "adipiscing si",
+          "patch": "fscpdmvoerd",
+          "delete": "kpuggxpfedyvq"
+        }
+      ],
+      "proxy": [
+        [
+          "testing",
+          "llomy"
+        ],
+        {
+          "testing": "adipi",
+          "staging": "goehamexdbyi",
+          "production": "ATjqpsT24i2"
+        },
+        [
+          "staging",
+          "conse"
+        ],
+        {
+          "testing": "xkfnqcgobstyp",
+          "staging": "sit adipis",
+          "production": "luhcigdzci"
+        }
+      ],
+      "events": [],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [],
+      "scheduled": [
+        [
+          "qxdqsj",
+          "Co16F2p"
+        ],
+        {},
+        [
+          "adipisci",
+          "ibafkvfbar"
+        ],
+        {}
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [],
+      "svhonrcsm": {},
+      "Kuop69": [
+        [
+          "nlupny",
+          "8azVHO",
+          "ipsum "
+        ],
+        {},
+        true
+      ]
+    },
+    {
+      "app": "s",
+      "aws": [],
+      "static": [
+        {
+          "folder": "fe",
+          "prune": false,
+          "spa": false,
+          "staging": "dwrtpryumfgdncm"
+        },
+        [
+          "prefix"
+        ],
+        {
+          "fingerprint": "mrpykqtryigf",
+          "folder": "U1VHkgjfrYW7qPU3x7O",
+          "ignore": {},
+          "prefix": "dolor consec",
+          "production": "l",
+          "prune": true,
+          "spa": true,
+          "staging": "DhNPRgYwaQeHCVjntHQ"
+        },
+        {
+          "ignore": "vF5HVp",
+          "production": "srt",
+          "spa": true
+        },
+        [
+          "spa",
+          [
+            95,
+            null,
+            10,
+            "nvkqlnm",
+            "xmapfergujd"
+          ]
+        ]
+      ],
+      "ws": [],
+      "http": [
+        {
+          "any": "lorem ",
+          "get": "lorem s",
+          "delete": "bwqdloj",
+          "options": "ggwbrinhojlxxs"
+        },
+        {
+          "any": "xnzorcmnbcygfrs",
+          "get": "rgptfanrz",
+          "post": "adipiscing a",
+          "put": "lorem ",
+          "delete": "GNCaBUZJiXOLI",
+          "head": "bvaiclafviaveo",
+          "options": "LfeLex9CrC"
+        }
+      ],
+      "events": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "macros": [
+        {
+          "_ref": "#/definitions/macros",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": [
+        [],
+        [
+          "sit ipsum ipsu",
+          "ogeraufjtjcmqp"
+        ]
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "indexes": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ],
+      "consect": {}
+    },
+    {
+      "app": "esagorxkgjtvetjftgo",
+      "aws": {
+        "apigateway": "utronqlchiqvmkjor",
+        "bucket": "sit dolor",
+        "concurrency": 627.33,
+        "memory": -468.83,
+        "policy": "a",
+        "policies": {},
+        "profile": "sit lorem amet ad",
+        "runtime": "qihyjhriyperpcoubzw",
+        "timeout": 988.79
+      },
+      "ws": [],
+      "proxy": [
+        [
+          "staging",
+          "ipsum"
+        ],
+        [
+          "testing",
+          "mzorkezgemv"
+        ],
+        {
+          "production": "sodwoqhei"
+        },
+        []
+      ],
+      "queues": [
+        {
+          "_ref": "#/definitions/strictName",
+          "_placeholder": true
+        }
+      ],
+      "scheduled": [
+        {},
+        [
+          "sit co"
+        ],
+        {},
+        [],
+        {}
+      ],
+      "tables": [
+        {
+          "_ref": "#/definitions/table",
+          "_placeholder": true
+        }
+      ]
+    }
+  ]
+}

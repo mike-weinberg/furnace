@@ -1,0 +1,3490 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://json.schemastore.org/aurora-1.3.json",
+    "$comment": "https://docs.aurorajs.dev/",
+    "additionalProperties": false,
+    "definitions": {
+      "propertyDefinition": {
+        "type": "object",
+        "required": [
+          "name",
+          "type"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of property, in camelCase",
+            "minLength": 2
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the property",
+            "minLength": 2
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of property",
+            "examples": [
+              "varchar"
+            ],
+            "enum": [
+              "array",
+              "bigint",
+              "blob.long",
+              "blob.medium",
+              "blob.tiny",
+              "blob",
+              "boolean",
+              "char",
+              "date",
+              "decimal",
+              "encrypted",
+              "enum",
+              "float",
+              "id",
+              "int",
+              "json",
+              "jsonb",
+              "manyToMany",
+              "password",
+              "relationship",
+              "smallint",
+              "text",
+              "timestamp",
+              "varchar"
+            ]
+          },
+          "arrayOptions": {
+            "type": "object",
+            "description": "Options to define array property",
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "The type of property",
+                "enum": [
+                  "char",
+                  "date",
+                  "decimal",
+                  "enum",
+                  "id",
+                  "int",
+                  "timestamp",
+                  "varchar"
+                ]
+              },
+              "length": {
+                "type": "number",
+                "description": "Set max length to property",
+                "minimum": 1
+              },
+              "maxLength": {
+                "type": "number",
+                "description": "Set max length to property",
+                "minimum": 1
+              },
+              "enumOptions": {
+                "type": "array",
+                "description": "Values for enum type",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "length": {
+            "type": "number",
+            "description": "Set max length to property",
+            "minimum": 1
+          },
+          "maxLength": {
+            "type": "number",
+            "description": "Set max length to property",
+            "minimum": 1
+          },
+          "nullable": {
+            "type": "boolean",
+            "description": "Set property to nullable"
+          },
+          "unsigned": {
+            "type": "boolean",
+            "description": "Set property like unsigned"
+          },
+          "primaryKey": {
+            "type": "boolean",
+            "description": "Set property to primary key"
+          },
+          "index": {
+            "type": "string",
+            "description": "To define property like a index",
+            "enum": [
+              "index",
+              "unique"
+            ]
+          },
+          "indexFields": {
+            "type": "array",
+            "description": "Fields to do composite unique index",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "indexName": {
+            "type": "string",
+            "description": "The name of index, if there are various indexes with the same name, they will be grouped",
+            "minLength": 2
+          },
+          "indexUsing": {
+            "type": "string",
+            "description": "To define property like a index",
+            "enum": [
+              "Btree",
+              "GIN",
+              "HASH",
+              "spgist",
+              "GiST",
+              "BRIN"
+            ]
+          },
+          "isI18n": {
+            "type": "boolean",
+            "description": "Set property as i18n, this property will be used to translate the entity in the translation table"
+          },
+          "enumOptions": {
+            "type": "array",
+            "description": "Values for enum type",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "defaultValue": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              }
+            ],
+            "description": "Default value for property"
+          },
+          "example": {
+            "type": [
+              "number",
+              "string",
+              "boolean",
+              "array"
+            ],
+            "description": "Example value for property, this value will be used in swagger documentation"
+          },
+          "decimals": {
+            "type": "array",
+            "description": "Total digits of the number and length of the decimal places in the back of the number, example: [10, 2].",
+            "items": {
+              "type": "number",
+              "minimum": 1
+            }
+          },
+          "autoIncrement": {
+            "type": "boolean",
+            "description": "Set number property as auto increment"
+          },
+          "applyTimezone": {
+            "type": "boolean",
+            "description": "Apply timezone to date property, by default is true"
+          },
+          "relationship": {
+            "$ref": "#/definitions/relationshipDefinition"
+          },
+          "webComponent": {
+            "$ref": "#/definitions/webComponentDefinition"
+          }
+        }
+      },
+      "additionalApisDefinition": {
+        "type": "object",
+        "required": [
+          "path",
+          "resolverType",
+          "httpMethod"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path to access api",
+            "minLength": 2,
+            "examples": [
+              "auditing/side-effect/rollback",
+              "iam/account/check-unique-username"
+            ]
+          },
+          "resolverType": {
+            "type": "string",
+            "description": "Type of resolver, query or mutation",
+            "enum": [
+              "query",
+              "mutation"
+            ],
+            "examples": [
+              "query"
+            ]
+          },
+          "httpMethod": {
+            "type": "string",
+            "description": "Verb of api rest",
+            "enum": [
+              "get",
+              "post",
+              "put",
+              "delete",
+              "patch"
+            ],
+            "examples": [
+              "post"
+            ]
+          }
+        }
+      },
+      "relationshipDefinition": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Relationship definition for this property",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of web component",
+            "enum": [
+              "many-to-many",
+              "many-to-one",
+              "none",
+              "one-to-many",
+              "one-to-one"
+            ]
+          },
+          "singularName": {
+            "type": "string",
+            "description": "Singular name of the property referred to in the relationship, only for one-to-many and many-to-many relationship, example: book",
+            "minLength": 2
+          },
+          "aggregateName": {
+            "type": "string",
+            "description": "Aggregate referring to this relationship, example: LibraryAuthor",
+            "minLength": 2
+          },
+          "modulePath": {
+            "type": "string",
+            "description": "Path to the module that refers to this relationship, example: library/author",
+            "minLength": 2
+          },
+          "key": {
+            "type": "string",
+            "description": "Property key that refers to this relationship, only for many-to-one relationship, example: id",
+            "minLength": 2
+          },
+          "field": {
+            "type": "string",
+            "description": "Field to obtain the relationship data, example: author",
+            "minLength": 2
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the relationship field",
+            "minLength": 2
+          },
+          "avoidConstraint": {
+            "type": "boolean",
+            "description": "Avoid constraint rules for this relationship"
+          },
+          "packageName": {
+            "type": "string",
+            "description": "Path to packageName where is the relationship, example: @aurora-ts/core",
+            "minLength": 2
+          },
+          "isDenormalized": {
+            "type": "boolean",
+            "description": "Set many-to-many relationship as denormalized, creating a field to store the selected ids"
+          },
+          "pivot": {
+            "$ref": "#/definitions/pivotTableDefinition"
+          }
+        }
+      },
+      "webComponentDefinition": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Web Component that wil be rendered for this property",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of web component",
+            "enum": [
+              "async-search-multiple-select",
+              "async-search-select",
+              "grid-elements-manager",
+              "grid-select-element",
+              "grid-select-multiple-elements",
+              "multiple-select",
+              "search-multiple-select",
+              "search-select",
+              "select"
+            ]
+          },
+          "className": {
+            "type": "string",
+            "description": "CSS class for web component",
+            "minLength": 2
+          },
+          "detailSort": {
+            "type": "number",
+            "description": "Web component order on detail view",
+            "minimum": 1
+          },
+          "isDetailHidden": {
+            "type": "boolean",
+            "description": "Set hidden web component on detail view"
+          },
+          "listSort": {
+            "type": "number",
+            "description": "Web component order on list view",
+            "minimum": 1
+          },
+          "isListHidden": {
+            "type": "boolean",
+            "description": "Set hidden web component on list view"
+          }
+        }
+      },
+      "excludedOperationDefinition": {
+        "type": "array",
+        "description": "Operations to be excluded from the module",
+        "examples": [
+          [
+            "create",
+            "update",
+            "delete"
+          ],
+          [
+            "create",
+            "update",
+            "delete",
+            "findById"
+          ]
+        ],
+        "items": {
+          "enum": [
+            "count",
+            "create",
+            "createBatch",
+            "deleteById",
+            "delete",
+            "findById",
+            "find",
+            "get",
+            "max",
+            "min",
+            "paginate",
+            "rawSql",
+            "getRaw",
+            "sum",
+            "updateAndIncrement",
+            "updateById",
+            "update",
+            "upsert"
+          ]
+        }
+      },
+      "frontDefinition": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Appearance properties for front application",
+        "properties": {
+          "outlineFontSetIcon": {
+            "type": "string",
+            "description": "Font set outline icon to be used in the front application",
+            "minLength": 2,
+            "examples": [
+              "material-symbols-outlined"
+            ]
+          },
+          "outlineIcon": {
+            "type": "string",
+            "description": "Outline icon to be used in the front application",
+            "minLength": 2,
+            "examples": [
+              "heroicons_solid:tag",
+              "photo_auto_merge"
+            ]
+          },
+          "solidFontSetIcon": {
+            "type": "string",
+            "description": "Font set solid icon to be used in the front application",
+            "minLength": 2,
+            "examples": [
+              "material-symbols-outlined"
+            ]
+          },
+          "solidIcon": {
+            "type": "string",
+            "description": "Solid icon to be used in the front application",
+            "minLength": 2,
+            "examples": [
+              "heroicons_solid:tag",
+              "photo_auto_merge"
+            ]
+          }
+        }
+      },
+      "pivotTableDefinition": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Relationship pivot table definition for this relationship",
+        "properties": {
+          "boundedContextName": {
+            "type": "string",
+            "description": "The name of the package, singular in kebab-case",
+            "minLength": 2
+          },
+          "moduleName": {
+            "type": "string",
+            "description": "The name of the module, singular in kebab-case",
+            "minLength": 2
+          },
+          "moduleNames": {
+            "type": "string",
+            "description": "The name of the module, plural in kebab-case",
+            "minLength": 2
+          },
+          "aggregateName": {
+            "type": "string",
+            "description": "The name of the aggregateName, singular in PascalCase",
+            "minLength": 2
+          },
+          "hasOAuth": {
+            "type": "boolean",
+            "description": "Enabled authentication for this pivot table",
+            "default": false
+          },
+          "hasAuditing": {
+            "type": "boolean",
+            "description": "Enabled auditing for pivot table",
+            "default": false
+          },
+          "aggregateProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/propertyDefinition"
+            }
+          },
+          "excludedFiles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "excludedOperations": {
+            "$ref": "#/definitions/excludedOperationDefinition"
+          }
+        }
+      }
+    },
+    "description": "Make agile applications without technical debt",
+    "properties": {
+      "version": {
+        "type": "string",
+        "description": "Schema version",
+        "default": "0.0.1",
+        "minLength": 2
+      },
+      "boundedContextName": {
+        "type": "string",
+        "description": "The name of the package, singular in kebab case",
+        "examples": [
+          "iam",
+          "queue-manager"
+        ],
+        "minLength": 2
+      },
+      "moduleName": {
+        "type": "string",
+        "description": "The name of the module, singular in kebab case",
+        "examples": [
+          "account",
+          "job-registry"
+        ],
+        "minLength": 2
+      },
+      "moduleNames": {
+        "type": "string",
+        "description": "The name of the module, plural in kebab case",
+        "examples": [
+          "accounts",
+          "jobs-registry"
+        ],
+        "minLength": 2
+      },
+      "aggregateName": {
+        "type": "string",
+        "description": "The name of the aggregateName, singular in pascal case, is composed of the boundedContextName plus the moduleName",
+        "examples": [
+          "IamAccount",
+          "QueueManagerJobRegistry"
+        ],
+        "minLength": 2
+      },
+      "hasOAuth": {
+        "type": "boolean",
+        "description": "Enabled authentication for this module",
+        "examples": [
+          false
+        ],
+        "default": false
+      },
+      "hasTenant": {
+        "type": "boolean",
+        "description": "Enabled tenant for this module",
+        "examples": [
+          false
+        ],
+        "default": false
+      },
+      "hasAuditing": {
+        "type": "boolean",
+        "description": "Enabled auditing for this module",
+        "examples": [
+          false
+        ],
+        "default": false
+      },
+      "front": {
+        "$ref": "#/definitions/frontDefinition"
+      },
+      "aggregateProperties": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/propertyDefinition"
+        }
+      },
+      "additionalApis": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/additionalApisDefinition"
+        }
+      },
+      "excludedFiles": {
+        "type": "array",
+        "description": "Files to be excluded from the module",
+        "examples": [
+          "src/@api/iam/account/resolvers/iam-create-accounts.resolver.ts",
+          "src/@api/iam/account/resolvers/iam-create-accounts.resolver.spec.ts"
+        ],
+        "items": {
+          "type": "string"
+        }
+      },
+      "excludedOperations": {
+        "$ref": "#/definitions/excludedOperationDefinition"
+      }
+    },
+    "required": [
+      "boundedContextName",
+      "moduleName",
+      "moduleNames",
+      "aggregateName"
+    ],
+    "title": "Aurora Agile Meta Framework",
+    "type": "object"
+  },
+  "examples": [
+    {
+      "boundedContextName": "consectetur ipsum lore",
+      "moduleName": "dolor lorem ipsum s",
+      "moduleNames": "SR",
+      "aggregateName": "amet consectetu",
+      "hasOAuth": true,
+      "hasTenant": false,
+      "hasAuditing": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "con",
+      "moduleName": "RfLLFJM626ydghjj",
+      "moduleNames": "dolor adipiscing ",
+      "aggregateName": "lore",
+      "hasTenant": true,
+      "hasAuditing": true,
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "RhxrnJgWQsNKVPw",
+      "moduleName": "qcbcycqzakmx",
+      "moduleNames": "consecte",
+      "aggregateName": "vla",
+      "hasAuditing": false,
+      "aggregateProperties": [],
+      "additionalApis": [],
+      "excludedFiles": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "psbEhY71O3",
+      "moduleName": "cons",
+      "moduleNames": "consec",
+      "aggregateName": "dbai",
+      "version": "lorem consec",
+      "hasOAuth": false,
+      "hasTenant": true,
+      "hasAuditing": false,
+      "aggregateProperties": [],
+      "excludedFiles": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "K1oF",
+      "moduleName": "XbWNdbIsuSVyRwDZCRMA",
+      "moduleNames": "Wrgveu2lsVmh",
+      "aggregateName": "ssitvjenr",
+      "hasAuditing": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "additionalApis": [],
+      "excludedFiles": []
+    },
+    {
+      "boundedContextName": "sit sit ipsum",
+      "moduleName": "czbgq7DH43JoGw",
+      "moduleNames": "dolor ame",
+      "aggregateName": "JmWT6hgJFYg2oRuDgzv22",
+      "hasAuditing": true,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [],
+      "additionalApis": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "IHXFSBjYOEnVIFDbAiP",
+      "moduleName": "sit ad",
+      "moduleNames": "ipsum ipsum ",
+      "aggregateName": "qjlfuwpacopsufzmruca",
+      "version": "aprklgtfosvyeeh",
+      "hasTenant": false,
+      "hasAuditing": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "excludedFiles": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "5uIY",
+      "moduleName": "hlb",
+      "moduleNames": "1LJypiAxVqy6MOQ4mVe",
+      "aggregateName": "Hi6uK7ERVq",
+      "hasTenant": true,
+      "hasAuditing": true,
+      "additionalApis": [],
+      "excludedFiles": []
+    },
+    {
+      "boundedContextName": "jxstiofoyjcjfbwzx",
+      "moduleName": "xzsvuqlfgyscxhs",
+      "moduleNames": "amet sit lorem a",
+      "aggregateName": "qzmxv",
+      "hasOAuth": false,
+      "hasTenant": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "ogzvgwoms",
+      "moduleName": "pjzkzwagmveqjuytft",
+      "moduleNames": "eabcutucoyyryxzj",
+      "aggregateName": "oejldtqzvuzyqonvy",
+      "hasTenant": false,
+      "hasAuditing": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "additionalApis": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "consectetu",
+      "moduleName": "lorem adipiscin",
+      "moduleNames": "aHBojDMEEhcMx",
+      "aggregateName": "P2Hi",
+      "version": "hiulospffsmdstcqff",
+      "hasOAuth": true,
+      "hasTenant": true,
+      "hasAuditing": true,
+      "aggregateProperties": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "fnmsjlayxzidwbbffdjtw",
+      "moduleName": "zbhcrklgutlvgiyfda",
+      "moduleNames": "bmkig",
+      "aggregateName": "Yl8uwlnDvELfOe",
+      "version": "amet ipsum ",
+      "hasOAuth": false,
+      "hasTenant": false,
+      "hasAuditing": true,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [],
+      "additionalApis": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "s3EnuT",
+      "moduleName": "bzoponyh",
+      "moduleNames": "amet a",
+      "aggregateName": "cPwaTk42x6bmxkBp",
+      "version": "ovyA3wbZ50svVfdFoCj7Ev",
+      "hasOAuth": false,
+      "aggregateProperties": [],
+      "additionalApis": [],
+      "excludedFiles": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "fzhc",
+      "moduleName": "vS7PHyz",
+      "moduleNames": "ubgynamfjcqlffe",
+      "aggregateName": "cyijfmvfolhd",
+      "hasOAuth": false,
+      "hasTenant": true,
+      "hasAuditing": true,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "excludedFiles": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "amet dolor sit adip",
+      "moduleName": "amet dolo",
+      "moduleNames": "ftfyokaexe",
+      "aggregateName": "ipsum ipsum dolor adi",
+      "hasOAuth": true,
+      "hasTenant": true,
+      "hasAuditing": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "additionalApis": [],
+      "excludedFiles": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "Lnt",
+      "moduleName": "adipiscing amet a",
+      "moduleNames": "Lx8OSQH",
+      "aggregateName": "odoepltpjnfzwkflqlybin",
+      "version": "baswNRbPiPBRaRpI",
+      "hasOAuth": true,
+      "hasAuditing": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [],
+      "additionalApis": []
+    },
+    {
+      "boundedContextName": "consectetur adipisci",
+      "moduleName": "glphpaftlrr",
+      "moduleNames": "ame",
+      "aggregateName": "lskLpQ",
+      "version": "iSoqpSDZ",
+      "hasOAuth": false,
+      "hasTenant": true,
+      "hasAuditing": true,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [],
+      "additionalApis": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "amet sit",
+      "moduleName": "sravju",
+      "moduleNames": "ipsum amet adipisci",
+      "aggregateName": "cqwhbtozgcpvqcidku",
+      "version": "vQ8UKiV57xBwRTwHDnM",
+      "hasOAuth": false,
+      "hasTenant": false,
+      "hasAuditing": true,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [],
+      "excludedFiles": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "ipsum ipsum",
+      "moduleName": "bxcwebqxksdq",
+      "moduleNames": "IKLgsb",
+      "aggregateName": "consectetur sit lore",
+      "version": "wpznvjcn",
+      "hasOAuth": true,
+      "hasTenant": true,
+      "hasAuditing": false,
+      "aggregateProperties": [],
+      "additionalApis": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "ipsum adipiscing ",
+      "moduleName": "wz",
+      "moduleNames": "ianceaudkxtv",
+      "aggregateName": "qtqesgkdbjakwzkc",
+      "version": "hvuZ",
+      "hasOAuth": false,
+      "hasTenant": true,
+      "hasAuditing": true,
+      "aggregateProperties": [],
+      "additionalApis": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "adipiscing ipsum sit",
+      "moduleName": "lorem ipsum amet a",
+      "moduleNames": "GW",
+      "aggregateName": "qrsilakyxjxa",
+      "hasTenant": false,
+      "hasAuditing": true,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [],
+      "additionalApis": [],
+      "excludedFiles": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "5pOxeOsZtUdP6hoL",
+      "moduleName": "xw",
+      "moduleNames": "amet do",
+      "aggregateName": "Rgb9MU5b5ka10dddAp7H5e",
+      "version": "vltybjkiohdwludhmake",
+      "hasOAuth": false,
+      "hasAuditing": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "additionalApis": [],
+      "excludedFiles": []
+    },
+    {
+      "boundedContextName": "amet sit amet ips",
+      "moduleName": "uufvqdwlsc",
+      "moduleNames": "ep",
+      "aggregateName": "sit lorem lorem sit ",
+      "version": "wtwEla",
+      "hasOAuth": true,
+      "hasTenant": false,
+      "hasAuditing": true,
+      "aggregateProperties": [],
+      "excludedFiles": []
+    },
+    {
+      "boundedContextName": "sit ipsum sit s",
+      "moduleName": "lfxmfmsgetdr",
+      "moduleNames": "dolor",
+      "aggregateName": "zwflbdawgixat",
+      "version": "consectetur ipsum c",
+      "hasOAuth": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [],
+      "additionalApis": [],
+      "excludedFiles": []
+    },
+    {
+      "boundedContextName": "5Ws8",
+      "moduleName": "adipiscing consecte",
+      "moduleNames": "sksq",
+      "aggregateName": "08",
+      "version": "sz",
+      "hasOAuth": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [],
+      "excludedFiles": []
+    },
+    {
+      "boundedContextName": "dolo",
+      "moduleName": "6AM5mckcBhfty2aO",
+      "moduleNames": "znsltgr",
+      "aggregateName": "weoxplgdaegrcx",
+      "version": "TGbNOshxsBVoa6F0pfYt",
+      "hasOAuth": false,
+      "aggregateProperties": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "txcplgwizjouubtc",
+      "moduleName": "consectetur ",
+      "moduleNames": "AH",
+      "aggregateName": "amet sit lorem adi",
+      "version": "Wh6DUQeAxhTzOc6zZVfU",
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [],
+      "excludedFiles": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "ips",
+      "moduleName": "52XICABGIYi9drm9n565F",
+      "moduleNames": "dolor am",
+      "aggregateName": "cons",
+      "hasTenant": true,
+      "hasAuditing": true,
+      "aggregateProperties": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "sit l",
+      "moduleName": "amet ",
+      "moduleNames": "gqnujxwcmhdgtvm",
+      "aggregateName": "adip",
+      "version": "ntuu",
+      "hasOAuth": false,
+      "hasAuditing": true,
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "XqjUmfFKFYG5",
+      "moduleName": "jejaqedxlyzrgdgt",
+      "moduleNames": "JpmbggiDVKw7mMjBHq",
+      "aggregateName": "gtavfivvwyhdbngxczlvl",
+      "version": "tE1E7zCNFPsaAd",
+      "hasOAuth": true,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [],
+      "additionalApis": [],
+      "excludedFiles": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "tesq",
+      "moduleName": "rpzsijqrfvl",
+      "moduleNames": "dolor lorem",
+      "aggregateName": "dolor dolo",
+      "version": "l64Jj7ndzx0jdBcPE25o",
+      "hasTenant": true,
+      "hasAuditing": false,
+      "aggregateProperties": [],
+      "additionalApis": [],
+      "excludedFiles": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "sit ipsum ",
+      "moduleName": "Gmgp",
+      "moduleNames": "IE",
+      "aggregateName": "lorem ipsum ame",
+      "hasOAuth": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [],
+      "excludedFiles": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "hht25vBC5BtFaFhYB7Aq9",
+      "moduleName": "adipiscing adip",
+      "moduleNames": "iarycsmk",
+      "aggregateName": "WACMo4d",
+      "hasOAuth": true,
+      "hasTenant": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "additionalApis": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "CTF054Q0YgQ5UrSP",
+      "moduleName": "gazomrdwhyemhqbbibvdh",
+      "moduleNames": "qmhrwjsaahihnuxolz",
+      "aggregateName": "eglstkjnmzckinwuqjp",
+      "hasOAuth": true,
+      "hasTenant": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "luqtwlju",
+        "ipsum ipsum ",
+        "adipiscing ipsum c",
+        "fanwvrhz",
+        "adipiscing s"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "y4d0rUBousuHa",
+      "moduleName": "L8UuCdNygNVfSQg",
+      "moduleNames": "lorem consectetur ",
+      "aggregateName": "2BB5JD2UWw6IlKJihLLfG",
+      "version": "bobbf",
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "irc",
+        "ydjzwmijubkvai",
+        "zGs5sU0F",
+        "RLUAEQn",
+        "amet amet lore"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "oYhDILjNF0",
+      "moduleName": "mu",
+      "moduleNames": "ZltfWHml",
+      "aggregateName": "sxpo",
+      "version": "wclcuncl",
+      "hasTenant": true,
+      "hasAuditing": true,
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "nDTVx6cEcw9h94QdDQfs",
+        "sit",
+        "tobmttaacyck",
+        "consectetur ipsu",
+        "lorem "
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "adipisci",
+      "moduleName": "xrxkrxmzax",
+      "moduleNames": "uNRlW7w",
+      "aggregateName": "lor",
+      "version": "amet sit am",
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "boundedContextName": "KoSEeb",
+      "moduleName": "mikvj",
+      "moduleNames": "q3c4",
+      "aggregateName": "ztxlqgkizigb",
+      "version": "ct3QvVbXN8F9NLW4bY7",
+      "hasOAuth": true,
+      "hasTenant": true,
+      "hasAuditing": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "31AwybV7xn",
+      "moduleName": "ipsum adipiscing sit ",
+      "moduleNames": "dolor i",
+      "aggregateName": "adipisci",
+      "hasTenant": false,
+      "hasAuditing": false,
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "wTBr5WvPFcnOacqDa89W1",
+        "kelqv",
+        "ipsu",
+        "nhvuoyezeoiwo",
+        "sxa8"
+      ]
+    },
+    {
+      "boundedContextName": "inmadrvaisfrpftwoe",
+      "moduleName": "adipiscing c",
+      "moduleNames": "sit sit adipisci",
+      "aggregateName": "v1KSgdAtqY5ngll",
+      "hasOAuth": true,
+      "hasTenant": true,
+      "hasAuditing": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "boundedContextName": "zhveeg",
+      "moduleName": "Kgt",
+      "moduleNames": "lorem ",
+      "aggregateName": "czvgsajuvkhkz",
+      "version": "adipiscing ad",
+      "hasOAuth": true,
+      "hasTenant": true,
+      "excludedFiles": [
+        "awImWf2AbGTFevPYyvcN",
+        "w9YPfyRlAAi03rkpSnT4f",
+        "qrh",
+        "u7ZBK",
+        "csssgnbweu"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "ldayfeczkjofusyvz",
+      "moduleName": "atj",
+      "moduleNames": "owmuwwldtkneoaleladp",
+      "aggregateName": "ipsum adipiscin",
+      "version": "ep2qPzj8NpJsXbA",
+      "hasAuditing": true,
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "amet sit adipisc",
+        "amet dolor dolor con",
+        "caxyqnsb",
+        "sit conse",
+        "oL"
+      ]
+    },
+    {
+      "boundedContextName": "aazifmotpot",
+      "moduleName": "y3unODFccG",
+      "moduleNames": "amAsghTHCbV",
+      "aggregateName": "amet amet adipisc",
+      "hasOAuth": true,
+      "hasTenant": false,
+      "hasAuditing": true,
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "avawpyqdnxkqjrjhaxpxs",
+        "JnSYJqVQF2",
+        "1",
+        "dolo",
+        "sit ipsum amet "
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "viyfuwjf",
+      "moduleName": "0nQLCAaIAMC5QO",
+      "moduleNames": "amet lore",
+      "aggregateName": "sit sit",
+      "hasOAuth": true,
+      "hasAuditing": false,
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "joegjs",
+        "dletiz",
+        "iyudzdzhgnbttbtnnntzp",
+        "QT5MOnRM",
+        "dolor amet dolor"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "9U",
+      "moduleName": "thsj",
+      "moduleNames": "consectetur sit am",
+      "aggregateName": "W2y3Df9i",
+      "hasOAuth": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "excludedFiles": [
+        "jtkkpgpwmnszkytxc",
+        "vxovqzbuigunu",
+        "mxfpqkneiss",
+        "itgjfhhlilxebzahbuk",
+        "rvhumnhdf"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "wvctqs",
+      "moduleName": "akcmq",
+      "moduleNames": "fysy",
+      "aggregateName": "ipsum amet ",
+      "hasOAuth": false,
+      "hasTenant": false,
+      "excludedFiles": [
+        "cz",
+        "qymyybndsby",
+        "huiwxjh",
+        "1pu9hpOw",
+        "AszpLucV"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "ieataimfyrplil",
+      "moduleName": "sit adipisc",
+      "moduleNames": "mkao6GCGY",
+      "aggregateName": "Dejah2SO2gGxun",
+      "version": "sit dolor dolor am",
+      "hasOAuth": false,
+      "hasTenant": false,
+      "hasAuditing": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "vaiglusc",
+        "dj",
+        "tfazxqb",
+        "dzxhphxhwxetbifkp",
+        "UJZxQO"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "sgib",
+      "moduleName": "nRuJkMnK0duTeDz",
+      "moduleNames": "zaxdfciujo",
+      "aggregateName": "HyUD85r95I3",
+      "version": "vqoplenrjolxhphosy",
+      "hasOAuth": false,
+      "hasAuditing": true,
+      "excludedFiles": [
+        "d",
+        "xqiqgqk",
+        "xsjcduzaugfpypwbaik",
+        "ldkrwnsxmnywed",
+        "nfkprwyig"
+      ]
+    },
+    {
+      "boundedContextName": "moixuozh",
+      "moduleName": "lorem consectetur",
+      "moduleNames": "YiVlQbF5ngAafO",
+      "aggregateName": "lu",
+      "hasTenant": false,
+      "hasAuditing": true,
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "boundedContextName": "7QyC",
+      "moduleName": "ZpLwE7nUVf9BHsI7",
+      "moduleNames": "8OVHklPTIY4WG",
+      "aggregateName": "lnb",
+      "version": "vnvupoxrixvyrlj",
+      "hasTenant": false,
+      "hasAuditing": true,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "boundedContextName": "IXqX2VfGjZePucb",
+      "moduleName": "wepsmredwemlkheepzwduj",
+      "moduleNames": "amet consec",
+      "aggregateName": "dxL5ue7S0EstiwI77En7ae",
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "swcdkupqxrvkdbyff",
+      "moduleName": "ehhftxbexccxhaoekivyym",
+      "moduleNames": "oqrxgxw",
+      "aggregateName": "lorem sit lorem sit l",
+      "hasTenant": false,
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "boundedContextName": "consectetur dolor c",
+      "moduleName": "lvyaalylurbmq",
+      "moduleNames": "lorem a",
+      "aggregateName": "hbjujouhwblgexeum",
+      "hasTenant": true,
+      "hasAuditing": true,
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "9H6hEiafrmJGmOwUxjl",
+      "moduleName": "ppnetrwmajnp",
+      "moduleNames": "fpjxucaxrgm",
+      "aggregateName": "amet amet amet sit a",
+      "hasOAuth": false,
+      "hasAuditing": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "epcaulsa",
+        "ezkgajudqh",
+        "Q3FWSCRv7dni",
+        "ips",
+        "lorem ame"
+      ]
+    },
+    {
+      "boundedContextName": "P5fvc2kNf9wiY",
+      "moduleName": "HBp0G644ukhFneiU60W8",
+      "moduleNames": "guflubwjqqzktpfmzxfo",
+      "aggregateName": "amet dolor ",
+      "version": "sit",
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "dafhxxoiv",
+        "ame",
+        "eidtcvumkbalctz",
+        "lorem consectetur ",
+        "qsxlV4yBhF398C"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "94YdbVbU",
+      "moduleName": "eBPYpspzl1",
+      "moduleNames": "hWi5HrXfd",
+      "aggregateName": "gapn",
+      "version": "yara",
+      "hasTenant": false,
+      "hasAuditing": true,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "adipiscing sit am",
+        "zWBMWLr3",
+        "ipsum d",
+        "JOg7VfbBCGlsF9gHz",
+        "TGjF1BG"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "cz8rYIW4yOYVa",
+      "moduleName": "ui",
+      "moduleNames": "wmvokovgndorkcwuvezmeh",
+      "aggregateName": "eblm",
+      "hasTenant": true,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "aysu",
+        "xSrqOaJatR2A",
+        "ccucwfl",
+        "mlktkvuj",
+        "serbzgtjpozmvnj"
+      ]
+    },
+    {
+      "boundedContextName": "LoifTGRfMmSKXW",
+      "moduleName": "fleocsrciboljy",
+      "moduleNames": "3L8w",
+      "aggregateName": "stlyenec",
+      "version": "dolor lorem dol",
+      "hasOAuth": false,
+      "hasTenant": true,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "dwptpkcdeedfouuv",
+        "jrna",
+        "xu",
+        "YHlcx1Vo0oSgQ",
+        "consectetur"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "7kyvFg",
+      "moduleName": "sit l",
+      "moduleNames": "iitfeejqzfyoxveqdakuof",
+      "aggregateName": "gl",
+      "hasTenant": true,
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "QH69ydgsAoZRB3X3pdK",
+        "consectetur",
+        "xx",
+        "qtoiacfnsfkyksqrm",
+        "sit lorem sit cons"
+      ]
+    },
+    {
+      "boundedContextName": "xojbnpxmuilgelneuguk",
+      "moduleName": "sgZQ",
+      "moduleNames": "xAzPaCHvbR",
+      "aggregateName": "co",
+      "hasOAuth": false,
+      "hasTenant": true,
+      "hasAuditing": false,
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "jorehl",
+      "moduleName": "sit amet sit adipisc",
+      "moduleNames": "FfdlJ3ZSGEzDeL",
+      "aggregateName": "mAL0iXweoshM",
+      "hasTenant": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "boundedContextName": "svrxtrlirmdpzbzr",
+      "moduleName": "lzTSzWJZpwJ6MDprn923G",
+      "moduleNames": "sit ipsum dolor ip",
+      "aggregateName": "v0OYs",
+      "hasOAuth": true,
+      "hasAuditing": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "con",
+        "wooqfkpqjmi",
+        "lorem ipsum amet i",
+        "ixej",
+        "amet adipiscing adip"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "tf",
+      "moduleName": "lorem consec",
+      "moduleNames": "driqw",
+      "aggregateName": "adipiscing adipiscin",
+      "version": "ipsum sit",
+      "hasOAuth": true,
+      "hasAuditing": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "amet",
+        "inj1lHbCnBdeiRhDIz",
+        "lAbVb2SENSbWpbW2hl",
+        "YLtJ7N0a",
+        "kogewwp"
+      ]
+    },
+    {
+      "boundedContextName": "X6tVukvUjOvkAxC25o9L",
+      "moduleName": "bivyjsrevvyywoqmqj",
+      "moduleNames": "uysdkhgdcmu",
+      "aggregateName": "paebwislpwrbq",
+      "version": "ipsum adipi",
+      "hasOAuth": true,
+      "hasAuditing": true,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "adipiscing consec",
+      "moduleName": "adip",
+      "moduleNames": "TrnDSOlwvru1i",
+      "aggregateName": "cons",
+      "version": "jriglgx",
+      "hasOAuth": true,
+      "hasTenant": false,
+      "hasAuditing": true,
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "olkqgnkrwrdptnbcosmso",
+        "c",
+        "ipsum dolor co",
+        "sit adipiscing amet a",
+        "anfhvhafrai"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "tsltylodh",
+      "moduleName": "xhi",
+      "moduleNames": "fdngcyb",
+      "aggregateName": "ipsum ip",
+      "version": "dolor adi",
+      "hasAuditing": false,
+      "excludedFiles": [
+        "lorem ad",
+        "uzrrumuwnijpomk",
+        "yzak",
+        "hjqyjrongzkldsukov",
+        "ips"
+      ]
+    },
+    {
+      "boundedContextName": "crsjzh",
+      "moduleName": "consect",
+      "moduleNames": "sit dolo",
+      "aggregateName": "9yMQOdSYBvS96mVE98E",
+      "hasTenant": false,
+      "hasAuditing": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "ipsum amet sit sit",
+        "jTM3"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "sit lorem ",
+      "moduleName": "onulhvexwonbeusqd",
+      "moduleNames": "wrlldbz",
+      "aggregateName": "qdvgflovcwgjtm",
+      "version": "DWU",
+      "hasOAuth": false,
+      "hasTenant": false,
+      "hasAuditing": false,
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "icggtowygdslvlfytusyw",
+        "con",
+        "mscewqe",
+        "cons"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "pksqrontdnclax",
+      "moduleName": "ghjckowhxrdgmefcighf",
+      "moduleNames": "agdmfmlqnn",
+      "aggregateName": "yGc",
+      "version": "mezy",
+      "hasOAuth": true,
+      "hasTenant": true,
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "boundedContextName": "ifkvqsoe",
+      "moduleName": "xrnS3vXtVoJz1Vgg",
+      "moduleNames": "iwnusknryhmwyost",
+      "aggregateName": "consectetur ipsum adi",
+      "version": "mQ",
+      "hasTenant": false,
+      "hasAuditing": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "phmkrjnapglgftrrt",
+      "moduleName": "LpePtO4K4XdpPDaYOA",
+      "moduleNames": "hlnqcqgsplgstircci",
+      "aggregateName": "adipiscing sit ip",
+      "hasOAuth": false,
+      "hasAuditing": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "vh",
+      "moduleName": "o20sLErAyC7Tcv8VL",
+      "moduleNames": "CrPQlaBcJUGMib0UXGGLWn",
+      "aggregateName": "pdscyrrygfqxyupjuqw",
+      "hasOAuth": true,
+      "hasTenant": false,
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "6xB6uGk",
+        "gqgvmhzmozhlxjw"
+      ]
+    },
+    {
+      "boundedContextName": "u7McGGGKH",
+      "moduleName": "g83CgU8sw1U4M",
+      "moduleNames": "NnZI5Q381",
+      "aggregateName": "genzmcdhifciffcotjcl",
+      "version": "sit si",
+      "hasTenant": false,
+      "hasAuditing": true,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "consectetur",
+        "adipiscing consec"
+      ]
+    },
+    {
+      "boundedContextName": "lorem lorem",
+      "moduleName": "rqrmodbwuztpewnwuuq",
+      "moduleNames": "ipsum dolor ips",
+      "aggregateName": "pgvkjwmsetypvosliyqyig",
+      "version": "amet dolor ipsum lor",
+      "hasOAuth": false,
+      "hasTenant": false,
+      "hasAuditing": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "sUhi77q2A5ed7GE7YgzkH",
+      "moduleName": "eCmzqR",
+      "moduleNames": "buarrgtxcsifm",
+      "aggregateName": "thbtjah",
+      "version": "adipiscing",
+      "hasOAuth": true,
+      "hasTenant": false,
+      "hasAuditing": false,
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "additionalApis": []
+    },
+    {
+      "boundedContextName": "ipsum con",
+      "moduleName": "hGJvYb8AkxAaRNKN4DI",
+      "moduleNames": "ecxqafikgioxsy",
+      "aggregateName": "si",
+      "version": "q09OUTUBYN43rFyh",
+      "hasOAuth": false,
+      "hasTenant": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "amet consectetu",
+        "rnkaqqpfipthsocxtpk",
+        "amet amet",
+        "GezdJjVmjwYy",
+        "ftdtnpxokhqtmpsnb"
+      ]
+    },
+    {
+      "boundedContextName": "lorem dolor consectetu",
+      "moduleName": "8vXjKS04IY21rXM3IYwuJ",
+      "moduleNames": "ipsum consectet",
+      "aggregateName": "lorem adipiscing ",
+      "hasOAuth": true,
+      "hasAuditing": true,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "consectetur",
+      "moduleName": "cxqgeyhmaswtbrfmvns",
+      "moduleNames": "bfmmypouaszpvti",
+      "aggregateName": "Go7oNyHa92bq5VJZhUkr6",
+      "version": "adipiscing amet lor",
+      "hasTenant": false,
+      "hasAuditing": true,
+      "excludedFiles": [
+        "conse"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "adipiscing adipisc",
+      "moduleName": "consectetur ipsu",
+      "moduleNames": "sidhfnn",
+      "aggregateName": "7mba6",
+      "hasOAuth": false,
+      "additionalApis": [],
+      "excludedFiles": [
+        "sfjxiujlhr",
+        "Xv3IHouGY"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "adip",
+      "moduleName": "pnyhwkrzupualwtlfjldyq",
+      "moduleNames": "Ogb2CxLLI1YRAcj9Xl",
+      "aggregateName": "jmpqueef",
+      "version": "yfvSCxp3O7yWw",
+      "hasTenant": true,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [],
+      "additionalApis": [],
+      "excludedFiles": [
+        "mmwrdfrfwqbtksjisjy",
+        "cbpSjIU",
+        "ipsum amet lorem ad",
+        "YqidBkVKxvfi3kHJUk"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "adipiscing adipisc",
+      "moduleName": "ZTKgB8IxM",
+      "moduleNames": "hubudq",
+      "aggregateName": "amet sit ipsum adipis",
+      "version": "8QxC8La0zsEm",
+      "hasAuditing": false,
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "yqwt",
+        "xwwwkppfs",
+        "DkVu39gJXzT1E",
+        "GgFvkQ",
+        "VvQsf7Nf9pJ5dFvaRSwH"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "con",
+      "moduleName": "adipiscing",
+      "moduleNames": "diIRk4V2xaTg",
+      "aggregateName": "lor",
+      "hasOAuth": false,
+      "hasTenant": false,
+      "hasAuditing": true,
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "k7zWbk8YbD",
+      "moduleName": "ipsum dolor ips",
+      "moduleNames": "syg3FP9gJDVLBiHX6CFXBz",
+      "aggregateName": "uyenbygnsmmmp",
+      "hasTenant": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "nibvvgcknpzlqtca"
+      ]
+    },
+    {
+      "boundedContextName": "consectet",
+      "moduleName": "LMaRjFZ",
+      "moduleNames": "ipsum ipsum adipiscing",
+      "aggregateName": "ame",
+      "version": "amet amet amet ",
+      "hasOAuth": false,
+      "hasAuditing": true,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "boundedContextName": "amet ipsum ipsum adi",
+      "moduleName": "mthdfm",
+      "moduleNames": "XDF",
+      "aggregateName": "bz",
+      "version": "pApzTb2O",
+      "hasTenant": true,
+      "excludedFiles": [
+        "zGWSwRESEjl",
+        "e",
+        "XF61gTuR0Q",
+        "x2SK8L0pvE99HPTHTA"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "pva",
+      "moduleName": "khryiyiysd",
+      "moduleNames": "lorem amet adi",
+      "aggregateName": "kL",
+      "hasAuditing": true,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "wD9tHNJ3s",
+      "moduleName": "conse",
+      "moduleNames": "ky40utvQ0mJaIeJqVxTJvX",
+      "aggregateName": "llnzmkuoffeazc",
+      "version": "xoe",
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [],
+      "additionalApis": []
+    },
+    {
+      "boundedContextName": "nbxskfwgsdrhgymplygt",
+      "moduleName": "xbpy",
+      "moduleNames": "dMujDM0gF",
+      "aggregateName": "consec",
+      "version": "3w4uvPGxPUajq4HfMjm5w",
+      "hasOAuth": true,
+      "hasAuditing": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "DMySGTY8",
+        "NzmWEM1",
+        "amet consectetu",
+        "QMS4IwpOl65P7H9OIt"
+      ]
+    },
+    {
+      "boundedContextName": "WOBCwKnv62SI69YbbU",
+      "moduleName": "consec",
+      "moduleNames": "xXfcWGNiFRMs",
+      "aggregateName": "uvkhuw",
+      "hasOAuth": true,
+      "hasTenant": true,
+      "hasAuditing": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "HBLoGiKsYFdMtCfPq"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "FybWhJ7SnQQ7",
+      "moduleName": "yosxsufltbttgqvue",
+      "moduleNames": "W9Mmj7Eu7k2aBu8CJYMZY",
+      "aggregateName": "xnkl",
+      "version": "guswhufldgyze",
+      "hasTenant": false,
+      "hasAuditing": true,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "siyu",
+        "eypmrueejdsdqqtunex"
+      ]
+    },
+    {
+      "boundedContextName": "lorem ipsum lor",
+      "moduleName": "adipiscing ipsum co",
+      "moduleNames": "grymxxuwvojxpirbbvjn",
+      "aggregateName": "dbhj",
+      "version": "xgc",
+      "hasOAuth": true,
+      "hasTenant": true,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ]
+    },
+    {
+      "boundedContextName": "tMV2RU2cfr58nxAf1",
+      "moduleName": "ky",
+      "moduleNames": "hpddsczgwzbkmggkmgpo",
+      "aggregateName": "ypkolgkgkxnxyaggjae",
+      "version": "ftgwe",
+      "hasOAuth": false,
+      "hasTenant": false,
+      "hasAuditing": true,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "additionalApis": []
+    },
+    {
+      "boundedContextName": "SISNhOE7n7L97gT7V",
+      "moduleName": "eKNNPSRw61",
+      "moduleNames": "dvsnwvysno",
+      "aggregateName": "ips",
+      "hasAuditing": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "ukeju",
+        "nnb",
+        "cffyunnqtjjyfawylrcb",
+        "j",
+        "amet s"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "pmvdhpdqjvhvy",
+      "moduleName": "hfazycgtrc",
+      "moduleNames": "cons",
+      "aggregateName": "d4NTscTio3j6rl",
+      "hasOAuth": true,
+      "hasTenant": true,
+      "hasAuditing": true,
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "DywVL",
+        "X5CibL7L",
+        "PzpZK1K0nLf",
+        "wiffqxgndgl",
+        "KoYtSLqfVA88stGp"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "dEmRkEkdLm3LrwERbZSH",
+      "moduleName": "br",
+      "moduleNames": "mp2PUYqNdHHb",
+      "aggregateName": "gopoznxmrdjtlklslm",
+      "version": "6jXD6EwUHeXY",
+      "hasAuditing": true,
+      "aggregateProperties": [],
+      "additionalApis": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "dolo",
+      "moduleName": "dolor co",
+      "moduleNames": "yZD9GuLPQDwvpExuSR",
+      "aggregateName": "dolor sit ip",
+      "version": "KvoJxPTQnuoHBMAZD8q",
+      "hasOAuth": true,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "6sGqlYkU",
+      "moduleName": "smxodfwa",
+      "moduleNames": "wbyprrhrbkaxvjavytazma",
+      "aggregateName": "kiugvxcvdfcjhuyipkthin",
+      "hasTenant": false,
+      "hasAuditing": false,
+      "front": {
+        "_ref": "#/definitions/frontDefinition",
+        "_placeholder": true
+      },
+      "additionalApis": [],
+      "excludedFiles": [
+        "upwfllh",
+        "ips"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "qp",
+      "moduleName": "onxtjxdvwhf",
+      "moduleNames": "dnnyijtozna",
+      "aggregateName": "WcJeMKTzxKrGPqU3syN",
+      "version": "gxUe5Ea2wgRzHi5WU",
+      "hasOAuth": true,
+      "hasAuditing": true,
+      "aggregateProperties": [
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/propertyDefinition",
+          "_placeholder": true
+        }
+      ],
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "lorem",
+      "moduleName": "ipsum ame",
+      "moduleNames": "83ol0R5dIyEROi1OUKP7YD",
+      "aggregateName": "IQxtSolG",
+      "hasOAuth": false,
+      "hasAuditing": false,
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        },
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedFiles": [
+        "igfjpjvewvki",
+        "dolor consectetu",
+        "gcaqrgjio"
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    },
+    {
+      "boundedContextName": "pmomyqazignqmoeiop",
+      "moduleName": "sit ipsum ipsum ips",
+      "moduleNames": "tronqlchi",
+      "aggregateName": "L4zlDxmeDveYQObqoaaKeh",
+      "version": "sit lorem amet adi",
+      "hasTenant": true,
+      "hasAuditing": false,
+      "additionalApis": [
+        {
+          "_ref": "#/definitions/additionalApisDefinition",
+          "_placeholder": true
+        }
+      ],
+      "excludedOperations": {
+        "_ref": "#/definitions/excludedOperationDefinition",
+        "_placeholder": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,2669 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "https://json.schemastore.org/bower.json",
+    "patternProperties": {
+      "^_": {
+        "description": "Any property starting with _ is valid.",
+        "additionalProperties": true
+      }
+    },
+    "properties": {
+      "name": {
+        "description": "The name of your package.",
+        "type": "string",
+        "maxLength": 50,
+        "minLength": 1
+      },
+      "description": {
+        "description": "Help users identify and search for your package with a brief description.",
+        "type": "string",
+        "maxLength": 140
+      },
+      "version": {
+        "description": "A semantic version number.",
+        "type": "string"
+      },
+      "main": {
+        "description": "The primary acting files necessary to use your package.",
+        "type": [
+          "string",
+          "array"
+        ]
+      },
+      "license": {
+        "description": "SPDX license identifier or path/url to a license.",
+        "type": [
+          "string",
+          "array"
+        ],
+        "maxLength": 140
+      },
+      "ignore": {
+        "description": "A list of files for Bower to ignore when installing your package.",
+        "type": [
+          "string",
+          "array"
+        ]
+      },
+      "keywords": {
+        "description": "Used for search by keyword. Helps make your package easier to discover without people needing to know its name.",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "maxLength": 50
+        }
+      },
+      "authors": {
+        "description": "A list of people that authored the contents of the package.",
+        "type": "array",
+        "items": {
+          "type": [
+            "string",
+            "object"
+          ]
+        }
+      },
+      "homepage": {
+        "description": "URL to learn more about the package. Falls back to GitHub project if not specified and it's a GitHub endpoint.",
+        "type": "string",
+        "format": "uri"
+      },
+      "repository": {
+        "description": "The repository in which the source code can be found.",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "git"
+            ]
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "dependencies": {
+        "description": "Dependencies are specified with a simple hash of package name to a semver compatible identifier or URL.",
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        }
+      },
+      "devDependencies": {
+        "description": "Dependencies that are only needed for development of the package, e.g., test framework or building documentation.",
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        }
+      },
+      "resolutions": {
+        "description": "Dependency versions to automatically resolve with if conflicts occur between packages.",
+        "type": "object"
+      },
+      "private": {
+        "description": "If you set it to  true  it will refuse to publish it. This is a way to prevent accidental publication of private repositories.",
+        "type": "boolean"
+      },
+      "exportsOverride": {
+        "description": "Used by grunt-bower-task to specify custom install locations.",
+        "type": "object",
+        "additionalProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "array"
+            ]
+          }
+        }
+      },
+      "moduleType": {
+        "description": "The types of modules this package exposes",
+        "type": [
+          "array",
+          "string"
+        ],
+        "items": {
+          "enum": [
+            "amd",
+            "es6",
+            "globals",
+            "node",
+            "yui"
+          ]
+        }
+      }
+    },
+    "required": [
+      "name"
+    ],
+    "title": "JSON schema for Bower configuration files",
+    "type": "object"
+  },
+  "examples": [
+    {
+      "name": "consectetur ipsum lor",
+      "description": "bnFbmOHnKYaXRvj7uff",
+      "keywords": [],
+      "homepage": "ftp://test.org/data/resource",
+      "repository": {
+        "type": "git"
+      },
+      "private": false,
+      "moduleType": "ipsum adipis"
+    },
+    {
+      "name": "co",
+      "version": "EbAx",
+      "license": [],
+      "ignore": "jcnm",
+      "authors": [],
+      "homepage": "ftp://example.com/resource/api",
+      "repository": {
+        "type": "git"
+      },
+      "dependencies": {},
+      "devDependencies": {}
+    },
+    {
+      "name": "RhxrnJgWQsNKVP",
+      "description": "qcbcycqzakm",
+      "main": [],
+      "keywords": [],
+      "exportsOverride": {
+        "XjD9T9M8Tr": {}
+      },
+      "moduleType": []
+    },
+    {
+      "name": "psbEhY71O",
+      "version": "tfwsbksxe",
+      "main": [],
+      "license": "i",
+      "ignore": [],
+      "keywords": [],
+      "authors": [],
+      "dependencies": {
+        "amet ": "ZiCfx2L",
+        "oquie": "b"
+      },
+      "resolutions": {},
+      "exportsOverride": {
+        "sit dolor": {}
+      }
+    },
+    {
+      "name": "K1o",
+      "description": "XbWNdbIsuSVyRwDZCRM",
+      "version": "Wrgveu2lsVm",
+      "main": "sitvjenrqvsektiorxwk",
+      "keywords": [],
+      "homepage": "http://test.org/api/resource",
+      "repository": {
+        "url": "https://demo.net/data/resource"
+      },
+      "devDependencies": {},
+      "exportsOverride": {
+        "ipsum": {
+          "sxxbgkh": "amet adi"
+        }
+      }
+    },
+    {
+      "name": "sit sit ipsu",
+      "description": "dolor lorem lorem ip",
+      "version": "consectetur dolor ",
+      "main": [],
+      "ignore": [],
+      "authors": [],
+      "homepage": "ftp://example.com/v1/data",
+      "dependencies": {
+        "xHpO2": "consectetur"
+      },
+      "resolutions": {},
+      "exportsOverride": {
+        "JEIy6Gn": {},
+        "jgpydaeqtb": {
+          "WB4cqNGPD": [],
+          "nA81l": []
+        }
+      }
+    },
+    {
+      "name": "IHXFSBjYOEnVIFDbAi",
+      "main": [],
+      "keywords": [],
+      "authors": [],
+      "homepage": "http://demo.net/data/resource",
+      "repository": {
+        "url": "https://demo.net/data/api"
+      },
+      "dependencies": {
+        "sit lorem": "adip"
+      },
+      "devDependencies": {
+        "cajkiux": "AqVlISZ5kjrZKTAG8yAO1",
+        "cfbaNwfY": "1B54fj9e2QR0vyHcMU3y"
+      },
+      "resolutions": {},
+      "moduleType": []
+    },
+    {
+      "name": "5uI",
+      "license": [],
+      "authors": [],
+      "dependencies": {
+        "lorem": "wO7MdzHMO4IHH"
+      },
+      "devDependencies": {},
+      "resolutions": {},
+      "private": false,
+      "moduleType": "uoodfcyvb"
+    },
+    {
+      "name": "jxstiofoyjcjfbwz",
+      "version": "zsv",
+      "ignore": "adipiscing ",
+      "authors": [],
+      "repository": {
+        "type": "git",
+        "url": "http://test.org/api/data"
+      },
+      "devDependencies": {
+        "vdoncjnaa": "murozeovgviqbwqrgkp"
+      },
+      "private": true,
+      "exportsOverride": {
+        "alqai": {
+          "nmhlycceb": "T"
+        }
+      }
+    },
+    {
+      "name": "ogzvgwom",
+      "version": "w9z80bqDYlM",
+      "main": "Z",
+      "license": "vvpe",
+      "keywords": [],
+      "authors": [],
+      "homepage": "https://example.com/data/api",
+      "repository": {},
+      "dependencies": {
+        "consecte": "uzyqonvyvvakcp"
+      },
+      "devDependencies": {
+        "consect": "oiirlfj",
+        "sit ipsum ": "ehwtrekcntyppl"
+      },
+      "resolutions": {},
+      "private": false,
+      "exportsOverride": {
+        "1xtJOQIz": {
+          "Lai1nzdVu": "adipiscing consec",
+          "T2Iv4": "parlsucoqypptewp"
+        },
+        "consectetu": {
+          "lbzdn": "pnzvj"
+        }
+      }
+    },
+    {
+      "name": "consectet",
+      "version": "adipi",
+      "main": [],
+      "license": "Bo",
+      "ignore": [],
+      "keywords": [],
+      "authors": [],
+      "repository": {},
+      "resolutions": {},
+      "moduleType": []
+    },
+    {
+      "name": "fnmsjlayxzidwbbffdjt",
+      "version": "bhcrklgutlvgi",
+      "license": "ame",
+      "keywords": [],
+      "authors": [],
+      "homepage": "https://test.org/v1/api",
+      "repository": {
+        "type": "git",
+        "url": "ftp://test.org/data/resource"
+      },
+      "dependencies": {},
+      "devDependencies": {
+        "LfOexs": "YL5oV1DAlnuVrBU36a3fN"
+      },
+      "private": true,
+      "moduleType": "jY4vdGA0UAG"
+    },
+    {
+      "name": "s3Enu",
+      "license": "XC",
+      "ignore": [],
+      "keywords": [],
+      "homepage": "http://example.com/data/v1",
+      "dependencies": {},
+      "devDependencies": {},
+      "resolutions": {},
+      "private": true,
+      "exportsOverride": {
+        "6bmxkB": {},
+        "OIY7zy6I0D": {
+          "sit dol": "oCj7EvsqWXX5LxAiwE1Jg"
+        }
+      },
+      "moduleType": "vprkhuuoyvscycf"
+    },
+    {
+      "name": "fzh",
+      "description": "vS7PHy",
+      "version": "ubgynamfjcqlff",
+      "main": [],
+      "ignore": [],
+      "keywords": [],
+      "authors": [],
+      "homepage": "https://example.com/v1/api",
+      "repository": {
+        "type": "git",
+        "url": "http://demo.net/resource/v1"
+      },
+      "dependencies": {
+        "OedRq": "lorem dolor",
+        "ipsum do": "sit sit"
+      },
+      "devDependencies": {
+        "usjks": "ajrmmhngmrwefzipms"
+      },
+      "resolutions": {},
+      "private": false,
+      "exportsOverride": {}
+    },
+    {
+      "name": "amet dolor sit adi",
+      "version": "amet adipiscing ipsu",
+      "license": [],
+      "authors": [],
+      "homepage": "http://demo.net/v1/data",
+      "repository": {
+        "type": "git",
+        "url": "ftp://example.com/v1/data"
+      },
+      "devDependencies": {},
+      "resolutions": {},
+      "exportsOverride": {
+        "dolor adip": {
+          "sit amet": [],
+          "sit sit": "consect"
+        },
+        "lorem": {}
+      }
+    },
+    {
+      "name": "Ln",
+      "description": "adipiscing amet ",
+      "main": [],
+      "license": "pmgqddjzvynelongxhrka",
+      "ignore": "dolor sit lor",
+      "keywords": [],
+      "authors": [],
+      "homepage": "https://test.org/data/v1",
+      "devDependencies": {
+        "amet s": "amet i",
+        "szbirvgwb": "lorem consectetur "
+      },
+      "resolutions": {},
+      "private": true,
+      "exportsOverride": {
+        "nvgksu": {}
+      },
+      "moduleType": []
+    },
+    {
+      "name": "consectetur adipisc",
+      "description": "glphpaftlr",
+      "main": "adipiscing",
+      "authors": [],
+      "homepage": "http://example.com/v1/api",
+      "repository": {
+        "type": "git",
+        "url": "ftp://demo.net/data/resource"
+      },
+      "resolutions": {},
+      "private": false,
+      "exportsOverride": {}
+    },
+    {
+      "name": "amet sit",
+      "description": "ravjuntsir",
+      "ignore": "cUI7pfJ0Ogv",
+      "keywords": [],
+      "authors": [],
+      "repository": {
+        "type": "git",
+        "url": "ftp://test.org/data/resource"
+      },
+      "resolutions": {}
+    },
+    {
+      "name": "ipsum ipsu",
+      "main": "lorem ",
+      "ignore": "MPFIK",
+      "authors": [],
+      "homepage": "http://demo.net/v1/resource",
+      "dependencies": {},
+      "resolutions": {},
+      "moduleType": []
+    },
+    {
+      "name": "ipsum adipiscing",
+      "description": "zukN3QNuAiTs",
+      "version": "txYMWMAolHD",
+      "main": "kcjbfqqamk",
+      "license": "gQO",
+      "keywords": [],
+      "homepage": "http://demo.net/data/api",
+      "resolutions": {},
+      "exportsOverride": {}
+    },
+    {
+      "name": "adipiscing ipsum si",
+      "description": "lorem ipsum amet ",
+      "version": "WvKjneHIM6svC6ts",
+      "main": [],
+      "license": "mjiOBEsm71jiHyyaH3e",
+      "authors": [],
+      "devDependencies": {
+        "ychdkjumui": "e5",
+        "dolor ipsu": "SNvzvc"
+      },
+      "resolutions": {},
+      "private": false,
+      "moduleType": []
+    },
+    {
+      "name": "5pOxeOsZtUdP6ho",
+      "description": "x",
+      "license": [],
+      "ignore": [],
+      "keywords": [],
+      "authors": [],
+      "repository": {
+        "type": "git"
+      },
+      "devDependencies": {},
+      "exportsOverride": {
+        "wve9T": {
+          "sit amet": [],
+          "U7cwyvHsh1": []
+        }
+      },
+      "moduleType": "lorem"
+    },
+    {
+      "name": "amet sit amet ip",
+      "description": "fvqdwlscrabcbpffvukft",
+      "version": "UQGdojnNnpXS",
+      "ignore": "adipiscing",
+      "authors": [],
+      "dependencies": {
+        "eeebbdn": "zgkubm"
+      },
+      "private": false
+    },
+    {
+      "name": "sit ipsum sit",
+      "description": "lfxmfmsgetd",
+      "main": [],
+      "license": [],
+      "homepage": "https://test.org/api/data",
+      "repository": {
+        "type": "git",
+        "url": "https://test.org/api/resource"
+      },
+      "devDependencies": {
+        "conse": "i9z8toImJRNaPqC11i",
+        "amet ": "zwzxokevmmhin"
+      },
+      "private": true,
+      "moduleType": []
+    },
+    {
+      "name": "5Ws",
+      "main": [],
+      "license": "sks",
+      "keywords": [],
+      "authors": [],
+      "homepage": "http://test.org/api/resource",
+      "resolutions": {},
+      "private": false,
+      "moduleType": []
+    },
+    {
+      "name": "dol",
+      "description": "lqxfbeald",
+      "version": "consectetu",
+      "main": "nsltg",
+      "homepage": "ftp://example.com/resource/v1",
+      "repository": {
+        "type": "git"
+      },
+      "resolutions": {},
+      "private": true,
+      "exportsOverride": {
+        "ipsum si": {
+          "losbyjzwvd": [],
+          "lorem co": []
+        },
+        "yGTVcgqFp": {}
+      },
+      "moduleType": "nxpaqnuqtb"
+    },
+    {
+      "name": "txcplgwizjouubt",
+      "description": "consectetur",
+      "version": "xhQIb9jJiYa6xL",
+      "main": "z3pkXc9xjo1wv8",
+      "authors": [],
+      "homepage": "https://test.org/resource/v1",
+      "dependencies": {},
+      "devDependencies": {
+        "nZK81": "rubhuyjhplntwcgk",
+        "eskxg": "sozldlzmxdphsf"
+      },
+      "resolutions": {}
+    },
+    {
+      "name": "ip",
+      "version": "ZJZtHBzyzjitROUSYg",
+      "main": "sjbcaggdm",
+      "homepage": "http://test.org/api/data",
+      "repository": {
+        "type": "git",
+        "url": "https://demo.net/resource/api"
+      },
+      "dependencies": {},
+      "private": false,
+      "exportsOverride": {
+        "bjuobus": {}
+      },
+      "moduleType": "avtksggdhoxmlyxs"
+    },
+    {
+      "name": "sit",
+      "description": "amet",
+      "version": "gqnujxwcmhdgtv",
+      "main": "HLedy",
+      "license": [],
+      "ignore": [],
+      "authors": [],
+      "homepage": "ftp://demo.net/api/data",
+      "repository": {
+        "type": "git"
+      },
+      "devDependencies": {
+        "utsvtp": "zbr",
+        "lorem ": "vs"
+      },
+      "resolutions": {},
+      "exportsOverride": {},
+      "moduleType": "nzrzjnxboagkgbcrw"
+    },
+    {
+      "name": "XqjUmfFKFYG",
+      "version": "kvbOl",
+      "main": [],
+      "license": "i",
+      "ignore": [],
+      "keywords": [],
+      "authors": [],
+      "homepage": "https://example.com/api/resource",
+      "repository": {
+        "type": "git",
+        "url": "ftp://demo.net/data/v1"
+      },
+      "devDependencies": {
+        "sit si": "consectet",
+        "consectet": "dolor c"
+      },
+      "moduleType": []
+    },
+    {
+      "name": "tes",
+      "version": "adipiscing amet ipsu",
+      "license": "dolor sit conse",
+      "keywords": [],
+      "authors": [],
+      "homepage": "https://demo.net/v1/resource",
+      "repository": {
+        "url": "https://demo.net/data/api"
+      },
+      "dependencies": {},
+      "devDependencies": {
+        "lorem ad": "sit lorem "
+      },
+      "resolutions": {},
+      "moduleType": "clzbhijzevgwdczaqf"
+    },
+    {
+      "name": "sit ipsum",
+      "description": "Gmg",
+      "version": "I",
+      "main": [],
+      "license": "m21CX26on",
+      "keywords": [],
+      "authors": [],
+      "homepage": "http://demo.net/v1/data",
+      "repository": {
+        "type": "git"
+      },
+      "dependencies": {
+        "V3YIvs": "Xy",
+        "zjeuc": "vohkgkmt"
+      },
+      "devDependencies": {
+        "HfncgSm": "QKMKN",
+        "adipis": "consectetur adipi"
+      },
+      "resolutions": {},
+      "exportsOverride": {
+        "qsDi3Dk": {
+          "NeweKEX": []
+        }
+      },
+      "moduleType": "smubsqbfhnrcnjuqa"
+    },
+    {
+      "name": "hht25vBC5BtFaFhYB7Aq",
+      "main": "TSubQ7",
+      "license": [],
+      "keywords": [],
+      "authors": [],
+      "homepage": "https://test.org/resource/v1",
+      "dependencies": {},
+      "devDependencies": {
+        "ltbOIF": "xgJkGzSoTf"
+      },
+      "private": false,
+      "exportsOverride": {
+        "lorem a": {
+          "Tf5Dy1cRW": "8OJ2TFUpIAJZ5X",
+          "ipsum adip": []
+        },
+        "amet ": {
+          "aqied": []
+        }
+      }
+    },
+    {
+      "name": "CTF054Q0YgQ5UrS",
+      "main": [
+        48,
+        null,
+        null,
+        true,
+        19.65
+      ],
+      "license": [
+        null,
+        83.31,
+        39,
+        null,
+        8
+      ],
+      "ignore": [
+        5.79,
+        true,
+        "h7sJnpMRX7",
+        "sit consecte",
+        null
+      ],
+      "keywords": [
+        "o",
+        "ipsum sit a",
+        "wFC8",
+        "dolo",
+        "0"
+      ],
+      "repository": {},
+      "dependencies": {
+        "WLrmB": "consect",
+        "XOT1B": "cegglozjkdxg"
+      },
+      "exportsOverride": {
+        "hzjrqisrw": {
+          "jxXVkFb": [
+            null,
+            "inbtfeesej",
+            null,
+            "zftkyvmvhana",
+            null
+          ]
+        },
+        "ddnjfdbl": {}
+      },
+      "moduleType": [
+        "es6",
+        "node",
+        "node",
+        "globals",
+        "amd"
+      ]
+    },
+    {
+      "name": "y4d0rUBousuH",
+      "description": "L8UuCdNygNVfSQ",
+      "version": "lorem consectetur",
+      "license": [
+        false,
+        92.75,
+        null,
+        false,
+        75.05
+      ],
+      "keywords": [
+        "lKJih",
+        "ipsum sit dolor dolo",
+        "sit l",
+        "bsr",
+        "KZ6YtPgW35"
+      ],
+      "authors": [
+        {},
+        {},
+        {},
+        {},
+        {}
+      ],
+      "homepage": "https://example.com/data/v1",
+      "dependencies": {},
+      "devDependencies": {
+        "zGs5sU": "nR01ESGUgsONgjn",
+        "ntsmyw": "ecwglmiwqdycuczuo"
+      },
+      "resolutions": {},
+      "exportsOverride": {
+        "lorem l": {},
+        "rmeax": {
+          "dolor adi": "hhbunddxuqngsypzrq"
+        }
+      },
+      "moduleType": "glzzgiclhvgub"
+    },
+    {
+      "name": "oYhDILjNF",
+      "version": "consectetur sit ",
+      "main": "nfecfolsbvzttwclcu",
+      "license": "WIh6d08U6",
+      "ignore": "TVx6cEcw9h94QdDQfsf",
+      "dependencies": {},
+      "resolutions": {}
+    },
+    {
+      "name": "adipisc",
+      "description": "rxkrxmzaxsjiqs",
+      "version": "mgisK2p5kFU3",
+      "ignore": "wAfz",
+      "homepage": "https://test.org/data/api",
+      "dependencies": {
+        "ipsum": "zisB",
+        "5himAoDf": "dolor consectetur a"
+      },
+      "private": true,
+      "exportsOverride": {},
+      "moduleType": [
+        "node",
+        "amd",
+        "node",
+        "amd",
+        "globals"
+      ]
+    },
+    {
+      "name": "KoSEe",
+      "description": "mikv",
+      "version": "q3c",
+      "license": [
+        7,
+        true,
+        30,
+        40.21,
+        "igbpsjbi"
+      ],
+      "authors": [
+        "qznzqpuxavylqxatf",
+        {},
+        {},
+        "pTIUSDH",
+        "dpbvrsddllye"
+      ],
+      "repository": {
+        "type": "git",
+        "url": "https://example.com/api/data"
+      },
+      "dependencies": {
+        "ixjjovnhux": "tdwfcsvwyjw"
+      },
+      "devDependencies": {
+        "tbsmsqzk": "dbdfgvrnbm",
+        "tHnN4": "FYZDwG1"
+      },
+      "private": true,
+      "exportsOverride": {},
+      "moduleType": [
+        "globals",
+        "es6",
+        "node",
+        "es6",
+        "yui"
+      ]
+    },
+    {
+      "name": "31AwybV7x",
+      "description": "ipsum adipiscing sit",
+      "main": [
+        null,
+        63.22,
+        27.06,
+        40,
+        84
+      ],
+      "license": "swJtT",
+      "ignore": [
+        null,
+        "lhyujrnbfrabg",
+        true,
+        null,
+        43
+      ],
+      "dependencies": {},
+      "devDependencies": {
+        "adipiscing": "nhvuoyezeoiwo"
+      },
+      "resolutions": {},
+      "private": false,
+      "exportsOverride": {},
+      "moduleType": [
+        "globals",
+        "es6",
+        "yui",
+        "globals",
+        "globals"
+      ]
+    },
+    {
+      "name": "inmadrvaisfrpftwo",
+      "description": "adipiscing ",
+      "version": "adipiscing cons",
+      "main": [
+        null,
+        "adipis",
+        "fceesjz",
+        50,
+        null
+      ],
+      "license": "cv5QwCszScYgG",
+      "authors": [
+        "xoawxniewxxy",
+        {},
+        "nebvgrhfrebzkjufugs",
+        "0EAej69GPi",
+        "amet dolor sit adipis"
+      ],
+      "repository": {
+        "type": "git",
+        "url": "https://test.org/resource/v1"
+      },
+      "devDependencies": {},
+      "private": false,
+      "exportsOverride": {
+        "gwqeyjdyt": {
+          "FFfNwkwyd": [
+            "3OeUWefGv",
+            83,
+            36.69,
+            64.13,
+            "lorem dolor a"
+          ]
+        }
+      },
+      "moduleType": [
+        "es6",
+        "amd",
+        "yui",
+        "yui",
+        "globals"
+      ]
+    },
+    {
+      "name": "zhvee",
+      "description": "Kg",
+      "version": "lorem",
+      "main": [
+        62,
+        83.74,
+        35.72,
+        "ISBxO",
+        "gQpcX"
+      ],
+      "license": "yiaxqxhwurrslyckjmvb",
+      "ignore": [
+        false,
+        "amet amet sit",
+        66.45,
+        5,
+        false
+      ],
+      "authors": [
+        {},
+        {},
+        "xhegsftxcssqrhdxexukm",
+        {},
+        "bfzj"
+      ],
+      "homepage": "ftp://demo.net/v1/api",
+      "repository": {
+        "type": "git",
+        "url": "https://demo.net/resource/v1"
+      },
+      "dependencies": {},
+      "devDependencies": {},
+      "resolutions": {},
+      "exportsOverride": {
+        "consectetu": {}
+      }
+    },
+    {
+      "name": "ldayfeczkjofusyv",
+      "version": "c",
+      "main": "ilypifxsqoxdjvrqrm",
+      "license": [
+        94.81,
+        "lorem lor",
+        true,
+        25.14,
+        false
+      ],
+      "ignore": [
+        true,
+        null,
+        "INL0FByP42gSkDD",
+        66,
+        true
+      ],
+      "keywords": [
+        "Bdxtk",
+        "qcn",
+        "yxbltboxkkycbhoum",
+        "consectetur conse",
+        "zwlpswaepur"
+      ],
+      "authors": [
+        {},
+        {},
+        {},
+        {},
+        {}
+      ],
+      "repository": {
+        "url": "http://test.org/v1/api"
+      },
+      "devDependencies": {
+        "adipisci": "iiz"
+      },
+      "resolutions": {},
+      "exportsOverride": {},
+      "moduleType": [
+        "node",
+        "es6",
+        "node",
+        "globals",
+        "yui"
+      ]
+    },
+    {
+      "name": "aazifmotpo",
+      "version": "3unODFccGsgo4iR",
+      "main": "sit ipsum consecte",
+      "ignore": "5jl2HjY8AION2eDnpf",
+      "authors": [
+        {},
+        {},
+        {},
+        {},
+        {}
+      ],
+      "repository": {
+        "url": "https://demo.net/data/resource"
+      },
+      "dependencies": {},
+      "private": false,
+      "moduleType": "sit dolor adipisc"
+    },
+    {
+      "name": "viyfuwj",
+      "description": "0nQLCAaIAMC5Q",
+      "main": [
+        44,
+        1.13,
+        null,
+        50.14,
+        null
+      ],
+      "license": [
+        "lorem i",
+        36.23,
+        null,
+        95.85,
+        36.15
+      ],
+      "homepage": "https://example.com/v1/api",
+      "dependencies": {},
+      "private": true,
+      "exportsOverride": {},
+      "moduleType": "sit lorem co"
+    },
+    {
+      "name": "9",
+      "ignore": [
+        64,
+        52,
+        true,
+        null,
+        20.85
+      ],
+      "keywords": [
+        "3Df9iY",
+        "VQm0XpGOwPMA",
+        "amet cons",
+        "ulbcaeuxvxovqzbui",
+        "dtlTD4nL"
+      ],
+      "homepage": "ftp://demo.net/v1/resource",
+      "repository": {
+        "url": "http://test.org/data/api"
+      },
+      "dependencies": {
+        "KIC2ce": "adipis"
+      },
+      "devDependencies": {},
+      "resolutions": {},
+      "exportsOverride": {
+        "vhumnhdfj": {}
+      }
+    },
+    {
+      "name": "wvctq",
+      "ignore": [
+        63,
+        null,
+        null,
+        97,
+        25.04
+      ],
+      "keywords": [
+        "hsksxlztrlrvvrvpah",
+        "vtqymyybnd",
+        "EM",
+        "sit conse",
+        "sZJ1p"
+      ],
+      "authors": [
+        "am",
+        {},
+        "AszpLucV",
+        "adipiscing a",
+        "vt"
+      ],
+      "homepage": "https://demo.net/api/v1",
+      "repository": {
+        "type": "git"
+      },
+      "dependencies": {
+        "wqyedkhe": "amet lorem lorem",
+        "1SW4EC2Ul": "ycrxa"
+      },
+      "devDependencies": {},
+      "exportsOverride": {
+        "amet ipsu": {
+          "ophytpwnxt": [
+            23,
+            52,
+            82,
+            "conse",
+            "nqaDTlHS"
+          ]
+        },
+        "MV7G7Ywg": {
+          "amet ame": "qzahyhsndiecahuqeezfo",
+          "joryd": "hmozlqls"
+        }
+      },
+      "moduleType": "rWstjaTsjq"
+    },
+    {
+      "name": "ieataimfyrpli",
+      "description": "sit adipis",
+      "main": "lorem ip",
+      "ignore": [
+        null,
+        63,
+        false,
+        true,
+        true
+      ],
+      "keywords": [
+        "adipi",
+        "lorem sit lorem dolor",
+        "bCwuMyvQGJuDN7",
+        "vaiglusc",
+        "dj"
+      ],
+      "dependencies": {},
+      "devDependencies": {
+        "bzynrt": "Mr3r24lUcumyLlGy"
+      },
+      "exportsOverride": {
+        "999yw": {
+          "wopefwsmkn": [
+            1.71,
+            "adipisc",
+            false,
+            "iymgtyre",
+            "bhbfoqkyyfjuyig"
+          ]
+        },
+        "krvuif": {
+          "XPWhhtRU": [
+            false,
+            "cjnppzcrnq",
+            true,
+            true,
+            true
+          ]
+        }
+      }
+    },
+    {
+      "name": "sgi",
+      "description": "nRuJkMnK0duTeD",
+      "version": "zaxdfciuj",
+      "main": [
+        null,
+        53.88,
+        false,
+        "hzyoxinpgutjg",
+        null
+      ],
+      "license": "citK2e3AlLSQ",
+      "ignore": "umawlyxq",
+      "keywords": [
+        "vdaxyxsjcduzaugfpypwb",
+        "d",
+        "D6tcu82gzC",
+        "wedgek",
+        "K"
+      ],
+      "dependencies": {},
+      "devDependencies": {},
+      "resolutions": {},
+      "exportsOverride": {
+        "RE1Rdmmg6N": {
+          "ysfzxw": "WhEQWl4",
+          "dolor ": [
+            20.4,
+            100,
+            "wrahmnkwrojrme",
+            null,
+            false
+          ]
+        }
+      },
+      "moduleType": "xqxww"
+    },
+    {
+      "name": "moixuoz",
+      "description": "lorem consectetu",
+      "license": "Gdehr",
+      "keywords": [
+        "lorem ipsum ip",
+        "l",
+        "Uur",
+        "ixryom",
+        "birlysyrfbkeotosdz"
+      ],
+      "homepage": "ftp://example.com/v1/data",
+      "repository": {
+        "type": "git",
+        "url": "https://test.org/api/v1"
+      },
+      "dependencies": {
+        "kuesyvscij": "s"
+      },
+      "resolutions": {},
+      "exportsOverride": {
+        "adipi": {
+          "kbelvl": [
+            66.48,
+            32,
+            false,
+            30,
+            "KigO35Hj06yl"
+          ],
+          "adipiscin": "dolor "
+        },
+        "sit l": {}
+      },
+      "moduleType": "dolor dolor lore"
+    },
+    {
+      "name": "7Qy",
+      "description": "ZpLwE7nUVf9BHsI",
+      "main": [
+        33.9,
+        false,
+        null,
+        90.72,
+        66
+      ],
+      "ignore": [
+        true,
+        null,
+        6.99,
+        null,
+        false
+      ],
+      "homepage": "https://example.com/resource/data",
+      "dependencies": {
+        "ljqess": "amet sit a",
+        "consecte": "adipiscing amet lo"
+      },
+      "devDependencies": {
+        "consect": "sit amet"
+      },
+      "private": false
+    },
+    {
+      "name": "IXqX2VfGjZePuc",
+      "description": "wepsmredwemlkheepzwdu",
+      "version": "amet conse",
+      "ignore": [
+        true,
+        null,
+        null,
+        "cuxmdzwtfo",
+        true
+      ],
+      "keywords": [
+        "lorem amet ",
+        "vwyxnqtankufvflo",
+        "ipsum amet",
+        "HKeHuulGyWNylSmQiOL5",
+        "SQ7yYhF"
+      ],
+      "authors": [
+        "jqgghiweayfyrwlmull",
+        "g",
+        "mimgryjb",
+        "Yc6cLodY0kwmT41lrK6",
+        "sJ"
+      ],
+      "homepage": "https://example.com/v1/data",
+      "repository": {
+        "type": "git"
+      },
+      "devDependencies": {},
+      "resolutions": {}
+    },
+    {
+      "name": "swcdkupqxrvkdbyf",
+      "description": "ehhftxbexccxhaoekivyy",
+      "version": "oqrxgx",
+      "ignore": [
+        null,
+        53,
+        null,
+        2,
+        null
+      ],
+      "authors": [
+        {},
+        "9RHiNccSe9ndvq6Au",
+        {},
+        {},
+        "a"
+      ],
+      "homepage": "http://example.com/data/v1",
+      "repository": {
+        "type": "git",
+        "url": "ftp://demo.net/api/v1"
+      },
+      "dependencies": {
+        "dsocw": "mM84SGndZ4sylBWeZdAMN",
+        "lorem i": "sit ipsum a"
+      },
+      "devDependencies": {
+        "adipiscin": "jeb",
+        "amet ipsum": "vqhsozrhz"
+      },
+      "exportsOverride": {
+        "Nw8vFo1iZU": {}
+      }
+    },
+    {
+      "name": "consectetur dolor ",
+      "description": "Z7baB7CXPc",
+      "version": "gczmzwvlqbzarfwigbvrt",
+      "main": "adipiscing sit c",
+      "authors": [
+        "rdvap",
+        "ipsum co",
+        "fyjknyvqiqwmduzhb",
+        {},
+        {}
+      ],
+      "homepage": "ftp://example.com/v1/api",
+      "repository": {
+        "url": "http://test.org/resource/v1"
+      },
+      "dependencies": {},
+      "devDependencies": {
+        "lorem ad": "ipsum lorem adipisci",
+        "clcxuxju": "puuuka"
+      },
+      "resolutions": {}
+    },
+    {
+      "name": "9H6hEiafrmJGmOwUxj",
+      "description": "ppnetrwmajn",
+      "version": "fpjxucaxrg",
+      "main": "qlpzllxohynhf",
+      "license": "ftq",
+      "keywords": [
+        "ezkgajudqh",
+        "Q3FWSCRv7dni",
+        "ips",
+        "lorem ame",
+        "fvmjnehlvcnmobymlgtq"
+      ],
+      "authors": [
+        "fHbmYp7CCN7",
+        {},
+        "M1aHB",
+        "sfesqzuhfymyfn",
+        "lorem c"
+      ],
+      "homepage": "https://demo.net/v1/resource",
+      "repository": {
+        "url": "ftp://example.com/v1/api"
+      },
+      "dependencies": {},
+      "devDependencies": {
+        "ntcovcebck": "ecuopjijkcuuffhwtlbfc",
+        "tznexdu": "sit adi"
+      },
+      "private": false,
+      "moduleType": [
+        "globals",
+        "es6",
+        "yui",
+        "node",
+        "node"
+      ]
+    },
+    {
+      "name": "P5fvc2kNf9wi",
+      "main": [
+        false,
+        68.87,
+        "wunablvjzpcoz",
+        "guflubwjqqzktp",
+        70.08
+      ],
+      "keywords": [
+        "to",
+        "lorem ",
+        "sit",
+        "u",
+        "Te"
+      ],
+      "authors": [
+        "lorem",
+        "hzfplhvqvbnuyidfkr",
+        {},
+        {},
+        "consectetur amet amet"
+      ],
+      "homepage": "http://test.org/v1/api",
+      "repository": {
+        "type": "git",
+        "url": "https://example.com/api/data"
+      },
+      "dependencies": {
+        "izYkRkuEr": "sit amet sit"
+      },
+      "resolutions": {},
+      "private": false,
+      "exportsOverride": {
+        "dfzyqq": {
+          "dolor con": [
+            81.4,
+            34.51,
+            1,
+            "huoftdf",
+            false
+          ]
+        },
+        "vP3GWpOsA": {
+          "vZQ9UoS8On": [
+            28,
+            null,
+            69.76,
+            "1AA6Zw",
+            16.74
+          ]
+        }
+      }
+    },
+    {
+      "name": "94YdbVb",
+      "version": "s",
+      "ignore": [
+        25.23,
+        true,
+        86.28,
+        56.85,
+        6.54
+      ],
+      "authors": [
+        "4MUC8obKFmeKpi88ja",
+        {},
+        "BA",
+        "aw",
+        "wkhTw9vcmZufHJOg7V"
+      ],
+      "homepage": "http://demo.net/resource/api",
+      "repository": {
+        "type": "git",
+        "url": "ftp://example.com/api/data"
+      },
+      "dependencies": {},
+      "devDependencies": {
+        "jF1BG": "lorem ipsum ip",
+        "jhwex": "y"
+      },
+      "exportsOverride": {
+        "lorem ad": {
+          "dudevip": [
+            79.81,
+            20,
+            15.26,
+            61,
+            false
+          ],
+          "sit amet": [
+            null,
+            null,
+            false,
+            false,
+            true
+          ]
+        },
+        "6815ED": {}
+      },
+      "moduleType": "nRFwJigK"
+    },
+    {
+      "name": "cz8rYIW4yOYV",
+      "description": "u",
+      "version": "wmvokovgndorkcwuvezme",
+      "main": "xsnjra",
+      "license": "nph0CAD0AxS",
+      "ignore": [
+        65.53,
+        42,
+        null,
+        40,
+        54
+      ],
+      "repository": {
+        "type": "git",
+        "url": "https://example.com/resource/data"
+      },
+      "dependencies": {
+        "hmmqxlax": "am",
+        "amet ": "LI8DYFvYhltFJlaCeH"
+      },
+      "private": true,
+      "exportsOverride": {
+        "sjNoP": {
+          "clZWgiD": [
+            76.09,
+            null,
+            9,
+            null,
+            true
+          ]
+        },
+        "adipisc": {
+          "xuxjz": "flijuchcshzwq",
+          "xrdiemomo": [
+            63.4,
+            true,
+            null,
+            null,
+            true
+          ]
+        }
+      },
+      "moduleType": "lorem lor"
+    },
+    {
+      "name": "LoifTGRfMmSKX",
+      "license": [
+        85.0,
+        "numkha",
+        36.25,
+        null,
+        59
+      ],
+      "ignore": "di7SUB5lFkgkQz6NiMxi",
+      "keywords": [
+        "lo",
+        "R5i1L",
+        "kcdee",
+        "wimgg",
+        "lorem dolor "
+      ],
+      "authors": [
+        "Yyzxf25SyBtOO",
+        {},
+        "consectetur",
+        {},
+        {}
+      ],
+      "repository": {
+        "type": "git",
+        "url": "https://demo.net/data/v1"
+      },
+      "dependencies": {
+        "krphrpzr": "dolor ipsum lor"
+      },
+      "devDependencies": {},
+      "moduleType": "1OaFmG68"
+    },
+    {
+      "name": "7kyvF",
+      "description": "sit",
+      "version": "iitfeejqzfyoxveqdakuo",
+      "main": "uxkqtbgq",
+      "authors": [
+        {},
+        {},
+        {},
+        {},
+        "qgwx"
+      ],
+      "dependencies": {
+        "lorem ame": "consectetur"
+      },
+      "devDependencies": {
+        "nfusjl": "YhKc",
+        "ksqrmoseuw": "ye"
+      },
+      "resolutions": {},
+      "private": true,
+      "exportsOverride": {}
+    },
+    {
+      "name": "xojbnpxmuilgelneugu",
+      "description": "sgZ",
+      "ignore": [
+        42.3,
+        false,
+        59,
+        53.51,
+        "wqY9A"
+      ],
+      "keywords": [
+        "9Z3Jk",
+        "1QQafbv62ZhRWYXil",
+        "xlxdywi",
+        "sit",
+        "lQurjCAGX7pr"
+      ],
+      "homepage": "http://demo.net/resource/data",
+      "repository": {
+        "type": "git",
+        "url": "https://test.org/v1/data"
+      },
+      "dependencies": {
+        "lorem d": "kbfbddijlrrr"
+      },
+      "devDependencies": {
+        "hHtPToACsc": "v2",
+        "gsyumzxb": "ruymuqawpdcqln"
+      },
+      "resolutions": {},
+      "private": false,
+      "exportsOverride": {},
+      "moduleType": [
+        "yui",
+        "amd",
+        "es6",
+        "es6",
+        "es6"
+      ]
+    },
+    {
+      "name": "joreh",
+      "description": "sit amet sit adipis",
+      "main": "consectetur amet ",
+      "license": "EzDeLZxmAL0iXweos",
+      "ignore": [
+        "mylqwrktpx",
+        null,
+        53.37,
+        "lorem sit adi",
+        "nxskxe"
+      ],
+      "keywords": [
+        "fkdmfck",
+        "conse",
+        "TzplsUmCY",
+        "mTq63SPV5QipzlA",
+        "yqmvhusw"
+      ],
+      "authors": [
+        "amet ",
+        "DWQXSq83j99",
+        "sit",
+        "sit sit amet si",
+        {}
+      ],
+      "homepage": "ftp://demo.net/v1/resource",
+      "repository": {
+        "type": "git",
+        "url": "ftp://demo.net/v1/api"
+      },
+      "private": false,
+      "exportsOverride": {
+        "ipsum si": {}
+      },
+      "moduleType": [
+        "node",
+        "amd",
+        "amd",
+        "globals",
+        "globals"
+      ]
+    },
+    {
+      "name": "svrxtrlirmdpzbz",
+      "main": [
+        null,
+        true,
+        null,
+        null,
+        8.61
+      ],
+      "license": "ZS4UGXClGcZiF5Dv0OYs",
+      "keywords": [
+        "cjamqjsgxeuihaggfye",
+        "jmi",
+        "lorem ipsum amet i",
+        "ixej",
+        "amet adipiscing adip"
+      ],
+      "authors": [
+        "j",
+        "r1rSUtpGyKuXAi",
+        {},
+        "buoC",
+        {}
+      ],
+      "repository": {
+        "type": "git"
+      },
+      "dependencies": {},
+      "devDependencies": {},
+      "exportsOverride": {},
+      "moduleType": [
+        "globals",
+        "node",
+        "yui",
+        "node",
+        "globals"
+      ]
+    },
+    {
+      "name": "t",
+      "description": "lorem conse",
+      "version": "amet ",
+      "ignore": [
+        "dolor lorem si",
+        25.83,
+        86.18,
+        12,
+        76
+      ],
+      "authors": [
+        "veMHYfSCW",
+        {},
+        "enbjdeqc",
+        "con",
+        "amet"
+      ],
+      "dependencies": {
+        "ivswxv": "saugauwdfgcxqcueb",
+        "amet ipsum": "ol11KQTMxRF"
+      },
+      "resolutions": {},
+      "exportsOverride": {
+        "ipsum lor": {}
+      },
+      "moduleType": "pxlbnnb"
+    },
+    {
+      "name": "X6tVukvUjOvkAxC25o9",
+      "license": [
+        41,
+        null,
+        45,
+        97.63,
+        false
+      ],
+      "keywords": [
+        "adipiscing consecte",
+        "sqhgDW17Kald1tSBK0O",
+        "boh",
+        "jhwcculq",
+        "lor"
+      ],
+      "homepage": "http://test.org/v1/data",
+      "dependencies": {
+        "lorem c": "DakQVJdU01UPvwlNv",
+        "ipsum": "amet ipsu"
+      },
+      "private": true,
+      "exportsOverride": {}
+    },
+    {
+      "name": "adipiscing conse",
+      "version": "BOQUrEirEevYlAcT",
+      "main": "ILEAjimpt3ni",
+      "license": "ytyolkqgnkrwrdptnbc",
+      "ignore": [
+        true,
+        null,
+        27,
+        95,
+        true
+      ],
+      "keywords": [
+        "lorem lore",
+        "xxzvanfhvh",
+        "r",
+        "dolor ",
+        "23h8cq75hY5xGVv7W"
+      ],
+      "authors": [
+        {},
+        {},
+        {},
+        "d1r3Dz0h1rW7Zu",
+        {}
+      ],
+      "homepage": "https://example.com/data/api",
+      "repository": {
+        "url": "ftp://example.com/v1/resource"
+      },
+      "dependencies": {
+        "pypmcpkvx": "amet ips",
+        "aisxbzzck": "kKMVnFm647ilYD0Nch"
+      },
+      "resolutions": {},
+      "private": true,
+      "exportsOverride": {}
+    },
+    {
+      "name": "tsltylod",
+      "description": "xh",
+      "version": "fdngcy",
+      "main": "fqAYe",
+      "license": [
+        "txshg",
+        null,
+        77,
+        true,
+        68.25
+      ],
+      "keywords": [
+        "nijpomktryzaktnqgk",
+        "xxwxxykkltzr",
+        "hdqzwgiymasxox",
+        "rg811jNd",
+        "amet"
+      ],
+      "authors": [
+        {},
+        {},
+        "adipiscing adipiscing",
+        "edenqqdtbnrrlij",
+        "dolor i"
+      ],
+      "homepage": "ftp://example.com/api/resource",
+      "repository": {
+        "type": "git"
+      },
+      "resolutions": {},
+      "exportsOverride": {
+        "mofji": {}
+      }
+    },
+    {
+      "name": "crsjz",
+      "description": "consec",
+      "version": "cizkqrqbsvliszyftm",
+      "ignore": "dolor amet co",
+      "keywords": [
+        "IbXW0lGj"
+      ],
+      "dependencies": {
+        "adipi": "cStrH"
+      },
+      "devDependencies": {
+        "sit ipsu": "8Kzb5ts",
+        "jlodqaouwv": "mlyqxusvolzy"
+      },
+      "resolutions": {},
+      "private": true,
+      "exportsOverride": {
+        "adipi": {},
+        "dolor ame": {
+          "amet sit": "49jxbclOYdeaT2K9x",
+          "lorem ame": [
+            25.23,
+            28,
+            false
+          ]
+        }
+      }
+    },
+    {
+      "name": "sit lorem",
+      "description": "onulhvexwonbeusq",
+      "version": "wrlldb",
+      "license": [
+        true,
+        "nqurbmpr",
+        100,
+        53,
+        61
+      ],
+      "ignore": "fgamnixopqcc",
+      "keywords": [],
+      "authors": [
+        "gdslvlfytusy",
+        "lo"
+      ],
+      "repository": {
+        "url": "http://demo.net/api/data"
+      },
+      "dependencies": {},
+      "devDependencies": {},
+      "resolutions": {},
+      "exportsOverride": {
+        "vwagdcrdkr": {
+          "qffyg": "ftmbwubpqvr",
+          "sit a": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "moduleType": [
+        "amd",
+        "globals",
+        "node",
+        "node"
+      ]
+    },
+    {
+      "name": "pksqrontdncla",
+      "license": [
+        "dolor sit adi",
+        "fkflwmiedvyxagd"
+      ],
+      "ignore": "BNFFc6A",
+      "authors": [],
+      "homepage": "http://test.org/v1/api",
+      "dependencies": {},
+      "devDependencies": {},
+      "exportsOverride": {
+        "zvnwnuass": {
+          "If7ag": [],
+          "adipisc": [
+            true,
+            "45YMTrm",
+            true,
+            true,
+            5
+          ]
+        },
+        "dolor ": {
+          "ipsum": [
+            60.24,
+            61.04,
+            92.21
+          ]
+        }
+      },
+      "moduleType": [
+        "node"
+      ]
+    },
+    {
+      "name": "ifkvqso",
+      "description": "xrnS3vXtVoJz1Vg",
+      "version": "iwnusknryhmwyos",
+      "keywords": [
+        "lpzjfrxetkrmyozzdytdp",
+        "C1UN1hznm",
+        "mzkfdgdydvumbfykudbj"
+      ],
+      "authors": [
+        {}
+      ],
+      "homepage": "https://test.org/data/resource",
+      "repository": {
+        "type": "git"
+      },
+      "dependencies": {
+        "KIh2alE5R3": "amet adipis"
+      },
+      "exportsOverride": {
+        "tomxigh": {},
+        "ipsum amet": {
+          "consectet": []
+        }
+      }
+    },
+    {
+      "name": "phmkrjnapglgftrr",
+      "version": "gbrhqxpxubgrma",
+      "ignore": "iP6nqJ2kyL",
+      "keywords": [],
+      "authors": [
+        "dolor consectetur l",
+        "sit amet",
+        {},
+        {},
+        {}
+      ],
+      "homepage": "https://demo.net/v1/data",
+      "repository": {
+        "type": "git"
+      },
+      "devDependencies": {},
+      "resolutions": {},
+      "private": true,
+      "exportsOverride": {
+        "sit sit": {
+          "uhyvo": [
+            "vbheuixlklwkfpd",
+            "vsfegjofh",
+            82
+          ]
+        }
+      }
+    },
+    {
+      "name": "v",
+      "description": "o20sLErAyC7Tcv8V",
+      "ignore": [
+        "amet lorem ipsu",
+        "vdxemccrvcipp",
+        5.09,
+        true,
+        null
+      ],
+      "homepage": "http://example.com/v1/resource",
+      "dependencies": {},
+      "exportsOverride": {
+        "ipsum con": {
+          "ipsum": "lorem consec",
+          "inewvgqgv": [
+            "mozhlxjwqypx"
+          ]
+        },
+        "yxgbwczx": {}
+      }
+    },
+    {
+      "name": "u7McGGGK",
+      "description": "g83CgU8sw1U4",
+      "main": "5Q381JOvVWl",
+      "license": "dolo",
+      "ignore": "nmfJUvgAe",
+      "keywords": [
+        "bmajzvmggolgauzzn",
+        "vqnzltlkmpzsu"
+      ],
+      "authors": [
+        {},
+        "lp",
+        {},
+        {}
+      ],
+      "repository": {
+        "type": "git",
+        "url": "http://example.com/resource/data"
+      },
+      "dependencies": {},
+      "devDependencies": {},
+      "moduleType": "eiVMFL8iCfGXPBs"
+    },
+    {
+      "name": "lorem lore",
+      "keywords": [
+        "lorem adipiscing c",
+        "ipsum ipsum ipsum a",
+        "qulsn",
+        "consectetur amet ips"
+      ],
+      "repository": {
+        "type": "git",
+        "url": "ftp://demo.net/resource/data"
+      },
+      "dependencies": {
+        "t5O5upHKde": "lorem adipiscing lor",
+        "jvhyebfp": "3ar"
+      },
+      "devDependencies": {
+        "elzosqenn": "gQdj25GXEciLXE6"
+      },
+      "private": true,
+      "moduleType": [
+        "yui",
+        "yui",
+        "es6",
+        "amd"
+      ]
+    },
+    {
+      "name": "sUhi77q2A5ed7GE7Ygzk",
+      "description": "eCmzq",
+      "main": [],
+      "license": "rgtxcsifmeuvt",
+      "keywords": [],
+      "authors": [
+        "1c7iqB",
+        "consectetur sit "
+      ],
+      "homepage": "https://demo.net/data/v1",
+      "repository": {
+        "type": "git",
+        "url": "https://test.org/data/api"
+      },
+      "dependencies": {
+        "puelhcy": "lorem lorem sit ame"
+      },
+      "devDependencies": {
+        "qhnavn": "7yrW0R0gYwMFA"
+      },
+      "resolutions": {},
+      "exportsOverride": {}
+    },
+    {
+      "name": "ipsum co",
+      "description": "yilr",
+      "version": "kxAaRNKN4DI6",
+      "license": "qafikgioxsyahxpigwz",
+      "repository": {},
+      "resolutions": {},
+      "private": false,
+      "exportsOverride": {
+        "jclqvi": {
+          "adipis": [],
+          "prnkaqqpfi": "cons"
+        }
+      },
+      "moduleType": [
+        "node",
+        "yui"
+      ]
+    },
+    {
+      "name": "lorem dolor consectet",
+      "version": "XjKS04IY21rXM3IYwuJA",
+      "main": [
+        98,
+        true,
+        true,
+        18,
+        36.1
+      ],
+      "ignore": "lorem adi",
+      "keywords": [
+        "zpyxqohdilxuuvuwddutt"
+      ],
+      "homepage": "ftp://test.org/v1/data",
+      "repository": {
+        "type": "git",
+        "url": "http://demo.net/resource/api"
+      },
+      "devDependencies": {},
+      "resolutions": {},
+      "exportsOverride": {
+        "34DAJ": {
+          "ijltjtpikb": [
+            43,
+            null
+          ],
+          "y3bQQyM1O": [
+            85.01,
+            2.59
+          ]
+        }
+      }
+    },
+    {
+      "name": "consectetu",
+      "description": "adipiscing ame",
+      "version": "amet dolo",
+      "main": [
+        86,
+        "lorem ad",
+        null,
+        false,
+        5
+      ],
+      "license": [
+        true,
+        0,
+        71.95
+      ],
+      "repository": {
+        "url": "ftp://example.com/v1/resource"
+      },
+      "devDependencies": {
+        "adipiscing": "wqytgnije",
+        "adipiscin": "ojv"
+      },
+      "resolutions": {},
+      "private": true
+    },
+    {
+      "name": "adipiscing adipis",
+      "description": "fgitysidhfn",
+      "version": "7mba",
+      "ignore": [
+        null,
+        true,
+        3
+      ],
+      "keywords": [
+        "sfjxiujlhr",
+        "Xv3IHouGY",
+        "LXauK",
+        "amet lor",
+        "zmcvd"
+      ],
+      "authors": [
+        {}
+      ],
+      "repository": {
+        "url": "ftp://demo.net/v1/resource"
+      },
+      "resolutions": {},
+      "private": true,
+      "exportsOverride": {
+        "rrlkiaah": {
+          "QS8FNh7Y8k": "HaFvh"
+        }
+      }
+    },
+    {
+      "name": "adi",
+      "version": "dolor ipsum amet ",
+      "keywords": [
+        "8"
+      ],
+      "homepage": "ftp://example.com/v1/resource",
+      "repository": {
+        "url": "http://demo.net/resource/data"
+      },
+      "dependencies": {
+        "lorem a": "T4ai1aqIHnUSaSx",
+        "pdagpqaw": "yfvSCxp3O7yW"
+      },
+      "devDependencies": {
+        "lEOyhN4e": "7wtlrtJrl1e7qVT7V",
+        "5Xmqd": "jqqwghsd"
+      },
+      "private": false,
+      "moduleType": [
+        "amd"
+      ]
+    },
+    {
+      "name": "adipiscing adipis",
+      "description": "dolor consectetur i",
+      "ignore": [],
+      "keywords": [],
+      "authors": [
+        "Er5MH1y8QxC8La0zs",
+        {},
+        "q"
+      ],
+      "homepage": "https://test.org/api/resource",
+      "repository": {}
+    },
+    {
+      "name": "co",
+      "description": "Iv",
+      "version": "upaBf",
+      "main": "B",
+      "ignore": "axogv",
+      "authors": [
+        "oyaxqloupvnknwqscmgi",
+        {},
+        "WbKZw39zFZdrEVS"
+      ],
+      "homepage": "http://example.com/resource/v1",
+      "dependencies": {},
+      "devDependencies": {},
+      "resolutions": {},
+      "private": false
+    },
+    {
+      "name": "k7zWbk8Yb",
+      "description": "ipsum dolor ip",
+      "version": "syg3FP9gJDVLBiHX6CFXB",
+      "main": [
+        true,
+        6.26,
+        7,
+        53.28
+      ],
+      "license": [
+        null,
+        true,
+        null
+      ],
+      "ignore": "amet ipsum conse",
+      "keywords": [
+        "tnibv",
+        "hmY3m7neb",
+        "cecfak"
+      ],
+      "resolutions": {},
+      "exportsOverride": {
+        "ipsum si": {}
+      }
+    },
+    {
+      "name": "consecte",
+      "version": "NeNDPzgpj3154dRN0bKS",
+      "ignore": [
+        48,
+        true,
+        true,
+        null
+      ],
+      "keywords": [
+        "AoaXpuE77zPq",
+        "0PGecqC0BNkRgpw",
+        "pagetymohrg",
+        "L46UnJCGX9oG8DCkeL",
+        "dolor ip"
+      ],
+      "authors": [],
+      "repository": {
+        "type": "git",
+        "url": "ftp://example.com/api/v1"
+      },
+      "devDependencies": {},
+      "resolutions": {},
+      "moduleType": [
+        "amd",
+        "amd",
+        "globals",
+        "node"
+      ]
+    },
+    {
+      "name": "amet ipsum ipsum ad",
+      "description": "mthdf",
+      "version": "XD",
+      "main": "adipiscing ipsum ipsu",
+      "license": [
+        70
+      ],
+      "homepage": "ftp://example.com/data/resource",
+      "dependencies": {
+        "iksgvauar": "jl6bK"
+      },
+      "resolutions": {},
+      "exportsOverride": {
+        "consec": {
+          "vkjwsp": "atisizphwdqe",
+          "JTuM9Yfbk": "adip"
+        }
+      },
+      "moduleType": "n21q"
+    },
+    {
+      "name": "pv",
+      "description": "khryiyiys",
+      "version": "lorem amet ad",
+      "main": "jjhngcjbsfhlsvvgvyoy",
+      "ignore": "adipiscing adip",
+      "keywords": [
+        "amet con",
+        "AJIMxag",
+        "dolor ip",
+        "dwp"
+      ],
+      "repository": {},
+      "devDependencies": {
+        "dolor s": "adipiscing sit "
+      },
+      "private": false,
+      "moduleType": "saofbyxox"
+    },
+    {
+      "name": "wD9tHNJ3",
+      "description": "cons",
+      "version": "ky40utvQ0mJaIeJqVxTJv",
+      "license": "sit ipsum dolor",
+      "authors": [
+        {}
+      ],
+      "homepage": "http://test.org/api/data",
+      "repository": {},
+      "dependencies": {},
+      "exportsOverride": {},
+      "moduleType": [
+        "globals"
+      ]
+    },
+    {
+      "name": "nbxskfwgsdrhgymplyg",
+      "keywords": [
+        "gughxi",
+        "wcndxelqtixjxijrn",
+        "yfffyfnrkrabk",
+        "s"
+      ],
+      "authors": [
+        {},
+        {},
+        {}
+      ],
+      "repository": {
+        "type": "git",
+        "url": "ftp://test.org/resource/data"
+      },
+      "devDependencies": {
+        "zuhqkfum": "JBIehpRzQMS4IwpOl65P",
+        "9OIt7znvb": "kmmuyljwinhbgabpcm"
+      },
+      "private": true,
+      "exportsOverride": {
+        "6OW0wmv": {
+          "dolor amet": "zKb5o9Gcyu3hsZUdZq"
+        }
+      }
+    },
+    {
+      "name": "WOBCwKnv62SI69Ybb",
+      "version": "wiszkroonvxydwdedclcl",
+      "license": "neigoxelgqxf",
+      "ignore": [
+        true,
+        null,
+        80.0,
+        "nbqim"
+      ],
+      "keywords": [
+        "lore",
+        "dolor adipiscin",
+        "3Wey8s",
+        "wqbfshcixe",
+        "lo"
+      ],
+      "homepage": "https://test.org/resource/data",
+      "private": true
+    },
+    {
+      "name": "FybWhJ7SnQQ",
+      "ignore": "ufltbttgqvuexpd",
+      "keywords": [
+        "ipsum adipisc",
+        "consectetur",
+        "u",
+        "JYM"
+      ],
+      "repository": {
+        "type": "git",
+        "url": "https://test.org/v1/resource"
+      },
+      "private": true
+    },
+    {
+      "name": "lorem ipsum lo",
+      "description": "adipiscing ipsum c",
+      "version": "amet adipisci",
+      "homepage": "https://test.org/data/api",
+      "dependencies": {}
+    },
+    {
+      "name": "tMV2RU2cfr58nxAf",
+      "license": "adipiscing",
+      "ignore": [
+        true,
+        64
+      ],
+      "keywords": [
+        "lorem si",
+        "2ZT5JAIBo",
+        "5CwZY70JZigaP"
+      ],
+      "homepage": "https://example.com/resource/api",
+      "dependencies": {},
+      "devDependencies": {
+        "lrdobhacy": "YGYzJqOHW72ORha",
+        "ZcJChu": "adipiscing dol"
+      },
+      "resolutions": {},
+      "exportsOverride": {
+        "JpDi5": {}
+      },
+      "moduleType": "JKWOYY3cpgRqRPY6HjwT"
+    },
+    {
+      "name": "SISNhOE7n7L97gT7",
+      "main": "gwxjsxxrrdvsnwvysno",
+      "license": [
+        69.38
+      ],
+      "authors": [
+        "dolor ipsum consectet",
+        "eqpsnnbqbkepe"
+      ],
+      "dependencies": {},
+      "resolutions": {},
+      "private": true,
+      "exportsOverride": {}
+    },
+    {
+      "name": "pmvdhpdqjvhv",
+      "version": "ipsum lor",
+      "ignore": [
+        "o07nSSRyhSDAXjo",
+        "mnuichc",
+        40.29,
+        63,
+        15
+      ],
+      "authors": [
+        "QKDywVLoiZYlILD"
+      ],
+      "dependencies": {
+        "amet con": "pvfpcizkjrmyerjalri",
+        "xtzogfmio": "hingnevyepugu"
+      },
+      "devDependencies": {},
+      "private": false,
+      "exportsOverride": {
+        "jollEOW": {
+          "sit ipsum ": []
+        }
+      }
+    },
+    {
+      "name": "dEmRkEkdLm3LrwERbZS",
+      "description": "b",
+      "license": [
+        "gUNXJySXK"
+      ],
+      "authors": [
+        {},
+        "amet sit lorem ad",
+        "zCQAElvyE2pdBSx9FPvxb",
+        {}
+      ],
+      "homepage": "http://demo.net/data/resource",
+      "dependencies": {},
+      "resolutions": {},
+      "exportsOverride": {}
+    },
+    {
+      "name": "dol",
+      "description": "Y3F70GiAGab8i3lX",
+      "ignore": "SRhcu4IKvoJxP",
+      "homepage": "https://example.com/v1/data",
+      "dependencies": {
+        "fuhrmdvs": "kxnydcrduqpwhwzfsfo",
+        "Wxr9xR": "consectetur "
+      },
+      "devDependencies": {
+        "tasiabf": "arxwzeihsqsozhdvvi"
+      },
+      "private": false,
+      "moduleType": "amet dolor co"
+    },
+    {
+      "name": "6sGqlYk",
+      "main": "wcrditywbyprrhrb",
+      "license": "vjavytazmavukiugvxc",
+      "keywords": [
+        "dol"
+      ],
+      "authors": [
+        {},
+        "amet dolor ipsum co",
+        {},
+        {},
+        {}
+      ],
+      "homepage": "https://demo.net/resource/data",
+      "devDependencies": {
+        "upwfll": "e8WiCtnEx"
+      },
+      "private": true,
+      "exportsOverride": {
+        "kdymknqo": {
+          "mcmfmdfu": "zb"
+        },
+        "Efv99Fo": {
+          "sit consec": "T1E1NM5nzMEwM6f",
+          "XiNmlr6K": "X8efgDUEJ22jBL"
+        }
+      },
+      "moduleType": [
+        "amd",
+        "globals",
+        "globals"
+      ]
+    },
+    {
+      "name": "q",
+      "license": "ihptpuxvordnnyijt",
+      "ignore": "s",
+      "keywords": [
+        "6fAAROavRF6of7sCR9v"
+      ],
+      "authors": [
+        "con",
+        {},
+        "jcskndy"
+      ],
+      "dependencies": {
+        "afghr": "xgoCnrrl7Q",
+        "Rn7CNeI": "oadslrs"
+      },
+      "devDependencies": {
+        "dolor dol": "jPhAHI8YWEz",
+        "olh5ZM": "sit ame"
+      },
+      "resolutions": {},
+      "private": false,
+      "exportsOverride": {
+        "YgxPr2GGC": {
+          "jrbCl4he": [
+            9,
+            false
+          ]
+        }
+      },
+      "moduleType": "wvztm"
+    },
+    {
+      "name": "lore",
+      "main": "kzxfevsxbokms",
+      "ignore": "pryumfgdncmdv",
+      "keywords": [
+        "mrpykqtryigf",
+        "ltwuoecechvu",
+        "amet consectetur a"
+      ],
+      "repository": {
+        "url": "ftp://test.org/data/v1"
+      },
+      "dependencies": {
+        "yvldohzr": "dolor sit",
+        "ruxck": "amet "
+      },
+      "devDependencies": {
+        "efhnrmdsbz": "vF5HVp"
+      },
+      "private": true
+    },
+    {
+      "name": "pmomyqazignqmoeio",
+      "version": "qqk0XUPIHNBgruM0",
+      "main": [
+        "QGqZcta",
+        "qiiprbsmlneodrz",
+        true
+      ],
+      "homepage": "https://demo.net/data/api",
+      "repository": {
+        "url": "http://demo.net/v1/api"
+      },
+      "resolutions": {},
+      "private": true,
+      "exportsOverride": {},
+      "moduleType": "y"
+    }
+  ]
+}

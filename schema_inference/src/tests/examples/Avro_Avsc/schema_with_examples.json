@@ -1,0 +1,431 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://json.schemastore.org/avro-avsc.json",
+    "definitions": {
+      "avroSchema": {
+        "title": "Avro Schema",
+        "description": "Root Schema",
+        "oneOf": [
+          {
+            "$ref": "#/definitions/types"
+          }
+        ]
+      },
+      "types": {
+        "title": "Avro Types",
+        "description": "Allowed Avro types",
+        "oneOf": [
+          {
+            "$ref": "#/definitions/primitiveType"
+          },
+          {
+            "$ref": "#/definitions/primitiveTypeWithMetadata"
+          },
+          {
+            "$ref": "#/definitions/customTypeReference"
+          },
+          {
+            "$ref": "#/definitions/avroRecord"
+          },
+          {
+            "$ref": "#/definitions/avroEnum"
+          },
+          {
+            "$ref": "#/definitions/avroArray"
+          },
+          {
+            "$ref": "#/definitions/avroMap"
+          },
+          {
+            "$ref": "#/definitions/avroFixed"
+          },
+          {
+            "$ref": "#/definitions/avroUnion"
+          }
+        ]
+      },
+      "primitiveType": {
+        "title": "Primitive Type",
+        "description": "Basic type primitives.",
+        "type": "string",
+        "enum": [
+          "null",
+          "boolean",
+          "int",
+          "long",
+          "float",
+          "double",
+          "bytes",
+          "string"
+        ]
+      },
+      "primitiveTypeWithMetadata": {
+        "title": "Primitive Type With Metadata",
+        "description": "A primitive type with metadata attached.",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/definitions/primitiveType"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "customTypeReference": {
+        "title": "Custom Type",
+        "description": "Reference to a ComplexType",
+        "not": {
+          "$ref": "#/definitions/primitiveType"
+        },
+        "type": "string",
+        "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$"
+      },
+      "avroUnion": {
+        "title": "Union",
+        "description": "A Union of types",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/avroSchema"
+        },
+        "minItems": 1
+      },
+      "avroField": {
+        "title": "Field",
+        "description": "A field within a Record",
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/definitions/name"
+          },
+          "type": {
+            "$ref": "#/definitions/types"
+          },
+          "doc": {
+            "type": "string"
+          },
+          "default": {},
+          "order": {
+            "enum": [
+              "ascending",
+              "descending",
+              "ignore"
+            ]
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/name"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "type"
+        ]
+      },
+      "avroRecord": {
+        "title": "Record",
+        "description": "A Record",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "record"
+            ]
+          },
+          "name": {
+            "$ref": "#/definitions/name"
+          },
+          "namespace": {
+            "$ref": "#/definitions/namespace"
+          },
+          "doc": {
+            "type": "string"
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/name"
+            }
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/avroField"
+            }
+          }
+        },
+        "required": [
+          "type",
+          "name",
+          "fields"
+        ]
+      },
+      "avroEnum": {
+        "title": "Enum",
+        "description": "An enumeration",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "enum"
+            ]
+          },
+          "name": {
+            "$ref": "#/definitions/name"
+          },
+          "namespace": {
+            "$ref": "#/definitions/namespace"
+          },
+          "doc": {
+            "type": "string"
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/name"
+            }
+          },
+          "symbols": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/name"
+            }
+          }
+        },
+        "required": [
+          "type",
+          "name",
+          "symbols"
+        ]
+      },
+      "avroArray": {
+        "title": "Array",
+        "description": "An array",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "array"
+            ]
+          },
+          "name": {
+            "$ref": "#/definitions/name"
+          },
+          "namespace": {
+            "$ref": "#/definitions/namespace"
+          },
+          "doc": {
+            "type": "string"
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/name"
+            }
+          },
+          "items": {
+            "$ref": "#/definitions/types"
+          }
+        },
+        "required": [
+          "type",
+          "items"
+        ]
+      },
+      "avroMap": {
+        "title": "Map",
+        "description": "A map of values",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "map"
+            ]
+          },
+          "name": {
+            "$ref": "#/definitions/name"
+          },
+          "namespace": {
+            "$ref": "#/definitions/namespace"
+          },
+          "doc": {
+            "type": "string"
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/name"
+            }
+          },
+          "values": {
+            "$ref": "#/definitions/types"
+          }
+        },
+        "required": [
+          "type",
+          "values"
+        ]
+      },
+      "avroFixed": {
+        "title": "Fixed",
+        "description": "A fixed sized array of bytes",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "fixed"
+            ]
+          },
+          "name": {
+            "$ref": "#/definitions/name"
+          },
+          "namespace": {
+            "$ref": "#/definitions/namespace"
+          },
+          "doc": {
+            "type": "string"
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/name"
+            }
+          },
+          "size": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "type",
+          "name",
+          "size"
+        ]
+      },
+      "name": {
+        "type": "string",
+        "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+      },
+      "namespace": {
+        "type": "string",
+        "pattern": "^([A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*)*$"
+      }
+    },
+    "description": "Json-Schema definition for Avro AVSC files.",
+    "oneOf": [
+      {
+        "$ref": "#/definitions/avroSchema"
+      }
+    ],
+    "title": "Avro Schema Definition"
+  },
+  "examples": [
+    3,
+    36,
+    true,
+    "fvearhtUcMi",
+    51,
+    "CvFycz",
+    null,
+    44,
+    false,
+    83.85,
+    "nwjad",
+    null,
+    43.89,
+    25,
+    null,
+    47,
+    null,
+    8.46,
+    "qYCu3X1Pl",
+    true,
+    null,
+    false,
+    true,
+    false,
+    39,
+    14,
+    true,
+    12,
+    37,
+    "azvzgfbfarjvt",
+    100,
+    "ICKEGm",
+    null,
+    false,
+    "fhkghvmcwfub",
+    "ipsum adip",
+    9.6,
+    43.75,
+    "R7wHxI0956d",
+    null,
+    76.94,
+    false,
+    "GPZC0",
+    70.13,
+    71,
+    73.79,
+    true,
+    98,
+    71.36,
+    75,
+    false,
+    false,
+    null,
+    null,
+    "kfvtsakigi",
+    42.9,
+    "jbmsrbmfazsjuu",
+    false,
+    45.95,
+    null,
+    67.63,
+    true,
+    25,
+    null,
+    true,
+    61.98,
+    71.53,
+    "HgF7IGWB",
+    true,
+    92.11,
+    false,
+    83,
+    56.27,
+    "niwohxhi",
+    null,
+    18.14,
+    31.22,
+    "yrttcxq",
+    null,
+    27,
+    null,
+    34,
+    "adipiscing lo",
+    22.25,
+    null,
+    79,
+    40.57,
+    null,
+    null,
+    "chkxjpceso",
+    true,
+    false,
+    true,
+    "hhslavjgiipvwvh",
+    null,
+    23,
+    38.19,
+    88,
+    3,
+    null
+  ]
+}

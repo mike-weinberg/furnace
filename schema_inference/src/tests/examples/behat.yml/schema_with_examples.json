@@ -1,0 +1,1315 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://json.schemastore.org/behat.json",
+    "additionalProperties": {
+      "$ref": "#/definitions/profile",
+      "title": "Profile name"
+    },
+    "definitions": {
+      "profile": {
+        "title": "Profile",
+        "type": "object",
+        "properties": {
+          "autoload": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "formatters": {
+            "title": "How to format tests output",
+            "default": "pretty",
+            "type": "object",
+            "properties": {
+              "pretty": {
+                "title": "Prints the feature as is",
+                "type": "boolean"
+              },
+              "progress": {
+                "title": "Prints one character per step",
+                "type": "boolean"
+              },
+              "junit": {
+                "title": "Outputs the failures in JUnit compatible files.",
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": false
+          },
+          "suites": {
+            "title": "Test suites",
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/definitions/suite"
+            }
+          },
+          "extensions": {
+            "title": "Behat extensions",
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "suite": {
+        "title": "Test suite",
+        "type": "object",
+        "properties": {
+          "paths": {
+            "title": "Paths to execute",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "contexts": {
+            "title": "Suite contexts",
+            "type": "array",
+            "items": {
+              "type": [
+                "string",
+                "object"
+              ]
+            },
+            "uniqueItems": true
+          },
+          "filters": {
+            "title": "Suite filters",
+            "type": "object",
+            "properties": {
+              "tags": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "properties": {
+      "default": {
+        "$ref": "#/definitions/profile",
+        "title": "Default profile"
+      },
+      "imports": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "uniqueItems": true
+      }
+    },
+    "title": "JSON schema for Behat configuration files",
+    "type": "object"
+  },
+  "examples": [
+    {
+      "imports": [],
+      "consec": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": []
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": []
+    },
+    {
+      "imports": [],
+      "fnpyabivv": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "suSVyR": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [],
+      "Fyczbgq7D": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [],
+      "6lVk72gOn": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "FDbAiP6dH": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": []
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [],
+      "tiofoy": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "ziezipp": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": []
+    },
+    {
+      "imports": [],
+      "6z4j9zlvN": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "BojDM": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "yntswaezt": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "imports": [],
+      "7xBJx42": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "sit consec": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "imports": [],
+      "V9AoxeN9mV": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": []
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [],
+      "sit do": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "glphpaf": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "dolor": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [],
+      "mixuwr": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [],
+      "QEwzukN": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "imports": []
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [],
+      "kcrhvhtb": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "azsuufvqd": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": []
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": []
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "amet sit": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "amet sit": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "rloequd": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "imports": []
+    },
+    {
+      "imports": [],
+      "adipisci": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": []
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [],
+      "KEGmgp": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "IE9ld": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "imports": []
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "nw",
+        "rwvcrythsrpmkjor",
+        "adipisc",
+        "sit dolor amet lorem",
+        "lorem dolor"
+      ],
+      "qmhrwjsaa": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "imports": [
+        "adipisci",
+        "gorahvmuezkidogmfb",
+        "xpocusf",
+        "clcuncluody",
+        "uk"
+      ],
+      "nDTVx6cEc": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "lgnomqv": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "imports": [
+        "xrxkrxmza",
+        "jiqseuyj",
+        "lo",
+        "jNGS0",
+        "U347f1aCwAfzQPaXtHsPF"
+      ],
+      "ipsum": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "zisBC": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "consec",
+        "m8E",
+        "sit amet a",
+        "q3c",
+        "ztxlqgkizig"
+      ]
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "HxI0956do6IiM5",
+        "KN8q9tOU",
+        "swJtT",
+        "onbfimrr",
+        "c"
+      ]
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "DbjP0atSnQLnU2Il1S",
+        "3oZpBI",
+        "v1KSgdAtqY5ngl",
+        "hwaked",
+        "cv5QwCszScYgG"
+      ],
+      "l02Jb04Ful": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "lutdwpbb": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "consectetur ipsum",
+        "Kg",
+        "iDMYVf8ZpR",
+        "I",
+        "ry7pvgQpcXwQLR7"
+      ]
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {},
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "imports": [
+        "tsthsjwnzka",
+        "lorem a",
+        "3Df9iY",
+        "VQm0XpGOwPMA",
+        "amet cons"
+      ],
+      "ulbcaeuxv": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "YO8dXu": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "consectetur amet a",
+        "akcm",
+        "brgeocahpqviqzyfjfpm",
+        "csr7vaKqKYd41WXtEMr",
+        "13xsZJ1pu9hpOwn2Wj"
+      ],
+      "qzrryd": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "dxamjiojb": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "nswrdz",
+        "plil",
+        "sit adipis",
+        "mkao6GCG",
+        "nmbdadwsqxcnkifl"
+      ],
+      "soppe": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "noimqyu": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "e0unRu": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "NwB3YqqeTcQ70xYiVlQ",
+        "d",
+        "amet lo",
+        "a",
+        "l"
+      ],
+      "Uurkx": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "ryomnymo": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "CWBCpl",
+        "fukcvursqkuv",
+        "uwrlijjxvfgby",
+        "ln",
+        "lqv"
+      ],
+      "poxrixv": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "ljqess": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "guwtcnevcribaxuwep",
+        "Pkh1jCAzqklK72",
+        "aOrr9",
+        "xobj",
+        "hscuxmdzwtfoyvveibdo"
+      ],
+      "vwyxnqta": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "imports": [
+        "wcdkupqxrvkdbyffrmp",
+        "ipsum consectetur ad",
+        "ctvf",
+        "jB3Ufyk",
+        "sit lorem consecte"
+      ],
+      "lorem sit": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "0QwsKqHAU",
+        "lurbmqedrhrh",
+        "lqb",
+        "a",
+        "ig"
+      ]
+    },
+    {
+      "imports": [
+        "wyaupqubspqchujeki",
+        "pnetrw",
+        "bQGv5mLx3Wfb3OoD",
+        "amet amet amet sit",
+        "ctweikxfdtepcaulsau"
+      ]
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "dolor ": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "Ic3Yw": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "sit cons": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "lorem ",
+        "RfMmSKXWY1nCl",
+        "6GWDyqam9HC3L8wn5jX",
+        "enecerkyqdqjdkxzqlov",
+        "R5i1L"
+      ],
+      "kcdeed": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imggwj": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "tluncl",
+        "qf",
+        "VmllvM7n",
+        "3YjOhayVJl04oBN",
+        "sit adipiscin"
+      ],
+      "nhpniwjmt": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "qgwxs": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "mrffhsfzbfcujmiqkf",
+        "nOMu1qWoeUz2nf",
+        "w",
+        "jclejQTwO",
+        "consectetur sit "
+      ],
+      "ybonslvrpp": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "deutxlxd": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "imports": [
+        "xtrlirm",
+        "conse",
+        "rphtwprf",
+        "qcffsnvsxtnulfnbvdn",
+        "v0OY"
+      ],
+      "dxtcjamq": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "ahY4gj": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "iqwpk": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "imports": [
+        "itie",
+        "adipiscing l",
+        "qvmwrs",
+        "yvngyz",
+        "jsrevvyywoqmqjhwvnxo"
+      ],
+      "oxowkjw": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {},
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "ti9UpKR4rtlK5T",
+        "lorem",
+        "jqp",
+        "Yet4X5cy896knf",
+        "uzrrumuwnijpomk"
+      ],
+      "yzakt": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "hjqyjrong": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "jzhesicc": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "cizkqrqbs": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "si",
+        "GWBr0k32HG",
+        "Mau",
+        "consect"
+      ],
+      "djerawqdvg": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "nqurbm": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "imports": [
+        "SNQHFUhF",
+        "ame",
+        "yughjckowhxrdgmef",
+        "uki"
+      ],
+      "ipsum ": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "imports": [
+        "dolor consectetu",
+        "amet dolor dolor i"
+      ]
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "xteflkz": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "qmTPQUGzyb": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "sit ips": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "hpmhl": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "bnnnpnuj",
+        "cukp",
+        "w1U4Mo6Y1us85geiP",
+        "VWlvGg0dA",
+        "nmfJUvgAe"
+      ]
+    },
+    {
+      "imports": [],
+      "2Is4r": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "Hic1X7T": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "imports": [
+        "amet conse",
+        "hwlybbynmzvckeod",
+        "sit ipsum dolor ip",
+        "buarrgtxcsif",
+        "7UscTxcsj9pEc1Fb"
+      ],
+      "I5zI2P": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "dolor lor": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "RS6uCO",
+        "lekka",
+        "pqxmoyxecxqafi"
+      ],
+      "dolor sit ": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "imports": [],
+      "lorem d": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "nponv": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "imports": [
+        "cxqgeyhmaswtbrfmvn",
+        "xbfmmypouaszpvti",
+        "Go7oNyHa92bq5VJZhUkr",
+        "IOBY7J"
+      ],
+      "gbwgbr": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "mifwsjecrhhhextlyfa",
+        "l",
+        "3L307YxayTSSn",
+        "JDqQr9xFXv3IH",
+        "9WsHLXau"
+      ],
+      "wdqbd": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "mcvdjfvf": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "pnyhwkrzupualwtlfjldy",
+        "EOgb2CxLLI1YRAcj9Xlm5",
+        "JOXllml"
+      ],
+      "uwupuiph": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "tlv",
+        "dolor consectetur i"
+      ],
+      "uhubudqqnx": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "5c1tBjw": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "adipiscin",
+        "vdiIRk4V2xaTgcPh4s",
+        "qZVvXmLGYtyVFQ"
+      ],
+      "ZGAF0OTfEq": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "yeCJulf": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "imports": [
+        "Wb"
+      ]
+    },
+    {
+      "imports": [
+        "ljsNeNDPzg",
+        "sit ipsum",
+        "xbsqwapsswblxujq",
+        "M8"
+      ],
+      "tvlotrtog": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "mmedqcro",
+        "sit lorem do",
+        "FaNskNypA"
+      ]
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "ipsum": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "amet a": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "imports": [
+        "lorem ipsum ",
+        "oxhuatdvq",
+        "njmmnk",
+        "foaobogtjt"
+      ],
+      "XyiaBqtY": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "YAPEV4pO4": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "xyqiv": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "agizrnrcrqfjkyj",
+        "m",
+        "S8yPHHH055i1hj",
+        "vkhuw",
+        "1Wj"
+      ]
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "07"
+      ],
+      "sit i": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "amet dol": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "stwachxzfjk",
+        "ips",
+        "k",
+        "le7M9u4uEe1F02lgERy2Z"
+      ],
+      "pkolg": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "5CwZY70J": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "atckmgolahnushxtrgwxj",
+        "xrrdvsnwvysn",
+        "bfsszexggkfsetaveqp",
+        "vescffyunnqtjjyfa"
+      ]
+    },
+    {
+      "YhrKjNw": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "consect": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "kdqbzsbfzuqkvubt",
+        "VUcQ8utpA",
+        "tvgq"
+      ]
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "az1tyZD9"
+      ],
+      "LPQDwvpEx": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "ayewFmL": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "adipiscing",
+        "consectetur con",
+        "wcrditywbyprrhrb",
+        "KZS2WOFaQFohN",
+        "uXp04h0jmfvrW7uJyUs"
+      ],
+      "XDZrxBZSy": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "yrtonxtjx": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "uxvord": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "imports": [
+        "d",
+        "ipsum am"
+      ],
+      "dkLPzBsH": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "EROi1OUK": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    },
+    {
+      "default": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      },
+      "imports": [
+        "C5Oa8v",
+        "dolor co",
+        "consectetur dolor "
+      ],
+      "qqk0XUPI": {
+        "_ref": "#/definitions/profile",
+        "_placeholder": true
+      }
+    }
+  ]
+}

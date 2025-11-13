@@ -1,0 +1,1625 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "id": "https://json.schemastore.org/artifacthub-repo.json",
+    "properties": {
+      "repositoryID": {
+        "description": "An identifier of the Artifact Hub repository where the packages will be published to",
+        "type": "string",
+        "format": "uuid"
+      },
+      "owners": {
+        "description": "Repository owners",
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+          "title": "owner",
+          "description": "A repository owner",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "description": "A repository owner name",
+              "type": "string"
+            },
+            "email": {
+              "description": "A repository owner email",
+              "type": "string",
+              "format": "email"
+            }
+          }
+        }
+      },
+      "ignore": {
+        "description": "Packages that should not be indexed by Artifact Hub",
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+          "title": "package",
+          "description": "A package",
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name"
+          ],
+          "properties": {
+            "name": {
+              "description": "A package name",
+              "type": "string"
+            },
+            "version": {
+              "description": "Regular expression",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "title": "An Artifact Hub config file",
+    "type": "object"
+  },
+  "examples": [
+    {
+      "owners": [],
+      "ignore": []
+    },
+    {
+      "repositoryID": "b174a8bf-96d7-4c59-9889-cc3325b27a30",
+      "ignore": []
+    },
+    {
+      "repositoryID": "a1a7f412-a985-4e21-96b2-40b8c00443e4",
+      "owners": []
+    },
+    {
+      "repositoryID": "e10aaf2a-dab7-4407-b897-ded5d58946ce",
+      "owners": [],
+      "ignore": []
+    },
+    {
+      "owners": [],
+      "ignore": []
+    },
+    {
+      "repositoryID": "bce0868f-6b5b-46d7-a24e-6bb2a6374b07",
+      "owners": [],
+      "ignore": []
+    },
+    {
+      "repositoryID": "70d50881-8bcd-4561-a930-e5e3311f7c0c",
+      "owners": []
+    },
+    {
+      "repositoryID": "3bc0fb31-4434-4f63-824b-6803384f644b",
+      "owners": [],
+      "ignore": []
+    },
+    {
+      "repositoryID": "ff70db5f-8ec4-4bdc-8ac3-ebee8290c16d",
+      "owners": []
+    },
+    {
+      "repositoryID": "c4d9a362-3c79-4fa9-a07d-3a71f32b3518",
+      "owners": [],
+      "ignore": []
+    },
+    {
+      "owners": []
+    },
+    {
+      "ignore": []
+    },
+    {
+      "owners": [],
+      "ignore": []
+    },
+    {
+      "repositoryID": "533d33c8-2f56-4ecd-b3fe-45142fc61487",
+      "ignore": []
+    },
+    {
+      "owners": [],
+      "ignore": []
+    },
+    {
+      "repositoryID": "e79df59f-9b5d-4424-893f-7ec9dc66b582",
+      "owners": [],
+      "ignore": []
+    },
+    {
+      "repositoryID": "129ce39f-74c4-4ea9-b256-209591ab65a4",
+      "owners": []
+    },
+    {
+      "repositoryID": "559c18be-942c-4070-b970-40c6089de69d"
+    },
+    {
+      "repositoryID": "cf568e82-ca7f-4e6f-99ad-91109ae07f05",
+      "owners": [],
+      "ignore": []
+    },
+    {
+      "repositoryID": "88d2a840-40cd-4591-823a-66b3261783e2",
+      "owners": []
+    },
+    {
+      "owners": []
+    },
+    {
+      "repositoryID": "b2c32471-0684-410a-9cfb-789696cd1694",
+      "owners": []
+    },
+    {
+      "repositoryID": "fa30c1bd-2513-4cdf-8892-fd4a60fed90d",
+      "ignore": []
+    },
+    {
+      "repositoryID": "09537acf-e59d-41f0-bb52-5c3a7ba7be93",
+      "owners": []
+    },
+    {
+      "repositoryID": "8f377b83-e5cc-4f71-b158-7745dcc0fb86",
+      "owners": [],
+      "ignore": []
+    },
+    {
+      "repositoryID": "5eaf0572-7ef1-46b2-8814-f726cea4e8fc"
+    },
+    {},
+    {
+      "owners": [],
+      "ignore": []
+    },
+    {
+      "owners": [],
+      "ignore": []
+    },
+    {
+      "repositoryID": "d2fca977-f35f-4fda-a28b-bc566b717d00",
+      "ignore": []
+    },
+    {
+      "repositoryID": "7723012d-2260-4659-b95f-5d1ea3d461f0",
+      "owners": []
+    },
+    {
+      "repositoryID": "93dc3684-aecb-42bc-8831-5279b44deea2",
+      "owners": [],
+      "ignore": []
+    },
+    {
+      "owners": [],
+      "ignore": []
+    },
+    {
+      "repositoryID": "0d96696b-f5dc-4e3c-91ba-6cc7cf6a4e65",
+      "owners": [
+        {
+          "name": "rmrwrixicgmwjrgaz",
+          "email": "diana948@test.org"
+        },
+        {
+          "name": "7kCtM",
+          "email": "alice277@demo.net"
+        },
+        {
+          "name": "dhn",
+          "email": "diana299@demo.net"
+        },
+        {
+          "name": "jsaahih",
+          "email": "eve562@sample.io"
+        },
+        {
+          "name": "tvYEEhq5F"
+        }
+      ],
+      "ignore": [
+        {
+          "name": "uF0XMwLYI4",
+          "version": "phflwdtgalimfauzc"
+        },
+        {
+          "name": "ipsum",
+          "version": "jkdxgv"
+        },
+        {
+          "name": "sit adipiscing conse"
+        },
+        {
+          "name": "adipiscing s",
+          "version": "sjxXVkF"
+        },
+        {
+          "name": "s",
+          "version": "inbtfeesejn"
+        }
+      ]
+    },
+    {
+      "repositoryID": "7afe3af5-929a-468a-a35a-d84c088176a0",
+      "ignore": [
+        {
+          "name": "consectetu",
+          "version": "consecte"
+        },
+        {
+          "name": "amet amet amet adi"
+        },
+        {
+          "name": "bP4jp5OTsJ1",
+          "version": "c"
+        },
+        {
+          "name": "8L2BB5JD2UWw6IlK",
+          "version": "LbjGy"
+        },
+        {
+          "name": "sbobbfxuqhtcn",
+          "version": "Pg"
+        }
+      ]
+    },
+    {
+      "owners": [
+        {
+          "name": "adip"
+        },
+        {
+          "name": "nwayevnveicunfecfo",
+          "email": "frank552@example.com"
+        },
+        {
+          "name": "wclcunc",
+          "email": "eve999@example.com"
+        },
+        {
+          "name": "consectetur adipi",
+          "email": "bob587@sample.io"
+        },
+        {
+          "name": "jyamb",
+          "email": "diana121@demo.net"
+        }
+      ]
+    },
+    {
+      "owners": [
+        {},
+        {
+          "name": "rxkrxmzaxsjiqs",
+          "email": "charlie374@example.com"
+        },
+        {
+          "name": "sit",
+          "email": "frank896@demo.net"
+        },
+        {},
+        {}
+      ]
+    },
+    {
+      "repositoryID": "508ca98e-d71e-4754-bca9-65c79e2a835e",
+      "owners": [
+        {
+          "name": "mbacssem"
+        },
+        {
+          "email": "alice266@sample.io"
+        },
+        {
+          "name": "ztxlqgkizig",
+          "email": "eve677@demo.net"
+        },
+        {
+          "email": "bob912@demo.net"
+        },
+        {
+          "name": "S",
+          "email": "eve633@example.com"
+        }
+      ]
+    },
+    {
+      "repositoryID": "e295166c-3f1f-4678-976d-7237fc6acb4f",
+      "owners": [
+        {},
+        {
+          "name": "bV7xnMykGaBijxKN8q"
+        },
+        {
+          "name": "d",
+          "email": "charlie636@example.com"
+        },
+        {
+          "name": "sit",
+          "email": "frank54@sample.io"
+        },
+        {
+          "name": "ujrnbfrabgm",
+          "email": "alice350@sample.io"
+        }
+      ]
+    },
+    {
+      "repositoryID": "d9cc3957-553d-4dad-a5a5-78e6728732a3",
+      "owners": [
+        {
+          "name": "bjP0atSnQLnU2",
+          "email": "bob880@demo.net"
+        },
+        {
+          "name": "lsaxsylh"
+        },
+        {
+          "name": "cblhgvxfcees",
+          "email": "alice20@sample.io"
+        },
+        {
+          "name": "adipi",
+          "email": "charlie894@example.com"
+        },
+        {
+          "email": "diana431@demo.net"
+        }
+      ],
+      "ignore": [
+        {
+          "name": "mb"
+        },
+        {
+          "name": "jhoumnkvyhyvkgro",
+          "version": "nebvgrhfrebzkjufugs"
+        },
+        {
+          "name": "dolor consectetur",
+          "version": "npJCL"
+        },
+        {
+          "name": "swgsmhe"
+        },
+        {
+          "name": "adipisc"
+        }
+      ]
+    },
+    {
+      "repositoryID": "357fd37a-9935-4041-b51f-5012c92b3d17",
+      "owners": [
+        {
+          "name": "rexlpc",
+          "email": "bob128@sample.io"
+        },
+        {
+          "name": "uczvgsajuvk",
+          "email": "diana929@demo.net"
+        },
+        {
+          "name": "amet ipsum"
+        },
+        {
+          "name": "syz",
+          "email": "frank636@sample.io"
+        },
+        {
+          "email": "eve824@test.org"
+        }
+      ]
+    },
+    {
+      "repositoryID": "966832dc-9d1e-492a-ae7f-10b9d551e3b2",
+      "ignore": [
+        {
+          "name": "adipiscing ip",
+          "version": "vI"
+        },
+        {
+          "name": "M3oBkWb"
+        },
+        {
+          "name": "SI2DX10BiUzF",
+          "version": "dolor consectetur a"
+        },
+        {
+          "name": "IA6q",
+          "version": "lorem dolor"
+        },
+        {
+          "name": "adipis"
+        }
+      ]
+    },
+    {
+      "ignore": [
+        {
+          "name": "P"
+        },
+        {
+          "name": "ITLHUqC3SLh6cYj",
+          "version": "amAsghTHCb"
+        },
+        {
+          "name": "amet amet adipis"
+        },
+        {
+          "name": "dolor ",
+          "version": "ION2eDnpfZBOxOq9"
+        },
+        {
+          "name": "qa5L3Qte844xKUuqqEz1Y",
+          "version": "emgqgczodg"
+        }
+      ]
+    },
+    {
+      "repositoryID": "c24e063b-dda8-431f-be27-bf9b3970145d",
+      "ignore": [
+        {
+          "name": "consect",
+          "version": "nwfrpmla"
+        },
+        {
+          "name": "sit amet consectet",
+          "version": "amet lor"
+        },
+        {
+          "name": "sit si"
+        },
+        {
+          "name": "adipiscing sit dol",
+          "version": "ipsum ips"
+        },
+        {
+          "name": "kpwSYWjBjTt8Z2",
+          "version": "dzdzhgnbttbtnnntzp"
+        }
+      ]
+    },
+    {
+      "owners": [
+        {
+          "email": "alice788@example.com"
+        },
+        {},
+        {
+          "name": "adipiscing lo",
+          "email": "eve786@test.org"
+        },
+        {
+          "name": "wk"
+        },
+        {
+          "name": "sit"
+        }
+      ],
+      "ignore": [
+        {
+          "name": "xmScytTxUyzKpL"
+        },
+        {
+          "name": "xulbcaeuxvxovqzb"
+        },
+        {
+          "name": "BdtlTD4nLNz",
+          "version": "byhvit"
+        },
+        {
+          "name": "consectet",
+          "version": "uA3le7brdVz8pJnKQi"
+        },
+        {
+          "name": "rj",
+          "version": "tjkybclztnjg"
+        }
+      ]
+    },
+    {
+      "repositoryID": "08fa258e-822f-4fb6-b7d0-406349548d2a",
+      "owners": [
+        {
+          "email": "charlie773@demo.net"
+        },
+        {},
+        {},
+        {
+          "email": "diana773@example.com"
+        },
+        {
+          "email": "frank72@test.org"
+        }
+      ],
+      "ignore": [
+        {
+          "name": "yhsksx",
+          "version": "rlrvvrvpahhyiapgpvbxw"
+        },
+        {
+          "name": "EM",
+          "version": "13xsZJ1pu9hpOwn2Wj"
+        },
+        {
+          "name": "amet dolor lorem ",
+          "version": "adipiscing a"
+        },
+        {
+          "name": "i"
+        },
+        {
+          "name": "wcBdLONz"
+        }
+      ]
+    },
+    {
+      "repositoryID": "605f254d-d7ca-4b2a-93f3-d7aaaf453e60",
+      "owners": [
+        {},
+        {
+          "name": "r",
+          "email": "alice705@test.org"
+        },
+        {
+          "email": "charlie686@sample.io"
+        },
+        {
+          "name": "consec",
+          "email": "bob454@test.org"
+        },
+        {
+          "name": "z"
+        }
+      ]
+    },
+    {
+      "repositoryID": "bdf614f2-83aa-464f-a816-c8ce08b7c445"
+    },
+    {
+      "repositoryID": "96153ad9-286a-46f2-a609-ad6fabaff8da",
+      "owners": [
+        {
+          "email": "frank908@demo.net"
+        },
+        {
+          "email": "charlie272@sample.io"
+        },
+        {
+          "name": "i8N"
+        },
+        {
+          "name": "dueranyfclacqzz"
+        },
+        {
+          "name": "Uur",
+          "email": "charlie320@sample.io"
+        }
+      ]
+    },
+    {
+      "repositoryID": "aaaece43-4677-459a-80b2-b491c086493f",
+      "owners": [
+        {
+          "email": "diana865@sample.io"
+        },
+        {
+          "name": "amet dolo",
+          "email": "bob396@example.com"
+        },
+        {
+          "email": "frank460@demo.net"
+        },
+        {
+          "name": "8OVHklPTIY4W",
+          "email": "alice921@sample.io"
+        },
+        {
+          "name": "adipiscing sit ame",
+          "email": "charlie790@test.org"
+        }
+      ]
+    },
+    {
+      "repositoryID": "090dd389-e5cd-4f48-aae2-136eef87e3cb",
+      "owners": [
+        {
+          "name": "consectetur adipisc",
+          "email": "bob859@example.com"
+        },
+        {
+          "name": "cb2X1jMTDPkh1jCAzqklK"
+        },
+        {
+          "email": "alice390@demo.net"
+        },
+        {
+          "name": "xobj"
+        },
+        {
+          "email": "alice96@sample.io"
+        }
+      ],
+      "ignore": [
+        {
+          "name": "wtfoyvveib",
+          "version": "zrvwyxnqtankufvflo"
+        },
+        {
+          "name": "ipsum amet"
+        },
+        {
+          "name": "HKeHuulGyWNylSmQiOL5"
+        },
+        {
+          "name": "iejiyajlnaujqg",
+          "version": "osiidqykhm"
+        },
+        {
+          "name": "llcqgwg"
+        }
+      ]
+    },
+    {
+      "owners": [
+        {
+          "name": "cdkupqxrvkdb"
+        },
+        {
+          "name": "zehhftxb",
+          "email": "alice993@example.com"
+        },
+        {
+          "name": "fuoelxtcke"
+        },
+        {
+          "name": "xgxwpnhykbzqlakyyd",
+          "email": "frank863@test.org"
+        },
+        {
+          "name": "lorem am",
+          "email": "charlie222@sample.io"
+        }
+      ],
+      "ignore": [
+        {
+          "name": "Rk5Jyiq1x0jU",
+          "version": "7"
+        },
+        {
+          "name": "amet amet am",
+          "version": "bhdl"
+        },
+        {
+          "name": "ENl"
+        },
+        {
+          "name": "xsnfb"
+        },
+        {
+          "name": "ylBWeZ",
+          "version": "lorem dolor do"
+        }
+      ]
+    },
+    {
+      "repositoryID": "e14cda1e-1b47-413f-829a-0b941af728ef",
+      "owners": [
+        {
+          "name": "rjhphnltjxjfsk"
+        },
+        {
+          "email": "alice684@demo.net"
+        },
+        {
+          "name": "vlqbzarfw",
+          "email": "charlie175@example.com"
+        },
+        {
+          "email": "frank483@test.org"
+        },
+        {
+          "email": "bob573@example.com"
+        }
+      ]
+    },
+    {
+      "owners": [
+        {
+          "email": "bob970@sample.io"
+        },
+        {
+          "name": "q"
+        },
+        {
+          "name": "qchujekiekgrccjqh",
+          "email": "frank543@demo.net"
+        },
+        {
+          "name": "amet dolor a"
+        },
+        {
+          "name": "i",
+          "email": "eve482@test.org"
+        }
+      ]
+    },
+    {
+      "repositoryID": "c4bed508-0d97-4539-9706-5078b6d392e2",
+      "ignore": [
+        {
+          "name": "dolor l"
+        },
+        {
+          "name": "tpvrFa",
+          "version": "tQv42XFbdBZx8KhI8s"
+        },
+        {
+          "name": "guflubwjqqzktpfmzxf",
+          "version": "amet dolor"
+        },
+        {
+          "name": "adipi",
+          "version": "u"
+        },
+        {
+          "name": "Te",
+          "version": "lorem i"
+        }
+      ]
+    },
+    {
+      "repositoryID": "091e1bb2-5737-4652-a83b-fa6a2eed42a5",
+      "ignore": [
+        {
+          "name": "Ic"
+        },
+        {
+          "name": "eBPYpspzl"
+        },
+        {
+          "name": "hWi5HrXf",
+          "version": "gap"
+        },
+        {
+          "name": "jsyarawmpnasollcs",
+          "version": "LI"
+        },
+        {
+          "name": "zWBMWLr3"
+        }
+      ]
+    },
+    {
+      "repositoryID": "3cf9d73e-0dac-4462-ac86-a1040aa58c2a",
+      "ignore": [
+        {
+          "name": "hv",
+          "version": "krutauxtuiqszfve"
+        },
+        {
+          "name": "YqFhHQ",
+          "version": "nekv"
+        },
+        {
+          "name": "lseY64SGxPa",
+          "version": "dolor ipsum ipsum "
+        },
+        {
+          "name": "AD"
+        },
+        {
+          "name": "consectetur am",
+          "version": "Q"
+        }
+      ]
+    },
+    {
+      "repositoryID": "4d175f76-2724-4aa4-a445-4ffaa8c17702",
+      "owners": [
+        {
+          "name": "lorem co",
+          "email": "frank552@example.com"
+        },
+        {
+          "email": "diana740@test.org"
+        },
+        {},
+        {},
+        {
+          "name": "wiynumkhafznmxp"
+        }
+      ],
+      "ignore": [
+        {
+          "name": "stlyene",
+          "version": "YfAfta"
+        },
+        {
+          "name": "dolor adipi"
+        },
+        {
+          "name": "dolor consectet"
+        },
+        {
+          "name": "sudyd",
+          "version": "ipsum ipsu"
+        },
+        {
+          "name": "Eop1wQFaZuxuYxYHlc",
+          "version": "fwfscritssjly"
+        }
+      ]
+    },
+    {
+      "repositoryID": "dce0220b-f71c-4434-ab91-9c5c7c9b48b2",
+      "owners": [
+        {},
+        {
+          "email": "alice546@example.com"
+        },
+        {
+          "name": "amet amet ipsum"
+        },
+        {},
+        {
+          "name": "zZyCrXx1NlLj"
+        }
+      ],
+      "ignore": [
+        {
+          "name": "xglqxd",
+          "version": "su"
+        },
+        {
+          "name": "riroyzkbchlgvslxu"
+        },
+        {
+          "name": "amet adip",
+          "version": "dbpfiqqto"
+        },
+        {
+          "name": "QDYhKcSgQj8"
+        },
+        {
+          "name": "sit lorem sit cons"
+        }
+      ]
+    },
+    {
+      "repositoryID": "7c013984-394b-4841-a6e0-bdfcf89b10cc",
+      "owners": [
+        {},
+        {
+          "name": "ipsum dolor amet "
+        },
+        {
+          "name": "sit sit",
+          "email": "charlie245@sample.io"
+        },
+        {
+          "name": "sgZ"
+        },
+        {}
+      ],
+      "ignore": [
+        {
+          "name": "lorem consect"
+        },
+        {
+          "name": "vbRaIjc",
+          "version": "kzv"
+        },
+        {
+          "name": "k0F1lG27eJHRBYPLLCNQ5",
+          "version": "3i72ueIQvdrZf6pmg8"
+        },
+        {
+          "name": "ipsum adipi",
+          "version": "loughroniyhrx"
+        },
+        {
+          "name": "tnfrddawfrvnq",
+          "version": "tPToACscd9TBPqS"
+        }
+      ]
+    },
+    {
+      "repositoryID": "490cc4a1-c9b2-49a6-8c85-cbb5f7234109",
+      "ignore": [
+        {
+          "name": "dolor sit amet conse"
+        },
+        {
+          "name": "jfdvrp",
+          "version": "snmkmbpvjflpvdujb"
+        },
+        {
+          "name": "lolrxvqm"
+        },
+        {
+          "name": "znfgfpoevjbdmwh"
+        },
+        {
+          "name": "jgryflrfkdmfckddd",
+          "version": "sit consect"
+        }
+      ]
+    },
+    {
+      "owners": [
+        {},
+        {
+          "name": "trl",
+          "email": "frank122@sample.io"
+        },
+        {
+          "name": "8c7QLsU1",
+          "email": "frank425@test.org"
+        },
+        {
+          "email": "eve255@example.com"
+        },
+        {
+          "name": "amet sit consectetu"
+        }
+      ]
+    },
+    {},
+    {
+      "owners": [
+        {},
+        {
+          "name": "kvUjOvkAxC25o9L7YGp"
+        },
+        {},
+        {
+          "name": "ztknnt"
+        },
+        {
+          "email": "eve296@example.com"
+        }
+      ],
+      "ignore": [
+        {
+          "name": "ipsum lorem ",
+          "version": "zpaebwislpwrb"
+        },
+        {
+          "name": "sit dolor amet amet d",
+          "version": "mewi"
+        },
+        {
+          "name": "hftwezny"
+        },
+        {
+          "name": "mrvnmaest",
+          "version": "lw"
+        },
+        {
+          "name": "rjjeqivggch"
+        }
+      ]
+    },
+    {
+      "ignore": [
+        {
+          "name": "buuezjlqrthmdhmbj"
+        },
+        {
+          "name": "lorem ",
+          "version": "jriglg"
+        },
+        {
+          "name": "jlJI9",
+          "version": "5YMw9"
+        },
+        {
+          "name": "OoGyP2OiKTHefHSETI"
+        },
+        {
+          "name": "ckjvfda",
+          "version": "xxzvanfhvh"
+        }
+      ]
+    },
+    {
+      "repositoryID": "9c146989-f861-436e-aa65-4bf232f39560",
+      "owners": [
+        {},
+        {
+          "name": "lodharyvex",
+          "email": "bob753@test.org"
+        },
+        {
+          "name": "ipsu",
+          "email": "bob470@demo.net"
+        },
+        {
+          "name": "1oMyssW0T"
+        },
+        {
+          "email": "bob225@example.com"
+        }
+      ]
+    },
+    {
+      "repositoryID": "267af41b-2529-4962-af8e-7386c0c432ac"
+    },
+    {
+      "repositoryID": "492ea648-0322-4cee-a404-eb8bc5b371fc",
+      "owners": [
+        {
+          "name": "7IGWBr0k"
+        },
+        {
+          "email": "eve325@example.com"
+        },
+        {
+          "name": "sqdszwrlldbzkkmzxrunq"
+        },
+        {
+          "email": "diana361@sample.io"
+        }
+      ]
+    },
+    {
+      "owners": [
+        {
+          "name": "qrontdnclaxyughj",
+          "email": "diana954@sample.io"
+        },
+        {
+          "name": "dolor",
+          "email": "alice507@demo.net"
+        },
+        {
+          "name": "mWqlKU",
+          "email": "diana207@test.org"
+        },
+        {
+          "name": "T6wtyGcAffG6lHc",
+          "email": "bob724@test.org"
+        }
+      ]
+    },
+    {
+      "owners": [
+        {
+          "name": "YNRIlCYSxXSVE",
+          "email": "frank779@test.org"
+        },
+        {
+          "email": "alice892@sample.io"
+        }
+      ]
+    },
+    {
+      "repositoryID": "13f6d220-8d69-4123-8779-296baf05d301"
+    },
+    {
+      "repositoryID": "09a4035f-117d-49a7-960a-4b38ac541826"
+    },
+    {
+      "repositoryID": "3fce7ef2-7a67-4c88-b220-d1b9554952f8",
+      "owners": [
+        {},
+        {
+          "name": "rhbvxiczxmctzhjwt"
+        },
+        {
+          "email": "frank830@test.org"
+        },
+        {
+          "email": "charlie958@example.com"
+        },
+        {}
+      ],
+      "ignore": [
+        {
+          "name": "VWlvGg0dA",
+          "version": "ips"
+        },
+        {
+          "name": "sit",
+          "version": "dolor lorem "
+        },
+        {
+          "name": "HMctqRciZ",
+          "version": "qcW97Fyh9Be8OUH"
+        },
+        {
+          "name": "L8TWlVz"
+        },
+        {
+          "name": "lp"
+        }
+      ]
+    },
+    {
+      "owners": [],
+      "ignore": [
+        {
+          "name": "rqrmodbwuztpewnwuu"
+        },
+        {
+          "name": "ipsum dolor ip"
+        }
+      ]
+    },
+    {
+      "owners": [
+        {
+          "name": "lorem adipiscing adip",
+          "email": "eve75@sample.io"
+        },
+        {
+          "name": "dIGZBQwEeCmzqRxzA"
+        },
+        {
+          "name": "JNbzrwz7"
+        },
+        {
+          "name": "jc"
+        },
+        {
+          "name": "gmawnapwmoy",
+          "email": "eve984@sample.io"
+        }
+      ]
+    },
+    {
+      "repositoryID": "0b9caf56-0bcb-4234-b74f-ddd1d0c5fd01",
+      "owners": [
+        {
+          "email": "frank121@demo.net"
+        },
+        {
+          "name": "adipiscing sit ipsum ",
+          "email": "frank436@test.org"
+        },
+        {
+          "name": "dslkgipcqbwjqijigdjgo",
+          "email": "diana336@example.com"
+        }
+      ],
+      "ignore": []
+    },
+    {
+      "owners": []
+    },
+    {
+      "owners": [
+        {},
+        {
+          "email": "diana646@test.org"
+        },
+        {
+          "email": "charlie216@sample.io"
+        },
+        {
+          "name": "wtbrfmvnsyxbf",
+          "email": "diana549@test.org"
+        }
+      ]
+    },
+    {
+      "repositoryID": "6bea1565-6829-4441-a5b8-fa47e679087e",
+      "owners": [
+        {},
+        {
+          "name": "fgitysidhfn",
+          "email": "alice436@test.org"
+        },
+        {
+          "email": "alice98@example.com"
+        },
+        {
+          "email": "diana405@sample.io"
+        },
+        {}
+      ]
+    },
+    {
+      "repositoryID": "7d27b9a4-3a1d-41b9-94ee-a5421a121465",
+      "owners": [
+        {
+          "email": "eve182@demo.net"
+        },
+        {
+          "name": "P8YLXbA1UBovAh6OGltzj",
+          "email": "charlie382@example.com"
+        },
+        {
+          "name": "l",
+          "email": "bob223@test.org"
+        }
+      ],
+      "ignore": [
+        {
+          "name": "adipiscing am",
+          "version": "ipsum ip"
+        },
+        {
+          "name": "yfvSCxp3O7yW",
+          "version": "lEOyhN4eGXDD1Pin"
+        },
+        {
+          "name": "adipiscin",
+          "version": "RxtSw5Xmq"
+        },
+        {
+          "name": "ip"
+        },
+        {
+          "name": "qwghs",
+          "version": "YqidBkVKxvfi3kHJUk"
+        }
+      ]
+    },
+    {
+      "repositoryID": "e1d0c889-9e5c-4e49-867a-828c10005e4c",
+      "owners": [
+        {
+          "email": "charlie780@test.org"
+        },
+        {
+          "name": "dolor consectetur i"
+        }
+      ]
+    },
+    {
+      "repositoryID": "76b8d813-923d-407d-8c4b-cf6df7bf4fa0",
+      "owners": [
+        {
+          "name": "Iv",
+          "email": "bob346@demo.net"
+        },
+        {
+          "email": "diana793@example.com"
+        },
+        {
+          "email": "alice324@sample.io"
+        }
+      ],
+      "ignore": []
+    },
+    {
+      "owners": [
+        {
+          "email": "charlie807@demo.net"
+        }
+      ],
+      "ignore": [
+        {
+          "name": "vamlfcidewjhk",
+          "version": "ysknycwctkgesaqqq"
+        }
+      ]
+    },
+    {
+      "owners": [
+        {
+          "name": "LMaRjF"
+        },
+        {},
+        {
+          "name": "wyxbsqwapsswblxu",
+          "email": "frank535@example.com"
+        },
+        {
+          "name": "consectetur sit dolo"
+        }
+      ],
+      "ignore": [
+        {
+          "name": "77zPqZG0PGecqC0BNkRgp",
+          "version": "pagetymohrg"
+        },
+        {
+          "name": "L46UnJCGX9oG8DCkeL",
+          "version": "mexmnjknukowa"
+        }
+      ]
+    },
+    {
+      "repositoryID": "7c810995-9fc9-431f-84c4-09475425e7ef",
+      "owners": [
+        {
+          "name": "DjiMfP",
+          "email": "charlie206@sample.io"
+        },
+        {
+          "name": "rE7Xe8pnx5dVm8",
+          "email": "frank671@test.org"
+        },
+        {
+          "email": "frank882@example.com"
+        }
+      ]
+    },
+    {
+      "repositoryID": "385cacec-6ead-4f37-a189-6ad27ee28ba8",
+      "ignore": []
+    },
+    {
+      "owners": [
+        {
+          "name": "ipsum amet ipsum"
+        },
+        {
+          "name": "atd"
+        },
+        {},
+        {
+          "email": "charlie861@sample.io"
+        }
+      ],
+      "ignore": [
+        {
+          "name": "Q0mJaIeJqVxTJvXyi",
+          "version": "8EyWInnkb9hJcse"
+        },
+        {
+          "name": "wwntnn",
+          "version": "hjbawpfe"
+        }
+      ]
+    },
+    {
+      "repositoryID": "9a22375a-5c09-4f40-b96b-f24e74e54af5",
+      "ignore": [
+        {
+          "name": "ivcoduoudsudc",
+          "version": "uzxbpygug"
+        },
+        {
+          "name": "jDM0gFj4jB"
+        },
+        {
+          "name": "3w4uvPGxPUajq4HfMjm5",
+          "version": "amet i"
+        },
+        {
+          "name": "qx1tombxKQ",
+          "version": "zuhqkfumqwwgqus"
+        },
+        {
+          "name": "QMS4IwpOl65P7H9OIt"
+        }
+      ]
+    },
+    {
+      "repositoryID": "aea03728-dfe1-49e3-9ab8-ea2e1465771a",
+      "owners": [
+        {
+          "email": "diana23@demo.net"
+        },
+        {
+          "name": "dolor adipi"
+        },
+        {
+          "name": "vaatdrmlmjucbunqdnsqh"
+        },
+        {},
+        {
+          "email": "charlie448@sample.io"
+        }
+      ]
+    },
+    {
+      "repositoryID": "ee6b3527-397d-47c2-97ed-78ad989445e5",
+      "ignore": [
+        {
+          "name": "3",
+          "version": "sfrrzztyosxsufltbttg"
+        },
+        {
+          "name": "ipsum lorem lorem con"
+        }
+      ]
+    },
+    {
+      "repositoryID": "0803c9ff-efe8-480e-bf33-d9ce05b70eb0",
+      "owners": [
+        {
+          "email": "eve26@test.org"
+        }
+      ]
+    },
+    {
+      "repositoryID": "d17cd120-546a-4bbc-ba72-7a57020fbbdf",
+      "owners": [
+        {
+          "email": "eve711@example.com"
+        },
+        {},
+        {
+          "email": "charlie224@example.com"
+        },
+        {
+          "name": "dolor ipsum lo"
+        }
+      ],
+      "ignore": [
+        {
+          "name": "hpddsczgwzbkmggkmgp",
+          "version": "ypkolgkgkxnxyaggja"
+        },
+        {
+          "name": "amet c",
+          "version": "consectetur"
+        },
+        {
+          "name": "consectetu",
+          "version": "bckwrseyxovnvkogrnuyx"
+        },
+        {
+          "name": "sit consectetur dolor",
+          "version": "amet ipsum ipsum lo"
+        },
+        {
+          "name": "UoNJvJ",
+          "version": "kiykkjppu"
+        }
+      ]
+    },
+    {
+      "repositoryID": "3c85cfc1-c7f5-43c6-b02b-471826874de1",
+      "owners": [
+        {},
+        {
+          "email": "diana114@sample.io"
+        },
+        {
+          "name": "97gT7VXs",
+          "email": "eve707@demo.net"
+        },
+        {}
+      ]
+    },
+    {
+      "ignore": [
+        {
+          "name": "dhpdqjvhvy",
+          "version": "ipsum lor"
+        },
+        {
+          "name": "cgtrctzcveuvobxqs",
+          "version": "do"
+        },
+        {
+          "name": "GXufreTY",
+          "version": "3O"
+        }
+      ]
+    },
+    {
+      "repositoryID": "a897941b-f8fd-4db1-add9-0a2191bbae9a",
+      "owners": [
+        {
+          "name": "iNc9Rdm"
+        },
+        {},
+        {
+          "name": "c",
+          "email": "alice762@example.com"
+        }
+      ],
+      "ignore": [
+        {
+          "name": "pAgUNXJySXK4YoHKJ"
+        },
+        {
+          "name": "amet sit lorem ad",
+          "version": "zCQAElvyE2pdBSx9FPvxb"
+        }
+      ]
+    },
+    {
+      "repositoryID": "d10a7b6c-3404-4597-814c-5afedd833bd0",
+      "owners": [
+        {
+          "name": "dolor adipis",
+          "email": "eve485@test.org"
+        }
+      ]
+    },
+    {
+      "repositoryID": "6fe93402-9f62-4b9d-8fea-67185f9fdad5",
+      "owners": [
+        {
+          "name": "gdlisyzsmxodfwaqj",
+          "email": "bob956@demo.net"
+        },
+        {},
+        {
+          "email": "frank538@example.com"
+        },
+        {
+          "email": "eve926@sample.io"
+        },
+        {}
+      ]
+    },
+    {
+      "repositoryID": "62c0a76e-3418-4e05-93d3-b839090efc43",
+      "ignore": [
+        {
+          "name": "onxtjxdvwh",
+          "version": "dnnyijtozn"
+        },
+        {
+          "name": "s"
+        },
+        {
+          "name": "si"
+        },
+        {
+          "name": "Tzx",
+          "version": "RF6of7sCR9"
+        },
+        {
+          "name": "uqefsjflngjq"
+        }
+      ]
+    },
+    {
+      "owners": [
+        {
+          "name": "fn"
+        },
+        {
+          "name": "83ol0R5dIyEROi1OUKP7Y",
+          "email": "bob323@test.org"
+        }
+      ],
+      "ignore": [
+        {
+          "name": "tSolG9Dv5KDvKLsyw"
+        },
+        {
+          "name": "V0CU1VHkg",
+          "version": "adi"
+        },
+        {
+          "name": "yhrtx",
+          "version": "dolor dolor sit dolor"
+        },
+        {
+          "name": "loaqzrenzfhhm",
+          "version": "uxckdgjnlrpgkwltzykyd"
+        },
+        {
+          "name": "vF5HVp"
+        }
+      ]
+    },
+    {
+      "repositoryID": "f6be14f8-5273-438e-8ed2-cec85029f172",
+      "owners": [
+        {
+          "name": "ipsum sit amet ",
+          "email": "charlie528@demo.net"
+        },
+        {
+          "email": "eve190@test.org"
+        },
+        {
+          "email": "bob624@demo.net"
+        }
+      ],
+      "ignore": [
+        {
+          "name": "zGnwcLE6J",
+          "version": "d"
+        },
+        {
+          "name": "L4zlDxmeDveYQObqoaaKe",
+          "version": "lIiQ7MxY4YNvs7xqQt"
+        },
+        {
+          "name": "erpcou",
+          "version": "96bbLpH"
+        }
+      ]
+    }
+  ]
+}

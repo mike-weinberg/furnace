@@ -1,0 +1,4467 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "typescript": {
+        "description": "Is project written in Typescript or not",
+        "type": "boolean"
+      },
+      "exceptionHandlerNamespace": {
+        "description": "Http server exception handler namespace",
+        "type": "string"
+      },
+      "assetsDriver": {
+        "description": "The driver to use for assets bundling",
+        "type": "string",
+        "enum": [
+          "encore",
+          "vite",
+          "fake"
+        ]
+      },
+      "preloads": {
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "file": {
+                  "type": "string"
+                },
+                "environment": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "web",
+                      "console",
+                      "test",
+                      "repl"
+                    ]
+                  }
+                },
+                "optional": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "file"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "metaFiles": {
+        "type": "array",
+        "items": {
+          "uniqueItems": true,
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "pattern": {
+                  "type": "string"
+                },
+                "reloadServer": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "pattern"
+              ]
+            }
+          ]
+        }
+      },
+      "commands": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "providers": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "uniqueItems": true
+      },
+      "aceProviders": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "uniqueItems": true
+      },
+      "testProviders": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "uniqueItems": true
+      },
+      "directories": {
+        "type": "object",
+        "properties": {
+          "config": {
+            "type": "string"
+          },
+          "public": {
+            "type": "string"
+          },
+          "contracts": {
+            "type": "string"
+          },
+          "providers": {
+            "type": "string"
+          },
+          "database": {
+            "type": "string"
+          },
+          "migrations": {
+            "type": "string"
+          },
+          "seeds": {
+            "type": "string"
+          },
+          "resources": {
+            "type": "string"
+          },
+          "views": {
+            "type": "string"
+          },
+          "start": {
+            "type": "string"
+          },
+          "tmp": {
+            "type": "string"
+          },
+          "tests": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": {
+          "type": "string"
+        }
+      },
+      "commandsAliases": {
+        "type": "object",
+        "patternProperties": {
+          "^.*$": {
+            "type": "string"
+          }
+        }
+      },
+      "aliases": {
+        "type": "object",
+        "patternProperties": {
+          "^.*$": {
+            "type": "string"
+          }
+        }
+      },
+      "namespaces": {
+        "type": "object",
+        "properties": {
+          "models": {
+            "type": "string"
+          },
+          "exceptions": {
+            "type": "string"
+          },
+          "middleware": {
+            "type": "string"
+          },
+          "httpControllers": {
+            "type": "string"
+          },
+          "eventListeners": {
+            "type": "string"
+          },
+          "redisListeners": {
+            "type": "string"
+          },
+          "validators": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": {
+          "type": "string"
+        }
+      },
+      "tests": {
+        "type": "object",
+        "properties": {
+          "suites": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "files": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ]
+                },
+                "timeout": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "name",
+                "files"
+              ]
+            }
+          },
+          "timeout": {
+            "type": "number"
+          },
+          "forceExit": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "suites"
+        ]
+      }
+    },
+    "required": [
+      "typescript",
+      "providers"
+    ]
+  },
+  "examples": [
+    {
+      "typescript": true,
+      "providers": [],
+      "exceptionHandlerNamespace": "lorem lor",
+      "preloads": [],
+      "metaFiles": [],
+      "commands": [],
+      "aceProviders": [],
+      "testProviders": [],
+      "commandsAliases": {},
+      "tests": {
+        "suites": [],
+        "timeout": -443.62
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [],
+      "exceptionHandlerNamespace": "jscpp",
+      "assetsDriver": "fake",
+      "preloads": [],
+      "commands": [],
+      "testProviders": [],
+      "directories": {
+        "contracts": "cons",
+        "providers": "FJxdd60s3Gg1K",
+        "seeds": "OSuPBhet2qTPe9Ps3TwA",
+        "resources": "cdcreucnlaaxzd",
+        "mysvw": "lorem consect"
+      },
+      "aliases": {},
+      "tests": {
+        "suites": [],
+        "timeout": -182.59
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [],
+      "exceptionHandlerNamespace": "ipsu",
+      "assetsDriver": "encore",
+      "preloads": [],
+      "metaFiles": [],
+      "testProviders": [],
+      "commandsAliases": {},
+      "tests": {
+        "suites": [],
+        "timeout": -434.54,
+        "forceExit": true
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [],
+      "exceptionHandlerNamespace": "dolor lor",
+      "assetsDriver": "vite",
+      "directories": {
+        "config": "conse",
+        "public": "lorem lorem do",
+        "contracts": "lorem conse",
+        "providers": "wtvqpbxxjqamqhkvd",
+        "database": "dF3",
+        "seeds": "rslMd6gMJwrBu8NGPEjb8",
+        "views": "lorem lorem amet adi",
+        "start": "xqhtwenaiqzkilo",
+        "rpwqxqpbx": "bcuohiln",
+        "dV9C3JxZdw": "sit dolor"
+      },
+      "commandsAliases": {},
+      "aliases": {}
+    },
+    {
+      "typescript": true,
+      "providers": [],
+      "exceptionHandlerNamespace": "3NjHXbWNdbIsuSVyRwD",
+      "preloads": [],
+      "aceProviders": [],
+      "testProviders": [],
+      "directories": {
+        "public": "eu2lsVmhpLSPerhIwUJK",
+        "contracts": "dolor consectetur ",
+        "seeds": "T",
+        "resources": "fyOixWYT",
+        "views": "rjjcf",
+        "start": "amet consec",
+        "tmp": "dolor dolor s",
+        "tests": "35Oqd95EdVsB840eOLSa",
+        "aoqkpt": "taqf"
+      },
+      "commandsAliases": {},
+      "aliases": {},
+      "namespaces": {
+        "models": "adipiscing ipsum ipsu",
+        "exceptions": "zmmhgxmrynesuyldrubv",
+        "httpControllers": "1cWmwrA82nstvk8O6Q9Y",
+        "redisListeners": "lor",
+        "validators": "c"
+      },
+      "tests": {
+        "suites": []
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [],
+      "exceptionHandlerNamespace": "vFyczbgq7DH43JoGw7",
+      "assetsDriver": "vite",
+      "metaFiles": [],
+      "commands": [],
+      "aceProviders": [],
+      "testProviders": [],
+      "namespaces": {
+        "models": "HpO250nUVLPrVoIqHct",
+        "middleware": "pqfmzzolzoucgvoul",
+        "eventListeners": "pyxxqyvof",
+        "redisListeners": "adipis",
+        "validators": "yqahebclFEWYGIaeZ5u"
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [],
+      "exceptionHandlerNamespace": "6lVk72gOnF0jnedEkh",
+      "preloads": [],
+      "metaFiles": [],
+      "commands": [],
+      "testProviders": [],
+      "aliases": {},
+      "namespaces": {
+        "models": "mX0LbgJKRWn9DPWgawAtX",
+        "httpControllers": "consectetur ipsum si",
+        "redisListeners": "adipi",
+        "I4JVSaCs": "lorem lorem amet dolo",
+        "1B54fj9e2": "wjknaptxkksymwdbedfp"
+      },
+      "tests": {
+        "suites": [],
+        "timeout": -611.8,
+        "forceExit": false
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [],
+      "exceptionHandlerNamespace": "IYQV",
+      "assetsDriver": "vite",
+      "commands": [],
+      "directories": {
+        "config": "csijrzpb",
+        "public": "fubgpimfglpsmjzuoo",
+        "contracts": "wyhbssb",
+        "migrations": "sit ipsum dolo",
+        "seeds": "CfPe5pvIalwg0h",
+        "resources": "cujsrndrtmwdrpgcpily",
+        "start": "gfimgvvakrnxlwamyg",
+        "tmp": "ipsum ipsum adipisc"
+      },
+      "commandsAliases": {},
+      "aliases": {},
+      "namespaces": {
+        "exceptions": "rrDNsSa",
+        "httpControllers": "sidcz",
+        "eventListeners": "ugbsjhzdioybbcgimjfo",
+        "redisListeners": "XRp8SUVa9c",
+        "validators": "ejpywfaibw",
+        "kbppae": "g8d4zX8l6b"
+      },
+      "tests": {
+        "suites": [],
+        "timeout": -335.87,
+        "forceExit": true
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [],
+      "assetsDriver": "encore",
+      "commands": [],
+      "aceProviders": [],
+      "testProviders": [],
+      "directories": {
+        "public": "iezi",
+        "tests": "XA9mB4Kh",
+        "hQ37h9": "3YYhJGfwGaaKz80ZXn",
+        "ZpYuNc0OQq": "zYDywWbBNatvNG"
+      },
+      "commandsAliases": {},
+      "aliases": {},
+      "namespaces": {
+        "exceptions": "lor",
+        "httpControllers": "sit ipsum ad",
+        "validators": "vj1GrO4ujZ8rYtxY",
+        "sit lorem": "wgupzgfrfh",
+        "sit ip": "stto"
+      },
+      "tests": {
+        "suites": [],
+        "timeout": -127.74,
+        "forceExit": false
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [],
+      "assetsDriver": "encore",
+      "metaFiles": [],
+      "commands": [],
+      "testProviders": [],
+      "aliases": {},
+      "tests": {
+        "suites": [],
+        "timeout": 993.44,
+        "forceExit": true
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [],
+      "exceptionHandlerNamespace": "6z4j9zlvNcyaekorW",
+      "assetsDriver": "encore",
+      "aceProviders": [],
+      "commandsAliases": {},
+      "aliases": {},
+      "namespaces": {
+        "models": "dolor ",
+        "exceptions": "laarnlededpholotudy",
+        "eventListeners": "grwtx",
+        "redisListeners": "amet ip"
+      },
+      "tests": {
+        "suites": [],
+        "timeout": -913.35,
+        "forceExit": true
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [],
+      "exceptionHandlerNamespace": "ntswaeztgtejlfdn",
+      "preloads": [],
+      "aceProviders": [],
+      "testProviders": [],
+      "directories": {
+        "public": "rebqmxpvxctcyux",
+        "contracts": "dolor lor",
+        "database": "wlnDvELfOexs5yYL5o",
+        "resources": "consectetur si",
+        "views": "zf2pISHxqRpM75P",
+        "start": "sit co",
+        "tmp": "A0UAGDPNOnXdqIbLtuexJ",
+        "tests": "no",
+        "adipiscing": "consectetur amet ",
+        "4nNXz": "consectetu"
+      },
+      "commandsAliases": {},
+      "aliases": {}
+    },
+    {
+      "typescript": true,
+      "providers": [],
+      "exceptionHandlerNamespace": "7xBJx42Sd9",
+      "assetsDriver": "fake",
+      "preloads": [],
+      "metaFiles": [],
+      "commands": [],
+      "aceProviders": [],
+      "testProviders": [],
+      "directories": {
+        "providers": "aq",
+        "database": "a",
+        "seeds": "l",
+        "resources": "amet lorem sit ",
+        "views": "y6I0D8CnEr3OB",
+        "start": "upniux",
+        "tests": "jkdj",
+        "pcniuvpr": "ShFRZsrCX9Kj3p"
+      },
+      "commandsAliases": {},
+      "aliases": {},
+      "tests": {
+        "suites": [],
+        "timeout": -642.94,
+        "forceExit": true
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [],
+      "assetsDriver": "fake",
+      "preloads": [],
+      "metaFiles": [],
+      "commands": [],
+      "aceProviders": [],
+      "aliases": {},
+      "namespaces": {
+        "models": "lnqqbfsovbg",
+        "exceptions": "consectetur do",
+        "httpControllers": "wmD0nIBsiRzDLg",
+        "validators": "ipsum lor",
+        "eqwryAKN": "us"
+      },
+      "tests": {
+        "suites": [],
+        "timeout": 409.81,
+        "forceExit": true
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [],
+      "exceptionHandlerNamespace": "H5RfMupJbJdKiQ5xp",
+      "assetsDriver": "encore",
+      "preloads": [],
+      "metaFiles": [],
+      "aceProviders": [],
+      "directories": {
+        "config": "lorem ",
+        "contracts": "aJ",
+        "providers": "sit amet sit dolor",
+        "database": "c3lXCasKC4bZ1kFdJR",
+        "migrations": "lorem sit con",
+        "seeds": "amet do",
+        "start": "amet amet lorem ame",
+        "tmp": "cX7V",
+        "zksyfcinzt": "kysf",
+        "hwpcyd": "nhpdsqrjkgbnijdtocllv"
+      },
+      "commandsAliases": {},
+      "aliases": {},
+      "namespaces": {
+        "exceptions": "lorem ipsum am",
+        "httpControllers": "adipi",
+        "9naPC": "zcyelsidwlawkd"
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [],
+      "exceptionHandlerNamespace": "sit adipiscing dolor",
+      "preloads": [],
+      "commands": [],
+      "testProviders": [],
+      "tests": {
+        "suites": []
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [],
+      "exceptionHandlerNamespace": "ffkyuglphpaftlrrbuuhe",
+      "assetsDriver": "encore",
+      "testProviders": [],
+      "directories": {
+        "config": "consecte",
+        "public": "pprikhfxplqewmhsm",
+        "providers": "sit",
+        "database": "am",
+        "migrations": "IS",
+        "seeds": "zinvibvdrrjcyydt",
+        "views": "s",
+        "tmp": "YfT55y9UCXzvJO",
+        "tests": "adipiscing lo",
+        "asckgulb": "dsHh2BcQmqgw8",
+        "dkixq": "ojwryzayecrwien"
+      },
+      "commandsAliases": {},
+      "namespaces": {
+        "exceptions": "YHC1lLLL1ePmPLP",
+        "middleware": "5Sg3raUYfEqvXk4GC",
+        "httpControllers": "consectetur sit lore",
+        "eventListeners": "emnzkjisowukyqzijx",
+        "redisListeners": "dolor "
+      },
+      "tests": {
+        "suites": []
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [],
+      "exceptionHandlerNamespace": "awsravjuntsirzxxcqwhb",
+      "preloads": [],
+      "commands": [],
+      "aceProviders": [],
+      "testProviders": [],
+      "aliases": {},
+      "namespaces": {
+        "models": "lorem ipsum s",
+        "exceptions": "pdtyzkljstjnm",
+        "middleware": "GBMGGWwb4wyhJYeIcAjT5",
+        "httpControllers": "chhtcmzfmdct",
+        "eventListeners": "lorem dolor ",
+        "validators": "zSR0Sbarp"
+      },
+      "tests": {
+        "suites": []
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [],
+      "exceptionHandlerNamespace": "conse",
+      "assetsDriver": "encore",
+      "aceProviders": [],
+      "testProviders": [],
+      "directories": {
+        "public": "amet c",
+        "contracts": "KLgsbJspr6h33mZmOhtE",
+        "providers": "aocekiozuoveszynp",
+        "database": "sit lorem conse",
+        "migrations": "sit lorem adip",
+        "resources": "ervdsfy",
+        "views": "gigtcgitoqyiyzekynved",
+        "tmp": "Q",
+        "tests": "ZolJ4ByI"
+      },
+      "commandsAliases": {},
+      "aliases": {},
+      "namespaces": {
+        "exceptions": "adipiscing co",
+        "httpControllers": "hdJQWkcj4K",
+        "eventListeners": "vfylsc",
+        "ePQZXpWLfc": "nKmKk",
+        "eEHmn6A": "con"
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [],
+      "exceptionHandlerNamespace": "iismjki",
+      "assetsDriver": "fake",
+      "preloads": [],
+      "metaFiles": [],
+      "commands": [],
+      "aceProviders": [],
+      "testProviders": [],
+      "commandsAliases": {},
+      "aliases": {}
+    },
+    {
+      "typescript": true,
+      "providers": [],
+      "exceptionHandlerNamespace": "ireeagqw",
+      "assetsDriver": "vite",
+      "preloads": [],
+      "commands": [],
+      "aceProviders": [],
+      "testProviders": [],
+      "directories": {
+        "config": "by63w3a1LoLmLbJmji",
+        "contracts": "wjoxiksimjvncaqd",
+        "database": "Q47grhywXEWud6C9N",
+        "migrations": "kISNvzvc",
+        "seeds": "ipsum amet",
+        "resources": "NR24TyspG7Aqjz38o6xz",
+        "views": "kjvelnixcunw",
+        "tmp": "tbeqlfqf",
+        "iziudnjw": "hGogRH90c6G9tDRpzuvH"
+      },
+      "commandsAliases": {},
+      "namespaces": {
+        "models": "K7KkpEM64d",
+        "exceptions": "consectetur consecte",
+        "redisListeners": "ruV5cndOLMlz2umn"
+      },
+      "tests": {
+        "suites": [],
+        "timeout": 964.32,
+        "forceExit": false
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [],
+      "exceptionHandlerNamespace": "fUemeM0Ln",
+      "metaFiles": [],
+      "commands": [],
+      "namespaces": {
+        "exceptions": "Rgb9MU5b5ka10dddAp7H5",
+        "middleware": "adipiscing consec",
+        "eventListeners": "consectetur ",
+        "redisListeners": "dolor lorem lo",
+        "validators": "lysW",
+        "amet sit": "9RUNDdRL",
+        "9o4pvxH4": "5zdIzWEwzDTXyiaLo0A7e"
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [],
+      "exceptionHandlerNamespace": "5b9RXXmYOj1BSfQadgcK",
+      "assetsDriver": "encore",
+      "preloads": [],
+      "metaFiles": [],
+      "commands": [],
+      "testProviders": [],
+      "directories": {
+        "config": "wElaCndrPZbXs12sN",
+        "public": "wgyqllse",
+        "contracts": "lorem ",
+        "database": "zgkubm",
+        "resources": "1i2VVFtF2YxuaatNVx",
+        "views": "mochazjqtmzzmbuna",
+        "hkTZv": "amet dolor adipisci",
+        "ipsum do": "d"
+      },
+      "aliases": {},
+      "tests": {
+        "suites": [],
+        "timeout": 791.42
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [],
+      "exceptionHandlerNamespace": "lnoiqxbogrqbcnwuv",
+      "assetsDriver": "vite",
+      "preloads": [],
+      "directories": {
+        "config": "tu",
+        "public": "helgwavevld",
+        "providers": "dolor dolor",
+        "resources": "sit",
+        "tmp": "ame",
+        "tests": "zwzxokevmmhin",
+        "vmsacni": "gr",
+        "amet a": "yzM2Q9rf"
+      },
+      "namespaces": {
+        "exceptions": "VxqjSawk",
+        "redisListeners": "amet cons",
+        "validators": "zKIxmdqjTYj2VwTEOU",
+        "dcdqvdunm": "glgtoc",
+        "bfoubtqroz": "bb"
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [],
+      "exceptionHandlerNamespace": "hzucwven",
+      "aceProviders": [],
+      "commandsAliases": {},
+      "aliases": {},
+      "namespaces": {
+        "models": "s",
+        "httpControllers": "yfbtirjycch",
+        "redisListeners": "OIg0ADxw57l4YZr3KCcG",
+        "validators": "gdWXbbWIO8",
+        "ggR4Z": "adipiscing consectet",
+        "ngqRqeUkk": "oyuvptw"
+      },
+      "tests": {
+        "suites": [],
+        "forceExit": false
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [],
+      "exceptionHandlerNamespace": "kylqxfbealdcik",
+      "preloads": [],
+      "testProviders": [],
+      "directories": {
+        "config": "l",
+        "contracts": "weoxplgdaegrc",
+        "database": "TGbNOshxsBVoa6F0pfY",
+        "migrations": "ruujqubrldhurnxpa",
+        "resources": "hyzelalndciquryjrbpx",
+        "start": "lorem adipiscing",
+        "tests": "lsvryiogatiaosbixpbt"
+      },
+      "commandsAliases": {}
+    },
+    {
+      "typescript": false,
+      "providers": [],
+      "metaFiles": [],
+      "commands": [],
+      "aceProviders": [],
+      "testProviders": [],
+      "commandsAliases": {},
+      "namespaces": {
+        "models": "cons",
+        "exceptions": "consectetur",
+        "middleware": "xhQIb9jJiYa6xL",
+        "httpControllers": "xhTzOc6",
+        "eventListeners": "ctsuug",
+        "redisListeners": "dolor sit sit conse",
+        "validators": "lorem amet consectetu",
+        "fjwrubhuy": "lorem sit ad"
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [],
+      "exceptionHandlerNamespace": "dolor ",
+      "metaFiles": [],
+      "commands": [],
+      "aceProviders": [],
+      "testProviders": [],
+      "directories": {
+        "config": "adipiscing lore",
+        "contracts": "ckqbwsjbcaggdmusq",
+        "database": "co",
+        "migrations": "hrqqenyqkrkugonrnjcll",
+        "seeds": "m2Z7x5MBdhFd",
+        "views": "sucktey",
+        "start": "stt",
+        "tests": "wijnqmubeyayqdehtjo"
+      },
+      "commandsAliases": {},
+      "aliases": {},
+      "namespaces": {
+        "models": "JtyqyaEJcVuPZLnvue",
+        "exceptions": "fjumh",
+        "middleware": "ipsum lor",
+        "eventListeners": "OSkUpbfl3sNiOf6",
+        "redisListeners": "nijxbvgl",
+        "validators": "ipsum sit lorem l",
+        "quqhuyay": "ad",
+        "dolor ad": "MX6xqaAMNnq"
+      },
+      "tests": {
+        "suites": [],
+        "timeout": -451.22
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [],
+      "exceptionHandlerNamespace": "tgYPnPXoOFVx31f",
+      "assetsDriver": "vite",
+      "metaFiles": [],
+      "commands": [],
+      "testProviders": [],
+      "namespaces": {
+        "exceptions": "ntu",
+        "httpControllers": "yfepobhcmlhpnsutsvtp",
+        "eventListeners": "brfwgtboldxmtei",
+        "validators": "zjnxboagk"
+      },
+      "tests": {
+        "suites": []
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [],
+      "exceptionHandlerNamespace": "i",
+      "preloads": [],
+      "metaFiles": [],
+      "commands": [],
+      "aceProviders": [],
+      "testProviders": [],
+      "commandsAliases": {},
+      "namespaces": {
+        "models": "dolor lorem amet ipsu",
+        "middleware": "rgdg",
+        "eventListeners": "pmbggiDVKw",
+        "validators": "amet sit dolor lorem",
+        "consectet": "dolor c",
+        "yhdbngxcz": "sit adipiscing "
+      },
+      "tests": {
+        "suites": [],
+        "timeout": 734.58,
+        "forceExit": false
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [],
+      "preloads": [],
+      "aceProviders": [],
+      "commandsAliases": {},
+      "tests": {
+        "suites": [],
+        "timeout": -945.9
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [],
+      "exceptionHandlerNamespace": "CKEGmgpWbvAIA16J",
+      "assetsDriver": "fake",
+      "metaFiles": [],
+      "directories": {
+        "config": "sywnxlcrq",
+        "public": "sit consectetur si",
+        "contracts": "dolor cons",
+        "providers": "kWf",
+        "database": "ohkg",
+        "migrations": "consectetur lore",
+        "seeds": "ifb",
+        "resources": "QKMKN",
+        "views": "nzrzjuv",
+        "start": "JqsDi3DkEwNeweKEXNGM",
+        "tmp": "smubsqbfhnrcnjuqa",
+        "tests": "eqqprktputpnfcmmj",
+        "xdfwvf": "o0"
+      },
+      "tests": {
+        "suites": [],
+        "forceExit": true
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [],
+      "exceptionHandlerNamespace": "consectetu",
+      "preloads": [],
+      "metaFiles": [],
+      "commands": [],
+      "aceProviders": [],
+      "commandsAliases": {},
+      "namespaces": {
+        "models": "q92a815JTSubQ7gQEyRL",
+        "middleware": "gl5BEDltbOIFsl0",
+        "httpControllers": "iwuqiw",
+        "redisListeners": "consect",
+        "validators": "qrxhcyrswermzqowtn",
+        "sit dolor": "eghefxthgrkmpaqiedk",
+        "ipsum ": "conse"
+      },
+      "tests": {
+        "suites": []
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "cVPPDP2Qv3tfpE1vPqb",
+        "CPi2s7kCtMddudYhtG",
+        "mhrw",
+        "suyylaewzoaht",
+        "YEEhq5"
+      ],
+      "exceptionHandlerNamespace": "dolor dolor ",
+      "commands": [
+        "dolor lorem sit dolo",
+        "Xv9lGV8AXOT1BvWwjnEE",
+        "jkdxgv",
+        "sit adipiscing conse",
+        "QOvTQ0y"
+      ],
+      "aceProviders": [
+        "consec",
+        "sit lorem c",
+        "vlMjdxqLm41hXDAPj",
+        "5ZC",
+        "amet sit"
+      ],
+      "commandsAliases": {},
+      "aliases": {},
+      "tests": {
+        "suites": [
+          {
+            "name": "ni",
+            "files": 58
+          },
+          {
+            "name": "eugdqyvaff",
+            "files": null,
+            "timeout": -801.76
+          },
+          {
+            "name": "lore",
+            "files": null
+          },
+          {
+            "name": "lorem ipsum s",
+            "files": null
+          },
+          {
+            "name": "bjb",
+            "files": "cyjrz",
+            "timeout": 210.93
+          }
+        ]
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "fhkghvmcwfubrpp",
+        "ilbqkcqtcsrcs",
+        "ipsu",
+        "8L2BB5JD2UWw6IlK",
+        "sit amet lorem ipsu"
+      ],
+      "exceptionHandlerNamespace": "TRcIden3WMsVf",
+      "assetsDriver": "encore",
+      "metaFiles": [
+        "sit ad",
+        8,
+        "wmijubkvait",
+        true,
+        false
+      ],
+      "commands": [
+        "sit adipis",
+        "nR01ESGUgsONgjn",
+        "ntsmywr",
+        "8TCkXSYXo7aEPAVsbfr5",
+        "lorem lorem "
+      ],
+      "aceProviders": [
+        "meaxgdjxqnzr",
+        "amet sit a",
+        "mmasr",
+        "ypzrq",
+        "dolor adi"
+      ],
+      "commandsAliases": {},
+      "aliases": {},
+      "namespaces": {
+        "middleware": "gubut",
+        "httpControllers": "con",
+        "eventListeners": "Y4IRDj5DS2j4h8",
+        "adipisc": "gwvppzwzxda",
+        "dneucepksm": "kng"
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "ipsum adipi",
+        "gorahvmuezkidogmfb",
+        "xpocusf",
+        "clcuncluody",
+        "uk"
+      ],
+      "exceptionHandlerNamespace": "nDTVx6cEcw9h94QdDQfs",
+      "assetsDriver": "vite",
+      "aceProviders": [
+        "dv",
+        "g",
+        "dolor sit adipi",
+        "consectet",
+        "adipi"
+      ],
+      "testProviders": [
+        "otknpxmkohwam",
+        "lo",
+        "cfc",
+        "adipiscing dol",
+        "Yy2O0r3fGtmrwSQ9"
+      ],
+      "aliases": {},
+      "namespaces": {
+        "exceptions": "ryhcdysfvqppnwydrd",
+        "eventListeners": "pjwhjqtalvmunvlcj",
+        "redisListeners": "vyqvorbozksemouimepyk",
+        "fWOONu": "FvNpX6vjq7sERfKer74KA",
+        "rwuruomxx": "ILq7srFBJJy4x"
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "jB4k",
+            "files": false,
+            "timeout": 895.55
+          },
+          {
+            "name": "dismcqgsp",
+            "files": true
+          },
+          {
+            "name": "cbjmkbfjfwsruy",
+            "files": 17.9,
+            "timeout": -574.02
+          },
+          {
+            "name": "boceqsmgoljk",
+            "files": true,
+            "timeout": -755.19
+          },
+          {
+            "name": "consectetur sit ",
+            "files": false
+          }
+        ],
+        "timeout": 598.79,
+        "forceExit": true
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "P2U3",
+        "amet consectetur ipsu",
+        "adipiscing consect",
+        "0kU1wmgisK2p5kFU347f1",
+        "a"
+      ],
+      "exceptionHandlerNamespace": "l2i",
+      "assetsDriver": "vite",
+      "preloads": [
+        null,
+        null,
+        "nwbkza",
+        56,
+        true
+      ],
+      "metaFiles": [
+        45.07,
+        false,
+        true,
+        16,
+        82.22
+      ],
+      "commands": [
+        "ipsum lorem dolo",
+        "ywfceoakymi",
+        "lorem lorem c",
+        "sit lorem amet dol",
+        "adipiscing dolor"
+      ],
+      "aceProviders": [
+        "mrupnedrsvgkapogrxlqp",
+        "hgmwiwniqkhsqqlsne",
+        "adi",
+        "qfplpbvqvuagpjdtylmo",
+        "pvkwv1nmuG0CyYeAK"
+      ],
+      "testProviders": [
+        "lorem sit",
+        "morxhdkvwomyiqduyp",
+        "g",
+        "sit dolor ipsum conse",
+        "ihkcmxesmrqfjzchzkql"
+      ],
+      "directories": {
+        "config": "GUny5M",
+        "contracts": "adipiscing sit ",
+        "database": "dkboszlunpxdeyzeervk",
+        "views": "consectetur a",
+        "start": "vmzfnzqhio",
+        "tmp": "ipsum dolor lor",
+        "fdqcwmkq": "rfq8Pg"
+      },
+      "commandsAliases": {}
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "kpQjvm8EtzZwYxq",
+        "adipiscing dolor",
+        "lqg",
+        "ipsum amet si",
+        "amet a"
+      ],
+      "exceptionHandlerNamespace": "ip",
+      "preloads": [
+        67,
+        97.31,
+        null,
+        null,
+        null
+      ],
+      "directories": {
+        "contracts": "assklfjgtotsmobjomzeo",
+        "providers": "lorem s",
+        "database": "amet ips",
+        "migrations": "EW",
+        "resources": "rssivhithdztt",
+        "views": "5xLVGHiD"
+      },
+      "commandsAliases": {},
+      "namespaces": {
+        "models": "kicyljwhzmsifbk",
+        "exceptions": "ame",
+        "httpControllers": "YZDwG1MLnlw",
+        "eventListeners": "lorem lorem "
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "phnkxirloyzwquix",
+            "files": 7.73,
+            "timeout": -692.57
+          },
+          {
+            "name": "ipsum adipi",
+            "files": null,
+            "timeout": 865.74
+          },
+          {
+            "name": "sit adipiscin",
+            "files": null,
+            "timeout": 537.87
+          },
+          {
+            "name": "lorem ad",
+            "files": 86.9,
+            "timeout": -780.01
+          },
+          {
+            "name": "dolor dolor adipisci",
+            "files": "zsdpddypow"
+          }
+        ],
+        "timeout": -335.91,
+        "forceExit": false
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "R7wHxI0956do6",
+        "sit lorem ipsum dol",
+        "adipiscing ipsum ip",
+        "tdhy",
+        "tTpEwTBr5WvPFcnOacqD"
+      ],
+      "exceptionHandlerNamespace": "uwx",
+      "preloads": [
+        21.86,
+        true,
+        9,
+        98.53,
+        "WHO9CK9JYVArJ"
+      ],
+      "metaFiles": [
+        false,
+        31,
+        44,
+        56.2,
+        "xwwzfdyvqw"
+      ],
+      "aceProviders": [
+        "s",
+        "consectetur adip",
+        "zhsiixgivqouzkpaqailf",
+        "dxhhtlqodyvzndjrugklh",
+        "lorem amet sit ip"
+      ],
+      "testProviders": [
+        "mehsduxwa",
+        "So1",
+        "ipsum lorem",
+        "Wg1w",
+        "sit a"
+      ],
+      "namespaces": {
+        "models": "ame",
+        "exceptions": "fvp",
+        "middleware": "zawjurtjbfiwtjsdtotdo",
+        "httpControllers": "adipis",
+        "eventListeners": "hcbhhthli",
+        "redisListeners": "ojNCgmVIwiUl",
+        "validators": "u2",
+        "xmlxh": "imodcde",
+        "sfyqm": "ojckmcqbhdp"
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "ipsum ipsum dolor l",
+            "files": 38.32,
+            "timeout": 35.59
+          },
+          {
+            "name": "Axi1Pl1uX91D",
+            "files": null
+          },
+          {
+            "name": "4X",
+            "files": true
+          },
+          {
+            "name": "adipiscing lorem",
+            "files": "cdpsqpfdlktnva",
+            "timeout": -473.38
+          },
+          {
+            "name": "oyovjvlzqpw",
+            "files": 36.49
+          }
+        ],
+        "timeout": 916.35
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "xZjBVL4rwsi",
+        "con",
+        "l1Sl3VOBRb4S5AsTqvW",
+        "dolor ",
+        "ewmfcqhwa"
+      ],
+      "exceptionHandlerNamespace": "consec",
+      "assetsDriver": "fake",
+      "preloads": [
+        88,
+        37.06,
+        false,
+        "ScYgGP",
+        true
+      ],
+      "metaFiles": [
+        "b04Ful1345AVUi",
+        null,
+        66,
+        21,
+        31
+      ],
+      "aceProviders": [
+        "kBToJtQ39o",
+        "tcjwmlbeyzn",
+        "adipiscing amet",
+        "6gQEco2B",
+        "dxtltgiojjrgfba"
+      ],
+      "testProviders": [
+        "IFFfNwkw",
+        "sit dolor sit",
+        "btubcnicdnqqnk",
+        "d19dHBJ7Sbr",
+        "dolor adipiscing am"
+      ],
+      "commandsAliases": {},
+      "namespaces": {
+        "models": "uvpygzrafihibc",
+        "exceptions": "4n",
+        "redisListeners": "ovaillgtuvkcovi",
+        "validators": "sit amet am",
+        "svopamzbkx": "ipsum lorem sit i"
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "zptbragtghqzcepte",
+            "files": true,
+            "timeout": 732.91
+          },
+          {
+            "name": "M6HD",
+            "files": null,
+            "timeout": 448.99
+          },
+          {
+            "name": "qkubclliz",
+            "files": "vgkgdgihjmku",
+            "timeout": 760.09
+          },
+          {
+            "name": "gissgpezs",
+            "files": null,
+            "timeout": -389.81
+          },
+          {
+            "name": "kll",
+            "files": true,
+            "timeout": 220.11
+          }
+        ]
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "hveegtamvfodmqvu",
+        "law",
+        "dolor cons",
+        "O4Pbs77snahe86",
+        "krkajofucwl"
+      ],
+      "exceptionHandlerNamespace": "wD0ezBxLRMFw9YPfy",
+      "preloads": [
+        false,
+        null,
+        63.33,
+        "fltvkdgcu",
+        "NIu7ZBK66hRRRpF"
+      ],
+      "metaFiles": [
+        84.15,
+        28.75,
+        "ryYocgm2j",
+        30.39,
+        78
+      ],
+      "commandsAliases": {},
+      "namespaces": {
+        "models": "sagnzdxntmdcdx",
+        "middleware": "yfizlcg",
+        "httpControllers": "xtchknyhxuahc",
+        "redisListeners": "aeikobfrfhs",
+        "validators": "aczknbxnout"
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "swzivkwqrsfh",
+            "files": 89.02,
+            "timeout": 276.16
+          },
+          {
+            "name": "ipsum amet ame",
+            "files": "tncneqwhcoub"
+          },
+          {
+            "name": "lor",
+            "files": true
+          },
+          {
+            "name": "ppfqyrwakbsqzgzvswvjl",
+            "files": 49,
+            "timeout": 412.64
+          },
+          {
+            "name": "dolor ipsum ipsum",
+            "files": null
+          }
+        ],
+        "timeout": -659.33,
+        "forceExit": true
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "dolor lorem ame",
+        "adipiscing",
+        "mqxfleuatjoeyilypi",
+        "consecte",
+        "5hwYOMODIA6qptjMJ"
+      ],
+      "exceptionHandlerNamespace": "mirmoipoq",
+      "assetsDriver": "encore",
+      "preloads": [
+        false,
+        6,
+        true,
+        null,
+        true
+      ],
+      "metaFiles": [
+        "nybqplbjievc",
+        80,
+        65,
+        null,
+        32
+      ],
+      "commands": [
+        "adipiscing ame",
+        "z7gerIWDFpBAngT80BKS",
+        "n",
+        "slhyjyhfyrdl",
+        "d82emrYk"
+      ],
+      "aceProviders": [
+        "ipsum ipsum dolor s",
+        "nyzyfibevb",
+        "consec",
+        "thomjxigsyserohamlyjm",
+        "oguqgifvxams"
+      ],
+      "commandsAliases": {},
+      "aliases": {},
+      "namespaces": {
+        "models": "nursywzccpfhmwcyi",
+        "middleware": "ovbiegtpipfmgpgccpo",
+        "httpControllers": "con",
+        "eventListeners": "adipi",
+        "validators": "pnys",
+        "bmkgvm": "gnkjpiasscnsapmt",
+        "sit ipsum": "jhukmwjcpwv"
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "qTSzmWhcN5guh",
+            "files": "Rhyj97EWsheR",
+            "timeout": 825.69
+          },
+          {
+            "name": "fhwa",
+            "files": 65,
+            "timeout": 696.59
+          },
+          {
+            "name": "Q2mjHDMdE46Vn",
+            "files": 65.62
+          },
+          {
+            "name": "BIdnoD",
+            "files": 66.72,
+            "timeout": -133.52
+          },
+          {
+            "name": "PRbXaZ80FGKL9nI",
+            "files": true
+          }
+        ],
+        "timeout": 923.21,
+        "forceExit": false
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "GP",
+        "0Uwj6SG",
+        "spdybvdmrnafk",
+        "hxcboduusa",
+        "doqegijiywmexwavawpy"
+      ],
+      "assetsDriver": "fake",
+      "metaFiles": [
+        null,
+        "rvcuhjxopo",
+        91.44,
+        false,
+        "ipsum sit dolor"
+      ],
+      "aceProviders": [
+        "emgqgczodg",
+        "vcb61gwPwb6",
+        "consectetur lorem ",
+        "jpuopqzxliunhiggmjdx",
+        "vywDMQNs9da"
+      ],
+      "testProviders": [
+        "zncm",
+        "jzqnkouhoxcysjkzm",
+        "kvaucpsyctt",
+        "adipiscing adipisci",
+        "sit dolor s"
+      ],
+      "directories": {
+        "config": "consectetu",
+        "public": "mgxgtcqutpkx",
+        "database": "pkgqdbnnyaakmtzjj",
+        "migrations": "ipsum ipsum ",
+        "seeds": "amet ipsum sit si",
+        "resources": "ame",
+        "views": "4zFJHCmQGaU",
+        "start": "huxtxuknyzw",
+        "tmp": "qnk3V",
+        "lvykwn": "Ioej6UylF27hcemT1",
+        "sit ipsu": "nlztkvyz"
+      },
+      "commandsAliases": {},
+      "aliases": {},
+      "namespaces": {
+        "models": "Im3VA8JE4oXdScNo",
+        "eventListeners": "a",
+        "redisListeners": "iUvn2TgN7Sm2JhUK",
+        "TyyLfh": "amfxjeaeknzpquydwsyzb"
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "iyfuwjfjwnupopdrbmru",
+        "qfkyjejdvrfylixe",
+        "ipsum ips",
+        "kpwSYWjBjTt8Z2",
+        "IHkh2LwlqyOW"
+      ],
+      "assetsDriver": "encore",
+      "preloads": [
+        null,
+        null,
+        null,
+        "QT5MOnRM",
+        false
+      ],
+      "metaFiles": [
+        false,
+        null,
+        true,
+        false,
+        true
+      ],
+      "commands": [
+        "v1LKhL5biJ6dlpIe",
+        "e",
+        "hby",
+        "dolor lorem l",
+        "consectetu"
+      ],
+      "directories": {
+        "config": "ip",
+        "database": "utmebmfa",
+        "migrations": "lgppnoxdnkugfgwjmqt",
+        "seeds": "ipsum",
+        "tmp": "6",
+        "tests": "lor"
+      },
+      "aliases": {},
+      "namespaces": {
+        "models": "bnizqaht",
+        "eventListeners": "sit adipiscin",
+        "redisListeners": "fyiqw",
+        "validators": "f",
+        "qgncFZKxT": "XHlRRi",
+        "gioGPr": "gfgxdxdymwbwurifu"
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "JInzll6MKyDRm",
+            "files": 76.7,
+            "timeout": -218.66
+          },
+          {
+            "name": "L3D0HRdOUprjtHb",
+            "files": false
+          },
+          {
+            "name": "jA7FyKFEbYCP5ACkEWj",
+            "files": 89
+          },
+          {
+            "name": "consectetur si",
+            "files": null,
+            "timeout": -49.23
+          },
+          {
+            "name": "8HocogYZorzjvcjG",
+            "files": false,
+            "timeout": -68.28
+          }
+        ],
+        "timeout": 333.61
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "iabnqvvcwcvlptfbxe",
+        "mczdvjljfs",
+        "gn",
+        "UyzKpL2EGS9A6T5fxE1nS",
+        "sit consectetur lorem"
+      ],
+      "exceptionHandlerNamespace": "ijsrnnsssu",
+      "assetsDriver": "fake",
+      "preloads": [
+        41,
+        "dolor",
+        "AuA3le7brdVz8p",
+        null,
+        82.15
+      ],
+      "metaFiles": [
+        49.05,
+        null,
+        null,
+        "ipsum dolor",
+        "5cgB9"
+      ],
+      "aceProviders": [
+        "lorem dolor ",
+        "chxvdhpodgm",
+        "7Y8QK",
+        "LjEzv",
+        "eejkswbm"
+      ],
+      "testProviders": [
+        "medhtirxmwjhu",
+        "c",
+        "zoovn",
+        "x4hby",
+        "ukruwyzsvdwil"
+      ],
+      "directories": {
+        "config": "LeLAmwW8festxU2",
+        "public": "p1BaMEOcrXmy",
+        "providers": "xu0cqYkIUDEB9",
+        "database": "q1czpLuGwD",
+        "migrations": "adipiscing sit ipsum",
+        "resources": "dJNLiOMVeeVSLanOQ1SV",
+        "start": "kz",
+        "tmp": "dsojlhprvtmfdiobkll",
+        "tests": "uwkvsfnenefgmt",
+        "ayewiojjzz": "dolor ip",
+        "amet dol": "d4UlgnkCzgLLw4"
+      },
+      "aliases": {},
+      "namespaces": {
+        "models": "sit amet ip",
+        "exceptions": "ebifgdibeidsg",
+        "httpControllers": "do",
+        "redisListeners": "AnbRgZrCR6oSW2eDdi"
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "RWuYimgEAMUQdUCsKZvN",
+            "files": 72.02,
+            "timeout": 890.32
+          },
+          {
+            "name": "S",
+            "files": true,
+            "timeout": 575.33
+          },
+          {
+            "name": "hbgj",
+            "files": "xmtfmcnoszuxgar",
+            "timeout": 825.38
+          },
+          {
+            "name": "3uRrDwtw",
+            "files": 55.49,
+            "timeout": -271.47
+          },
+          {
+            "name": "lorem ",
+            "files": null
+          }
+        ]
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "vctqswx",
+        "dolor lorem ",
+        "brgeocahpqviqzyfjfpm",
+        "csr7vaKqKYd41WXtEMr",
+        "13xsZJ1pu9hpOwn2Wj"
+      ],
+      "exceptionHandlerNamespace": "zrrydyqdxamjiojblbpq",
+      "preloads": [
+        false,
+        "mthwrpmtehobplc",
+        "mmwted",
+        9.7,
+        "dolor ipsum ame"
+      ],
+      "metaFiles": [
+        null,
+        44,
+        68.64,
+        false,
+        null
+      ],
+      "commandsAliases": {},
+      "tests": {
+        "suites": [
+          {
+            "name": "lorem ",
+            "files": 26,
+            "timeout": -739.88
+          },
+          {
+            "name": "Inq",
+            "files": 25,
+            "timeout": 471.61
+          },
+          {
+            "name": "adipisc",
+            "files": null
+          },
+          {
+            "name": "ynyvjcrgqrrxrqmsnlqyc",
+            "files": null,
+            "timeout": -963.07
+          },
+          {
+            "name": "lorem lorem dolor co",
+            "files": 21.73
+          }
+        ],
+        "timeout": -122.74,
+        "forceExit": false
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "laVavCn",
+        "plil",
+        "sit adipis",
+        "mkao6GCG",
+        "nmbdadwsqxcnkifl"
+      ],
+      "exceptionHandlerNamespace": "oppeiltukbhlfkj",
+      "assetsDriver": "encore",
+      "preloads": [
+        "Uiv35U",
+        74.77,
+        false,
+        64.02,
+        93
+      ],
+      "metaFiles": [
+        74.22,
+        false,
+        null,
+        null,
+        "hwxetb"
+      ],
+      "commands": [
+        "xtmtovk",
+        "adipiscing dolor dolo",
+        "N1HLjm0REzGQJAb",
+        "ipsum lorem",
+        "s4t7DoV7PkuScte"
+      ],
+      "aceProviders": [
+        "Rps20xzaGV9yPZWtmWz",
+        "ddistzjthwzcjnp",
+        "txnRlboA5bWssH9b1lav",
+        "HWsvBK4YHRPqfNcIhGA4",
+        "sfgimqfxgggp"
+      ],
+      "testProviders": [
+        "pyjcbqygrlx",
+        "sfmxarlxrkgrcfnvuer",
+        "DMu4AEFLQxTaGk",
+        "EnUA5REcKMkRJ",
+        "xzqoxnvajrfgb"
+      ],
+      "commandsAliases": {},
+      "aliases": {},
+      "namespaces": {
+        "exceptions": "amet ipsum sit ipsum",
+        "middleware": "v2bzdFlPeIKLvX7kbH",
+        "httpControllers": "t",
+        "eventListeners": "ucxspycxe",
+        "IUzeQAyjg": "A4GC8TI2ZG"
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "htJ",
+            "files": true,
+            "timeout": 582.44
+          },
+          {
+            "name": "j",
+            "files": 19
+          },
+          {
+            "name": "consec",
+            "files": 36.74,
+            "timeout": -397.34
+          },
+          {
+            "name": "adipiscing sit adipi",
+            "files": 45.76,
+            "timeout": -332.99
+          },
+          {
+            "name": "spcsoswfmmyunohnghta",
+            "files": 82,
+            "timeout": -260.45
+          }
+        ],
+        "timeout": 174.26
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "gibwifsioeqfpwbisbmk",
+        "zaxdfciuj",
+        "amet dolor ipsum s",
+        "IGPm02F3OYNJLBkF",
+        "IB4sKsIR"
+      ],
+      "assetsDriver": "fake",
+      "preloads": [
+        81,
+        95.7,
+        "nbfgjwbtvdax",
+        65,
+        null
+      ],
+      "metaFiles": [
+        17,
+        27.36,
+        null,
+        78,
+        false
+      ],
+      "commands": [
+        "6K1cb",
+        "s6BiAP1GQ3D",
+        "ipsum sit consect",
+        "ozKQ15",
+        "yemAKRKMH2Z"
+      ],
+      "testProviders": [
+        "adipis",
+        "ysfzxwe",
+        "vnstvpgegquf",
+        "uirwra",
+        "QQpmmNgF3"
+      ],
+      "directories": {
+        "config": "adipiscing amet lor",
+        "public": "GcZgfyh2KcUMzI2vWt",
+        "contracts": "nMuyQQ",
+        "providers": "dolor lorem co",
+        "database": "prreiqqykqee",
+        "resources": "PXmotr",
+        "views": "B4UiU3MTgOjslobht8kq",
+        "start": "consectetur",
+        "9xXZMThc": "dolor ame",
+        "cdirz": "d1JvM"
+      },
+      "commandsAliases": {},
+      "namespaces": {
+        "exceptions": "fofjixwzfawttynbj",
+        "middleware": "lorem amet lorem amet",
+        "httpControllers": "btnauigwfvou",
+        "eventListeners": "xc",
+        "redisListeners": "9Z25cHaCf39lLJ5003A",
+        "validators": "dolor ipsum adi"
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "zbhclplvxtaigspgafn",
+            "files": 50.61,
+            "timeout": -910.01
+          },
+          {
+            "name": "qL6Mti0",
+            "files": false
+          },
+          {
+            "name": "VOFycrlzr01dObvMNF0",
+            "files": "iazoeocbpbwiata"
+          },
+          {
+            "name": "dol",
+            "files": 13.8
+          },
+          {
+            "name": "dolor dolor ipsum",
+            "files": "lorem adipi",
+            "timeout": -911.9
+          }
+        ],
+        "forceExit": true
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "Jt2",
+        "8tEwHi8N9xCgHGd",
+        "sit",
+        "amet lo",
+        "a"
+      ],
+      "metaFiles": [
+        61,
+        "0Lt4P6JEH6",
+        false,
+        null,
+        false
+      ],
+      "aceProviders": [
+        "rfbkeo",
+        "Rh99sQQNrxws2QNahE",
+        "lorem consect",
+        "scijahyltfecjwtejfk",
+        "YCLoNfzgowzKigO"
+      ],
+      "commandsAliases": {},
+      "aliases": {}
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "amet ipsum adipisci",
+        "ZpLwE7nUVf9BHsI",
+        "8OVHklPTIY4W",
+        "bkefylqvnvupoxrix",
+        "ljqessw"
+      ],
+      "exceptionHandlerNamespace": "dcbvioarkxnfjkrtgnp",
+      "preloads": [
+        "gwedqxkeckwqm",
+        null,
+        true,
+        63.15,
+        null
+      ],
+      "aceProviders": [
+        "krwfkjiodhcxdofdwau",
+        "qpcihnhpmzgaderoo",
+        "ipsu",
+        "kssc",
+        "x8FAgLGSJrj7n7W"
+      ],
+      "testProviders": [
+        "consec",
+        "lpqawxjfcwqvwdw",
+        "D1eV",
+        "wiardsnx",
+        "pfr"
+      ],
+      "directories": {
+        "config": "nrmuwczhqeiwwxqlm",
+        "public": "iOwMS8",
+        "contracts": "rocgousbbknjxhngjd",
+        "seeds": "IpguDj2ht",
+        "start": "ryfyvklncmztrdvgylf",
+        "tmp": "rb",
+        "tests": "aovwnzktuky"
+      },
+      "namespaces": {
+        "httpControllers": "con",
+        "eventListeners": "gTCXceGBkzGs7O24",
+        "redisListeners": "b7yccqhKAjemQayretTy8",
+        "validators": "zhgsadch",
+        "7y3xP": "Ot948PBfrO08q",
+        "vnauyxjqq": "fbaprizgu"
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "IYSQNx6XoAJNuoFqi",
+            "files": true,
+            "timeout": -703.05
+          },
+          {
+            "name": "amet l",
+            "files": null,
+            "timeout": -920.84
+          },
+          {
+            "name": "Zb08AHKHiQ",
+            "files": null,
+            "timeout": -283.87
+          },
+          {
+            "name": "lbl",
+            "files": false
+          },
+          {
+            "name": "cNKF",
+            "files": "iYWVf8c",
+            "timeout": 691.94
+          }
+        ],
+        "timeout": -448.19,
+        "forceExit": false
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "IKX7PYJDZ9JNd1NNk",
+        "amet consectetur si",
+        "ryubja",
+        "fefpma",
+        "hrucvqnidphscuxmdzwtf"
+      ],
+      "exceptionHandlerNamespace": "eibdojmcceyviocr",
+      "assetsDriver": "vite",
+      "metaFiles": [
+        36.42,
+        false,
+        72.12,
+        false,
+        null
+      ],
+      "commands": [
+        "sit dolor dolor",
+        "achawvuoimbvftiej",
+        "dnhqopsowi",
+        "osiidqykhm",
+        "llcqgwg"
+      ],
+      "namespaces": {
+        "models": "gs",
+        "middleware": "amet ipsum lor",
+        "redisListeners": "flpavgbtsazk",
+        "validators": "ikm",
+        "woviurtm": "dolor sit ipsum amet",
+        "rvvaqg": "dolor "
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "iakhwek",
+            "files": null,
+            "timeout": -645.95
+          },
+          {
+            "name": "consect",
+            "files": null
+          },
+          {
+            "name": "szjaosvidurd",
+            "files": false,
+            "timeout": -581.58
+          },
+          {
+            "name": "vlCF5CYiq0ZCvJRBfy",
+            "files": true
+          },
+          {
+            "name": "amet sit",
+            "files": "gkvhmmnxthtz"
+          }
+        ],
+        "forceExit": false
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "wcdkupqxrvkdbyffrmp",
+        "ipsum consectetur ad",
+        "ctvf",
+        "jB3Ufyk",
+        "sit lorem consecte"
+      ],
+      "assetsDriver": "encore",
+      "preloads": [
+        "kbzqlakyydhzs",
+        null,
+        26.73,
+        4.03,
+        20
+      ],
+      "commands": [
+        "lorem dolor",
+        "uGracP",
+        "etjanoaqqpccnxdso",
+        "ENl",
+        "sit consectetur cons"
+      ],
+      "aceProviders": [
+        "hkelubvblpqydc",
+        "mJlOnQp",
+        "cydyxfrdzhrjgd",
+        "8Or94Na",
+        "ndcrrvuouyde"
+      ],
+      "testProviders": [
+        "zc",
+        "dolor consectetu",
+        "plm",
+        "phzdunxjuaeesdusxvnea",
+        "m2EwqBVWsAh"
+      ],
+      "aliases": {},
+      "namespaces": {
+        "exceptions": "amet ipsum c",
+        "eventListeners": "EZmEu25teXfNh",
+        "validators": "skphhhwvwqjh"
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "uqcsok",
+            "files": 26.17,
+            "timeout": -824.16
+          },
+          {
+            "name": "juyjlsxfcvatb",
+            "files": false,
+            "timeout": 425.64
+          },
+          {
+            "name": "xzfoop",
+            "files": 99.65
+          },
+          {
+            "name": "sit ad",
+            "files": 13
+          },
+          {
+            "name": "4B",
+            "files": 7,
+            "timeout": 502.68
+          }
+        ],
+        "timeout": 787.11,
+        "forceExit": true
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "hwrj",
+        "Z7baB7CXPc",
+        "vgczmzwvlqbzarf",
+        "qdYQUJmDSm3FNPL",
+        "lorem sit amet ipsum"
+      ],
+      "exceptionHandlerNamespace": "yefrmxerfyjknyvqiqwm",
+      "assetsDriver": "vite",
+      "metaFiles": [
+        80,
+        "amet sit c",
+        96.1,
+        null,
+        12.89
+      ],
+      "commands": [
+        "lscdyqj",
+        "adipiscing co",
+        "clcxuxjuepwtmhi",
+        "6W6HGs0E7WUCsbUUp3n",
+        "xm5K4i"
+      ],
+      "testProviders": [
+        "amet ame",
+        "yIwF5OLiZr5j36Vg",
+        "lTs9NxRc4fXNLyA",
+        "uesdvjcuzkdmmbigzv",
+        "czrlyk"
+      ],
+      "directories": {
+        "config": "OLJ0vHQp9pcI",
+        "public": "ad",
+        "providers": "Kx07A79FK42fvJL9o0h",
+        "migrations": "sit a",
+        "seeds": "uwhzlpykvtogip",
+        "tests": "QgzuhCSjJlFYdm"
+      },
+      "namespaces": {
+        "models": "lsucmgmzrsenu",
+        "exceptions": "98bor8iSnVx",
+        "httpControllers": "ciusxqjinyvgouuyhse",
+        "redisListeners": "AaYHLYr",
+        "validators": "wavhh",
+        "dfqzfgx": "chlogsy"
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "fb",
+            "files": true
+          },
+          {
+            "name": "p",
+            "files": "oofroqrolakmyta"
+          },
+          {
+            "name": "zfhlqlrtrgixz",
+            "files": 30,
+            "timeout": -620.51
+          },
+          {
+            "name": "sit amet ipsum ",
+            "files": 8.02,
+            "timeout": 173.23
+          },
+          {
+            "name": "lorem dolor co",
+            "files": 40,
+            "timeout": 493.11
+          }
+        ],
+        "timeout": -851.6
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "consectetur amet",
+        "Gm",
+        "ipsum consectetur dol",
+        "ppnetrwmajn",
+        "5mLx3Wfb3OoDTJQyN0i"
+      ],
+      "assetsDriver": "vite",
+      "metaFiles": [
+        "3miVkLfaW",
+        true,
+        "ezkgajudq",
+        "4Dd5BCgFlpu",
+        true
+      ],
+      "commands": [
+        "ips",
+        "lorem ame",
+        "fvmjnehlvcnmobymlgtq",
+        "psmcnafvgym",
+        "sViBM1aHBUWAB8X"
+      ],
+      "aceProviders": [
+        "consectetur lorem con",
+        "VlUXz7SJ",
+        "adipiscin",
+        "ipsum lo",
+        "xntcovc"
+      ],
+      "testProviders": [
+        "do",
+        "ecuopjijkcuuffhwtlbfc",
+        "tznexdufcxz",
+        "adipiscing",
+        "nddoqkfedmvquo"
+      ],
+      "commandsAliases": {},
+      "aliases": {}
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "kfvtsakigih",
+        "vmolgvnyxxiednfbd",
+        "wuzo",
+        "consectet",
+        "KrFZKA9fK9R6Wt"
+      ],
+      "exceptionHandlerNamespace": "amet dolor",
+      "assetsDriver": "encore",
+      "preloads": [
+        false,
+        97,
+        80.35,
+        44,
+        73.47
+      ],
+      "metaFiles": [
+        "lorem ip",
+        "oivcpexeidtcvum",
+        true,
+        24,
+        54
+      ],
+      "commands": [
+        "sit",
+        "aavrplvdbeogjjdv",
+        "zzldkvesei",
+        "rkfpxneodvgxytdf",
+        "qqyncgakvyfjvg"
+      ],
+      "testProviders": [
+        "mTjn0EF7xKPbm7IX",
+        "opnhtlimhcgjryps",
+        "amet ipsum ",
+        "vjefth",
+        "TQJwpXiodJ"
+      ],
+      "commandsAliases": {},
+      "aliases": {},
+      "namespaces": {
+        "exceptions": "ipsum dolor lore",
+        "middleware": "consectet",
+        "httpControllers": "L2",
+        "redisListeners": "consectetur sit i",
+        "lorem ip": "lorem sit amet amet ",
+        "sit sit": "whkhxsu57Ypxoy6TQCGhQ"
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "jvuoobxvjblrvg",
+        "consectetu",
+        "sit",
+        "dxo",
+        "qtlzgapnf"
+      ],
+      "exceptionHandlerNamespace": "arawmpnasollcsawnpo",
+      "assetsDriver": "vite",
+      "preloads": [
+        44.07,
+        null,
+        "ibfvicopqcyuca",
+        true,
+        false
+      ],
+      "metaFiles": [
+        53.76,
+        null,
+        12,
+        null,
+        "jtnenwlnlye"
+      ],
+      "commands": [
+        "jhw",
+        "aswysxc",
+        "idqtiiKAOZhhpX0jnza",
+        "jDPI60GYZBQAx",
+        "ipsum dolor ipsum co"
+      ],
+      "aceProviders": [
+        "ipsum adipiscing",
+        "rbuktqze",
+        "lorem adipisci",
+        "vwzrqgzzlog",
+        "dolor adipiscing do"
+      ],
+      "testProviders": [
+        "TmarjvdmUqJno5",
+        "sit",
+        "aqgnzf",
+        "kchxffzdjbfadlro",
+        "ueyvfyotdeqdd"
+      ],
+      "namespaces": {
+        "models": "consectetur ipsum ad",
+        "middleware": "d",
+        "eventListeners": "4vlPHvPRkP",
+        "validators": "adipi",
+        "5HnGDYe8bd": "behwjlhewiajaqkvkantn",
+        "spmoqi": "kkoqjsshxbpr"
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "jbmsrbmfazsjuuajhbt",
+        "consectetur ipsu",
+        "sit lor",
+        "consectetur sit ad",
+        "ezmehc"
+      ],
+      "commands": [
+        "oowfhfgdvmlm",
+        "xSrqOaJatR2A",
+        "ccucwfl",
+        "mlktkvuj",
+        "serbzgtjpozmvnj"
+      ],
+      "testProviders": [
+        "isfuik",
+        "XPdk10cgdaKYVBEclZ",
+        "l",
+        "stnabkydezlrsxu",
+        "92ymijtlBySSge"
+      ]
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "ipsum ipsum c",
+        "nscqfspuu",
+        "fleocsrcibolj",
+        "sit ipsum sit lore",
+        "adipi"
+      ],
+      "assetsDriver": "encore",
+      "commands": [
+        "a",
+        "dolor lorem do",
+        "i",
+        "consectetur l",
+        "Zh6DdTSWj"
+      ],
+      "testProviders": [
+        "ipsu",
+        "52tEop",
+        "lorem dolor ",
+        "xu",
+        "YHlcx1Vo0oSgQ"
+      ],
+      "directories": {
+        "providers": "clzgnxwunygwkrp",
+        "database": "qsfifajhwxrugktskwra",
+        "migrations": "dolor a",
+        "resources": "gwkoqtvphtzubab",
+        "views": "sofcwkugiwxwskosjf",
+        "start": "adipiscing ad",
+        "nzncub": "onqpkepbaiftelskudehj",
+        "uejyntcdd": "consectetur amet i"
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "VRTAXHeCc56utVm",
+        "adipis",
+        "fyoxveqdakuofv",
+        "uxkqtbgq",
+        "riroyzkbchlgvslxu"
+      ],
+      "assetsDriver": "encore",
+      "commands": [
+        "dbpfiqqto",
+        "QDYhKcSgQj8",
+        "HRjX2cmpfiNhe6yHDvCmJ",
+        "ZZe9q900f",
+        "khhhyzog"
+      ],
+      "aceProviders": [
+        "ame",
+        "lorem amet dolor adip",
+        "cswvoe",
+        "a",
+        "kxBnj0IqMNi"
+      ],
+      "testProviders": [
+        "OhgMcXAv7e4zJDQsPIZ",
+        "conse",
+        "jossqm",
+        "adipiscing ",
+        "consectetu"
+      ],
+      "commandsAliases": {},
+      "aliases": {},
+      "namespaces": {
+        "models": "jm",
+        "exceptions": "bG7VQcJo9an2hss2R",
+        "httpControllers": "ame",
+        "redisListeners": "cifgrlt",
+        "validators": "consectetur conse",
+        "lorem": "ipsum"
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "4yuToGdzSh",
+            "files": null,
+            "timeout": -572.26
+          },
+          {
+            "name": "adipiscing sit do",
+            "files": null
+          },
+          {
+            "name": "5qK",
+            "files": null
+          },
+          {
+            "name": "wjhlEyzVUG",
+            "files": 7.7,
+            "timeout": 230.98
+          },
+          {
+            "name": "fyirpmrxs",
+            "files": null,
+            "timeout": 223.39
+          }
+        ],
+        "timeout": -382.2,
+        "forceExit": false
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "mrffhsfzbfcujmiqkf",
+        "nOMu1qWoeUz2nf",
+        "w",
+        "jclejQTwO",
+        "consectetur sit "
+      ],
+      "exceptionHandlerNamespace": "b",
+      "assetsDriver": "fake",
+      "aceProviders": [
+        "vudeutxlxdywiborjbhv",
+        "ips",
+        "lorem adipiscin",
+        "adip",
+        "amet c"
+      ],
+      "testProviders": [
+        "dolor consectetur s",
+        "u6rQ3ydnejhvwBPPQwP",
+        "sit sit dolor dolo",
+        "sit sit",
+        "gpiwlbofax"
+      ],
+      "namespaces": {
+        "eventListeners": "amet ipsum amet amet ",
+        "validators": "ame",
+        "ipsum": "ipsum ipsum ipsum "
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "clGS4Fo",
+            "files": null,
+            "timeout": -975.3
+          },
+          {
+            "name": "omdcbpszpzkdbhnzh",
+            "files": 16.58
+          },
+          {
+            "name": "j05U6ucs3DmjkB52UUlWn",
+            "files": null,
+            "timeout": 512.15
+          },
+          {
+            "name": "amet amet ame",
+            "files": null,
+            "timeout": 584.52
+          },
+          {
+            "name": "zwbrcrjwbybbadz",
+            "files": 93,
+            "timeout": 375.35
+          }
+        ]
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "IOlsAKSHU2lXBFfdlJ3Z",
+        "EzDeLZxmAL0iXweos",
+        "BP3ZN",
+        "nwznfgfpoevjbdmw",
+        "adipiscing"
+      ],
+      "exceptionHandlerNamespace": "sit am",
+      "assetsDriver": "vite",
+      "preloads": [
+        null,
+        true,
+        10,
+        38.92,
+        11.58
+      ],
+      "commands": [
+        "TzplsUmCY",
+        "mTq63SPV5QipzlA",
+        "yqmvhusw",
+        "rx",
+        "LD27v"
+      ],
+      "aceProviders": [
+        "usgzxdzzfcoflgm",
+        "Dq32R7IeRgUOmjek8o2",
+        "thglf",
+        "cPvHSKV",
+        "alzvznzbmwklljv"
+      ],
+      "directories": {
+        "config": "vrxvqhcww",
+        "contracts": "faefrvvrzzlxsgpek",
+        "database": "adipiscing sit adi",
+        "migrations": "yltmgyarcawmq",
+        "seeds": "dolor ",
+        "resources": "fGYR5",
+        "start": "vwtjqojhqxgjej",
+        "tmp": "Ol3",
+        "tests": "ejzkidviwoez",
+        "uzuxatldx": "ppum",
+        "frvkrssei": "ido"
+      },
+      "namespaces": {
+        "exceptions": "guFkVuUoEOmr0yvMQ1J",
+        "g5zuI": "c",
+        "oxpwzj": "mpxu"
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "xtrlirm",
+        "conse",
+        "rphtwprf",
+        "qcffsnvsxtnulfnbvdn",
+        "v0OY"
+      ],
+      "exceptionHandlerNamespace": "oush",
+      "assetsDriver": "fake",
+      "metaFiles": [
+        false,
+        22,
+        true,
+        "lorem ipsum ips",
+        true
+      ],
+      "commands": [
+        "alcdahqgclkegnpsqrrmd",
+        "bawqelhwhstignkpiukdu",
+        "25aEbuoCP1qa9WIgd5G",
+        "ug",
+        "adipisci"
+      ],
+      "aceProviders": [
+        "DmPOFT86grMQr",
+        "VdrbXG7LuwxmgOtC",
+        "adipiscin",
+        "dolor lor",
+        "consectetu"
+      ],
+      "testProviders": [
+        "qadtkzqvtzrylgc",
+        "ozrvzfhic",
+        "vhrfhyfhfwrp",
+        "fkBulPW2tXUR9kr",
+        "sit amet consectetur"
+      ],
+      "directories": {
+        "config": "sit",
+        "public": "adipiscing ",
+        "providers": "adipi",
+        "migrations": "amet dol",
+        "tmp": "obljqkuhsaduw",
+        "tests": "raurman"
+      },
+      "commandsAliases": {},
+      "aliases": {},
+      "namespaces": {
+        "exceptions": "yewsexnefzu",
+        "middleware": "amet amet adipi",
+        "redisListeners": "urrylbwripxxzi",
+        "jwvscrxjws": "jyxvqswyebpkwmwbg",
+        "kKdAgd": "adipiscing ipsu"
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "dnoawriumso",
+            "files": null,
+            "timeout": -819.94
+          },
+          {
+            "name": "amet adipiscing ",
+            "files": true,
+            "timeout": -490.7
+          },
+          {
+            "name": "kkmnysddjuxkwfo",
+            "files": "lbdwjbwnxxm"
+          },
+          {
+            "name": "hwjgphyx",
+            "files": 97
+          },
+          {
+            "name": "nmdne",
+            "files": null,
+            "timeout": -454.94
+          }
+        ],
+        "forceExit": false
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "fisuaex",
+        "cons",
+        "wpkiqqkmngeo",
+        "cons",
+        "gkyj"
+      ],
+      "assetsDriver": "encore",
+      "preloads": [
+        false,
+        91.38,
+        17.93,
+        null,
+        3.99
+      ],
+      "metaFiles": [
+        46.22,
+        62.48,
+        7,
+        7.18,
+        81.35
+      ],
+      "commands": [
+        "IzZ",
+        "St0R130GGTJb4mEC",
+        "ips",
+        "pho",
+        "varfei"
+      ],
+      "aceProviders": [
+        "con",
+        "QTMxRF4D",
+        "adipiscing dolor",
+        "mkf",
+        "xlbnnbpezehxg"
+      ],
+      "testProviders": [
+        "ipsum ipsum con",
+        "al",
+        "sit",
+        "YYef",
+        "mwsnvftdjci"
+      ],
+      "commandsAliases": {},
+      "aliases": {}
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "yitiejtdrjelklwxfzp",
+        "bivyjsrevvyywoqmq",
+        "7X5RhzsqhgDW1",
+        "ofpetluneasbohrqjhw",
+        "mewi"
+      ],
+      "exceptionHandlerNamespace": "ip",
+      "metaFiles": [
+        null,
+        92.83,
+        "mrvnmaest",
+        null,
+        82
+      ],
+      "aliases": {},
+      "namespaces": {
+        "models": "Ogp4YeOn79cfTfZVPBOka",
+        "middleware": "egsjjpakoztvnub",
+        "unqxeayoo": "mlz",
+        "tEkP6HR": "u4mD9zCzutZae"
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "G",
+        "consectetur cons",
+        "TrnDSOlwvru1",
+        "cTglU",
+        "iglgxmeeooziypy"
+      ],
+      "preloads": [
+        false,
+        65.26,
+        62.93,
+        "kzseajnstsm",
+        null
+      ],
+      "commands": [
+        "c",
+        "ipsum dolor co",
+        "sit adipiscing amet a",
+        "anfhvhafrai",
+        "amet sit amet con"
+      ],
+      "aceProviders": [
+        "nt",
+        "co",
+        "GVv7WCLtw3azy4FjG5",
+        "cwhuyvizn",
+        "ipsum sit "
+      ],
+      "testProviders": [
+        "lapcpol",
+        "dol",
+        "xxaqgpk",
+        "S4",
+        "bw"
+      ],
+      "commandsAliases": {},
+      "aliases": {},
+      "namespaces": {
+        "models": "adipiscing consectet",
+        "exceptions": "i",
+        "httpControllers": "ipsum amet dolor dolo",
+        "eventListeners": "s",
+        "redisListeners": "pqzptlredltj",
+        "amet adi": "mktfhpaz",
+        "MvCfv": "lorem s"
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "amet adipiscing",
+            "files": "qbsysdlr",
+            "timeout": 898.85
+          },
+          {
+            "name": "Oq9k2p",
+            "files": 29,
+            "timeout": -285.0
+          },
+          {
+            "name": "pskeiwn",
+            "files": 35.38,
+            "timeout": 121.89
+          },
+          {
+            "name": "sit dolor ipsum a",
+            "files": "fvllzu"
+          },
+          {
+            "name": "vsjpkfcx",
+            "files": true,
+            "timeout": -682.24
+          }
+        ],
+        "timeout": 789.32
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "8ODti9UpKR4rtlK5Tixe",
+        "ipsum ",
+        "dol",
+        "dolor ad",
+        "bkzzyefczl"
+      ],
+      "exceptionHandlerNamespace": "rrumuwnijpomktryzaktn",
+      "preloads": [
+        false,
+        null,
+        null,
+        91.57,
+        false
+      ],
+      "metaFiles": [
+        false,
+        false,
+        37,
+        15.14,
+        98.72
+      ],
+      "aceProviders": [
+        "ecxxnoikhcz",
+        "dqbsbpezxlxueww",
+        "1a55kjlFN",
+        "LZ8MB2KYw3myoxM5cKnYU",
+        "gslgcxl"
+      ],
+      "testProviders": [
+        "ucxjtzWx",
+        "dolor adipisci",
+        "spfhvbnawysmsakgk",
+        "do",
+        "coblnfkrdxtlmz"
+      ],
+      "directories": {
+        "config": "eehits",
+        "public": "VMDwzCPqr4",
+        "contracts": "ha3SG7nv",
+        "migrations": "qateivavjp",
+        "seeds": "ipsum sit lorem ips",
+        "resources": "consectet",
+        "start": "LQiMv",
+        "tmp": "ufgkbfjefosiwabe"
+      },
+      "commandsAliases": {},
+      "tests": {
+        "suites": [
+          {
+            "name": "adipiscing adipis",
+            "files": null,
+            "timeout": 105.83
+          },
+          {
+            "name": "IK5Bz",
+            "files": 14.68
+          },
+          {
+            "name": "ip",
+            "files": null
+          },
+          {
+            "name": "nI",
+            "files": true,
+            "timeout": -50.03
+          },
+          {
+            "name": "Ztl6",
+            "files": null
+          }
+        ],
+        "forceExit": true
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "khf",
+        "ips",
+        "ipsum adipi",
+        "O1n2",
+        "bsvliszyftmzzmxxckyg"
+      ],
+      "exceptionHandlerNamespace": "consectetur consectet",
+      "assetsDriver": "fake",
+      "commands": [
+        "consectetur amet adip",
+        "uik",
+        "yW",
+        "syylkI8Kzb5tsS2gen"
+      ],
+      "testProviders": [],
+      "directories": {
+        "migrations": "jicpeyqaqmrpcm",
+        "resources": "ebkqqdpoenqscbsz",
+        "views": "jPr1UdtXdncQ7R3mY9Yns",
+        "tests": "RlavT56Jz",
+        "oneiizcz": "dnmgtywvkq"
+      },
+      "aliases": {},
+      "tests": {
+        "suites": [
+          {
+            "name": "Bj",
+            "files": false
+          },
+          {
+            "name": "hhuk",
+            "files": "ruxonofatscjgc"
+          }
+        ],
+        "timeout": -365.89
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "doEs4eoFAP4tT2t"
+      ],
+      "exceptionHandlerNamespace": "sqdszwrlldbzkkmzxrunq",
+      "metaFiles": [
+        "mabbizevfgamni",
+        54.12,
+        null
+      ],
+      "testProviders": [],
+      "directories": {
+        "config": "05qjSAZBo6UX",
+        "database": "fdl",
+        "migrations": "aktdve",
+        "resources": "MY2bpiePiAQWHQOo",
+        "views": "consectet",
+        "tmp": "wrwdjgjddnyqqxpo",
+        "tests": "MuCbXtNbN5UHYL9cL",
+        "conse": "scotvzltbkwztnhwiir",
+        "bjheyrotoa": "OVsMuLN7BsyPOFcn4U"
+      },
+      "namespaces": {
+        "exceptions": "a",
+        "middleware": "JESWWK68UrkQW96yfNHOl",
+        "redisListeners": "cW8",
+        "validators": "adip"
+      },
+      "tests": {
+        "suites": [],
+        "forceExit": false
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "SNQHFUhF",
+        "ame",
+        "yughjckowhxrdgmef",
+        "uki"
+      ],
+      "metaFiles": [
+        1.24,
+        true
+      ],
+      "commands": [
+        "T6wtyGcAffG6lHc",
+        "l",
+        "drzzv",
+        "ipsum amet lorem "
+      ],
+      "aceProviders": [],
+      "directories": {
+        "config": "0Pa",
+        "public": "adipiscing ",
+        "contracts": "ipsum adipiscin",
+        "resources": "sit sit",
+        "start": "lorem",
+        "tmp": "empypdbed"
+      },
+      "commandsAliases": {},
+      "tests": {
+        "suites": [
+          {
+            "name": "dolor consectetur i",
+            "files": null
+          },
+          {
+            "name": "zkseeyixowgkt",
+            "files": null,
+            "timeout": -79.83
+          },
+          {
+            "name": "1L6udB4H0Z3EbJgxow",
+            "files": false
+          },
+          {
+            "name": "ve",
+            "files": null
+          }
+        ],
+        "timeout": -573.18,
+        "forceExit": true
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "dolor consectetu",
+        "amet dolor dolor i"
+      ],
+      "exceptionHandlerNamespace": "cQQ3CdAFsv3v",
+      "preloads": [],
+      "commands": [
+        "mmwcrseuez",
+        "6bQBj6KHKJa0LQn",
+        "QwC1U",
+        "amet adipiscing dolor"
+      ],
+      "testProviders": [
+        "Ns9A8lfDra2oU",
+        "lorem dolor dolor ip",
+        "hejqenoqvlktexhrvsn",
+        "xiop"
+      ],
+      "directories": {
+        "config": "vhrhncpamli",
+        "public": "n",
+        "contracts": "rUoBUS3aCl3pXGVX13zP4",
+        "database": "lllyfydgtshhotjml",
+        "views": "ipsum consecte",
+        "start": "atftybxcsfvmsqmnpl",
+        "tmp": "hujnzc",
+        "tests": "iwxtfblgasvwxonzj",
+        "amet am": "qnefbpfapr"
+      },
+      "commandsAliases": {},
+      "aliases": {}
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "sxteflkzsmjfpyelipg",
+        "ips",
+        "xpxubgrmavqln",
+        "sit si",
+        "fgowekpebtqpocmmnebn"
+      ],
+      "metaFiles": [
+        false,
+        null,
+        66.94
+      ],
+      "aceProviders": [
+        "tlbip",
+        "yjAHWcH",
+        "Zb0E6rV0c",
+        "vrxlptldvn"
+      ],
+      "testProviders": [
+        "consectetu",
+        "ipsum dolor sit ipsum",
+        "hb",
+        "gv"
+      ],
+      "directories": {
+        "contracts": "rkvlzldocbkcpf",
+        "database": "sit dolor amet",
+        "migrations": "ipsum ipsum",
+        "resources": "amet ame",
+        "views": "lorem adipisci"
+      },
+      "commandsAliases": {},
+      "tests": {
+        "suites": [
+          {
+            "name": "consectetur amet a",
+            "files": "lorem lorem"
+          },
+          {
+            "name": "ufejiduskopopqzhcdpm",
+            "files": "3toiSQ7BIZHBs",
+            "timeout": 805.15
+          },
+          {
+            "name": "RccUM2xIDVL0jOxW",
+            "files": true,
+            "timeout": -976.19
+          }
+        ],
+        "timeout": -743.56
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "sit ipsum",
+        "h",
+        "adipiscing dolor dol",
+        "ajztpqrekh",
+        "lorem s"
+      ],
+      "exceptionHandlerNamespace": "hwvdxemccrvcippdscy",
+      "commands": [
+        "xyup"
+      ],
+      "aceProviders": [],
+      "aliases": {},
+      "tests": {
+        "suites": [
+          {
+            "name": "safkojjyklyi",
+            "files": null,
+            "timeout": -494.86
+          },
+          {
+            "name": "gqgvmhzmozhlxjw",
+            "files": null
+          }
+        ]
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "7McG",
+        "hbvxiczxmctzhjwtx",
+        "DNnZI5Q381JOvVWlvGg0",
+        "lo"
+      ],
+      "exceptionHandlerNamespace": "sit ips",
+      "assetsDriver": "vite",
+      "preloads": [],
+      "metaFiles": [
+        97,
+        0.14,
+        null,
+        null
+      ],
+      "commands": [
+        "do",
+        "qq",
+        "2vhV9jq60OF9BVAzCL"
+      ],
+      "commandsAliases": {},
+      "namespaces": {
+        "middleware": "LLSzhuwckPG",
+        "httpControllers": "lorem",
+        "adipisc": "npzdlcn"
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "u2Is"
+      ],
+      "assetsDriver": "vite",
+      "preloads": [
+        null,
+        15.4,
+        "tpewnwu",
+        true
+      ],
+      "commands": [
+        "xspgvkjw",
+        "iwpyktrtyendqnoq",
+        "lorem ",
+        "a"
+      ],
+      "aceProviders": [
+        "Qr5xzQFh9u",
+        "v",
+        "GqHKE3Wt3uF",
+        "amet"
+      ],
+      "commandsAliases": {},
+      "namespaces": {
+        "exceptions": "conse",
+        "middleware": "lorem a",
+        "eventListeners": "qcvvwztdpatyfdvxgvt",
+        "redisListeners": "DA5kD8W27SnxlsIayYrn",
+        "D2uLmtWoy": "arlxvuzwgypoivp"
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "OaawWWFuL6",
+            "files": "bnfzotxnootw",
+            "timeout": 4.33
+          },
+          {
+            "name": "sit dolo",
+            "files": 43.93,
+            "timeout": 980.03
+          },
+          {
+            "name": "sit lorem sit lor",
+            "files": false,
+            "timeout": -938.01
+          },
+          {
+            "name": "adipiscing lorem a",
+            "files": 89.73,
+            "timeout": 188.45
+          }
+        ],
+        "timeout": 905.5
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [],
+      "assetsDriver": "encore",
+      "preloads": [
+        27.41,
+        null,
+        true
+      ],
+      "metaFiles": [
+        null,
+        "sit sit cons"
+      ],
+      "commands": [
+        "EeCmzqRxzANyVRuJNb",
+        "oDlXYUQxg2dt1c",
+        "ip",
+        "amet consectetu",
+        "I2PFuMVTmsHhVqsq"
+      ],
+      "aceProviders": [
+        "lorem adipis",
+        "lo",
+        "fogtqhnavnsmykhuv"
+      ],
+      "commandsAliases": {},
+      "namespaces": {
+        "exceptions": "yxAORJilFowU5g",
+        "middleware": "sit adipiscing ",
+        "httpControllers": "consecte",
+        "eventListeners": "wzwhiqbmewsb",
+        "redisListeners": "nsszqqbudtwhxdomfru",
+        "validators": "lorem l"
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "rN8O7f9NQOUDe6f",
+            "files": true,
+            "timeout": 175.31
+          },
+          {
+            "name": "gilaljieh",
+            "files": true,
+            "timeout": -453.67
+          }
+        ]
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "consec"
+      ],
+      "metaFiles": [
+        16,
+        "sit amet do",
+        70.32
+      ],
+      "aceProviders": [
+        "I62kg",
+        "afi",
+        "ijigdjgoblalbx",
+        "tlvqxxhnkdhzjc",
+        "hyafosfssxbzprn"
+      ],
+      "testProviders": [],
+      "directories": {
+        "config": "G9pgdTevPDGLaMO8CGez",
+        "public": "vbslmyqnamggficgdrg",
+        "database": "nbpbiok",
+        "seeds": "liaupaunzznmlnan",
+        "tmp": "erw",
+        "lorem": "sit amet ips",
+        "m8fOdOr": "dol"
+      },
+      "commandsAliases": {},
+      "aliases": {}
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "haia",
+        "LJGYQFami27xUd0d"
+      ],
+      "commands": [],
+      "aceProviders": [
+        "consectetur lorem lor",
+        "0k0ri7pl5n37"
+      ],
+      "testProviders": [
+        "ohdilxu",
+        "wddu",
+        "ratf",
+        "hjieksbahmdbauq"
+      ],
+      "directories": {
+        "config": "vijltj",
+        "providers": "wjcnnkxarrkqw",
+        "seeds": "gncdh",
+        "resources": "consectetur lorem ame",
+        "tmp": "llujvwbsyrgjovdre",
+        "tests": "adipiscin",
+        "aoiud": "SkqLExGRzgdUW",
+        "dolor s": "ipsum sit ip"
+      },
+      "commandsAliases": {},
+      "aliases": {},
+      "namespaces": {
+        "models": "adipiscing do",
+        "middleware": "tzhwvbrcukkihlmleq",
+        "httpControllers": "lorem dolo",
+        "eventListeners": "dcrspuoywi",
+        "validators": "f5Z2U",
+        "jxmpmwe": "wkxupxywtygabiln"
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "ttcxqgeyhmaswtbrfm"
+      ],
+      "assetsDriver": "fake",
+      "preloads": [
+        5,
+        21.23,
+        false
+      ],
+      "metaFiles": [
+        null,
+        null,
+        77.06,
+        21
+      ],
+      "aliases": {},
+      "tests": {
+        "suites": [
+          {
+            "name": "zkdhqalk",
+            "files": 34
+          },
+          {
+            "name": "ZhUkr6vIOBY7JwYqc2pdQ",
+            "files": 52
+          },
+          {
+            "name": "conse",
+            "files": 6.6,
+            "timeout": -509.69
+          },
+          {
+            "name": "llipqgebspcwsaram",
+            "files": null
+          }
+        ],
+        "timeout": -778.41
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "rmifwsjecrhhhextlyfaa"
+      ],
+      "preloads": [
+        null,
+        false,
+        null,
+        true,
+        3
+      ],
+      "metaFiles": [
+        "dolor adipisci",
+        "hzjnujxoog",
+        "hopuaipuwdqbd",
+        true,
+        true
+      ],
+      "commands": [
+        "uDVVG"
+      ],
+      "aceProviders": [
+        "lTNzl",
+        "0QQCyv",
+        "n",
+        "sQS"
+      ],
+      "directories": {
+        "public": "zeanna",
+        "contracts": "consectetur",
+        "providers": "glnhklpgc",
+        "database": "hoqfiludgxn",
+        "migrations": "esasgxgylgmkgxrlcz",
+        "seeds": "drS",
+        "resources": "qkocphstckdfdy",
+        "start": "adipiscing dolo",
+        "tmp": "consectetur dolor con",
+        "ftremmlrcw": "lorem sit dolor s",
+        "dtqduens": "amet sit lorem "
+      },
+      "commandsAliases": {},
+      "aliases": {},
+      "tests": {
+        "suites": [
+          {
+            "name": "lorem ",
+            "files": 24.53,
+            "timeout": -229.6
+          },
+          {
+            "name": "vslmicgoixw",
+            "files": "hpahoqsxy"
+          },
+          {
+            "name": "ipsum ipsum sit sit ",
+            "files": false
+          },
+          {
+            "name": "KgLz8grUCM8IglUdVnj3I",
+            "files": 85.54,
+            "timeout": 466.92
+          },
+          {
+            "name": "lwaphkyolo",
+            "files": 9
+          }
+        ],
+        "forceExit": false
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "qeueieqbswwldmzxipd"
+      ],
+      "exceptionHandlerNamespace": "oAEO",
+      "assetsDriver": "encore",
+      "preloads": [
+        false,
+        "adwagonftsasjm"
+      ],
+      "metaFiles": [
+        1,
+        23.56,
+        null,
+        63.34,
+        97
+      ],
+      "commands": [
+        "wupuiphkjmalm",
+        "dktcwbr",
+        "mmwrdfrfwqbtksjisjy",
+        "cbpSjIU",
+        "ipsum amet lorem ad"
+      ],
+      "aceProviders": [
+        "ipsum lorem sit ",
+        "xvfi3kHJUkyihxGt",
+        "ipsum amet ad"
+      ],
+      "testProviders": [
+        "c",
+        "amet cons",
+        "consectetur amet a",
+        "B6B5Pj8bQt7plpSyL4S"
+      ],
+      "commandsAliases": {},
+      "aliases": {},
+      "namespaces": {
+        "models": "KnyZNu",
+        "exceptions": "NOYw0faidZQvqAjFt",
+        "middleware": "eeusrnwh",
+        "httpControllers": "dkmhbbwyozwr",
+        "eventListeners": "lorem ip",
+        "redisListeners": "wlwliwauowwckmpcwbax",
+        "validators": "86hueI"
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "bjfzrzehsg",
+        "MiuWDy8GBfKEr",
+        "adipiscing dolor sit",
+        "8La"
+      ],
+      "assetsDriver": "vite",
+      "preloads": [
+        0.33,
+        61.88,
+        true,
+        false
+      ],
+      "commands": [
+        "7Y"
+      ],
+      "aceProviders": [
+        "chuxwwwkppfssjmetixzc",
+        "wqebzkncnjerrpvzwbn"
+      ],
+      "commandsAliases": {},
+      "aliases": {},
+      "namespaces": {
+        "models": "s",
+        "exceptions": "i",
+        "validators": "XOdvSVRmNcCh513u",
+        "dolor a": "srxpqsizdxmfj"
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "ipsum adipi",
+            "files": "fdljzcucyt"
+          }
+        ],
+        "forceExit": false
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "gvw",
+        "u0juupaBfLetB"
+      ],
+      "assetsDriver": "encore",
+      "preloads": [],
+      "metaFiles": [
+        null,
+        false,
+        true
+      ],
+      "aceProviders": [
+        "qoyaxql",
+        "rxmrjatevxreikbloi",
+        "Zw39zFZ"
+      ],
+      "testProviders": [
+        "qgmezltbdfgjhlkc",
+        "Rf3"
+      ],
+      "commandsAliases": {},
+      "aliases": {},
+      "tests": {
+        "suites": [
+          {
+            "name": "aokaqezbw",
+            "files": 37.21,
+            "timeout": -843.25
+          },
+          {
+            "name": "sit sit ipsum amet ad",
+            "files": false,
+            "timeout": 949.86
+          }
+        ],
+        "timeout": 259.24
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "a",
+        "dolor dolor do",
+        "amlfcidewj",
+        "elspysknyc"
+      ],
+      "assetsDriver": "fake",
+      "preloads": [
+        45.52
+      ],
+      "metaFiles": [
+        false,
+        "yenbygnsmmmpqs",
+        true,
+        true,
+        2.12
+      ],
+      "commands": [
+        "YUFteY0pfyFM9ANV",
+        "ips"
+      ],
+      "testProviders": [],
+      "directories": {
+        "config": "DVadfwfHzwpBV7",
+        "contracts": "QGwvF24NYThfZSMtEd7aU",
+        "providers": "xisbqgnzhgrdhvdukkxk",
+        "database": "J6CRLlN719TQ7vCVpRp",
+        "seeds": "3y032aOx54fhDGjbi",
+        "resources": "YC8",
+        "tmp": "quzfp",
+        "tests": "czlaj",
+        "zqtec": "paudiyufypbaml",
+        "dq8MM6JP1": "ipsum dolor ipsum l"
+      },
+      "aliases": {},
+      "namespaces": {
+        "models": "9lTTeKtWgSVJnMF",
+        "middleware": "sit amet adipis",
+        "httpControllers": "EPaYXBdN9BuVivih0FblQ",
+        "eventListeners": "lhggywgp",
+        "validators": "lorem adipisc"
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "mcbitssanaqaxsiad",
+            "files": "L6nMEzGoFwMTI4g"
+          },
+          {
+            "name": "TVG",
+            "files": false,
+            "timeout": 539.78
+          },
+          {
+            "name": "wLhomyXiMU7gVsgfM3",
+            "files": "vyvnhyobu",
+            "timeout": 530.58
+          },
+          {
+            "name": "b6yi",
+            "files": 49,
+            "timeout": -965.31
+          },
+          {
+            "name": "amet lorem dolor ips",
+            "files": 93
+          }
+        ],
+        "timeout": 281.78
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "TvLMaRjFZNUsElEi5rLH"
+      ],
+      "exceptionHandlerNamespace": "ueebupcmnmqzjqtvlot",
+      "metaFiles": [
+        false
+      ],
+      "aceProviders": [
+        "ecqC0BNkRg",
+        "Q5KbokT7",
+        "lwqZHVCzPzJmCGq",
+        "sit adipisc"
+      ],
+      "testProviders": [
+        "amet ipsum consectet"
+      ],
+      "directories": {
+        "public": "H5egXa9KQVDbIPgsV",
+        "contracts": "nlbmciyzzkmwkfmmykbit",
+        "database": "lxlgzajb",
+        "resources": "ipsum amet adipis",
+        "views": "4IfbPpxTh4L6PcnN",
+        "tests": "CaFQad4JfWjXu",
+        "kDgV6UROen": "i"
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "EYzMCTo1bX837a",
+            "files": 99.77
+          }
+        ]
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "NDDjiMfPHwVxzXDFaNsk",
+        "dolor adipiscing lore",
+        "Q",
+        "dqaoj"
+      ],
+      "assetsDriver": "vite",
+      "commands": [
+        "gvauardswuynbh",
+        "nywcsisvrv",
+        "YJU73754RaUuRu"
+      ],
+      "testProviders": [
+        "dqepkiqowksipn",
+        "adip"
+      ],
+      "directories": {
+        "config": "spiiuweffbvmp",
+        "contracts": "si",
+        "providers": "g",
+        "migrations": "dolor do",
+        "seeds": "consectetu",
+        "resources": "PRoumitRKbgvhxSN9539S",
+        "views": "ptOYMB0izaMiLTouS",
+        "start": "EnOGOQtK",
+        "tmp": "lorem dolor ipsu",
+        "Q2kP0bm": "yvsnmoz",
+        "nbgmtfcqhb": "KW"
+      },
+      "aliases": {}
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "gb6zsP5t6t7Rh5gfK8b",
+        "sjjhng",
+        "sit",
+        "fhlsvvgvy"
+      ],
+      "exceptionHandlerNamespace": "xxlkvvsulocsufpduzszm",
+      "preloads": [
+        "adipisci",
+        null,
+        null
+      ],
+      "directories": {
+        "public": "dolor sit ",
+        "contracts": "8o",
+        "database": "nriysaofbyx",
+        "migrations": "consectet",
+        "seeds": "nyegetnct",
+        "views": "gffdlwdra",
+        "start": "yokxvgyricqlww",
+        "tmp": "bssqSHn9uf",
+        "tests": "lorem sit sit a"
+      },
+      "commandsAliases": {},
+      "namespaces": {
+        "exceptions": "snsfgrlbnskmewnck",
+        "middleware": "hzzhabqgwjqjtzwgeib",
+        "eventListeners": "hlwsfbrttimbiwpov",
+        "redisListeners": "OK0gUQ0p3YzzYa",
+        "validators": "cons",
+        "kghqlfoabw": "wyztmvvuscs"
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "D9tHNJ3sWbVhZN48G",
+        "iijrvfoaobog",
+        "TJvXyiaBqtYV6zYAP"
+      ],
+      "exceptionHandlerNamespace": "grxo",
+      "assetsDriver": "fake",
+      "metaFiles": [],
+      "commands": [
+        "ipsum amet dolor i",
+        "u",
+        "ipsum amet adipis",
+        "lwyxbmuacrelvuwqwm"
+      ],
+      "aceProviders": [],
+      "namespaces": {
+        "models": "ipsum adipiscing si",
+        "exceptions": "ipsum ipsum d",
+        "middleware": "b6Sc0",
+        "httpControllers": "fqz3bXZQYiVgn1ie8X",
+        "eventListeners": "ipsum dolor lorem ",
+        "validators": "dolor dolor sit",
+        "consec": "whzrq"
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [],
+      "commands": [
+        "drhg"
+      ],
+      "testProviders": [
+        "lorem lorem ips",
+        "xbp",
+        "cons",
+        "idmqwcndx"
+      ],
+      "directories": {
+        "config": "phppludqewyfffyfnrkra",
+        "public": "ipsum sit sit",
+        "contracts": "XxJFDMySG",
+        "resources": "rdrclolobdgsksqsxojgq",
+        "views": "rynzroiyk",
+        "start": "zwkmmuyljwin",
+        "tmp": "Q4",
+        "tests": "sit consecte"
+      },
+      "commandsAliases": {},
+      "namespaces": {
+        "models": "uvjfihaippeokpaxgzn",
+        "exceptions": "gfyhlkhcouvtd",
+        "httpControllers": "luoekypvsmhfnbgmampof",
+        "eventListeners": "ASnc0uZAbGgeMRr",
+        "redisListeners": "Y",
+        "validators": "tT",
+        "amet adipi": "ExcTQTyg"
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "moHe4tFP9ErrPnD5ixfwl",
+            "files": 51,
+            "timeout": -382.27
+          },
+          {
+            "name": "SIb",
+            "files": true,
+            "timeout": 236.41
+          }
+        ],
+        "timeout": -944.9,
+        "forceExit": true
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "agizrnrcrqfjkyj",
+        "m"
+      ],
+      "exceptionHandlerNamespace": "zkroonvxydwdedcl",
+      "assetsDriver": "vite",
+      "aceProviders": [
+        "lorem ",
+        "elgqxfdiolpfndphvnbq",
+        "IKh3wrw3JyZ",
+        "ejoeehwwqbfs"
+      ],
+      "testProviders": [],
+      "directories": {
+        "public": "lo",
+        "providers": "ypfjhqftrl",
+        "database": "sit lorem lorem sit",
+        "migrations": "gpzjjmtiu",
+        "seeds": "Dz6fdk",
+        "views": "dolor s",
+        "start": "x",
+        "tmp": "lprmozkbiermnute"
+      },
+      "commandsAliases": {},
+      "aliases": {},
+      "namespaces": {
+        "models": "amet dolor adipi",
+        "exceptions": "BRdAw2FwKoT6H3hZ",
+        "httpControllers": "lorem sit adipiscin",
+        "validators": "qNkKHHFItlsliBbH80CS"
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "dolor dolor adipi",
+        "sfrrzztyosxsufltbttg"
+      ],
+      "metaFiles": [
+        "zqfezm",
+        "ewali",
+        58,
+        null
+      ],
+      "commands": [
+        "sit sit consectetur a",
+        "dzvqguswhufld",
+        "dolor sit"
+      ],
+      "aceProviders": [],
+      "testProviders": [
+        "ocP3mxUSR",
+        "nrpwuikfasp"
+      ],
+      "aliases": {},
+      "tests": {
+        "suites": [
+          {
+            "name": "unexqnwvpkfbb",
+            "files": 68
+          },
+          {
+            "name": "amet ",
+            "files": null,
+            "timeout": -797.41
+          },
+          {
+            "name": "LPjXzSeAsZ0fV0ceuqshA",
+            "files": null
+          },
+          {
+            "name": "byipxdbo",
+            "files": 22.21
+          }
+        ],
+        "timeout": 311.02,
+        "forceExit": true
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "ipsum lorem lo"
+      ],
+      "preloads": [
+        false
+      ],
+      "metaFiles": [
+        65.82,
+        true,
+        false
+      ],
+      "commands": [
+        "consectetur",
+        "rwdbhjdbmwul",
+        "JdtxfwL",
+        "mdq"
+      ],
+      "directories": {
+        "config": "amet consectetur con",
+        "public": "lddaufamokxrmfustcje",
+        "contracts": "gyxebyibsb",
+        "providers": "dolor sit sit amet co",
+        "migrations": "jhemsswls",
+        "seeds": "a",
+        "views": "p4NCP3ckh2dd5mb9SxZ4",
+        "start": "njsfxdzymtjyfvzobfup",
+        "tmp": "aoIF97jZeaXZW"
+      },
+      "namespaces": {
+        "exceptions": "ggjfeekkrjqbmzntnu",
+        "httpControllers": "cons",
+        "eventListeners": "d",
+        "validators": "G8n"
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "MV2RU2cfr58nxAf1",
+        "k"
+      ],
+      "assetsDriver": "encore",
+      "preloads": [
+        62.15,
+        "imbwnv",
+        18.14,
+        50
+      ],
+      "metaFiles": [
+        "ooaxkkehply",
+        false,
+        null,
+        31,
+        null
+      ],
+      "commands": [
+        "ipsum",
+        "ftgw"
+      ],
+      "aceProviders": [
+        "CWFZeNeeA1P",
+        "rlqxvk"
+      ],
+      "aliases": {},
+      "namespaces": {
+        "middleware": "daeo",
+        "httpControllers": "Chuzgkc5umRh",
+        "eventListeners": "sit lorem adipiscing ",
+        "redisListeners": "KWOYY3cpgRqRPY6",
+        "validators": "olqme"
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "osqdrmz",
+        "pHCbrGXS",
+        "eKNNPSRw6",
+        "dvsnwvysn"
+      ],
+      "exceptionHandlerNamespace": "ip",
+      "commands": [
+        "iqgsruke",
+        "psnnbqbkepep"
+      ],
+      "testProviders": [
+        "x6oa16AQfca"
+      ],
+      "directories": {
+        "config": "g",
+        "providers": "si",
+        "migrations": "ips",
+        "resources": "lzlpwwjltpu",
+        "views": "dolor ipsum cons",
+        "start": "zwnt",
+        "tests": "ipsum lorem l",
+        "bszlaq": "http"
+      },
+      "aliases": {},
+      "namespaces": {
+        "models": "orgbijrcssmdfujhqrnbn",
+        "redisListeners": "QoSjiR2hje",
+        "validators": "qmshoop"
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "EYhrKjNw0qZ5rpbrpG8sS",
+        "ctzcveuvobxq",
+        "ipsum dolo",
+        "dyheveqezmxrggwl",
+        "DywVL"
+      ],
+      "exceptionHandlerNamespace": "yldap",
+      "metaFiles": [],
+      "aceProviders": [
+        "pwpvfpcizkjrmyerjalri",
+        "xtzogfmiokmhqkqjuey"
+      ],
+      "testProviders": [
+        "nak"
+      ],
+      "directories": {
+        "config": "KjollEOW",
+        "public": "Lh9VUaA",
+        "contracts": "adipiscing ips",
+        "providers": "zlmwmiooakesugtg",
+        "database": "7srHPkJ",
+        "resources": "aojpnugafitc",
+        "views": "nvcqkz",
+        "start": "ipsum sit amet ",
+        "consect": "dolor am"
+      },
+      "commandsAliases": {},
+      "aliases": {},
+      "namespaces": {
+        "models": "i58qhbcICAFi",
+        "httpControllers": "ips",
+        "eventListeners": "5MvBgFfsF29kdEE",
+        "redisListeners": "clbytdtbxtn",
+        "validators": "67VSOjnG",
+        "73BYFzilp": "dolor lorem lorem co",
+        "Kp4UY": "qagqajkiqpntgvnyxak"
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "3M0FKx",
+            "files": 11.62,
+            "timeout": 542.03
+          },
+          {
+            "name": "ytubvldzabufoii",
+            "files": 49
+          },
+          {
+            "name": "ZWyQKWrws1",
+            "files": 2
+          },
+          {
+            "name": "uMj",
+            "files": false
+          },
+          {
+            "name": "vxhiavzljkfcf",
+            "files": null,
+            "timeout": -760.08
+          }
+        ],
+        "timeout": -901.84,
+        "forceExit": false
+      }
+    },
+    {
+      "typescript": false,
+      "providers": [
+        "VA",
+        "sit i",
+        "bf",
+        "qkvubtgtauexynfgwrtv"
+      ],
+      "exceptionHandlerNamespace": "SXK4YoHKJ9F4DPhwTAzCQ",
+      "assetsDriver": "vite",
+      "preloads": [
+        "E2pdBSx9FPv"
+      ],
+      "metaFiles": [],
+      "aceProviders": [
+        "pcmbpesobkwhyfvrjyxn"
+      ],
+      "directories": {
+        "config": "c",
+        "public": "5WB",
+        "contracts": "UXW7UgqG",
+        "database": "jieyfpv",
+        "migrations": "dolor adipisci",
+        "seeds": "consectetur ips",
+        "resources": "do",
+        "views": "lrfqprefbtfpmqezc",
+        "start": "zOfg36TSI9h",
+        "tmp": "OIXvP9AM6EXN5790dr",
+        "tests": "gdubefmcwg",
+        "OPOoXvxTo": "lorem l"
+      },
+      "aliases": {},
+      "namespaces": {
+        "models": "amet ip",
+        "middleware": "sit ips",
+        "httpControllers": "w",
+        "eventListeners": "ipsum sit adipiscing "
+      },
+      "tests": {
+        "suites": [
+          {
+            "name": "lamsjdut",
+            "files": null
+          },
+          {
+            "name": "fkou",
+            "files": null
+          },
+          {
+            "name": "dukne",
+            "files": 36.97,
+            "timeout": -990.12
+          },
+          {
+            "name": "sit adipi",
+            "files": 96.66
+          },
+          {
+            "name": "dolor do",
+            "files": 94.26,
+            "timeout": 728.04
+          }
+        ],
+        "forceExit": true
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "lEaz1tyZD9GuLP"
+      ],
+      "assetsDriver": "vite",
+      "preloads": [
+        false
+      ],
+      "commands": [],
+      "testProviders": [
+        "dbixopigojrs",
+        "gxydtvf",
+        "sit conse",
+        "xkxnydcrduqpw",
+        "mlecskedbp"
+      ],
+      "directories": {
+        "providers": "ux",
+        "database": "uyDX8BJxU5",
+        "migrations": "wzeihsqsozhdvviwjihh",
+        "views": "XbyOQ9p7Yogq",
+        "start": "ip",
+        "consectet": "lor"
+      },
+      "commandsAliases": {},
+      "aliases": {},
+      "namespaces": {
+        "exceptions": "ipsum si",
+        "middleware": "WLPpo5aBal",
+        "eventListeners": "consectetur s",
+        "redisListeners": "amet adipiscing dolo",
+        "validators": "s",
+        "hnizrnpm": "iscnnscdjdha"
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "hnhevetufcvwwcr",
+        "aqjgd",
+        "rrhrbkaxv"
+      ],
+      "exceptionHandlerNamespace": "qn",
+      "assetsDriver": "fake",
+      "metaFiles": [],
+      "commands": [
+        "uXp04h0jmfvrW7uJyUs",
+        "numvhklvskh",
+        "pwfllhvedhnlkonkrnaok",
+        "hvF0oyYAKgOjR",
+        "bhrtz"
+      ],
+      "aceProviders": [
+        "E1nIvlJQeg4",
+        "uOkM2C"
+      ],
+      "directories": {
+        "config": "iwxdlnudqffhypcluzbcc",
+        "public": "lorem consectetu",
+        "contracts": "h1O1O2",
+        "providers": "co",
+        "migrations": "amet ipsum ipsu",
+        "seeds": "gcgv",
+        "resources": "x",
+        "start": "vilFeNt270K0KUmzW",
+        "tmp": "b5tPWv64",
+        "consecte": "LdD",
+        "e4Yd7bbf": "lore"
+      },
+      "tests": {
+        "suites": [],
+        "timeout": -518.61
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "36OUHG3Vv5jZ0qosEtal",
+        "dgp79aBWcJe",
+        "dolor sit amet amet l",
+        "PqU3syNh5E2W",
+        "bymawjcskndyuthybbvwg"
+      ],
+      "assetsDriver": "vite",
+      "metaFiles": [],
+      "commands": [
+        "yckpkhm",
+        "ad",
+        "lao3IaiSAOQjRox"
+      ],
+      "aceProviders": [
+        "dolor amet consect",
+        "LXoo4Kolh5ZM9WgFJl"
+      ],
+      "testProviders": [
+        "adipiscing dolo",
+        "bmeDX2qHjrbCl"
+      ],
+      "commandsAliases": {},
+      "aliases": {},
+      "tests": {
+        "suites": [],
+        "timeout": 142.57,
+        "forceExit": false
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [],
+      "exceptionHandlerNamespace": "rfnzjqibeprklholfb",
+      "assetsDriver": "fake",
+      "preloads": [
+        true
+      ],
+      "testProviders": [
+        "ipsum sit l"
+      ],
+      "directories": {
+        "config": "Z117DQL",
+        "contracts": "ywNZAV0CU1VHkgjfrYW7q",
+        "seeds": "dolor dolor sit dolor",
+        "resources": "yvldohzrgpzxrr",
+        "tmp": "aQeHCVjntHQDj"
+      },
+      "aliases": {},
+      "tests": {
+        "suites": [
+          {
+            "name": "oeduidzsrtpgotbov",
+            "files": false
+          },
+          {
+            "name": "csdjoowtvpsjyxmapfer",
+            "files": 0.85
+          }
+        ],
+        "timeout": 746.65
+      }
+    },
+    {
+      "typescript": true,
+      "providers": [
+        "amet lorem ipsum",
+        "qvUYlTwnUpH",
+        "zGnwcLE6J",
+        "i"
+      ],
+      "exceptionHandlerNamespace": "L4zlDxmeDveYQObqoaaKe",
+      "assetsDriver": "fake",
+      "preloads": [
+        "hezxftpwesxse"
+      ],
+      "metaFiles": [
+        60.15,
+        8.17
+      ],
+      "commands": [
+        "Sl6",
+        "96bbLpH"
+      ],
+      "aceProviders": [
+        "i",
+        "iklrtugambobytt"
+      ],
+      "directories": {
+        "config": "odwoqheieqletvrjvvfse",
+        "public": "ndmdxuzko",
+        "contracts": "a",
+        "providers": "Hraxl",
+        "database": "UeJCCnK4XEF21h",
+        "migrations": "gl",
+        "resources": "adipiscing ame",
+        "views": "vWbvhrpyHdZ4",
+        "start": "sit s",
+        "tmp": "yiudndnw",
+        "tests": "amet amet lorem conse",
+        "vuucopxo": "sit consectetur dolor"
+      },
+      "commandsAliases": {},
+      "namespaces": {
+        "models": "x1nv7Z6QivRTzgzDQ8r",
+        "exceptions": "CmKFYSQ",
+        "middleware": "si",
+        "httpControllers": "adipiscing adipisc"
+      }
+    }
+  ]
+}

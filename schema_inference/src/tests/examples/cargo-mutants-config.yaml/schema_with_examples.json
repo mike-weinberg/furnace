@@ -1,0 +1,3493 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://json.schemastore.org/cargo-mutants-config.json",
+    "additionalProperties": true,
+    "title": "cargo-mutants config",
+    "description": "cargo-mutants configuration, read by default from `.cargo/mutants.toml`.\n\nSee <https://mutants.rs/>.",
+    "type": "object",
+    "properties": {
+      "additional_cargo_args": {
+        "description": "Pass extra args to every cargo invocation.",
+        "default": [],
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "additional_cargo_test_args": {
+        "description": "Pass extra args to cargo test.",
+        "default": [],
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "build_timeout_multiplier": {
+        "description": "Build timeout multiplier, relative to the baseline 'cargo build'.",
+        "default": null,
+        "type": [
+          "number",
+          "null"
+        ],
+        "format": "double"
+      },
+      "cap_lints": {
+        "description": "Pass `--cap-lints` to rustc.",
+        "default": false,
+        "type": "boolean"
+      },
+      "copy_vcs": {
+        "description": "Copy `.git` and other VCS directories to the build directory.",
+        "default": null,
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "error_values": {
+        "description": "Generate these error values from functions returning Result.",
+        "default": [],
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "examine_globs": {
+        "description": "Generate mutants from source files matching these globs.",
+        "default": [],
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "examine_re": {
+        "description": "Examine only mutants matching these regexps.",
+        "default": [],
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "exclude_globs": {
+        "description": "Exclude mutants from source files matching these globs.",
+        "default": [],
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "exclude_re": {
+        "description": "Exclude mutants from source files matches these regexps.",
+        "default": [],
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "minimum_test_timeout": {
+        "description": "Minimum test timeout, in seconds, as a floor on the autoset value.",
+        "default": null,
+        "type": [
+          "number",
+          "null"
+        ],
+        "format": "double"
+      },
+      "output": {
+        "description": "Output directory.",
+        "default": null,
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "profile": {
+        "description": "Cargo profile.",
+        "default": null,
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "skip_calls": {
+        "description": "Skip calls to functions or methods with these names.\n\nThis is combined with values from the --skip-calls argument.",
+        "default": [],
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "skip_calls_defaults": {
+        "description": "Use built-in defaults for `skip_calls` in addition to any explicit values.",
+        "default": null,
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "test_package": {
+        "description": "Run tests from these packages for all mutants.",
+        "default": [],
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "test_tool": {
+        "description": "Choice of test tool: cargo or nextest.",
+        "anyOf": [
+          {
+            "$ref": "#/definitions/TestTool"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "test_workspace": {
+        "description": "Run tests from all packages in the workspace, not just the mutated package.\n\nOverrides `test_package`.",
+        "default": null,
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "timeout_multiplier": {
+        "description": "Timeout multiplier, relative to the baseline 'cargo test'.",
+        "default": null,
+        "type": [
+          "number",
+          "null"
+        ],
+        "format": "double"
+      }
+    },
+    "definitions": {
+      "TestTool": {
+        "description": "Choice of tool to use to run tests.",
+        "oneOf": [
+          {
+            "description": "Use `cargo test`, the default.",
+            "type": "string",
+            "enum": [
+              "cargo"
+            ]
+          },
+          {
+            "description": "Use `cargo nextest`.",
+            "type": "string",
+            "enum": [
+              "nextest"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "examples": [
+    {
+      "additional_cargo_test_args": [],
+      "build_timeout_multiplier": -720.92,
+      "cap_lints": true,
+      "copy_vcs": true,
+      "error_values": [],
+      "examine_globs": [],
+      "exclude_globs": [],
+      "output": null,
+      "profile": "ieyicc",
+      "test_workspace": null,
+      "timeout_multiplier": null,
+      "lorem ame": "wjlvej",
+      "adipiscing": 53.41
+    },
+    {
+      "additional_cargo_args": [],
+      "build_timeout_multiplier": null,
+      "cap_lints": true,
+      "copy_vcs": null,
+      "examine_globs": [],
+      "examine_re": [],
+      "profile": "jcnm",
+      "skip_calls_defaults": null,
+      "test_package": [],
+      "test_tool": 74,
+      "test_workspace": true,
+      "timeout_multiplier": 44.51
+    },
+    {
+      "additional_cargo_args": [],
+      "additional_cargo_test_args": [],
+      "cap_lints": true,
+      "copy_vcs": true,
+      "error_values": [],
+      "examine_globs": [],
+      "exclude_re": [],
+      "output": null,
+      "profile": null,
+      "test_package": [],
+      "test_tool": 34,
+      "timeout_multiplier": null
+    },
+    {
+      "additional_cargo_args": [],
+      "additional_cargo_test_args": [],
+      "build_timeout_multiplier": null,
+      "cap_lints": false,
+      "copy_vcs": null,
+      "minimum_test_timeout": null,
+      "skip_calls": [],
+      "test_tool": true,
+      "consect": 52
+    },
+    {
+      "additional_cargo_test_args": [],
+      "build_timeout_multiplier": 269.05,
+      "cap_lints": true,
+      "copy_vcs": null,
+      "examine_globs": [],
+      "examine_re": [],
+      "exclude_globs": [],
+      "exclude_re": [],
+      "minimum_test_timeout": -204.07,
+      "profile": null,
+      "skip_calls": [],
+      "skip_calls_defaults": false,
+      "test_package": [],
+      "test_tool": "dolor l",
+      "test_workspace": null,
+      "timeout_multiplier": null,
+      "pzssit": 47,
+      "sit amet": null
+    },
+    {
+      "additional_cargo_args": [],
+      "additional_cargo_test_args": [],
+      "build_timeout_multiplier": null,
+      "cap_lints": false,
+      "copy_vcs": false,
+      "examine_re": [],
+      "output": null,
+      "profile": "w7cxQLIV",
+      "skip_calls": [],
+      "test_tool": "xHpO25",
+      "timeout_multiplier": 546.15,
+      "wvvxjomoky": null,
+      "qfmzzo": true
+    },
+    {
+      "additional_cargo_args": [],
+      "additional_cargo_test_args": [],
+      "cap_lints": true,
+      "error_values": [],
+      "examine_globs": [],
+      "exclude_re": [],
+      "minimum_test_timeout": -56.42,
+      "output": null,
+      "profile": null,
+      "test_package": [],
+      "test_tool": "ipsum ipsu",
+      "ekvuhjh": "hhjuHtAVWA2aKQ"
+    },
+    {
+      "additional_cargo_args": [],
+      "additional_cargo_test_args": [],
+      "build_timeout_multiplier": 359.72,
+      "copy_vcs": null,
+      "examine_re": [],
+      "minimum_test_timeout": null,
+      "output": "xVqy",
+      "test_workspace": false,
+      "timeout_multiplier": null,
+      "ipymsthx": null
+    },
+    {
+      "additional_cargo_args": [],
+      "additional_cargo_test_args": [],
+      "cap_lints": false,
+      "error_values": [],
+      "examine_globs": [],
+      "examine_re": [],
+      "exclude_globs": [],
+      "minimum_test_timeout": 959.45,
+      "output": "ipp",
+      "ipsum": 25,
+      "amet sit": "amet dolor ame",
+      "dzuolnnrmv": "tdjxrm"
+    },
+    {
+      "additional_cargo_args": [],
+      "additional_cargo_test_args": [],
+      "build_timeout_multiplier": 665.2,
+      "cap_lints": false,
+      "copy_vcs": null,
+      "examine_globs": [],
+      "exclude_globs": [],
+      "exclude_re": [],
+      "output": "ipsu",
+      "profile": "juytftlvmxzv",
+      "test_package": [],
+      "test_tool": true,
+      "adipisc": 58.94
+    },
+    {
+      "additional_cargo_test_args": [],
+      "cap_lints": false,
+      "copy_vcs": true,
+      "exclude_re": [],
+      "minimum_test_timeout": null,
+      "output": "sit",
+      "skip_calls": [],
+      "skip_calls_defaults": true,
+      "timeout_multiplier": null,
+      "PRrtWA": null
+    },
+    {
+      "build_timeout_multiplier": null,
+      "copy_vcs": null,
+      "examine_re": [],
+      "exclude_globs": [],
+      "output": "ipsum ",
+      "profile": null,
+      "skip_calls": [],
+      "test_package": [],
+      "timeout_multiplier": null,
+      "okzre": 57
+    },
+    {
+      "additional_cargo_test_args": [],
+      "build_timeout_multiplier": null,
+      "copy_vcs": false,
+      "error_values": [],
+      "exclude_re": [],
+      "minimum_test_timeout": null,
+      "profile": "szHfO69KcPwaTk42x6",
+      "skip_calls": [],
+      "skip_calls_defaults": null,
+      "test_package": [],
+      "test_workspace": false,
+      "timeout_multiplier": null,
+      "3wbZ50sv": "rlnxyu",
+      "sqWXX5LxA": 42.99,
+      "1JgHvXZ": null
+    },
+    {
+      "additional_cargo_args": [],
+      "build_timeout_multiplier": null,
+      "error_values": [],
+      "examine_globs": [],
+      "minimum_test_timeout": null,
+      "output": null,
+      "skip_calls": [],
+      "skip_calls_defaults": false,
+      "test_package": [],
+      "test_tool": 73,
+      "test_workspace": true,
+      "timeout_multiplier": 3.94,
+      "ipsum ": "adipi",
+      "geeiefq": false,
+      "cvxgvshhc": false
+    },
+    {
+      "additional_cargo_test_args": [],
+      "build_timeout_multiplier": null,
+      "error_values": [],
+      "examine_globs": [],
+      "examine_re": [],
+      "exclude_globs": [],
+      "output": "ok",
+      "profile": "epolsdrbfredm",
+      "skip_calls_defaults": false,
+      "test_package": [],
+      "test_tool": 67,
+      "test_workspace": null,
+      "timeout_multiplier": null,
+      "sit sit": 87,
+      "consec": 24,
+      "ipsum l": 2.98
+    },
+    {
+      "additional_cargo_args": [],
+      "additional_cargo_test_args": [],
+      "build_timeout_multiplier": null,
+      "copy_vcs": null,
+      "examine_re": [],
+      "exclude_re": [],
+      "output": "pmgqddjzvynelongxhrka",
+      "profile": "dolor sit lor",
+      "skip_calls": [],
+      "skip_calls_defaults": null,
+      "test_package": [],
+      "test_tool": "sardrlsasg",
+      "test_workspace": true
+    },
+    {
+      "additional_cargo_args": [],
+      "additional_cargo_test_args": [],
+      "copy_vcs": null,
+      "error_values": [],
+      "exclude_globs": [],
+      "exclude_re": [],
+      "output": "D",
+      "profile": null,
+      "skip_calls_defaults": false,
+      "test_package": [],
+      "test_workspace": true,
+      "timeout_multiplier": null,
+      "adipis": "mvpprikhfxplqew"
+    },
+    {
+      "additional_cargo_args": [],
+      "cap_lints": false,
+      "examine_globs": [],
+      "exclude_globs": [],
+      "minimum_test_timeout": 457.25,
+      "output": "cqwhbtozgcpvqcidk",
+      "skip_calls": [],
+      "skip_calls_defaults": false,
+      "test_package": [],
+      "test_workspace": null,
+      "timeout_multiplier": 770.34
+    },
+    {
+      "additional_cargo_args": [],
+      "additional_cargo_test_args": [],
+      "build_timeout_multiplier": null,
+      "cap_lints": false,
+      "error_values": [],
+      "examine_re": [],
+      "exclude_re": [],
+      "minimum_test_timeout": -175.06,
+      "profile": "YcI9j7nWHenRpZT1J",
+      "skip_calls_defaults": null,
+      "test_package": [],
+      "test_tool": null,
+      "timeout_multiplier": -837.64,
+      "I8WH0kS86F": null,
+      "ipsum si": 28,
+      "IcDa66JV": 88.96
+    },
+    {
+      "additional_cargo_args": [],
+      "additional_cargo_test_args": [],
+      "cap_lints": false,
+      "error_values": [],
+      "examine_globs": [],
+      "examine_re": [],
+      "exclude_globs": [],
+      "minimum_test_timeout": 787.56,
+      "skip_calls": [],
+      "skip_calls_defaults": true,
+      "test_tool": "txYMWMAolH",
+      "test_workspace": null,
+      "timeout_multiplier": null
+    },
+    {
+      "additional_cargo_test_args": [],
+      "cap_lints": false,
+      "copy_vcs": null,
+      "error_values": [],
+      "examine_globs": [],
+      "examine_re": [],
+      "exclude_globs": [],
+      "output": null,
+      "profile": null,
+      "test_workspace": null,
+      "timeout_multiplier": null,
+      "3a1LoLm": null,
+      "sit ipsum ": 10.17
+    },
+    {
+      "additional_cargo_args": [],
+      "additional_cargo_test_args": [],
+      "cap_lints": true,
+      "copy_vcs": true,
+      "examine_globs": [],
+      "exclude_globs": [],
+      "minimum_test_timeout": -343.7,
+      "output": "ws",
+      "profile": null,
+      "skip_calls": [],
+      "skip_calls_defaults": true,
+      "test_tool": "7hJ6L5yBwwve9T",
+      "timeout_multiplier": 2.99,
+      "U7cwyvHsh1": true,
+      "dolor s": 13,
+      "uxunocua": "tqmbspxjzgxgjj"
+    },
+    {
+      "additional_cargo_args": [],
+      "build_timeout_multiplier": -592.98,
+      "cap_lints": true,
+      "examine_re": [],
+      "exclude_globs": [],
+      "exclude_re": [],
+      "minimum_test_timeout": null,
+      "profile": "lorem ",
+      "skip_calls": [],
+      "skip_calls_defaults": false,
+      "test_package": [],
+      "test_tool": 54.97,
+      "test_workspace": null,
+      "lorem sit": 21.97,
+      "amet conse": "hqogzr",
+      "llseee": 16
+    },
+    {
+      "additional_cargo_args": [],
+      "additional_cargo_test_args": [],
+      "cap_lints": false,
+      "copy_vcs": null,
+      "examine_globs": [],
+      "examine_re": [],
+      "exclude_re": [],
+      "minimum_test_timeout": null,
+      "profile": "1XZivJ",
+      "skip_calls": [],
+      "skip_calls_defaults": false,
+      "test_package": [],
+      "test_tool": 75.93,
+      "timeout_multiplier": null,
+      "sit i": null,
+      "conse": null
+    },
+    {
+      "additional_cargo_args": [],
+      "additional_cargo_test_args": [],
+      "build_timeout_multiplier": null,
+      "cap_lints": true,
+      "examine_globs": [],
+      "examine_re": [],
+      "exclude_globs": [],
+      "minimum_test_timeout": null,
+      "profile": null,
+      "skip_calls_defaults": false,
+      "test_tool": 90,
+      "test_workspace": null,
+      "Dssm582Xzt": false
+    },
+    {
+      "additional_cargo_args": [],
+      "cap_lints": false,
+      "copy_vcs": null,
+      "examine_globs": [],
+      "examine_re": [],
+      "exclude_globs": [],
+      "exclude_re": [],
+      "minimum_test_timeout": 365.47,
+      "output": "pknwszznsltgr",
+      "test_package": [],
+      "test_tool": 76,
+      "timeout_multiplier": -726.64
+    },
+    {
+      "copy_vcs": false,
+      "error_values": [],
+      "exclude_globs": [],
+      "exclude_re": [],
+      "minimum_test_timeout": -916.43,
+      "profile": null,
+      "skip_calls": [],
+      "test_package": [],
+      "test_workspace": null,
+      "timeout_multiplier": null,
+      "oazdodvayj": null
+    },
+    {
+      "additional_cargo_test_args": [],
+      "build_timeout_multiplier": null,
+      "cap_lints": false,
+      "copy_vcs": null,
+      "error_values": [],
+      "examine_re": [],
+      "exclude_globs": [],
+      "exclude_re": [],
+      "minimum_test_timeout": null,
+      "output": null,
+      "profile": "adipiscing",
+      "skip_calls": [],
+      "skip_calls_defaults": false,
+      "test_workspace": null
+    },
+    {
+      "additional_cargo_test_args": [],
+      "build_timeout_multiplier": -355.67,
+      "cap_lints": true,
+      "error_values": [],
+      "examine_globs": [],
+      "examine_re": [],
+      "exclude_globs": [],
+      "exclude_re": [],
+      "minimum_test_timeout": null,
+      "profile": null,
+      "skip_calls": [],
+      "test_package": [],
+      "test_tool": 63
+    },
+    {
+      "additional_cargo_args": [],
+      "build_timeout_multiplier": 644.32,
+      "copy_vcs": true,
+      "error_values": [],
+      "examine_globs": [],
+      "exclude_globs": [],
+      "minimum_test_timeout": -301.35,
+      "output": null,
+      "skip_calls": [],
+      "skip_calls_defaults": false,
+      "test_tool": 84,
+      "test_workspace": true,
+      "timeout_multiplier": null,
+      "dolor dol": 12,
+      "lorem ": null
+    },
+    {
+      "additional_cargo_args": [],
+      "additional_cargo_test_args": [],
+      "cap_lints": false,
+      "copy_vcs": false,
+      "error_values": [],
+      "examine_globs": [],
+      "examine_re": [],
+      "exclude_re": [],
+      "minimum_test_timeout": 544.8,
+      "output": null,
+      "test_package": [],
+      "test_tool": "jmeyxodyfbkj",
+      "timeout_multiplier": 932.35,
+      "ooxkd": true,
+      "8dstw9l": null,
+      "yukrbmz": 40
+    },
+    {
+      "additional_cargo_args": [],
+      "additional_cargo_test_args": [],
+      "build_timeout_multiplier": null,
+      "cap_lints": true,
+      "copy_vcs": false,
+      "error_values": [],
+      "examine_globs": [],
+      "exclude_globs": [],
+      "exclude_re": [],
+      "minimum_test_timeout": null,
+      "output": "m21CX26on",
+      "skip_calls": [],
+      "skip_calls_defaults": true,
+      "test_package": [],
+      "test_workspace": true,
+      "BV3YIv": "lorem do"
+    },
+    {
+      "additional_cargo_test_args": [],
+      "build_timeout_multiplier": 599.98,
+      "cap_lints": true,
+      "copy_vcs": null,
+      "examine_globs": [],
+      "examine_re": [],
+      "exclude_globs": [],
+      "exclude_re": [],
+      "profile": "amet ipsum ipsu",
+      "skip_calls": [],
+      "skip_calls_defaults": true,
+      "test_package": [],
+      "timeout_multiplier": -963.08
+    },
+    {
+      "additional_cargo_args": [
+        "TF054Q0YgQ5UrS",
+        "mkjoryffdmpv",
+        "M",
+        "ip",
+        "consect"
+      ],
+      "additional_cargo_test_args": [
+        "qmhrwjsaahihnuxol",
+        "tvYEEhq5F",
+        "dolor dolor ",
+        "qjpvoxanxoujzent",
+        "XO"
+      ],
+      "copy_vcs": null,
+      "examine_globs": [
+        "ipsum",
+        "7xzh3pYM1wPFDDni",
+        "Bc9mqceYouIZlDwvlMjdx",
+        "ipsum ame",
+        "dumlre"
+      ],
+      "examine_re": [
+        "vmvha",
+        "09yh3eddl7ZRtdDzZ",
+        "y",
+        "ipsum ipsum con",
+        "sc8I"
+      ],
+      "exclude_globs": [
+        "qurrbese",
+        "adip",
+        "amet",
+        "opuxwcdukl",
+        "adipisc"
+      ],
+      "output": null,
+      "skip_calls": [
+        "axqoxzkjnazpamih",
+        "ecirbqhleiemiigxnikmu",
+        "sit dol",
+        "dolo",
+        "sit i"
+      ],
+      "skip_calls_defaults": true,
+      "test_package": [
+        "xpr",
+        "VsP1D83gRsLPJ9KPn",
+        "z",
+        "lexXkgPxq",
+        "JbBfkf"
+      ],
+      "test_tool": true,
+      "test_workspace": null,
+      "lorem ad": "bfgsryg"
+    },
+    {
+      "additional_cargo_args": [
+        "dolor dolor i",
+        "lgihinakxu",
+        "ilbqkcqtcsrcs",
+        "ipsu",
+        "8L2BB5JD2UWw6IlK"
+      ],
+      "additional_cargo_test_args": [
+        "LbjGy",
+        "sbobbfxuqhtcn",
+        "irc",
+        "ydjzwmijubkvai",
+        "zGs5sU0F"
+      ],
+      "build_timeout_multiplier": null,
+      "cap_lints": false,
+      "copy_vcs": true,
+      "error_values": [
+        "Dh5sTFVRE61QMle1qBDt2",
+        "adipiscing lorem sit ",
+        "z3oKkiflav",
+        "kc4qj",
+        "dongorgpmorz"
+      ],
+      "examine_globs": [
+        "qngsypzrqhlsglzz",
+        "POKh0A5dK",
+        "con",
+        "con",
+        "dolor "
+      ],
+      "exclude_globs": [
+        "j5DS2j4h8Z46tvuRvXFMj",
+        "zwzxdatyqezitgctmr",
+        "OveGuFMHrZBX01YX5sR1",
+        "epirbigkmtoimrlplnk",
+        "ijijevyeavcm"
+      ],
+      "exclude_re": [
+        "sit a",
+        "vbrpzeynd",
+        "kusq",
+        "pwv",
+        "fndllntmwswmqjwosa"
+      ],
+      "minimum_test_timeout": 911.8,
+      "output": null,
+      "profile": "adipiscin",
+      "test_tool": 65.31,
+      "test_workspace": false,
+      "timeout_multiplier": null,
+      "R7mZKG0": 10,
+      "amet s": "Ho2be6V"
+    },
+    {
+      "additional_cargo_test_args": [
+        "adipisci",
+        "gorahvmuezkidogmfb",
+        "xpocusf",
+        "clcuncluody",
+        "uk"
+      ],
+      "build_timeout_multiplier": -561.68,
+      "cap_lints": true,
+      "error_values": [
+        "am",
+        "lgnomqvrdnam",
+        "tobmttaacyck",
+        "consectetur ipsu",
+        "lorem "
+      ],
+      "examine_globs": [
+        "zotknpxmkohwamata",
+        "QWk6",
+        "adipiscing si",
+        "consectetur d",
+        "ixu"
+      ],
+      "minimum_test_timeout": null,
+      "output": null,
+      "skip_calls": [
+        "ryhcdysfvqppnwydrd",
+        "irtpjw",
+        "sit amet c",
+        "0E",
+        "baauauuvyqvorbozks"
+      ],
+      "skip_calls_defaults": null,
+      "test_package": [
+        "imepykrofsfpzhriqen",
+        "dolor ipsum ipsum ame",
+        "hmscpbhzxplnkkvcl",
+        "ExkyILq7srFBJJy4xq",
+        "jB4k"
+      ],
+      "test_tool": "f4pWkAbKFA",
+      "test_workspace": false,
+      "timeout_multiplier": null
+    },
+    {
+      "additional_cargo_test_args": [
+        "xrxkrxmza",
+        "jiqseuyj",
+        "lo",
+        "jNGS0",
+        "U347f1aCwAfzQPaXtHsPF"
+      ],
+      "cap_lints": false,
+      "copy_vcs": true,
+      "examine_globs": [
+        "cesnyddflgmcpi",
+        "xwywfceo",
+        "z",
+        "u",
+        "lorem lorem c"
+      ],
+      "examine_re": [
+        "mjieykmkowqmrup",
+        "jwieZwcNEIFF3KLzTs",
+        "wzvdekrsr",
+        "qlsnexhwqhxawyi",
+        "qvuagpjdtylmotp"
+      ],
+      "exclude_globs": [
+        "lorem lorem ",
+        "ipsum dolor sit cons",
+        "tnnykgbmohwki",
+        "izY2ID6uNi",
+        "pay"
+      ],
+      "output": null,
+      "profile": "nqjolsiasssy",
+      "skip_calls_defaults": null,
+      "test_workspace": null,
+      "timeout_multiplier": null,
+      "GkdudA1": true,
+      "oj8I8mTvLd": 51,
+      "sit am": "nlztljtnejv"
+    },
+    {
+      "additional_cargo_args": [
+        "oSEebgSSkDQM",
+        "q3c",
+        "ztxlqgkizig",
+        "ame",
+        "ct3QvVbXN8F9NLW4bY"
+      ],
+      "build_timeout_multiplier": -985.19,
+      "copy_vcs": null,
+      "error_values": [
+        "pTIUSDH",
+        "ud",
+        "eomfvhgtgyggcpmuzak",
+        "sivhithdzt",
+        "adipi"
+      ],
+      "examine_globs": [
+        "wyjwovlovmzdm",
+        "kicyljwhzmsifbk",
+        "nN4muQC17Ng",
+        "pfejfygdbbywai",
+        "phnkxirloyzwquix"
+      ],
+      "exclude_globs": [
+        "paexgpwvvcozw",
+        "consectetur amet ",
+        "ccpqnjr",
+        "q2O8ThLih",
+        "I1OAuuqM51T4xf8KFC"
+      ],
+      "exclude_re": [
+        "xseqezeitij",
+        "epqulrD08vRf",
+        "ldzl",
+        "NrSD4",
+        "amet sit lorem con"
+      ],
+      "output": null,
+      "skip_calls": [
+        "mFhDFDIc14t0ClmQqxA",
+        "dolor con",
+        "adipiscing ipsum",
+        "consec",
+        "adipis"
+      ],
+      "skip_calls_defaults": true,
+      "test_package": [
+        "4m0N",
+        "dolor amet ",
+        "chkizagsqipkgweyifft",
+        "kxwtxp",
+        "consectetur dolor con"
+      ],
+      "timeout_multiplier": -177.0,
+      "FpqkzLKQA": 96,
+      "kQ5uwm": null
+    },
+    {
+      "additional_cargo_args": [
+        "wkjkatyjfqkenaldej",
+        "adipiscing ipsum ip",
+        "tdhy",
+        "tTpEwTBr5WvPFcnOacqD",
+        "f"
+      ],
+      "additional_cargo_test_args": [
+        "xwkelqvtbdkgiun",
+        "5l9kIv1IhbwzpSYvIqM42",
+        "fdyvqw",
+        "adipiscing lore",
+        "consectetur adip"
+      ],
+      "error_values": [
+        "adipiscing ",
+        "qouzkpaqailfq",
+        "hxyit",
+        "orlgetaohvptfbcsmeh",
+        "mehsduxwa"
+      ],
+      "examine_globs": [
+        "fw",
+        "ipsum lorem",
+        "Wg1w",
+        "sit a",
+        "hnbd"
+      ],
+      "examine_re": [
+        "ipsum dolor con",
+        "tehzpxehcxne",
+        "jsdtotdokepdsdglkgaq",
+        "hlijyigdqlcftoj",
+        "gtjji"
+      ],
+      "profile": null,
+      "skip_calls": [
+        "pimodcdeyv",
+        "adipiscing amet",
+        "x",
+        "Nv9",
+        "dolor ipsum"
+      ],
+      "skip_calls_defaults": null,
+      "test_package": [
+        "dolor l",
+        "BGwWN2o",
+        "adipiscing",
+        "mplmxuswqsmakcmaokfy",
+        "pfdlktnvajgvv"
+      ],
+      "test_workspace": null,
+      "timeout_multiplier": null,
+      "wwfvyrwagn": 25
+    },
+    {
+      "additional_cargo_args": [
+        "GDbjP0atSnQLnU2",
+        "zuijxgvgloytvjjwps",
+        "adip",
+        "wewmfcqhwa",
+        "i0xoK2ao3Af56"
+      ],
+      "additional_cargo_test_args": [
+        "sit ame",
+        "jhoumnkvyhyvkgro",
+        "adipiscing amet lor",
+        "adi",
+        "hf"
+      ],
+      "cap_lints": true,
+      "copy_vcs": null,
+      "error_values": [
+        "fiinith",
+        "ej6",
+        "Pi6MT1oRD",
+        "mbgwlxudxt",
+        "lhvtgwqeyjdytmo"
+      ],
+      "examine_globs": [
+        "qhvaigoimxrbtubcn",
+        "amet dolor i",
+        "nkvjbwzbn",
+        "trmwzdkwqkshwcc",
+        "uvpygzrafihibc"
+      ],
+      "examine_re": [
+        "4n",
+        "altstztiodukvfdqhueb",
+        "amet lorem conse",
+        "vopamzbkxnxojyj",
+        "zptbragtghqzcepte"
+      ],
+      "exclude_re": [
+        "dxfbfc",
+        "amet am",
+        "sit consectetur dolor",
+        "8U",
+        "vgkgdgihjmkuiwx"
+      ],
+      "output": null,
+      "profile": null,
+      "skip_calls_defaults": true,
+      "test_package": [
+        "xkllmkppzk",
+        "adipiscing adipis",
+        "lgE8G7c3n",
+        "wd",
+        "fvkl"
+      ],
+      "test_tool": "dolor dolor",
+      "test_workspace": null,
+      "xspftdrpov": 24,
+      "sit dolo": 27.65,
+      "gclbxt": 92.31
+    },
+    {
+      "additional_cargo_args": [
+        "hveegtamvfodmqvu",
+        "law",
+        "dolor cons",
+        "O4Pbs77snahe86",
+        "krkajofucwl"
+      ],
+      "additional_cargo_test_args": [
+        "wD0ezBxLRMFw9YPfy",
+        "dolor sit l",
+        "hegsftxcssqr",
+        "oizvlpyycs",
+        "gnbweud"
+      ],
+      "build_timeout_multiplier": null,
+      "cap_lints": false,
+      "examine_globs": [
+        "lorem ipsum a",
+        "dolor",
+        "yvymwbgylnskbvfxonzj",
+        "cons",
+        "nfbzekawvq"
+      ],
+      "examine_re": [
+        "tchknyhxuahczgihpayh",
+        "sit",
+        "PQCuley",
+        "Fd4FJVU",
+        "d"
+      ],
+      "exclude_globs": [
+        "zivkwqrsfhfeiv",
+        "e58DCvZpCN",
+        "hcoubuxyfaqkwety",
+        "fg1HheGZAxljvkqA2N9",
+        "J3hy"
+      ],
+      "exclude_re": [
+        "onrwbwbgv",
+        "njl",
+        "2I",
+        "hlwhrvtehtxrygfvx",
+        "gxjLDLHiTxPk8BHRK5nXb"
+      ],
+      "minimum_test_timeout": 54.55,
+      "output": "vzXceMJW044r7o9FD5bmu",
+      "skip_calls": [
+        "evdyryjlajkea",
+        "ECaw2vkljArYHJm",
+        "OcDw8i4nDwmqh",
+        "d",
+        "ipsum amet ipsum dol"
+      ],
+      "skip_calls_defaults": true,
+      "test_tool": false,
+      "timeout_multiplier": -235.8,
+      "ipsum ": null
+    },
+    {
+      "additional_cargo_args": [
+        "dolor lorem ame",
+        "adipiscing",
+        "mqxfleuatjoeyilypi",
+        "consecte",
+        "5hwYOMODIA6qptjMJ"
+      ],
+      "additional_cargo_test_args": [
+        "mirmoipoq",
+        "alqtcblpmbgsnybqplbj",
+        "o25MgFS673c",
+        "adipiscing ame",
+        "z7gerIWDFpBAngT80BKS"
+      ],
+      "cap_lints": true,
+      "copy_vcs": null,
+      "examine_re": [
+        "iLjHYpiYvz",
+        "rx",
+        "t9GTimr",
+        "adipiscing dol",
+        "zyfibevbravbqwkmyw"
+      ],
+      "exclude_re": [
+        "nrrfskunv",
+        "jmttoguqgifvxa",
+        "adipiscing sit c",
+        "sit sit ipsum ame",
+        "wzccpf"
+      ],
+      "minimum_test_timeout": null,
+      "profile": null,
+      "skip_calls_defaults": null,
+      "test_package": [
+        "ZetlqULuJ",
+        "cgtlnrrk",
+        "con",
+        "lor",
+        "Zo2XKF6RFW"
+      ],
+      "test_tool": 9,
+      "test_workspace": false
+    },
+    {
+      "build_timeout_multiplier": 43.41,
+      "error_values": [
+        "jdysnkxifrmnbbnhcg",
+        "amet ipsum adi",
+        "CbV9",
+        "amet amet adipis",
+        "ipsum a"
+      ],
+      "examine_globs": [
+        "wmexw",
+        "c",
+        "pyqdnxkqjrjhaxpx",
+        "e844xKUuqqEz1YirC7",
+        "Zhe4lZ4A"
+      ],
+      "examine_re": [
+        "wo",
+        "dolor amet dolor",
+        "r3v9P5wLWIKM74C",
+        "p7httnjDCUH",
+        "zsymsqbytcsq"
+      ],
+      "exclude_re": [
+        "gqj",
+        "nk",
+        "8vwaYfTQIt4UyZaVgLS",
+        "conse",
+        "adipiscing adipisci"
+      ],
+      "output": null,
+      "test_package": [
+        "d",
+        "pvgEAApDIT4PRrIS",
+        "ZG6",
+        "oNidFF6aczEV9vvzvzOi",
+        "kPnGIhVdODu"
+      ],
+      "test_tool": 40.55,
+      "test_workspace": false,
+      "timeout_multiplier": 188.45,
+      "OONWqX3U3": 51,
+      "570iUjjZ": "vyYkFUP"
+    },
+    {
+      "additional_cargo_args": [
+        "iyfuwjfjwnupopdrbmru",
+        "qfkyjejdvrfylixe",
+        "ipsum ips",
+        "kpwSYWjBjTt8Z2",
+        "IHkh2LwlqyOW"
+      ],
+      "build_timeout_multiplier": 4.94,
+      "cap_lints": false,
+      "copy_vcs": null,
+      "exclude_re": [
+        "mgmwxmmgffiiwp",
+        "c5YQWzfby5ESXj82qd5",
+        "dolor lorem l",
+        "consectetu",
+        "sit lorem s"
+      ],
+      "minimum_test_timeout": -777.91,
+      "output": null,
+      "skip_calls_defaults": true,
+      "test_package": [
+        "SJLLAoKLFI4hHyV",
+        "qwZxpMy8",
+        "ipsum",
+        "dasmmdceyfdgvxbniz",
+        "zalpdhjkukjmkssfyiqwi"
+      ],
+      "timeout_multiplier": null,
+      "iowtjvk": true
+    },
+    {
+      "additional_cargo_test_args": [
+        "tsthsjwnzka",
+        "lorem a",
+        "3Df9iY",
+        "VQm0XpGOwPMA",
+        "amet cons"
+      ],
+      "error_values": [
+        "tx",
+        "xvxo",
+        "sit consectetur lorem",
+        "Vu",
+        "4nLNzGlvSSKfq"
+      ],
+      "examine_globs": [
+        "nrtAuA3le",
+        "ipsum lorem co",
+        "04OYqVEGrjmwkW",
+        "5c",
+        "cons"
+      ],
+      "exclude_globs": [
+        "qkpYQer5ZjrKIhpEjTh9p",
+        "h3BQyppp0uHFJ318g",
+        "medhtirxmwjhu",
+        "c",
+        "zoovn"
+      ],
+      "exclude_re": [
+        "ipsum consec",
+        "wukruwyzsvdwilamm",
+        "eLAmw",
+        "cbhhktwkto",
+        "consecte"
+      ],
+      "minimum_test_timeout": -1.46,
+      "profile": null,
+      "skip_calls_defaults": null,
+      "test_package": [
+        "kjiwagveotm",
+        "eHpvq1czpLuGwDfL",
+        "p0D4aLLKp",
+        "drptbbuspafqrwstqcbe",
+        "epatexpqdwpaaumweyhi"
+      ],
+      "test_tool": "suwkvsfnen",
+      "test_workspace": false,
+      "timeout_multiplier": null,
+      "zayewiojjz": null
+    },
+    {
+      "additional_cargo_args": [
+        "vctqswx",
+        "dolor lorem ",
+        "brgeocahpqviqzyfjfpm",
+        "csr7vaKqKYd41WXtEMr",
+        "13xsZJ1pu9hpOwn2Wj"
+      ],
+      "additional_cargo_test_args": [
+        "zrrydyqdxamjiojblbpq",
+        "ipsum dolor dolor dol",
+        "ipsum dolor ipsu",
+        "amet lorem lorem",
+        "1SW4EC2UljVlTwPBVMM"
+      ],
+      "build_timeout_multiplier": -301.92,
+      "examine_globs": [
+        "ozageargcekqufutiofg",
+        "i",
+        "sit consectet",
+        "zlmxdgxkkfnautzqzahy",
+        "adipiscing"
+      ],
+      "exclude_re": [
+        "consectetur amet i",
+        "sit",
+        "jory",
+        "kSrDH",
+        "wapfjihuhieashd"
+      ],
+      "minimum_test_timeout": null,
+      "output": null,
+      "profile": "wxX3zaZQyn5nF3gaSbLa7",
+      "skip_calls_defaults": false,
+      "test_package": [
+        "g0zoesF1xMXUrsojnrf4",
+        "vtxmlqovfg",
+        "CSNp8DMTig71WY",
+        "adipiscing l",
+        "jfByhuqIX6uoym7U4qb"
+      ],
+      "test_tool": null,
+      "test_workspace": null,
+      "dolor ": 46
+    },
+    {
+      "additional_cargo_args": [
+        "laVavCn",
+        "plil",
+        "sit adipis",
+        "mkao6GCG",
+        "nmbdadwsqxcnkifl"
+      ],
+      "additional_cargo_test_args": [
+        "oppeiltukbhlfkj",
+        "oB",
+        "lorem dolo",
+        "ytfazxqbzynrtumrqc",
+        "IBqa1kQ4VD"
+      ],
+      "cap_lints": false,
+      "copy_vcs": false,
+      "examine_globs": [
+        "kjkqwopefws",
+        "8TV2mZhlfTBPm9Ci",
+        "consectetur adipiscin",
+        "dolor lorem ipsum",
+        "ghwwkkanuzkrvuifuktt"
+      ],
+      "examine_re": [
+        "lorem dolor am",
+        "jthwzcjn",
+        "dolor dolor dolor ip",
+        "xWhrBK",
+        "gjsmijhpoi"
+      ],
+      "exclude_re": [
+        "K4YHRPqfNcIh",
+        "V31TopuENo3pqpKfv",
+        "6xgeM5pOB38J",
+        "fmxarlxrkgrcfnvuerrkt",
+        "aemxitplfakgkasvhosg"
+      ],
+      "minimum_test_timeout": null,
+      "output": null,
+      "profile": null,
+      "skip_calls": [
+        "zqoxnvajr",
+        "vxyjufz",
+        "g",
+        "sit ipsum ipsum lorem",
+        "2bzdFlPeIKL"
+      ],
+      "skip_calls_defaults": null,
+      "test_tool": 59,
+      "test_workspace": true
+    },
+    {
+      "additional_cargo_args": [
+        "gibwifsioeqfpwbisbmk",
+        "zaxdfciuj",
+        "amet dolor ipsum s",
+        "IGPm02F3OYNJLBkF",
+        "IB4sKsIR"
+      ],
+      "build_timeout_multiplier": null,
+      "copy_vcs": true,
+      "examine_re": [
+        "d",
+        "xqiqgqk",
+        "xsjcduzaugfpypwbaik",
+        "ldkrwnsxmnywed",
+        "nfkprwyig"
+      ],
+      "exclude_re": [
+        "dolor dolor am",
+        "2ZUAlxZBYM6Rm832",
+        "amet c",
+        "QWl48qzwxmZWtP0Qbq",
+        "rgffqcnxmkpjzkux"
+      ],
+      "test_package": [
+        "cZgfyh2KcUMzI2v",
+        "vvnMuyQQtzx",
+        "consectetur",
+        "rre",
+        "9y2nWaBfJiHP"
+      ],
+      "test_workspace": false,
+      "timeout_multiplier": null,
+      "dolor si": 95
+    },
+    {
+      "additional_cargo_args": [
+        "Jt2",
+        "8tEwHi8N9xCgHGd",
+        "sit",
+        "amet lo",
+        "a"
+      ],
+      "copy_vcs": false,
+      "error_values": [
+        "0Lt4P6JEH6E",
+        "lysyrfbkeotosdzzhr",
+        "hjjhwr",
+        "korzdaukoqnjpxcotcsbo",
+        "0Tk"
+      ],
+      "examine_globs": [
+        "ipsum s",
+        "Lo",
+        "gmyqmipqmgkdisxjjrwgy",
+        "ga",
+        "consectetu"
+      ],
+      "examine_re": [
+        "snxwiLfp",
+        "igbtwgmmiwmi",
+        "twbkdkozvortvqatsro",
+        "qehxk",
+        "wtgvtqc"
+      ],
+      "exclude_globs": [
+        "c",
+        "amet consectetur lo",
+        "ipsum dolo",
+        "iqroxawjhmjoagxrovse",
+        "tgrtlphzb"
+      ],
+      "exclude_re": [
+        "3p7PJ",
+        "w79nPQ5cXtBwGxgtHQU",
+        "consec",
+        "fx2p1TMiYDbtL",
+        "sit amet adi"
+      ],
+      "minimum_test_timeout": 839.78,
+      "profile": null,
+      "test_package": [
+        "adipiscing ",
+        "adipiscing amet sit l",
+        "smdihsykzjlsrahdyc",
+        "ipsum adipiscing dolo",
+        "AdFk4XNbeOfXNTeyCANk"
+      ],
+      "test_workspace": null,
+      "timeout_multiplier": 634.04
+    },
+    {
+      "additional_cargo_args": [
+        "rklull",
+        "amet dolo",
+        "consectetur dolo",
+        "qkuvjzqtoeertov",
+        "nxxlnboks"
+      ],
+      "additional_cargo_test_args": [
+        "poxrixvyrljq",
+        "snhnyd",
+        "a54j",
+        "4FnxzOVpFK5yrGsX8dhL",
+        "kgz1NDGmoqTOdJ7ej8G3"
+      ],
+      "cap_lints": true,
+      "copy_vcs": null,
+      "error_values": [
+        "sit",
+        "ievvq",
+        "nndiiqucjirawvfycekc",
+        "R",
+        "sit consecte"
+      ],
+      "examine_re": [
+        "973m",
+        "ipsum",
+        "kKjLSVBKN",
+        "b",
+        "ne0NZ0j2WCD1eVpyHDD2"
+      ],
+      "exclude_globs": [
+        "3e3",
+        "ame",
+        "o6GODV1f7rMlv224NCC",
+        "eswswlymnrro",
+        "amet"
+      ],
+      "minimum_test_timeout": null,
+      "output": "Gw3sFpxh",
+      "test_package": [
+        "IpguDj2ht",
+        "ZQ5",
+        "adipisc",
+        "nGNoycPkA3W2NWP",
+        "SWa"
+      ],
+      "test_tool": 67,
+      "timeout_multiplier": 467.82,
+      "pffbotkj": 8,
+      "ylmocbs": "amet ",
+      "dpuwhq": null
+    },
+    {
+      "additional_cargo_args": [
+        "XqX2VfGjZePucb2X1jM",
+        "Pkh1jCAzqklK72",
+        "aOrr9",
+        "xobj",
+        "hscuxmdzwtfoyvveibdo"
+      ],
+      "additional_cargo_test_args": [
+        "vwyxnqtankufvflo",
+        "ipsum amet",
+        "HKeHuulGyWNylSmQiOL5",
+        "SQ7yYhF",
+        "FaXwNoqrt2"
+      ],
+      "build_timeout_multiplier": -318.88,
+      "cap_lints": false,
+      "error_values": [
+        "consectetur con",
+        "lorem adi",
+        "txvfmvkchvayapgb",
+        "ejftxwehpygthhoc",
+        "sit sit ipsum d"
+      ],
+      "examine_globs": [
+        "0uVOTDLPBKG5O2PYZbOpj",
+        "QM84ubzs1ly1y",
+        "p0XLHV",
+        "zjaosvidurdlffoxqj",
+        "5CYiq0ZCvJRBfyz"
+      ],
+      "exclude_globs": [
+        "ehqgkvhmmnxthtzruajip",
+        "dolor lorem adip",
+        "qSX0QJN7R2F",
+        "do",
+        "sit i"
+      ],
+      "minimum_test_timeout": null,
+      "test_workspace": null,
+      "timeout_multiplier": -561.82,
+      "dolor ame": 1,
+      "lorem dol": "gfkddn",
+      "adipiscin": "dolor "
+    },
+    {
+      "additional_cargo_test_args": [
+        "wcdkupqxrvkdbyffrmp",
+        "ipsum consectetur ad",
+        "ctvf",
+        "jB3Ufyk",
+        "sit lorem consecte"
+      ],
+      "cap_lints": true,
+      "copy_vcs": null,
+      "error_values": [
+        "d",
+        "anyzwnvvvygfjerrimnp",
+        "uGracP",
+        "etjanoaqqpccnxdso",
+        "ENl"
+      ],
+      "examine_re": [
+        "snfbvxhkelubvb",
+        "lorem dolor do",
+        "ip",
+        "sit ipsum a",
+        "GGAl8vld"
+      ],
+      "minimum_test_timeout": 958.41,
+      "output": null,
+      "skip_calls": [
+        "8Or94Na",
+        "ndcrrvuouyde",
+        "consecte",
+        "bsSk",
+        "lorem ipsum lorem c"
+      ],
+      "test_tool": 16,
+      "test_workspace": false
+    },
+    {
+      "additional_cargo_args": [
+        "hwrj",
+        "Z7baB7CXPc",
+        "vgczmzwvlqbzarf",
+        "qdYQUJmDSm3FNPL",
+        "lorem sit amet ipsum"
+      ],
+      "additional_cargo_test_args": [
+        "yefrmxerfyjknyvqiqwm",
+        "utFNv",
+        "nvfqpdmfakjavvdgcwtu",
+        "clcxuxjuepwtmhi",
+        "6W6HGs0E7WUCsbUUp3n"
+      ],
+      "cap_lints": false,
+      "copy_vcs": null,
+      "error_values": [
+        "adipiscing ",
+        "amet amet dolor sit d",
+        "fbflyreiwcpfneshz",
+        "qmkvmcxlwrzuuesdvjcuz",
+        "gmkxobpyzczrl"
+      ],
+      "examine_re": [
+        "MYxOLJ",
+        "sit ipsum ip",
+        "lorem sit sit",
+        "ad",
+        "sit"
+      ],
+      "exclude_re": [
+        "lyznpxxcjo",
+        "consectetur dolor ip",
+        "consectet",
+        "W8W2",
+        "ubdbptyblu"
+      ],
+      "minimum_test_timeout": 459.41,
+      "skip_calls": [
+        "QgzuhCSjJlFYdm",
+        "q",
+        "9xeYa0DWnb",
+        "senubiyyvmcleeccmnh",
+        "oiBznAd5q"
+      ],
+      "skip_calls_defaults": null,
+      "test_package": [
+        "PsK57qHZmX0pvo2YdE",
+        "wavhh",
+        "W36nGKvvVfrBHqR",
+        "amet lorem adipiscin",
+        "aqurhi"
+      ],
+      "test_workspace": null,
+      "dolor ": 82,
+      "oQK1nrqi": 87,
+      "dolor a": 6
+    },
+    {
+      "additional_cargo_test_args": [
+        "wyaupqubspqchujeki",
+        "pnetrw",
+        "bQGv5mLx3Wfb3OoD",
+        "amet amet amet sit",
+        "ctweikxfdtepcaulsau"
+      ],
+      "cap_lints": false,
+      "copy_vcs": false,
+      "examine_globs": [
+        "h",
+        "Q3FWSCRv7dni",
+        "ips",
+        "lorem ame",
+        "fvmjnehlvcnmobymlgtq"
+      ],
+      "examine_re": [
+        "RDfHbmYp7CCN7sil1F6",
+        "zcusfesqzuhfym",
+        "VlUXz7SJ",
+        "adipiscin",
+        "ipsum lo"
+      ],
+      "exclude_globs": [
+        "UhIYfkdg",
+        "qecuopjijkcuuf",
+        "kOlVmfs",
+        "znexdufcxzhtvywljohvk",
+        "okhDZNWJ5Hg3T"
+      ],
+      "exclude_re": [
+        "pcweztjp",
+        "i",
+        "sit amet",
+        "bqgpkfykih",
+        "dol"
+      ],
+      "minimum_test_timeout": null,
+      "output": "iakjcktwslptagngw",
+      "profile": "o5DZlEWCoK3klQ2",
+      "skip_calls_defaults": true,
+      "test_workspace": true,
+      "timeout_multiplier": null,
+      "xzxpjgbrn": 22,
+      "zrllgoh": 23.62
+    },
+    {
+      "additional_cargo_args": [
+        "cibxeqczjdvvm",
+        "tQv42XFbdBZx8KhI8s",
+        "guflubwjqqzktpfmzxf",
+        "dphadxbvhaesbeqnsda",
+        "VPfSs9o"
+      ],
+      "additional_cargo_test_args": [
+        "eidtcvumkbalctz",
+        "lorem consectetur ",
+        "qsxlV4yBhF398C",
+        "3gEof",
+        "rQiGJBMHfOs4JonjpAsiy"
+      ],
+      "build_timeout_multiplier": null,
+      "cap_lints": true,
+      "examine_globs": [
+        "dakxkE1f",
+        "ipsum consec",
+        "vP3GWpOsA2SIJFqUB",
+        "zqfyybfdncp",
+        "A6Zwjn"
+      ],
+      "exclude_globs": [
+        "TQJwpXiodJ",
+        "lorem s",
+        "sit",
+        "dolor",
+        "qrBK7IL20dFH"
+      ],
+      "exclude_re": [
+        "adipiscing adipi",
+        "BM",
+        "sit amet amet d",
+        "sit sit amet",
+        "hkhxsu57Ypxoy6T"
+      ],
+      "output": "izrdrvdckbjchc",
+      "skip_calls": [
+        "dolor consectetur ",
+        "18csXNjFDHF4d3U",
+        "pprededgkz",
+        "adipiscing ip",
+        "amet amet lo"
+      ],
+      "skip_calls_defaults": null,
+      "test_tool": null,
+      "sit c": 38,
+      "ipsum ipsu": null,
+      "olNvSJPCPb": 51.0
+    },
+    {
+      "additional_cargo_args": [
+        "vbauathaqmci",
+        "consectetu",
+        "sit",
+        "dxo",
+        "qtlzgapnf"
+      ],
+      "additional_cargo_test_args": [
+        "arawmpnasollcsawnpo",
+        "zWBMWLr3",
+        "ipsum d",
+        "JOg7VfbBCGlsF9gHz",
+        "TGjF1BG"
+      ],
+      "build_timeout_multiplier": -617.61,
+      "cap_lints": true,
+      "error_values": [
+        "exaswysxcp",
+        "lorem ips",
+        "dudevipxer",
+        "ipsu",
+        "mkemroywnvvlrk"
+      ],
+      "examine_globs": [
+        "ipsum dolor ipsum co",
+        "Dnm5onMPeXyVN9k",
+        "lorem adipisci",
+        "vwzrqgzzlog",
+        "dolor adipiscing do"
+      ],
+      "examine_re": [
+        "TmarjvdmUqJno5",
+        "sit",
+        "aqgnzf",
+        "kchxffzdjbfadlro",
+        "ueyvfyotdeqdd"
+      ],
+      "output": null,
+      "skip_calls": [
+        "adipiscing consect",
+        "lo",
+        "adipiscing ",
+        "oencbikkxbdq",
+        "adipi"
+      ],
+      "skip_calls_defaults": null,
+      "test_tool": true,
+      "test_workspace": false,
+      "timeout_multiplier": null
+    },
+    {
+      "additional_cargo_args": [
+        "dD",
+        "sit ipsum lorem ad",
+        "consectetur ",
+        "NR8lZklFlM",
+        "ipsum"
+      ],
+      "additional_cargo_test_args": [
+        "vezmehcvyxsnjrabn",
+        "nph0CAD0AxS",
+        "m1uQ3Ph18",
+        "ccucwfl",
+        "mlktkvuj"
+      ],
+      "build_timeout_multiplier": -652.51,
+      "copy_vcs": null,
+      "error_values": [
+        "LI8DYFvYhltFJlaCeH",
+        "ipsu",
+        "lorem lorem lorem am",
+        "PRG9bBjZRVGaeA6",
+        "amet"
+      ],
+      "examine_re": [
+        "xu",
+        "92ymijtlBySSge",
+        "quvxrdiemomohqwjsxnn",
+        "mcbanclorvekjfmkw",
+        "gwlfaixbdrmcekjlf"
+      ],
+      "exclude_globs": [
+        "oZLScKRwG1LXpXcZov",
+        "consect",
+        "d",
+        "prpkjxcv",
+        "ipsum consecte"
+      ],
+      "exclude_re": [
+        "amet amet ip",
+        "chdqlnoadci",
+        "adhnfvvklqddbsqexctub",
+        "L41t7WMgorgtzEy4NXlxK",
+        "consec"
+      ],
+      "minimum_test_timeout": null,
+      "skip_calls": [
+        "gkdvohwquoftfcdcc",
+        "kdbsdorwflx",
+        "consec",
+        "pa1WWnTEkJAj4Gs",
+        "iL6Iuh"
+      ],
+      "skip_calls_defaults": null,
+      "test_package": [
+        "LTsEbVX9NFz9aC",
+        "6HdlmL",
+        "ohq",
+        "mvemsvtuff",
+        "njhvyw"
+      ],
+      "test_tool": null,
+      "timeout_multiplier": 681.57,
+      "tVoF30ZG": 35.95
+    },
+    {
+      "additional_cargo_args": [
+        "oifTGRf",
+        "AMn3xyQjO0v6GWDyqam9",
+        "sit ipsum sit lore",
+        "adipi",
+        "86OcbDYfAftauGm"
+      ],
+      "build_timeout_multiplier": -114.05,
+      "cap_lints": true,
+      "copy_vcs": null,
+      "examine_globs": [
+        "dyddhzkywimggwjrnavi",
+        "Yyzxf25SyBtOO",
+        "amet dolor",
+        "B72A4esQ",
+        "nygwkrphrpz"
+      ],
+      "exclude_globs": [
+        "maws03PWqzURz",
+        "anfnyzznuygw",
+        "GMNVVmbgtJ7zwI",
+        "mg1yWqu231RyISwmC0R",
+        "ymxxme"
+      ],
+      "exclude_re": [
+        "ncubrarh",
+        "z",
+        "adipis",
+        "oU",
+        "bufemh"
+      ],
+      "output": "dolor adipiscing s",
+      "profile": "lorem",
+      "skip_calls_defaults": true,
+      "test_package": [
+        "vl",
+        "lorem sit ",
+        "a",
+        "zotp",
+        "exe"
+      ],
+      "test_tool": "Kb6iarIrEX",
+      "test_workspace": false,
+      "qojPV": "SWkzdoq0fa6",
+      "adipis": 32
+    },
+    {
+      "additional_cargo_args": [
+        "ekjncdtgrqffvzy",
+        "dolor",
+        "CrXx1Nl",
+        "VJl04oBN3hI8LSWFrKGv",
+        "kbchlgvslxux"
+      ],
+      "additional_cargo_test_args": [
+        "we",
+        "dbpfiqqto",
+        "QDYhKcSgQj8",
+        "HRjX2cmpfiNhe6yHDvCmJ",
+        "ZZe9q900f"
+      ],
+      "build_timeout_multiplier": -218.92,
+      "cap_lints": false,
+      "error_values": [
+        "o",
+        "OnNSbfKu",
+        "consectetur adi",
+        "oesraikjsfxp",
+        "qMNiKKgs1JnyCR1fcBb"
+      ],
+      "examine_globs": [
+        "hrov",
+        "conse",
+        "jossqm",
+        "adipiscing ",
+        "consectetu"
+      ],
+      "exclude_globs": [
+        "hNdD",
+        "E7PFpLGYgl5RCRhwt",
+        "s2R5lfvVM5SftmqPBUa4k",
+        "bozamljfegfhxygagwer",
+        "dum"
+      ],
+      "exclude_re": [
+        "adipiscing sit do",
+        "ujygposhkixtiuqgmcfc",
+        "con",
+        "fyirpmrxs",
+        "amet ipsum dolor "
+      ],
+      "minimum_test_timeout": 927.26,
+      "profile": "zmhuowbrx",
+      "skip_calls": [
+        "pxf",
+        "S9F",
+        "zYApQLew2raYL",
+        "mswddvh",
+        "d"
+      ],
+      "skip_calls_defaults": true,
+      "GyySPhJW": 65
+    },
+    {
+      "additional_cargo_args": [
+        "ojbnpxm",
+        "BpjBHlW",
+        "kflhcvrr",
+        "xAzPaCHvb",
+        "sit ipsum lo"
+      ],
+      "additional_cargo_test_args": [
+        "kzv",
+        "k0F1lG27eJHRBYPLLCNQ5",
+        "xlxdywi",
+        "sit",
+        "lQurjCAGX7pr"
+      ],
+      "cap_lints": true,
+      "examine_globs": [
+        "dolor consectetur s",
+        "u6rQ3ydnejhvwBPPQwP",
+        "sit sit dolor dolo",
+        "sit sit",
+        "gpiwlbofax"
+      ],
+      "minimum_test_timeout": null,
+      "skip_calls_defaults": true,
+      "test_tool": 88,
+      "test_workspace": null,
+      "timeout_multiplier": -706.4,
+      "ipsum": null,
+      "tqexu": 44.87,
+      "xyurw": 75
+    },
+    {
+      "additional_cargo_args": [
+        "IOlsAKSHU2lXBFfdlJ3Z",
+        "EzDeLZxmAL0iXweos",
+        "BP3ZN",
+        "nwznfgfpoevjbdmw",
+        "adipiscing"
+      ],
+      "additional_cargo_test_args": [
+        "sit am",
+        "iLGaorhW",
+        "t",
+        "plsUmCYZC0NofkW",
+        "tyrdgkelygebd"
+      ],
+      "build_timeout_multiplier": -451.92,
+      "examine_globs": [
+        "xdsktbt",
+        "adipiscing sit ips",
+        "a",
+        "adipiscing adipisc",
+        "yanopmhxwsyocsctqf"
+      ],
+      "examine_re": [
+        "wkq",
+        "dolor sit dolo",
+        "sit ipsum lorem",
+        "HSKVCn6bh7s",
+        "s"
+      ],
+      "exclude_re": [
+        "consectetur adi",
+        "XUYQ40Nrf",
+        "xgtyfaefrvvrzzlxsg",
+        "smnvaxnygkuxyltmgya",
+        "dolo"
+      ],
+      "output": "dolor ",
+      "profile": "sit ipsum amet co",
+      "skip_calls": [
+        "Ac7bDV95qPg4qlWi",
+        "Ol3",
+        "zejzkidviwoezx",
+        "uzuxatldxcodmjawtfrv",
+        "ffsljtidowycti"
+      ],
+      "test_package": [
+        "vpgq",
+        "gmrfhvkjqrwowxyxsskcx",
+        "mvwapfufoelpwe",
+        "mpxu",
+        "adip"
+      ],
+      "test_tool": 10.17,
+      "timeout_multiplier": null
+    },
+    {
+      "additional_cargo_test_args": [
+        "xtrlirm",
+        "conse",
+        "rphtwprf",
+        "qcffsnvsxtnulfnbvdn",
+        "v0OY"
+      ],
+      "build_timeout_multiplier": 973.72,
+      "cap_lints": true,
+      "error_values": [
+        "MxTq3kWusaoon5jfPb",
+        "IPuQ0H8t5lwYcM2",
+        "uNeb2MkAr1rSUtpG",
+        "luudllzortpdx",
+        "amet amet d"
+      ],
+      "examine_globs": [
+        "p",
+        "MiivXc2IQp9fsxWsz5",
+        "T86grMQr5CVdrbXG7Lu",
+        "idbztvydwwsh",
+        "gPs7DPGYRNbiUz8NZU"
+      ],
+      "minimum_test_timeout": null,
+      "output": null,
+      "skip_calls": [
+        "vz",
+        "bq2SYqP",
+        "znRKV9T",
+        "fkBulPW2tXUR9kr",
+        "sit amet consectetur"
+      ],
+      "skip_calls_defaults": true,
+      "test_package": [
+        "ipsum dolor dolor ",
+        "ipsum adipiscin",
+        "cslqpqw",
+        "qo",
+        "OhE"
+      ],
+      "test_tool": false,
+      "test_workspace": false,
+      "timeout_multiplier": 706.76,
+      "raurma": null,
+      "consect": "tyews"
+    },
+    {
+      "cap_lints": false,
+      "copy_vcs": true,
+      "examine_globs": [
+        "amet ",
+        "ipsum ipsum adipiscin",
+        "CHqlJgLXZp",
+        "eMHYfSCWDinj1l",
+        "ijMfjaYpeMSNHHSt0R"
+      ],
+      "minimum_test_timeout": 158.14,
+      "output": "wdfgcxq",
+      "profile": "amet dolor consectetu",
+      "skip_calls": [
+        "ipsum ip",
+        "QTMxRF4D",
+        "adipiscing dolor",
+        "mkf",
+        "xlbnnbpezehxg"
+      ],
+      "skip_calls_defaults": null,
+      "test_package": [
+        "sit lo",
+        "al",
+        "sit",
+        "YYef",
+        "mwsnvftdjci"
+      ],
+      "test_workspace": true
+    },
+    {
+      "additional_cargo_test_args": [
+        "itie",
+        "adipiscing l",
+        "qvmwrs",
+        "yvngyz",
+        "jsrevvyywoqmqjhwvnxo"
+      ],
+      "build_timeout_multiplier": null,
+      "cap_lints": true,
+      "copy_vcs": null,
+      "examine_re": [
+        "m",
+        "islpwrbqjzggxkcuxmew",
+        "consectetur",
+        "ezny",
+        "lorem con"
+      ],
+      "exclude_re": [
+        "pzdfrqlwigujaikq",
+        "ipsu",
+        "brf",
+        "ac",
+        "ivl"
+      ],
+      "minimum_test_timeout": null,
+      "output": "d",
+      "skip_calls_defaults": true,
+      "test_tool": true,
+      "timeout_multiplier": null,
+      "dolor adi": null,
+      "srunqxe": 13,
+      "JebEFpItE": 66.26
+    },
+    {
+      "build_timeout_multiplier": null,
+      "cap_lints": false,
+      "error_values": [
+        "BOQUrEirEevYlAcT",
+        "ujri",
+        "Ajimpt3ni",
+        "pyvqjznfk",
+        "yP2OiKTHefHSETIZnZUhn"
+      ],
+      "examine_globs": [
+        "bthwh",
+        "vanf",
+        "lorem adip",
+        "ainruiwxdz",
+        "nt"
+      ],
+      "examine_re": [
+        "yjnuizu",
+        "consectetur sit",
+        "d1r3Dz0h1rW7Zu",
+        "swfNBI2Bb",
+        "pypmcpkvxxaqgpkbhmas"
+      ],
+      "exclude_globs": [
+        "gnl",
+        "MVnFm647ilYD0Nc",
+        "ut5b",
+        "s",
+        "1"
+      ],
+      "exclude_re": [
+        "consectetur amet sit",
+        "dolor consectet",
+        "YhgOpGkY13j61QfLz",
+        "adipiscing sit ",
+        "cdqyonwfanpdrpv"
+      ],
+      "minimum_test_timeout": -931.06,
+      "profile": null,
+      "skip_calls_defaults": true,
+      "test_package": [
+        "sit",
+        "consecte",
+        "kt1Fk",
+        "IS1",
+        "sit dolor ipsum a"
+      ],
+      "test_workspace": false,
+      "9XROOYRvK": false,
+      "ufbyks": 70.11,
+      "ipsum adip": true
+    },
+    {
+      "additional_cargo_args": [
+        "sltylodharyvexfdngc",
+        "ipsum ",
+        "dol",
+        "dolor ad",
+        "bkzzyefczl"
+      ],
+      "additional_cargo_test_args": [
+        "rrumuwnijpomktryzaktn",
+        "dolor amet adipiscin",
+        "wxxykkltzrlcdbdakhy",
+        "bQ4J4",
+        "rg811jNd"
+      ],
+      "cap_lints": true,
+      "error_values": [
+        "aqeyjiwayyeden",
+        "dolor amet consectetu",
+        "lijdffjblcbdmqu",
+        "zqgslgcxl",
+        "dolor"
+      ],
+      "examine_globs": [
+        "suqFJez2SFyu",
+        "dolor",
+        "adi",
+        "sm",
+        "dolor ipsum dolor lo"
+      ],
+      "examine_re": [
+        "sit lorem",
+        "esvyrirqkpbaex",
+        "d",
+        "knxhchsiobv",
+        "ezxfkejtc"
+      ],
+      "minimum_test_timeout": 665.96,
+      "profile": null,
+      "test_package": [
+        "CRLvcP",
+        "oKBMaTnYDPAh8",
+        "kkuvu",
+        "KITtW9o",
+        "iwabeufthu"
+      ],
+      "test_tool": 1.74,
+      "test_workspace": null
+    },
+    {
+      "additional_cargo_args": [],
+      "build_timeout_multiplier": null,
+      "cap_lints": true,
+      "copy_vcs": true,
+      "examine_globs": [],
+      "examine_re": [
+        "dolor adipisci",
+        "pxtozauiqgnyfabxtozei",
+        "auufjefpmmcqbye",
+        "ipsum lorem adipisc"
+      ],
+      "exclude_globs": [
+        "yW",
+        "syylkI8Kzb5tsS2gen",
+        "gOFgex8A9xugLk6MbMDOL",
+        "7fPE",
+        "knpokky"
+      ],
+      "minimum_test_timeout": -683.38,
+      "output": "3x",
+      "profile": "consectet",
+      "skip_calls": [
+        "CK",
+        "fvzvfhysk",
+        "RlavT56Jz"
+      ],
+      "skip_calls_defaults": null,
+      "test_package": [
+        "6Wi57hHEpT5"
+      ],
+      "timeout_multiplier": 715.61,
+      "lxjoldmtqy": 98,
+      "ipsum co": false
+    },
+    {
+      "additional_cargo_args": [
+        "gF7IGWBr0k32HGe",
+        "aifpek",
+        "dolor ipsum ame"
+      ],
+      "cap_lints": false,
+      "examine_globs": [
+        "bmpr",
+        "k",
+        "9lYopbEFt5HJOhgJ",
+        "co",
+        "dolor ipsum amet ip"
+      ],
+      "exclude_globs": [
+        "0fp3RAQdZmiBg0N",
+        "e",
+        "cons",
+        "adipis"
+      ],
+      "exclude_re": [
+        "wagdcr",
+        "fqyas",
+        "ipsum ad",
+        "birfzqwrw"
+      ],
+      "minimum_test_timeout": null,
+      "skip_calls_defaults": false,
+      "test_workspace": true,
+      "timeout_multiplier": null,
+      "bnxaz": "YL9cLPkUmYTSf",
+      "gRRURbd2p": null,
+      "savkwyb": false
+    },
+    {
+      "additional_cargo_test_args": [
+        "SNQHFUhF",
+        "ame",
+        "yughjckowhxrdgmef",
+        "uki"
+      ],
+      "error_values": [
+        "dolor",
+        "NFFc6A1uf9Ek75g6i"
+      ],
+      "examine_globs": [
+        "poshbcgpbbfabddiwrabi"
+      ],
+      "examine_re": [
+        "SNpq9G45YMTrm",
+        "CWcizHAsqpymW",
+        "dbedvwc"
+      ],
+      "minimum_test_timeout": -515.65,
+      "test_workspace": false,
+      "pydethqpqg": null,
+      "dolor s": null,
+      "iblxowv": "xcuhbgxbcNKS"
+    },
+    {
+      "additional_cargo_test_args": [
+        "dolor consectetu",
+        "amet dolor dolor i"
+      ],
+      "build_timeout_multiplier": null,
+      "cap_lints": true,
+      "copy_vcs": false,
+      "error_values": [
+        "lorem sit ipsum i",
+        "aaqyxstmmwcrseuez",
+        "6bQBj6KHKJa0LQn"
+      ],
+      "exclude_re": [
+        "C1UN1hznm",
+        "mzkfdgdydvumbfykudbj",
+        "xwuhejqenoqv",
+        "consectetur si",
+        "OYRGQg4IqL80U3ZsPr"
+      ],
+      "minimum_test_timeout": 148.94,
+      "output": null,
+      "profile": null,
+      "skip_calls": [
+        "zna",
+        "rUoBUS3aCl3pXGVX13zP4",
+        "ZWBBB6o7ipTRss",
+        "amet amet adipiscin"
+      ],
+      "skip_calls_defaults": true,
+      "test_package": [
+        "MtLGH7z",
+        "consectet",
+        "rfa"
+      ],
+      "test_tool": 59,
+      "test_workspace": false,
+      "timeout_multiplier": null,
+      "adipisci": "jnzclnrc",
+      "tfblga": 62,
+      "onzjth": null
+    },
+    {
+      "additional_cargo_args": [
+        "sxteflkzsmjfpyelipg",
+        "ips",
+        "xpxubgrmavqln",
+        "sit si",
+        "fgowekpebtqpocmmnebn"
+      ],
+      "copy_vcs": null,
+      "error_values": [
+        "wcottlb",
+        "I1zyjAHWcHW",
+        "volwxriwry",
+        "lptldvnlnh"
+      ],
+      "examine_re": [
+        "miclkoq"
+      ],
+      "exclude_globs": [],
+      "exclude_re": [
+        "tydfskkv",
+        "lzl",
+        "RsoO6",
+        "ame"
+      ],
+      "minimum_test_timeout": null,
+      "output": null,
+      "profile": null,
+      "skip_calls": [
+        "cons",
+        "zjfbezyyebz"
+      ],
+      "timeout_multiplier": null,
+      "gsrRRNyF": "oxpqfu"
+    },
+    {
+      "additional_cargo_args": [
+        "sit ipsum",
+        "h",
+        "adipiscing dolor dol",
+        "ajztpqrekh",
+        "lorem s"
+      ],
+      "additional_cargo_test_args": [
+        "Mib0UXGGLW",
+        "LKiRg5P",
+        "gfqxyupj",
+        "wtm"
+      ],
+      "cap_lints": false,
+      "copy_vcs": true,
+      "error_values": [
+        "Jvx6xB6uGk0ZoMoZEr8"
+      ],
+      "examine_globs": [
+        "hlxjwqypxmfimpljgnrqa",
+        "amet sit",
+        "jvxhzgqhtpffkvgozuf",
+        "dolor ipsum ip"
+      ],
+      "examine_re": [],
+      "exclude_globs": [
+        "Cpax",
+        "nenuhokorjpalddauryh",
+        "amet consectetur ",
+        "amet lorem consec",
+        "eSoKVq3VV3"
+      ],
+      "exclude_re": [],
+      "test_package": [
+        "sit",
+        "sit ipsum dolor l",
+        "IaLnP",
+        "ssm"
+      ],
+      "test_tool": "292nhu",
+      "test_workspace": false
+    },
+    {
+      "additional_cargo_args": [],
+      "additional_cargo_test_args": [
+        "dzrhbvxiczxmctzhjwtxq"
+      ],
+      "build_timeout_multiplier": 730.28,
+      "cap_lints": false,
+      "exclude_re": [
+        "VWlvGg0dA",
+        "nmfJUvgAe",
+        "sit s",
+        "aw80DqqHBqcW97Fyh9Be",
+        "tnfutnyeypcvwvl"
+      ],
+      "skip_calls": [],
+      "skip_calls_defaults": null,
+      "test_package": [],
+      "test_tool": 85,
+      "test_workspace": null,
+      "timeout_multiplier": -904.48
+    },
+    {
+      "additional_cargo_test_args": [],
+      "build_timeout_multiplier": null,
+      "exclude_re": [
+        "lorem adipiscing c",
+        "ipsum ipsum ipsum a",
+        "qulsn",
+        "consectetur amet ips"
+      ],
+      "profile": "iwpyktrtyendqnoq",
+      "skip_calls": [
+        "qc9",
+        "xh",
+        "adipiscing do",
+        "h9",
+        "vuvrnngopmx"
+      ],
+      "test_package": [
+        "5iN26g5o4H3",
+        "umy",
+        "lorem a",
+        "amet sit ipsum cons"
+      ],
+      "test_tool": 85.49
+    },
+    {
+      "additional_cargo_test_args": [
+        "amet conse",
+        "hwlybbynmzvckeod",
+        "sit ipsum dolor ip",
+        "buarrgtxcsif",
+        "7UscTxcsj9pEc1Fb"
+      ],
+      "copy_vcs": null,
+      "error_values": [
+        "niqttfhncughhfv",
+        "lorem adipis",
+        "lo",
+        "fogtqhnavnsmykhuv"
+      ],
+      "exclude_globs": [
+        "nkaufedvyfoafohy",
+        "sit lorem consectetu"
+      ],
+      "minimum_test_timeout": -995.76,
+      "skip_calls": [
+        "wzwhiqbmewsb",
+        "sit amet",
+        "qqbudtwhxdomfruc",
+        "lorem l",
+        "q"
+      ],
+      "skip_calls_defaults": null,
+      "test_package": [
+        "czqrqtmbycmbpvxhqdib",
+        "wv",
+        "vxfdmz",
+        "lorem lore"
+      ],
+      "test_workspace": null,
+      "timeout_multiplier": null
+    },
+    {
+      "additional_cargo_args": [
+        "jzhGJvY"
+      ],
+      "additional_cargo_test_args": [
+        "sit amet dolor",
+        "qpqxmo"
+      ],
+      "copy_vcs": true,
+      "examine_globs": [
+        "OuxupjwqHcC"
+      ],
+      "examine_re": [
+        "qt",
+        "lvqxxh",
+        "b4mKrZ3q5amJRnRT3"
+      ],
+      "exclude_globs": [
+        "zjihmvinzgcbtbjrmnpa",
+        "tjgcfrlyvbslmyqnamgg",
+        "K4IysMT",
+        "ipsum amet sit s"
+      ],
+      "minimum_test_timeout": null,
+      "output": null,
+      "skip_calls_defaults": null,
+      "test_package": [
+        "xq",
+        "cl6RbW3TXYmMeQPWW"
+      ],
+      "test_workspace": true,
+      "timeout_multiplier": null
+    },
+    {
+      "additional_cargo_test_args": [],
+      "cap_lints": true,
+      "copy_vcs": false,
+      "error_values": [
+        "GYQFami27xU",
+        "xov",
+        "tlcewraucaxx",
+        "0k0ri7pl5n37"
+      ],
+      "examine_globs": [
+        "ohdilxu",
+        "wddu",
+        "ratf",
+        "hjieksbahmdbauq"
+      ],
+      "examine_re": [
+        "consectetur dolor l"
+      ],
+      "exclude_re": [
+        "ikboiiqzazdov",
+        "wrwhdpathmqactdrdxp",
+        "lrllujvwbsyrgjovdrem",
+        "adipiscin",
+        "lorem amet lorem "
+      ],
+      "minimum_test_timeout": -208.27,
+      "skip_calls": [
+        "adipiscing amet ",
+        "adi",
+        "dolor sit co",
+        "con"
+      ],
+      "test_package": [
+        "vgc",
+        "zxqptzhwvbr"
+      ],
+      "test_tool": 49,
+      "timeout_multiplier": null,
+      "BlMdtlP": false,
+      "2igQRLW": null,
+      "wivldr": 92
+    },
+    {
+      "additional_cargo_test_args": [
+        "cxqgeyhmaswtbrfmvn",
+        "xbfmmypouaszpvti",
+        "Go7oNyHa92bq5VJZhUkr",
+        "IOBY7J"
+      ],
+      "build_timeout_multiplier": null,
+      "cap_lints": true,
+      "examine_re": [
+        "conse"
+      ],
+      "exclude_globs": [
+        "sit a"
+      ],
+      "exclude_re": [
+        "xwslfrfgwama",
+        "phhxjnhwqobuaewm",
+        "dnzcuwlwwoxjmapkeogl"
+      ],
+      "minimum_test_timeout": null,
+      "output": "sit adipiscing ",
+      "test_package": [
+        "rdqnkklsvblpt",
+        "afghrclfipaonzowy",
+        "iyczbitfadzeynsmggcjy"
+      ],
+      "test_workspace": null,
+      "lorem do": false,
+      "Fgsm0f": null
+    },
+    {
+      "additional_cargo_args": [
+        "rmifwsjecrhhhextlyfaa"
+      ],
+      "cap_lints": false,
+      "exclude_globs": [],
+      "exclude_re": [
+        "sfjxiujlhr",
+        "Xv3IHouGY"
+      ],
+      "minimum_test_timeout": -986.4,
+      "output": "amet lor",
+      "profile": null,
+      "skip_calls_defaults": true,
+      "test_package": [
+        "consectetur",
+        "Li04yb3Du0QQCyvbas"
+      ],
+      "test_tool": "sznqdyvzeann",
+      "test_workspace": null,
+      "timeout_multiplier": null,
+      "ipsum": false,
+      "amet dolo": null,
+      "lorem d": "eyhxcxuwopouues"
+    },
+    {
+      "additional_cargo_args": [
+        "eueieqbswwldm",
+        "ovAh6OGltzj",
+        "xLLI1YRAcj9",
+        "amet d"
+      ],
+      "additional_cargo_test_args": [
+        "ueefeuwjruwupuiphkjm",
+        "S",
+        "sdktcwbroyjiehiphew",
+        "con"
+      ],
+      "build_timeout_multiplier": null,
+      "error_values": [
+        "lorem adipiscing "
+      ],
+      "exclude_re": [
+        "amet",
+        "EdmUGlDjnJuqZBR3RMB"
+      ],
+      "profile": "hgrxbprgtgo",
+      "skip_calls": [
+        "consectetur amet a",
+        "B6B5Pj8bQt7plpSyL4S"
+      ],
+      "test_package": [],
+      "test_tool": 22,
+      "test_workspace": false,
+      "timeout_multiplier": -59.35
+    },
+    {
+      "additional_cargo_args": [
+        "bjfzrzehsg",
+        "MiuWDy8GBfKEr",
+        "adipiscing dolor sit",
+        "8La"
+      ],
+      "build_timeout_multiplier": null,
+      "cap_lints": true,
+      "copy_vcs": false,
+      "error_values": [
+        "cglzucjuxch",
+        "wwkppfssjmetixzcoukt",
+        "ll"
+      ],
+      "examine_globs": [
+        "lorem lorem sit c",
+        "zwbnrxolhfvat",
+        "ipsum ipsum ",
+        "pnmothxezmacrxcaiu"
+      ],
+      "examine_re": [
+        "lorem lor",
+        "wzHPMZm4t39s",
+        "Ikeq7VvRnh"
+      ],
+      "exclude_globs": [
+        "cucytyqdyyssrlh",
+        "p0MXGmk9"
+      ],
+      "exclude_re": [
+        "dolor ipsum sit lo"
+      ],
+      "profile": null,
+      "skip_calls_defaults": true,
+      "test_workspace": null,
+      "ihrwvn": 9,
+      "elkpvrwe": "dolor",
+      "qladhxxlgf": null
+    },
+    {
+      "additional_cargo_args": [],
+      "build_timeout_multiplier": -241.75,
+      "cap_lints": false,
+      "error_values": [
+        "paBfLetB4fiWb4JqZV",
+        "DYNJ7a3OAHX"
+      ],
+      "examine_globs": [
+        "jatevxreikbloiecq",
+        "z",
+        "S4N97NoDl9BUc"
+      ],
+      "examine_re": [
+        "d"
+      ],
+      "exclude_globs": [
+        "gdwfAaHeRz9qDUuvN82zS",
+        "oe2dG",
+        "4VsZwHuhkKATCbBTSS"
+      ],
+      "exclude_re": [
+        "d",
+        "iFHw3vqFmty6emm93",
+        "ipsum a"
+      ],
+      "minimum_test_timeout": 858.75,
+      "profile": null,
+      "skip_calls": [
+        "c",
+        "ixvypaupziprjlywifl",
+        "ezbknve"
+      ],
+      "skip_calls_defaults": null,
+      "test_package": [
+        "npbj",
+        "gJ7uOqBJpQF4r7lbOTD"
+      ],
+      "test_tool": null,
+      "test_workspace": null,
+      "mxxuhpzik": 32
+    },
+    {
+      "additional_cargo_test_args": [
+        "Wb"
+      ],
+      "build_timeout_multiplier": null,
+      "copy_vcs": null,
+      "examine_globs": [
+        "myVO"
+      ],
+      "examine_re": [
+        "adipis",
+        "H5g2",
+        "sit"
+      ],
+      "minimum_test_timeout": 601.9,
+      "output": null,
+      "skip_calls": [
+        "enbygnsmmmpqsmk",
+        "consec",
+        "jDTZwLdZyhmY",
+        "NVfcTgk"
+      ],
+      "skip_calls_defaults": true,
+      "test_package": [
+        "xsqwmtblefouglul",
+        "yoglydnjiclpuyihd",
+        "atjpecclytrvvzsld"
+      ],
+      "test_tool": true,
+      "timeout_multiplier": null
+    },
+    {
+      "additional_cargo_test_args": [
+        "ljsNeNDPzg",
+        "sit ipsum",
+        "xbsqwapsswblxujq",
+        "M8"
+      ],
+      "build_timeout_multiplier": null,
+      "error_values": [
+        "rtogpnsl",
+        "rnbbglwlqescgjixjdo",
+        "ymohrgr",
+        "lkrkofmngiz"
+      ],
+      "examine_globs": [
+        "WLFveykBcJyzH5eg",
+        "adipiscing amet am",
+        "adipiscing adipi",
+        "lqycftguqmegfwo"
+      ],
+      "exclude_globs": [
+        "kbitunfqdbbivvcwo",
+        "FuoeuLnE4IfbPp",
+        "consectetur i"
+      ],
+      "exclude_re": [
+        "ipsum amet consec",
+        "QvCaFQad4JfW",
+        "conse",
+        "YQ1ncYbZvyh",
+        "hwtjklqt"
+      ],
+      "output": null,
+      "skip_calls": [
+        "d",
+        "yadctv",
+        "dolo",
+        "ips"
+      ],
+      "skip_calls_defaults": true,
+      "test_workspace": null,
+      "timeout_multiplier": 208.8,
+      "adipis": 32,
+      "kjifmivch": null
+    },
+    {
+      "additional_cargo_args": [
+        "NDDjiMfPHwVxzXDFaNsk",
+        "dolor adipiscing lore",
+        "Q",
+        "dqaoj"
+      ],
+      "build_timeout_multiplier": null,
+      "error_values": [
+        "gvauardswuynbh",
+        "nywcsisvrv",
+        "YJU73754RaUuRu"
+      ],
+      "examine_re": [
+        "dqepkiqowksipn",
+        "adip"
+      ],
+      "exclude_globs": [
+        "n21q",
+        "w",
+        "nvkskx"
+      ],
+      "exclude_re": [
+        "si",
+        "ayjowe",
+        "dolor sit lore"
+      ],
+      "output": null,
+      "profile": "gif",
+      "skip_calls": [
+        "pac",
+        "OTiOuFeBkCFp"
+      ],
+      "skip_calls_defaults": null,
+      "test_workspace": null,
+      "timeout_multiplier": null,
+      "pX3yh": 91,
+      "n2Z0WZ": 88,
+      "KAEKn": null
+    },
+    {
+      "additional_cargo_args": [
+        "gb6zsP5t6t7Rh5gfK8b",
+        "sjjhng",
+        "sit",
+        "fhlsvvgvy"
+      ],
+      "additional_cargo_test_args": [
+        "xxlkvvsulocsufpduzszm",
+        "sit ipsum ipsum adipi",
+        "ypwuhxphzkxaznzfyeig",
+        "iy",
+        "sit ipsum"
+      ],
+      "build_timeout_multiplier": null,
+      "copy_vcs": null,
+      "error_values": [
+        "sit conse"
+      ],
+      "examine_globs": [
+        "consectetu"
+      ],
+      "exclude_re": [
+        "ipsum ipsum lo",
+        "XTNLRU6HA4Yp5Qu"
+      ],
+      "minimum_test_timeout": -147.75,
+      "skip_calls": [
+        "jkcmvrzzdjdfcmlre",
+        "by"
+      ],
+      "skip_calls_defaults": true,
+      "test_package": [
+        "ipsum amet sit l",
+        "bjsqjpohrowpluxeb",
+        "ccjaoajeg",
+        "tvz",
+        "mpffjgjbhh"
+      ],
+      "test_tool": null,
+      "timeout_multiplier": -726.66,
+      "ugraedjvqc": null,
+      "UhkxP": 49,
+      "dolor a": true
+    },
+    {
+      "additional_cargo_test_args": [
+        "lorem ipsum ",
+        "oxhuatdvq",
+        "njmmnk",
+        "foaobogtjt"
+      ],
+      "build_timeout_multiplier": null,
+      "cap_lints": false,
+      "error_values": [
+        "8EyWInnkb9hJcse",
+        "wwntnn",
+        "thj"
+      ],
+      "examine_globs": [],
+      "exclude_re": [
+        "sit co",
+        "L4Sqc7fIL2Wy1fR92"
+      ],
+      "output": "wrenpbyjtgsee",
+      "profile": null,
+      "skip_calls_defaults": null,
+      "test_tool": "consect",
+      "ipsum dol": 34,
+      "svducfwdcz": 80.13
+    },
+    {
+      "additional_cargo_args": [
+        "adipiscin",
+        "ivcoduoudsudc",
+        "tuz",
+        "amet adipiscin"
+      ],
+      "build_timeout_multiplier": null,
+      "cap_lints": true,
+      "copy_vcs": true,
+      "error_values": [
+        "NUv3w4uvPGxPUajq4"
+      ],
+      "examine_globs": [],
+      "exclude_globs": [
+        "lorem d",
+        "s",
+        "amet dolor consecte",
+        "ipsum lorem dolor a",
+        "sit adipiscing si"
+      ],
+      "exclude_re": [
+        "amet lo",
+        "wgqusxokwivqjpg",
+        "adipiscing adip"
+      ],
+      "minimum_test_timeout": 310.37,
+      "output": null,
+      "skip_calls": [
+        "adipisc",
+        "EDW5",
+        "adipiscing lor",
+        "prxijohcxi"
+      ],
+      "test_package": [
+        "ruvjfi",
+        "ihesnuvcat",
+        "cyu3hsZUdZ",
+        "W0Ui8GOHY"
+      ],
+      "test_tool": null,
+      "test_workspace": null,
+      "timeout_multiplier": 154.67,
+      "dolor adip": 6
+    },
+    {
+      "additional_cargo_args": [
+        "agizrnrcrqfjkyj",
+        "m"
+      ],
+      "additional_cargo_test_args": [
+        "kroonvxydwded",
+        "khu",
+        "jwuedlqkszlufd"
+      ],
+      "build_timeout_multiplier": null,
+      "exclude_re": [
+        "adipiscing dolor ",
+        "hblemefdewejoeehwwq"
+      ],
+      "minimum_test_timeout": 668.91,
+      "output": null,
+      "profile": null,
+      "skip_calls_defaults": true,
+      "test_workspace": null,
+      "timeout_multiplier": null,
+      "susfdfwup": null,
+      "xugzuu": "zjjmtiu",
+      "conse": false
+    },
+    {
+      "additional_cargo_args": [
+        "bWh",
+        "gkRISBEmndkBKTNYTa3",
+        "amet consectetur",
+        "W9Mmj7Eu7k2aBu8CJYMZ"
+      ],
+      "build_timeout_multiplier": 828.67,
+      "cap_lints": false,
+      "error_values": [
+        "consectetur lorem ame",
+        "sit"
+      ],
+      "examine_globs": [
+        "zeqaj",
+        "lorem dolor ame"
+      ],
+      "examine_re": [
+        "siyu",
+        "eypmrueejdsdqqtunex",
+        "hctcnyzhnpcrcypsaopre",
+        "SeAsZ0fV0ceuqshAH8P",
+        "chx"
+      ],
+      "minimum_test_timeout": 528.44,
+      "profile": "mYfR5pxWmFj",
+      "skip_calls": [
+        "iv",
+        "ipsum lorem amet ips",
+        "yfcprfifskledbdh",
+        "sit ipsum ips"
+      ],
+      "test_package": [
+        "xsijulvgrylaifsjkju",
+        "jFunCytW3f8wRZrxj",
+        "d"
+      ],
+      "timeout_multiplier": 646.57,
+      "dolor sit": "vicgfuu"
+    },
+    {
+      "additional_cargo_args": [
+        "xh",
+        "adipiscing ipsum c",
+        "grymxxuwvojxpirbbvj"
+      ],
+      "additional_cargo_test_args": [],
+      "cap_lints": true,
+      "error_values": [
+        "sit adipiscing consec"
+      ],
+      "examine_globs": [
+        "ib",
+        "rzmdqrvddpkg",
+        "t",
+        "LqHU0TQg4x1eKE7VFT"
+      ],
+      "examine_re": [
+        "ipsum ",
+        "sxnmznqv"
+      ],
+      "exclude_globs": [
+        "dolor sit sit amet co",
+        "consectetur "
+      ],
+      "exclude_re": [
+        "swlsoal",
+        "adi",
+        "p4NCP3ckh2dd5mb9SxZ4"
+      ],
+      "minimum_test_timeout": null,
+      "skip_calls_defaults": false,
+      "test_package": [
+        "consectetur adipis",
+        "ipsum d"
+      ],
+      "test_workspace": true,
+      "lorem ips": "BEtgSV",
+      "lorem con": 67.05,
+      "ipsum dolo": 20.31
+    },
+    {
+      "additional_cargo_args": [
+        "vioqsytwrgh",
+        "A",
+        "ips"
+      ],
+      "additional_cargo_test_args": [
+        "oebyqziximb",
+        "02l",
+        "DqLH"
+      ],
+      "build_timeout_multiplier": 870.85,
+      "cap_lints": false,
+      "copy_vcs": false,
+      "error_values": [
+        "5CwZY70JZigaP",
+        "dolor s",
+        "ictryl",
+        "bckwrseyxovnvkogrnuyx"
+      ],
+      "exclude_globs": [],
+      "exclude_re": [
+        "bomdikcebyifsdkrqki",
+        "ywJK",
+        "vxagcshsrvyndjtil",
+        "ip"
+      ],
+      "minimum_test_timeout": null,
+      "output": null,
+      "skip_calls": [],
+      "test_package": [
+        "wxn9ILt2hhp",
+        "ragatusqmheanoaw"
+      ],
+      "test_workspace": null,
+      "lorem a": true
+    },
+    {
+      "additional_cargo_args": [
+        "tvatckmgolahnushxt"
+      ],
+      "build_timeout_multiplier": null,
+      "copy_vcs": null,
+      "examine_globs": [
+        "SMrsu5enRR8k3oqAm",
+        "ukeju",
+        "nnb",
+        "cffyunnqtjjyfawylrcb",
+        "j"
+      ],
+      "examine_re": [
+        "oVEUbIZI",
+        "ips",
+        "vqxV",
+        "hqgxlfwqhiguzpcnetae",
+        "agbdipbszlaqvzhtt"
+      ],
+      "exclude_globs": [
+        "W1WHOoeuwOgRRDjm",
+        "MaMXKCEpzucG",
+        "consectetur ipsum ",
+        "cons",
+        "3PODSsJJKfIhaNvOALV"
+      ],
+      "exclude_re": [
+        "adipiscing dolor ",
+        "a",
+        "z",
+        "whilshxe"
+      ],
+      "minimum_test_timeout": -125.27,
+      "output": null,
+      "profile": "EnloTsAp124i7DPDr",
+      "skip_calls": [
+        "am",
+        "oekh",
+        "Yf",
+        "kvpmmsabwfyssmbvwz",
+        "dolo"
+      ],
+      "skip_calls_defaults": false,
+      "test_tool": null,
+      "test_workspace": false,
+      "timeout_multiplier": 971.45,
+      "jtubolziaf": "evjcfdzxoluljnl",
+      "IYDHOXgayB": 10
+    },
+    {
+      "build_timeout_multiplier": null,
+      "cap_lints": true,
+      "copy_vcs": true,
+      "error_values": [
+        "tK01Zrla96eq",
+        "ctzcveuvobxq"
+      ],
+      "examine_re": [],
+      "exclude_globs": [
+        "mnuic",
+        "eqezmxrggw"
+      ],
+      "exclude_re": [
+        "DywVL",
+        "X5CibL7L",
+        "PzpZK1K0nLf",
+        "wiffqxgndgl",
+        "KoYtSLqfVA88stGp"
+      ],
+      "minimum_test_timeout": 576.63,
+      "output": "ugunakiiggr",
+      "profile": "bvjhql",
+      "skip_calls_defaults": null,
+      "test_tool": true,
+      "test_workspace": null,
+      "timeout_multiplier": 430.07,
+      "St26zCa": 73,
+      "dolor i": 95,
+      "mljlyhh": null
+    },
+    {
+      "additional_cargo_args": [
+        "VA",
+        "sit i",
+        "bf",
+        "qkvubtgtauexynfgwrtv"
+      ],
+      "additional_cargo_test_args": [
+        "sit sit lorem",
+        "gopoznxmrdjtlklsl",
+        "iy6jXD6EwUHeXY24",
+        "qgucxplykxsjodzl",
+        "jyxn"
+      ],
+      "cap_lints": false,
+      "copy_vcs": true,
+      "error_values": [
+        "5WB",
+        "6GUXW7UgqGLzSPwtj5m",
+        "adipiscing amet ips",
+        "zBVnf61BcAn7Z",
+        "PnMLPkmcTnKEOk8f"
+      ],
+      "examine_globs": [
+        "kirymvvraseylqouirz",
+        "sajufdfjvogjsg"
+      ],
+      "examine_re": [
+        "Ml",
+        "hTCx",
+        "ItKI721nfgh0jrulB6ENA",
+        "aQI"
+      ],
+      "minimum_test_timeout": -52.79,
+      "profile": null,
+      "skip_calls": [
+        "uaugorlpshcxmscem"
+      ],
+      "test_package": [
+        "dvzskkrerpwgnwtfpj"
+      ],
+      "test_tool": "VivGnROz0hc0",
+      "ipsum adi": 95
+    },
+    {
+      "additional_cargo_args": [
+        "gjvxnzvndln",
+        "r",
+        "wvpEx"
+      ],
+      "additional_cargo_test_args": [
+        "i",
+        "dbixopigojrs",
+        "gxydtvf",
+        "sit conse",
+        "xkxnydcrduqpw"
+      ],
+      "build_timeout_multiplier": null,
+      "copy_vcs": true,
+      "examine_globs": [
+        "lorem amet am"
+      ],
+      "minimum_test_timeout": 562.58,
+      "skip_calls": [
+        "tasiabfwomq",
+        "wzeihsqsozhdvviwjihh"
+      ],
+      "test_tool": "qjhikzkoqq",
+      "timeout_multiplier": null
+    },
+    {
+      "additional_cargo_args": [
+        "adipiscing",
+        "consectetur con",
+        "wcrditywbyprrhrb"
+      ],
+      "additional_cargo_test_args": [],
+      "build_timeout_multiplier": null,
+      "examine_globs": [],
+      "examine_re": [
+        "lorem amet amet ",
+        "gvxcvdfcjhuyipkth",
+        "numvhklvskh",
+        "pwfllhvedhnlkonkrnaok"
+      ],
+      "exclude_re": [],
+      "output": null,
+      "skip_calls": [
+        "kpcqeswvbhrtzbjimw",
+        "zngqdnwy",
+        "uOkM2C"
+      ],
+      "test_package": [
+        "ziwxdlnudqffhy",
+        "liiypgjiwecvvngekmx",
+        "dolor amet lorem cons",
+        "RrPmm2hhdSDKWMyxV"
+      ],
+      "test_tool": null,
+      "test_workspace": null,
+      "timeout_multiplier": null,
+      "eNt270K0": null
+    },
+    {
+      "additional_cargo_args": [
+        "36OUHG3Vv5jZ0qosEtal",
+        "dgp79aBWcJe",
+        "dolor sit amet amet l",
+        "PqU3syNh5E2W",
+        "bymawjcskndyuthybbvwg"
+      ],
+      "build_timeout_multiplier": null,
+      "copy_vcs": true,
+      "error_values": [
+        "ckpkhmbsv"
+      ],
+      "examine_globs": [
+        "ips"
+      ],
+      "exclude_globs": [],
+      "exclude_re": [],
+      "output": "amet ",
+      "profile": null,
+      "skip_calls": [
+        "dloozvumkfqbu"
+      ],
+      "skip_calls_defaults": false,
+      "test_workspace": true,
+      "timeout_multiplier": null,
+      "ID6Mw": 35,
+      "nnltky": "sit ipsu",
+      "adipi": "sit s"
+    },
+    {
+      "additional_cargo_test_args": [
+        "d",
+        "ipsum am"
+      ],
+      "cap_lints": true,
+      "error_values": [
+        "xbokmsrdwrtpry"
+      ],
+      "examine_re": [
+        "ipsum sit l"
+      ],
+      "exclude_globs": [
+        "jvwwzmrp"
+      ],
+      "minimum_test_timeout": null,
+      "skip_calls_defaults": null,
+      "test_package": [
+        "U1VHkgjfrYW7qPU3x7O",
+        "uHwqzVU"
+      ],
+      "timeout_multiplier": 361.55,
+      "8nssDhN": 12
+    },
+    {
+      "additional_cargo_args": [],
+      "additional_cargo_test_args": [
+        "C5Oa8v",
+        "dolor co",
+        "consectetur dolor "
+      ],
+      "build_timeout_multiplier": null,
+      "cap_lints": false,
+      "copy_vcs": false,
+      "examine_re": [
+        "bbbJIL4zlDxmeDveYQObq",
+        "rbsmlneo",
+        "ipsum",
+        "consectetur a"
+      ],
+      "exclude_globs": [
+        "seewtepchg",
+        "Vd92z96bbLpHpsh",
+        "4tyAQTXoa",
+        "gemvhhczzsodwoqh",
+        "dolor "
+      ],
+      "exclude_re": [],
+      "minimum_test_timeout": 687.9,
+      "profile": "elvxndm",
+      "skip_calls": [
+        "kob",
+        "a",
+        "mnhajeduj"
+      ],
+      "test_package": [
+        "cregdkgwiqmsbjk",
+        "okfgwvni",
+        "625RVkQQdfH9",
+        "ipsum"
+      ],
+      "dndnwd": "KeV5zNYVXhIJ3IT",
+      "adipis": true
+    }
+  ]
+}

@@ -1,0 +1,730 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://json.schemastore.org/buf.work.json",
+    "$comment": "https://buf.build/docs/configuration/v1/buf-work-yaml",
+    "title": "buf.work.yaml",
+    "description": "buf.work.yaml is used to define a workspace, which is an advanced local development feature. Workspaces make it possible to consolidate one or more modules into a single buildable unit. They also allow users to run buf operations across multiple modules with a single execution (such as buf lint).",
+    "type": "object",
+    "properties": {
+      "version": {
+        "description": "Required. Defines the current configuration version. The only accepted value is v1.",
+        "type": "string",
+        "const": "v1"
+      },
+      "directories": {
+        "description": "Required. Lists the directories that define modules to be included in the workspace. The directory paths must be relative to the buf.work.yaml, and can't point to a location outside of the directory where your buf.work.yaml is.",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "version",
+      "directories"
+    ]
+  },
+  "examples": [
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "CTF054Q0YgQ5UrS",
+        "mkjoryffdmpv",
+        "M",
+        "ip",
+        "consect"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "y4d0rUBousuH",
+        "p",
+        "jgoarxdgyqthpwnafvme",
+        "2BB5JD2UWw6IlKJihLLf",
+        "xhj71EScSOWBKZ6Yt"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "oYhDILjNF",
+        "adipiscin",
+        "ZltfWHm",
+        "consect",
+        "HgXRnufJZ4W8qM5"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "adipisc",
+        "xrxkrxmza",
+        "jiqseuyj",
+        "lo",
+        "jNGS0"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "KoSEe",
+        "a",
+        "emrqccumsssztxlq",
+        "ipsum ip",
+        "kcOI5jm6q59"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "31AwybV7x",
+        "bgyodqyg",
+        "N8q9tOUjs5Mb",
+        "gmjtlhyujrnbfrab",
+        "RHfvC4hDi"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "inmadrvaisfrpftwo",
+        "uijxgv",
+        "axsylhth",
+        "cblhgvxfcees",
+        "akedxkajyrjlh"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "zhvee",
+        "adipiscin",
+        "fodmqvuczvgsajuvkhk",
+        "dolor adi",
+        "ipsum lo"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "ldayfeczkjofusyv",
+        "lorem ",
+        "Jl5tC6Kto4SMI5h",
+        "lBchK4jn8geg",
+        "ep2qPzj8NpJsXb"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "aazifmotpo",
+        "y3unODFcc",
+        "nafkhcdtomatzsmsq",
+        "pyeew",
+        "72Ek50bYa0K5NiG3yM"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "viyfuwj",
+        "nwfrpmla",
+        "sit amet consectet",
+        "fkyjejdv",
+        "adipiscing sit dol"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "9",
+        "s",
+        "Sx2F9zaVnwW2y3Df9iYxA",
+        "fvugnqjrplues",
+        "xulbcaeuxvxovqzb"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "wvctq",
+        "xxakcmqstfy",
+        "hsksxlztrlrvvrvpah",
+        "vtqymyybnd",
+        "EM"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "ieataimfyrpli",
+        "ipsum sit adip",
+        "ad",
+        "fxzzqyuamjknmjd",
+        "sqxcnkiflnwsop"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "sgi",
+        "dol",
+        "amet lo",
+        "ajCWI8",
+        "sit"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "moixuoz",
+        "ipsum lore",
+        "qz",
+        "YiVlQbF5ngAaf",
+        "consectetur lorem sit"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "7Qy",
+        "tmvgpjmzfttczlo",
+        "WZx8OVHklP",
+        "fgbybkefylqvnvupox",
+        "J9mvWdzUTFs"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "IXqX2VfGjZePuc",
+        "q",
+        "epsmre",
+        "yubj",
+        "ip"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "swcdkupqxrvkdbyf",
+        "zehhftxb",
+        "U8fUYm",
+        "jB3Ufyk",
+        "sit lorem consecte"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "consectetur dolor ",
+        "lvyaalylurbm",
+        "gczmzwvlqbzarfwigbvrt",
+        "xayoscsszpbrrdvapqy",
+        "efurnk"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "9H6hEiafrmJGmOwUxj",
+        "vlypOg",
+        "wmaj",
+        "v5mLx3Wfb3OoDTJQy",
+        "lpzllxohynhfcogxftqwj"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "P5fvc2kNf9wi",
+        "m",
+        "tQv42XFbdBZx8KhI8s",
+        "guflubwjqqzktpfmzxf",
+        "dphadxbvhaesbeqnsda"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "94YdbVb",
+        "eBPYpspzl",
+        "sit",
+        "dxo",
+        "qtlzgapnf"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "cz8rYIW4yOYV",
+        "u",
+        "u",
+        "consectetur",
+        "ipsum sit ipsum am"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "LoifTGRfMmSKX",
+        "wfleocsrcibo",
+        "adipiscing sit",
+        "zjfxeup",
+        "raamvc"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "7kyvF",
+        "eCc5",
+        "tVmllvM",
+        "CrXx1Nl",
+        "VJl04oBN3hI8LSWFrKGv"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "xojbnpxmuilgelneugu",
+        "sit dolor lore",
+        "rwkjkkramniasaodaebd",
+        "oevnwenwybon",
+        "dsuvudeutxlxdyw"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "joreh",
+        "cGMG2TxohYQLBF",
+        "nmkmbpvj",
+        "UAy4kmK",
+        "lorem amet adipiscing"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "svrxtrlirmdpzbz",
+        "htwpr",
+        "ovgjpyqm",
+        "xtnulfnbv",
+        "pg5fY"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "t",
+        "ahY4gjeU",
+        "wpkiqqkmngeo",
+        "cons",
+        "gkyj"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "X6tVukvUjOvkAxC25o9",
+        "494duZ6wSPl0Z572JNEM",
+        "7X5RhzsqhgDW1",
+        "ofpetluneasbohrqjhw",
+        "mewi"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "adipiscing conse",
+        "adi",
+        "TrnDSOlwvru1",
+        "cTglU",
+        "iglgxmeeooziypy"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "tsltylod",
+        "R4rtlK5Tix",
+        "bel",
+        "dol",
+        "dolor ad"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "khf"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "HgF7IGWB",
+        "P4tT2tGMa"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "sit ipsum sit lorem ",
+        "dnclaxyughj",
+        "yulx"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "yMkmAoPzxrn"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "sxteflkzsmjfpyelipg",
+        "ips",
+        "xpxubgrmavqln"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "amet ipsum amet ips"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "niwohxh",
+        "Hic1X7TKk1G"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "sUhi77q2A5ed7GE7Ygzk",
+        "EeCmzqRxzANyVRuJNb",
+        "oDlXYUQxg2dt1c",
+        "ip",
+        "amet consectetu"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "dolor "
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "lorem dolor consectet",
+        "8vXjKS04IY21rXM3IYwu",
+        "fl1PaVea34wXnlWrf1F",
+        "dewnftw",
+        "dolor "
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "yrttcx",
+        "zgvfpkgltridaxnmkcgzj"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "adipisci",
+        "mifwsjecrhhhextlyfa",
+        "l",
+        "3L307YxayTSSn"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "s5TVCZT",
+        "dolor consectetur i",
+        "uhubudqqnxxjybwildjbc",
+        "ipsum sit consectetu"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "adipiscing lorem i",
+        "adipiscing "
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "poedhqbq"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "CN",
+        "frxmthdfmakhmzub",
+        "ipsum ",
+        "consectetur ip"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "ibjNpPSIegsx4"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "adipiscing adipis",
+        "gsdrhgymply",
+        "ipsum con",
+        "xbp"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "consectetur co",
+        "K",
+        "rnrcrqfj",
+        "consectetur ip"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "chkxjpcesosl",
+        "yosxsufltbttgqvu"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "33t07",
+        "adipiscing ipsum c",
+        "grymxxuwvojxpirbbvj"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "VYuHMR6U2Pqr",
+        "A",
+        "ips"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "adipiscing adipis",
+        "m",
+        "adipiscing am"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "pmvdhpdqjvhv",
+        "hfazycgtr",
+        "con",
+        "con",
+        "d4NTscTio3j6r"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "AVAiNc9Rdm7WMz",
+        "c",
+        "VUcQ8utpA",
+        "tvgq"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "Rm1pjBvS67RE4"
+      ]
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": []
+    },
+    {
+      "version": "v1",
+      "directories": [
+        "D",
+        "agorxkgjtvetjftgogh",
+        "nwcLE6",
+        "gruM0CywJQGqZctaqMO"
+      ]
+    }
+  ]
+}
