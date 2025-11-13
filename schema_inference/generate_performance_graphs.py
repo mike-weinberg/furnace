@@ -12,25 +12,27 @@ import numpy as np
 # Data collected from benchmarks (all times in milliseconds)
 
 # By Complexity Category - Final implementations only
+# Based on actual benchmark runs from schema_inference/src/tests/examples
 complexity_data = {
     'small+simple': {
         'Python GenSON': 0.29,
         'Rust genson-rs': 0.09,
-        'json-melt (Streaming)': 0.06,
+        'json-melt (Streaming)': 0.08,
     },
     'small+complex': {
         'Python GenSON': 0.37,
         'Rust genson-rs': 0.30,
-        'json-melt (Streaming)': 0.17,
+        'json-melt (Streaming)': 0.33,
     },
     'big+complex': {
         'Python GenSON': 0.41,
         'Rust genson-rs': 4.00,
-        'json-melt (Streaming)': 2.93,
+        'json-melt (Streaming)': 4.32,
     }
 }
 
-# Overall averages - final implementations only
+# Overall averages - calculated from benchmarks (28 real-world schemas)
+# Weighted average: ~15% small+simple, ~55% small+complex, ~30% big+complex
 final_comparison = {
     'Python GenSON': 0.36,
     'Rust genson-rs': 1.04,
