@@ -70,7 +70,7 @@ ax1.set_ylabel('Time (ms)', fontsize=10, fontweight='bold')
 ax1.set_title('Performance by Complexity\n(Final Implementations)', fontsize=11, fontweight='bold')
 ax1.set_xticks(x + width)
 ax1.set_xticklabels(categories, rotation=0, ha='center')
-ax1.legend(fontsize=9, loc='upper left')
+ax1.legend(fontsize=8.5, loc='upper left', framealpha=0.95)
 ax1.set_ylim(0, 5)
 ax1.grid(axis='y', alpha=0.3)
 
@@ -86,7 +86,7 @@ ax2.set_ylabel('Time (ms)', fontsize=10, fontweight='bold')
 ax2.set_title('Overall Performance\n(All Tests)', fontsize=11, fontweight='bold')
 ax2.set_ylim(0, 1.5)
 ax2.grid(axis='y', alpha=0.3)
-ax2.legend(fontsize=8, loc='upper left')
+ax2.legend(fontsize=8.5, loc='upper left', framealpha=0.95)
 
 # Add value labels and ratios
 genson_rs_time = final_comparison['Rust genson-rs']
@@ -174,7 +174,7 @@ ax5.set_ylabel('Time (ms)', fontsize=10, fontweight='bold')
 ax5.set_title('Direct Head-to-Head:\njson-melt vs genson-rs', fontsize=11, fontweight='bold')
 ax5.set_xticks(x_hth)
 ax5.set_xticklabels(categories_hth, rotation=0)
-ax5.legend(fontsize=9, loc='upper left')
+ax5.legend(fontsize=8.5, loc='upper left', framealpha=0.95)
 ax5.grid(axis='y', alpha=0.3)
 ax5.set_ylim(0, 5)
 
