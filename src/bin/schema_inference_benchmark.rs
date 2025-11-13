@@ -62,17 +62,29 @@ fn main() -> anyhow::Result<()> {
 
             let examples_array = examples.as_array().unwrap();
 
-            // Benchmark our implementation
+            // Serialize to JSON bytes for FAIR comparison
+            let examples_json = serde_json::to_string(&examples)?;
+            let examples_json_bytes = examples_json.clone();
+
+            // Benchmark our implementation (fair: parse + infer)
             let start = Instant::now();
-            let _schema = infer_schema(examples_array);
+            let mut json_bytes_ours = examples_json_bytes.clone().into_bytes();
+            let parsed = simd_json::to_borrowed_value(&mut json_bytes_ours)?;
+            if let simd_json::BorrowedValue::Array(arr) = parsed {
+                // Convert to serde_json for our implementation
+                let examples_serde: Vec<serde_json::Value> = arr
+                    .iter()
+                    .map(|v| serde_json::to_value(v).unwrap_or(serde_json::Value::Null))
+                    .collect();
+                let _schema = infer_schema(&examples_serde);
+            }
             let elapsed_ours = start.elapsed();
 
-            // Benchmark genson-rs
-            let examples_json = serde_json::to_string(&examples)?;
+            // Benchmark genson-rs (fair: parse + infer)
             let start = Instant::now();
             let mut builder = genson_rs::SchemaBuilder::new(Some("AUTO"));
-            let mut json_bytes = examples_json.into_bytes();
-            let examples_array_genson = simd_json::to_borrowed_value(&mut json_bytes)?;
+            let mut json_bytes_genson = examples_json_bytes.into_bytes();
+            let examples_array_genson = simd_json::to_borrowed_value(&mut json_bytes_genson)?;
 
             match examples_array_genson {
                 simd_json::BorrowedValue::Array(arr) => {
