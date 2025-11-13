@@ -79,11 +79,12 @@ names = list(final_comparison.keys())
 times = list(final_comparison.values())
 bar_colors = ['#4ECDC4', '#45B7D1', '#2ECC71']
 
-bars = ax2.bar(names, times, color=bar_colors, edgecolor='black', linewidth=1.5)
+bars = ax2.bar(names, times, color=bar_colors, edgecolor='black', linewidth=1.5, label=names)
 ax2.set_ylabel('Time (ms)', fontsize=10, fontweight='bold')
 ax2.set_title('Overall Performance\n(All Tests)', fontsize=11, fontweight='bold')
 ax2.set_ylim(0, 1.5)
 ax2.grid(axis='y', alpha=0.3)
+ax2.legend(fontsize=8, loc='upper left')
 
 # Add value labels and ratios
 genson_rs_time = final_comparison['Rust genson-rs']
@@ -94,7 +95,7 @@ for bar, (name, val) in zip(bars, final_comparison.items()):
 
     if name != 'Rust genson-rs':
         ratio = val / genson_rs_time
-        ratio_text = f'{ratio:.2f}x' if ratio > 1 else f'{1/ratio:.2f}x faster'
+        ratio_text = f'{ratio:.2f}x slower' if ratio > 1 else f'{1/ratio:.2f}x faster'
         ax2.text(bar.get_x() + bar.get_width()/2., height/2,
                 ratio_text, ha='center', va='center', fontsize=8, color='white', fontweight='bold',
                 bbox=dict(boxstyle='round', facecolor='black', alpha=0.6))
