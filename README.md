@@ -268,9 +268,9 @@ This project includes a production-ready JSON schema inference library ported fr
 - genson-rs: **0.90ms average**
 - Trade-off: Superior schema quality (7.23x slower) vs raw speed
 
-![Performance Summary](https://raw.githubusercontent.com/mike-weinberg/furnace/main/schema_inference/performance_graphs.png)
+![Performance Summary](https://raw.githubusercontent.com/mike-weinberg/furnace/main/schema_inference/performance_graphs.png?v=2)
 
-![Optimization Timeline](https://raw.githubusercontent.com/mike-weinberg/furnace/main/schema_inference/optimization_timeline.png)
+![Optimization Timeline](https://raw.githubusercontent.com/mike-weinberg/furnace/main/schema_inference/optimization_timeline.png?v=2)
 
 ### Key Results
 
